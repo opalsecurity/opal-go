@@ -1,0 +1,242 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: hello@opal.dev
+    name: Opal Team
+    url: https://www.opal.dev/
+  description: Your Home For Developer Permissions.
+  title: Opal API
+  version: "1.0"
+servers:
+- description: Production
+  url: https://api.opal.dev/v1
+paths:
+  /permission-users:
+    get:
+      description: Returns a list of `PermissionUser` objects.
+      operationId: permission_users_list
+      parameters:
+      - description: The ID of the permission.
+        example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+        explode: true
+        in: query
+        name: permission_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: The pagination cursor value.
+        example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Number of results to return per page.
+        example: 200
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPermissionUserList'
+          description: One page worth of users with access to this permission.
+      security:
+      - BearerAuth: []
+      tags:
+      - permissions
+  /permission-access-status/{permission_id}/{user_id}:
+    get:
+      description: Get user's access status to a permission.
+      operationId: perm_access_status_retrieve
+      parameters:
+      - description: The ID of the permission.
+        example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+        explode: false
+        in: path
+        name: permission_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The ID of the user.
+        example: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+        explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The pagination cursor value.
+        example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Number of results to return per page.
+        example: 200
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionAccessStatus'
+          description: The access status reflecting the user's access to the permission.
+      security:
+      - BearerAuth: []
+      tags:
+      - permissions
+components:
+  schemas:
+    PaginatedPermissionUserList:
+      example:
+        next: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        previous: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
+        results:
+        - full_name: Jake Barnes
+          user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+          permission_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          expiration_date: 2022-01-23T04:56:07Z
+          email: jake@company.dev
+        - full_name: Brett Ashley
+          user_id: 7646aa9a-e2ee-4eb5-8c62-91f29038a373
+          permission_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          expiration_date: 2022-02-03T12:33:02Z
+          email: brett@company.dev
+      properties:
+        next:
+          description: The cursor with which to continue pagination if additional
+            result pages exist.
+          example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+          nullable: true
+          type: string
+        previous:
+          description: The cursor used to obtain the current result page.
+          example: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PermissionUser'
+          type: array
+      type: object
+    PermissionAccessStatus:
+      description: |-
+        # AccessStatus Object
+        ### Description
+        The `AccessStatus` object is used to represent the user's access to the permission.
+
+        ### Usage Example
+        View the `AccessStatus` for a permission/user pair to determine if the user has access to the permission.
+      example:
+        user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+        permission_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+        expiration_date: 2022-01-23T04:56:07Z
+        status: AUTHORIZED
+      properties:
+        permission_id:
+          description: The ID of the permission.
+          example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          format: uuid
+          type: string
+        user_id:
+          description: The ID of the user.
+          example: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+          format: uuid
+          type: string
+        status:
+          $ref: '#/components/schemas/PermissionAccessStatusEnum'
+        expiration_date:
+          description: The day and time the user's access will expire.
+          example: 2022-01-23T04:56:07Z
+          format: date-time
+          nullable: true
+          type: string
+      required:
+      - expiration_date
+      - permission_id
+      - status
+      - user_id
+      type: object
+    PermissionAccessStatusEnum:
+      description: The status of the user's access to the permission.
+      enum:
+      - UNAUTHORIZED
+      - REQUESTED
+      - AUTHORIZED
+      example: AUTHORIZED
+      type: string
+    PermissionUser:
+      description: |-
+        # Permission User Object
+        ### Description
+        The `PermissionUser` object is used to represent a user with access to a permission.
+
+        ### Usage Example
+        Fetch from the `LIST PermissionUsers` endpoint.
+      example:
+        full_name: Jake Barnes
+        user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+        permission_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+        expiration_date: 2022-01-23T04:56:07Z
+        email: jake@company.dev
+      properties:
+        permission_id:
+          description: The ID of the permission.
+          example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          format: uuid
+          type: string
+        user_id:
+          description: The ID of the user.
+          example: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+          format: uuid
+          type: string
+        full_name:
+          description: The user's full name.
+          example: Jake Barnes
+          type: string
+        email:
+          description: The user's email.
+          example: jake@company.dev
+          format: email
+          type: string
+        expiration_date:
+          description: The day and time the user's access will expire.
+          example: 2022-01-23T04:56:07Z
+          format: date-time
+          nullable: true
+          type: string
+      required:
+      - email
+      - expiration_date
+      - full_name
+      - permission_id
+      - user_id
+      type: object
+  securitySchemes:
+    BearerAuth:
+      scheme: bearer
+      type: http
