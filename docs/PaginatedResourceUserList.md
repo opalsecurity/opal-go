@@ -1,4 +1,4 @@
-# PaginatedPermissionUserList
+# PaginatedResourceUserList
 
 ## Properties
 
@@ -6,119 +6,119 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Next** | Pointer to **NullableString** | The cursor with which to continue pagination if additional result pages exist. | [optional] 
 **Previous** | Pointer to **NullableString** | The cursor used to obtain the current result page. | [optional] 
-**Results** | Pointer to [**[]PermissionUser**](PermissionUser.md) |  | [optional] 
+**Results** | Pointer to [**[]ResourceUser**](ResourceUser.md) |  | [optional] 
 
 ## Methods
 
-### NewPaginatedPermissionUserList
+### NewPaginatedResourceUserList
 
-`func NewPaginatedPermissionUserList() *PaginatedPermissionUserList`
+`func NewPaginatedResourceUserList() *PaginatedResourceUserList`
 
-NewPaginatedPermissionUserList instantiates a new PaginatedPermissionUserList object
+NewPaginatedResourceUserList instantiates a new PaginatedResourceUserList object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewPaginatedPermissionUserListWithDefaults
+### NewPaginatedResourceUserListWithDefaults
 
-`func NewPaginatedPermissionUserListWithDefaults() *PaginatedPermissionUserList`
+`func NewPaginatedResourceUserListWithDefaults() *PaginatedResourceUserList`
 
-NewPaginatedPermissionUserListWithDefaults instantiates a new PaginatedPermissionUserList object
+NewPaginatedResourceUserListWithDefaults instantiates a new PaginatedResourceUserList object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetNext
 
-`func (o *PaginatedPermissionUserList) GetNext() string`
+`func (o *PaginatedResourceUserList) GetNext() string`
 
 GetNext returns the Next field if non-nil, zero value otherwise.
 
 ### GetNextOk
 
-`func (o *PaginatedPermissionUserList) GetNextOk() (*string, bool)`
+`func (o *PaginatedResourceUserList) GetNextOk() (*string, bool)`
 
 GetNextOk returns a tuple with the Next field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNext
 
-`func (o *PaginatedPermissionUserList) SetNext(v string)`
+`func (o *PaginatedResourceUserList) SetNext(v string)`
 
 SetNext sets Next field to given value.
 
 ### HasNext
 
-`func (o *PaginatedPermissionUserList) HasNext() bool`
+`func (o *PaginatedResourceUserList) HasNext() bool`
 
 HasNext returns a boolean if a field has been set.
 
 ### SetNextNil
 
-`func (o *PaginatedPermissionUserList) SetNextNil(b bool)`
+`func (o *PaginatedResourceUserList) SetNextNil(b bool)`
 
  SetNextNil sets the value for Next to be an explicit nil
 
 ### UnsetNext
-`func (o *PaginatedPermissionUserList) UnsetNext()`
+`func (o *PaginatedResourceUserList) UnsetNext()`
 
 UnsetNext ensures that no value is present for Next, not even an explicit nil
 ### GetPrevious
 
-`func (o *PaginatedPermissionUserList) GetPrevious() string`
+`func (o *PaginatedResourceUserList) GetPrevious() string`
 
 GetPrevious returns the Previous field if non-nil, zero value otherwise.
 
 ### GetPreviousOk
 
-`func (o *PaginatedPermissionUserList) GetPreviousOk() (*string, bool)`
+`func (o *PaginatedResourceUserList) GetPreviousOk() (*string, bool)`
 
 GetPreviousOk returns a tuple with the Previous field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrevious
 
-`func (o *PaginatedPermissionUserList) SetPrevious(v string)`
+`func (o *PaginatedResourceUserList) SetPrevious(v string)`
 
 SetPrevious sets Previous field to given value.
 
 ### HasPrevious
 
-`func (o *PaginatedPermissionUserList) HasPrevious() bool`
+`func (o *PaginatedResourceUserList) HasPrevious() bool`
 
 HasPrevious returns a boolean if a field has been set.
 
 ### SetPreviousNil
 
-`func (o *PaginatedPermissionUserList) SetPreviousNil(b bool)`
+`func (o *PaginatedResourceUserList) SetPreviousNil(b bool)`
 
  SetPreviousNil sets the value for Previous to be an explicit nil
 
 ### UnsetPrevious
-`func (o *PaginatedPermissionUserList) UnsetPrevious()`
+`func (o *PaginatedResourceUserList) UnsetPrevious()`
 
 UnsetPrevious ensures that no value is present for Previous, not even an explicit nil
 ### GetResults
 
-`func (o *PaginatedPermissionUserList) GetResults() []PermissionUser`
+`func (o *PaginatedResourceUserList) GetResults() []ResourceUser`
 
 GetResults returns the Results field if non-nil, zero value otherwise.
 
 ### GetResultsOk
 
-`func (o *PaginatedPermissionUserList) GetResultsOk() (*[]PermissionUser, bool)`
+`func (o *PaginatedResourceUserList) GetResultsOk() (*[]ResourceUser, bool)`
 
 GetResultsOk returns a tuple with the Results field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResults
 
-`func (o *PaginatedPermissionUserList) SetResults(v []PermissionUser)`
+`func (o *PaginatedResourceUserList) SetResults(v []ResourceUser)`
 
 SetResults sets Results field to given value.
 
 ### HasResults
 
-`func (o *PaginatedPermissionUserList) HasResults() bool`
+`func (o *PaginatedResourceUserList) HasResults() bool`
 
 HasResults returns a boolean if a field has been set.
 

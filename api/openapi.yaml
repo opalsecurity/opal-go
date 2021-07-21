@@ -4,26 +4,37 @@ info:
     email: hello@opal.dev
     name: Opal Team
     url: https://www.opal.dev/
-  description: Your Home For Developer Permissions.
+  description: Your Home For Developer Resources.
   title: Opal API
   version: "1.0"
 servers:
 - description: Production
   url: https://api.opal.dev/v1
 paths:
-  /permission-users:
+  /resource-users:
     get:
-      description: Returns a list of `PermissionUser` objects.
-      operationId: permission_users_list
+      description: Returns a list of `ResourceUser` objects.
+      operationId: resource_users_list
       parameters:
-      - description: The ID of the permission.
+      - description: The ID of the resource.
         example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
         explode: true
         in: query
-        name: permission_id
+        name: resource_id
         required: true
         schema:
           format: uuid
+          type: string
+        style: form
+      - description: The remote ID of the access level that you wish to query for
+          the resource. If omitted, the default access level remote ID value (empty
+          string) is used.
+        example: arn:aws:iam::590304332660:role/AdministratorAccess
+        explode: true
+        in: query
+        name: access_level_remote_id
+        required: false
+        schema:
           type: string
         style: form
       - description: The pagination cursor value.
@@ -49,22 +60,22 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedPermissionUserList'
-          description: One page worth of users with access to this permission.
+                $ref: '#/components/schemas/PaginatedResourceUserList'
+          description: One page worth of users with access to this resource.
       security:
       - BearerAuth: []
       tags:
-      - permissions
-  /permission-access-status/{permission_id}/{user_id}:
+      - resources
+  /resource-access-status/{resource_id}/{user_id}:
     get:
-      description: Get user's access status to a permission.
-      operationId: perm_access_status_retrieve
+      description: Get user's access status to a resource.
+      operationId: resource_access_status_retrieve
       parameters:
-      - description: The ID of the permission.
+      - description: The ID of the resource.
         example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
         explode: false
         in: path
-        name: permission_id
+        name: resource_id
         required: true
         schema:
           format: uuid
@@ -80,6 +91,17 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: The remote ID of the access level that you wish to query for
+          the resource. If omitted, the default access level remote ID value (empty
+          string) is used.
+        example: arn:aws:iam::590304332660:role/AdministratorAccess
+        explode: true
+        in: query
+        name: access_level_remote_id
+        required: false
+        schema:
+          type: string
+        style: form
       - description: The pagination cursor value.
         example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
         explode: true
@@ -103,27 +125,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PermissionAccessStatus'
-          description: The access status reflecting the user's access to the permission.
+                $ref: '#/components/schemas/ResourceAccessStatus'
+          description: The access status reflecting the user's access to the resource.
       security:
       - BearerAuth: []
       tags:
-      - permissions
+      - resources
 components:
   schemas:
-    PaginatedPermissionUserList:
+    PaginatedResourceUserList:
       example:
         next: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
         previous: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
         results:
         - full_name: Jake Barnes
           user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
-          permission_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          resource_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
           expiration_date: 2022-01-23T04:56:07Z
           email: jake@company.dev
         - full_name: Brett Ashley
           user_id: 7646aa9a-e2ee-4eb5-8c62-91f29038a373
-          permission_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          resource_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
           expiration_date: 2022-02-03T12:33:02Z
           email: brett@company.dev
       properties:
@@ -140,25 +162,50 @@ components:
           type: string
         results:
           items:
-            $ref: '#/components/schemas/PermissionUser'
+            $ref: '#/components/schemas/ResourceUser'
           type: array
       type: object
-    PermissionAccessStatus:
+    ResourceAccessLevel:
+      description: |-
+        # Access Level Object
+        ### Description
+        The `ResourceAccessLevel` object is used to represent the level of access that a user has to a resource or a resource has to a group. The "default" access
+        level is a `ResourceAccessLevel` object whose fields are all empty strings.
+
+        ### Usage Example
+        View the `ResourceAccessLevel` of a resource/user or resource/group pair to see the level of access granted to the resource.
+      example:
+        access_level_name: AdminRole
+        access_level_remote_id: arn:aws:iam::590304332660:role/AdministratorAccess
+      properties:
+        access_level_name:
+          description: The human-readable name of the access level.
+          example: AdminRole
+          type: string
+        access_level_remote_id:
+          description: The machine-readable identifier of the access level.
+          example: arn:aws:iam::590304332660:role/AdministratorAccess
+          type: string
+      required:
+      - access_level_name
+      - access_level_remote_id
+      type: object
+    ResourceAccessStatus:
       description: |-
         # AccessStatus Object
         ### Description
-        The `AccessStatus` object is used to represent the user's access to the permission.
+        The `AccessStatus` object is used to represent the user's access to the resource.
 
         ### Usage Example
-        View the `AccessStatus` for a permission/user pair to determine if the user has access to the permission.
+        View the `AccessStatus` for a resource/user pair to determine if the user has access to the resource.
       example:
         user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
-        permission_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+        resource_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
         expiration_date: 2022-01-23T04:56:07Z
         status: AUTHORIZED
       properties:
-        permission_id:
-          description: The ID of the permission.
+        resource_id:
+          description: The ID of the resource.
           example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
           format: uuid
           type: string
@@ -167,8 +214,10 @@ components:
           example: 29827fb8-f2dd-4e80-9576-28e31e9934ac
           format: uuid
           type: string
+        access_level:
+          $ref: '#/components/schemas/ResourceAccessLevel'
         status:
-          $ref: '#/components/schemas/PermissionAccessStatusEnum'
+          $ref: '#/components/schemas/ResourceAccessStatusEnum'
         expiration_date:
           description: The day and time the user's access will expire.
           example: 2022-01-23T04:56:07Z
@@ -177,35 +226,35 @@ components:
           type: string
       required:
       - expiration_date
-      - permission_id
+      - resource_id
       - status
       - user_id
       type: object
-    PermissionAccessStatusEnum:
-      description: The status of the user's access to the permission.
+    ResourceAccessStatusEnum:
+      description: The status of the user's access to the resource.
       enum:
       - UNAUTHORIZED
       - REQUESTED
       - AUTHORIZED
       example: AUTHORIZED
       type: string
-    PermissionUser:
+    ResourceUser:
       description: |-
-        # Permission User Object
+        # Resource User Object
         ### Description
-        The `PermissionUser` object is used to represent a user with access to a permission.
+        The `ResourceUser` object is used to represent a user with access to a resource.
 
         ### Usage Example
-        Fetch from the `LIST PermissionUsers` endpoint.
+        Fetch from the `LIST ResourceUsers` endpoint.
       example:
         full_name: Jake Barnes
         user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
-        permission_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+        resource_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
         expiration_date: 2022-01-23T04:56:07Z
         email: jake@company.dev
       properties:
-        permission_id:
-          description: The ID of the permission.
+        resource_id:
+          description: The ID of the resource.
           example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
           format: uuid
           type: string
@@ -214,6 +263,8 @@ components:
           example: 29827fb8-f2dd-4e80-9576-28e31e9934ac
           format: uuid
           type: string
+        access_level:
+          $ref: '#/components/schemas/ResourceAccessLevel'
         full_name:
           description: The user's full name.
           example: Jake Barnes
@@ -230,10 +281,11 @@ components:
           nullable: true
           type: string
       required:
+      - access_level
       - email
       - expiration_date
       - full_name
-      - permission_id
+      - resource_id
       - user_id
       type: object
   securitySchemes:

@@ -1,7 +1,7 @@
 /*
  * Opal API
  *
- * Your Home For Developer Permissions.
+ * Your Home For Developer Resources.
  *
  * API version: 1.0
  * Contact: hello@opal.dev
@@ -49,7 +49,7 @@ type APIClient struct {
 
 	// API Services
 
-	PermissionsApi *PermissionsApiService
+	ResourcesApi *ResourcesApiService
 }
 
 type service struct {
@@ -68,7 +68,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
-	c.PermissionsApi = (*PermissionsApiService)(&c.common)
+	c.ResourcesApi = (*ResourcesApiService)(&c.common)
 
 	return c
 }

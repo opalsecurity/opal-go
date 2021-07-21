@@ -1,7 +1,7 @@
 /*
  * Opal API
  *
- * Your Home For Developer Permissions.
+ * Your Home For Developer Resources.
  *
  * API version: 1.0
  * Contact: hello@opal.dev
@@ -15,34 +15,34 @@ import (
 	"encoding/json"
 )
 
-// PaginatedPermissionUserList struct for PaginatedPermissionUserList
-type PaginatedPermissionUserList struct {
+// PaginatedResourceUserList struct for PaginatedResourceUserList
+type PaginatedResourceUserList struct {
 	// The cursor with which to continue pagination if additional result pages exist.
 	Next NullableString `json:"next,omitempty"`
 	// The cursor used to obtain the current result page.
 	Previous NullableString `json:"previous,omitempty"`
-	Results *[]PermissionUser `json:"results,omitempty"`
+	Results *[]ResourceUser `json:"results,omitempty"`
 }
 
-// NewPaginatedPermissionUserList instantiates a new PaginatedPermissionUserList object
+// NewPaginatedResourceUserList instantiates a new PaginatedResourceUserList object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaginatedPermissionUserList() *PaginatedPermissionUserList {
-	this := PaginatedPermissionUserList{}
+func NewPaginatedResourceUserList() *PaginatedResourceUserList {
+	this := PaginatedResourceUserList{}
 	return &this
 }
 
-// NewPaginatedPermissionUserListWithDefaults instantiates a new PaginatedPermissionUserList object
+// NewPaginatedResourceUserListWithDefaults instantiates a new PaginatedResourceUserList object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewPaginatedPermissionUserListWithDefaults() *PaginatedPermissionUserList {
-	this := PaginatedPermissionUserList{}
+func NewPaginatedResourceUserListWithDefaults() *PaginatedResourceUserList {
+	this := PaginatedResourceUserList{}
 	return &this
 }
 
 // GetNext returns the Next field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaginatedPermissionUserList) GetNext() string {
+func (o *PaginatedResourceUserList) GetNext() string {
 	if o == nil || o.Next.Get() == nil {
 		var ret string
 		return ret
@@ -53,7 +53,7 @@ func (o *PaginatedPermissionUserList) GetNext() string {
 // GetNextOk returns a tuple with the Next field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaginatedPermissionUserList) GetNextOk() (*string, bool) {
+func (o *PaginatedResourceUserList) GetNextOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -61,7 +61,7 @@ func (o *PaginatedPermissionUserList) GetNextOk() (*string, bool) {
 }
 
 // HasNext returns a boolean if a field has been set.
-func (o *PaginatedPermissionUserList) HasNext() bool {
+func (o *PaginatedResourceUserList) HasNext() bool {
 	if o != nil && o.Next.IsSet() {
 		return true
 	}
@@ -70,21 +70,21 @@ func (o *PaginatedPermissionUserList) HasNext() bool {
 }
 
 // SetNext gets a reference to the given NullableString and assigns it to the Next field.
-func (o *PaginatedPermissionUserList) SetNext(v string) {
+func (o *PaginatedResourceUserList) SetNext(v string) {
 	o.Next.Set(&v)
 }
 // SetNextNil sets the value for Next to be an explicit nil
-func (o *PaginatedPermissionUserList) SetNextNil() {
+func (o *PaginatedResourceUserList) SetNextNil() {
 	o.Next.Set(nil)
 }
 
 // UnsetNext ensures that no value is present for Next, not even an explicit nil
-func (o *PaginatedPermissionUserList) UnsetNext() {
+func (o *PaginatedResourceUserList) UnsetNext() {
 	o.Next.Unset()
 }
 
 // GetPrevious returns the Previous field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaginatedPermissionUserList) GetPrevious() string {
+func (o *PaginatedResourceUserList) GetPrevious() string {
 	if o == nil || o.Previous.Get() == nil {
 		var ret string
 		return ret
@@ -95,7 +95,7 @@ func (o *PaginatedPermissionUserList) GetPrevious() string {
 // GetPreviousOk returns a tuple with the Previous field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaginatedPermissionUserList) GetPreviousOk() (*string, bool) {
+func (o *PaginatedResourceUserList) GetPreviousOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -103,7 +103,7 @@ func (o *PaginatedPermissionUserList) GetPreviousOk() (*string, bool) {
 }
 
 // HasPrevious returns a boolean if a field has been set.
-func (o *PaginatedPermissionUserList) HasPrevious() bool {
+func (o *PaginatedResourceUserList) HasPrevious() bool {
 	if o != nil && o.Previous.IsSet() {
 		return true
 	}
@@ -112,23 +112,23 @@ func (o *PaginatedPermissionUserList) HasPrevious() bool {
 }
 
 // SetPrevious gets a reference to the given NullableString and assigns it to the Previous field.
-func (o *PaginatedPermissionUserList) SetPrevious(v string) {
+func (o *PaginatedResourceUserList) SetPrevious(v string) {
 	o.Previous.Set(&v)
 }
 // SetPreviousNil sets the value for Previous to be an explicit nil
-func (o *PaginatedPermissionUserList) SetPreviousNil() {
+func (o *PaginatedResourceUserList) SetPreviousNil() {
 	o.Previous.Set(nil)
 }
 
 // UnsetPrevious ensures that no value is present for Previous, not even an explicit nil
-func (o *PaginatedPermissionUserList) UnsetPrevious() {
+func (o *PaginatedResourceUserList) UnsetPrevious() {
 	o.Previous.Unset()
 }
 
 // GetResults returns the Results field value if set, zero value otherwise.
-func (o *PaginatedPermissionUserList) GetResults() []PermissionUser {
+func (o *PaginatedResourceUserList) GetResults() []ResourceUser {
 	if o == nil || o.Results == nil {
-		var ret []PermissionUser
+		var ret []ResourceUser
 		return ret
 	}
 	return *o.Results
@@ -136,7 +136,7 @@ func (o *PaginatedPermissionUserList) GetResults() []PermissionUser {
 
 // GetResultsOk returns a tuple with the Results field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaginatedPermissionUserList) GetResultsOk() (*[]PermissionUser, bool) {
+func (o *PaginatedResourceUserList) GetResultsOk() (*[]ResourceUser, bool) {
 	if o == nil || o.Results == nil {
 		return nil, false
 	}
@@ -144,7 +144,7 @@ func (o *PaginatedPermissionUserList) GetResultsOk() (*[]PermissionUser, bool) {
 }
 
 // HasResults returns a boolean if a field has been set.
-func (o *PaginatedPermissionUserList) HasResults() bool {
+func (o *PaginatedResourceUserList) HasResults() bool {
 	if o != nil && o.Results != nil {
 		return true
 	}
@@ -152,12 +152,12 @@ func (o *PaginatedPermissionUserList) HasResults() bool {
 	return false
 }
 
-// SetResults gets a reference to the given []PermissionUser and assigns it to the Results field.
-func (o *PaginatedPermissionUserList) SetResults(v []PermissionUser) {
+// SetResults gets a reference to the given []ResourceUser and assigns it to the Results field.
+func (o *PaginatedResourceUserList) SetResults(v []ResourceUser) {
 	o.Results = &v
 }
 
-func (o PaginatedPermissionUserList) MarshalJSON() ([]byte, error) {
+func (o PaginatedResourceUserList) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Next.IsSet() {
 		toSerialize["next"] = o.Next.Get()
@@ -171,38 +171,38 @@ func (o PaginatedPermissionUserList) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullablePaginatedPermissionUserList struct {
-	value *PaginatedPermissionUserList
+type NullablePaginatedResourceUserList struct {
+	value *PaginatedResourceUserList
 	isSet bool
 }
 
-func (v NullablePaginatedPermissionUserList) Get() *PaginatedPermissionUserList {
+func (v NullablePaginatedResourceUserList) Get() *PaginatedResourceUserList {
 	return v.value
 }
 
-func (v *NullablePaginatedPermissionUserList) Set(val *PaginatedPermissionUserList) {
+func (v *NullablePaginatedResourceUserList) Set(val *PaginatedResourceUserList) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePaginatedPermissionUserList) IsSet() bool {
+func (v NullablePaginatedResourceUserList) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePaginatedPermissionUserList) Unset() {
+func (v *NullablePaginatedResourceUserList) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePaginatedPermissionUserList(val *PaginatedPermissionUserList) *NullablePaginatedPermissionUserList {
-	return &NullablePaginatedPermissionUserList{value: val, isSet: true}
+func NewNullablePaginatedResourceUserList(val *PaginatedResourceUserList) *NullablePaginatedResourceUserList {
+	return &NullablePaginatedResourceUserList{value: val, isSet: true}
 }
 
-func (v NullablePaginatedPermissionUserList) MarshalJSON() ([]byte, error) {
+func (v NullablePaginatedResourceUserList) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullablePaginatedPermissionUserList) UnmarshalJSON(src []byte) error {
+func (v *NullablePaginatedResourceUserList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

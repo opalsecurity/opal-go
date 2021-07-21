@@ -1,7 +1,7 @@
 /*
  * Opal API
  *
- * Your Home For Developer Permissions.
+ * Your Home For Developer Resources.
  *
  * API version: 1.0
  * Contact: hello@opal.dev
@@ -25,75 +25,83 @@ var (
 	_ _context.Context
 )
 
-// PermissionsApiService PermissionsApi service
-type PermissionsApiService service
+// ResourcesApiService ResourcesApi service
+type ResourcesApiService service
 
-type ApiPermAccessStatusRetrieveRequest struct {
+type ApiResourceAccessStatusRetrieveRequest struct {
 	ctx _context.Context
-	ApiService *PermissionsApiService
-	permissionId string
+	ApiService *ResourcesApiService
+	resourceId string
 	userId string
+	accessLevelRemoteId *string
 	cursor *string
 	pageSize *int32
 }
 
-func (r ApiPermAccessStatusRetrieveRequest) Cursor(cursor string) ApiPermAccessStatusRetrieveRequest {
+func (r ApiResourceAccessStatusRetrieveRequest) AccessLevelRemoteId(accessLevelRemoteId string) ApiResourceAccessStatusRetrieveRequest {
+	r.accessLevelRemoteId = &accessLevelRemoteId
+	return r
+}
+func (r ApiResourceAccessStatusRetrieveRequest) Cursor(cursor string) ApiResourceAccessStatusRetrieveRequest {
 	r.cursor = &cursor
 	return r
 }
-func (r ApiPermAccessStatusRetrieveRequest) PageSize(pageSize int32) ApiPermAccessStatusRetrieveRequest {
+func (r ApiResourceAccessStatusRetrieveRequest) PageSize(pageSize int32) ApiResourceAccessStatusRetrieveRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiPermAccessStatusRetrieveRequest) Execute() (PermissionAccessStatus, *_nethttp.Response, error) {
-	return r.ApiService.PermAccessStatusRetrieveExecute(r)
+func (r ApiResourceAccessStatusRetrieveRequest) Execute() (ResourceAccessStatus, *_nethttp.Response, error) {
+	return r.ApiService.ResourceAccessStatusRetrieveExecute(r)
 }
 
 /*
- * PermAccessStatusRetrieve Method for PermAccessStatusRetrieve
- * Get user's access status to a permission.
+ * ResourceAccessStatusRetrieve Method for ResourceAccessStatusRetrieve
+ * Get user's access status to a resource.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param permissionId The ID of the permission.
+ * @param resourceId The ID of the resource.
  * @param userId The ID of the user.
- * @return ApiPermAccessStatusRetrieveRequest
+ * @return ApiResourceAccessStatusRetrieveRequest
  */
-func (a *PermissionsApiService) PermAccessStatusRetrieve(ctx _context.Context, permissionId string, userId string) ApiPermAccessStatusRetrieveRequest {
-	return ApiPermAccessStatusRetrieveRequest{
+func (a *ResourcesApiService) ResourceAccessStatusRetrieve(ctx _context.Context, resourceId string, userId string) ApiResourceAccessStatusRetrieveRequest {
+	return ApiResourceAccessStatusRetrieveRequest{
 		ApiService: a,
 		ctx: ctx,
-		permissionId: permissionId,
+		resourceId: resourceId,
 		userId: userId,
 	}
 }
 
 /*
  * Execute executes the request
- * @return PermissionAccessStatus
+ * @return ResourceAccessStatus
  */
-func (a *PermissionsApiService) PermAccessStatusRetrieveExecute(r ApiPermAccessStatusRetrieveRequest) (PermissionAccessStatus, *_nethttp.Response, error) {
+func (a *ResourcesApiService) ResourceAccessStatusRetrieveExecute(r ApiResourceAccessStatusRetrieveRequest) (ResourceAccessStatus, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  PermissionAccessStatus
+		localVarReturnValue  ResourceAccessStatus
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PermissionsApiService.PermAccessStatusRetrieve")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesApiService.ResourceAccessStatusRetrieve")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/permission-access-status/{permission_id}/{user_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"permission_id"+"}", _neturl.PathEscape(parameterToString(r.permissionId, "")), -1)
+	localVarPath := localBasePath + "/resource-access-status/{resource_id}/{user_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", _neturl.PathEscape(parameterToString(r.resourceId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"user_id"+"}", _neturl.PathEscape(parameterToString(r.userId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.accessLevelRemoteId != nil {
+		localVarQueryParams.Add("access_level_remote_id", parameterToString(*r.accessLevelRemoteId, ""))
+	}
 	if r.cursor != nil {
 		localVarQueryParams.Add("cursor", parameterToString(*r.cursor, ""))
 	}
@@ -154,39 +162,44 @@ func (a *PermissionsApiService) PermAccessStatusRetrieveExecute(r ApiPermAccessS
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiPermissionUsersListRequest struct {
+type ApiResourceUsersListRequest struct {
 	ctx _context.Context
-	ApiService *PermissionsApiService
-	permissionId *string
+	ApiService *ResourcesApiService
+	resourceId *string
+	accessLevelRemoteId *string
 	cursor *string
 	pageSize *int32
 }
 
-func (r ApiPermissionUsersListRequest) PermissionId(permissionId string) ApiPermissionUsersListRequest {
-	r.permissionId = &permissionId
+func (r ApiResourceUsersListRequest) ResourceId(resourceId string) ApiResourceUsersListRequest {
+	r.resourceId = &resourceId
 	return r
 }
-func (r ApiPermissionUsersListRequest) Cursor(cursor string) ApiPermissionUsersListRequest {
+func (r ApiResourceUsersListRequest) AccessLevelRemoteId(accessLevelRemoteId string) ApiResourceUsersListRequest {
+	r.accessLevelRemoteId = &accessLevelRemoteId
+	return r
+}
+func (r ApiResourceUsersListRequest) Cursor(cursor string) ApiResourceUsersListRequest {
 	r.cursor = &cursor
 	return r
 }
-func (r ApiPermissionUsersListRequest) PageSize(pageSize int32) ApiPermissionUsersListRequest {
+func (r ApiResourceUsersListRequest) PageSize(pageSize int32) ApiResourceUsersListRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiPermissionUsersListRequest) Execute() (PaginatedPermissionUserList, *_nethttp.Response, error) {
-	return r.ApiService.PermissionUsersListExecute(r)
+func (r ApiResourceUsersListRequest) Execute() (PaginatedResourceUserList, *_nethttp.Response, error) {
+	return r.ApiService.ResourceUsersListExecute(r)
 }
 
 /*
- * PermissionUsersList Method for PermissionUsersList
- * Returns a list of `PermissionUser` objects.
+ * ResourceUsersList Method for ResourceUsersList
+ * Returns a list of `ResourceUser` objects.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiPermissionUsersListRequest
+ * @return ApiResourceUsersListRequest
  */
-func (a *PermissionsApiService) PermissionUsersList(ctx _context.Context) ApiPermissionUsersListRequest {
-	return ApiPermissionUsersListRequest{
+func (a *ResourcesApiService) ResourceUsersList(ctx _context.Context) ApiResourceUsersListRequest {
+	return ApiResourceUsersListRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -194,33 +207,36 @@ func (a *PermissionsApiService) PermissionUsersList(ctx _context.Context) ApiPer
 
 /*
  * Execute executes the request
- * @return PaginatedPermissionUserList
+ * @return PaginatedResourceUserList
  */
-func (a *PermissionsApiService) PermissionUsersListExecute(r ApiPermissionUsersListRequest) (PaginatedPermissionUserList, *_nethttp.Response, error) {
+func (a *ResourcesApiService) ResourceUsersListExecute(r ApiResourceUsersListRequest) (PaginatedResourceUserList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  PaginatedPermissionUserList
+		localVarReturnValue  PaginatedResourceUserList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PermissionsApiService.PermissionUsersList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesApiService.ResourceUsersList")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/permission-users"
+	localVarPath := localBasePath + "/resource-users"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.permissionId == nil {
-		return localVarReturnValue, nil, reportError("permissionId is required and must be specified")
+	if r.resourceId == nil {
+		return localVarReturnValue, nil, reportError("resourceId is required and must be specified")
 	}
 
-	localVarQueryParams.Add("permission_id", parameterToString(*r.permissionId, ""))
+	localVarQueryParams.Add("resource_id", parameterToString(*r.resourceId, ""))
+	if r.accessLevelRemoteId != nil {
+		localVarQueryParams.Add("access_level_remote_id", parameterToString(*r.accessLevelRemoteId, ""))
+	}
 	if r.cursor != nil {
 		localVarQueryParams.Add("cursor", parameterToString(*r.cursor, ""))
 	}

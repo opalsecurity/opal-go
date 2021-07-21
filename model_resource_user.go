@@ -1,7 +1,7 @@
 /*
  * Opal API
  *
- * Your Home For Developer Permissions.
+ * Your Home For Developer Resources.
  *
  * API version: 1.0
  * Contact: hello@opal.dev
@@ -16,12 +16,13 @@ import (
 	"time"
 )
 
-// PermissionUser # Permission User Object ### Description The `PermissionUser` object is used to represent a user with access to a permission.  ### Usage Example Fetch from the `LIST PermissionUsers` endpoint.
-type PermissionUser struct {
-	// The ID of the permission.
-	PermissionId string `json:"permission_id"`
+// ResourceUser # Resource User Object ### Description The `ResourceUser` object is used to represent a user with access to a resource.  ### Usage Example Fetch from the `LIST ResourceUsers` endpoint.
+type ResourceUser struct {
+	// The ID of the resource.
+	ResourceId string `json:"resource_id"`
 	// The ID of the user.
 	UserId string `json:"user_id"`
+	AccessLevel ResourceAccessLevel `json:"access_level"`
 	// The user's full name.
 	FullName string `json:"full_name"`
 	// The user's email.
@@ -30,54 +31,55 @@ type PermissionUser struct {
 	ExpirationDate NullableTime `json:"expiration_date"`
 }
 
-// NewPermissionUser instantiates a new PermissionUser object
+// NewResourceUser instantiates a new ResourceUser object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPermissionUser(permissionId string, userId string, fullName string, email string, expirationDate NullableTime) *PermissionUser {
-	this := PermissionUser{}
-	this.PermissionId = permissionId
+func NewResourceUser(resourceId string, userId string, accessLevel ResourceAccessLevel, fullName string, email string, expirationDate NullableTime) *ResourceUser {
+	this := ResourceUser{}
+	this.ResourceId = resourceId
 	this.UserId = userId
+	this.AccessLevel = accessLevel
 	this.FullName = fullName
 	this.Email = email
 	this.ExpirationDate = expirationDate
 	return &this
 }
 
-// NewPermissionUserWithDefaults instantiates a new PermissionUser object
+// NewResourceUserWithDefaults instantiates a new ResourceUser object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewPermissionUserWithDefaults() *PermissionUser {
-	this := PermissionUser{}
+func NewResourceUserWithDefaults() *ResourceUser {
+	this := ResourceUser{}
 	return &this
 }
 
-// GetPermissionId returns the PermissionId field value
-func (o *PermissionUser) GetPermissionId() string {
+// GetResourceId returns the ResourceId field value
+func (o *ResourceUser) GetResourceId() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.PermissionId
+	return o.ResourceId
 }
 
-// GetPermissionIdOk returns a tuple with the PermissionId field value
+// GetResourceIdOk returns a tuple with the ResourceId field value
 // and a boolean to check if the value has been set.
-func (o *PermissionUser) GetPermissionIdOk() (*string, bool) {
+func (o *ResourceUser) GetResourceIdOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.PermissionId, true
+	return &o.ResourceId, true
 }
 
-// SetPermissionId sets field value
-func (o *PermissionUser) SetPermissionId(v string) {
-	o.PermissionId = v
+// SetResourceId sets field value
+func (o *ResourceUser) SetResourceId(v string) {
+	o.ResourceId = v
 }
 
 // GetUserId returns the UserId field value
-func (o *PermissionUser) GetUserId() string {
+func (o *ResourceUser) GetUserId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -88,7 +90,7 @@ func (o *PermissionUser) GetUserId() string {
 
 // GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
-func (o *PermissionUser) GetUserIdOk() (*string, bool) {
+func (o *ResourceUser) GetUserIdOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -96,12 +98,36 @@ func (o *PermissionUser) GetUserIdOk() (*string, bool) {
 }
 
 // SetUserId sets field value
-func (o *PermissionUser) SetUserId(v string) {
+func (o *ResourceUser) SetUserId(v string) {
 	o.UserId = v
 }
 
+// GetAccessLevel returns the AccessLevel field value
+func (o *ResourceUser) GetAccessLevel() ResourceAccessLevel {
+	if o == nil {
+		var ret ResourceAccessLevel
+		return ret
+	}
+
+	return o.AccessLevel
+}
+
+// GetAccessLevelOk returns a tuple with the AccessLevel field value
+// and a boolean to check if the value has been set.
+func (o *ResourceUser) GetAccessLevelOk() (*ResourceAccessLevel, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.AccessLevel, true
+}
+
+// SetAccessLevel sets field value
+func (o *ResourceUser) SetAccessLevel(v ResourceAccessLevel) {
+	o.AccessLevel = v
+}
+
 // GetFullName returns the FullName field value
-func (o *PermissionUser) GetFullName() string {
+func (o *ResourceUser) GetFullName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -112,7 +138,7 @@ func (o *PermissionUser) GetFullName() string {
 
 // GetFullNameOk returns a tuple with the FullName field value
 // and a boolean to check if the value has been set.
-func (o *PermissionUser) GetFullNameOk() (*string, bool) {
+func (o *ResourceUser) GetFullNameOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -120,12 +146,12 @@ func (o *PermissionUser) GetFullNameOk() (*string, bool) {
 }
 
 // SetFullName sets field value
-func (o *PermissionUser) SetFullName(v string) {
+func (o *ResourceUser) SetFullName(v string) {
 	o.FullName = v
 }
 
 // GetEmail returns the Email field value
-func (o *PermissionUser) GetEmail() string {
+func (o *ResourceUser) GetEmail() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -136,7 +162,7 @@ func (o *PermissionUser) GetEmail() string {
 
 // GetEmailOk returns a tuple with the Email field value
 // and a boolean to check if the value has been set.
-func (o *PermissionUser) GetEmailOk() (*string, bool) {
+func (o *ResourceUser) GetEmailOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -144,13 +170,13 @@ func (o *PermissionUser) GetEmailOk() (*string, bool) {
 }
 
 // SetEmail sets field value
-func (o *PermissionUser) SetEmail(v string) {
+func (o *ResourceUser) SetEmail(v string) {
 	o.Email = v
 }
 
 // GetExpirationDate returns the ExpirationDate field value
 // If the value is explicit nil, the zero value for time.Time will be returned
-func (o *PermissionUser) GetExpirationDate() time.Time {
+func (o *ResourceUser) GetExpirationDate() time.Time {
 	if o == nil || o.ExpirationDate.Get() == nil {
 		var ret time.Time
 		return ret
@@ -162,7 +188,7 @@ func (o *PermissionUser) GetExpirationDate() time.Time {
 // GetExpirationDateOk returns a tuple with the ExpirationDate field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PermissionUser) GetExpirationDateOk() (*time.Time, bool) {
+func (o *ResourceUser) GetExpirationDateOk() (*time.Time, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -170,17 +196,20 @@ func (o *PermissionUser) GetExpirationDateOk() (*time.Time, bool) {
 }
 
 // SetExpirationDate sets field value
-func (o *PermissionUser) SetExpirationDate(v time.Time) {
+func (o *ResourceUser) SetExpirationDate(v time.Time) {
 	o.ExpirationDate.Set(&v)
 }
 
-func (o PermissionUser) MarshalJSON() ([]byte, error) {
+func (o ResourceUser) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
-		toSerialize["permission_id"] = o.PermissionId
+		toSerialize["resource_id"] = o.ResourceId
 	}
 	if true {
 		toSerialize["user_id"] = o.UserId
+	}
+	if true {
+		toSerialize["access_level"] = o.AccessLevel
 	}
 	if true {
 		toSerialize["full_name"] = o.FullName
@@ -194,38 +223,38 @@ func (o PermissionUser) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullablePermissionUser struct {
-	value *PermissionUser
+type NullableResourceUser struct {
+	value *ResourceUser
 	isSet bool
 }
 
-func (v NullablePermissionUser) Get() *PermissionUser {
+func (v NullableResourceUser) Get() *ResourceUser {
 	return v.value
 }
 
-func (v *NullablePermissionUser) Set(val *PermissionUser) {
+func (v *NullableResourceUser) Set(val *ResourceUser) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePermissionUser) IsSet() bool {
+func (v NullableResourceUser) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePermissionUser) Unset() {
+func (v *NullableResourceUser) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePermissionUser(val *PermissionUser) *NullablePermissionUser {
-	return &NullablePermissionUser{value: val, isSet: true}
+func NewNullableResourceUser(val *ResourceUser) *NullableResourceUser {
+	return &NullableResourceUser{value: val, isSet: true}
 }
 
-func (v NullablePermissionUser) MarshalJSON() ([]byte, error) {
+func (v NullableResourceUser) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullablePermissionUser) UnmarshalJSON(src []byte) error {
+func (v *NullableResourceUser) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

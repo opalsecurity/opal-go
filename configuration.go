@@ -1,7 +1,7 @@
 /*
  * Opal API
  *
- * Your Home For Developer Permissions.
+ * Your Home For Developer Resources.
  *
  * API version: 1.0
  * Contact: hello@opal.dev
