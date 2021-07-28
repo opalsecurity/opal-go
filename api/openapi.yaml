@@ -131,6 +131,41 @@ paths:
       - BearerAuth: []
       tags:
       - resources
+  /sessions:
+    get:
+      description: Returns a list of `Session` objects.
+      operationId: sessions
+      parameters:
+      - description: The ID of the resource.
+        example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+        explode: true
+        in: query
+        name: resource_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: The email of the user you wish to query
+        example: johndoe@domain.org
+        explode: true
+        in: query
+        name: email
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionsList'
+          description: The sessions associated with a resource.
+      security:
+      - BearerAuth: []
+      tags:
+      - sessions
 components:
   schemas:
     PaginatedResourceUserList:
@@ -285,6 +320,75 @@ components:
       - email
       - expiration_date
       - full_name
+      - resource_id
+      - user_id
+      type: object
+    SessionsList:
+      example:
+        results:
+        - connection_id: h0z968412-2451-4bbd-42h4-057l715d917m
+          user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+          resource_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          expiration_date: 2022-01-23T04:56:07Z
+          is_global: true
+        - connection_id: 6e6b5597-bd36-4f4c-a629-01e3fa791932
+          user_id: b031c922-b84f-4424-9f4f-c49c05871bfe
+          resource_id: 77eb1ab7-2c27-4fc4-afdb-137e1265cddd
+          expiration_date: 2022-03-12T07:22:18Z
+          is_global: false
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/Session'
+          type: array
+      type: object
+    Session:
+      description: |-
+        # Session Object
+        ### Description
+        The `Session` object is used to represent a session.
+
+        ### Usage Example
+        Fetch from the `LIST Sessions` endpoint.
+      example:
+        connection_id: h0z968412-2451-4bbd-42h4-057l715d917m
+        user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+        resource_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+        expiration_date: 2022-01-23T04:56:07Z
+        is_global: true
+      properties:
+        connection_id:
+          description: The ID of the connection.
+          format: uuid
+          type: string
+        user_id:
+          description: The ID of the user.
+          example: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+          format: uuid
+          type: string
+        resource_id:
+          description: The ID of the resource.
+          example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          format: uuid
+          type: string
+        access_level:
+          $ref: '#/components/schemas/ResourceAccessLevel'
+        expiration_date:
+          description: The day and time the user's access will expire.
+          example: 2022-01-23T04:56:07Z
+          format: date-time
+          nullable: false
+          type: string
+        is_global:
+          description: Whether the session is of type global impersonation.
+          example: true
+          nullable: false
+          type: boolean
+      required:
+      - access_level
+      - connection_id
+      - expiration_date
+      - is_global
       - resource_id
       - user_id
       type: object
