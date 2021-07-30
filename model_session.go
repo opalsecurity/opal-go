@@ -16,7 +16,7 @@ import (
 	"time"
 )
 
-// Session # Session Object ### Description The `Session` object is used to represent a session.  ### Usage Example Fetch from the `LIST Sessions` endpoint.
+// Session # Session Object ### Description The `Session` object is used to represent an access session. Groups and some resources can be accessed temporarily via a time-bounded session.  ### Usage Example Fetch from the `LIST Sessions` endpoint.
 type Session struct {
 	// The ID of the connection.
 	ConnectionId string `json:"connection_id"`
@@ -27,22 +27,19 @@ type Session struct {
 	AccessLevel ResourceAccessLevel `json:"access_level"`
 	// The day and time the user's access will expire.
 	ExpirationDate time.Time `json:"expiration_date"`
-	// Whether the session is of type global impersonation.
-	IsGlobal bool `json:"is_global"`
 }
 
 // NewSession instantiates a new Session object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSession(connectionId string, userId string, resourceId string, accessLevel ResourceAccessLevel, expirationDate time.Time, isGlobal bool) *Session {
+func NewSession(connectionId string, userId string, resourceId string, accessLevel ResourceAccessLevel, expirationDate time.Time) *Session {
 	this := Session{}
 	this.ConnectionId = connectionId
 	this.UserId = userId
 	this.ResourceId = resourceId
 	this.AccessLevel = accessLevel
 	this.ExpirationDate = expirationDate
-	this.IsGlobal = isGlobal
 	return &this
 }
 
@@ -174,30 +171,6 @@ func (o *Session) SetExpirationDate(v time.Time) {
 	o.ExpirationDate = v
 }
 
-// GetIsGlobal returns the IsGlobal field value
-func (o *Session) GetIsGlobal() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.IsGlobal
-}
-
-// GetIsGlobalOk returns a tuple with the IsGlobal field value
-// and a boolean to check if the value has been set.
-func (o *Session) GetIsGlobalOk() (*bool, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.IsGlobal, true
-}
-
-// SetIsGlobal sets field value
-func (o *Session) SetIsGlobal(v bool) {
-	o.IsGlobal = v
-}
-
 func (o Session) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -214,9 +187,6 @@ func (o Session) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["expiration_date"] = o.ExpirationDate
-	}
-	if true {
-		toSerialize["is_global"] = o.IsGlobal
 	}
 	return json.Marshal(toSerialize)
 }

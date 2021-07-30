@@ -82,6 +82,7 @@ Class | Method | HTTP request | Description
 *ResourcesApi* | [**ResourceAccessStatusRetrieve**](docs/ResourcesApi.md#resourceaccessstatusretrieve) | **Get** /resource-access-status/{resource_id}/{user_id} | 
 *ResourcesApi* | [**ResourceUsersList**](docs/ResourcesApi.md#resourceuserslist) | **Get** /resource-users | 
 *SessionsApi* | [**Sessions**](docs/SessionsApi.md#sessions) | **Get** /sessions | 
+*UsersApi* | [**User**](docs/UsersApi.md#user) | **Get** /user | 
 
 
 ## Documentation For Models
@@ -93,6 +94,8 @@ Class | Method | HTTP request | Description
  - [ResourceUser](docs/ResourceUser.md)
  - [Session](docs/Session.md)
  - [SessionsList](docs/SessionsList.md)
+ - [User](docs/User.md)
+ - [UsersList](docs/UsersList.md)
 
 
 ## Documentation For Authorization

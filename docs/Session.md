@@ -9,13 +9,12 @@ Name | Type | Description | Notes
 **ResourceId** | **string** | The ID of the resource. | 
 **AccessLevel** | [**ResourceAccessLevel**](ResourceAccessLevel.md) |  | 
 **ExpirationDate** | **time.Time** | The day and time the user&#39;s access will expire. | 
-**IsGlobal** | **bool** | Whether the session is of type global impersonation. | 
 
 ## Methods
 
 ### NewSession
 
-`func NewSession(connectionId string, userId string, resourceId string, accessLevel ResourceAccessLevel, expirationDate time.Time, isGlobal bool, ) *Session`
+`func NewSession(connectionId string, userId string, resourceId string, accessLevel ResourceAccessLevel, expirationDate time.Time, ) *Session`
 
 NewSession instantiates a new Session object
 This constructor will assign default values to properties that have it defined,
@@ -128,26 +127,6 @@ and a boolean to check if the value has been set.
 `func (o *Session) SetExpirationDate(v time.Time)`
 
 SetExpirationDate sets ExpirationDate field to given value.
-
-
-### GetIsGlobal
-
-`func (o *Session) GetIsGlobal() bool`
-
-GetIsGlobal returns the IsGlobal field if non-nil, zero value otherwise.
-
-### GetIsGlobalOk
-
-`func (o *Session) GetIsGlobalOk() (*bool, bool)`
-
-GetIsGlobalOk returns a tuple with the IsGlobal field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsGlobal
-
-`func (o *Session) SetIsGlobal(v bool)`
-
-SetIsGlobal sets IsGlobal field to given value.
 
 
 

@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## Sessions
 
-> SessionsList Sessions(ctx).ResourceId(resourceId).Email(email).Execute()
+> SessionsList Sessions(ctx).ResourceId(resourceId).UserId(userId).Execute()
 
 
 
@@ -30,11 +30,11 @@ import (
 
 func main() {
     resourceId := TODO // string | The ID of the resource.
-    email := "johndoe@domain.org" // string | The email of the user you wish to query (optional)
+    userId := "32acc112-21ff-4669-91c2-21e27683eaa1" // string | The ID of the user you wish to query sessions for. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SessionsApi.Sessions(context.Background()).ResourceId(resourceId).Email(email).Execute()
+    resp, r, err := api_client.SessionsApi.Sessions(context.Background()).ResourceId(resourceId).UserId(userId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SessionsApi.Sessions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -56,7 +56,7 @@ Other parameters are passed through a pointer to a apiSessionsRequest struct via
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **resourceId** | [**string**](string.md) | The ID of the resource. | 
- **email** | **string** | The email of the user you wish to query | 
+ **userId** | **string** | The ID of the user you wish to query sessions for. | 
 
 ### Return type
 

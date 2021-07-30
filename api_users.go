@@ -24,37 +24,37 @@ var (
 	_ _context.Context
 )
 
-// SessionsApiService SessionsApi service
-type SessionsApiService service
+// UsersApiService UsersApi service
+type UsersApiService service
 
-type ApiSessionsRequest struct {
+type ApiUserRequest struct {
 	ctx _context.Context
-	ApiService *SessionsApiService
-	resourceId *string
+	ApiService *UsersApiService
 	userId *string
+	email *string
 }
 
-func (r ApiSessionsRequest) ResourceId(resourceId string) ApiSessionsRequest {
-	r.resourceId = &resourceId
-	return r
-}
-func (r ApiSessionsRequest) UserId(userId string) ApiSessionsRequest {
+func (r ApiUserRequest) UserId(userId string) ApiUserRequest {
 	r.userId = &userId
 	return r
 }
+func (r ApiUserRequest) Email(email string) ApiUserRequest {
+	r.email = &email
+	return r
+}
 
-func (r ApiSessionsRequest) Execute() (SessionsList, *_nethttp.Response, error) {
-	return r.ApiService.SessionsExecute(r)
+func (r ApiUserRequest) Execute() (User, *_nethttp.Response, error) {
+	return r.ApiService.UserExecute(r)
 }
 
 /*
- * Sessions Method for Sessions
- * Returns a list of `Session` objects.
+ * User Method for User
+ * Returns a `User` object.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiSessionsRequest
+ * @return ApiUserRequest
  */
-func (a *SessionsApiService) Sessions(ctx _context.Context) ApiSessionsRequest {
-	return ApiSessionsRequest{
+func (a *UsersApiService) User(ctx _context.Context) ApiUserRequest {
+	return ApiUserRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -62,35 +62,34 @@ func (a *SessionsApiService) Sessions(ctx _context.Context) ApiSessionsRequest {
 
 /*
  * Execute executes the request
- * @return SessionsList
+ * @return User
  */
-func (a *SessionsApiService) SessionsExecute(r ApiSessionsRequest) (SessionsList, *_nethttp.Response, error) {
+func (a *UsersApiService) UserExecute(r ApiUserRequest) (User, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  SessionsList
+		localVarReturnValue  User
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SessionsApiService.Sessions")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.User")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/sessions"
+	localVarPath := localBasePath + "/user"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.resourceId == nil {
-		return localVarReturnValue, nil, reportError("resourceId is required and must be specified")
-	}
 
-	localVarQueryParams.Add("resource_id", parameterToString(*r.resourceId, ""))
 	if r.userId != nil {
 		localVarQueryParams.Add("user_id", parameterToString(*r.userId, ""))
+	}
+	if r.email != nil {
+		localVarQueryParams.Add("email", parameterToString(*r.email, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

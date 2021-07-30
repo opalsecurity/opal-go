@@ -146,11 +146,11 @@ paths:
           format: uuid
           type: string
         style: form
-      - description: The email of the user you wish to query
-        example: johndoe@domain.org
+      - description: The ID of the user you wish to query sessions for.
+        example: 32acc112-21ff-4669-91c2-21e27683eaa1
         explode: true
         in: query
-        name: email
+        name: user_id
         required: false
         schema:
           type: string
@@ -166,6 +166,42 @@ paths:
       - BearerAuth: []
       tags:
       - sessions
+  /user:
+    get:
+      description: Returns a `User` object.
+      operationId: user
+      parameters:
+      - description: The user ID of the user.
+        example: 32acc112-21ff-4669-91c2-21e27683eaa1
+        explode: true
+        in: query
+        name: user_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: The email of the user. If both user ID and email provided, user
+          ID will take precedence. If neither are provided, an error will occur.
+        example: johndoe@domain.org
+        explode: true
+        in: query
+        name: email
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: The user object associated with the passed-in email or ID.
+      security:
+      - BearerAuth: []
+      tags:
+      - users
 components:
   schemas:
     PaginatedResourceUserList:
@@ -330,12 +366,10 @@ components:
           user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
           resource_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
           expiration_date: 2022-01-23T04:56:07Z
-          is_global: true
         - connection_id: 6e6b5597-bd36-4f4c-a629-01e3fa791932
           user_id: b031c922-b84f-4424-9f4f-c49c05871bfe
           resource_id: 77eb1ab7-2c27-4fc4-afdb-137e1265cddd
           expiration_date: 2022-03-12T07:22:18Z
-          is_global: false
       properties:
         results:
           items:
@@ -346,7 +380,7 @@ components:
       description: |-
         # Session Object
         ### Description
-        The `Session` object is used to represent a session.
+        The `Session` object is used to represent an access session. Groups and some resources can be accessed temporarily via a time-bounded session.
 
         ### Usage Example
         Fetch from the `LIST Sessions` endpoint.
@@ -355,7 +389,6 @@ components:
         user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
         resource_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
         expiration_date: 2022-01-23T04:56:07Z
-        is_global: true
       properties:
         connection_id:
           description: The ID of the connection.
@@ -379,17 +412,75 @@ components:
           format: date-time
           nullable: false
           type: string
-        is_global:
-          description: Whether the session is of type global impersonation.
-          example: true
-          nullable: false
-          type: boolean
       required:
       - access_level
       - connection_id
       - expiration_date
-      - is_global
       - resource_id
+      - user_id
+      type: object
+    UsersList:
+      example:
+        results:
+        - user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+          email: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          full_name: John Doe
+          team_id: 659eeec6-7d77-42c1-add2-b41243c618fd
+          position: Senior Engineer
+        - user_id: e8581682-04f7-473a-a419-472f0fb26d46
+          email: 186511e5-5b5a-4ad7-a4ad-b6c8694a544a
+          full_name: Jane Smith
+          team_id: 02cc7531-ebce-4cc1-88a3-35ce8bfadf39
+          position: Product Marketing Lead
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+      type: object
+    User:
+      description: |-
+        # User Object
+        ### Description
+        The `User` object is used to represent a user.
+
+        ### Usage Example
+        Fetch from the `LIST Sessions` endpoint.
+      example:
+        user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+        email: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+        full_name: John Doe
+        team_id: 659eeec6-7d77-42c1-add2-b41243c618fd
+        position: Engineer
+      properties:
+        user_id:
+          description: The ID of the user.
+          format: uuid
+          type: string
+        email:
+          description: The email of the user.
+          example: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+          format: uuid
+          type: string
+        full_name:
+          description: The full name of the user.
+          example: John Doe
+          type: string
+        team_id:
+          description: The ID of the user's team.
+          example: 659eeec6-7d77-42c1-add2-b41243c618fd
+          format: uuid
+          nullable: true
+          type: string
+        position:
+          description: The user's position.
+          example: Senior Engineer
+          type: string
+      required:
+      - email
+      - full_name
+      - position
+      - team_id
       - user_id
       type: object
   securitySchemes:

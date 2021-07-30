@@ -4,6 +4,7 @@ README.md
 api/openapi.yaml
 api_resources.go
 api_sessions.go
+api_users.go
 client.go
 configuration.go
 docs/PaginatedResourceUserList.md
@@ -15,6 +16,9 @@ docs/ResourcesApi.md
 docs/Session.md
 docs/SessionsApi.md
 docs/SessionsList.md
+docs/User.md
+docs/UsersApi.md
+docs/UsersList.md
 git_push.sh
 go.mod
 go.sum
@@ -25,5 +29,7 @@ model_resource_access_status_enum.go
 model_resource_user.go
 model_session.go
 model_sessions_list.go
+model_user.go
+model_users_list.go
 response.go
 utils.go
