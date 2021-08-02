@@ -181,8 +181,8 @@ paths:
           format: uuid
           type: string
         style: form
-      - description: The email of the user. If both user ID and email provided, user
-          ID will take precedence. If neither are provided, an error will occur.
+      - description: The email of the user. If both user ID and email are provided,
+          user ID will take precedence. If neither are provided, an error will occur.
         example: johndoe@domain.org
         explode: true
         in: query
@@ -361,6 +361,8 @@ components:
       type: object
     SessionsList:
       example:
+        next: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        previous: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
         results:
         - connection_id: h0z968412-2451-4bbd-42h4-057l715d917m
           user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
@@ -371,6 +373,17 @@ components:
           resource_id: 77eb1ab7-2c27-4fc4-afdb-137e1265cddd
           expiration_date: 2022-03-12T07:22:18Z
       properties:
+        next:
+          description: The cursor with which to continue pagination if additional
+            result pages exist.
+          example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+          nullable: true
+          type: string
+        previous:
+          description: The cursor used to obtain the current result page.
+          example: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
+          nullable: true
+          type: string
         results:
           items:
             $ref: '#/components/schemas/Session'
@@ -380,7 +393,7 @@ components:
       description: |-
         # Session Object
         ### Description
-        The `Session` object is used to represent an access session. Groups and some resources can be accessed temporarily via a time-bounded session.
+        The `Session` object is used to represent an access session. Some resources can be accessed temporarily via a time-bounded session.
 
         ### Usage Example
         Fetch from the `LIST Sessions` endpoint.

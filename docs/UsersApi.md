@@ -30,7 +30,7 @@ import (
 
 func main() {
     userId := TODO // string | The user ID of the user. (optional)
-    email := "johndoe@domain.org" // string | The email of the user. If both user ID and email provided, user ID will take precedence. If neither are provided, an error will occur. (optional)
+    email := "johndoe@domain.org" // string | The email of the user. If both user ID and email are provided, user ID will take precedence. If neither are provided, an error will occur. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -56,7 +56,7 @@ Other parameters are passed through a pointer to a apiUserRequest struct via the
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userId** | [**string**](string.md) | The user ID of the user. | 
- **email** | **string** | The email of the user. If both user ID and email provided, user ID will take precedence. If neither are provided, an error will occur. | 
+ **email** | **string** | The email of the user. If both user ID and email are provided, user ID will take precedence. If neither are provided, an error will occur. | 
 
 ### Return type
 

@@ -17,6 +17,10 @@ import (
 
 // SessionsList struct for SessionsList
 type SessionsList struct {
+	// The cursor with which to continue pagination if additional result pages exist.
+	Next NullableString `json:"next,omitempty"`
+	// The cursor used to obtain the current result page.
+	Previous NullableString `json:"previous,omitempty"`
 	Results *[]Session `json:"results,omitempty"`
 }
 
@@ -35,6 +39,90 @@ func NewSessionsList() *SessionsList {
 func NewSessionsListWithDefaults() *SessionsList {
 	this := SessionsList{}
 	return &this
+}
+
+// GetNext returns the Next field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SessionsList) GetNext() string {
+	if o == nil || o.Next.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Next.Get()
+}
+
+// GetNextOk returns a tuple with the Next field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SessionsList) GetNextOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Next.Get(), o.Next.IsSet()
+}
+
+// HasNext returns a boolean if a field has been set.
+func (o *SessionsList) HasNext() bool {
+	if o != nil && o.Next.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetNext gets a reference to the given NullableString and assigns it to the Next field.
+func (o *SessionsList) SetNext(v string) {
+	o.Next.Set(&v)
+}
+// SetNextNil sets the value for Next to be an explicit nil
+func (o *SessionsList) SetNextNil() {
+	o.Next.Set(nil)
+}
+
+// UnsetNext ensures that no value is present for Next, not even an explicit nil
+func (o *SessionsList) UnsetNext() {
+	o.Next.Unset()
+}
+
+// GetPrevious returns the Previous field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SessionsList) GetPrevious() string {
+	if o == nil || o.Previous.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Previous.Get()
+}
+
+// GetPreviousOk returns a tuple with the Previous field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SessionsList) GetPreviousOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Previous.Get(), o.Previous.IsSet()
+}
+
+// HasPrevious returns a boolean if a field has been set.
+func (o *SessionsList) HasPrevious() bool {
+	if o != nil && o.Previous.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPrevious gets a reference to the given NullableString and assigns it to the Previous field.
+func (o *SessionsList) SetPrevious(v string) {
+	o.Previous.Set(&v)
+}
+// SetPreviousNil sets the value for Previous to be an explicit nil
+func (o *SessionsList) SetPreviousNil() {
+	o.Previous.Set(nil)
+}
+
+// UnsetPrevious ensures that no value is present for Previous, not even an explicit nil
+func (o *SessionsList) UnsetPrevious() {
+	o.Previous.Unset()
 }
 
 // GetResults returns the Results field value if set, zero value otherwise.
@@ -71,6 +159,12 @@ func (o *SessionsList) SetResults(v []Session) {
 
 func (o SessionsList) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.Next.IsSet() {
+		toSerialize["next"] = o.Next.Get()
+	}
+	if o.Previous.IsSet() {
+		toSerialize["previous"] = o.Previous.Get()
+	}
 	if o.Results != nil {
 		toSerialize["results"] = o.Results
 	}

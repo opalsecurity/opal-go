@@ -16,7 +16,7 @@ import (
 	"time"
 )
 
-// Session # Session Object ### Description The `Session` object is used to represent an access session. Groups and some resources can be accessed temporarily via a time-bounded session.  ### Usage Example Fetch from the `LIST Sessions` endpoint.
+// Session # Session Object ### Description The `Session` object is used to represent an access session. Some resources can be accessed temporarily via a time-bounded session.  ### Usage Example Fetch from the `LIST Sessions` endpoint.
 type Session struct {
 	// The ID of the connection.
 	ConnectionId string `json:"connection_id"`
