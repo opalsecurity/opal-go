@@ -11,6 +11,87 @@ servers:
 - description: Production
   url: https://api.opal.dev/v1
 paths:
+  /events:
+    get:
+      description: Returns a list of `Event` objects.
+      operationId: events_list
+      parameters:
+      - description: A start date filter for the events.
+        example: 2021/11/01
+        explode: true
+        in: query
+        name: start_date_filter
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: An end date filter for the events.
+        example: 2021-11-12
+        explode: true
+        in: query
+        name: end_date_filter
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: An actor filter for the events. Supply the ID of the actor.
+        example: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+        explode: true
+        in: query
+        name: actor_filter
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: An object filter for the events. Supply the ID of the object.
+        example: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+        explode: true
+        in: query
+        name: object_filter
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: An event type filter for the events.
+        example: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+        explode: true
+        in: query
+        name: event_type_filter
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The pagination cursor value.
+        example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Number of results to return per page.
+        example: 200
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEventList'
+          description: One page worth of events with the appropriate filters applied.
+      security:
+      - BearerAuth: []
+      tags:
+      - events
   /resource-users:
     get:
       description: Returns a list of `ResourceUser` objects.
@@ -125,7 +206,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceAccessStatus'
+                $ref: '#/components/schemas/ResourceUserAccessStatus'
           description: The access status reflecting the user's access to the resource.
       security:
       - BearerAuth: []
@@ -204,6 +285,76 @@ paths:
       - users
 components:
   schemas:
+    Event:
+      description: |-
+        # Event Object
+        ### Description
+        The `Event` object is used to represent an event.
+
+        ### Usage Example
+        Fetch from the `LIST Events` endpoint.
+      example:
+        full_name: Jake Barnes
+        user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+        resource_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+        expiration_date: 2022-01-23T04:56:07Z
+        email: jake@company.dev
+      properties:
+        event_id:
+          description: The ID of the event.
+          example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          format: uuid
+          type: string
+        actor_user_id:
+          description: The ID of the actor user.
+          example: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+          format: uuid
+          type: string
+        event_type:
+          description: The event type.
+          example: USERS_CREATED
+          type: string
+        created_at:
+          description: The day and time the event was created.
+          example: 2022-01-23T04:56:07Z
+          format: date-time
+          type: string
+      required:
+      - actor_user_id
+      - created_at
+      - event_id
+      - event_type
+      type: object
+    PaginatedEventList:
+      example:
+        next: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        previous: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
+        results:
+        - event_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+          actor_user_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          created_at: 2022-01-23T04:56:07Z
+          event_type: USERS_CREATED
+        - event_id: 7646aa9a-e2ee-4eb5-8c62-91f29038a373
+          actor_user_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          created_at: 2022-02-03T12:33:02Z
+          event_type: USER_TEAM_UPDATED
+      properties:
+        next:
+          description: The cursor with which to continue pagination if additional
+            result pages exist.
+          example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+          nullable: true
+          type: string
+        previous:
+          description: The cursor used to obtain the current result page.
+          example: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Event'
+          type: array
+      type: object
     PaginatedResourceUserList:
       example:
         next: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
@@ -261,7 +412,7 @@ components:
       - access_level_name
       - access_level_remote_id
       type: object
-    ResourceAccessStatus:
+    ResourceUserAccessStatus:
       description: |-
         # AccessStatus Object
         ### Description
@@ -288,7 +439,7 @@ components:
         access_level:
           $ref: '#/components/schemas/ResourceAccessLevel'
         status:
-          $ref: '#/components/schemas/ResourceAccessStatusEnum'
+          $ref: '#/components/schemas/ResourceUserAccessStatusEnum'
         expiration_date:
           description: The day and time the user's access will expire.
           example: 2022-01-23T04:56:07Z
@@ -301,7 +452,7 @@ components:
       - status
       - user_id
       type: object
-    ResourceAccessStatusEnum:
+    ResourceUserAccessStatusEnum:
       description: The status of the user's access to the resource.
       enum:
       - UNAUTHORIZED

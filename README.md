@@ -59,7 +59,7 @@ Note, enum values are always validated and all unused variables are silently ign
 ### URLs Configuration per Operation
 
 Each operation can use different server URL defined using `OperationServers` map in the `Configuration`.
-An operation is uniquely identifield by `"{classname}Service.{nickname}"` string.
+An operation is uniquely identified by `"{classname}Service.{nickname}"` string.
 Similar rules for overriding default operation server index and variables applies by using `sw.ContextOperationServerIndices` and `sw.ContextOperationServerVariables` context maps.
 
 ```
@@ -79,6 +79,7 @@ All URIs are relative to *https://api.opal.dev/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*EventsApi* | [**EventsList**](docs/EventsApi.md#eventslist) | **Get** /events | 
 *ResourcesApi* | [**ResourceAccessStatusRetrieve**](docs/ResourcesApi.md#resourceaccessstatusretrieve) | **Get** /resource-access-status/{resource_id}/{user_id} | 
 *ResourcesApi* | [**ResourceUsersList**](docs/ResourcesApi.md#resourceuserslist) | **Get** /resource-users | 
 *SessionsApi* | [**Sessions**](docs/SessionsApi.md#sessions) | **Get** /sessions | 
@@ -87,11 +88,13 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [Event](docs/Event.md)
+ - [PaginatedEventList](docs/PaginatedEventList.md)
  - [PaginatedResourceUserList](docs/PaginatedResourceUserList.md)
  - [ResourceAccessLevel](docs/ResourceAccessLevel.md)
- - [ResourceAccessStatus](docs/ResourceAccessStatus.md)
- - [ResourceAccessStatusEnum](docs/ResourceAccessStatusEnum.md)
  - [ResourceUser](docs/ResourceUser.md)
+ - [ResourceUserAccessStatus](docs/ResourceUserAccessStatus.md)
+ - [ResourceUserAccessStatusEnum](docs/ResourceUserAccessStatusEnum.md)
  - [Session](docs/Session.md)
  - [SessionsList](docs/SessionsList.md)
  - [User](docs/User.md)
