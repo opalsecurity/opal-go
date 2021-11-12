@@ -29,7 +29,7 @@ import (
 )
 
 func main() {
-    resourceId := TODO // string | The ID of the resource.
+    resourceId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the resource.
     userId := "32acc112-21ff-4669-91c2-21e27683eaa1" // string | The ID of the user you wish to query sessions for. (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -55,7 +55,7 @@ Other parameters are passed through a pointer to a apiSessionsRequest struct via
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **resourceId** | [**string**](string.md) | The ID of the resource. | 
+ **resourceId** | **string** | The ID of the resource. | 
  **userId** | **string** | The ID of the user you wish to query sessions for. | 
 
 ### Return type

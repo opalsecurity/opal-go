@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## ResourceAccessStatusRetrieve
 
-> ResourceAccessStatus ResourceAccessStatusRetrieve(ctx, resourceId, userId).AccessLevelRemoteId(accessLevelRemoteId).Cursor(cursor).PageSize(pageSize).Execute()
+> ResourceUserAccessStatus ResourceAccessStatusRetrieve(ctx, resourceId, userId).AccessLevelRemoteId(accessLevelRemoteId).Cursor(cursor).PageSize(pageSize).Execute()
 
 
 
@@ -30,8 +30,8 @@ import (
 )
 
 func main() {
-    resourceId := TODO // string | The ID of the resource.
-    userId := TODO // string | The ID of the user.
+    resourceId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the resource.
+    userId := "29827fb8-f2dd-4e80-9576-28e31e9934ac" // string | The ID of the user.
     accessLevelRemoteId := "arn:aws:iam::590304332660:role/AdministratorAccess" // string | The remote ID of the access level that you wish to query for the resource. If omitted, the default access level remote ID value (empty string) is used. (optional)
     cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
     pageSize := int32(200) // int32 | Number of results to return per page. (optional)
@@ -43,7 +43,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ResourcesApi.ResourceAccessStatusRetrieve``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ResourceAccessStatusRetrieve`: ResourceAccessStatus
+    // response from `ResourceAccessStatusRetrieve`: ResourceUserAccessStatus
     fmt.Fprintf(os.Stdout, "Response from `ResourcesApi.ResourceAccessStatusRetrieve`: %v\n", resp)
 }
 ```
@@ -54,8 +54,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**resourceId** | [**string**](.md) | The ID of the resource. | 
-**userId** | [**string**](.md) | The ID of the user. | 
+**resourceId** | **string** | The ID of the resource. | 
+**userId** | **string** | The ID of the user. | 
 
 ### Other Parameters
 
@@ -72,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResourceAccessStatus**](ResourceAccessStatus.md)
+[**ResourceUserAccessStatus**](ResourceUserAccessStatus.md)
 
 ### Authorization
 
@@ -109,7 +109,7 @@ import (
 )
 
 func main() {
-    resourceId := TODO // string | The ID of the resource.
+    resourceId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the resource.
     accessLevelRemoteId := "arn:aws:iam::590304332660:role/AdministratorAccess" // string | The remote ID of the access level that you wish to query for the resource. If omitted, the default access level remote ID value (empty string) is used. (optional)
     cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
     pageSize := int32(200) // int32 | Number of results to return per page. (optional)
@@ -137,7 +137,7 @@ Other parameters are passed through a pointer to a apiResourceUsersListRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **resourceId** | [**string**](string.md) | The ID of the resource. | 
+ **resourceId** | **string** | The ID of the resource. | 
  **accessLevelRemoteId** | **string** | The remote ID of the access level that you wish to query for the resource. If omitted, the default access level remote ID value (empty string) is used. | 
  **cursor** | **string** | The pagination cursor value. | 
  **pageSize** | **int32** | Number of results to return per page. | 
