@@ -28,7 +28,7 @@ var (
 // ResourcesApiService ResourcesApi service
 type ResourcesApiService service
 
-type ApiResourceAccessStatusRetrieveRequest struct {
+type ApiResourceUserAccessStatusRetrieveRequest struct {
 	ctx _context.Context
 	ApiService *ResourcesApiService
 	resourceId string
@@ -39,37 +39,37 @@ type ApiResourceAccessStatusRetrieveRequest struct {
 }
 
 // The remote ID of the access level that you wish to query for the resource. If omitted, the default access level remote ID value (empty string) is used.
-func (r ApiResourceAccessStatusRetrieveRequest) AccessLevelRemoteId(accessLevelRemoteId string) ApiResourceAccessStatusRetrieveRequest {
+func (r ApiResourceUserAccessStatusRetrieveRequest) AccessLevelRemoteId(accessLevelRemoteId string) ApiResourceUserAccessStatusRetrieveRequest {
 	r.accessLevelRemoteId = &accessLevelRemoteId
 	return r
 }
 // The pagination cursor value.
-func (r ApiResourceAccessStatusRetrieveRequest) Cursor(cursor string) ApiResourceAccessStatusRetrieveRequest {
+func (r ApiResourceUserAccessStatusRetrieveRequest) Cursor(cursor string) ApiResourceUserAccessStatusRetrieveRequest {
 	r.cursor = &cursor
 	return r
 }
 // Number of results to return per page.
-func (r ApiResourceAccessStatusRetrieveRequest) PageSize(pageSize int32) ApiResourceAccessStatusRetrieveRequest {
+func (r ApiResourceUserAccessStatusRetrieveRequest) PageSize(pageSize int32) ApiResourceUserAccessStatusRetrieveRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiResourceAccessStatusRetrieveRequest) Execute() (ResourceUserAccessStatus, *_nethttp.Response, error) {
-	return r.ApiService.ResourceAccessStatusRetrieveExecute(r)
+func (r ApiResourceUserAccessStatusRetrieveRequest) Execute() (ResourceUserAccessStatus, *_nethttp.Response, error) {
+	return r.ApiService.ResourceUserAccessStatusRetrieveExecute(r)
 }
 
 /*
-ResourceAccessStatusRetrieve Method for ResourceAccessStatusRetrieve
+ResourceUserAccessStatusRetrieve Method for ResourceUserAccessStatusRetrieve
 
 Get user's access status to a resource.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param resourceId The ID of the resource.
  @param userId The ID of the user.
- @return ApiResourceAccessStatusRetrieveRequest
+ @return ApiResourceUserAccessStatusRetrieveRequest
 */
-func (a *ResourcesApiService) ResourceAccessStatusRetrieve(ctx _context.Context, resourceId string, userId string) ApiResourceAccessStatusRetrieveRequest {
-	return ApiResourceAccessStatusRetrieveRequest{
+func (a *ResourcesApiService) ResourceUserAccessStatusRetrieve(ctx _context.Context, resourceId string, userId string) ApiResourceUserAccessStatusRetrieveRequest {
+	return ApiResourceUserAccessStatusRetrieveRequest{
 		ApiService: a,
 		ctx: ctx,
 		resourceId: resourceId,
@@ -79,7 +79,7 @@ func (a *ResourcesApiService) ResourceAccessStatusRetrieve(ctx _context.Context,
 
 // Execute executes the request
 //  @return ResourceUserAccessStatus
-func (a *ResourcesApiService) ResourceAccessStatusRetrieveExecute(r ApiResourceAccessStatusRetrieveRequest) (ResourceUserAccessStatus, *_nethttp.Response, error) {
+func (a *ResourcesApiService) ResourceUserAccessStatusRetrieveExecute(r ApiResourceUserAccessStatusRetrieveRequest) (ResourceUserAccessStatus, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -89,12 +89,12 @@ func (a *ResourcesApiService) ResourceAccessStatusRetrieveExecute(r ApiResourceA
 		localVarReturnValue  ResourceUserAccessStatus
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesApiService.ResourceAccessStatusRetrieve")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesApiService.ResourceUserAccessStatusRetrieve")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/resource-access-status/{resource_id}/{user_id}"
+	localVarPath := localBasePath + "/resource-user-access-status/{resource_id}/{user_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", _neturl.PathEscape(parameterToString(r.resourceId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"user_id"+"}", _neturl.PathEscape(parameterToString(r.userId, "")), -1)
 

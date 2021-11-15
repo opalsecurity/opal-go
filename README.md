@@ -80,7 +80,7 @@ All URIs are relative to *https://api.opal.dev/v1*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *EventsApi* | [**EventsList**](docs/EventsApi.md#eventslist) | **Get** /events | 
-*ResourcesApi* | [**ResourceAccessStatusRetrieve**](docs/ResourcesApi.md#resourceaccessstatusretrieve) | **Get** /resource-access-status/{resource_id}/{user_id} | 
+*ResourcesApi* | [**ResourceUserAccessStatusRetrieve**](docs/ResourcesApi.md#resourceuseraccessstatusretrieve) | **Get** /resource-user-access-status/{resource_id}/{user_id} | 
 *ResourcesApi* | [**ResourceUsersList**](docs/ResourcesApi.md#resourceuserslist) | **Get** /resource-users | 
 *SessionsApi* | [**Sessions**](docs/SessionsApi.md#sessions) | **Get** /sessions | 
 *UsersApi* | [**User**](docs/UsersApi.md#user) | **Get** /user | 
