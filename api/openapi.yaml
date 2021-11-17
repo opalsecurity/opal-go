@@ -147,10 +147,10 @@ paths:
       - BearerAuth: []
       tags:
       - resources
-  /resource-access-status/{resource_id}/{user_id}:
+  /resource-user-access-status/{resource_id}/{user_id}:
     get:
       description: Get user's access status to a resource.
-      operationId: resource_access_status_retrieve
+      operationId: resource_user_access_status_retrieve
       parameters:
       - description: The ID of the resource.
         example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
@@ -294,11 +294,10 @@ components:
         ### Usage Example
         Fetch from the `LIST Events` endpoint.
       example:
-        full_name: Jake Barnes
-        user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
-        resource_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
-        expiration_date: 2022-01-23T04:56:07Z
-        email: jake@company.dev
+        event_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+        actor_user_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+        created_at: 2022-01-23T04:56:07Z
+        event_type: USERS_CREATED
       properties:
         event_id:
           description: The ID of the event.

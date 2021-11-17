@@ -4,14 +4,14 @@ All URIs are relative to *https://api.opal.dev/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ResourceAccessStatusRetrieve**](ResourcesApi.md#ResourceAccessStatusRetrieve) | **Get** /resource-access-status/{resource_id}/{user_id} | 
+[**ResourceUserAccessStatusRetrieve**](ResourcesApi.md#ResourceUserAccessStatusRetrieve) | **Get** /resource-user-access-status/{resource_id}/{user_id} | 
 [**ResourceUsersList**](ResourcesApi.md#ResourceUsersList) | **Get** /resource-users | 
 
 
 
-## ResourceAccessStatusRetrieve
+## ResourceUserAccessStatusRetrieve
 
-> ResourceUserAccessStatus ResourceAccessStatusRetrieve(ctx, resourceId, userId).AccessLevelRemoteId(accessLevelRemoteId).Cursor(cursor).PageSize(pageSize).Execute()
+> ResourceUserAccessStatus ResourceUserAccessStatusRetrieve(ctx, resourceId, userId).AccessLevelRemoteId(accessLevelRemoteId).Cursor(cursor).PageSize(pageSize).Execute()
 
 
 
@@ -38,13 +38,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ResourcesApi.ResourceAccessStatusRetrieve(context.Background(), resourceId, userId).AccessLevelRemoteId(accessLevelRemoteId).Cursor(cursor).PageSize(pageSize).Execute()
+    resp, r, err := api_client.ResourcesApi.ResourceUserAccessStatusRetrieve(context.Background(), resourceId, userId).AccessLevelRemoteId(accessLevelRemoteId).Cursor(cursor).PageSize(pageSize).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ResourcesApi.ResourceAccessStatusRetrieve``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ResourcesApi.ResourceUserAccessStatusRetrieve``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ResourceAccessStatusRetrieve`: ResourceUserAccessStatus
-    fmt.Fprintf(os.Stdout, "Response from `ResourcesApi.ResourceAccessStatusRetrieve`: %v\n", resp)
+    // response from `ResourceUserAccessStatusRetrieve`: ResourceUserAccessStatus
+    fmt.Fprintf(os.Stdout, "Response from `ResourcesApi.ResourceUserAccessStatusRetrieve`: %v\n", resp)
 }
 ```
 
@@ -59,7 +59,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiResourceAccessStatusRetrieveRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiResourceUserAccessStatusRetrieveRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
