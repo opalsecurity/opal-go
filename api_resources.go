@@ -165,7 +165,7 @@ func (a *ResourcesApiService) ResourceUserAccessStatusRetrieveExecute(r ApiResou
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiResourceUsersListRequest struct {
+type ApiResourceUsersRequest struct {
 	ctx _context.Context
 	ApiService *ResourcesApiService
 	resourceId *string
@@ -175,40 +175,40 @@ type ApiResourceUsersListRequest struct {
 }
 
 // The ID of the resource.
-func (r ApiResourceUsersListRequest) ResourceId(resourceId string) ApiResourceUsersListRequest {
+func (r ApiResourceUsersRequest) ResourceId(resourceId string) ApiResourceUsersRequest {
 	r.resourceId = &resourceId
 	return r
 }
 // The remote ID of the access level that you wish to query for the resource. If omitted, the default access level remote ID value (empty string) is used.
-func (r ApiResourceUsersListRequest) AccessLevelRemoteId(accessLevelRemoteId string) ApiResourceUsersListRequest {
+func (r ApiResourceUsersRequest) AccessLevelRemoteId(accessLevelRemoteId string) ApiResourceUsersRequest {
 	r.accessLevelRemoteId = &accessLevelRemoteId
 	return r
 }
 // The pagination cursor value.
-func (r ApiResourceUsersListRequest) Cursor(cursor string) ApiResourceUsersListRequest {
+func (r ApiResourceUsersRequest) Cursor(cursor string) ApiResourceUsersRequest {
 	r.cursor = &cursor
 	return r
 }
 // Number of results to return per page.
-func (r ApiResourceUsersListRequest) PageSize(pageSize int32) ApiResourceUsersListRequest {
+func (r ApiResourceUsersRequest) PageSize(pageSize int32) ApiResourceUsersRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiResourceUsersListRequest) Execute() (PaginatedResourceUserList, *_nethttp.Response, error) {
-	return r.ApiService.ResourceUsersListExecute(r)
+func (r ApiResourceUsersRequest) Execute() (PaginatedResourceUserList, *_nethttp.Response, error) {
+	return r.ApiService.ResourceUsersExecute(r)
 }
 
 /*
-ResourceUsersList Method for ResourceUsersList
+ResourceUsers Method for ResourceUsers
 
 Returns a list of `ResourceUser` objects.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiResourceUsersListRequest
+ @return ApiResourceUsersRequest
 */
-func (a *ResourcesApiService) ResourceUsersList(ctx _context.Context) ApiResourceUsersListRequest {
-	return ApiResourceUsersListRequest{
+func (a *ResourcesApiService) ResourceUsers(ctx _context.Context) ApiResourceUsersRequest {
+	return ApiResourceUsersRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -216,7 +216,7 @@ func (a *ResourcesApiService) ResourceUsersList(ctx _context.Context) ApiResourc
 
 // Execute executes the request
 //  @return PaginatedResourceUserList
-func (a *ResourcesApiService) ResourceUsersListExecute(r ApiResourceUsersListRequest) (PaginatedResourceUserList, *_nethttp.Response, error) {
+func (a *ResourcesApiService) ResourceUsersExecute(r ApiResourceUsersRequest) (PaginatedResourceUserList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -226,7 +226,7 @@ func (a *ResourcesApiService) ResourceUsersListExecute(r ApiResourceUsersListReq
 		localVarReturnValue  PaginatedResourceUserList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesApiService.ResourceUsersList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesApiService.ResourceUsers")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
