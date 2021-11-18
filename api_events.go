@@ -27,7 +27,7 @@ var (
 // EventsApiService EventsApi service
 type EventsApiService service
 
-type ApiEventsListRequest struct {
+type ApiEventsRequest struct {
 	ctx _context.Context
 	ApiService *EventsApiService
 	startDateFilter *string
@@ -40,55 +40,55 @@ type ApiEventsListRequest struct {
 }
 
 // A start date filter for the events.
-func (r ApiEventsListRequest) StartDateFilter(startDateFilter string) ApiEventsListRequest {
+func (r ApiEventsRequest) StartDateFilter(startDateFilter string) ApiEventsRequest {
 	r.startDateFilter = &startDateFilter
 	return r
 }
 // An end date filter for the events.
-func (r ApiEventsListRequest) EndDateFilter(endDateFilter string) ApiEventsListRequest {
+func (r ApiEventsRequest) EndDateFilter(endDateFilter string) ApiEventsRequest {
 	r.endDateFilter = &endDateFilter
 	return r
 }
 // An actor filter for the events. Supply the ID of the actor.
-func (r ApiEventsListRequest) ActorFilter(actorFilter string) ApiEventsListRequest {
+func (r ApiEventsRequest) ActorFilter(actorFilter string) ApiEventsRequest {
 	r.actorFilter = &actorFilter
 	return r
 }
 // An object filter for the events. Supply the ID of the object.
-func (r ApiEventsListRequest) ObjectFilter(objectFilter string) ApiEventsListRequest {
+func (r ApiEventsRequest) ObjectFilter(objectFilter string) ApiEventsRequest {
 	r.objectFilter = &objectFilter
 	return r
 }
 // An event type filter for the events.
-func (r ApiEventsListRequest) EventTypeFilter(eventTypeFilter string) ApiEventsListRequest {
+func (r ApiEventsRequest) EventTypeFilter(eventTypeFilter string) ApiEventsRequest {
 	r.eventTypeFilter = &eventTypeFilter
 	return r
 }
 // The pagination cursor value.
-func (r ApiEventsListRequest) Cursor(cursor string) ApiEventsListRequest {
+func (r ApiEventsRequest) Cursor(cursor string) ApiEventsRequest {
 	r.cursor = &cursor
 	return r
 }
 // Number of results to return per page.
-func (r ApiEventsListRequest) PageSize(pageSize int32) ApiEventsListRequest {
+func (r ApiEventsRequest) PageSize(pageSize int32) ApiEventsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiEventsListRequest) Execute() (PaginatedEventList, *_nethttp.Response, error) {
-	return r.ApiService.EventsListExecute(r)
+func (r ApiEventsRequest) Execute() (PaginatedEventList, *_nethttp.Response, error) {
+	return r.ApiService.EventsExecute(r)
 }
 
 /*
-EventsList Method for EventsList
+Events Method for Events
 
 Returns a list of `Event` objects.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiEventsListRequest
+ @return ApiEventsRequest
 */
-func (a *EventsApiService) EventsList(ctx _context.Context) ApiEventsListRequest {
-	return ApiEventsListRequest{
+func (a *EventsApiService) Events(ctx _context.Context) ApiEventsRequest {
+	return ApiEventsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -96,7 +96,7 @@ func (a *EventsApiService) EventsList(ctx _context.Context) ApiEventsListRequest
 
 // Execute executes the request
 //  @return PaginatedEventList
-func (a *EventsApiService) EventsListExecute(r ApiEventsListRequest) (PaginatedEventList, *_nethttp.Response, error) {
+func (a *EventsApiService) EventsExecute(r ApiEventsRequest) (PaginatedEventList, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -106,7 +106,7 @@ func (a *EventsApiService) EventsListExecute(r ApiEventsListRequest) (PaginatedE
 		localVarReturnValue  PaginatedEventList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsApiService.EventsList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsApiService.Events")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}

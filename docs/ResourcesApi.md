@@ -5,7 +5,7 @@ All URIs are relative to *https://api.opal.dev/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ResourceUserAccessStatusRetrieve**](ResourcesApi.md#ResourceUserAccessStatusRetrieve) | **Get** /resource-user-access-status/{resource_id}/{user_id} | 
-[**ResourceUsersList**](ResourcesApi.md#ResourceUsersList) | **Get** /resource-users | 
+[**ResourceUsers**](ResourcesApi.md#ResourceUsers) | **Get** /resource-users | 
 
 
 
@@ -88,9 +88,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ResourceUsersList
+## ResourceUsers
 
-> PaginatedResourceUserList ResourceUsersList(ctx).ResourceId(resourceId).AccessLevelRemoteId(accessLevelRemoteId).Cursor(cursor).PageSize(pageSize).Execute()
+> PaginatedResourceUserList ResourceUsers(ctx).ResourceId(resourceId).AccessLevelRemoteId(accessLevelRemoteId).Cursor(cursor).PageSize(pageSize).Execute()
 
 
 
@@ -116,13 +116,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ResourcesApi.ResourceUsersList(context.Background()).ResourceId(resourceId).AccessLevelRemoteId(accessLevelRemoteId).Cursor(cursor).PageSize(pageSize).Execute()
+    resp, r, err := api_client.ResourcesApi.ResourceUsers(context.Background()).ResourceId(resourceId).AccessLevelRemoteId(accessLevelRemoteId).Cursor(cursor).PageSize(pageSize).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ResourcesApi.ResourceUsersList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ResourcesApi.ResourceUsers``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ResourceUsersList`: PaginatedResourceUserList
-    fmt.Fprintf(os.Stdout, "Response from `ResourcesApi.ResourceUsersList`: %v\n", resp)
+    // response from `ResourceUsers`: PaginatedResourceUserList
+    fmt.Fprintf(os.Stdout, "Response from `ResourcesApi.ResourceUsers`: %v\n", resp)
 }
 ```
 
@@ -132,7 +132,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiResourceUsersListRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiResourceUsersRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

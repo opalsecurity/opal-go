@@ -14,7 +14,7 @@ paths:
   /events:
     get:
       description: Returns a list of `Event` objects.
-      operationId: events_list
+      operationId: events
       parameters:
       - description: A start date filter for the events.
         example: 2021/11/01
@@ -95,7 +95,7 @@ paths:
   /resource-users:
     get:
       description: Returns a list of `ResourceUser` objects.
-      operationId: resource_users_list
+      operationId: resource_users
       parameters:
       - description: The ID of the resource.
         example: 1b978423-db0a-4037-a4cf-f79c60cb67b3

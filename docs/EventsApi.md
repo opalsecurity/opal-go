@@ -4,13 +4,13 @@ All URIs are relative to *https://api.opal.dev/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**EventsList**](EventsApi.md#EventsList) | **Get** /events | 
+[**Events**](EventsApi.md#Events) | **Get** /events | 
 
 
 
-## EventsList
+## Events
 
-> PaginatedEventList EventsList(ctx).StartDateFilter(startDateFilter).EndDateFilter(endDateFilter).ActorFilter(actorFilter).ObjectFilter(objectFilter).EventTypeFilter(eventTypeFilter).Cursor(cursor).PageSize(pageSize).Execute()
+> PaginatedEventList Events(ctx).StartDateFilter(startDateFilter).EndDateFilter(endDateFilter).ActorFilter(actorFilter).ObjectFilter(objectFilter).EventTypeFilter(eventTypeFilter).Cursor(cursor).PageSize(pageSize).Execute()
 
 
 
@@ -39,13 +39,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EventsApi.EventsList(context.Background()).StartDateFilter(startDateFilter).EndDateFilter(endDateFilter).ActorFilter(actorFilter).ObjectFilter(objectFilter).EventTypeFilter(eventTypeFilter).Cursor(cursor).PageSize(pageSize).Execute()
+    resp, r, err := api_client.EventsApi.Events(context.Background()).StartDateFilter(startDateFilter).EndDateFilter(endDateFilter).ActorFilter(actorFilter).ObjectFilter(objectFilter).EventTypeFilter(eventTypeFilter).Cursor(cursor).PageSize(pageSize).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EventsApi.EventsList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `EventsApi.Events``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `EventsList`: PaginatedEventList
-    fmt.Fprintf(os.Stdout, "Response from `EventsApi.EventsList`: %v\n", resp)
+    // response from `Events`: PaginatedEventList
+    fmt.Fprintf(os.Stdout, "Response from `EventsApi.Events`: %v\n", resp)
 }
 ```
 
@@ -55,7 +55,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiEventsListRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiEventsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
