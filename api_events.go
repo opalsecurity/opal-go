@@ -13,22 +13,22 @@ package opal
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 )
 
 // Linger please
 var (
-	_ _context.Context
+	_ context.Context
 )
 
 // EventsApiService EventsApi service
 type EventsApiService service
 
 type ApiEventsRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *EventsApiService
 	startDateFilter *string
 	endDateFilter *string
@@ -69,13 +69,13 @@ func (r ApiEventsRequest) Cursor(cursor string) ApiEventsRequest {
 	r.cursor = &cursor
 	return r
 }
-// Number of results to return per page.
+// Number of results to return per page. Default is 200.
 func (r ApiEventsRequest) PageSize(pageSize int32) ApiEventsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiEventsRequest) Execute() (PaginatedEventList, *_nethttp.Response, error) {
+func (r ApiEventsRequest) Execute() (*PaginatedEventList, *http.Response, error) {
 	return r.ApiService.EventsExecute(r)
 }
 
@@ -84,10 +84,10 @@ Events Method for Events
 
 Returns a list of `Event` objects.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEventsRequest
 */
-func (a *EventsApiService) Events(ctx _context.Context) ApiEventsRequest {
+func (a *EventsApiService) Events(ctx context.Context) ApiEventsRequest {
 	return ApiEventsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -96,26 +96,24 @@ func (a *EventsApiService) Events(ctx _context.Context) ApiEventsRequest {
 
 // Execute executes the request
 //  @return PaginatedEventList
-func (a *EventsApiService) EventsExecute(r ApiEventsRequest) (PaginatedEventList, *_nethttp.Response, error) {
+func (a *EventsApiService) EventsExecute(r ApiEventsRequest) (*PaginatedEventList, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PaginatedEventList
+		formFiles            []formFile
+		localVarReturnValue  *PaginatedEventList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsApiService.Events")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/events"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.startDateFilter != nil {
 		localVarQueryParams.Add("start_date_filter", parameterToString(*r.startDateFilter, ""))
@@ -155,7 +153,7 @@ func (a *EventsApiService) EventsExecute(r ApiEventsRequest) (PaginatedEventList
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -165,15 +163,15 @@ func (a *EventsApiService) EventsExecute(r ApiEventsRequest) (PaginatedEventList
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -182,7 +180,7 @@ func (a *EventsApiService) EventsExecute(r ApiEventsRequest) (PaginatedEventList
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

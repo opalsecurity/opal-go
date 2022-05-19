@@ -13,22 +13,22 @@ package opal
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 )
 
 // Linger please
 var (
-	_ _context.Context
+	_ context.Context
 )
 
 // SessionsApiService SessionsApi service
 type SessionsApiService service
 
 type ApiSessionsRequest struct {
-	ctx _context.Context
+	ctx context.Context
 	ApiService *SessionsApiService
 	resourceId *string
 	userId *string
@@ -45,7 +45,7 @@ func (r ApiSessionsRequest) UserId(userId string) ApiSessionsRequest {
 	return r
 }
 
-func (r ApiSessionsRequest) Execute() (SessionsList, *_nethttp.Response, error) {
+func (r ApiSessionsRequest) Execute() (*SessionsList, *http.Response, error) {
 	return r.ApiService.SessionsExecute(r)
 }
 
@@ -54,10 +54,10 @@ Sessions Method for Sessions
 
 Returns a list of `Session` objects.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSessionsRequest
 */
-func (a *SessionsApiService) Sessions(ctx _context.Context) ApiSessionsRequest {
+func (a *SessionsApiService) Sessions(ctx context.Context) ApiSessionsRequest {
 	return ApiSessionsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -66,26 +66,24 @@ func (a *SessionsApiService) Sessions(ctx _context.Context) ApiSessionsRequest {
 
 // Execute executes the request
 //  @return SessionsList
-func (a *SessionsApiService) SessionsExecute(r ApiSessionsRequest) (SessionsList, *_nethttp.Response, error) {
+func (a *SessionsApiService) SessionsExecute(r ApiSessionsRequest) (*SessionsList, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  SessionsList
+		formFiles            []formFile
+		localVarReturnValue  *SessionsList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SessionsApiService.Sessions")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/sessions"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.resourceId == nil {
 		return localVarReturnValue, nil, reportError("resourceId is required and must be specified")
 	}
@@ -111,7 +109,7 @@ func (a *SessionsApiService) SessionsExecute(r ApiSessionsRequest) (SessionsList
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -121,15 +119,15 @@ func (a *SessionsApiService) SessionsExecute(r ApiSessionsRequest) (SessionsList
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -138,7 +136,7 @@ func (a *SessionsApiService) SessionsExecute(r ApiSessionsRequest) (SessionsList
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

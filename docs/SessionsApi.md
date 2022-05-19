@@ -33,8 +33,8 @@ func main() {
     userId := "32acc112-21ff-4669-91c2-21e27683eaa1" // string | The ID of the user you wish to query sessions for. (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SessionsApi.Sessions(context.Background()).ResourceId(resourceId).UserId(userId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SessionsApi.Sessions(context.Background()).ResourceId(resourceId).UserId(userId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SessionsApi.Sessions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

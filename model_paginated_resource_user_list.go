@@ -21,7 +21,7 @@ type PaginatedResourceUserList struct {
 	Next NullableString `json:"next,omitempty"`
 	// The cursor used to obtain the current result page.
 	Previous NullableString `json:"previous,omitempty"`
-	Results *[]ResourceUser `json:"results,omitempty"`
+	Results []ResourceUser `json:"results,omitempty"`
 }
 
 // NewPaginatedResourceUserList instantiates a new PaginatedResourceUserList object
@@ -131,12 +131,12 @@ func (o *PaginatedResourceUserList) GetResults() []ResourceUser {
 		var ret []ResourceUser
 		return ret
 	}
-	return *o.Results
+	return o.Results
 }
 
 // GetResultsOk returns a tuple with the Results field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaginatedResourceUserList) GetResultsOk() (*[]ResourceUser, bool) {
+func (o *PaginatedResourceUserList) GetResultsOk() ([]ResourceUser, bool) {
 	if o == nil || o.Results == nil {
 		return nil, false
 	}
@@ -154,7 +154,7 @@ func (o *PaginatedResourceUserList) HasResults() bool {
 
 // SetResults gets a reference to the given []ResourceUser and assigns it to the Results field.
 func (o *PaginatedResourceUserList) SetResults(v []ResourceUser) {
-	o.Results = &v
+	o.Results = v
 }
 
 func (o PaginatedResourceUserList) MarshalJSON() ([]byte, error) {

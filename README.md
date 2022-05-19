@@ -23,7 +23,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```golang
-import sw "./opal"
+import opal "github.com/opalsecurity/opal-go"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -41,7 +41,7 @@ Default configuration comes with `Servers` field that contains server objects as
 For using other server than the one defined on index 0 set context value `sw.ContextServerIndex` of type `int`.
 
 ```golang
-ctx := context.WithValue(context.Background(), sw.ContextServerIndex, 1)
+ctx := context.WithValue(context.Background(), opal.ContextServerIndex, 1)
 ```
 
 ### Templated Server URL
@@ -49,7 +49,7 @@ ctx := context.WithValue(context.Background(), sw.ContextServerIndex, 1)
 Templated server URL is formatted using default variables from configuration or from context value `sw.ContextServerVariables` of type `map[string]string`.
 
 ```golang
-ctx := context.WithValue(context.Background(), sw.ContextServerVariables, map[string]string{
+ctx := context.WithValue(context.Background(), opal.ContextServerVariables, map[string]string{
 	"basePath": "v2",
 })
 ```
@@ -63,10 +63,10 @@ An operation is uniquely identified by `"{classname}Service.{nickname}"` string.
 Similar rules for overriding default operation server index and variables applies by using `sw.ContextOperationServerIndices` and `sw.ContextOperationServerVariables` context maps.
 
 ```
-ctx := context.WithValue(context.Background(), sw.ContextOperationServerIndices, map[string]int{
+ctx := context.WithValue(context.Background(), opal.ContextOperationServerIndices, map[string]int{
 	"{classname}Service.{nickname}": 2,
 })
-ctx = context.WithValue(context.Background(), sw.ContextOperationServerVariables, map[string]map[string]string{
+ctx = context.WithValue(context.Background(), opal.ContextOperationServerVariables, map[string]map[string]string{
 	"{classname}Service.{nickname}": {
 		"port": "8443",
 	},
@@ -80,25 +80,62 @@ All URIs are relative to *https://api.opal.dev/v1*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *EventsApi* | [**Events**](docs/EventsApi.md#events) | **Get** /events | 
+*GroupsApi* | [**GetGroupMessageChannels**](docs/GroupsApi.md#getgroupmessagechannels) | **Get** /groups/{group_id}/message-channels | 
+*GroupsApi* | [**GetGroupReviewers**](docs/GroupsApi.md#getgroupreviewers) | **Get** /groups/{group_id}/reviewers | 
+*GroupsApi* | [**GetGroups**](docs/GroupsApi.md#getgroups) | **Get** /groups | 
+*GroupsApi* | [**SetGroupMessageChannels**](docs/GroupsApi.md#setgroupmessagechannels) | **Put** /groups/{group_id}/message-channels | 
+*GroupsApi* | [**SetGroupReviewers**](docs/GroupsApi.md#setgroupreviewers) | **Put** /groups/{group_id}/reviewers | 
+*GroupsApi* | [**UpdateGroups**](docs/GroupsApi.md#updategroups) | **Put** /groups | 
+*ResourcesApi* | [**GetResourceMessageChannels**](docs/ResourcesApi.md#getresourcemessagechannels) | **Get** /resources/{resource_id}/message-channels | 
+*ResourcesApi* | [**GetResourceReviewers**](docs/ResourcesApi.md#getresourcereviewers) | **Get** /resources/{resource_id}/reviewers | 
+*ResourcesApi* | [**GetResources**](docs/ResourcesApi.md#getresources) | **Get** /resources | 
 *ResourcesApi* | [**ResourceUserAccessStatusRetrieve**](docs/ResourcesApi.md#resourceuseraccessstatusretrieve) | **Get** /resource-user-access-status/{resource_id}/{user_id} | 
 *ResourcesApi* | [**ResourceUsers**](docs/ResourcesApi.md#resourceusers) | **Get** /resource-users | 
+*ResourcesApi* | [**SetResourceMessageChannels**](docs/ResourcesApi.md#setresourcemessagechannels) | **Put** /resources/{resource_id}/message-channels | 
+*ResourcesApi* | [**SetResourceReviewers**](docs/ResourcesApi.md#setresourcereviewers) | **Put** /resources/{resource_id}/reviewers | 
+*ResourcesApi* | [**UpdateResources**](docs/ResourcesApi.md#updateresources) | **Put** /resources | 
 *SessionsApi* | [**Sessions**](docs/SessionsApi.md#sessions) | **Get** /sessions | 
+*TagsApi* | [**AddGroupTag**](docs/TagsApi.md#addgrouptag) | **Post** /tags/{tag_id}/groups/{group_id} | 
+*TagsApi* | [**AddResourceTag**](docs/TagsApi.md#addresourcetag) | **Post** /tags/{tag_id}/resources/{resource_id} | 
+*TagsApi* | [**AddUserTag**](docs/TagsApi.md#addusertag) | **Post** /tags/{tag_id}/users/{user_id} | 
+*TagsApi* | [**CreateTag**](docs/TagsApi.md#createtag) | **Post** /tag | 
+*TagsApi* | [**GetTag**](docs/TagsApi.md#gettag) | **Get** /tag | 
+*TagsApi* | [**RemoveGroupTag**](docs/TagsApi.md#removegrouptag) | **Delete** /tags/{tag_id}/groups/{group_id} | 
+*TagsApi* | [**RemoveResourceTag**](docs/TagsApi.md#removeresourcetag) | **Delete** /tags/{tag_id}/resources/{resource_id} | 
+*TagsApi* | [**RemoveUserTag**](docs/TagsApi.md#removeusertag) | **Delete** /tags/{tag_id}/users/{user_id} | 
 *UsersApi* | [**User**](docs/UsersApi.md#user) | **Get** /user | 
 
 
 ## Documentation For Models
 
+ - [EntityTypeEnum](docs/EntityTypeEnum.md)
  - [Event](docs/Event.md)
+ - [Group](docs/Group.md)
+ - [MessageChannel](docs/MessageChannel.md)
+ - [MessageChannelIDList](docs/MessageChannelIDList.md)
+ - [MessageChannelList](docs/MessageChannelList.md)
+ - [MessageChannelProviderEnum](docs/MessageChannelProviderEnum.md)
+ - [MessageChannelTypeEnum](docs/MessageChannelTypeEnum.md)
  - [PaginatedEventList](docs/PaginatedEventList.md)
+ - [PaginatedGroupsList](docs/PaginatedGroupsList.md)
  - [PaginatedResourceUserList](docs/PaginatedResourceUserList.md)
+ - [PaginatedResourcesList](docs/PaginatedResourcesList.md)
+ - [Resource](docs/Resource.md)
  - [ResourceAccessLevel](docs/ResourceAccessLevel.md)
  - [ResourceUser](docs/ResourceUser.md)
  - [ResourceUserAccessStatus](docs/ResourceUserAccessStatus.md)
  - [ResourceUserAccessStatusEnum](docs/ResourceUserAccessStatusEnum.md)
+ - [ReviewerIDList](docs/ReviewerIDList.md)
  - [Session](docs/Session.md)
  - [SessionsList](docs/SessionsList.md)
+ - [Tag](docs/Tag.md)
+ - [UpdateGroupInfo](docs/UpdateGroupInfo.md)
+ - [UpdateGroupInfoList](docs/UpdateGroupInfoList.md)
+ - [UpdateResourceInfo](docs/UpdateResourceInfo.md)
+ - [UpdateResourceInfoList](docs/UpdateResourceInfoList.md)
  - [User](docs/User.md)
  - [UsersList](docs/UsersList.md)
+ - [VisibilityEnum](docs/VisibilityEnum.md)
 
 
 ## Documentation For Authorization
@@ -112,7 +149,7 @@ Class | Method | HTTP request | Description
 Example
 
 ```golang
-auth := context.WithValue(context.Background(), sw.ContextAccessToken, "BEARERTOKENSTRING")
+auth := context.WithValue(context.Background(), sw.ContextAccessToken, "BEARER_TOKEN_STRING")
 r, err := client.Service.Operation(auth, args)
 ```
 

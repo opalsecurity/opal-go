@@ -35,11 +35,11 @@ func main() {
     objectFilter := "29827fb8-f2dd-4e80-9576-28e31e9934ac" // string | An object filter for the events. Supply the ID of the object. (optional)
     eventTypeFilter := "29827fb8-f2dd-4e80-9576-28e31e9934ac" // string | An event type filter for the events. (optional)
     cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
-    pageSize := int32(200) // int32 | Number of results to return per page. (optional)
+    pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EventsApi.Events(context.Background()).StartDateFilter(startDateFilter).EndDateFilter(endDateFilter).ActorFilter(actorFilter).ObjectFilter(objectFilter).EventTypeFilter(eventTypeFilter).Cursor(cursor).PageSize(pageSize).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EventsApi.Events(context.Background()).StartDateFilter(startDateFilter).EndDateFilter(endDateFilter).ActorFilter(actorFilter).ObjectFilter(objectFilter).EventTypeFilter(eventTypeFilter).Cursor(cursor).PageSize(pageSize).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EventsApi.Events``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
  **objectFilter** | **string** | An object filter for the events. Supply the ID of the object. | 
  **eventTypeFilter** | **string** | An event type filter for the events. | 
  **cursor** | **string** | The pagination cursor value. | 
- **pageSize** | **int32** | Number of results to return per page. | 
+ **pageSize** | **int32** | Number of results to return per page. Default is 200. | 
 
 ### Return type
 

@@ -33,8 +33,8 @@ func main() {
     email := "johndoe@domain.org" // string | The email of the user. If both user ID and email are provided, user ID will take precedence. If neither are provided, an error will occur. (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UsersApi.User(context.Background()).UserId(userId).Email(email).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.UsersApi.User(context.Background()).UserId(userId).Email(email).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.User``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
