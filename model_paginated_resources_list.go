@@ -15,34 +15,35 @@ import (
 	"encoding/json"
 )
 
-// PaginatedEventList struct for PaginatedEventList
-type PaginatedEventList struct {
+// PaginatedResourcesList struct for PaginatedResourcesList
+type PaginatedResourcesList struct {
 	// The cursor with which to continue pagination if additional result pages exist.
 	Next NullableString `json:"next,omitempty"`
 	// The cursor used to obtain the current result page.
 	Previous NullableString `json:"previous,omitempty"`
-	Results []Event `json:"results,omitempty"`
+	Results []Resource `json:"results"`
 }
 
-// NewPaginatedEventList instantiates a new PaginatedEventList object
+// NewPaginatedResourcesList instantiates a new PaginatedResourcesList object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaginatedEventList() *PaginatedEventList {
-	this := PaginatedEventList{}
+func NewPaginatedResourcesList(results []Resource) *PaginatedResourcesList {
+	this := PaginatedResourcesList{}
+	this.Results = results
 	return &this
 }
 
-// NewPaginatedEventListWithDefaults instantiates a new PaginatedEventList object
+// NewPaginatedResourcesListWithDefaults instantiates a new PaginatedResourcesList object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewPaginatedEventListWithDefaults() *PaginatedEventList {
-	this := PaginatedEventList{}
+func NewPaginatedResourcesListWithDefaults() *PaginatedResourcesList {
+	this := PaginatedResourcesList{}
 	return &this
 }
 
 // GetNext returns the Next field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaginatedEventList) GetNext() string {
+func (o *PaginatedResourcesList) GetNext() string {
 	if o == nil || o.Next.Get() == nil {
 		var ret string
 		return ret
@@ -53,7 +54,7 @@ func (o *PaginatedEventList) GetNext() string {
 // GetNextOk returns a tuple with the Next field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaginatedEventList) GetNextOk() (*string, bool) {
+func (o *PaginatedResourcesList) GetNextOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -61,7 +62,7 @@ func (o *PaginatedEventList) GetNextOk() (*string, bool) {
 }
 
 // HasNext returns a boolean if a field has been set.
-func (o *PaginatedEventList) HasNext() bool {
+func (o *PaginatedResourcesList) HasNext() bool {
 	if o != nil && o.Next.IsSet() {
 		return true
 	}
@@ -70,21 +71,21 @@ func (o *PaginatedEventList) HasNext() bool {
 }
 
 // SetNext gets a reference to the given NullableString and assigns it to the Next field.
-func (o *PaginatedEventList) SetNext(v string) {
+func (o *PaginatedResourcesList) SetNext(v string) {
 	o.Next.Set(&v)
 }
 // SetNextNil sets the value for Next to be an explicit nil
-func (o *PaginatedEventList) SetNextNil() {
+func (o *PaginatedResourcesList) SetNextNil() {
 	o.Next.Set(nil)
 }
 
 // UnsetNext ensures that no value is present for Next, not even an explicit nil
-func (o *PaginatedEventList) UnsetNext() {
+func (o *PaginatedResourcesList) UnsetNext() {
 	o.Next.Unset()
 }
 
 // GetPrevious returns the Previous field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaginatedEventList) GetPrevious() string {
+func (o *PaginatedResourcesList) GetPrevious() string {
 	if o == nil || o.Previous.Get() == nil {
 		var ret string
 		return ret
@@ -95,7 +96,7 @@ func (o *PaginatedEventList) GetPrevious() string {
 // GetPreviousOk returns a tuple with the Previous field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaginatedEventList) GetPreviousOk() (*string, bool) {
+func (o *PaginatedResourcesList) GetPreviousOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -103,7 +104,7 @@ func (o *PaginatedEventList) GetPreviousOk() (*string, bool) {
 }
 
 // HasPrevious returns a boolean if a field has been set.
-func (o *PaginatedEventList) HasPrevious() bool {
+func (o *PaginatedResourcesList) HasPrevious() bool {
 	if o != nil && o.Previous.IsSet() {
 		return true
 	}
@@ -112,52 +113,44 @@ func (o *PaginatedEventList) HasPrevious() bool {
 }
 
 // SetPrevious gets a reference to the given NullableString and assigns it to the Previous field.
-func (o *PaginatedEventList) SetPrevious(v string) {
+func (o *PaginatedResourcesList) SetPrevious(v string) {
 	o.Previous.Set(&v)
 }
 // SetPreviousNil sets the value for Previous to be an explicit nil
-func (o *PaginatedEventList) SetPreviousNil() {
+func (o *PaginatedResourcesList) SetPreviousNil() {
 	o.Previous.Set(nil)
 }
 
 // UnsetPrevious ensures that no value is present for Previous, not even an explicit nil
-func (o *PaginatedEventList) UnsetPrevious() {
+func (o *PaginatedResourcesList) UnsetPrevious() {
 	o.Previous.Unset()
 }
 
-// GetResults returns the Results field value if set, zero value otherwise.
-func (o *PaginatedEventList) GetResults() []Event {
-	if o == nil || o.Results == nil {
-		var ret []Event
+// GetResults returns the Results field value
+func (o *PaginatedResourcesList) GetResults() []Resource {
+	if o == nil {
+		var ret []Resource
 		return ret
 	}
+
 	return o.Results
 }
 
-// GetResultsOk returns a tuple with the Results field value if set, nil otherwise
+// GetResultsOk returns a tuple with the Results field value
 // and a boolean to check if the value has been set.
-func (o *PaginatedEventList) GetResultsOk() ([]Event, bool) {
-	if o == nil || o.Results == nil {
+func (o *PaginatedResourcesList) GetResultsOk() ([]Resource, bool) {
+	if o == nil  {
 		return nil, false
 	}
 	return o.Results, true
 }
 
-// HasResults returns a boolean if a field has been set.
-func (o *PaginatedEventList) HasResults() bool {
-	if o != nil && o.Results != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetResults gets a reference to the given []Event and assigns it to the Results field.
-func (o *PaginatedEventList) SetResults(v []Event) {
+// SetResults sets field value
+func (o *PaginatedResourcesList) SetResults(v []Resource) {
 	o.Results = v
 }
 
-func (o PaginatedEventList) MarshalJSON() ([]byte, error) {
+func (o PaginatedResourcesList) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Next.IsSet() {
 		toSerialize["next"] = o.Next.Get()
@@ -165,44 +158,44 @@ func (o PaginatedEventList) MarshalJSON() ([]byte, error) {
 	if o.Previous.IsSet() {
 		toSerialize["previous"] = o.Previous.Get()
 	}
-	if o.Results != nil {
+	if true {
 		toSerialize["results"] = o.Results
 	}
 	return json.Marshal(toSerialize)
 }
 
-type NullablePaginatedEventList struct {
-	value *PaginatedEventList
+type NullablePaginatedResourcesList struct {
+	value *PaginatedResourcesList
 	isSet bool
 }
 
-func (v NullablePaginatedEventList) Get() *PaginatedEventList {
+func (v NullablePaginatedResourcesList) Get() *PaginatedResourcesList {
 	return v.value
 }
 
-func (v *NullablePaginatedEventList) Set(val *PaginatedEventList) {
+func (v *NullablePaginatedResourcesList) Set(val *PaginatedResourcesList) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePaginatedEventList) IsSet() bool {
+func (v NullablePaginatedResourcesList) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePaginatedEventList) Unset() {
+func (v *NullablePaginatedResourcesList) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePaginatedEventList(val *PaginatedEventList) *NullablePaginatedEventList {
-	return &NullablePaginatedEventList{value: val, isSet: true}
+func NewNullablePaginatedResourcesList(val *PaginatedResourcesList) *NullablePaginatedResourcesList {
+	return &NullablePaginatedResourcesList{value: val, isSet: true}
 }
 
-func (v NullablePaginatedEventList) MarshalJSON() ([]byte, error) {
+func (v NullablePaginatedResourcesList) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullablePaginatedEventList) UnmarshalJSON(src []byte) error {
+func (v *NullablePaginatedResourcesList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

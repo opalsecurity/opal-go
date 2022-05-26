@@ -21,7 +21,7 @@ type SessionsList struct {
 	Next NullableString `json:"next,omitempty"`
 	// The cursor used to obtain the current result page.
 	Previous NullableString `json:"previous,omitempty"`
-	Results *[]Session `json:"results,omitempty"`
+	Results []Session `json:"results,omitempty"`
 }
 
 // NewSessionsList instantiates a new SessionsList object
@@ -131,12 +131,12 @@ func (o *SessionsList) GetResults() []Session {
 		var ret []Session
 		return ret
 	}
-	return *o.Results
+	return o.Results
 }
 
 // GetResultsOk returns a tuple with the Results field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SessionsList) GetResultsOk() (*[]Session, bool) {
+func (o *SessionsList) GetResultsOk() ([]Session, bool) {
 	if o == nil || o.Results == nil {
 		return nil, false
 	}
@@ -154,7 +154,7 @@ func (o *SessionsList) HasResults() bool {
 
 // SetResults gets a reference to the given []Session and assigns it to the Results field.
 func (o *SessionsList) SetResults(v []Session) {
-	o.Results = &v
+	o.Results = v
 }
 
 func (o SessionsList) MarshalJSON() ([]byte, error) {

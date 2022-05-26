@@ -17,7 +17,7 @@ import (
 
 // UsersList struct for UsersList
 type UsersList struct {
-	Results *[]User `json:"results,omitempty"`
+	Results []User `json:"results,omitempty"`
 }
 
 // NewUsersList instantiates a new UsersList object
@@ -43,12 +43,12 @@ func (o *UsersList) GetResults() []User {
 		var ret []User
 		return ret
 	}
-	return *o.Results
+	return o.Results
 }
 
 // GetResultsOk returns a tuple with the Results field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UsersList) GetResultsOk() (*[]User, bool) {
+func (o *UsersList) GetResultsOk() ([]User, bool) {
 	if o == nil || o.Results == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *UsersList) HasResults() bool {
 
 // SetResults gets a reference to the given []User and assigns it to the Results field.
 func (o *UsersList) SetResults(v []User) {
-	o.Results = &v
+	o.Results = v
 }
 
 func (o UsersList) MarshalJSON() ([]byte, error) {
