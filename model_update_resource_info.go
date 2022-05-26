@@ -19,6 +19,8 @@ import (
 type UpdateResourceInfo struct {
 	// The ID of the resource.
 	ResourceId string `json:"resource_id"`
+	// The name of the resource.
+	Name *string `json:"name,omitempty"`
 	// A description of the resource.
 	Description *string `json:"description,omitempty"`
 	// The ID of the owning team of the resource.
@@ -30,6 +32,8 @@ type UpdateResourceInfo struct {
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
 	// A bool representing whether or not access requests to the resource require a support ticket.
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
+	// The ID of the folder that the resource is located in.
+	FolderId *string `json:"folder_id,omitempty"`
 }
 
 // NewUpdateResourceInfo instantiates a new UpdateResourceInfo object
@@ -72,6 +76,38 @@ func (o *UpdateResourceInfo) GetResourceIdOk() (*string, bool) {
 // SetResourceId sets field value
 func (o *UpdateResourceInfo) SetResourceId(v string) {
 	o.ResourceId = v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetName() string {
+	if o == nil || o.Name == nil {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceInfo) GetNameOk() (*string, bool) {
+	if o == nil || o.Name == nil {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasName() bool {
+	if o != nil && o.Name != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *UpdateResourceInfo) SetName(v string) {
+	o.Name = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -266,10 +302,45 @@ func (o *UpdateResourceInfo) SetRequireSupportTicket(v bool) {
 	o.RequireSupportTicket = &v
 }
 
+// GetFolderId returns the FolderId field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetFolderId() string {
+	if o == nil || o.FolderId == nil {
+		var ret string
+		return ret
+	}
+	return *o.FolderId
+}
+
+// GetFolderIdOk returns a tuple with the FolderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceInfo) GetFolderIdOk() (*string, bool) {
+	if o == nil || o.FolderId == nil {
+		return nil, false
+	}
+	return o.FolderId, true
+}
+
+// HasFolderId returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasFolderId() bool {
+	if o != nil && o.FolderId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFolderId gets a reference to the given string and assigns it to the FolderId field.
+func (o *UpdateResourceInfo) SetFolderId(v string) {
+	o.FolderId = &v
+}
+
 func (o UpdateResourceInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["resource_id"] = o.ResourceId
+	}
+	if o.Name != nil {
+		toSerialize["name"] = o.Name
 	}
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
@@ -288,6 +359,9 @@ func (o UpdateResourceInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.RequireSupportTicket != nil {
 		toSerialize["require_support_ticket"] = o.RequireSupportTicket
+	}
+	if o.FolderId != nil {
+		toSerialize["folder_id"] = o.FolderId
 	}
 	return json.Marshal(toSerialize)
 }

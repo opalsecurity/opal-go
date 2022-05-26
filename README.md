@@ -80,14 +80,19 @@ All URIs are relative to *https://api.opal.dev/v1*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *EventsApi* | [**Events**](docs/EventsApi.md#events) | **Get** /events | 
+*GroupsApi* | [**ConvertGroup**](docs/GroupsApi.md#convertgroup) | **Put** /groups/{group_id}/convert | 
+*GroupsApi* | [**DeleteGroup**](docs/GroupsApi.md#deletegroup) | **Delete** /groups/{group_id} | 
 *GroupsApi* | [**GetGroupMessageChannels**](docs/GroupsApi.md#getgroupmessagechannels) | **Get** /groups/{group_id}/message-channels | 
 *GroupsApi* | [**GetGroupReviewers**](docs/GroupsApi.md#getgroupreviewers) | **Get** /groups/{group_id}/reviewers | 
+*GroupsApi* | [**GetGroupTags**](docs/GroupsApi.md#getgrouptags) | **Get** /groups/{group_id}/tags | 
 *GroupsApi* | [**GetGroups**](docs/GroupsApi.md#getgroups) | **Get** /groups | 
 *GroupsApi* | [**SetGroupMessageChannels**](docs/GroupsApi.md#setgroupmessagechannels) | **Put** /groups/{group_id}/message-channels | 
 *GroupsApi* | [**SetGroupReviewers**](docs/GroupsApi.md#setgroupreviewers) | **Put** /groups/{group_id}/reviewers | 
 *GroupsApi* | [**UpdateGroups**](docs/GroupsApi.md#updategroups) | **Put** /groups | 
+*ResourcesApi* | [**DeleteResource**](docs/ResourcesApi.md#deleteresource) | **Delete** /resources/{resource_id} | 
 *ResourcesApi* | [**GetResourceMessageChannels**](docs/ResourcesApi.md#getresourcemessagechannels) | **Get** /resources/{resource_id}/message-channels | 
 *ResourcesApi* | [**GetResourceReviewers**](docs/ResourcesApi.md#getresourcereviewers) | **Get** /resources/{resource_id}/reviewers | 
+*ResourcesApi* | [**GetResourceTags**](docs/ResourcesApi.md#getresourcetags) | **Get** /resources/{resource_id}/tags | 
 *ResourcesApi* | [**GetResources**](docs/ResourcesApi.md#getresources) | **Get** /resources | 
 *ResourcesApi* | [**ResourceUserAccessStatusRetrieve**](docs/ResourcesApi.md#resourceuseraccessstatusretrieve) | **Get** /resource-user-access-status/{resource_id}/{user_id} | 
 *ResourcesApi* | [**ResourceUsers**](docs/ResourcesApi.md#resourceusers) | **Get** /resource-users | 
@@ -103,6 +108,7 @@ Class | Method | HTTP request | Description
 *TagsApi* | [**RemoveGroupTag**](docs/TagsApi.md#removegrouptag) | **Delete** /tags/{tag_id}/groups/{group_id} | 
 *TagsApi* | [**RemoveResourceTag**](docs/TagsApi.md#removeresourcetag) | **Delete** /tags/{tag_id}/resources/{resource_id} | 
 *TagsApi* | [**RemoveUserTag**](docs/TagsApi.md#removeusertag) | **Delete** /tags/{tag_id}/users/{user_id} | 
+*UsersApi* | [**GetUserTags**](docs/UsersApi.md#getusertags) | **Get** /users/{user_id}/tags | 
 *UsersApi* | [**User**](docs/UsersApi.md#user) | **Get** /user | 
 
 
@@ -111,17 +117,21 @@ Class | Method | HTTP request | Description
  - [EntityTypeEnum](docs/EntityTypeEnum.md)
  - [Event](docs/Event.md)
  - [Group](docs/Group.md)
+ - [GroupFunctionEnum](docs/GroupFunctionEnum.md)
+ - [GroupTypeEnum](docs/GroupTypeEnum.md)
  - [MessageChannel](docs/MessageChannel.md)
  - [MessageChannelIDList](docs/MessageChannelIDList.md)
  - [MessageChannelList](docs/MessageChannelList.md)
  - [MessageChannelProviderEnum](docs/MessageChannelProviderEnum.md)
  - [MessageChannelTypeEnum](docs/MessageChannelTypeEnum.md)
+ - [NewAdminIDList](docs/NewAdminIDList.md)
  - [PaginatedEventList](docs/PaginatedEventList.md)
  - [PaginatedGroupsList](docs/PaginatedGroupsList.md)
  - [PaginatedResourceUserList](docs/PaginatedResourceUserList.md)
  - [PaginatedResourcesList](docs/PaginatedResourcesList.md)
  - [Resource](docs/Resource.md)
  - [ResourceAccessLevel](docs/ResourceAccessLevel.md)
+ - [ResourceTypeEnum](docs/ResourceTypeEnum.md)
  - [ResourceUser](docs/ResourceUser.md)
  - [ResourceUserAccessStatus](docs/ResourceUserAccessStatus.md)
  - [ResourceUserAccessStatusEnum](docs/ResourceUserAccessStatusEnum.md)
@@ -129,6 +139,7 @@ Class | Method | HTTP request | Description
  - [Session](docs/Session.md)
  - [SessionsList](docs/SessionsList.md)
  - [Tag](docs/Tag.md)
+ - [TagsList](docs/TagsList.md)
  - [UpdateGroupInfo](docs/UpdateGroupInfo.md)
  - [UpdateGroupInfoList](docs/UpdateGroupInfoList.md)
  - [UpdateResourceInfo](docs/UpdateResourceInfo.md)

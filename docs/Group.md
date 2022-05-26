@@ -8,10 +8,13 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the group. | [optional] 
 **Description** | Pointer to **string** | A description of the group. | [optional] 
 **OwnerTeamId** | Pointer to **string** | The ID of the owning team of the group. | [optional] 
+**GroupFunction** | Pointer to [**GroupFunctionEnum**](GroupFunctionEnum.md) |  | [optional] 
+**GroupType** | Pointer to [**GroupTypeEnum**](GroupTypeEnum.md) |  | [optional] 
 **Visibility** | Pointer to [**VisibilityEnum**](VisibilityEnum.md) |  | [optional] 
 **MaxDuration** | Pointer to **int32** | The maximum duration access to the group can be requested for (in minutes). | [optional] 
 **RequireManagerApproval** | Pointer to **bool** | A bool representing whether or not access requests to the group require manager approval. | [optional] 
 **RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the group require a support ticket. | [optional] 
+**FolderId** | Pointer to **string** | The ID of the folder that the group is located in. | [optional] 
 
 ## Methods
 
@@ -127,6 +130,56 @@ SetOwnerTeamId sets OwnerTeamId field to given value.
 
 HasOwnerTeamId returns a boolean if a field has been set.
 
+### GetGroupFunction
+
+`func (o *Group) GetGroupFunction() GroupFunctionEnum`
+
+GetGroupFunction returns the GroupFunction field if non-nil, zero value otherwise.
+
+### GetGroupFunctionOk
+
+`func (o *Group) GetGroupFunctionOk() (*GroupFunctionEnum, bool)`
+
+GetGroupFunctionOk returns a tuple with the GroupFunction field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGroupFunction
+
+`func (o *Group) SetGroupFunction(v GroupFunctionEnum)`
+
+SetGroupFunction sets GroupFunction field to given value.
+
+### HasGroupFunction
+
+`func (o *Group) HasGroupFunction() bool`
+
+HasGroupFunction returns a boolean if a field has been set.
+
+### GetGroupType
+
+`func (o *Group) GetGroupType() GroupTypeEnum`
+
+GetGroupType returns the GroupType field if non-nil, zero value otherwise.
+
+### GetGroupTypeOk
+
+`func (o *Group) GetGroupTypeOk() (*GroupTypeEnum, bool)`
+
+GetGroupTypeOk returns a tuple with the GroupType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGroupType
+
+`func (o *Group) SetGroupType(v GroupTypeEnum)`
+
+SetGroupType sets GroupType field to given value.
+
+### HasGroupType
+
+`func (o *Group) HasGroupType() bool`
+
+HasGroupType returns a boolean if a field has been set.
+
 ### GetVisibility
 
 `func (o *Group) GetVisibility() VisibilityEnum`
@@ -226,6 +279,31 @@ SetRequireSupportTicket sets RequireSupportTicket field to given value.
 `func (o *Group) HasRequireSupportTicket() bool`
 
 HasRequireSupportTicket returns a boolean if a field has been set.
+
+### GetFolderId
+
+`func (o *Group) GetFolderId() string`
+
+GetFolderId returns the FolderId field if non-nil, zero value otherwise.
+
+### GetFolderIdOk
+
+`func (o *Group) GetFolderIdOk() (*string, bool)`
+
+GetFolderIdOk returns a tuple with the FolderId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFolderId
+
+`func (o *Group) SetFolderId(v string)`
+
+SetFolderId sets FolderId field to given value.
+
+### HasFolderId
+
+`func (o *Group) HasFolderId() bool`
+
+HasFolderId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

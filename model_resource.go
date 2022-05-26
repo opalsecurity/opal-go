@@ -26,12 +26,15 @@ type Resource struct {
 	// The ID of the owning team of the resource.
 	OwnerTeamId *string `json:"owner_team_id,omitempty"`
 	Visibility *VisibilityEnum `json:"visibility,omitempty"`
+	ResourceType *ResourceTypeEnum `json:"resource_type,omitempty"`
 	// The maximum duration access to the resource can be requested for (in minutes).
 	MaxDuration *int32 `json:"max_duration,omitempty"`
 	// A bool representing whether or not access requests to the resource require manager approval.
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
 	// A bool representing whether or not access requests to the resource require a support ticket.
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
+	// The ID of the folder that the resource is located in.
+	FolderId *string `json:"folder_id,omitempty"`
 }
 
 // NewResource instantiates a new Resource object
@@ -204,6 +207,38 @@ func (o *Resource) SetVisibility(v VisibilityEnum) {
 	o.Visibility = &v
 }
 
+// GetResourceType returns the ResourceType field value if set, zero value otherwise.
+func (o *Resource) GetResourceType() ResourceTypeEnum {
+	if o == nil || o.ResourceType == nil {
+		var ret ResourceTypeEnum
+		return ret
+	}
+	return *o.ResourceType
+}
+
+// GetResourceTypeOk returns a tuple with the ResourceType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetResourceTypeOk() (*ResourceTypeEnum, bool) {
+	if o == nil || o.ResourceType == nil {
+		return nil, false
+	}
+	return o.ResourceType, true
+}
+
+// HasResourceType returns a boolean if a field has been set.
+func (o *Resource) HasResourceType() bool {
+	if o != nil && o.ResourceType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceType gets a reference to the given ResourceTypeEnum and assigns it to the ResourceType field.
+func (o *Resource) SetResourceType(v ResourceTypeEnum) {
+	o.ResourceType = &v
+}
+
 // GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
 func (o *Resource) GetMaxDuration() int32 {
 	if o == nil || o.MaxDuration == nil {
@@ -300,6 +335,38 @@ func (o *Resource) SetRequireSupportTicket(v bool) {
 	o.RequireSupportTicket = &v
 }
 
+// GetFolderId returns the FolderId field value if set, zero value otherwise.
+func (o *Resource) GetFolderId() string {
+	if o == nil || o.FolderId == nil {
+		var ret string
+		return ret
+	}
+	return *o.FolderId
+}
+
+// GetFolderIdOk returns a tuple with the FolderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetFolderIdOk() (*string, bool) {
+	if o == nil || o.FolderId == nil {
+		return nil, false
+	}
+	return o.FolderId, true
+}
+
+// HasFolderId returns a boolean if a field has been set.
+func (o *Resource) HasFolderId() bool {
+	if o != nil && o.FolderId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFolderId gets a reference to the given string and assigns it to the FolderId field.
+func (o *Resource) SetFolderId(v string) {
+	o.FolderId = &v
+}
+
 func (o Resource) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -317,6 +384,9 @@ func (o Resource) MarshalJSON() ([]byte, error) {
 	if o.Visibility != nil {
 		toSerialize["visibility"] = o.Visibility
 	}
+	if o.ResourceType != nil {
+		toSerialize["resource_type"] = o.ResourceType
+	}
 	if o.MaxDuration != nil {
 		toSerialize["max_duration"] = o.MaxDuration
 	}
@@ -325,6 +395,9 @@ func (o Resource) MarshalJSON() ([]byte, error) {
 	}
 	if o.RequireSupportTicket != nil {
 		toSerialize["require_support_ticket"] = o.RequireSupportTicket
+	}
+	if o.FolderId != nil {
+		toSerialize["folder_id"] = o.FolderId
 	}
 	return json.Marshal(toSerialize)
 }

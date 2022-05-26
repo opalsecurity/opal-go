@@ -19,9 +19,11 @@ import (
 type UpdateGroupInfo struct {
 	// The ID of the group.
 	GroupId string `json:"group_id"`
+	// The name of the group.
+	Name *string `json:"name,omitempty"`
 	// A description of the group.
 	Description *string `json:"description,omitempty"`
-	// The ID of the owning team of the group. Use empty string to remove owner.
+	// The ID of the owning team of the group. Use empty string to remove owner. Required when converting from Team to Group.
 	OwnerTeamId *string `json:"owner_team_id,omitempty"`
 	Visibility *VisibilityEnum `json:"visibility,omitempty"`
 	// The maximum duration access to the group can be requested for (in minutes). Use 0 to set to indefinite.
@@ -30,6 +32,8 @@ type UpdateGroupInfo struct {
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
 	// A bool representing whether or not access requests to the group require a support ticket.
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
+	// The ID of the folder that the group is located in.
+	FolderId *string `json:"folder_id,omitempty"`
 }
 
 // NewUpdateGroupInfo instantiates a new UpdateGroupInfo object
@@ -72,6 +76,38 @@ func (o *UpdateGroupInfo) GetGroupIdOk() (*string, bool) {
 // SetGroupId sets field value
 func (o *UpdateGroupInfo) SetGroupId(v string) {
 	o.GroupId = v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *UpdateGroupInfo) GetName() string {
+	if o == nil || o.Name == nil {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateGroupInfo) GetNameOk() (*string, bool) {
+	if o == nil || o.Name == nil {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *UpdateGroupInfo) HasName() bool {
+	if o != nil && o.Name != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *UpdateGroupInfo) SetName(v string) {
+	o.Name = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -266,10 +302,45 @@ func (o *UpdateGroupInfo) SetRequireSupportTicket(v bool) {
 	o.RequireSupportTicket = &v
 }
 
+// GetFolderId returns the FolderId field value if set, zero value otherwise.
+func (o *UpdateGroupInfo) GetFolderId() string {
+	if o == nil || o.FolderId == nil {
+		var ret string
+		return ret
+	}
+	return *o.FolderId
+}
+
+// GetFolderIdOk returns a tuple with the FolderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateGroupInfo) GetFolderIdOk() (*string, bool) {
+	if o == nil || o.FolderId == nil {
+		return nil, false
+	}
+	return o.FolderId, true
+}
+
+// HasFolderId returns a boolean if a field has been set.
+func (o *UpdateGroupInfo) HasFolderId() bool {
+	if o != nil && o.FolderId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFolderId gets a reference to the given string and assigns it to the FolderId field.
+func (o *UpdateGroupInfo) SetFolderId(v string) {
+	o.FolderId = &v
+}
+
 func (o UpdateGroupInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["group_id"] = o.GroupId
+	}
+	if o.Name != nil {
+		toSerialize["name"] = o.Name
 	}
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
@@ -288,6 +359,9 @@ func (o UpdateGroupInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.RequireSupportTicket != nil {
 		toSerialize["require_support_ticket"] = o.RequireSupportTicket
+	}
+	if o.FolderId != nil {
+		toSerialize["folder_id"] = o.FolderId
 	}
 	return json.Marshal(toSerialize)
 }

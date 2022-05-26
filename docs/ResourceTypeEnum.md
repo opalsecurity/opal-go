@@ -1,0 +1,63 @@
+# ResourceTypeEnum
+
+## Enum
+
+
+* `AWS_IAM_ROLE` (value: `"AWS_IAM_ROLE"`)
+
+* `AWS_EC2_INSTANCE` (value: `"AWS_EC2_INSTANCE"`)
+
+* `AWS_EKS_CLUSTER` (value: `"AWS_EKS_CLUSTER"`)
+
+* `AWS_RDS_POSTGRES_INSTANCE` (value: `"AWS_RDS_POSTGRES_INSTANCE"`)
+
+* `AWS_RDS_MYSQL_INSTANCE` (value: `"AWS_RDS_MYSQL_INSTANCE"`)
+
+* `CUSTOM` (value: `"CUSTOM"`)
+
+* `GCP_BUCKET` (value: `"GCP_BUCKET"`)
+
+* `GCP_COMPUTE_INSTANCE` (value: `"GCP_COMPUTE_INSTANCE"`)
+
+* `GCP_FOLDER` (value: `"GCP_FOLDER"`)
+
+* `GCP_GKE_CLUSTER` (value: `"GCP_GKE_CLUSTER"`)
+
+* `GCP_PROJECT` (value: `"GCP_PROJECT"`)
+
+* `GCP_CLOUD_SQL_POSTGRES_INSTANCE` (value: `"GCP_CLOUD_SQL_POSTGRES_INSTANCE"`)
+
+* `GCP_CLOUD_SQL_MYSQL_INSTANCE` (value: `"GCP_CLOUD_SQL_MYSQL_INSTANCE"`)
+
+* `GIT_HUB_REPO` (value: `"GIT_HUB_REPO"`)
+
+* `GOOGLE_WORKSPACE_ROLE` (value: `"GOOGLE_WORKSPACE_ROLE"`)
+
+* `MONGO_INSTANCE` (value: `"MONGO_INSTANCE"`)
+
+* `MONGO_ATLAS_INSTANCE` (value: `"MONGO_ATLAS_INSTANCE"`)
+
+* `OKTA_APP` (value: `"OKTA_APP"`)
+
+* `OKTA_ROLE` (value: `"OKTA_ROLE"`)
+
+* `OPAL_ROLE` (value: `"OPAL_ROLE"`)
+
+* `PAGERDUTY_ROLE` (value: `"PAGERDUTY_ROLE"`)
+
+* `SALESFORCE_PERMISSION_SET` (value: `"SALESFORCE_PERMISSION_SET"`)
+
+* `SALESFORCE_PROFILE` (value: `"SALESFORCE_PROFILE"`)
+
+* `SALESFORCE_ROLE` (value: `"SALESFORCE_ROLE"`)
+
+* `WORKDAY_ROLE` (value: `"WORKDAY_ROLE"`)
+
+* `MYSQL_INSTANCE` (value: `"MYSQL_INSTANCE"`)
+
+* `MARIADB_INSTANCE` (value: `"MARIADB_INSTANCE"`)
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

@@ -9,9 +9,11 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | A description of the resource. | [optional] 
 **OwnerTeamId** | Pointer to **string** | The ID of the owning team of the resource. | [optional] 
 **Visibility** | Pointer to [**VisibilityEnum**](VisibilityEnum.md) |  | [optional] 
+**ResourceType** | Pointer to [**ResourceTypeEnum**](ResourceTypeEnum.md) |  | [optional] 
 **MaxDuration** | Pointer to **int32** | The maximum duration access to the resource can be requested for (in minutes). | [optional] 
 **RequireManagerApproval** | Pointer to **bool** | A bool representing whether or not access requests to the resource require manager approval. | [optional] 
 **RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the resource require a support ticket. | [optional] 
+**FolderId** | Pointer to **string** | The ID of the folder that the resource is located in. | [optional] 
 
 ## Methods
 
@@ -152,6 +154,31 @@ SetVisibility sets Visibility field to given value.
 
 HasVisibility returns a boolean if a field has been set.
 
+### GetResourceType
+
+`func (o *Resource) GetResourceType() ResourceTypeEnum`
+
+GetResourceType returns the ResourceType field if non-nil, zero value otherwise.
+
+### GetResourceTypeOk
+
+`func (o *Resource) GetResourceTypeOk() (*ResourceTypeEnum, bool)`
+
+GetResourceTypeOk returns a tuple with the ResourceType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResourceType
+
+`func (o *Resource) SetResourceType(v ResourceTypeEnum)`
+
+SetResourceType sets ResourceType field to given value.
+
+### HasResourceType
+
+`func (o *Resource) HasResourceType() bool`
+
+HasResourceType returns a boolean if a field has been set.
+
 ### GetMaxDuration
 
 `func (o *Resource) GetMaxDuration() int32`
@@ -226,6 +253,31 @@ SetRequireSupportTicket sets RequireSupportTicket field to given value.
 `func (o *Resource) HasRequireSupportTicket() bool`
 
 HasRequireSupportTicket returns a boolean if a field has been set.
+
+### GetFolderId
+
+`func (o *Resource) GetFolderId() string`
+
+GetFolderId returns the FolderId field if non-nil, zero value otherwise.
+
+### GetFolderIdOk
+
+`func (o *Resource) GetFolderIdOk() (*string, bool)`
+
+GetFolderIdOk returns a tuple with the FolderId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFolderId
+
+`func (o *Resource) SetFolderId(v string)`
+
+SetFolderId sets FolderId field to given value.
+
+### HasFolderId
+
+`func (o *Resource) HasFolderId() bool`
+
+HasFolderId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

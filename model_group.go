@@ -25,6 +25,8 @@ type Group struct {
 	Description *string `json:"description,omitempty"`
 	// The ID of the owning team of the group.
 	OwnerTeamId *string `json:"owner_team_id,omitempty"`
+	GroupFunction *GroupFunctionEnum `json:"group_function,omitempty"`
+	GroupType *GroupTypeEnum `json:"group_type,omitempty"`
 	Visibility *VisibilityEnum `json:"visibility,omitempty"`
 	// The maximum duration access to the group can be requested for (in minutes).
 	MaxDuration *int32 `json:"max_duration,omitempty"`
@@ -32,6 +34,8 @@ type Group struct {
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
 	// A bool representing whether or not access requests to the group require a support ticket.
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
+	// The ID of the folder that the group is located in.
+	FolderId *string `json:"folder_id,omitempty"`
 }
 
 // NewGroup instantiates a new Group object
@@ -172,6 +176,70 @@ func (o *Group) SetOwnerTeamId(v string) {
 	o.OwnerTeamId = &v
 }
 
+// GetGroupFunction returns the GroupFunction field value if set, zero value otherwise.
+func (o *Group) GetGroupFunction() GroupFunctionEnum {
+	if o == nil || o.GroupFunction == nil {
+		var ret GroupFunctionEnum
+		return ret
+	}
+	return *o.GroupFunction
+}
+
+// GetGroupFunctionOk returns a tuple with the GroupFunction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetGroupFunctionOk() (*GroupFunctionEnum, bool) {
+	if o == nil || o.GroupFunction == nil {
+		return nil, false
+	}
+	return o.GroupFunction, true
+}
+
+// HasGroupFunction returns a boolean if a field has been set.
+func (o *Group) HasGroupFunction() bool {
+	if o != nil && o.GroupFunction != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupFunction gets a reference to the given GroupFunctionEnum and assigns it to the GroupFunction field.
+func (o *Group) SetGroupFunction(v GroupFunctionEnum) {
+	o.GroupFunction = &v
+}
+
+// GetGroupType returns the GroupType field value if set, zero value otherwise.
+func (o *Group) GetGroupType() GroupTypeEnum {
+	if o == nil || o.GroupType == nil {
+		var ret GroupTypeEnum
+		return ret
+	}
+	return *o.GroupType
+}
+
+// GetGroupTypeOk returns a tuple with the GroupType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetGroupTypeOk() (*GroupTypeEnum, bool) {
+	if o == nil || o.GroupType == nil {
+		return nil, false
+	}
+	return o.GroupType, true
+}
+
+// HasGroupType returns a boolean if a field has been set.
+func (o *Group) HasGroupType() bool {
+	if o != nil && o.GroupType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupType gets a reference to the given GroupTypeEnum and assigns it to the GroupType field.
+func (o *Group) SetGroupType(v GroupTypeEnum) {
+	o.GroupType = &v
+}
+
 // GetVisibility returns the Visibility field value if set, zero value otherwise.
 func (o *Group) GetVisibility() VisibilityEnum {
 	if o == nil || o.Visibility == nil {
@@ -300,6 +368,38 @@ func (o *Group) SetRequireSupportTicket(v bool) {
 	o.RequireSupportTicket = &v
 }
 
+// GetFolderId returns the FolderId field value if set, zero value otherwise.
+func (o *Group) GetFolderId() string {
+	if o == nil || o.FolderId == nil {
+		var ret string
+		return ret
+	}
+	return *o.FolderId
+}
+
+// GetFolderIdOk returns a tuple with the FolderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetFolderIdOk() (*string, bool) {
+	if o == nil || o.FolderId == nil {
+		return nil, false
+	}
+	return o.FolderId, true
+}
+
+// HasFolderId returns a boolean if a field has been set.
+func (o *Group) HasFolderId() bool {
+	if o != nil && o.FolderId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFolderId gets a reference to the given string and assigns it to the FolderId field.
+func (o *Group) SetFolderId(v string) {
+	o.FolderId = &v
+}
+
 func (o Group) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -314,6 +414,12 @@ func (o Group) MarshalJSON() ([]byte, error) {
 	if o.OwnerTeamId != nil {
 		toSerialize["owner_team_id"] = o.OwnerTeamId
 	}
+	if o.GroupFunction != nil {
+		toSerialize["group_function"] = o.GroupFunction
+	}
+	if o.GroupType != nil {
+		toSerialize["group_type"] = o.GroupType
+	}
 	if o.Visibility != nil {
 		toSerialize["visibility"] = o.Visibility
 	}
@@ -325,6 +431,9 @@ func (o Group) MarshalJSON() ([]byte, error) {
 	}
 	if o.RequireSupportTicket != nil {
 		toSerialize["require_support_ticket"] = o.RequireSupportTicket
+	}
+	if o.FolderId != nil {
+		toSerialize["folder_id"] = o.FolderId
 	}
 	return json.Marshal(toSerialize)
 }
