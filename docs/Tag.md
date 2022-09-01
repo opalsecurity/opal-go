@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **CreatedAt** | Pointer to **time.Time** | The date the tag was created. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date the tag was last updated. | [optional] 
 **UserCreatorId** | Pointer to **string** | The ID of the user that created the tag. | [optional] 
-**OwnerTeamId** | Pointer to **string** | The ID of the team that owns the tag. | [optional] 
 **Key** | Pointer to **string** | The key of the tag. | [optional] 
 **Value** | Pointer to **string** | The value of the tag. | [optional] 
 
@@ -125,31 +124,6 @@ SetUserCreatorId sets UserCreatorId field to given value.
 `func (o *Tag) HasUserCreatorId() bool`
 
 HasUserCreatorId returns a boolean if a field has been set.
-
-### GetOwnerTeamId
-
-`func (o *Tag) GetOwnerTeamId() string`
-
-GetOwnerTeamId returns the OwnerTeamId field if non-nil, zero value otherwise.
-
-### GetOwnerTeamIdOk
-
-`func (o *Tag) GetOwnerTeamIdOk() (*string, bool)`
-
-GetOwnerTeamIdOk returns a tuple with the OwnerTeamId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOwnerTeamId
-
-`func (o *Tag) SetOwnerTeamId(v string)`
-
-SetOwnerTeamId sets OwnerTeamId field to given value.
-
-### HasOwnerTeamId
-
-`func (o *Tag) HasOwnerTeamId() bool`
-
-HasOwnerTeamId returns a boolean if a field has been set.
 
 ### GetKey
 

@@ -20,10 +20,6 @@ import (
 	"strings"
 )
 
-// Linger please
-var (
-	_ context.Context
-)
 
 // UsersApiService UsersApi service
 type UsersApiService service
@@ -33,7 +29,6 @@ type ApiGetUserTagsRequest struct {
 	ApiService *UsersApiService
 	userId string
 }
-
 
 func (r ApiGetUserTagsRequest) Execute() (*TagsList, *http.Response, error) {
 	return r.ApiService.GetUserTagsExecute(r)
@@ -132,6 +127,125 @@ func (a *UsersApiService) GetUserTagsExecute(r ApiGetUserTagsRequest) (*TagsList
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetUsersRequest struct {
+	ctx context.Context
+	ApiService *UsersApiService
+	cursor *string
+	pageSize *int32
+}
+
+// The pagination cursor value.
+func (r ApiGetUsersRequest) Cursor(cursor string) ApiGetUsersRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Number of results to return per page. Default is 200.
+func (r ApiGetUsersRequest) PageSize(pageSize int32) ApiGetUsersRequest {
+	r.pageSize = &pageSize
+	return r
+}
+
+func (r ApiGetUsersRequest) Execute() (*PaginatedUsersList, *http.Response, error) {
+	return r.ApiService.GetUsersExecute(r)
+}
+
+/*
+GetUsers Method for GetUsers
+
+Returns a list of users for your organization.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetUsersRequest
+*/
+func (a *UsersApiService) GetUsers(ctx context.Context) ApiGetUsersRequest {
+	return ApiGetUsersRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return PaginatedUsersList
+func (a *UsersApiService) GetUsersExecute(r ApiGetUsersRequest) (*PaginatedUsersList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PaginatedUsersList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.GetUsers")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/users"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.cursor != nil {
+		localVarQueryParams.Add("cursor", parameterToString(*r.cursor, ""))
+	}
+	if r.pageSize != nil {
+		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiUserRequest struct {
 	ctx context.Context
 	ApiService *UsersApiService
@@ -144,6 +258,7 @@ func (r ApiUserRequest) UserId(userId string) ApiUserRequest {
 	r.userId = &userId
 	return r
 }
+
 // The email of the user. If both user ID and email are provided, user ID will take precedence. If neither are provided, an error will occur.
 func (r ApiUserRequest) Email(email string) ApiUserRequest {
 	r.email = &email

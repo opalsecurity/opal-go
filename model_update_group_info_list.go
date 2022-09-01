@@ -52,7 +52,7 @@ func (o *UpdateGroupInfoList) GetGroups() []UpdateGroupInfo {
 // GetGroupsOk returns a tuple with the Groups field value
 // and a boolean to check if the value has been set.
 func (o *UpdateGroupInfoList) GetGroupsOk() ([]UpdateGroupInfo, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Groups, true

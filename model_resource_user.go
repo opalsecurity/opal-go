@@ -16,7 +16,7 @@ import (
 	"time"
 )
 
-// ResourceUser # Resource User Object ### Description The `ResourceUser` object is used to represent a user with access to a resource.  ### Usage Example Fetch from the `LIST ResourceUsers` endpoint.
+// ResourceUser # Resource User Object ### Description The `ResourceUser` object is used to represent a user with direct access to a resource.
 type ResourceUser struct {
 	// The ID of the resource.
 	ResourceId string `json:"resource_id"`
@@ -67,7 +67,7 @@ func (o *ResourceUser) GetResourceId() string {
 // GetResourceIdOk returns a tuple with the ResourceId field value
 // and a boolean to check if the value has been set.
 func (o *ResourceUser) GetResourceIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ResourceId, true
@@ -91,7 +91,7 @@ func (o *ResourceUser) GetUserId() string {
 // GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
 func (o *ResourceUser) GetUserIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.UserId, true
@@ -115,7 +115,7 @@ func (o *ResourceUser) GetAccessLevel() ResourceAccessLevel {
 // GetAccessLevelOk returns a tuple with the AccessLevel field value
 // and a boolean to check if the value has been set.
 func (o *ResourceUser) GetAccessLevelOk() (*ResourceAccessLevel, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AccessLevel, true
@@ -139,7 +139,7 @@ func (o *ResourceUser) GetFullName() string {
 // GetFullNameOk returns a tuple with the FullName field value
 // and a boolean to check if the value has been set.
 func (o *ResourceUser) GetFullNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.FullName, true
@@ -163,7 +163,7 @@ func (o *ResourceUser) GetEmail() string {
 // GetEmailOk returns a tuple with the Email field value
 // and a boolean to check if the value has been set.
 func (o *ResourceUser) GetEmailOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Email, true
@@ -189,7 +189,7 @@ func (o *ResourceUser) GetExpirationDate() time.Time {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceUser) GetExpirationDateOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ExpirationDate.Get(), o.ExpirationDate.IsSet()

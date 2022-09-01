@@ -62,7 +62,7 @@ func (o *ResourceUserAccessStatus) GetResourceId() string {
 // GetResourceIdOk returns a tuple with the ResourceId field value
 // and a boolean to check if the value has been set.
 func (o *ResourceUserAccessStatus) GetResourceIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ResourceId, true
@@ -86,7 +86,7 @@ func (o *ResourceUserAccessStatus) GetUserId() string {
 // GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
 func (o *ResourceUserAccessStatus) GetUserIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.UserId, true
@@ -142,7 +142,7 @@ func (o *ResourceUserAccessStatus) GetStatus() ResourceUserAccessStatusEnum {
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
 func (o *ResourceUserAccessStatus) GetStatusOk() (*ResourceUserAccessStatusEnum, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Status, true
@@ -168,7 +168,7 @@ func (o *ResourceUserAccessStatus) GetExpirationDate() time.Time {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceUserAccessStatus) GetExpirationDateOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ExpirationDate.Get(), o.ExpirationDate.IsSet()

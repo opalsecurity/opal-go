@@ -21,17 +21,15 @@ type GroupFunctionEnum string
 
 // List of GroupFunctionEnum
 const (
-	GROUPFUNCTIONENUM_REGULAR GroupFunctionEnum = "REGULAR"
 	GROUPFUNCTIONENUM_ON_CALL GroupFunctionEnum = "ON_CALL"
-	GROUPFUNCTIONENUM_TEAM GroupFunctionEnum = "TEAM"
+	GROUPFUNCTIONENUM_REGULAR GroupFunctionEnum = "REGULAR"
 	GROUPFUNCTIONENUM_UNKNOWN GroupFunctionEnum = "UNKNOWN"
 )
 
 // All allowed values of GroupFunctionEnum enum
 var AllowedGroupFunctionEnumEnumValues = []GroupFunctionEnum{
-	"REGULAR",
 	"ON_CALL",
-	"TEAM",
+	"REGULAR",
 	"UNKNOWN",
 }
 

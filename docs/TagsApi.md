@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**AddUserTag**](TagsApi.md#AddUserTag) | **Post** /tags/{tag_id}/users/{user_id} | 
 [**CreateTag**](TagsApi.md#CreateTag) | **Post** /tag | 
 [**GetTag**](TagsApi.md#GetTag) | **Get** /tag | 
+[**GetTags**](TagsApi.md#GetTags) | **Get** /tags | 
 [**RemoveGroupTag**](TagsApi.md#RemoveGroupTag) | **Delete** /tags/{tag_id}/groups/{group_id} | 
 [**RemoveResourceTag**](TagsApi.md#RemoveResourceTag) | **Delete** /tags/{tag_id}/resources/{resource_id} | 
 [**RemoveUserTag**](TagsApi.md#RemoveUserTag) | **Delete** /tags/{tag_id}/users/{user_id} | 
@@ -230,7 +231,7 @@ Name | Type | Description  | Notes
 
 ## CreateTag
 
-> Tag CreateTag(ctx).TagKey(tagKey).TagValue(tagValue).TagOwnerTeamId(tagOwnerTeamId).Execute()
+> Tag CreateTag(ctx).TagKey(tagKey).TagValue(tagValue).AdminOwnerId(adminOwnerId).Execute()
 
 
 
@@ -250,12 +251,12 @@ import (
 
 func main() {
     tagKey := "api-scope" // string | The key of the tag to create.
-    tagValue := "production" // string | The value of the tag to create.
-    tagOwnerTeamId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of the team that owns the tag.
+    tagValue := "production" // string | The value of the tag to create. (optional)
+    adminOwnerId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of the owner that manages the tag. (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TagsApi.CreateTag(context.Background()).TagKey(tagKey).TagValue(tagValue).TagOwnerTeamId(tagOwnerTeamId).Execute()
+    resp, r, err := apiClient.TagsApi.CreateTag(context.Background()).TagKey(tagKey).TagValue(tagValue).AdminOwnerId(adminOwnerId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TagsApi.CreateTag``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -278,7 +279,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tagKey** | **string** | The key of the tag to create. | 
  **tagValue** | **string** | The value of the tag to create. | 
- **tagOwnerTeamId** | **string** | The ID of the team that owns the tag. | 
+ **adminOwnerId** | **string** | The ID of the owner that manages the tag. | 
 
 ### Return type
 
@@ -320,7 +321,7 @@ import (
 
 func main() {
     tagKey := "api-scope" // string | The key of the tag to get.
-    tagValue := "production" // string | The value of the tag to get.
+    tagValue := "production" // string | The value of the tag to get. (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -351,6 +352,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Tag**](Tag.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetTags
+
+> PaginatedTagsList GetTags(ctx).Cursor(cursor).PageSize(pageSize).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
+    pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.TagsApi.GetTags(context.Background()).Cursor(cursor).PageSize(pageSize).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TagsApi.GetTags``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetTags`: PaginatedTagsList
+    fmt.Fprintf(os.Stdout, "Response from `TagsApi.GetTags`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetTagsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cursor** | **string** | The pagination cursor value. | 
+ **pageSize** | **int32** | Number of results to return per page. Default is 200. | 
+
+### Return type
+
+[**PaginatedTagsList**](PaginatedTagsList.md)
 
 ### Authorization
 

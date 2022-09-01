@@ -23,10 +23,9 @@ type UpdateResourceInfo struct {
 	Name *string `json:"name,omitempty"`
 	// A description of the resource.
 	Description *string `json:"description,omitempty"`
-	// The ID of the owning team of the resource.
-	OwnerTeamId *string `json:"owner_team_id,omitempty"`
-	Visibility *VisibilityEnum `json:"visibility,omitempty"`
-	// The maximum duration access to the resource can be requested for (in minutes). Use 0 to set to indefinite.
+	// The ID of the owner of the resource.
+	AdminOwnerId *string `json:"admin_owner_id,omitempty"`
+	// The maximum duration for which the resource can be requested (in minutes). Use 0 to set to indefinite.
 	MaxDuration *int32 `json:"max_duration,omitempty"`
 	// A bool representing whether or not access requests to the resource require manager approval.
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
@@ -34,6 +33,12 @@ type UpdateResourceInfo struct {
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
 	// The ID of the folder that the resource is located in.
 	FolderId *string `json:"folder_id,omitempty"`
+	// A bool representing whether or not to require MFA for reviewers to approve requests for this resource.
+	RequireMfaToApprove *bool `json:"require_mfa_to_approve,omitempty"`
+	// A bool representing whether or not to automatically approve requests to this resource.
+	AutoApproval *bool `json:"auto_approval,omitempty"`
+	// The ID of the associated request template.
+	RequestTemplateId *string `json:"request_template_id,omitempty"`
 }
 
 // NewUpdateResourceInfo instantiates a new UpdateResourceInfo object
@@ -67,7 +72,7 @@ func (o *UpdateResourceInfo) GetResourceId() string {
 // GetResourceIdOk returns a tuple with the ResourceId field value
 // and a boolean to check if the value has been set.
 func (o *UpdateResourceInfo) GetResourceIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ResourceId, true
@@ -142,68 +147,36 @@ func (o *UpdateResourceInfo) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetOwnerTeamId returns the OwnerTeamId field value if set, zero value otherwise.
-func (o *UpdateResourceInfo) GetOwnerTeamId() string {
-	if o == nil || o.OwnerTeamId == nil {
+// GetAdminOwnerId returns the AdminOwnerId field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetAdminOwnerId() string {
+	if o == nil || o.AdminOwnerId == nil {
 		var ret string
 		return ret
 	}
-	return *o.OwnerTeamId
+	return *o.AdminOwnerId
 }
 
-// GetOwnerTeamIdOk returns a tuple with the OwnerTeamId field value if set, nil otherwise
+// GetAdminOwnerIdOk returns a tuple with the AdminOwnerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateResourceInfo) GetOwnerTeamIdOk() (*string, bool) {
-	if o == nil || o.OwnerTeamId == nil {
+func (o *UpdateResourceInfo) GetAdminOwnerIdOk() (*string, bool) {
+	if o == nil || o.AdminOwnerId == nil {
 		return nil, false
 	}
-	return o.OwnerTeamId, true
+	return o.AdminOwnerId, true
 }
 
-// HasOwnerTeamId returns a boolean if a field has been set.
-func (o *UpdateResourceInfo) HasOwnerTeamId() bool {
-	if o != nil && o.OwnerTeamId != nil {
+// HasAdminOwnerId returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasAdminOwnerId() bool {
+	if o != nil && o.AdminOwnerId != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetOwnerTeamId gets a reference to the given string and assigns it to the OwnerTeamId field.
-func (o *UpdateResourceInfo) SetOwnerTeamId(v string) {
-	o.OwnerTeamId = &v
-}
-
-// GetVisibility returns the Visibility field value if set, zero value otherwise.
-func (o *UpdateResourceInfo) GetVisibility() VisibilityEnum {
-	if o == nil || o.Visibility == nil {
-		var ret VisibilityEnum
-		return ret
-	}
-	return *o.Visibility
-}
-
-// GetVisibilityOk returns a tuple with the Visibility field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateResourceInfo) GetVisibilityOk() (*VisibilityEnum, bool) {
-	if o == nil || o.Visibility == nil {
-		return nil, false
-	}
-	return o.Visibility, true
-}
-
-// HasVisibility returns a boolean if a field has been set.
-func (o *UpdateResourceInfo) HasVisibility() bool {
-	if o != nil && o.Visibility != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetVisibility gets a reference to the given VisibilityEnum and assigns it to the Visibility field.
-func (o *UpdateResourceInfo) SetVisibility(v VisibilityEnum) {
-	o.Visibility = &v
+// SetAdminOwnerId gets a reference to the given string and assigns it to the AdminOwnerId field.
+func (o *UpdateResourceInfo) SetAdminOwnerId(v string) {
+	o.AdminOwnerId = &v
 }
 
 // GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
@@ -334,6 +307,102 @@ func (o *UpdateResourceInfo) SetFolderId(v string) {
 	o.FolderId = &v
 }
 
+// GetRequireMfaToApprove returns the RequireMfaToApprove field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetRequireMfaToApprove() bool {
+	if o == nil || o.RequireMfaToApprove == nil {
+		var ret bool
+		return ret
+	}
+	return *o.RequireMfaToApprove
+}
+
+// GetRequireMfaToApproveOk returns a tuple with the RequireMfaToApprove field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceInfo) GetRequireMfaToApproveOk() (*bool, bool) {
+	if o == nil || o.RequireMfaToApprove == nil {
+		return nil, false
+	}
+	return o.RequireMfaToApprove, true
+}
+
+// HasRequireMfaToApprove returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasRequireMfaToApprove() bool {
+	if o != nil && o.RequireMfaToApprove != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRequireMfaToApprove gets a reference to the given bool and assigns it to the RequireMfaToApprove field.
+func (o *UpdateResourceInfo) SetRequireMfaToApprove(v bool) {
+	o.RequireMfaToApprove = &v
+}
+
+// GetAutoApproval returns the AutoApproval field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetAutoApproval() bool {
+	if o == nil || o.AutoApproval == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AutoApproval
+}
+
+// GetAutoApprovalOk returns a tuple with the AutoApproval field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceInfo) GetAutoApprovalOk() (*bool, bool) {
+	if o == nil || o.AutoApproval == nil {
+		return nil, false
+	}
+	return o.AutoApproval, true
+}
+
+// HasAutoApproval returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasAutoApproval() bool {
+	if o != nil && o.AutoApproval != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoApproval gets a reference to the given bool and assigns it to the AutoApproval field.
+func (o *UpdateResourceInfo) SetAutoApproval(v bool) {
+	o.AutoApproval = &v
+}
+
+// GetRequestTemplateId returns the RequestTemplateId field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetRequestTemplateId() string {
+	if o == nil || o.RequestTemplateId == nil {
+		var ret string
+		return ret
+	}
+	return *o.RequestTemplateId
+}
+
+// GetRequestTemplateIdOk returns a tuple with the RequestTemplateId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceInfo) GetRequestTemplateIdOk() (*string, bool) {
+	if o == nil || o.RequestTemplateId == nil {
+		return nil, false
+	}
+	return o.RequestTemplateId, true
+}
+
+// HasRequestTemplateId returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasRequestTemplateId() bool {
+	if o != nil && o.RequestTemplateId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestTemplateId gets a reference to the given string and assigns it to the RequestTemplateId field.
+func (o *UpdateResourceInfo) SetRequestTemplateId(v string) {
+	o.RequestTemplateId = &v
+}
+
 func (o UpdateResourceInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -345,11 +414,8 @@ func (o UpdateResourceInfo) MarshalJSON() ([]byte, error) {
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
 	}
-	if o.OwnerTeamId != nil {
-		toSerialize["owner_team_id"] = o.OwnerTeamId
-	}
-	if o.Visibility != nil {
-		toSerialize["visibility"] = o.Visibility
+	if o.AdminOwnerId != nil {
+		toSerialize["admin_owner_id"] = o.AdminOwnerId
 	}
 	if o.MaxDuration != nil {
 		toSerialize["max_duration"] = o.MaxDuration
@@ -362,6 +428,15 @@ func (o UpdateResourceInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.FolderId != nil {
 		toSerialize["folder_id"] = o.FolderId
+	}
+	if o.RequireMfaToApprove != nil {
+		toSerialize["require_mfa_to_approve"] = o.RequireMfaToApprove
+	}
+	if o.AutoApproval != nil {
+		toSerialize["auto_approval"] = o.AutoApproval
+	}
+	if o.RequestTemplateId != nil {
+		toSerialize["request_template_id"] = o.RequestTemplateId
 	}
 	return json.Marshal(toSerialize)
 }

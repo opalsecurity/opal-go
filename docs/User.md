@@ -7,14 +7,15 @@ Name | Type | Description | Notes
 **UserId** | **string** | The ID of the user. | 
 **Email** | **string** | The email of the user. | 
 **FullName** | **string** | The full name of the user. | 
-**TeamId** | **NullableString** | The ID of the user&#39;s team. | 
+**FirstName** | **string** | The first name of the user. | 
+**LastName** | **string** | The last name of the user. | 
 **Position** | **string** | The user&#39;s position. | 
 
 ## Methods
 
 ### NewUser
 
-`func NewUser(userId string, email string, fullName string, teamId NullableString, position string, ) *User`
+`func NewUser(userId string, email string, fullName string, firstName string, lastName string, position string, ) *User`
 
 NewUser instantiates a new User object
 This constructor will assign default values to properties that have it defined,
@@ -89,36 +90,46 @@ and a boolean to check if the value has been set.
 SetFullName sets FullName field to given value.
 
 
-### GetTeamId
+### GetFirstName
 
-`func (o *User) GetTeamId() string`
+`func (o *User) GetFirstName() string`
 
-GetTeamId returns the TeamId field if non-nil, zero value otherwise.
+GetFirstName returns the FirstName field if non-nil, zero value otherwise.
 
-### GetTeamIdOk
+### GetFirstNameOk
 
-`func (o *User) GetTeamIdOk() (*string, bool)`
+`func (o *User) GetFirstNameOk() (*string, bool)`
 
-GetTeamIdOk returns a tuple with the TeamId field if it's non-nil, zero value otherwise
+GetFirstNameOk returns a tuple with the FirstName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTeamId
+### SetFirstName
 
-`func (o *User) SetTeamId(v string)`
+`func (o *User) SetFirstName(v string)`
 
-SetTeamId sets TeamId field to given value.
+SetFirstName sets FirstName field to given value.
 
 
-### SetTeamIdNil
+### GetLastName
 
-`func (o *User) SetTeamIdNil(b bool)`
+`func (o *User) GetLastName() string`
 
- SetTeamIdNil sets the value for TeamId to be an explicit nil
+GetLastName returns the LastName field if non-nil, zero value otherwise.
 
-### UnsetTeamId
-`func (o *User) UnsetTeamId()`
+### GetLastNameOk
 
-UnsetTeamId ensures that no value is present for TeamId, not even an explicit nil
+`func (o *User) GetLastNameOk() (*string, bool)`
+
+GetLastNameOk returns a tuple with the LastName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastName
+
+`func (o *User) SetLastName(v string)`
+
+SetLastName sets LastName field to given value.
+
+
 ### GetPosition
 
 `func (o *User) GetPosition() string`

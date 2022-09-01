@@ -5,6 +5,7 @@ All URIs are relative to *https://api.opal.dev/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetUserTags**](UsersApi.md#GetUserTags) | **Get** /users/{user_id}/tags | 
+[**GetUsers**](UsersApi.md#GetUsers) | **Get** /users | 
 [**User**](UsersApi.md#User) | **Get** /user | 
 
 
@@ -64,6 +65,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TagsList**](TagsList.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUsers
+
+> PaginatedUsersList GetUsers(ctx).Cursor(cursor).PageSize(pageSize).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
+    pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.UsersApi.GetUsers(context.Background()).Cursor(cursor).PageSize(pageSize).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.GetUsers``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetUsers`: PaginatedUsersList
+    fmt.Fprintf(os.Stdout, "Response from `UsersApi.GetUsers`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUsersRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cursor** | **string** | The pagination cursor value. | 
+ **pageSize** | **int32** | Number of results to return per page. Default is 200. | 
+
+### Return type
+
+[**PaginatedUsersList**](PaginatedUsersList.md)
 
 ### Authorization
 

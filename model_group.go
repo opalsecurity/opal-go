@@ -19,16 +19,21 @@ import (
 type Group struct {
 	// The ID of the group.
 	GroupId string `json:"group_id"`
+	// The ID of the group's app.
+	AppId *string `json:"app_id,omitempty"`
 	// The name of the group.
 	Name *string `json:"name,omitempty"`
 	// A description of the group.
 	Description *string `json:"description,omitempty"`
-	// The ID of the owning team of the group.
-	OwnerTeamId *string `json:"owner_team_id,omitempty"`
+	// The ID of the owner of the group.
+	AdminOwnerId *string `json:"admin_owner_id,omitempty"`
+	// The ID of the remote.
+	RemoteId *string `json:"remote_id,omitempty"`
+	// The name of the remote.
+	RemoteName *string `json:"remote_name,omitempty"`
 	GroupFunction *GroupFunctionEnum `json:"group_function,omitempty"`
 	GroupType *GroupTypeEnum `json:"group_type,omitempty"`
-	Visibility *VisibilityEnum `json:"visibility,omitempty"`
-	// The maximum duration access to the group can be requested for (in minutes).
+	// The maximum duration for which the group can be requested (in minutes).
 	MaxDuration *int32 `json:"max_duration,omitempty"`
 	// A bool representing whether or not access requests to the group require manager approval.
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
@@ -36,6 +41,12 @@ type Group struct {
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
 	// The ID of the folder that the group is located in.
 	FolderId *string `json:"folder_id,omitempty"`
+	// A bool representing whether or not to require MFA for reviewers to approve requests for this group.
+	RequireMfaToApprove *bool `json:"require_mfa_to_approve,omitempty"`
+	// A bool representing whether or not to automatically approve requests to this group.
+	AutoApproval *bool `json:"auto_approval,omitempty"`
+	// The ID of the associated request template.
+	RequestTemplateId *string `json:"request_template_id,omitempty"`
 }
 
 // NewGroup instantiates a new Group object
@@ -69,7 +80,7 @@ func (o *Group) GetGroupId() string {
 // GetGroupIdOk returns a tuple with the GroupId field value
 // and a boolean to check if the value has been set.
 func (o *Group) GetGroupIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.GroupId, true
@@ -78,6 +89,38 @@ func (o *Group) GetGroupIdOk() (*string, bool) {
 // SetGroupId sets field value
 func (o *Group) SetGroupId(v string) {
 	o.GroupId = v
+}
+
+// GetAppId returns the AppId field value if set, zero value otherwise.
+func (o *Group) GetAppId() string {
+	if o == nil || o.AppId == nil {
+		var ret string
+		return ret
+	}
+	return *o.AppId
+}
+
+// GetAppIdOk returns a tuple with the AppId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetAppIdOk() (*string, bool) {
+	if o == nil || o.AppId == nil {
+		return nil, false
+	}
+	return o.AppId, true
+}
+
+// HasAppId returns a boolean if a field has been set.
+func (o *Group) HasAppId() bool {
+	if o != nil && o.AppId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAppId gets a reference to the given string and assigns it to the AppId field.
+func (o *Group) SetAppId(v string) {
+	o.AppId = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -144,36 +187,100 @@ func (o *Group) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetOwnerTeamId returns the OwnerTeamId field value if set, zero value otherwise.
-func (o *Group) GetOwnerTeamId() string {
-	if o == nil || o.OwnerTeamId == nil {
+// GetAdminOwnerId returns the AdminOwnerId field value if set, zero value otherwise.
+func (o *Group) GetAdminOwnerId() string {
+	if o == nil || o.AdminOwnerId == nil {
 		var ret string
 		return ret
 	}
-	return *o.OwnerTeamId
+	return *o.AdminOwnerId
 }
 
-// GetOwnerTeamIdOk returns a tuple with the OwnerTeamId field value if set, nil otherwise
+// GetAdminOwnerIdOk returns a tuple with the AdminOwnerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Group) GetOwnerTeamIdOk() (*string, bool) {
-	if o == nil || o.OwnerTeamId == nil {
+func (o *Group) GetAdminOwnerIdOk() (*string, bool) {
+	if o == nil || o.AdminOwnerId == nil {
 		return nil, false
 	}
-	return o.OwnerTeamId, true
+	return o.AdminOwnerId, true
 }
 
-// HasOwnerTeamId returns a boolean if a field has been set.
-func (o *Group) HasOwnerTeamId() bool {
-	if o != nil && o.OwnerTeamId != nil {
+// HasAdminOwnerId returns a boolean if a field has been set.
+func (o *Group) HasAdminOwnerId() bool {
+	if o != nil && o.AdminOwnerId != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetOwnerTeamId gets a reference to the given string and assigns it to the OwnerTeamId field.
-func (o *Group) SetOwnerTeamId(v string) {
-	o.OwnerTeamId = &v
+// SetAdminOwnerId gets a reference to the given string and assigns it to the AdminOwnerId field.
+func (o *Group) SetAdminOwnerId(v string) {
+	o.AdminOwnerId = &v
+}
+
+// GetRemoteId returns the RemoteId field value if set, zero value otherwise.
+func (o *Group) GetRemoteId() string {
+	if o == nil || o.RemoteId == nil {
+		var ret string
+		return ret
+	}
+	return *o.RemoteId
+}
+
+// GetRemoteIdOk returns a tuple with the RemoteId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetRemoteIdOk() (*string, bool) {
+	if o == nil || o.RemoteId == nil {
+		return nil, false
+	}
+	return o.RemoteId, true
+}
+
+// HasRemoteId returns a boolean if a field has been set.
+func (o *Group) HasRemoteId() bool {
+	if o != nil && o.RemoteId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRemoteId gets a reference to the given string and assigns it to the RemoteId field.
+func (o *Group) SetRemoteId(v string) {
+	o.RemoteId = &v
+}
+
+// GetRemoteName returns the RemoteName field value if set, zero value otherwise.
+func (o *Group) GetRemoteName() string {
+	if o == nil || o.RemoteName == nil {
+		var ret string
+		return ret
+	}
+	return *o.RemoteName
+}
+
+// GetRemoteNameOk returns a tuple with the RemoteName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetRemoteNameOk() (*string, bool) {
+	if o == nil || o.RemoteName == nil {
+		return nil, false
+	}
+	return o.RemoteName, true
+}
+
+// HasRemoteName returns a boolean if a field has been set.
+func (o *Group) HasRemoteName() bool {
+	if o != nil && o.RemoteName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRemoteName gets a reference to the given string and assigns it to the RemoteName field.
+func (o *Group) SetRemoteName(v string) {
+	o.RemoteName = &v
 }
 
 // GetGroupFunction returns the GroupFunction field value if set, zero value otherwise.
@@ -238,38 +345,6 @@ func (o *Group) HasGroupType() bool {
 // SetGroupType gets a reference to the given GroupTypeEnum and assigns it to the GroupType field.
 func (o *Group) SetGroupType(v GroupTypeEnum) {
 	o.GroupType = &v
-}
-
-// GetVisibility returns the Visibility field value if set, zero value otherwise.
-func (o *Group) GetVisibility() VisibilityEnum {
-	if o == nil || o.Visibility == nil {
-		var ret VisibilityEnum
-		return ret
-	}
-	return *o.Visibility
-}
-
-// GetVisibilityOk returns a tuple with the Visibility field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Group) GetVisibilityOk() (*VisibilityEnum, bool) {
-	if o == nil || o.Visibility == nil {
-		return nil, false
-	}
-	return o.Visibility, true
-}
-
-// HasVisibility returns a boolean if a field has been set.
-func (o *Group) HasVisibility() bool {
-	if o != nil && o.Visibility != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetVisibility gets a reference to the given VisibilityEnum and assigns it to the Visibility field.
-func (o *Group) SetVisibility(v VisibilityEnum) {
-	o.Visibility = &v
 }
 
 // GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
@@ -400,10 +475,109 @@ func (o *Group) SetFolderId(v string) {
 	o.FolderId = &v
 }
 
+// GetRequireMfaToApprove returns the RequireMfaToApprove field value if set, zero value otherwise.
+func (o *Group) GetRequireMfaToApprove() bool {
+	if o == nil || o.RequireMfaToApprove == nil {
+		var ret bool
+		return ret
+	}
+	return *o.RequireMfaToApprove
+}
+
+// GetRequireMfaToApproveOk returns a tuple with the RequireMfaToApprove field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetRequireMfaToApproveOk() (*bool, bool) {
+	if o == nil || o.RequireMfaToApprove == nil {
+		return nil, false
+	}
+	return o.RequireMfaToApprove, true
+}
+
+// HasRequireMfaToApprove returns a boolean if a field has been set.
+func (o *Group) HasRequireMfaToApprove() bool {
+	if o != nil && o.RequireMfaToApprove != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRequireMfaToApprove gets a reference to the given bool and assigns it to the RequireMfaToApprove field.
+func (o *Group) SetRequireMfaToApprove(v bool) {
+	o.RequireMfaToApprove = &v
+}
+
+// GetAutoApproval returns the AutoApproval field value if set, zero value otherwise.
+func (o *Group) GetAutoApproval() bool {
+	if o == nil || o.AutoApproval == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AutoApproval
+}
+
+// GetAutoApprovalOk returns a tuple with the AutoApproval field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetAutoApprovalOk() (*bool, bool) {
+	if o == nil || o.AutoApproval == nil {
+		return nil, false
+	}
+	return o.AutoApproval, true
+}
+
+// HasAutoApproval returns a boolean if a field has been set.
+func (o *Group) HasAutoApproval() bool {
+	if o != nil && o.AutoApproval != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoApproval gets a reference to the given bool and assigns it to the AutoApproval field.
+func (o *Group) SetAutoApproval(v bool) {
+	o.AutoApproval = &v
+}
+
+// GetRequestTemplateId returns the RequestTemplateId field value if set, zero value otherwise.
+func (o *Group) GetRequestTemplateId() string {
+	if o == nil || o.RequestTemplateId == nil {
+		var ret string
+		return ret
+	}
+	return *o.RequestTemplateId
+}
+
+// GetRequestTemplateIdOk returns a tuple with the RequestTemplateId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetRequestTemplateIdOk() (*string, bool) {
+	if o == nil || o.RequestTemplateId == nil {
+		return nil, false
+	}
+	return o.RequestTemplateId, true
+}
+
+// HasRequestTemplateId returns a boolean if a field has been set.
+func (o *Group) HasRequestTemplateId() bool {
+	if o != nil && o.RequestTemplateId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestTemplateId gets a reference to the given string and assigns it to the RequestTemplateId field.
+func (o *Group) SetRequestTemplateId(v string) {
+	o.RequestTemplateId = &v
+}
+
 func (o Group) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["group_id"] = o.GroupId
+	}
+	if o.AppId != nil {
+		toSerialize["app_id"] = o.AppId
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
@@ -411,17 +585,20 @@ func (o Group) MarshalJSON() ([]byte, error) {
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
 	}
-	if o.OwnerTeamId != nil {
-		toSerialize["owner_team_id"] = o.OwnerTeamId
+	if o.AdminOwnerId != nil {
+		toSerialize["admin_owner_id"] = o.AdminOwnerId
+	}
+	if o.RemoteId != nil {
+		toSerialize["remote_id"] = o.RemoteId
+	}
+	if o.RemoteName != nil {
+		toSerialize["remote_name"] = o.RemoteName
 	}
 	if o.GroupFunction != nil {
 		toSerialize["group_function"] = o.GroupFunction
 	}
 	if o.GroupType != nil {
 		toSerialize["group_type"] = o.GroupType
-	}
-	if o.Visibility != nil {
-		toSerialize["visibility"] = o.Visibility
 	}
 	if o.MaxDuration != nil {
 		toSerialize["max_duration"] = o.MaxDuration
@@ -434,6 +611,15 @@ func (o Group) MarshalJSON() ([]byte, error) {
 	}
 	if o.FolderId != nil {
 		toSerialize["folder_id"] = o.FolderId
+	}
+	if o.RequireMfaToApprove != nil {
+		toSerialize["require_mfa_to_approve"] = o.RequireMfaToApprove
+	}
+	if o.AutoApproval != nil {
+		toSerialize["auto_approval"] = o.AutoApproval
+	}
+	if o.RequestTemplateId != nil {
+		toSerialize["request_template_id"] = o.RequestTemplateId
 	}
 	return json.Marshal(toSerialize)
 }

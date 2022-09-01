@@ -5,15 +5,20 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ResourceId** | **string** | The ID of the resource. | 
+**AppId** | Pointer to **string** | The ID of the app. | [optional] 
 **Name** | Pointer to **string** | The name of the resource. | [optional] 
 **Description** | Pointer to **string** | A description of the resource. | [optional] 
-**OwnerTeamId** | Pointer to **string** | The ID of the owning team of the resource. | [optional] 
-**Visibility** | Pointer to [**VisibilityEnum**](VisibilityEnum.md) |  | [optional] 
+**AdminOwnerId** | Pointer to **string** | The ID of the owner of the resource. | [optional] 
+**RemoteResourceId** | Pointer to **string** | The ID of the resource on the remote system. | [optional] 
+**RemoteResourceName** | Pointer to **string** | The name of the resource on the remote system. | [optional] 
 **ResourceType** | Pointer to [**ResourceTypeEnum**](ResourceTypeEnum.md) |  | [optional] 
-**MaxDuration** | Pointer to **int32** | The maximum duration access to the resource can be requested for (in minutes). | [optional] 
+**MaxDuration** | Pointer to **int32** | The maximum duration for which the resource can be requested (in minutes). | [optional] 
 **RequireManagerApproval** | Pointer to **bool** | A bool representing whether or not access requests to the resource require manager approval. | [optional] 
 **RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the resource require a support ticket. | [optional] 
 **FolderId** | Pointer to **string** | The ID of the folder that the resource is located in. | [optional] 
+**RequireMfaToApprove** | Pointer to **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this resource. | [optional] 
+**AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this resource. | [optional] 
+**RequestTemplateId** | Pointer to **string** | The ID of the associated request template. | [optional] 
 
 ## Methods
 
@@ -53,6 +58,31 @@ and a boolean to check if the value has been set.
 
 SetResourceId sets ResourceId field to given value.
 
+
+### GetAppId
+
+`func (o *Resource) GetAppId() string`
+
+GetAppId returns the AppId field if non-nil, zero value otherwise.
+
+### GetAppIdOk
+
+`func (o *Resource) GetAppIdOk() (*string, bool)`
+
+GetAppIdOk returns a tuple with the AppId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAppId
+
+`func (o *Resource) SetAppId(v string)`
+
+SetAppId sets AppId field to given value.
+
+### HasAppId
+
+`func (o *Resource) HasAppId() bool`
+
+HasAppId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -104,55 +134,80 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
-### GetOwnerTeamId
+### GetAdminOwnerId
 
-`func (o *Resource) GetOwnerTeamId() string`
+`func (o *Resource) GetAdminOwnerId() string`
 
-GetOwnerTeamId returns the OwnerTeamId field if non-nil, zero value otherwise.
+GetAdminOwnerId returns the AdminOwnerId field if non-nil, zero value otherwise.
 
-### GetOwnerTeamIdOk
+### GetAdminOwnerIdOk
 
-`func (o *Resource) GetOwnerTeamIdOk() (*string, bool)`
+`func (o *Resource) GetAdminOwnerIdOk() (*string, bool)`
 
-GetOwnerTeamIdOk returns a tuple with the OwnerTeamId field if it's non-nil, zero value otherwise
+GetAdminOwnerIdOk returns a tuple with the AdminOwnerId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOwnerTeamId
+### SetAdminOwnerId
 
-`func (o *Resource) SetOwnerTeamId(v string)`
+`func (o *Resource) SetAdminOwnerId(v string)`
 
-SetOwnerTeamId sets OwnerTeamId field to given value.
+SetAdminOwnerId sets AdminOwnerId field to given value.
 
-### HasOwnerTeamId
+### HasAdminOwnerId
 
-`func (o *Resource) HasOwnerTeamId() bool`
+`func (o *Resource) HasAdminOwnerId() bool`
 
-HasOwnerTeamId returns a boolean if a field has been set.
+HasAdminOwnerId returns a boolean if a field has been set.
 
-### GetVisibility
+### GetRemoteResourceId
 
-`func (o *Resource) GetVisibility() VisibilityEnum`
+`func (o *Resource) GetRemoteResourceId() string`
 
-GetVisibility returns the Visibility field if non-nil, zero value otherwise.
+GetRemoteResourceId returns the RemoteResourceId field if non-nil, zero value otherwise.
 
-### GetVisibilityOk
+### GetRemoteResourceIdOk
 
-`func (o *Resource) GetVisibilityOk() (*VisibilityEnum, bool)`
+`func (o *Resource) GetRemoteResourceIdOk() (*string, bool)`
 
-GetVisibilityOk returns a tuple with the Visibility field if it's non-nil, zero value otherwise
+GetRemoteResourceIdOk returns a tuple with the RemoteResourceId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVisibility
+### SetRemoteResourceId
 
-`func (o *Resource) SetVisibility(v VisibilityEnum)`
+`func (o *Resource) SetRemoteResourceId(v string)`
 
-SetVisibility sets Visibility field to given value.
+SetRemoteResourceId sets RemoteResourceId field to given value.
 
-### HasVisibility
+### HasRemoteResourceId
 
-`func (o *Resource) HasVisibility() bool`
+`func (o *Resource) HasRemoteResourceId() bool`
 
-HasVisibility returns a boolean if a field has been set.
+HasRemoteResourceId returns a boolean if a field has been set.
+
+### GetRemoteResourceName
+
+`func (o *Resource) GetRemoteResourceName() string`
+
+GetRemoteResourceName returns the RemoteResourceName field if non-nil, zero value otherwise.
+
+### GetRemoteResourceNameOk
+
+`func (o *Resource) GetRemoteResourceNameOk() (*string, bool)`
+
+GetRemoteResourceNameOk returns a tuple with the RemoteResourceName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemoteResourceName
+
+`func (o *Resource) SetRemoteResourceName(v string)`
+
+SetRemoteResourceName sets RemoteResourceName field to given value.
+
+### HasRemoteResourceName
+
+`func (o *Resource) HasRemoteResourceName() bool`
+
+HasRemoteResourceName returns a boolean if a field has been set.
 
 ### GetResourceType
 
@@ -278,6 +333,81 @@ SetFolderId sets FolderId field to given value.
 `func (o *Resource) HasFolderId() bool`
 
 HasFolderId returns a boolean if a field has been set.
+
+### GetRequireMfaToApprove
+
+`func (o *Resource) GetRequireMfaToApprove() bool`
+
+GetRequireMfaToApprove returns the RequireMfaToApprove field if non-nil, zero value otherwise.
+
+### GetRequireMfaToApproveOk
+
+`func (o *Resource) GetRequireMfaToApproveOk() (*bool, bool)`
+
+GetRequireMfaToApproveOk returns a tuple with the RequireMfaToApprove field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequireMfaToApprove
+
+`func (o *Resource) SetRequireMfaToApprove(v bool)`
+
+SetRequireMfaToApprove sets RequireMfaToApprove field to given value.
+
+### HasRequireMfaToApprove
+
+`func (o *Resource) HasRequireMfaToApprove() bool`
+
+HasRequireMfaToApprove returns a boolean if a field has been set.
+
+### GetAutoApproval
+
+`func (o *Resource) GetAutoApproval() bool`
+
+GetAutoApproval returns the AutoApproval field if non-nil, zero value otherwise.
+
+### GetAutoApprovalOk
+
+`func (o *Resource) GetAutoApprovalOk() (*bool, bool)`
+
+GetAutoApprovalOk returns a tuple with the AutoApproval field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoApproval
+
+`func (o *Resource) SetAutoApproval(v bool)`
+
+SetAutoApproval sets AutoApproval field to given value.
+
+### HasAutoApproval
+
+`func (o *Resource) HasAutoApproval() bool`
+
+HasAutoApproval returns a boolean if a field has been set.
+
+### GetRequestTemplateId
+
+`func (o *Resource) GetRequestTemplateId() string`
+
+GetRequestTemplateId returns the RequestTemplateId field if non-nil, zero value otherwise.
+
+### GetRequestTemplateIdOk
+
+`func (o *Resource) GetRequestTemplateIdOk() (*string, bool)`
+
+GetRequestTemplateIdOk returns a tuple with the RequestTemplateId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestTemplateId
+
+`func (o *Resource) SetRequestTemplateId(v string)`
+
+SetRequestTemplateId sets RequestTemplateId field to given value.
+
+### HasRequestTemplateId
+
+`func (o *Resource) HasRequestTemplateId() bool`
+
+HasRequestTemplateId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

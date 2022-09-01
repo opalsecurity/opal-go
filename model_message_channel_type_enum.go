@@ -22,15 +22,15 @@ type MessageChannelTypeEnum string
 // List of MessageChannelTypeEnum
 const (
 	MESSAGECHANNELTYPEENUM_AUDIT MessageChannelTypeEnum = "AUDIT"
-	MESSAGECHANNELTYPEENUM_REVIEWER MessageChannelTypeEnum = "REVIEWER"
 	MESSAGECHANNELTYPEENUM_MONITOR MessageChannelTypeEnum = "MONITOR"
+	MESSAGECHANNELTYPEENUM_REVIEWER MessageChannelTypeEnum = "REVIEWER"
 )
 
 // All allowed values of MessageChannelTypeEnum enum
 var AllowedMessageChannelTypeEnumEnumValues = []MessageChannelTypeEnum{
 	"AUDIT",
-	"REVIEWER",
 	"MONITOR",
+	"REVIEWER",
 }
 
 func (v *MessageChannelTypeEnum) UnmarshalJSON(src []byte) error {

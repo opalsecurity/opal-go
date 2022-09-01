@@ -62,7 +62,7 @@ func (o *Event) GetEventId() string {
 // GetEventIdOk returns a tuple with the EventId field value
 // and a boolean to check if the value has been set.
 func (o *Event) GetEventIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EventId, true
@@ -86,7 +86,7 @@ func (o *Event) GetActorUserId() string {
 // GetActorUserIdOk returns a tuple with the ActorUserId field value
 // and a boolean to check if the value has been set.
 func (o *Event) GetActorUserIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ActorUserId, true
@@ -110,7 +110,7 @@ func (o *Event) GetEventType() string {
 // GetEventTypeOk returns a tuple with the EventType field value
 // and a boolean to check if the value has been set.
 func (o *Event) GetEventTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.EventType, true
@@ -134,7 +134,7 @@ func (o *Event) GetCreatedAt() time.Time {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *Event) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.CreatedAt, true

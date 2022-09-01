@@ -20,10 +20,6 @@ import (
 	"strings"
 )
 
-// Linger please
-var (
-	_ context.Context
-)
 
 // TagsApiService TagsApi service
 type TagsApiService service
@@ -34,7 +30,6 @@ type ApiAddGroupTagRequest struct {
 	tagId string
 	groupId string
 }
-
 
 func (r ApiAddGroupTagRequest) Execute() (*http.Response, error) {
 	return r.ApiService.AddGroupTagExecute(r)
@@ -132,7 +127,6 @@ type ApiAddResourceTagRequest struct {
 	resourceId string
 }
 
-
 func (r ApiAddResourceTagRequest) Execute() (*http.Response, error) {
 	return r.ApiService.AddResourceTagExecute(r)
 }
@@ -229,7 +223,6 @@ type ApiAddUserTagRequest struct {
 	userId string
 }
 
-
 func (r ApiAddUserTagRequest) Execute() (*http.Response, error) {
 	return r.ApiService.AddUserTagExecute(r)
 }
@@ -324,7 +317,7 @@ type ApiCreateTagRequest struct {
 	ApiService *TagsApiService
 	tagKey *string
 	tagValue *string
-	tagOwnerTeamId *string
+	adminOwnerId *string
 }
 
 // The key of the tag to create.
@@ -332,14 +325,17 @@ func (r ApiCreateTagRequest) TagKey(tagKey string) ApiCreateTagRequest {
 	r.tagKey = &tagKey
 	return r
 }
+
 // The value of the tag to create.
 func (r ApiCreateTagRequest) TagValue(tagValue string) ApiCreateTagRequest {
 	r.tagValue = &tagValue
 	return r
 }
-// The ID of the team that owns the tag.
-func (r ApiCreateTagRequest) TagOwnerTeamId(tagOwnerTeamId string) ApiCreateTagRequest {
-	r.tagOwnerTeamId = &tagOwnerTeamId
+
+// The ID of the owner that manages the tag.
+// Deprecated
+func (r ApiCreateTagRequest) AdminOwnerId(adminOwnerId string) ApiCreateTagRequest {
+	r.adminOwnerId = &adminOwnerId
 	return r
 }
 
@@ -385,16 +381,14 @@ func (a *TagsApiService) CreateTagExecute(r ApiCreateTagRequest) (*Tag, *http.Re
 	if r.tagKey == nil {
 		return localVarReturnValue, nil, reportError("tagKey is required and must be specified")
 	}
-	if r.tagValue == nil {
-		return localVarReturnValue, nil, reportError("tagValue is required and must be specified")
-	}
-	if r.tagOwnerTeamId == nil {
-		return localVarReturnValue, nil, reportError("tagOwnerTeamId is required and must be specified")
-	}
 
 	localVarQueryParams.Add("tag_key", parameterToString(*r.tagKey, ""))
-	localVarQueryParams.Add("tag_value", parameterToString(*r.tagValue, ""))
-	localVarQueryParams.Add("tag_owner_team_id", parameterToString(*r.tagOwnerTeamId, ""))
+	if r.tagValue != nil {
+		localVarQueryParams.Add("tag_value", parameterToString(*r.tagValue, ""))
+	}
+	if r.adminOwnerId != nil {
+		localVarQueryParams.Add("admin_owner_id", parameterToString(*r.adminOwnerId, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -461,6 +455,7 @@ func (r ApiGetTagRequest) TagKey(tagKey string) ApiGetTagRequest {
 	r.tagKey = &tagKey
 	return r
 }
+
 // The value of the tag to get.
 func (r ApiGetTagRequest) TagValue(tagValue string) ApiGetTagRequest {
 	r.tagValue = &tagValue
@@ -509,12 +504,130 @@ func (a *TagsApiService) GetTagExecute(r ApiGetTagRequest) (*Tag, *http.Response
 	if r.tagKey == nil {
 		return localVarReturnValue, nil, reportError("tagKey is required and must be specified")
 	}
-	if r.tagValue == nil {
-		return localVarReturnValue, nil, reportError("tagValue is required and must be specified")
-	}
 
 	localVarQueryParams.Add("tag_key", parameterToString(*r.tagKey, ""))
-	localVarQueryParams.Add("tag_value", parameterToString(*r.tagValue, ""))
+	if r.tagValue != nil {
+		localVarQueryParams.Add("tag_value", parameterToString(*r.tagValue, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetTagsRequest struct {
+	ctx context.Context
+	ApiService *TagsApiService
+	cursor *string
+	pageSize *int32
+}
+
+// The pagination cursor value.
+func (r ApiGetTagsRequest) Cursor(cursor string) ApiGetTagsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Number of results to return per page. Default is 200.
+func (r ApiGetTagsRequest) PageSize(pageSize int32) ApiGetTagsRequest {
+	r.pageSize = &pageSize
+	return r
+}
+
+func (r ApiGetTagsRequest) Execute() (*PaginatedTagsList, *http.Response, error) {
+	return r.ApiService.GetTagsExecute(r)
+}
+
+/*
+GetTags Method for GetTags
+
+Returns a list of tags created by your organization.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetTagsRequest
+*/
+func (a *TagsApiService) GetTags(ctx context.Context) ApiGetTagsRequest {
+	return ApiGetTagsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return PaginatedTagsList
+func (a *TagsApiService) GetTagsExecute(r ApiGetTagsRequest) (*PaginatedTagsList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PaginatedTagsList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsApiService.GetTags")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/tags"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.cursor != nil {
+		localVarQueryParams.Add("cursor", parameterToString(*r.cursor, ""))
+	}
+	if r.pageSize != nil {
+		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -575,7 +688,6 @@ type ApiRemoveGroupTagRequest struct {
 	tagId string
 	groupId string
 }
-
 
 func (r ApiRemoveGroupTagRequest) Execute() (*http.Response, error) {
 	return r.ApiService.RemoveGroupTagExecute(r)
@@ -673,7 +785,6 @@ type ApiRemoveResourceTagRequest struct {
 	resourceId string
 }
 
-
 func (r ApiRemoveResourceTagRequest) Execute() (*http.Response, error) {
 	return r.ApiService.RemoveResourceTagExecute(r)
 }
@@ -769,7 +880,6 @@ type ApiRemoveUserTagRequest struct {
 	tagId string
 	userId string
 }
-
 
 func (r ApiRemoveUserTagRequest) Execute() (*http.Response, error) {
 	return r.ApiService.RemoveUserTagExecute(r)

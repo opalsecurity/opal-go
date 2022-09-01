@@ -23,8 +23,10 @@ type User struct {
 	Email string `json:"email"`
 	// The full name of the user.
 	FullName string `json:"full_name"`
-	// The ID of the user's team.
-	TeamId NullableString `json:"team_id"`
+	// The first name of the user.
+	FirstName string `json:"first_name"`
+	// The last name of the user.
+	LastName string `json:"last_name"`
 	// The user's position.
 	Position string `json:"position"`
 }
@@ -33,12 +35,13 @@ type User struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUser(userId string, email string, fullName string, teamId NullableString, position string) *User {
+func NewUser(userId string, email string, fullName string, firstName string, lastName string, position string) *User {
 	this := User{}
 	this.UserId = userId
 	this.Email = email
 	this.FullName = fullName
-	this.TeamId = teamId
+	this.FirstName = firstName
+	this.LastName = lastName
 	this.Position = position
 	return &this
 }
@@ -64,7 +67,7 @@ func (o *User) GetUserId() string {
 // GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
 func (o *User) GetUserIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.UserId, true
@@ -88,7 +91,7 @@ func (o *User) GetEmail() string {
 // GetEmailOk returns a tuple with the Email field value
 // and a boolean to check if the value has been set.
 func (o *User) GetEmailOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Email, true
@@ -112,7 +115,7 @@ func (o *User) GetFullName() string {
 // GetFullNameOk returns a tuple with the FullName field value
 // and a boolean to check if the value has been set.
 func (o *User) GetFullNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.FullName, true
@@ -123,30 +126,52 @@ func (o *User) SetFullName(v string) {
 	o.FullName = v
 }
 
-// GetTeamId returns the TeamId field value
-// If the value is explicit nil, the zero value for string will be returned
-func (o *User) GetTeamId() string {
-	if o == nil || o.TeamId.Get() == nil {
+// GetFirstName returns the FirstName field value
+func (o *User) GetFirstName() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.TeamId.Get()
+	return o.FirstName
 }
 
-// GetTeamIdOk returns a tuple with the TeamId field value
+// GetFirstNameOk returns a tuple with the FirstName field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *User) GetTeamIdOk() (*string, bool) {
-	if o == nil  {
+func (o *User) GetFirstNameOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TeamId.Get(), o.TeamId.IsSet()
+	return &o.FirstName, true
 }
 
-// SetTeamId sets field value
-func (o *User) SetTeamId(v string) {
-	o.TeamId.Set(&v)
+// SetFirstName sets field value
+func (o *User) SetFirstName(v string) {
+	o.FirstName = v
+}
+
+// GetLastName returns the LastName field value
+func (o *User) GetLastName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.LastName
+}
+
+// GetLastNameOk returns a tuple with the LastName field value
+// and a boolean to check if the value has been set.
+func (o *User) GetLastNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.LastName, true
+}
+
+// SetLastName sets field value
+func (o *User) SetLastName(v string) {
+	o.LastName = v
 }
 
 // GetPosition returns the Position field value
@@ -162,7 +187,7 @@ func (o *User) GetPosition() string {
 // GetPositionOk returns a tuple with the Position field value
 // and a boolean to check if the value has been set.
 func (o *User) GetPositionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Position, true
@@ -185,7 +210,10 @@ func (o User) MarshalJSON() ([]byte, error) {
 		toSerialize["full_name"] = o.FullName
 	}
 	if true {
-		toSerialize["team_id"] = o.TeamId.Get()
+		toSerialize["first_name"] = o.FirstName
+	}
+	if true {
+		toSerialize["last_name"] = o.LastName
 	}
 	if true {
 		toSerialize["position"] = o.Position

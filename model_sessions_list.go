@@ -54,7 +54,7 @@ func (o *SessionsList) GetNext() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SessionsList) GetNextOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Next.Get(), o.Next.IsSet()
@@ -96,7 +96,7 @@ func (o *SessionsList) GetPrevious() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SessionsList) GetPreviousOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Previous.Get(), o.Previous.IsSet()

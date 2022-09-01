@@ -55,7 +55,7 @@ func (o *PaginatedGroupsList) GetNext() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaginatedGroupsList) GetNextOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Next.Get(), o.Next.IsSet()
@@ -97,7 +97,7 @@ func (o *PaginatedGroupsList) GetPrevious() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaginatedGroupsList) GetPreviousOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Previous.Get(), o.Previous.IsSet()
@@ -139,7 +139,7 @@ func (o *PaginatedGroupsList) GetResults() []Group {
 // GetResultsOk returns a tuple with the Results field value
 // and a boolean to check if the value has been set.
 func (o *PaginatedGroupsList) GetResultsOk() ([]Group, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Results, true

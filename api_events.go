@@ -19,10 +19,6 @@ import (
 	"net/url"
 )
 
-// Linger please
-var (
-	_ context.Context
-)
 
 // EventsApiService EventsApi service
 type EventsApiService service
@@ -44,31 +40,37 @@ func (r ApiEventsRequest) StartDateFilter(startDateFilter string) ApiEventsReque
 	r.startDateFilter = &startDateFilter
 	return r
 }
+
 // An end date filter for the events.
 func (r ApiEventsRequest) EndDateFilter(endDateFilter string) ApiEventsRequest {
 	r.endDateFilter = &endDateFilter
 	return r
 }
+
 // An actor filter for the events. Supply the ID of the actor.
 func (r ApiEventsRequest) ActorFilter(actorFilter string) ApiEventsRequest {
 	r.actorFilter = &actorFilter
 	return r
 }
+
 // An object filter for the events. Supply the ID of the object.
 func (r ApiEventsRequest) ObjectFilter(objectFilter string) ApiEventsRequest {
 	r.objectFilter = &objectFilter
 	return r
 }
+
 // An event type filter for the events.
 func (r ApiEventsRequest) EventTypeFilter(eventTypeFilter string) ApiEventsRequest {
 	r.eventTypeFilter = &eventTypeFilter
 	return r
 }
+
 // The pagination cursor value.
 func (r ApiEventsRequest) Cursor(cursor string) ApiEventsRequest {
 	r.cursor = &cursor
 	return r
 }
+
 // Number of results to return per page. Default is 200.
 func (r ApiEventsRequest) PageSize(pageSize int32) ApiEventsRequest {
 	r.pageSize = &pageSize

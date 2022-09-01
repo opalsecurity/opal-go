@@ -11,6 +11,45 @@ servers:
 - description: Production
   url: https://api.opal.dev/v1
 paths:
+  /apps:
+    get:
+      description: Returns a list of `App` objects.
+      operationId: getApps
+      parameters:
+      - description: A list of app types to filter by.
+        example:
+        - OKTA_DIRECTORY
+        - GIT_HUB
+        explode: false
+        in: query
+        name: app_type_filter
+        required: false
+        schema:
+          items:
+            $ref: '#/components/schemas/AppTypeEnum'
+          type: array
+        style: form
+      - description: An owner ID to filter by.
+        example: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+        explode: true
+        in: query
+        name: owner_filter
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppsList'
+          description: A list of apps for your organization.
+      security:
+      - BearerAuth: []
+      tags:
+      - apps
   /events:
     get:
       description: Returns a list of `Event` objects.
@@ -135,6 +174,30 @@ paths:
         schema:
           $ref: '#/components/schemas/GroupTypeEnum'
         style: form
+      - description: The group ids to filter by.
+        example:
+        - 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        - 1b978423-db0a-4037-a4cf-f79c60cb67b3
+        explode: false
+        in: query
+        name: group_ids
+        required: false
+        schema:
+          items:
+            example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+            format: uuid
+            type: string
+          type: array
+        style: form
+      - description: Group name.
+        example: example-name
+        explode: true
+        in: query
+        name: group_name
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -142,6 +205,27 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedGroupsList'
           description: One page worth groups associated with your organization.
+      security:
+      - BearerAuth: []
+      tags:
+      - groups
+    post:
+      description: "Creates a group. See [here](https://docs.opal.dev/docs/how-opal)\
+        \ for details about importing groups."
+      operationId: createGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGroupInfo'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: The group just created.
       security:
       - BearerAuth: []
       tags:
@@ -189,61 +273,10 @@ paths:
       - BearerAuth: []
       tags:
       - groups
-  /groups/{group_id}/convert:
-    put:
-      description: Updates a groups function.
-      operationId: convert_group
-      parameters:
-      - description: The ID of the group.
-        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
-        explode: false
-        in: path
-        name: group_id
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      - description: The group function to convert to.
-        example: TEAM
-        explode: false
-        in: query
-        name: group_function
-        required: true
-        schema:
-          $ref: '#/components/schemas/GroupFunctionEnum'
-        style: form
-      - description: The ID of the owning team of the group. Required when converting
-          from Team to Group.
-        example: 7c86c85d-0651-43e2-a748-d69d658418e8
-        explode: false
-        in: query
-        name: owner_team_id
-        required: false
-        schema:
-          format: uuid
-          type: string
-        style: form
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NewAdminIDList'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Group'
-          description: The converted group.
-      security:
-      - BearerAuth: []
-      tags:
-      - groups
   /groups/{group_id}/message-channels:
     get:
-      description: Gets the list of message channels attached to a group.
+      description: Gets the list of audit and reviewer message channels attached to
+        a group.
       operationId: get_group_message_channels
       parameters:
       - description: The ID of the group.
@@ -262,13 +295,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageChannelList'
-          description: The message channels attached to the group.
+          description: The audit and reviewer message channels attached to the group.
       security:
       - BearerAuth: []
       tags:
       - groups
     put:
-      description: Sets the list of message channels attached to a group.
+      description: Sets the list of audit message channels attached to a group.
       operationId: set_group_message_channels
       parameters:
       - description: The ID of the group.
@@ -297,14 +330,71 @@ paths:
                   format: uuid
                   type: string
                 type: array
-          description: The updated message channel IDs for the group.
+          description: The updated audit message channel IDs for the group.
+      security:
+      - BearerAuth: []
+      tags:
+      - groups
+  /groups/{group_id}/visibility:
+    get:
+      description: Gets the visibility of this group.
+      operationId: get_group_visibility
+      parameters:
+      - description: The ID of the group.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisibilityInfo'
+          description: The visibility info of this group.
+      security:
+      - BearerAuth: []
+      tags:
+      - groups
+    put:
+      description: Sets the visibility of this group.
+      operationId: set_group_visibility
+      parameters:
+      - description: The ID of the group.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisibilityInfo'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisibilityInfo'
+          description: The visibility info of this group.
       security:
       - BearerAuth: []
       tags:
       - groups
   /groups/{group_id}/reviewers:
     get:
-      description: Gets the list of team/user IDs of the reviewers for a group.
+      description: Gets the list of owner IDs of the reviewers for a group.
       operationId: get_group_reviewers
       parameters:
       - description: The ID of the group.
@@ -327,7 +417,7 @@ paths:
                   format: uuid
                   type: string
                 type: array
-          description: The IDs of teams/users that are reviewers for this group.
+          description: The IDs of owners that are reviewers for this group.
       security:
       - BearerAuth: []
       tags:
@@ -362,8 +452,7 @@ paths:
                   format: uuid
                   type: string
                 type: array
-          description: The updated IDs of teams/users that are reviewers for this
-            group
+          description: The updated IDs of owners that are reviewers for this group
       security:
       - BearerAuth: []
       tags:
@@ -394,6 +483,188 @@ paths:
       - BearerAuth: []
       tags:
       - groups
+  /owners:
+    get:
+      description: Returns a list of `Owner` objects.
+      operationId: get_owners
+      parameters:
+      - description: The pagination cursor value.
+        example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Number of results to return per page. Default is 200.
+        example: 200
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          maximum: 1000
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedOwnersList'
+          description: One page worth of owners in your organization.
+      security:
+      - BearerAuth: []
+      tags:
+      - owners
+    post:
+      description: Creates an owner.
+      operationId: createOwner
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOwnerInfo'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Owner'
+          description: The owner just created.
+      security:
+      - BearerAuth: []
+      tags:
+      - owners
+    put:
+      description: Bulk updates a list of owners.
+      operationId: updateOwners
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOwnerInfoList'
+        description: Owners to be updated
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateOwnerInfoList'
+          description: The resulting updated owner infos.
+      security:
+      - BearerAuth: []
+      tags:
+      - owners
+  /owners/{owner_id}:
+    delete:
+      description: Deletes an owner.
+      operationId: delete_owner
+      parameters:
+      - description: The ID of the owner.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: owner_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: The owner was successfully deleted.
+      security:
+      - BearerAuth: []
+      tags:
+      - owners
+    get:
+      description: Returns an `Owner` object.
+      operationId: getOwner
+      parameters:
+      - description: The ID of the owner.
+        example: 32acc112-21ff-4669-91c2-21e27683eaa1
+        explode: true
+        in: path
+        name: owner_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Owner'
+          description: The owner object associated with the passed-in ID.
+      security:
+      - BearerAuth: []
+      tags:
+      - owners
+  /owners/{owner_id}/users:
+    get:
+      description: "Gets the list of users for this owner, in escalation priority\
+        \ order if applicable."
+      operationId: get_owner_users
+      parameters:
+      - description: The ID of the owner.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: owner_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+          description: The users for this owner.
+      security:
+      - BearerAuth: []
+      tags:
+      - owners
+    put:
+      description: "Sets the list of users for this owner. If escalation is enabled,\
+        \ the order of this list is the escalation priority order of the users."
+      operationId: set_owner_users
+      parameters:
+      - description: The ID of the owner.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: owner_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserIDList'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+          description: The updated users for the owner.
+      security:
+      - BearerAuth: []
+      tags:
+      - owners
   /resources:
     get:
       description: Returns a list of resources for your organization.
@@ -427,6 +698,30 @@ paths:
         schema:
           $ref: '#/components/schemas/ResourceTypeEnum'
         style: form
+      - description: The resource ids to filter by.
+        example:
+        - 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        - 1b978423-db0a-4037-a4cf-f79c60cb67b3
+        explode: false
+        in: query
+        name: resource_ids
+        required: false
+        schema:
+          items:
+            example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+            format: uuid
+            type: string
+          type: array
+        style: form
+      - description: Resource name.
+        example: example-name
+        explode: true
+        in: query
+        name: resource_name
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -434,6 +729,27 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedResourcesList'
           description: One page worth resources associated with your organization.
+      security:
+      - BearerAuth: []
+      tags:
+      - resources
+    post:
+      description: "Creates a resource. See [here](https://docs.opal.dev/docs/how-opal)\
+        \ for details about importing resources."
+      operationId: createResource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateResourceInfo'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+          description: The resource just created.
       security:
       - BearerAuth: []
       tags:
@@ -483,7 +799,7 @@ paths:
       - resources
   /resources/{resource_id}/message-channels:
     get:
-      description: Gets the list of message channels attached to a resource.
+      description: Gets the list of audit message channels attached to a resource.
       operationId: get_resource_message_channels
       parameters:
       - description: The ID of the resource.
@@ -502,13 +818,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MessageChannelList'
-          description: The message channels attached to the resource.
+          description: The audit message channels attached to the resource.
       security:
       - BearerAuth: []
       tags:
       - resources
     put:
-      description: Sets the list of message channels attached to a resource.
+      description: Sets the list of audit message channels attached to a resource.
       operationId: set_resource_message_channels
       parameters:
       - description: The ID of the resource.
@@ -537,14 +853,71 @@ paths:
                   format: uuid
                   type: string
                 type: array
-          description: The updated message channel IDs for the resource.
+          description: The updated audit message channel IDs for the resource.
+      security:
+      - BearerAuth: []
+      tags:
+      - resources
+  /resources/{resource_id}/visibility:
+    get:
+      description: Gets the visibility of this resource.
+      operationId: get_resource_visibility
+      parameters:
+      - description: The ID of the resource.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisibilityInfo'
+          description: The visibility info of this resource.
+      security:
+      - BearerAuth: []
+      tags:
+      - resources
+    put:
+      description: Sets the visibility of this resource.
+      operationId: set_resource_visibility
+      parameters:
+      - description: The ID of the resource.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisibilityInfo'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisibilityInfo'
+          description: The visibility info of this resource.
       security:
       - BearerAuth: []
       tags:
       - resources
   /resources/{resource_id}/reviewers:
     get:
-      description: Gets the list of team/user IDs of the reviewers for a resource.
+      description: Gets the list of owner IDs of the reviewers for a resource.
       operationId: get_resource_reviewers
       parameters:
       - description: The ID of the resource.
@@ -567,7 +940,7 @@ paths:
                   format: uuid
                   type: string
                 type: array
-          description: The IDs of teams that are reviewers for this resource.
+          description: The IDs of owners that are reviewers for this resource.
       security:
       - BearerAuth: []
       tags:
@@ -602,29 +975,74 @@ paths:
                   format: uuid
                   type: string
                 type: array
-          description: The updated IDs of teams that are reviewers for this resource
+          description: The updated IDs of owners that are reviewers for this resource
       security:
       - BearerAuth: []
       tags:
       - resources
-  /resource-users:
+  /resources/{resource_id}/users:
     get:
-      description: Returns a list of `ResourceUser` objects.
-      operationId: resource_users
+      description: Gets the list of users for this resource.
+      operationId: get_resource_users
       parameters:
       - description: The ID of the resource.
-        example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
-        explode: true
-        in: query
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
         name: resource_id
         required: true
         schema:
           format: uuid
           type: string
+        style: simple
+      - description: Limit the number of results returned.
+        example: 200
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
         style: form
-      - description: The remote ID of the access level that you wish to query for
-          the resource. If omitted, the default access level remote ID value (empty
-          string) is used.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAccessUserList'
+          description: List of users with access to this resource.
+      security:
+      - BearerAuth: []
+      tags:
+      - resources
+  /resources/{resource_id}/users/{user_id}:
+    delete:
+      description: Removes a user's direct access from this resource.
+      operationId: delete_resource_user
+      parameters:
+      - description: The ID of the resource.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The ID of a user to remove from this resource.
+        example: f92aa855-cea9-4814-b9d8-f2a60d3e4a06
+        explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: "The remote ID of the access level for which this user has direct\
+          \ access. If omitted, the default access level remote ID value (empty string)\
+          \ is assumed."
         example: arn:aws:iam::590304332660:role/AdministratorAccess
         explode: true
         in: query
@@ -633,32 +1051,65 @@ paths:
         schema:
           type: string
         style: form
-      - description: The pagination cursor value.
-        example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+      responses:
+        "200":
+          description: This user's access was successfully removed from this resource.
+      security:
+      - BearerAuth: []
+      tags:
+      - resources
+    post:
+      description: Adds a user to this resource.
+      operationId: add_resource_user
+      parameters:
+      - description: The ID of the resource.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The ID of the user to add.
+        example: f92aa855-cea9-4814-b9d8-f2a60d3e4a06
+        explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The duration for which the resource can be accessed (in minutes).
+          Use 0 to set to indefinite.
+        example: 60
         explode: true
         in: query
-        name: cursor
+        name: duration_minutes
+        required: true
+        schema:
+          maximum: 525960
+          type: integer
+        style: form
+      - description: "The remote ID of the access level to grant to this user. If\
+          \ omitted, the default access level remote ID value (empty string) is used."
+        example: arn:aws:iam::590304332660:role/AdministratorAccess
+        explode: true
+        in: query
+        name: access_level_remote_id
         required: false
         schema:
           type: string
-        style: form
-      - description: Number of results to return per page. Default is 200.
-        example: 200
-        explode: true
-        in: query
-        name: page_size
-        required: false
-        schema:
-          maximum: 1000
-          type: integer
         style: form
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedResourceUserList'
-          description: One page worth of users with access to this resource.
+                $ref: '#/components/schemas/ResourceUser'
+          description: The ResourceUser that was created.
       security:
       - BearerAuth: []
       tags:
@@ -688,9 +1139,9 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: The remote ID of the access level that you wish to query for
-          the resource. If omitted, the default access level remote ID value (empty
-          string) is used.
+      - description: "The remote ID of the access level that you wish to query for\
+          \ the resource. If omitted, the default access level remote ID value (empty\
+          \ string) is used."
         example: arn:aws:iam::590304332660:role/AdministratorAccess
         explode: true
         in: query
@@ -805,8 +1256,8 @@ paths:
           format: uuid
           type: string
         style: form
-      - description: The email of the user. If both user ID and email are provided,
-          user ID will take precedence. If neither are provided, an error will occur.
+      - description: "The email of the user. If both user ID and email are provided,\
+          \ user ID will take precedence. If neither are provided, an error will occur."
         example: johndoe@domain.org
         explode: true
         in: query
@@ -822,6 +1273,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
           description: The user object associated with the passed-in email or ID.
+      security:
+      - BearerAuth: []
+      tags:
+      - users
+  /users:
+    get:
+      description: Returns a list of users for your organization.
+      operationId: getUsers
+      parameters:
+      - description: The pagination cursor value.
+        example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Number of results to return per page. Default is 200.
+        example: 200
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          maximum: 1000
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUsersList'
+          description: One page worth users in your organization.
       security:
       - BearerAuth: []
       tags:
@@ -871,7 +1357,7 @@ paths:
         explode: false
         in: query
         name: tag_value
-        required: true
+        required: false
         schema:
           type: string
         style: form
@@ -904,16 +1390,17 @@ paths:
         explode: false
         in: query
         name: tag_value
-        required: true
+        required: false
         schema:
           type: string
         style: form
-      - description: The ID of the team that owns the tag.
+      - deprecated: true
+        description: The ID of the owner that manages the tag.
         example: f92aa855-cea9-4814-b9d8-f2a60d3e4a06
         explode: false
         in: query
-        name: tag_owner_team_id
-        required: true
+        name: admin_owner_id
+        required: false
         schema:
           format: uuid
           type: string
@@ -925,6 +1412,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/Tag'
           description: The tag that was created.
+      security:
+      - BearerAuth: []
+      tags:
+      - tags
+  /tags:
+    get:
+      description: Returns a list of tags created by your organization.
+      operationId: getTags
+      parameters:
+      - description: The pagination cursor value.
+        example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Number of results to return per page. Default is 200.
+        example: 200
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          maximum: 1000
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedTagsList'
+          description: A list of tags created by your organization.
       security:
       - BearerAuth: []
       tags:
@@ -1118,8 +1640,416 @@ paths:
       - BearerAuth: []
       tags:
       - tags
+  /uars:
+    get:
+      description: Returns a list of `UAR` objects.
+      operationId: getUARs
+      parameters:
+      - description: The pagination cursor value.
+        example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Number of results to return per page. Default is 200.
+        example: 200
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          maximum: 1000
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUARsList'
+          description: A list of UARs for your organization.
+      security:
+      - BearerAuth: []
+      tags:
+      - uars
+  /uar:
+    post:
+      description: Starts a User Access Review.
+      operationId: create_uar
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUARInfo'
+        description: The settings of the UAR.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UAR'
+          description: The UAR that was started.
+      security:
+      - BearerAuth: []
+      tags:
+      - uars
+  /uar/{uar_id}:
+    get:
+      description: Retrieves a specific UAR.
+      operationId: get_uar
+      parameters:
+      - description: The ID of the UAR.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: uar_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UAR'
+          description: The UAR that was requested.
+      security:
+      - BearerAuth: []
+      tags:
+      - uars
 components:
   schemas:
+    UARScope:
+      description: "If set, the access review will only contain resources and groups\
+        \ that match at least one of the filters in scope."
+      example:
+        tags:
+        - key: uar_scope
+          value: high_priority
+        names:
+        - demo
+        - api
+        admins:
+        - f454d283-ca87-4a8a-bdbb-df212eca5353
+        - 8763d283-ca87-4a8a-bdbb-df212ecab139
+      properties:
+        tags:
+          description: This access review will include resources and groups who are
+            tagged with one of the given tags.
+          items:
+            $ref: '#/components/schemas/TagFilter'
+          type: array
+        names:
+          description: This access review will include resources and groups whose
+            name contains one of the given strings.
+          items:
+            example: demo
+            type: string
+          type: array
+        admins:
+          description: This access review will include resources and groups who are
+            owned by one of the owners corresponding to the given IDs.
+          items:
+            example: f454d283-ca87-4a8a-bdbb-df212eca5353
+            format: uuid
+            type: string
+          type: array
+      type: object
+    PaginatedUARsList:
+      description: A list of UARs.
+      example:
+        next: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        previous: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
+        results:
+        - uar_id: f454d283-ca87-4a8a-bdbb-df212eca5353
+          name: Monthly UAR (July)
+          send_reviewer_assignment_notification: false
+          deadline: 2022-07-14 06:59:59
+          time_zone: America/Los_Angeles
+          self_review_allowed: false
+          uar_scope:
+            tags:
+            - key: uar_scope
+              value: high_priority
+            names:
+            - demo
+            - api
+            admins:
+            - f454d283-ca87-4a8a-bdbb-df212eca5353
+            - 8763d283-ca87-4a8a-bdbb-df212ecab139
+        - uar_id: 39a4d283-ca87-4a8a-bdbb-df212eca5fdb
+          name: Monthly UAR (August)
+          send_reviewer_assignment_notification: true
+          deadline: 2022-08-14 06:59:59
+          time_zone: America/Los_Angeles
+          self_review_allowed: false
+          uar_scope:
+            tags:
+            - key: uar_scope
+              value: high_priority
+            names:
+            - demo
+            - api
+            admins:
+            - f454d283-ca87-4a8a-bdbb-df212eca5353
+            - 8763d283-ca87-4a8a-bdbb-df212ecab139
+      properties:
+        next:
+          description: The cursor with which to continue pagination if additional
+            result pages exist.
+          example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+          nullable: true
+          type: string
+        previous:
+          description: The cursor used to obtain the current result page.
+          example: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/UAR'
+          type: array
+      required:
+      - results
+      type: object
+    UAR:
+      description: A user access review.
+      example:
+        uar_id: f454d283-ca87-4a8a-bdbb-df212eca5353
+        name: Monthly UAR (July)
+        send_reviewer_assignment_notification: false
+        deadline: 2022-07-14 06:59:59
+        time_zone: America/Los_Angeles
+        self_review_allowed: false
+        uar_scope:
+          tags:
+          - key: uar_scope
+            value: high_priority
+          names:
+          - demo
+          - api
+          admins:
+          - f454d283-ca87-4a8a-bdbb-df212eca5353
+          - 8763d283-ca87-4a8a-bdbb-df212ecab139
+      properties:
+        uar_id:
+          description: The ID of the UAR.
+          example: f454d283-ca87-4a8a-bdbb-df212eca5353
+          format: uuid
+          type: string
+        name:
+          description: The name of the UAR.
+          example: Monthly UAR (July)
+          type: string
+        reviewer_assignment_policy:
+          $ref: '#/components/schemas/UARReviewerAssignmentPolicyEnum'
+        send_reviewer_assignment_notification:
+          description: A bool representing whether to send a notification to reviewers
+            when they're assigned a new review. Default is False.
+          example: false
+          type: boolean
+        deadline:
+          description: The last day for reviewers to complete their access reviews
+            before access is frozen for incomplete reviews.
+          format: date-time
+          type: string
+        time_zone:
+          description: The time zone name (as defined by the IANA Time Zone database)
+            used in the access review deadline and exported audit report. Default
+            is America/Los_Angeles.
+          example: America/Los_Angeles
+          type: string
+        self_review_allowed:
+          description: A bool representing whether to present a warning when a user
+            is the only reviewer for themself. Default is False.
+          example: false
+          type: boolean
+        uar_scope:
+          $ref: '#/components/schemas/UARScope'
+      required:
+      - deadline
+      - name
+      - reviewer_assignment_policy
+      - self_review_allowed
+      - send_reviewer_assignment_notification
+      - time_zone
+      - uar_id
+      type: object
+    CreateUARInfo:
+      description: Information needed to start a user access review.
+      example:
+        name: Monthly UAR (July)
+        send_reviewer_assignment_notification: false
+        deadline: 2022-07-14 06:59:59
+        time_zone: America/Los_Angeles
+        self_review_allowed: false
+        uar_scope:
+          tags:
+          - key: uar_scope
+            value: high_priority
+          names:
+          - demo
+          - api
+          admins:
+          - f454d283-ca87-4a8a-bdbb-df212eca5353
+          - 8763d283-ca87-4a8a-bdbb-df212ecab139
+      properties:
+        name:
+          description: The name of the UAR.
+          example: Monthly UAR (July)
+          type: string
+        reviewer_assignment_policy:
+          $ref: '#/components/schemas/UARReviewerAssignmentPolicyEnum'
+        send_reviewer_assignment_notification:
+          description: A bool representing whether to send a notification to reviewers
+            when they're assigned a new review. Default is False.
+          example: false
+          type: boolean
+        deadline:
+          description: The last day for reviewers to complete their access reviews
+            before access is frozen for incomplete reviews.
+          format: date-time
+          type: string
+        time_zone:
+          description: The time zone name (as defined by the IANA Time Zone database)
+            used in the access review deadline and exported audit report. Default
+            is America/Los_Angeles.
+          example: America/Los_Angeles
+          type: string
+        self_review_allowed:
+          description: A bool representing whether to present a warning when a user
+            is the only reviewer for themself. Default is False.
+          example: false
+          type: boolean
+        uar_scope:
+          $ref: '#/components/schemas/UARScope'
+      required:
+      - deadline
+      - name
+      - reviewer_assignment_policy
+      - self_review_allowed
+      - send_reviewer_assignment_notification
+      - time_zone
+      type: object
+    UARReviewerAssignmentPolicyEnum:
+      description: "A policy for auto-assigning reviewers. If auto-assignment is on,\
+        \ specific assignments can still be manually adjusted after the access review\
+        \ is started. Default is Manually."
+      enum:
+      - MANUALLY
+      - BY_OWNING_TEAM_ADMIN
+      - BY_MANAGER
+      example: MANUALLY
+      type: string
+    TagFilter:
+      description: A tag filter defined by the tags key and value.
+      example:
+        key: uar_scope
+        value: high_priority
+      properties:
+        key:
+          description: The key of the tag.
+          example: uar_scope
+          type: string
+        value:
+          description: The value of the tag.
+          example: high_priority
+          type: string
+      required:
+      - key
+      type: object
+    AppsList:
+      description: A list of apps.
+      example:
+      - app_id: f454d283-ca87-4a8a-bdbb-df212eca5353
+        name: Okta Org
+        description: Okta directory for the engineering team.
+        admin_owner_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+        app_type: OKTA_DIRECTORY
+      - app_id: 5247d283-ca87-4a8a-bdbb-df212eca1243
+        name: Prod AWS Account
+        description: Our production engineering account for AWS.
+        admin_owner_id: aab485d-0651-43e2-a748-d69d6584123af
+        app_type: AWS
+      properties:
+        apps:
+          items:
+            $ref: '#/components/schemas/App'
+          type: array
+      required:
+      - apps
+      type: object
+    App:
+      description: |-
+        # App Object
+        ### Description
+        The `App` object is used to represent an app to an application.
+
+        ### Usage Example
+        List from the `GET Apps` endpoint.
+      example:
+        app_id: f454d283-ca87-4a8a-bdbb-df212eca5353
+        name: Okta Org
+        description: Okta directory for the engineering team.
+        admin_owner_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+        app_type: OKTA_DIRECTORY
+      properties:
+        app_id:
+          description: The ID of the app.
+          example: f454d283-ca87-4a8a-bdbb-df212eca5353
+          format: uuid
+          type: string
+        name:
+          description: The name of the app.
+          example: Okta Org
+          type: string
+        description:
+          description: A description of the app.
+          example: Okta directory for the engineering team.
+          type: string
+        admin_owner_id:
+          description: The ID of the owner of the app.
+          example: 7c86c85d-0651-43e2-a748-d69d658418e8
+          format: uuid
+          type: string
+        app_type:
+          $ref: '#/components/schemas/AppTypeEnum'
+      required:
+      - admin_owner_id
+      - app_id
+      - app_type
+      - description
+      - name
+      type: object
+    AppTypeEnum:
+      description: The type of an app.
+      enum:
+      - ACTIVE_DIRECTORY
+      - AWS
+      - CUSTOM
+      - DUO
+      - GCP
+      - GIT_HUB
+      - GOOGLE_GROUPS
+      - GOOGLE_WORKSPACE
+      - LDAP
+      - MARIADB
+      - MONGO
+      - MONGO_ATLAS
+      - MYSQL
+      - OKTA_DIRECTORY
+      - OPAL
+      - PAGERDUTY
+      - SALESFORCE
+      - WORKDAY
+      example: OKTA_DIRECTORY
+      type: string
     EntityTypeEnum:
       description: The type of an entity.
       enum:
@@ -1197,36 +2127,27 @@ components:
             $ref: '#/components/schemas/Event'
           type: array
       type: object
-    PaginatedResourceUserList:
+    ResourceAccessUserList:
       example:
-        next: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
-        previous: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
         results:
         - full_name: Jake Barnes
           user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
           resource_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
           expiration_date: 2022-01-23T04:56:07Z
           email: jake@company.dev
+          has_direct_access: true
+          num_access_paths: 2
         - full_name: Brett Ashley
           user_id: 7646aa9a-e2ee-4eb5-8c62-91f29038a373
           resource_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
           expiration_date: 2022-02-03T12:33:02Z
           email: brett@company.dev
+          has_direct_access: true
+          num_access_paths: 3
       properties:
-        next:
-          description: The cursor with which to continue pagination if additional
-            result pages exist.
-          example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
-          nullable: true
-          type: string
-        previous:
-          description: The cursor used to obtain the current result page.
-          example: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
-          nullable: true
-          type: string
         results:
           items:
-            $ref: '#/components/schemas/ResourceUser'
+            $ref: '#/components/schemas/ResourceAccessUser'
           type: array
       type: object
     ResourceAccessLevel:
@@ -1297,19 +2218,16 @@ components:
     ResourceUserAccessStatusEnum:
       description: The status of the user's access to the resource.
       enum:
-      - UNAUTHORIZED
-      - REQUESTED
       - AUTHORIZED
+      - REQUESTED
+      - UNAUTHORIZED
       example: AUTHORIZED
       type: string
     ResourceUser:
       description: |-
         # Resource User Object
         ### Description
-        The `ResourceUser` object is used to represent a user with access to a resource.
-
-        ### Usage Example
-        Fetch from the `LIST ResourceUsers` endpoint.
+        The `ResourceUser` object is used to represent a user with direct access to a resource.
       example:
         full_name: Jake Barnes
         user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
@@ -1349,6 +2267,66 @@ components:
       - email
       - expiration_date
       - full_name
+      - resource_id
+      - user_id
+      type: object
+    ResourceAccessUser:
+      description: "# Resource Access User Object\n### Description\nThe `ResourceAccessUser`\
+        \ object is used to represent a user with access to a resource, either directly\
+        \ or indirectly through group(s).\n\n### Usage Example\nFetch from the `LIST\
+        \ ResourceUsers` endpoint."
+      example:
+        full_name: Jake Barnes
+        user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+        resource_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+        expiration_date: 2022-01-23T04:56:07Z
+        email: jake@company.dev
+      properties:
+        resource_id:
+          description: The ID of the resource.
+          example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          format: uuid
+          type: string
+        user_id:
+          description: The ID of the user.
+          example: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+          format: uuid
+          type: string
+        access_level:
+          $ref: '#/components/schemas/ResourceAccessLevel'
+        full_name:
+          description: The user's full name.
+          example: Jake Barnes
+          type: string
+        email:
+          description: The user's email.
+          example: jake@company.dev
+          format: email
+          type: string
+        expiration_date:
+          description: The day and time the user's access will expire.
+          example: 2022-01-23T04:56:07Z
+          format: date-time
+          nullable: true
+          type: string
+        has_direct_access:
+          description: "The user has direct access to this resources (vs. indirectly,\
+            \ like through a group)."
+          example: true
+          type: boolean
+        num_access_paths:
+          description: The number of ways in which the user has access through this
+            resource (directly and indirectly).
+          example: 3
+          format: int32
+          type: integer
+      required:
+      - access_level
+      - email
+      - expiration_date
+      - full_name
+      - has_direct_access
+      - num_access_paths
       - resource_id
       - user_id
       type: object
@@ -1425,24 +2403,37 @@ components:
       - resource_id
       - user_id
       type: object
-    UsersList:
+    PaginatedUsersList:
       example:
+        next: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        previous: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
         results:
         - user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
           email: 1b978423-db0a-4037-a4cf-f79c60cb67b3
           full_name: John Doe
-          team_id: 659eeec6-7d77-42c1-add2-b41243c618fd
           position: Senior Engineer
         - user_id: e8581682-04f7-473a-a419-472f0fb26d46
           email: 186511e5-5b5a-4ad7-a4ad-b6c8694a544a
           full_name: Jane Smith
-          team_id: 02cc7531-ebce-4cc1-88a3-35ce8bfadf39
           position: Product Marketing Lead
       properties:
+        next:
+          description: The cursor with which to continue pagination if additional
+            result pages exist.
+          example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+          nullable: true
+          type: string
+        previous:
+          description: The cursor used to obtain the current result page.
+          example: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
+          nullable: true
+          type: string
         results:
           items:
             $ref: '#/components/schemas/User'
           type: array
+      required:
+      - results
       type: object
     User:
       description: |-
@@ -1456,7 +2447,8 @@ components:
         user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
         email: 1b978423-db0a-4037-a4cf-f79c60cb67b3
         full_name: John Doe
-        team_id: 659eeec6-7d77-42c1-add2-b41243c618fd
+        first_name: John
+        last_name: Doe
         position: Engineer
       properties:
         user_id:
@@ -1472,11 +2464,13 @@ components:
           description: The full name of the user.
           example: John Doe
           type: string
-        team_id:
-          description: The ID of the user's team.
-          example: 659eeec6-7d77-42c1-add2-b41243c618fd
-          format: uuid
-          nullable: true
+        first_name:
+          description: The first name of the user.
+          example: John
+          type: string
+        last_name:
+          description: The last name of the user.
+          example: Doe
           type: string
         position:
           description: The user's position.
@@ -1484,10 +2478,50 @@ components:
           type: string
       required:
       - email
+      - first_name
       - full_name
+      - last_name
       - position
-      - team_id
       - user_id
+      type: object
+    UserList:
+      description: A list of users.
+      example:
+        users:
+        - user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+          email: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          full_name: John Doe
+          first_name: John
+          last_name: Doe
+          position: Engineer
+        - user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+          email: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          full_name: John Doe
+          first_name: John
+          last_name: Doe
+          position: Engineer
+      properties:
+        users:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+      required:
+      - users
+      type: object
+    UserIDList:
+      description: A list of user IDs.
+      example:
+        user_ids:
+        - 7870617d-e72a-47f5-a84c-693817ab4567
+        - 1520617d-e72a-47f5-a84c-693817ab48ad2
+      properties:
+        user_ids:
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - user_ids
       type: object
     PaginatedGroupsList:
       example:
@@ -1495,11 +2529,11 @@ components:
         previous: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
         results:
         - group_id: f454d283-ca87-4a8a-bdbb-df212eca5353
+          app_id: b5a5ca27-0ea3-4d86-9199-2126d57d1fbd
           description: This group represents Active Directory group "Payments Production
             Admin". We use this AD group to facilitate staging deployments and qualifying
             new releases.
-          owner_team_id: 7c86c85d-0651-43e2-a748-d69d658418e8
-          visibility: Global
+          admin_owner_id: 7c86c85d-0651-43e2-a748-d69d658418e8
           max_duration: 120
           require_manager_approval: false
           require_support_ticket: false
@@ -1507,8 +2541,7 @@ components:
           description: Manages the Integrations Team on-call privileged resources.
             This group is automatically synced with the on-call rotation defined in
             PagerDuty.
-          owner_team_id: 4220bc12-ab8a-4b5d-be7b-f6bbcf9159f3
-          visibility: Team
+          admin_owner_id: 4220bc12-ab8a-4b5d-be7b-f6bbcf9159f3
           max_duration: 360
           require_manager_approval: false
           require_support_ticket: true
@@ -1541,11 +2574,13 @@ components:
         Update from the `UPDATE Groups` endpoint.
       example:
         group_id: f454d283-ca87-4a8a-bdbb-df212eca5353
+        app_id: b5a5ca27-0ea3-4d86-9199-2126d57d1fbd
+        remote_id: 037m2jsg218b2wb
+        remote_name: Finance Team
         description: This group represents Active Directory group "Payments Production
           Admin". We use this AD group to facilitate staging deployments and qualifying
           new releases.
-        owner_team_id: 7c86c85d-0651-43e2-a748-d69d658418e8
-        visibility: Global
+        admin_owner_id: 7c86c85d-0651-43e2-a748-d69d658418e8
         max_duration: 120
         require_manager_approval: false
         require_support_ticket: false
@@ -1553,6 +2588,11 @@ components:
         group_id:
           description: The ID of the group.
           example: f454d283-ca87-4a8a-bdbb-df212eca5353
+          format: uuid
+          type: string
+        app_id:
+          description: The ID of the group's app.
+          example: b5a5ca27-0ea3-4d86-9199-2126d57d1fbd
           format: uuid
           type: string
         name:
@@ -1565,20 +2605,26 @@ components:
             Admin". We use this AD group to facilitate staging deployments and qualifying
             new releases.
           type: string
-        owner_team_id:
-          description: The ID of the owning team of the group.
+        admin_owner_id:
+          description: The ID of the owner of the group.
           example: 7c86c85d-0651-43e2-a748-d69d658418e8
           format: uuid
+          type: string
+        remote_id:
+          description: The ID of the remote.
+          example: google-group-group:037m2jsg218b2wb
+          type: string
+        remote_name:
+          description: The name of the remote.
+          example: Finance team
           type: string
         group_function:
           $ref: '#/components/schemas/GroupFunctionEnum'
         group_type:
           $ref: '#/components/schemas/GroupTypeEnum'
-        visibility:
-          $ref: '#/components/schemas/VisibilityEnum'
         max_duration:
-          description: The maximum duration access to the group can be requested for
-            (in minutes).
+          description: The maximum duration for which the group can be requested (in
+            minutes).
           example: 120
           type: integer
         require_manager_approval:
@@ -1596,6 +2642,21 @@ components:
           example: e27cb7b0-98e2-4555-9916-9e6d8ca6b079
           format: uuid
           type: string
+        require_mfa_to_approve:
+          description: A bool representing whether or not to require MFA for reviewers
+            to approve requests for this group.
+          example: false
+          type: boolean
+        auto_approval:
+          description: A bool representing whether or not to automatically approve
+            requests to this group.
+          example: false
+          type: boolean
+        request_template_id:
+          description: The ID of the associated request template.
+          example: 06851574-e50d-40ca-8c78-f72ae6ab4304
+          format: uuid
+          type: string
       required:
       - group_id
       type: object
@@ -1607,8 +2668,7 @@ components:
             Admin". We use this AD group to facilitate staging deployments and qualifying
             new releases.
           name: api-group
-          owner_team_id: 7c86c85d-0651-43e2-a748-d69d658418e8
-          visibility: Global
+          admin_owner_id: 7c86c85d-0651-43e2-a748-d69d658418e8
           max_duration: 120
           require_manager_approval: false
           require_support_ticket: false
@@ -1617,8 +2677,7 @@ components:
             This group is automatically synced with the on-call rotation defined in
             PagerDuty.
           name: on-call-integrations
-          owner_team_id: 4220bc12-ab8a-4b5d-be7b-f6bbcf9159f3
-          visibility: Team
+          admin_owner_id: 4220bc12-ab8a-4b5d-be7b-f6bbcf9159f3
           max_duration: 360
           require_manager_approval: false
           require_support_ticket: true
@@ -1642,8 +2701,7 @@ components:
           Admin". We use this AD group to facilitate staging deployments and qualifying
           new releases.
         name: api-group
-        owner_team_id: 7c86c85d-0651-43e2-a748-d69d658418e8
-        visibility: Global
+        admin_owner_id: 7c86c85d-0651-43e2-a748-d69d658418e8
         max_duration: 120
         require_manager_approval: false
         require_support_ticket: false
@@ -1663,17 +2721,14 @@ components:
             Admin". We use this AD group to facilitate staging deployments and qualifying
             new releases.
           type: string
-        owner_team_id:
-          description: The ID of the owning team of the group. Use empty string to
-            remove owner. Required when converting from Team to Group.
+        admin_owner_id:
+          description: The ID of the owner of the group.
           example: 7c86c85d-0651-43e2-a748-d69d658418e8
           format: uuid
           type: string
-        visibility:
-          $ref: '#/components/schemas/VisibilityEnum'
         max_duration:
-          description: The maximum duration access to the group can be requested for
-            (in minutes). Use 0 to set to indefinite.
+          description: The maximum duration for which the group can be requested (in
+            minutes). Use 0 to set to indefinite.
           example: 120
           type: integer
         require_manager_approval:
@@ -1689,6 +2744,21 @@ components:
         folder_id:
           description: The ID of the folder that the group is located in.
           example: e27cb7b0-98e2-4555-9916-9e6d8ca6b079
+          format: uuid
+          type: string
+        require_mfa_to_approve:
+          description: A bool representing whether or not to require MFA for reviewers
+            to approve requests for this group.
+          example: false
+          type: boolean
+        auto_approval:
+          description: A bool representing whether or not to automatically approve
+            requests to this group.
+          example: false
+          type: boolean
+        request_template_id:
+          description: The ID of the associated request template.
+          example: 06851574-e50d-40ca-8c78-f72ae6ab4304
           format: uuid
           type: string
       required:
@@ -1709,32 +2779,33 @@ components:
     GroupFunctionEnum:
       description: The function type of the group.
       enum:
-      - REGULAR
       - ON_CALL
-      - TEAM
+      - REGULAR
       - UNKNOWN
       example: REGULAR
       type: string
     ResourceTypeEnum:
       description: The type of the resource.
       enum:
-      - AWS_IAM_ROLE
       - AWS_EC2_INSTANCE
       - AWS_EKS_CLUSTER
-      - AWS_RDS_POSTGRES_INSTANCE
+      - AWS_IAM_ROLE
       - AWS_RDS_MYSQL_INSTANCE
+      - AWS_RDS_POSTGRES_INSTANCE
       - CUSTOM
       - GCP_BUCKET
+      - GCP_CLOUD_SQL_MYSQL_INSTANCE
+      - GCP_CLOUD_SQL_POSTGRES_INSTANCE
       - GCP_COMPUTE_INSTANCE
       - GCP_FOLDER
       - GCP_GKE_CLUSTER
       - GCP_PROJECT
-      - GCP_CLOUD_SQL_POSTGRES_INSTANCE
-      - GCP_CLOUD_SQL_MYSQL_INSTANCE
       - GIT_HUB_REPO
       - GOOGLE_WORKSPACE_ROLE
-      - MONGO_INSTANCE
+      - MARIADB_INSTANCE
       - MONGO_ATLAS_INSTANCE
+      - MONGO_INSTANCE
+      - MYSQL_INSTANCE
       - OKTA_APP
       - OKTA_ROLE
       - OPAL_ROLE
@@ -1743,15 +2814,13 @@ components:
       - SALESFORCE_PROFILE
       - SALESFORCE_ROLE
       - WORKDAY_ROLE
-      - MYSQL_INSTANCE
-      - MARIADB_INSTANCE
       example: AWS_IAM_ROLE
       type: string
-    VisibilityEnum:
+    VisibilityTypeEnum:
       description: The visibility level of the entity.
       enum:
       - GLOBAL
-      - TEAM
+      - LIMITED
       example: GLOBAL
       type: string
     MessageChannelList:
@@ -1776,6 +2845,24 @@ components:
           type: array
       required:
       - channels
+      type: object
+    VisibilityInfo:
+      description: Visibility infomation of an entity.
+      example:
+        visibility: LIMITED
+        visibility_group_ids:
+        - 7870617d-e72a-47f5-a84c-693817ab4567
+        - 1520617d-e72a-47f5-a84c-693817ab48ad2
+      properties:
+        visibility:
+          $ref: '#/components/schemas/VisibilityTypeEnum'
+        visibility_group_ids:
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - visibility
       type: object
     MessageChannelIDList:
       description: A list of message channel IDs.
@@ -1806,20 +2893,6 @@ components:
           type: array
       required:
       - reviewer_ids
-      type: object
-    NewAdminIDList:
-      example:
-        admin_ids:
-        - 7870617d-e72a-47f5-a84c-693817ab4567
-        - 1520617d-e72a-47f5-a84c-693817ab48ad2
-      properties:
-        admin_ids:
-          description: The IDs of admins to set for the group if converting to a team.
-            Required when converting from Group to Team.
-          items:
-            format: uuid
-            type: string
-          type: array
       type: object
     MessageChannel:
       description: |-
@@ -1865,8 +2938,8 @@ components:
       description: The type of the message channel.
       enum:
       - AUDIT
-      - REVIEWER
       - MONITOR
+      - REVIEWER
       example: AUDIT
       type: string
     MessageChannelProviderEnum:
@@ -1875,6 +2948,215 @@ components:
       - SLACK
       example: SLACK
       type: string
+    CreateResourceInfo:
+      description: |-
+        # CreateResourceInfo Object
+        ### Description
+        The `CreateResourceInfo` object is used to store creation info for a resource.
+
+        ### Usage Example
+        Use in the `POST Resources` endpoint.
+      example:
+        remote_resource_id: API_ACCESS_MANAGEMENT_ADMIN-51d203da-313a-4fd9-8fcf-420ce6312345
+        name: Okta Engineering Super Admin
+        description: Okta super admin role.
+        resource_type: OKTA_ROLE
+        metadata: "{\n  \"okta_directory_role\":\n    {\n      \"role_id\": \"SUPER_ADMIN-b52aa037-4a35-4ac3-9350-f6260fd12345\"\
+          ,\n      \"role_type\": \"SUPER_ADMIN\",\n    },\n}"
+        app_id: f454d283-ca87-4a8a-bdbb-df212eca5353
+      properties:
+        name:
+          description: The name of the remote resource.
+          example: mongo-db-prod
+          type: string
+        description:
+          description: A description of the remote resource.
+          example: Engineering team Okta role.
+          type: string
+        resource_type:
+          $ref: '#/components/schemas/ResourceTypeEnum'
+        app_id:
+          description: The ID of the app for the resource.
+          example: f454d283-ca87-4a8a-bdbb-df212eca5353
+          format: uuid
+          type: string
+        remote_resource_id:
+          description: "The ID of the resource on the remote system. Include only\
+            \ for items linked to remote systems. See [this guide](https://docs.opal.dev/docs/how-opal)\
+            \ for details on how to specify this field."
+          example: API_ACCESS_MANAGEMENT_ADMIN-51d203da-313a-4fd9-8fcf-420ce6312345
+          type: string
+        metadata:
+          description: "JSON metadata about the remote resource. Include only for\
+            \ items linked to remote systems. See [this guide](https://docs.opal.dev/docs/how-opal)\
+            \ for details on how to specify this field.\nThe required format is dependent\
+            \ on resource_type and should have the following schema:\n<style type=\"\
+            text/css\">\ncode {max-height:300px !important}\n</style>\n```json\n{\n\
+            \  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\n  \"title\"\
+            : \"Resource Metadata\",\n  \"properties\": {\n    \"aws_ec2_instance\"\
+            : {\n      \"properties\": {\n        \"instance_id\": {\n          \"\
+            type\": \"string\"\n        },\n        \"region\": {\n          \"type\"\
+            : \"string\"\n        }\n      },\n      \"required\": [\"instance_id\"\
+            , \"region\"],\n      \"additionalProperties\": false,\n      \"type\"\
+            : \"object\",\n      \"title\": \"AWS EC2 Instance\"\n    },\n    \"aws_eks_cluster\"\
+            : {\n      \"properties\": {\n        \"cluster_name\": {\n          \"\
+            type\": \"string\"\n        },\n        \"cluster_region\": {\n      \
+            \    \"type\": \"string\"\n        },\n        \"cluster_arn\": {\n  \
+            \        \"type\": \"string\"\n        }\n      },\n      \"required\"\
+            : [\"cluster_name\", \"cluster_region\", \"cluster_arn\"],\n      \"additionalProperties\"\
+            : false,\n      \"type\": \"object\",\n      \"title\": \"AWS EKS Cluster\"\
+            \n    },\n    \"aws_rds_instance\": {\n      \"properties\": {\n     \
+            \   \"instance_id\": {\n          \"type\": \"string\"\n        },\n \
+            \       \"engine\": {\n          \"type\": \"string\"\n        },\n  \
+            \      \"region\": {\n          \"type\": \"string\"\n        },\n   \
+            \     \"resource_id\": {\n          \"type\": \"string\"\n        },\n\
+            \        \"database_name\": {\n          \"type\": \"string\"\n      \
+            \  }\n      },\n      \"required\": [\n        \"instance_id\",\n    \
+            \    \"engine\",\n        \"region\",\n        \"resource_id\",\n    \
+            \    \"database_name\"\n      ],\n      \"additionalProperties\": false,\n\
+            \      \"type\": \"object\",\n      \"title\": \"AWS RDS Instance\"\n\
+            \    },\n    \"aws_role\": {\n      \"properties\": {\n        \"arn\"\
+            : {\n          \"type\": \"string\"\n        },\n        \"name\": {\n\
+            \          \"type\": \"string\"\n        }\n      },\n      \"required\"\
+            : [\"arn\", \"name\"],\n      \"additionalProperties\": false,\n     \
+            \ \"type\": \"object\",\n      \"title\": \"AWS Role\"\n    },\n    \"\
+            gcp_bucket\": {\n      \"properties\": {\n        \"bucket_id\": {\n \
+            \         \"type\": \"string\"\n        }\n      },\n      \"required\"\
+            : [\"bucket_id\"],\n      \"additionalProperties\": false,\n      \"type\"\
+            : \"object\",\n      \"title\": \"GCP Bucket\"\n    },\n    \"gcp_compute_instance\"\
+            : {\n      \"properties\": {\n        \"instance_id\": {\n          \"\
+            type\": \"string\"\n        },\n        \"project_id\": {\n          \"\
+            type\": \"string\"\n        },\n        \"zone\": {\n          \"type\"\
+            : \"string\"\n        }\n      },\n      \"required\": [\"instance_id\"\
+            , \"project_id\", \"zone\"],\n      \"additionalProperties\": false,\n\
+            \      \"type\": \"object\",\n      \"title\": \"GCP Compute Instance\"\
+            \n    },\n    \"gcp_folder\": {\n      \"properties\": {\n        \"folder_id\"\
+            : {\n          \"type\": \"string\"\n        }\n      },\n      \"required\"\
+            : [\"folder_id\"],\n      \"additionalProperties\": false,\n      \"type\"\
+            : \"object\",\n      \"title\": \"GCP Folder\"\n    },\n    \"gcp_gke_cluster\"\
+            : {\n      \"properties\": {\n        \"cluster_name\": {\n          \"\
+            type\": \"string\"\n        }\n      },\n      \"required\": [\"cluster_name\"\
+            ],\n      \"additionalProperties\": false,\n      \"type\": \"object\"\
+            ,\n      \"title\": \"GCP GKE Cluster\"\n    },\n    \"gcp_project\":\
+            \ {\n      \"properties\": {\n        \"project_id\": {\n          \"\
+            type\": \"string\"\n        }\n      },\n      \"required\": [\"project_id\"\
+            ],\n      \"additionalProperties\": false,\n      \"type\": \"object\"\
+            ,\n      \"title\": \"GCP Project\"\n    },\n    \"gcp_sql_instance\"\
+            : {\n      \"properties\": {\n        \"instance_id\": {\n          \"\
+            type\": \"string\"\n        },\n        \"project_id\": {\n          \"\
+            type\": \"string\"\n        }\n      },\n      \"required\": [\"instance_id\"\
+            , \"project_id\"],\n      \"additionalProperties\": false,\n      \"type\"\
+            : \"object\",\n      \"title\": \"GCP SQL Instance\"\n    },\n    \"git_hub_repo\"\
+            : {\n      \"properties\": {\n        \"org_name\": {\n          \"type\"\
+            : \"string\"\n        },\n        \"repo_name\": {\n          \"type\"\
+            : \"string\"\n        }\n      },\n      \"required\": [\"org_name\",\
+            \ \"repo_name\"],\n      \"additionalProperties\": false,\n      \"type\"\
+            : \"object\",\n      \"title\": \"GitHub Repo\"\n    },\n    \"okta_directory_app\"\
+            : {\n      \"properties\": {\n        \"app_id\": {\n          \"type\"\
+            : \"string\"\n        },\n        \"logo_url\": {\n          \"type\"\
+            : \"string\"\n        }\n      },\n      \"required\": [\"app_id\", \"\
+            logo_url\"],\n      \"additionalProperties\": false,\n      \"type\":\
+            \ \"object\",\n      \"title\": \"Okta Directory App\"\n    },\n    \"\
+            okta_directory_role\": {\n      \"properties\": {\n        \"role_type\"\
+            : {\n          \"type\": \"string\"\n        },\n        \"role_id\":\
+            \ {\n          \"type\": \"string\"\n        }\n      },\n      \"required\"\
+            : [\"role_type\", \"role_id\"],\n      \"additionalProperties\": false,\n\
+            \      \"type\": \"object\",\n      \"title\": \"Okta Directory Role\"\
+            \n    },\n    \"salesforce_profile\": {\n      \"properties\": {\n   \
+            \     \"user_license\": {\n          \"type\": \"string\"\n        }\n\
+            \      },\n      \"required\": [\"user_license\"],\n      \"additionalProperties\"\
+            : false,\n      \"type\": \"object\",\n      \"title\": \"Salesforce Profile\"\
+            \n    }\n  },\n  \"additionalProperties\": false,\n  \"minProperties\"\
+            : 1,\n  \"maxProperties\": 1,\n  \"type\": \"object\"\n}\n```"
+          example: "{\n  \"okta_directory_role\":\n    {\n      \"role_id\": \"SUPER_ADMIN-b52aa037-4a35-4ac3-9350-f6260fd12345\"\
+            ,\n      \"role_type\": \"SUPER_ADMIN\",\n    },\n}"
+          type: string
+      required:
+      - app_id
+      - name
+      - resource_type
+      type: object
+    CreateGroupInfo:
+      description: |-
+        # CreateGroupInfo Object
+        ### Description
+        The `CreateGroupInfo` object is used to store creation info for a group.
+
+        ### Usage Example
+        Use in the `POST Groups` endpoint.
+      example:
+        remote_group_id: 00g4fixjd6Bc9w0TT5d7
+        name: Engineering Team
+        description: Engineering team Okta group.
+        group_type: OKTA_GROUP
+        metadata: "{ \"okta_directory_group\": { \"group_id\": \"00g4bs66kwtpe1g12345\"\
+          \ } }"
+        app_id: f454d283-ca87-4a8a-bdbb-df212eca5353
+      properties:
+        name:
+          description: The name of the remote group.
+          example: mongo-db-prod
+          type: string
+        description:
+          description: A description of the remote group.
+          example: Engineering team Okta group.
+          type: string
+        group_type:
+          $ref: '#/components/schemas/GroupTypeEnum'
+        app_id:
+          description: The ID of the app for the group.
+          example: f454d283-ca87-4a8a-bdbb-df212eca5353
+          format: uuid
+          type: string
+        remote_group_id:
+          description: "The ID of the group on the remote system. Include only for\
+            \ items linked to remote systems. See [this guide](https://docs.opal.dev/docs/how-opal)\
+            \ for details on how to specify this field."
+          example: 00g4fixjd6Bc9w012345
+          type: string
+        metadata:
+          description: "JSON metadata about the remote group. Include only for items\
+            \ linked to remote systems. See [this guide](https://docs.opal.dev/docs/how-opal)\
+            \ for details on how to specify this field.\nThe required format is dependent\
+            \ on group_type and should have the following schema:\n<style type=\"\
+            text/css\">\ncode {max-height:300px !important}\n</style>\n```json\n{\n\
+            \  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\n  \"title\"\
+            : \"Group Metadata\",\n  \"properties\": {\n    \"ad_group\": {\n    \
+            \  \"properties\": {\n        \"object_guid\": {\n          \"type\":\
+            \ \"string\"\n        }\n      },\n      \"required\": [\"object_guid\"\
+            ],\n      \"additionalProperties\": false,\n      \"type\": \"object\"\
+            ,\n      \"title\": \"Active Directory Group\"\n    },\n    \"duo_group\"\
+            : {\n      \"properties\": {\n        \"group_id\": {\n          \"type\"\
+            : \"string\"\n        }\n      },\n      \"required\": [\"group_id\"],\n\
+            \      \"additionalProperties\": false,\n      \"type\": \"object\",\n\
+            \      \"title\": \"Duo Group\"\n    },\n    \"git_hub_team\": {\n   \
+            \   \"properties\": {\n        \"org_name\": {\n          \"type\": \"\
+            string\"\n        },\n        \"team_slug\": {\n          \"type\": \"\
+            string\"\n        }\n      },\n      \"required\": [\"org_name\", \"team_slug\"\
+            ],\n      \"additionalProperties\": false,\n      \"type\": \"object\"\
+            ,\n      \"title\": \"GitHub Team\"\n    },\n    \"google_groups_group\"\
+            : {\n      \"properties\": {\n        \"group_id\": {\n          \"type\"\
+            : \"string\"\n        }\n      },\n      \"required\": [\"group_id\"],\n\
+            \      \"additionalProperties\": false,\n      \"type\": \"object\",\n\
+            \      \"title\": \"Google Groups Group\"\n    },\n    \"ldap_group\"\
+            : {\n      \"properties\": {\n        \"group_uid\": {\n          \"type\"\
+            : \"string\"\n        }\n      },\n      \"required\": [\"group_uid\"\
+            ],\n      \"additionalProperties\": false,\n      \"type\": \"object\"\
+            ,\n      \"title\": \"LDAP Group\"\n    },\n    \"okta_directory_group\"\
+            : {\n      \"properties\": {\n        \"group_id\": {\n          \"type\"\
+            : \"string\"\n        }\n      },\n      \"required\": [\"group_id\"],\n\
+            \      \"additionalProperties\": false,\n      \"type\": \"object\",\n\
+            \      \"title\": \"Okta Directory Group\"\n    }\n  },\n  \"additionalProperties\"\
+            : false,\n  \"minProperties\": 1,\n  \"maxProperties\": 1,\n  \"type\"\
+            : \"object\"\n}\n```"
+          example: "{ \"okta_directory_group\": { \"group_id\": \"00g4bs66kwtpe1g12345\"\
+            \ } }"
+          type: string
+      required:
+      - app_id
+      - group_type
+      - name
+      type: object
     PaginatedResourcesList:
       example:
         next: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
@@ -1882,15 +3164,17 @@ components:
         results:
         - resource_id: f454d283-ca67-4a8a-bdbb-df212eca5353
           description: This resource represents AWS IAM role "SupportUser".
-          owner_team_id: 7c86c85d-0651-43e2-a748-d69d658418e8
-          visibility: Global
+          admin_owner_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+          remote_id: arn:aws:iam::490306337630:role/SupportUser
+          remote_name: SupportUser
           max_duration: 120
           require_manager_approval: false
           require_support_ticket: false
         - resource_id: 99d0b81d-14be-4cf6-bd27-348b4af1d11b
           description: This resource represents GCP project "app-demo".
-          owner_team_id: 7c86c85d-0651-43e2-a748-d69d658418e8
-          visibility: Team
+          remote_id: app-demo-307223
+          remote_name: app-demo
+          admin_owner_id: 7c86c85d-0651-43e2-a748-d69d658418e8
           max_duration: 360
           require_manager_approval: false
           require_support_ticket: true
@@ -1923,9 +3207,11 @@ components:
         Update from the `UPDATE Resources` endpoint.
       example:
         resource_id: f454d283-ca87-4a8a-bdbb-df212eca5353
+        app_id: b5a5ca27-0ea3-4d86-9199-2126d57d1fbd
         description: This resource represents AWS IAM role "SupportUser".
-        owner_team_id: 7c86c85d-0651-43e2-a748-d69d658418e8
-        visibility: Global
+        admin_owner_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+        remote_id: 318038399
+        remote_name: repo-name
         max_duration: 120
         require_manager_approval: false
         require_support_ticket: false
@@ -1933,6 +3219,11 @@ components:
         resource_id:
           description: The ID of the resource.
           example: f454d283-ca87-4a8a-bdbb-df212eca5353
+          format: uuid
+          type: string
+        app_id:
+          description: The ID of the app.
+          example: b5a5ca27-0ea3-4d86-9199-2126d57d1fbd
           format: uuid
           type: string
         name:
@@ -1943,18 +3234,24 @@ components:
           description: A description of the resource.
           example: This resource represents AWS IAM role "SupportUser".
           type: string
-        owner_team_id:
-          description: The ID of the owning team of the resource.
+        admin_owner_id:
+          description: The ID of the owner of the resource.
           example: 7c86c85d-0651-43e2-a748-d69d658418e8
           format: uuid
           type: string
-        visibility:
-          $ref: '#/components/schemas/VisibilityEnum'
+        remote_resource_id:
+          description: The ID of the resource on the remote system.
+          example: "318038399"
+          type: string
+        remote_resource_name:
+          description: The name of the resource on the remote system.
+          example: repo-name
+          type: string
         resource_type:
           $ref: '#/components/schemas/ResourceTypeEnum'
         max_duration:
-          description: The maximum duration access to the resource can be requested
-            for (in minutes).
+          description: The maximum duration for which the resource can be requested
+            (in minutes).
           example: 120
           type: integer
         require_manager_approval:
@@ -1972,6 +3269,21 @@ components:
           example: e27cb7b0-98e2-4555-9916-9e6d8ca6b079
           format: uuid
           type: string
+        require_mfa_to_approve:
+          description: A bool representing whether or not to require MFA for reviewers
+            to approve requests for this resource.
+          example: false
+          type: boolean
+        auto_approval:
+          description: A bool representing whether or not to automatically approve
+            requests to this resource.
+          example: false
+          type: boolean
+        request_template_id:
+          description: The ID of the associated request template.
+          example: 06851574-e50d-40ca-8c78-f72ae6ab4304
+          format: uuid
+          type: string
       required:
       - resource_id
       type: object
@@ -1981,16 +3293,14 @@ components:
         - resource_id: f454d283-ca87-4a8a-bdbb-df212eca5353
           name: my-mongo-db
           description: This resource represents AWS IAM role "SupportUser".
-          owner_team_id: 7c86c85d-0651-43e2-a748-d69d658418e8
-          visibility: Global
+          admin_owner_id: 7c86c85d-0651-43e2-a748-d69d658418e8
           max_duration: 120
           require_manager_approval: false
           require_support_ticket: false
         - resource_id: 99d0b81d-14be-4cf6-bd27-348b4af1d11b
           name: Admin Role
           description: This resource represents GCP project "app-demo".
-          owner_team_id: 4220bc12-ab8a-4b5d-be7b-f6bbcf9159f3
-          visibility: Team
+          admin_owner_id: 4220bc12-ab8a-4b5d-be7b-f6bbcf9159f3
           max_duration: 360
           require_manager_approval: false
           require_support_ticket: true
@@ -2012,8 +3322,7 @@ components:
         resource_id: f454d283-ca87-4a8a-bdbb-df212eca5353
         name: my-mongo-db
         description: This resource represents AWS IAM role "SupportUser".
-        owner_team_id: 7c86c85d-0651-43e2-a748-d69d658418e8
-        visibility: Global
+        admin_owner_id: 7c86c85d-0651-43e2-a748-d69d658418e8
         max_duration: 120
         require_manager_approval: false
         require_support_ticket: false
@@ -2031,16 +3340,14 @@ components:
           description: A description of the resource.
           example: This resource represents AWS IAM role "SupportUser".
           type: string
-        owner_team_id:
-          description: The ID of the owning team of the resource.
+        admin_owner_id:
+          description: The ID of the owner of the resource.
           example: 7c86c85d-0651-43e2-a748-d69d658418e8
           format: uuid
           type: string
-        visibility:
-          $ref: '#/components/schemas/VisibilityEnum'
         max_duration:
-          description: The maximum duration access to the resource can be requested
-            for (in minutes). Use 0 to set to indefinite.
+          description: The maximum duration for which the resource can be requested
+            (in minutes). Use 0 to set to indefinite.
           example: 120
           type: integer
         require_manager_approval:
@@ -2058,8 +3365,61 @@ components:
           example: e27cb7b0-98e2-4555-9916-9e6d8ca6b079
           format: uuid
           type: string
+        require_mfa_to_approve:
+          description: A bool representing whether or not to require MFA for reviewers
+            to approve requests for this resource.
+          example: false
+          type: boolean
+        auto_approval:
+          description: A bool representing whether or not to automatically approve
+            requests to this resource.
+          example: false
+          type: boolean
+        request_template_id:
+          description: The ID of the associated request template.
+          example: 06851574-e50d-40ca-8c78-f72ae6ab4304
+          format: uuid
+          type: string
       required:
       - resource_id
+      type: object
+    PaginatedTagsList:
+      example:
+        next: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        previous: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
+        results:
+        - tag_id: f290a738-5f9f-43c2-ad67-fa31ff0eb946
+          created_at: 2022-01-23T04:56:07Z
+          updated_at: 2022-02-23T01:34:07Z
+          user_creator_id: d4a7d928-783e-4599-8ec6-088d635a5bcc
+          admin_owner_id: bfb518b1-3f5b-4e3b-8eb8-3b3fabd4ea2b
+          key: database-name
+          value: redis_db
+        - tag_id: 92f0a738-5f9f-43c2-ad67-fa31ff0eb052
+          created_at: 2022-03-23T04:56:07Z
+          updated_at: 2022-04-23T01:34:07Z
+          user_creator_id: a4d7d928-783e-4599-8ec6-088d635af4ac
+          admin_owner_id: gtg418b1-3f5b-4e3b-8eb8-3b3fabd4eaa1
+          key: database-type
+          value: sql
+      properties:
+        next:
+          description: The cursor with which to continue pagination if additional
+            result pages exist.
+          example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+          nullable: true
+          type: string
+        previous:
+          description: The cursor used to obtain the current result page.
+          example: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+      required:
+      - results
       type: object
     TagsList:
       example:
@@ -2068,14 +3428,14 @@ components:
           created_at: 2022-01-23T04:56:07Z
           updated_at: 2022-02-23T01:34:07Z
           user_creator_id: d4a7d928-783e-4599-8ec6-088d635a5bcc
-          owner_team_id: bfb518b1-3f5b-4e3b-8eb8-3b3fabd4ea2b
+          admin_owner_id: bfb518b1-3f5b-4e3b-8eb8-3b3fabd4ea2b
           key: database-name
           value: redis_db
         - tag_id: 92f0a738-5f9f-43c2-ad67-fa31ff0eb052
           created_at: 2022-03-23T04:56:07Z
           updated_at: 2022-04-23T01:34:07Z
           user_creator_id: a4d7d928-783e-4599-8ec6-088d635af4ac
-          owner_team_id: gtg418b1-3f5b-4e3b-8eb8-3b3fabd4eaa1
+          admin_owner_id: gtg418b1-3f5b-4e3b-8eb8-3b3fabd4eaa1
           key: database-type
           value: sql
       properties:
@@ -2099,7 +3459,6 @@ components:
         created_at: 2022-01-23T04:56:07Z
         updated_at: 2022-02-23T01:34:07Z
         user_creator_id: d4a7d928-783e-4599-8ec6-088d635a5bcc
-        owner_team_id: bfb518b1-3f5b-4e3b-8eb8-3b3fabd4ea2b
         key: database-name
         value: redis_db
       properties:
@@ -2123,11 +3482,6 @@ components:
           example: d4a7d928-783e-4599-8ec6-088d635a5bcc
           format: uuid
           type: string
-        owner_team_id:
-          description: The ID of the team that owns the tag.
-          example: bfb518b1-3f5b-4e3b-8eb8-3b3fabd4ea2b
-          format: uuid
-          type: string
         key:
           description: The key of the tag.
           example: database-name
@@ -2138,6 +3492,161 @@ components:
           type: string
       required:
       - tag_id
+      type: object
+    PaginatedOwnersList:
+      example:
+        next: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        previous: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
+        results:
+        - owner_id: f454d283-ca87-4a8a-bdbb-df212eca5353
+          name: API Owner
+          description: This owner represents the API team owners.
+          access_request_escalation_period: 120
+        - owner_id: e8581682-04f7-473a-a419-472f0fb26d46
+          name: Finance Owner
+          description: This owner represents the Finance team owners.
+          access_request_escalation_period: 120
+      properties:
+        next:
+          description: The cursor with which to continue pagination if additional
+            result pages exist.
+          example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+          nullable: true
+          type: string
+        previous:
+          description: The cursor used to obtain the current result page.
+          example: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/Owner'
+          type: array
+      required:
+      - results
+      type: object
+    Owner:
+      description: |-
+        # Owner Object
+        ### Description
+        The `Owner` object is used to represent an owner.
+      example:
+        owner_id: f454d283-ca87-4a8a-bdbb-df212eca5353
+        name: API Owner
+        description: This owner represents the API team owners.
+        access_request_escalation_period: 120
+      properties:
+        owner_id:
+          description: The ID of the owner.
+          example: f454d283-ca87-4a8a-bdbb-df212eca5353
+          format: uuid
+          type: string
+        name:
+          description: The name of the owner.
+          example: API Owner
+          type: string
+        description:
+          description: A description of the owner.
+          example: This owner represents the API team owners.
+          type: string
+        access_request_escalation_period:
+          description: The amount of time (in minutes) before the next reviewer is
+            notified. Use 0 to remove escalation policy.
+          example: 120
+          type: integer
+      required:
+      - owner_id
+      type: object
+    CreateOwnerInfo:
+      description: |-
+        # CreateOwnerInfo Object
+        ### Description
+        The `CreateOwnerInfo` object is used to store creation info for an owner.
+
+        ### Usage Example
+        Use in the `POST Owners` endpoint.
+      example:
+        name: API Owner
+        description: This owner represents the API team owners.
+        access_request_escalation_period: 120
+      properties:
+        name:
+          description: The name of the owner.
+          example: API Owner
+          type: string
+        description:
+          description: A description of the owner.
+          example: This owner represents the API team owners.
+          type: string
+        access_request_escalation_period:
+          description: The amount of time (in minutes) before the next reviewer is
+            notified. Use 0 to remove escalation policy.
+          example: 120
+          type: integer
+        user_ids:
+          description: Users to add to the created owner.
+          example:
+          - 7870617d-e72a-47f5-a84c-693817ab4567
+          - 1520617d-e72a-47f5-a84c-693817ab48ad2
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - name
+      - user_ids
+      type: object
+    UpdateOwnerInfoList:
+      example:
+        owners:
+        - owner_id: f454d283-ca87-4a8a-bdbb-df212eca5353
+          name: API Owner
+          description: This owner represents the API team owners.
+          access_request_escalation_period: 120
+        - owner_id: 99d0b81d-14be-4cf6-bd27-348b4af1d11b
+          name: Finance Owner
+          description: This owner represents the Finance team owners.
+          access_request_escalation_period: 15
+      properties:
+        owners:
+          description: A list of owners with information to update.
+          items:
+            $ref: '#/components/schemas/UpdateOwnerInfo'
+          type: array
+      required:
+      - owners
+      type: object
+    UpdateOwnerInfo:
+      description: |-
+        # UpdateOwnerInfo Object
+        ### Description
+        The `UpdateOwnerInfo` object is used as an input to the UpdateOwner API.
+      example:
+        owner_id: f454d283-ca87-4a8a-bdbb-df212eca5353
+        name: API Owner
+        description: This owner represents the API team owners.
+        access_request_escalation_period: 120
+      properties:
+        owner_id:
+          description: The ID of the owner.
+          example: f454d283-ca87-4a8a-bdbb-df212eca5353
+          format: uuid
+          type: string
+        name:
+          description: The name of the owner.
+          example: API Owner
+          type: string
+        description:
+          description: A description of the owner.
+          example: This owner represents the API team owners.
+          type: string
+        access_request_escalation_period:
+          description: The amount of time (in minutes) before the next reviewer is
+            notified. Use 0 to remove escalation policy.
+          example: 120
+          type: integer
+      required:
+      - owner_id
       type: object
   securitySchemes:
     BearerAuth:

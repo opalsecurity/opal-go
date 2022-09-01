@@ -20,91 +20,64 @@ import (
 	"strings"
 )
 
-// Linger please
-var (
-	_ context.Context
-)
 
 // GroupsApiService GroupsApi service
 type GroupsApiService service
 
-type ApiConvertGroupRequest struct {
+type ApiCreateGroupRequest struct {
 	ctx context.Context
 	ApiService *GroupsApiService
-	groupId string
-	groupFunction *GroupFunctionEnum
-	newAdminIDList *NewAdminIDList
-	ownerTeamId *string
+	createGroupInfo *CreateGroupInfo
 }
 
-// The group function to convert to.
-func (r ApiConvertGroupRequest) GroupFunction(groupFunction GroupFunctionEnum) ApiConvertGroupRequest {
-	r.groupFunction = &groupFunction
-	return r
-}
-func (r ApiConvertGroupRequest) NewAdminIDList(newAdminIDList NewAdminIDList) ApiConvertGroupRequest {
-	r.newAdminIDList = &newAdminIDList
-	return r
-}
-// The ID of the owning team of the group. Required when converting from Team to Group.
-func (r ApiConvertGroupRequest) OwnerTeamId(ownerTeamId string) ApiConvertGroupRequest {
-	r.ownerTeamId = &ownerTeamId
+func (r ApiCreateGroupRequest) CreateGroupInfo(createGroupInfo CreateGroupInfo) ApiCreateGroupRequest {
+	r.createGroupInfo = &createGroupInfo
 	return r
 }
 
-func (r ApiConvertGroupRequest) Execute() (*Group, *http.Response, error) {
-	return r.ApiService.ConvertGroupExecute(r)
+func (r ApiCreateGroupRequest) Execute() (*Group, *http.Response, error) {
+	return r.ApiService.CreateGroupExecute(r)
 }
 
 /*
-ConvertGroup Method for ConvertGroup
+CreateGroup Method for CreateGroup
 
-Updates a groups function.
+Creates a group. See [here](https://docs.opal.dev/docs/how-opal) for details about importing groups.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId The ID of the group.
- @return ApiConvertGroupRequest
+ @return ApiCreateGroupRequest
 */
-func (a *GroupsApiService) ConvertGroup(ctx context.Context, groupId string) ApiConvertGroupRequest {
-	return ApiConvertGroupRequest{
+func (a *GroupsApiService) CreateGroup(ctx context.Context) ApiCreateGroupRequest {
+	return ApiCreateGroupRequest{
 		ApiService: a,
 		ctx: ctx,
-		groupId: groupId,
 	}
 }
 
 // Execute executes the request
 //  @return Group
-func (a *GroupsApiService) ConvertGroupExecute(r ApiConvertGroupRequest) (*Group, *http.Response, error) {
+func (a *GroupsApiService) CreateGroupExecute(r ApiCreateGroupRequest) (*Group, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  *Group
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GroupsApiService.ConvertGroup")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GroupsApiService.CreateGroup")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/groups/{group_id}/convert"
-	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterToString(r.groupId, "")), -1)
+	localVarPath := localBasePath + "/groups"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.groupFunction == nil {
-		return localVarReturnValue, nil, reportError("groupFunction is required and must be specified")
-	}
-	if r.newAdminIDList == nil {
-		return localVarReturnValue, nil, reportError("newAdminIDList is required and must be specified")
+	if r.createGroupInfo == nil {
+		return localVarReturnValue, nil, reportError("createGroupInfo is required and must be specified")
 	}
 
-	localVarQueryParams.Add("group_function", parameterToString(*r.groupFunction, ""))
-	if r.ownerTeamId != nil {
-		localVarQueryParams.Add("owner_team_id", parameterToString(*r.ownerTeamId, ""))
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -123,7 +96,7 @@ func (a *GroupsApiService) ConvertGroupExecute(r ApiConvertGroupRequest) (*Group
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.newAdminIDList
+	localVarPostBody = r.createGroupInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -166,7 +139,6 @@ type ApiDeleteGroupRequest struct {
 	ApiService *GroupsApiService
 	groupId string
 }
-
 
 func (r ApiDeleteGroupRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteGroupExecute(r)
@@ -260,7 +232,6 @@ type ApiGetGroupMessageChannelsRequest struct {
 	groupId string
 }
 
-
 func (r ApiGetGroupMessageChannelsRequest) Execute() (*MessageChannelList, *http.Response, error) {
 	return r.ApiService.GetGroupMessageChannelsExecute(r)
 }
@@ -268,7 +239,7 @@ func (r ApiGetGroupMessageChannelsRequest) Execute() (*MessageChannelList, *http
 /*
 GetGroupMessageChannels Method for GetGroupMessageChannels
 
-Gets the list of message channels attached to a group.
+Gets the list of audit and reviewer message channels attached to a group.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param groupId The ID of the group.
@@ -364,7 +335,6 @@ type ApiGetGroupReviewersRequest struct {
 	groupId string
 }
 
-
 func (r ApiGetGroupReviewersRequest) Execute() ([]string, *http.Response, error) {
 	return r.ApiService.GetGroupReviewersExecute(r)
 }
@@ -372,7 +342,7 @@ func (r ApiGetGroupReviewersRequest) Execute() ([]string, *http.Response, error)
 /*
 GetGroupReviewers Method for GetGroupReviewers
 
-Gets the list of team/user IDs of the reviewers for a group.
+Gets the list of owner IDs of the reviewers for a group.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param groupId The ID of the group.
@@ -467,7 +437,6 @@ type ApiGetGroupTagsRequest struct {
 	ApiService *GroupsApiService
 	groupId string
 }
-
 
 func (r ApiGetGroupTagsRequest) Execute() (*TagsList, *http.Response, error) {
 	return r.ApiService.GetGroupTagsExecute(r)
@@ -566,6 +535,109 @@ func (a *GroupsApiService) GetGroupTagsExecute(r ApiGetGroupTagsRequest) (*TagsL
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetGroupVisibilityRequest struct {
+	ctx context.Context
+	ApiService *GroupsApiService
+	groupId string
+}
+
+func (r ApiGetGroupVisibilityRequest) Execute() (*VisibilityInfo, *http.Response, error) {
+	return r.ApiService.GetGroupVisibilityExecute(r)
+}
+
+/*
+GetGroupVisibility Method for GetGroupVisibility
+
+Gets the visibility of this group.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param groupId The ID of the group.
+ @return ApiGetGroupVisibilityRequest
+*/
+func (a *GroupsApiService) GetGroupVisibility(ctx context.Context, groupId string) ApiGetGroupVisibilityRequest {
+	return ApiGetGroupVisibilityRequest{
+		ApiService: a,
+		ctx: ctx,
+		groupId: groupId,
+	}
+}
+
+// Execute executes the request
+//  @return VisibilityInfo
+func (a *GroupsApiService) GetGroupVisibilityExecute(r ApiGetGroupVisibilityRequest) (*VisibilityInfo, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *VisibilityInfo
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GroupsApiService.GetGroupVisibility")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/groups/{group_id}/visibility"
+	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterToString(r.groupId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetGroupsRequest struct {
 	ctx context.Context
 	ApiService *GroupsApiService
@@ -573,6 +645,8 @@ type ApiGetGroupsRequest struct {
 	pageSize *int32
 	groupFunctionFilter *GroupFunctionEnum
 	groupTypeFilter *GroupTypeEnum
+	groupIds *[]string
+	groupName *string
 }
 
 // The pagination cursor value.
@@ -580,19 +654,34 @@ func (r ApiGetGroupsRequest) Cursor(cursor string) ApiGetGroupsRequest {
 	r.cursor = &cursor
 	return r
 }
+
 // Number of results to return per page. Default is 200.
 func (r ApiGetGroupsRequest) PageSize(pageSize int32) ApiGetGroupsRequest {
 	r.pageSize = &pageSize
 	return r
 }
+
 // The group function to filter by.
 func (r ApiGetGroupsRequest) GroupFunctionFilter(groupFunctionFilter GroupFunctionEnum) ApiGetGroupsRequest {
 	r.groupFunctionFilter = &groupFunctionFilter
 	return r
 }
+
 // The group type to filter by.
 func (r ApiGetGroupsRequest) GroupTypeFilter(groupTypeFilter GroupTypeEnum) ApiGetGroupsRequest {
 	r.groupTypeFilter = &groupTypeFilter
+	return r
+}
+
+// The group ids to filter by.
+func (r ApiGetGroupsRequest) GroupIds(groupIds []string) ApiGetGroupsRequest {
+	r.groupIds = &groupIds
+	return r
+}
+
+// Group name.
+func (r ApiGetGroupsRequest) GroupName(groupName string) ApiGetGroupsRequest {
+	r.groupName = &groupName
 	return r
 }
 
@@ -647,6 +736,12 @@ func (a *GroupsApiService) GetGroupsExecute(r ApiGetGroupsRequest) (*PaginatedGr
 	}
 	if r.groupTypeFilter != nil {
 		localVarQueryParams.Add("group_type_filter", parameterToString(*r.groupTypeFilter, ""))
+	}
+	if r.groupIds != nil {
+		localVarQueryParams.Add("group_ids", parameterToString(*r.groupIds, "csv"))
+	}
+	if r.groupName != nil {
+		localVarQueryParams.Add("group_name", parameterToString(*r.groupName, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -721,7 +816,7 @@ func (r ApiSetGroupMessageChannelsRequest) Execute() ([]string, *http.Response, 
 /*
 SetGroupMessageChannels Method for SetGroupMessageChannels
 
-Sets the list of message channels attached to a group.
+Sets the list of audit message channels attached to a group.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param groupId The ID of the group.
@@ -893,6 +988,120 @@ func (a *GroupsApiService) SetGroupReviewersExecute(r ApiSetGroupReviewersReques
 	}
 	// body params
 	localVarPostBody = r.reviewerIDList
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiSetGroupVisibilityRequest struct {
+	ctx context.Context
+	ApiService *GroupsApiService
+	groupId string
+	visibilityInfo *VisibilityInfo
+}
+
+func (r ApiSetGroupVisibilityRequest) VisibilityInfo(visibilityInfo VisibilityInfo) ApiSetGroupVisibilityRequest {
+	r.visibilityInfo = &visibilityInfo
+	return r
+}
+
+func (r ApiSetGroupVisibilityRequest) Execute() (*VisibilityInfo, *http.Response, error) {
+	return r.ApiService.SetGroupVisibilityExecute(r)
+}
+
+/*
+SetGroupVisibility Method for SetGroupVisibility
+
+Sets the visibility of this group.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param groupId The ID of the group.
+ @return ApiSetGroupVisibilityRequest
+*/
+func (a *GroupsApiService) SetGroupVisibility(ctx context.Context, groupId string) ApiSetGroupVisibilityRequest {
+	return ApiSetGroupVisibilityRequest{
+		ApiService: a,
+		ctx: ctx,
+		groupId: groupId,
+	}
+}
+
+// Execute executes the request
+//  @return VisibilityInfo
+func (a *GroupsApiService) SetGroupVisibilityExecute(r ApiSetGroupVisibilityRequest) (*VisibilityInfo, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *VisibilityInfo
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GroupsApiService.SetGroupVisibility")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/groups/{group_id}/visibility"
+	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterToString(r.groupId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.visibilityInfo == nil {
+		return localVarReturnValue, nil, reportError("visibilityInfo is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.visibilityInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

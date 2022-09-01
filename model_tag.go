@@ -26,8 +26,6 @@ type Tag struct {
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	// The ID of the user that created the tag.
 	UserCreatorId *string `json:"user_creator_id,omitempty"`
-	// The ID of the team that owns the tag.
-	OwnerTeamId *string `json:"owner_team_id,omitempty"`
 	// The key of the tag.
 	Key *string `json:"key,omitempty"`
 	// The value of the tag.
@@ -65,7 +63,7 @@ func (o *Tag) GetTagId() string {
 // GetTagIdOk returns a tuple with the TagId field value
 // and a boolean to check if the value has been set.
 func (o *Tag) GetTagIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.TagId, true
@@ -172,38 +170,6 @@ func (o *Tag) SetUserCreatorId(v string) {
 	o.UserCreatorId = &v
 }
 
-// GetOwnerTeamId returns the OwnerTeamId field value if set, zero value otherwise.
-func (o *Tag) GetOwnerTeamId() string {
-	if o == nil || o.OwnerTeamId == nil {
-		var ret string
-		return ret
-	}
-	return *o.OwnerTeamId
-}
-
-// GetOwnerTeamIdOk returns a tuple with the OwnerTeamId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Tag) GetOwnerTeamIdOk() (*string, bool) {
-	if o == nil || o.OwnerTeamId == nil {
-		return nil, false
-	}
-	return o.OwnerTeamId, true
-}
-
-// HasOwnerTeamId returns a boolean if a field has been set.
-func (o *Tag) HasOwnerTeamId() bool {
-	if o != nil && o.OwnerTeamId != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetOwnerTeamId gets a reference to the given string and assigns it to the OwnerTeamId field.
-func (o *Tag) SetOwnerTeamId(v string) {
-	o.OwnerTeamId = &v
-}
-
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *Tag) GetKey() string {
 	if o == nil || o.Key == nil {
@@ -281,9 +247,6 @@ func (o Tag) MarshalJSON() ([]byte, error) {
 	}
 	if o.UserCreatorId != nil {
 		toSerialize["user_creator_id"] = o.UserCreatorId
-	}
-	if o.OwnerTeamId != nil {
-		toSerialize["owner_team_id"] = o.OwnerTeamId
 	}
 	if o.Key != nil {
 		toSerialize["key"] = o.Key

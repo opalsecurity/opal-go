@@ -52,7 +52,7 @@ func (o *UpdateResourceInfoList) GetResources() []UpdateResourceInfo {
 // GetResourcesOk returns a tuple with the Resources field value
 // and a boolean to check if the value has been set.
 func (o *UpdateResourceInfoList) GetResourcesOk() ([]UpdateResourceInfo, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Resources, true

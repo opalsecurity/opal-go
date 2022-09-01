@@ -4,21 +4,23 @@ All URIs are relative to *https://api.opal.dev/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ConvertGroup**](GroupsApi.md#ConvertGroup) | **Put** /groups/{group_id}/convert | 
+[**CreateGroup**](GroupsApi.md#CreateGroup) | **Post** /groups | 
 [**DeleteGroup**](GroupsApi.md#DeleteGroup) | **Delete** /groups/{group_id} | 
 [**GetGroupMessageChannels**](GroupsApi.md#GetGroupMessageChannels) | **Get** /groups/{group_id}/message-channels | 
 [**GetGroupReviewers**](GroupsApi.md#GetGroupReviewers) | **Get** /groups/{group_id}/reviewers | 
 [**GetGroupTags**](GroupsApi.md#GetGroupTags) | **Get** /groups/{group_id}/tags | 
+[**GetGroupVisibility**](GroupsApi.md#GetGroupVisibility) | **Get** /groups/{group_id}/visibility | 
 [**GetGroups**](GroupsApi.md#GetGroups) | **Get** /groups | 
 [**SetGroupMessageChannels**](GroupsApi.md#SetGroupMessageChannels) | **Put** /groups/{group_id}/message-channels | 
 [**SetGroupReviewers**](GroupsApi.md#SetGroupReviewers) | **Put** /groups/{group_id}/reviewers | 
+[**SetGroupVisibility**](GroupsApi.md#SetGroupVisibility) | **Put** /groups/{group_id}/visibility | 
 [**UpdateGroups**](GroupsApi.md#UpdateGroups) | **Put** /groups | 
 
 
 
-## ConvertGroup
+## CreateGroup
 
-> Group ConvertGroup(ctx, groupId).GroupFunction(groupFunction).NewAdminIDList(newAdminIDList).OwnerTeamId(ownerTeamId).Execute()
+> Group CreateGroup(ctx).CreateGroupInfo(createGroupInfo).Execute()
 
 
 
@@ -37,42 +39,32 @@ import (
 )
 
 func main() {
-    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
-    groupFunction := openapiclient.GroupFunctionEnum("REGULAR") // GroupFunctionEnum | The group function to convert to.
-    newAdminIDList := *openapiclient.NewNewAdminIDList() // NewAdminIDList | 
-    ownerTeamId := "7c86c85d-0651-43e2-a748-d69d658418e8" // string | The ID of the owning team of the group. Required when converting from Team to Group. (optional)
+    createGroupInfo := *openapiclient.NewCreateGroupInfo("mongo-db-prod", openapiclient.GroupTypeEnum("ACTIVE_DIRECTORY_GROUP"), "f454d283-ca87-4a8a-bdbb-df212eca5353") // CreateGroupInfo | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.ConvertGroup(context.Background(), groupId).GroupFunction(groupFunction).NewAdminIDList(newAdminIDList).OwnerTeamId(ownerTeamId).Execute()
+    resp, r, err := apiClient.GroupsApi.CreateGroup(context.Background()).CreateGroupInfo(createGroupInfo).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.ConvertGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.CreateGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ConvertGroup`: Group
-    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.ConvertGroup`: %v\n", resp)
+    // response from `CreateGroup`: Group
+    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.CreateGroup`: %v\n", resp)
 }
 ```
 
 ### Path Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**groupId** | **string** | The ID of the group. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiConvertGroupRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateGroupRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
- **groupFunction** | [**GroupFunctionEnum**](GroupFunctionEnum.md) | The group function to convert to. | 
- **newAdminIDList** | [**NewAdminIDList**](NewAdminIDList.md) |  | 
- **ownerTeamId** | **string** | The ID of the owning team of the group. Required when converting from Team to Group. | 
+ **createGroupInfo** | [**CreateGroupInfo**](CreateGroupInfo.md) |  | 
 
 ### Return type
 
@@ -370,9 +362,79 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetGroupVisibility
+
+> VisibilityInfo GetGroupVisibility(ctx, groupId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.GroupsApi.GetGroupVisibility(context.Background(), groupId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.GetGroupVisibility``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetGroupVisibility`: VisibilityInfo
+    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.GetGroupVisibility`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**groupId** | **string** | The ID of the group. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetGroupVisibilityRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**VisibilityInfo**](VisibilityInfo.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetGroups
 
-> PaginatedGroupsList GetGroups(ctx).Cursor(cursor).PageSize(pageSize).GroupFunctionFilter(groupFunctionFilter).GroupTypeFilter(groupTypeFilter).Execute()
+> PaginatedGroupsList GetGroups(ctx).Cursor(cursor).PageSize(pageSize).GroupFunctionFilter(groupFunctionFilter).GroupTypeFilter(groupTypeFilter).GroupIds(groupIds).GroupName(groupName).Execute()
 
 
 
@@ -393,12 +455,14 @@ import (
 func main() {
     cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
     pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
-    groupFunctionFilter := openapiclient.GroupFunctionEnum("REGULAR") // GroupFunctionEnum | The group function to filter by. (optional)
+    groupFunctionFilter := openapiclient.GroupFunctionEnum("ON_CALL") // GroupFunctionEnum | The group function to filter by. (optional)
     groupTypeFilter := openapiclient.GroupTypeEnum("ACTIVE_DIRECTORY_GROUP") // GroupTypeEnum | The group type to filter by. (optional)
+    groupIds := []string{"1b978423-db0a-4037-a4cf-f79c60cb67b3"} // []string | The group ids to filter by. (optional)
+    groupName := "example-name" // string | Group name. (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.GetGroups(context.Background()).Cursor(cursor).PageSize(pageSize).GroupFunctionFilter(groupFunctionFilter).GroupTypeFilter(groupTypeFilter).Execute()
+    resp, r, err := apiClient.GroupsApi.GetGroups(context.Background()).Cursor(cursor).PageSize(pageSize).GroupFunctionFilter(groupFunctionFilter).GroupTypeFilter(groupTypeFilter).GroupIds(groupIds).GroupName(groupName).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.GetGroups``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -423,6 +487,8 @@ Name | Type | Description  | Notes
  **pageSize** | **int32** | Number of results to return per page. Default is 200. | 
  **groupFunctionFilter** | [**GroupFunctionEnum**](GroupFunctionEnum.md) | The group function to filter by. | 
  **groupTypeFilter** | [**GroupTypeEnum**](GroupTypeEnum.md) | The group type to filter by. | 
+ **groupIds** | **[]string** | The group ids to filter by. | 
+ **groupName** | **string** | Group name. | 
 
 ### Return type
 
@@ -571,6 +637,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 **[]string**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SetGroupVisibility
+
+> VisibilityInfo SetGroupVisibility(ctx, groupId).VisibilityInfo(visibilityInfo).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+    visibilityInfo := *openapiclient.NewVisibilityInfo(openapiclient.VisibilityTypeEnum("GLOBAL")) // VisibilityInfo | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.GroupsApi.SetGroupVisibility(context.Background(), groupId).VisibilityInfo(visibilityInfo).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.SetGroupVisibility``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `SetGroupVisibility`: VisibilityInfo
+    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.SetGroupVisibility`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**groupId** | **string** | The ID of the group. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSetGroupVisibilityRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **visibilityInfo** | [**VisibilityInfo**](VisibilityInfo.md) |  | 
+
+### Return type
+
+[**VisibilityInfo**](VisibilityInfo.md)
 
 ### Authorization
 

@@ -5,16 +5,21 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **GroupId** | **string** | The ID of the group. | 
+**AppId** | Pointer to **string** | The ID of the group&#39;s app. | [optional] 
 **Name** | Pointer to **string** | The name of the group. | [optional] 
 **Description** | Pointer to **string** | A description of the group. | [optional] 
-**OwnerTeamId** | Pointer to **string** | The ID of the owning team of the group. | [optional] 
+**AdminOwnerId** | Pointer to **string** | The ID of the owner of the group. | [optional] 
+**RemoteId** | Pointer to **string** | The ID of the remote. | [optional] 
+**RemoteName** | Pointer to **string** | The name of the remote. | [optional] 
 **GroupFunction** | Pointer to [**GroupFunctionEnum**](GroupFunctionEnum.md) |  | [optional] 
 **GroupType** | Pointer to [**GroupTypeEnum**](GroupTypeEnum.md) |  | [optional] 
-**Visibility** | Pointer to [**VisibilityEnum**](VisibilityEnum.md) |  | [optional] 
-**MaxDuration** | Pointer to **int32** | The maximum duration access to the group can be requested for (in minutes). | [optional] 
+**MaxDuration** | Pointer to **int32** | The maximum duration for which the group can be requested (in minutes). | [optional] 
 **RequireManagerApproval** | Pointer to **bool** | A bool representing whether or not access requests to the group require manager approval. | [optional] 
 **RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the group require a support ticket. | [optional] 
 **FolderId** | Pointer to **string** | The ID of the folder that the group is located in. | [optional] 
+**RequireMfaToApprove** | Pointer to **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this group. | [optional] 
+**AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this group. | [optional] 
+**RequestTemplateId** | Pointer to **string** | The ID of the associated request template. | [optional] 
 
 ## Methods
 
@@ -54,6 +59,31 @@ and a boolean to check if the value has been set.
 
 SetGroupId sets GroupId field to given value.
 
+
+### GetAppId
+
+`func (o *Group) GetAppId() string`
+
+GetAppId returns the AppId field if non-nil, zero value otherwise.
+
+### GetAppIdOk
+
+`func (o *Group) GetAppIdOk() (*string, bool)`
+
+GetAppIdOk returns a tuple with the AppId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAppId
+
+`func (o *Group) SetAppId(v string)`
+
+SetAppId sets AppId field to given value.
+
+### HasAppId
+
+`func (o *Group) HasAppId() bool`
+
+HasAppId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -105,30 +135,80 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
-### GetOwnerTeamId
+### GetAdminOwnerId
 
-`func (o *Group) GetOwnerTeamId() string`
+`func (o *Group) GetAdminOwnerId() string`
 
-GetOwnerTeamId returns the OwnerTeamId field if non-nil, zero value otherwise.
+GetAdminOwnerId returns the AdminOwnerId field if non-nil, zero value otherwise.
 
-### GetOwnerTeamIdOk
+### GetAdminOwnerIdOk
 
-`func (o *Group) GetOwnerTeamIdOk() (*string, bool)`
+`func (o *Group) GetAdminOwnerIdOk() (*string, bool)`
 
-GetOwnerTeamIdOk returns a tuple with the OwnerTeamId field if it's non-nil, zero value otherwise
+GetAdminOwnerIdOk returns a tuple with the AdminOwnerId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOwnerTeamId
+### SetAdminOwnerId
 
-`func (o *Group) SetOwnerTeamId(v string)`
+`func (o *Group) SetAdminOwnerId(v string)`
 
-SetOwnerTeamId sets OwnerTeamId field to given value.
+SetAdminOwnerId sets AdminOwnerId field to given value.
 
-### HasOwnerTeamId
+### HasAdminOwnerId
 
-`func (o *Group) HasOwnerTeamId() bool`
+`func (o *Group) HasAdminOwnerId() bool`
 
-HasOwnerTeamId returns a boolean if a field has been set.
+HasAdminOwnerId returns a boolean if a field has been set.
+
+### GetRemoteId
+
+`func (o *Group) GetRemoteId() string`
+
+GetRemoteId returns the RemoteId field if non-nil, zero value otherwise.
+
+### GetRemoteIdOk
+
+`func (o *Group) GetRemoteIdOk() (*string, bool)`
+
+GetRemoteIdOk returns a tuple with the RemoteId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemoteId
+
+`func (o *Group) SetRemoteId(v string)`
+
+SetRemoteId sets RemoteId field to given value.
+
+### HasRemoteId
+
+`func (o *Group) HasRemoteId() bool`
+
+HasRemoteId returns a boolean if a field has been set.
+
+### GetRemoteName
+
+`func (o *Group) GetRemoteName() string`
+
+GetRemoteName returns the RemoteName field if non-nil, zero value otherwise.
+
+### GetRemoteNameOk
+
+`func (o *Group) GetRemoteNameOk() (*string, bool)`
+
+GetRemoteNameOk returns a tuple with the RemoteName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemoteName
+
+`func (o *Group) SetRemoteName(v string)`
+
+SetRemoteName sets RemoteName field to given value.
+
+### HasRemoteName
+
+`func (o *Group) HasRemoteName() bool`
+
+HasRemoteName returns a boolean if a field has been set.
 
 ### GetGroupFunction
 
@@ -179,31 +259,6 @@ SetGroupType sets GroupType field to given value.
 `func (o *Group) HasGroupType() bool`
 
 HasGroupType returns a boolean if a field has been set.
-
-### GetVisibility
-
-`func (o *Group) GetVisibility() VisibilityEnum`
-
-GetVisibility returns the Visibility field if non-nil, zero value otherwise.
-
-### GetVisibilityOk
-
-`func (o *Group) GetVisibilityOk() (*VisibilityEnum, bool)`
-
-GetVisibilityOk returns a tuple with the Visibility field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVisibility
-
-`func (o *Group) SetVisibility(v VisibilityEnum)`
-
-SetVisibility sets Visibility field to given value.
-
-### HasVisibility
-
-`func (o *Group) HasVisibility() bool`
-
-HasVisibility returns a boolean if a field has been set.
 
 ### GetMaxDuration
 
@@ -304,6 +359,81 @@ SetFolderId sets FolderId field to given value.
 `func (o *Group) HasFolderId() bool`
 
 HasFolderId returns a boolean if a field has been set.
+
+### GetRequireMfaToApprove
+
+`func (o *Group) GetRequireMfaToApprove() bool`
+
+GetRequireMfaToApprove returns the RequireMfaToApprove field if non-nil, zero value otherwise.
+
+### GetRequireMfaToApproveOk
+
+`func (o *Group) GetRequireMfaToApproveOk() (*bool, bool)`
+
+GetRequireMfaToApproveOk returns a tuple with the RequireMfaToApprove field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequireMfaToApprove
+
+`func (o *Group) SetRequireMfaToApprove(v bool)`
+
+SetRequireMfaToApprove sets RequireMfaToApprove field to given value.
+
+### HasRequireMfaToApprove
+
+`func (o *Group) HasRequireMfaToApprove() bool`
+
+HasRequireMfaToApprove returns a boolean if a field has been set.
+
+### GetAutoApproval
+
+`func (o *Group) GetAutoApproval() bool`
+
+GetAutoApproval returns the AutoApproval field if non-nil, zero value otherwise.
+
+### GetAutoApprovalOk
+
+`func (o *Group) GetAutoApprovalOk() (*bool, bool)`
+
+GetAutoApprovalOk returns a tuple with the AutoApproval field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoApproval
+
+`func (o *Group) SetAutoApproval(v bool)`
+
+SetAutoApproval sets AutoApproval field to given value.
+
+### HasAutoApproval
+
+`func (o *Group) HasAutoApproval() bool`
+
+HasAutoApproval returns a boolean if a field has been set.
+
+### GetRequestTemplateId
+
+`func (o *Group) GetRequestTemplateId() string`
+
+GetRequestTemplateId returns the RequestTemplateId field if non-nil, zero value otherwise.
+
+### GetRequestTemplateIdOk
+
+`func (o *Group) GetRequestTemplateIdOk() (*string, bool)`
+
+GetRequestTemplateIdOk returns a tuple with the RequestTemplateId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestTemplateId
+
+`func (o *Group) SetRequestTemplateId(v string)`
+
+SetRequestTemplateId sets RequestTemplateId field to given value.
+
+### HasRequestTemplateId
+
+`func (o *Group) HasRequestTemplateId() bool`
+
+HasRequestTemplateId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

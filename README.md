@@ -79,25 +79,40 @@ All URIs are relative to *https://api.opal.dev/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AppsApi* | [**GetApps**](docs/AppsApi.md#getapps) | **Get** /apps | 
 *EventsApi* | [**Events**](docs/EventsApi.md#events) | **Get** /events | 
-*GroupsApi* | [**ConvertGroup**](docs/GroupsApi.md#convertgroup) | **Put** /groups/{group_id}/convert | 
+*GroupsApi* | [**CreateGroup**](docs/GroupsApi.md#creategroup) | **Post** /groups | 
 *GroupsApi* | [**DeleteGroup**](docs/GroupsApi.md#deletegroup) | **Delete** /groups/{group_id} | 
 *GroupsApi* | [**GetGroupMessageChannels**](docs/GroupsApi.md#getgroupmessagechannels) | **Get** /groups/{group_id}/message-channels | 
 *GroupsApi* | [**GetGroupReviewers**](docs/GroupsApi.md#getgroupreviewers) | **Get** /groups/{group_id}/reviewers | 
 *GroupsApi* | [**GetGroupTags**](docs/GroupsApi.md#getgrouptags) | **Get** /groups/{group_id}/tags | 
+*GroupsApi* | [**GetGroupVisibility**](docs/GroupsApi.md#getgroupvisibility) | **Get** /groups/{group_id}/visibility | 
 *GroupsApi* | [**GetGroups**](docs/GroupsApi.md#getgroups) | **Get** /groups | 
 *GroupsApi* | [**SetGroupMessageChannels**](docs/GroupsApi.md#setgroupmessagechannels) | **Put** /groups/{group_id}/message-channels | 
 *GroupsApi* | [**SetGroupReviewers**](docs/GroupsApi.md#setgroupreviewers) | **Put** /groups/{group_id}/reviewers | 
+*GroupsApi* | [**SetGroupVisibility**](docs/GroupsApi.md#setgroupvisibility) | **Put** /groups/{group_id}/visibility | 
 *GroupsApi* | [**UpdateGroups**](docs/GroupsApi.md#updategroups) | **Put** /groups | 
+*OwnersApi* | [**CreateOwner**](docs/OwnersApi.md#createowner) | **Post** /owners | 
+*OwnersApi* | [**DeleteOwner**](docs/OwnersApi.md#deleteowner) | **Delete** /owners/{owner_id} | 
+*OwnersApi* | [**GetOwner**](docs/OwnersApi.md#getowner) | **Get** /owners/{owner_id} | 
+*OwnersApi* | [**GetOwnerUsers**](docs/OwnersApi.md#getownerusers) | **Get** /owners/{owner_id}/users | 
+*OwnersApi* | [**GetOwners**](docs/OwnersApi.md#getowners) | **Get** /owners | 
+*OwnersApi* | [**SetOwnerUsers**](docs/OwnersApi.md#setownerusers) | **Put** /owners/{owner_id}/users | 
+*OwnersApi* | [**UpdateOwners**](docs/OwnersApi.md#updateowners) | **Put** /owners | 
+*ResourcesApi* | [**AddResourceUser**](docs/ResourcesApi.md#addresourceuser) | **Post** /resources/{resource_id}/users/{user_id} | 
+*ResourcesApi* | [**CreateResource**](docs/ResourcesApi.md#createresource) | **Post** /resources | 
 *ResourcesApi* | [**DeleteResource**](docs/ResourcesApi.md#deleteresource) | **Delete** /resources/{resource_id} | 
+*ResourcesApi* | [**DeleteResourceUser**](docs/ResourcesApi.md#deleteresourceuser) | **Delete** /resources/{resource_id}/users/{user_id} | 
 *ResourcesApi* | [**GetResourceMessageChannels**](docs/ResourcesApi.md#getresourcemessagechannels) | **Get** /resources/{resource_id}/message-channels | 
 *ResourcesApi* | [**GetResourceReviewers**](docs/ResourcesApi.md#getresourcereviewers) | **Get** /resources/{resource_id}/reviewers | 
 *ResourcesApi* | [**GetResourceTags**](docs/ResourcesApi.md#getresourcetags) | **Get** /resources/{resource_id}/tags | 
+*ResourcesApi* | [**GetResourceUsers**](docs/ResourcesApi.md#getresourceusers) | **Get** /resources/{resource_id}/users | 
+*ResourcesApi* | [**GetResourceVisibility**](docs/ResourcesApi.md#getresourcevisibility) | **Get** /resources/{resource_id}/visibility | 
 *ResourcesApi* | [**GetResources**](docs/ResourcesApi.md#getresources) | **Get** /resources | 
 *ResourcesApi* | [**ResourceUserAccessStatusRetrieve**](docs/ResourcesApi.md#resourceuseraccessstatusretrieve) | **Get** /resource-user-access-status/{resource_id}/{user_id} | 
-*ResourcesApi* | [**ResourceUsers**](docs/ResourcesApi.md#resourceusers) | **Get** /resource-users | 
 *ResourcesApi* | [**SetResourceMessageChannels**](docs/ResourcesApi.md#setresourcemessagechannels) | **Put** /resources/{resource_id}/message-channels | 
 *ResourcesApi* | [**SetResourceReviewers**](docs/ResourcesApi.md#setresourcereviewers) | **Put** /resources/{resource_id}/reviewers | 
+*ResourcesApi* | [**SetResourceVisibility**](docs/ResourcesApi.md#setresourcevisibility) | **Put** /resources/{resource_id}/visibility | 
 *ResourcesApi* | [**UpdateResources**](docs/ResourcesApi.md#updateresources) | **Put** /resources | 
 *SessionsApi* | [**Sessions**](docs/SessionsApi.md#sessions) | **Get** /sessions | 
 *TagsApi* | [**AddGroupTag**](docs/TagsApi.md#addgrouptag) | **Post** /tags/{tag_id}/groups/{group_id} | 
@@ -105,15 +120,27 @@ Class | Method | HTTP request | Description
 *TagsApi* | [**AddUserTag**](docs/TagsApi.md#addusertag) | **Post** /tags/{tag_id}/users/{user_id} | 
 *TagsApi* | [**CreateTag**](docs/TagsApi.md#createtag) | **Post** /tag | 
 *TagsApi* | [**GetTag**](docs/TagsApi.md#gettag) | **Get** /tag | 
+*TagsApi* | [**GetTags**](docs/TagsApi.md#gettags) | **Get** /tags | 
 *TagsApi* | [**RemoveGroupTag**](docs/TagsApi.md#removegrouptag) | **Delete** /tags/{tag_id}/groups/{group_id} | 
 *TagsApi* | [**RemoveResourceTag**](docs/TagsApi.md#removeresourcetag) | **Delete** /tags/{tag_id}/resources/{resource_id} | 
 *TagsApi* | [**RemoveUserTag**](docs/TagsApi.md#removeusertag) | **Delete** /tags/{tag_id}/users/{user_id} | 
+*UarsApi* | [**CreateUar**](docs/UarsApi.md#createuar) | **Post** /uar | 
+*UarsApi* | [**GetUARs**](docs/UarsApi.md#getuars) | **Get** /uars | 
+*UarsApi* | [**GetUar**](docs/UarsApi.md#getuar) | **Get** /uar/{uar_id} | 
 *UsersApi* | [**GetUserTags**](docs/UsersApi.md#getusertags) | **Get** /users/{user_id}/tags | 
+*UsersApi* | [**GetUsers**](docs/UsersApi.md#getusers) | **Get** /users | 
 *UsersApi* | [**User**](docs/UsersApi.md#user) | **Get** /user | 
 
 
 ## Documentation For Models
 
+ - [App](docs/App.md)
+ - [AppTypeEnum](docs/AppTypeEnum.md)
+ - [AppsList](docs/AppsList.md)
+ - [CreateGroupInfo](docs/CreateGroupInfo.md)
+ - [CreateOwnerInfo](docs/CreateOwnerInfo.md)
+ - [CreateResourceInfo](docs/CreateResourceInfo.md)
+ - [CreateUARInfo](docs/CreateUARInfo.md)
  - [EntityTypeEnum](docs/EntityTypeEnum.md)
  - [Event](docs/Event.md)
  - [Group](docs/Group.md)
@@ -124,13 +151,18 @@ Class | Method | HTTP request | Description
  - [MessageChannelList](docs/MessageChannelList.md)
  - [MessageChannelProviderEnum](docs/MessageChannelProviderEnum.md)
  - [MessageChannelTypeEnum](docs/MessageChannelTypeEnum.md)
- - [NewAdminIDList](docs/NewAdminIDList.md)
+ - [Owner](docs/Owner.md)
  - [PaginatedEventList](docs/PaginatedEventList.md)
  - [PaginatedGroupsList](docs/PaginatedGroupsList.md)
- - [PaginatedResourceUserList](docs/PaginatedResourceUserList.md)
+ - [PaginatedOwnersList](docs/PaginatedOwnersList.md)
  - [PaginatedResourcesList](docs/PaginatedResourcesList.md)
+ - [PaginatedTagsList](docs/PaginatedTagsList.md)
+ - [PaginatedUARsList](docs/PaginatedUARsList.md)
+ - [PaginatedUsersList](docs/PaginatedUsersList.md)
  - [Resource](docs/Resource.md)
  - [ResourceAccessLevel](docs/ResourceAccessLevel.md)
+ - [ResourceAccessUser](docs/ResourceAccessUser.md)
+ - [ResourceAccessUserList](docs/ResourceAccessUserList.md)
  - [ResourceTypeEnum](docs/ResourceTypeEnum.md)
  - [ResourceUser](docs/ResourceUser.md)
  - [ResourceUserAccessStatus](docs/ResourceUserAccessStatus.md)
@@ -139,14 +171,22 @@ Class | Method | HTTP request | Description
  - [Session](docs/Session.md)
  - [SessionsList](docs/SessionsList.md)
  - [Tag](docs/Tag.md)
+ - [TagFilter](docs/TagFilter.md)
  - [TagsList](docs/TagsList.md)
+ - [UAR](docs/UAR.md)
+ - [UARReviewerAssignmentPolicyEnum](docs/UARReviewerAssignmentPolicyEnum.md)
+ - [UARScope](docs/UARScope.md)
  - [UpdateGroupInfo](docs/UpdateGroupInfo.md)
  - [UpdateGroupInfoList](docs/UpdateGroupInfoList.md)
+ - [UpdateOwnerInfo](docs/UpdateOwnerInfo.md)
+ - [UpdateOwnerInfoList](docs/UpdateOwnerInfoList.md)
  - [UpdateResourceInfo](docs/UpdateResourceInfo.md)
  - [UpdateResourceInfoList](docs/UpdateResourceInfoList.md)
  - [User](docs/User.md)
- - [UsersList](docs/UsersList.md)
- - [VisibilityEnum](docs/VisibilityEnum.md)
+ - [UserIDList](docs/UserIDList.md)
+ - [UserList](docs/UserList.md)
+ - [VisibilityInfo](docs/VisibilityInfo.md)
+ - [VisibilityTypeEnum](docs/VisibilityTypeEnum.md)
 
 
 ## Documentation For Authorization

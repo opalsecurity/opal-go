@@ -60,7 +60,7 @@ func (o *MessageChannel) GetMessageChannelId() string {
 // GetMessageChannelIdOk returns a tuple with the MessageChannelId field value
 // and a boolean to check if the value has been set.
 func (o *MessageChannel) GetMessageChannelIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.MessageChannelId, true

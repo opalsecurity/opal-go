@@ -51,7 +51,7 @@ func (o *TagsList) GetTags() []Tag {
 // GetTagsOk returns a tuple with the Tags field value
 // and a boolean to check if the value has been set.
 func (o *TagsList) GetTagsOk() ([]Tag, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Tags, true

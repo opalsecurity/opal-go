@@ -21,16 +21,16 @@ type ResourceUserAccessStatusEnum string
 
 // List of ResourceUserAccessStatusEnum
 const (
-	RESOURCEUSERACCESSSTATUSENUM_UNAUTHORIZED ResourceUserAccessStatusEnum = "UNAUTHORIZED"
-	RESOURCEUSERACCESSSTATUSENUM_REQUESTED ResourceUserAccessStatusEnum = "REQUESTED"
 	RESOURCEUSERACCESSSTATUSENUM_AUTHORIZED ResourceUserAccessStatusEnum = "AUTHORIZED"
+	RESOURCEUSERACCESSSTATUSENUM_REQUESTED ResourceUserAccessStatusEnum = "REQUESTED"
+	RESOURCEUSERACCESSSTATUSENUM_UNAUTHORIZED ResourceUserAccessStatusEnum = "UNAUTHORIZED"
 )
 
 // All allowed values of ResourceUserAccessStatusEnum enum
 var AllowedResourceUserAccessStatusEnumEnumValues = []ResourceUserAccessStatusEnum{
-	"UNAUTHORIZED",
-	"REQUESTED",
 	"AUTHORIZED",
+	"REQUESTED",
+	"UNAUTHORIZED",
 }
 
 func (v *ResourceUserAccessStatusEnum) UnmarshalJSON(src []byte) error {

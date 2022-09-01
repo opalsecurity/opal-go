@@ -19,10 +19,6 @@ import (
 	"net/url"
 )
 
-// Linger please
-var (
-	_ context.Context
-)
 
 // SessionsApiService SessionsApi service
 type SessionsApiService service
@@ -39,6 +35,7 @@ func (r ApiSessionsRequest) ResourceId(resourceId string) ApiSessionsRequest {
 	r.resourceId = &resourceId
 	return r
 }
+
 // The ID of the user you wish to query sessions for.
 func (r ApiSessionsRequest) UserId(userId string) ApiSessionsRequest {
 	r.userId = &userId

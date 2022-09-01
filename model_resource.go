@@ -19,15 +19,20 @@ import (
 type Resource struct {
 	// The ID of the resource.
 	ResourceId string `json:"resource_id"`
+	// The ID of the app.
+	AppId *string `json:"app_id,omitempty"`
 	// The name of the resource.
 	Name *string `json:"name,omitempty"`
 	// A description of the resource.
 	Description *string `json:"description,omitempty"`
-	// The ID of the owning team of the resource.
-	OwnerTeamId *string `json:"owner_team_id,omitempty"`
-	Visibility *VisibilityEnum `json:"visibility,omitempty"`
+	// The ID of the owner of the resource.
+	AdminOwnerId *string `json:"admin_owner_id,omitempty"`
+	// The ID of the resource on the remote system.
+	RemoteResourceId *string `json:"remote_resource_id,omitempty"`
+	// The name of the resource on the remote system.
+	RemoteResourceName *string `json:"remote_resource_name,omitempty"`
 	ResourceType *ResourceTypeEnum `json:"resource_type,omitempty"`
-	// The maximum duration access to the resource can be requested for (in minutes).
+	// The maximum duration for which the resource can be requested (in minutes).
 	MaxDuration *int32 `json:"max_duration,omitempty"`
 	// A bool representing whether or not access requests to the resource require manager approval.
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
@@ -35,6 +40,12 @@ type Resource struct {
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
 	// The ID of the folder that the resource is located in.
 	FolderId *string `json:"folder_id,omitempty"`
+	// A bool representing whether or not to require MFA for reviewers to approve requests for this resource.
+	RequireMfaToApprove *bool `json:"require_mfa_to_approve,omitempty"`
+	// A bool representing whether or not to automatically approve requests to this resource.
+	AutoApproval *bool `json:"auto_approval,omitempty"`
+	// The ID of the associated request template.
+	RequestTemplateId *string `json:"request_template_id,omitempty"`
 }
 
 // NewResource instantiates a new Resource object
@@ -68,7 +79,7 @@ func (o *Resource) GetResourceId() string {
 // GetResourceIdOk returns a tuple with the ResourceId field value
 // and a boolean to check if the value has been set.
 func (o *Resource) GetResourceIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ResourceId, true
@@ -77,6 +88,38 @@ func (o *Resource) GetResourceIdOk() (*string, bool) {
 // SetResourceId sets field value
 func (o *Resource) SetResourceId(v string) {
 	o.ResourceId = v
+}
+
+// GetAppId returns the AppId field value if set, zero value otherwise.
+func (o *Resource) GetAppId() string {
+	if o == nil || o.AppId == nil {
+		var ret string
+		return ret
+	}
+	return *o.AppId
+}
+
+// GetAppIdOk returns a tuple with the AppId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetAppIdOk() (*string, bool) {
+	if o == nil || o.AppId == nil {
+		return nil, false
+	}
+	return o.AppId, true
+}
+
+// HasAppId returns a boolean if a field has been set.
+func (o *Resource) HasAppId() bool {
+	if o != nil && o.AppId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAppId gets a reference to the given string and assigns it to the AppId field.
+func (o *Resource) SetAppId(v string) {
+	o.AppId = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -143,68 +186,100 @@ func (o *Resource) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetOwnerTeamId returns the OwnerTeamId field value if set, zero value otherwise.
-func (o *Resource) GetOwnerTeamId() string {
-	if o == nil || o.OwnerTeamId == nil {
+// GetAdminOwnerId returns the AdminOwnerId field value if set, zero value otherwise.
+func (o *Resource) GetAdminOwnerId() string {
+	if o == nil || o.AdminOwnerId == nil {
 		var ret string
 		return ret
 	}
-	return *o.OwnerTeamId
+	return *o.AdminOwnerId
 }
 
-// GetOwnerTeamIdOk returns a tuple with the OwnerTeamId field value if set, nil otherwise
+// GetAdminOwnerIdOk returns a tuple with the AdminOwnerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Resource) GetOwnerTeamIdOk() (*string, bool) {
-	if o == nil || o.OwnerTeamId == nil {
+func (o *Resource) GetAdminOwnerIdOk() (*string, bool) {
+	if o == nil || o.AdminOwnerId == nil {
 		return nil, false
 	}
-	return o.OwnerTeamId, true
+	return o.AdminOwnerId, true
 }
 
-// HasOwnerTeamId returns a boolean if a field has been set.
-func (o *Resource) HasOwnerTeamId() bool {
-	if o != nil && o.OwnerTeamId != nil {
+// HasAdminOwnerId returns a boolean if a field has been set.
+func (o *Resource) HasAdminOwnerId() bool {
+	if o != nil && o.AdminOwnerId != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetOwnerTeamId gets a reference to the given string and assigns it to the OwnerTeamId field.
-func (o *Resource) SetOwnerTeamId(v string) {
-	o.OwnerTeamId = &v
+// SetAdminOwnerId gets a reference to the given string and assigns it to the AdminOwnerId field.
+func (o *Resource) SetAdminOwnerId(v string) {
+	o.AdminOwnerId = &v
 }
 
-// GetVisibility returns the Visibility field value if set, zero value otherwise.
-func (o *Resource) GetVisibility() VisibilityEnum {
-	if o == nil || o.Visibility == nil {
-		var ret VisibilityEnum
+// GetRemoteResourceId returns the RemoteResourceId field value if set, zero value otherwise.
+func (o *Resource) GetRemoteResourceId() string {
+	if o == nil || o.RemoteResourceId == nil {
+		var ret string
 		return ret
 	}
-	return *o.Visibility
+	return *o.RemoteResourceId
 }
 
-// GetVisibilityOk returns a tuple with the Visibility field value if set, nil otherwise
+// GetRemoteResourceIdOk returns a tuple with the RemoteResourceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Resource) GetVisibilityOk() (*VisibilityEnum, bool) {
-	if o == nil || o.Visibility == nil {
+func (o *Resource) GetRemoteResourceIdOk() (*string, bool) {
+	if o == nil || o.RemoteResourceId == nil {
 		return nil, false
 	}
-	return o.Visibility, true
+	return o.RemoteResourceId, true
 }
 
-// HasVisibility returns a boolean if a field has been set.
-func (o *Resource) HasVisibility() bool {
-	if o != nil && o.Visibility != nil {
+// HasRemoteResourceId returns a boolean if a field has been set.
+func (o *Resource) HasRemoteResourceId() bool {
+	if o != nil && o.RemoteResourceId != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetVisibility gets a reference to the given VisibilityEnum and assigns it to the Visibility field.
-func (o *Resource) SetVisibility(v VisibilityEnum) {
-	o.Visibility = &v
+// SetRemoteResourceId gets a reference to the given string and assigns it to the RemoteResourceId field.
+func (o *Resource) SetRemoteResourceId(v string) {
+	o.RemoteResourceId = &v
+}
+
+// GetRemoteResourceName returns the RemoteResourceName field value if set, zero value otherwise.
+func (o *Resource) GetRemoteResourceName() string {
+	if o == nil || o.RemoteResourceName == nil {
+		var ret string
+		return ret
+	}
+	return *o.RemoteResourceName
+}
+
+// GetRemoteResourceNameOk returns a tuple with the RemoteResourceName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetRemoteResourceNameOk() (*string, bool) {
+	if o == nil || o.RemoteResourceName == nil {
+		return nil, false
+	}
+	return o.RemoteResourceName, true
+}
+
+// HasRemoteResourceName returns a boolean if a field has been set.
+func (o *Resource) HasRemoteResourceName() bool {
+	if o != nil && o.RemoteResourceName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRemoteResourceName gets a reference to the given string and assigns it to the RemoteResourceName field.
+func (o *Resource) SetRemoteResourceName(v string) {
+	o.RemoteResourceName = &v
 }
 
 // GetResourceType returns the ResourceType field value if set, zero value otherwise.
@@ -367,10 +442,109 @@ func (o *Resource) SetFolderId(v string) {
 	o.FolderId = &v
 }
 
+// GetRequireMfaToApprove returns the RequireMfaToApprove field value if set, zero value otherwise.
+func (o *Resource) GetRequireMfaToApprove() bool {
+	if o == nil || o.RequireMfaToApprove == nil {
+		var ret bool
+		return ret
+	}
+	return *o.RequireMfaToApprove
+}
+
+// GetRequireMfaToApproveOk returns a tuple with the RequireMfaToApprove field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetRequireMfaToApproveOk() (*bool, bool) {
+	if o == nil || o.RequireMfaToApprove == nil {
+		return nil, false
+	}
+	return o.RequireMfaToApprove, true
+}
+
+// HasRequireMfaToApprove returns a boolean if a field has been set.
+func (o *Resource) HasRequireMfaToApprove() bool {
+	if o != nil && o.RequireMfaToApprove != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRequireMfaToApprove gets a reference to the given bool and assigns it to the RequireMfaToApprove field.
+func (o *Resource) SetRequireMfaToApprove(v bool) {
+	o.RequireMfaToApprove = &v
+}
+
+// GetAutoApproval returns the AutoApproval field value if set, zero value otherwise.
+func (o *Resource) GetAutoApproval() bool {
+	if o == nil || o.AutoApproval == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AutoApproval
+}
+
+// GetAutoApprovalOk returns a tuple with the AutoApproval field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetAutoApprovalOk() (*bool, bool) {
+	if o == nil || o.AutoApproval == nil {
+		return nil, false
+	}
+	return o.AutoApproval, true
+}
+
+// HasAutoApproval returns a boolean if a field has been set.
+func (o *Resource) HasAutoApproval() bool {
+	if o != nil && o.AutoApproval != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoApproval gets a reference to the given bool and assigns it to the AutoApproval field.
+func (o *Resource) SetAutoApproval(v bool) {
+	o.AutoApproval = &v
+}
+
+// GetRequestTemplateId returns the RequestTemplateId field value if set, zero value otherwise.
+func (o *Resource) GetRequestTemplateId() string {
+	if o == nil || o.RequestTemplateId == nil {
+		var ret string
+		return ret
+	}
+	return *o.RequestTemplateId
+}
+
+// GetRequestTemplateIdOk returns a tuple with the RequestTemplateId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetRequestTemplateIdOk() (*string, bool) {
+	if o == nil || o.RequestTemplateId == nil {
+		return nil, false
+	}
+	return o.RequestTemplateId, true
+}
+
+// HasRequestTemplateId returns a boolean if a field has been set.
+func (o *Resource) HasRequestTemplateId() bool {
+	if o != nil && o.RequestTemplateId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestTemplateId gets a reference to the given string and assigns it to the RequestTemplateId field.
+func (o *Resource) SetRequestTemplateId(v string) {
+	o.RequestTemplateId = &v
+}
+
 func (o Resource) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["resource_id"] = o.ResourceId
+	}
+	if o.AppId != nil {
+		toSerialize["app_id"] = o.AppId
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
@@ -378,11 +552,14 @@ func (o Resource) MarshalJSON() ([]byte, error) {
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
 	}
-	if o.OwnerTeamId != nil {
-		toSerialize["owner_team_id"] = o.OwnerTeamId
+	if o.AdminOwnerId != nil {
+		toSerialize["admin_owner_id"] = o.AdminOwnerId
 	}
-	if o.Visibility != nil {
-		toSerialize["visibility"] = o.Visibility
+	if o.RemoteResourceId != nil {
+		toSerialize["remote_resource_id"] = o.RemoteResourceId
+	}
+	if o.RemoteResourceName != nil {
+		toSerialize["remote_resource_name"] = o.RemoteResourceName
 	}
 	if o.ResourceType != nil {
 		toSerialize["resource_type"] = o.ResourceType
@@ -398,6 +575,15 @@ func (o Resource) MarshalJSON() ([]byte, error) {
 	}
 	if o.FolderId != nil {
 		toSerialize["folder_id"] = o.FolderId
+	}
+	if o.RequireMfaToApprove != nil {
+		toSerialize["require_mfa_to_approve"] = o.RequireMfaToApprove
+	}
+	if o.AutoApproval != nil {
+		toSerialize["auto_approval"] = o.AutoApproval
+	}
+	if o.RequestTemplateId != nil {
+		toSerialize["request_template_id"] = o.RequestTemplateId
 	}
 	return json.Marshal(toSerialize)
 }

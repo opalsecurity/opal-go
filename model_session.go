@@ -64,7 +64,7 @@ func (o *Session) GetConnectionId() string {
 // GetConnectionIdOk returns a tuple with the ConnectionId field value
 // and a boolean to check if the value has been set.
 func (o *Session) GetConnectionIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ConnectionId, true
@@ -88,7 +88,7 @@ func (o *Session) GetUserId() string {
 // GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
 func (o *Session) GetUserIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.UserId, true
@@ -112,7 +112,7 @@ func (o *Session) GetResourceId() string {
 // GetResourceIdOk returns a tuple with the ResourceId field value
 // and a boolean to check if the value has been set.
 func (o *Session) GetResourceIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ResourceId, true
@@ -136,7 +136,7 @@ func (o *Session) GetAccessLevel() ResourceAccessLevel {
 // GetAccessLevelOk returns a tuple with the AccessLevel field value
 // and a boolean to check if the value has been set.
 func (o *Session) GetAccessLevelOk() (*ResourceAccessLevel, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.AccessLevel, true
@@ -160,7 +160,7 @@ func (o *Session) GetExpirationDate() time.Time {
 // GetExpirationDateOk returns a tuple with the ExpirationDate field value
 // and a boolean to check if the value has been set.
 func (o *Session) GetExpirationDateOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ExpirationDate, true

@@ -51,7 +51,7 @@ func (o *MessageChannelList) GetChannels() []MessageChannel {
 // GetChannelsOk returns a tuple with the Channels field value
 // and a boolean to check if the value has been set.
 func (o *MessageChannelList) GetChannelsOk() ([]MessageChannel, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.Channels, true

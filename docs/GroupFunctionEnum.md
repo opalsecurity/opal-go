@@ -3,11 +3,9 @@
 ## Enum
 
 
-* `REGULAR` (value: `"REGULAR"`)
-
 * `ON_CALL` (value: `"ON_CALL"`)
 
-* `TEAM` (value: `"TEAM"`)
+* `REGULAR` (value: `"REGULAR"`)
 
 * `UNKNOWN` (value: `"UNKNOWN"`)
 

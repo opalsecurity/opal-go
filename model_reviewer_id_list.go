@@ -51,7 +51,7 @@ func (o *ReviewerIDList) GetReviewerIds() []string {
 // GetReviewerIdsOk returns a tuple with the ReviewerIds field value
 // and a boolean to check if the value has been set.
 func (o *ReviewerIDList) GetReviewerIdsOk() ([]string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.ReviewerIds, true

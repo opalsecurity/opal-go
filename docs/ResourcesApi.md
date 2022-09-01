@@ -4,17 +4,165 @@ All URIs are relative to *https://api.opal.dev/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**AddResourceUser**](ResourcesApi.md#AddResourceUser) | **Post** /resources/{resource_id}/users/{user_id} | 
+[**CreateResource**](ResourcesApi.md#CreateResource) | **Post** /resources | 
 [**DeleteResource**](ResourcesApi.md#DeleteResource) | **Delete** /resources/{resource_id} | 
+[**DeleteResourceUser**](ResourcesApi.md#DeleteResourceUser) | **Delete** /resources/{resource_id}/users/{user_id} | 
 [**GetResourceMessageChannels**](ResourcesApi.md#GetResourceMessageChannels) | **Get** /resources/{resource_id}/message-channels | 
 [**GetResourceReviewers**](ResourcesApi.md#GetResourceReviewers) | **Get** /resources/{resource_id}/reviewers | 
 [**GetResourceTags**](ResourcesApi.md#GetResourceTags) | **Get** /resources/{resource_id}/tags | 
+[**GetResourceUsers**](ResourcesApi.md#GetResourceUsers) | **Get** /resources/{resource_id}/users | 
+[**GetResourceVisibility**](ResourcesApi.md#GetResourceVisibility) | **Get** /resources/{resource_id}/visibility | 
 [**GetResources**](ResourcesApi.md#GetResources) | **Get** /resources | 
 [**ResourceUserAccessStatusRetrieve**](ResourcesApi.md#ResourceUserAccessStatusRetrieve) | **Get** /resource-user-access-status/{resource_id}/{user_id} | 
-[**ResourceUsers**](ResourcesApi.md#ResourceUsers) | **Get** /resource-users | 
 [**SetResourceMessageChannels**](ResourcesApi.md#SetResourceMessageChannels) | **Put** /resources/{resource_id}/message-channels | 
 [**SetResourceReviewers**](ResourcesApi.md#SetResourceReviewers) | **Put** /resources/{resource_id}/reviewers | 
+[**SetResourceVisibility**](ResourcesApi.md#SetResourceVisibility) | **Put** /resources/{resource_id}/visibility | 
 [**UpdateResources**](ResourcesApi.md#UpdateResources) | **Put** /resources | 
 
+
+
+## AddResourceUser
+
+> ResourceUser AddResourceUser(ctx, resourceId, userId).DurationMinutes(durationMinutes).AccessLevelRemoteId(accessLevelRemoteId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    resourceId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the resource.
+    userId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of the user to add.
+    durationMinutes := int32(60) // int32 | The duration for which the resource can be accessed (in minutes). Use 0 to set to indefinite.
+    accessLevelRemoteId := "arn:aws:iam::590304332660:role/AdministratorAccess" // string | The remote ID of the access level to grant to this user. If omitted, the default access level remote ID value (empty string) is used. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ResourcesApi.AddResourceUser(context.Background(), resourceId, userId).DurationMinutes(durationMinutes).AccessLevelRemoteId(accessLevelRemoteId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ResourcesApi.AddResourceUser``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `AddResourceUser`: ResourceUser
+    fmt.Fprintf(os.Stdout, "Response from `ResourcesApi.AddResourceUser`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+**userId** | **string** | The ID of the user to add. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAddResourceUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **durationMinutes** | **int32** | The duration for which the resource can be accessed (in minutes). Use 0 to set to indefinite. | 
+ **accessLevelRemoteId** | **string** | The remote ID of the access level to grant to this user. If omitted, the default access level remote ID value (empty string) is used. | 
+
+### Return type
+
+[**ResourceUser**](ResourceUser.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateResource
+
+> Resource CreateResource(ctx).CreateResourceInfo(createResourceInfo).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    createResourceInfo := *openapiclient.NewCreateResourceInfo("mongo-db-prod", openapiclient.ResourceTypeEnum("AWS_EC2_INSTANCE"), "f454d283-ca87-4a8a-bdbb-df212eca5353") // CreateResourceInfo | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ResourcesApi.CreateResource(context.Background()).CreateResourceInfo(createResourceInfo).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ResourcesApi.CreateResource``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateResource`: Resource
+    fmt.Fprintf(os.Stdout, "Response from `ResourcesApi.CreateResource`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateResourceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createResourceInfo** | [**CreateResourceInfo**](CreateResourceInfo.md) |  | 
+
+### Return type
+
+[**Resource**](Resource.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## DeleteResource
@@ -66,6 +214,79 @@ Other parameters are passed through a pointer to a apiDeleteResourceRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteResourceUser
+
+> DeleteResourceUser(ctx, resourceId, userId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    resourceId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the resource.
+    userId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of a user to remove from this resource.
+    accessLevelRemoteId := "arn:aws:iam::590304332660:role/AdministratorAccess" // string | The remote ID of the access level for which this user has direct access. If omitted, the default access level remote ID value (empty string) is assumed. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ResourcesApi.DeleteResourceUser(context.Background(), resourceId, userId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ResourcesApi.DeleteResourceUser``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+**userId** | **string** | The ID of a user to remove from this resource. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteResourceUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **accessLevelRemoteId** | **string** | The remote ID of the access level for which this user has direct access. If omitted, the default access level remote ID value (empty string) is assumed. | 
 
 ### Return type
 
@@ -295,9 +516,151 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetResourceUsers
+
+> ResourceAccessUserList GetResourceUsers(ctx, resourceId).Limit(limit).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    resourceId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the resource.
+    limit := int32(200) // int32 | Limit the number of results returned. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ResourcesApi.GetResourceUsers(context.Background(), resourceId).Limit(limit).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ResourcesApi.GetResourceUsers``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetResourceUsers`: ResourceAccessUserList
+    fmt.Fprintf(os.Stdout, "Response from `ResourcesApi.GetResourceUsers`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetResourceUsersRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **limit** | **int32** | Limit the number of results returned. | 
+
+### Return type
+
+[**ResourceAccessUserList**](ResourceAccessUserList.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetResourceVisibility
+
+> VisibilityInfo GetResourceVisibility(ctx, resourceId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    resourceId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the resource.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ResourcesApi.GetResourceVisibility(context.Background(), resourceId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ResourcesApi.GetResourceVisibility``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetResourceVisibility`: VisibilityInfo
+    fmt.Fprintf(os.Stdout, "Response from `ResourcesApi.GetResourceVisibility`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetResourceVisibilityRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**VisibilityInfo**](VisibilityInfo.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetResources
 
-> PaginatedResourcesList GetResources(ctx).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).Execute()
+> PaginatedResourcesList GetResources(ctx).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).Execute()
 
 
 
@@ -318,11 +681,13 @@ import (
 func main() {
     cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
     pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
-    resourceTypeFilter := openapiclient.ResourceTypeEnum("AWS_IAM_ROLE") // ResourceTypeEnum | The resource type to filter by. (optional)
+    resourceTypeFilter := openapiclient.ResourceTypeEnum("AWS_EC2_INSTANCE") // ResourceTypeEnum | The resource type to filter by. (optional)
+    resourceIds := []string{"1b978423-db0a-4037-a4cf-f79c60cb67b3"} // []string | The resource ids to filter by. (optional)
+    resourceName := "example-name" // string | Resource name. (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ResourcesApi.GetResources(context.Background()).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).Execute()
+    resp, r, err := apiClient.ResourcesApi.GetResources(context.Background()).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ResourcesApi.GetResources``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -346,6 +711,8 @@ Name | Type | Description  | Notes
  **cursor** | **string** | The pagination cursor value. | 
  **pageSize** | **int32** | Number of results to return per page. Default is 200. | 
  **resourceTypeFilter** | [**ResourceTypeEnum**](ResourceTypeEnum.md) | The resource type to filter by. | 
+ **resourceIds** | **[]string** | The resource ids to filter by. | 
+ **resourceName** | **string** | Resource name. | 
 
 ### Return type
 
@@ -429,78 +796,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ResourceUserAccessStatus**](ResourceUserAccessStatus.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ResourceUsers
-
-> PaginatedResourceUserList ResourceUsers(ctx).ResourceId(resourceId).AccessLevelRemoteId(accessLevelRemoteId).Cursor(cursor).PageSize(pageSize).Execute()
-
-
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    resourceId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the resource.
-    accessLevelRemoteId := "arn:aws:iam::590304332660:role/AdministratorAccess" // string | The remote ID of the access level that you wish to query for the resource. If omitted, the default access level remote ID value (empty string) is used. (optional)
-    cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
-    pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ResourcesApi.ResourceUsers(context.Background()).ResourceId(resourceId).AccessLevelRemoteId(accessLevelRemoteId).Cursor(cursor).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ResourcesApi.ResourceUsers``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ResourceUsers`: PaginatedResourceUserList
-    fmt.Fprintf(os.Stdout, "Response from `ResourcesApi.ResourceUsers`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiResourceUsersRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **resourceId** | **string** | The ID of the resource. | 
- **accessLevelRemoteId** | **string** | The remote ID of the access level that you wish to query for the resource. If omitted, the default access level remote ID value (empty string) is used. | 
- **cursor** | **string** | The pagination cursor value. | 
- **pageSize** | **int32** | Number of results to return per page. Default is 200. | 
-
-### Return type
-
-[**PaginatedResourceUserList**](PaginatedResourceUserList.md)
 
 ### Authorization
 
@@ -645,6 +940,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 **[]string**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SetResourceVisibility
+
+> VisibilityInfo SetResourceVisibility(ctx, resourceId).VisibilityInfo(visibilityInfo).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    resourceId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the resource.
+    visibilityInfo := *openapiclient.NewVisibilityInfo(openapiclient.VisibilityTypeEnum("GLOBAL")) // VisibilityInfo | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ResourcesApi.SetResourceVisibility(context.Background(), resourceId).VisibilityInfo(visibilityInfo).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ResourcesApi.SetResourceVisibility``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `SetResourceVisibility`: VisibilityInfo
+    fmt.Fprintf(os.Stdout, "Response from `ResourcesApi.SetResourceVisibility`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSetResourceVisibilityRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **visibilityInfo** | [**VisibilityInfo**](VisibilityInfo.md) |  | 
+
+### Return type
+
+[**VisibilityInfo**](VisibilityInfo.md)
 
 ### Authorization
 
