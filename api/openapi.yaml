@@ -797,6 +797,31 @@ paths:
       - BearerAuth: []
       tags:
       - resources
+    get:
+      description: Returns a `Resource` object.
+      operationId: getResource
+      parameters:
+      - description: The ID of the resource.
+        example: 32acc112-21ff-4669-91c2-21e27683eaa1
+        explode: true
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+          description: The resource object associated with the passed-in ID.
+      security:
+      - BearerAuth: []
+      tags:
+      - resources
   /resources/{resource_id}/message-channels:
     get:
       description: Gets the list of audit message channels attached to a resource.
