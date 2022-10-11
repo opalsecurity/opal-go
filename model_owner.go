@@ -25,6 +25,7 @@ type Owner struct {
 	Description *string `json:"description,omitempty"`
 	// The amount of time (in minutes) before the next reviewer is notified. Use 0 to remove escalation policy.
 	AccessRequestEscalationPeriod *int32 `json:"access_request_escalation_period,omitempty"`
+	ReviewerMessageChannelId NullableString `json:"reviewer_message_channel_id,omitempty"`
 }
 
 // NewOwner instantiates a new Owner object
@@ -165,6 +166,48 @@ func (o *Owner) SetAccessRequestEscalationPeriod(v int32) {
 	o.AccessRequestEscalationPeriod = &v
 }
 
+// GetReviewerMessageChannelId returns the ReviewerMessageChannelId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Owner) GetReviewerMessageChannelId() string {
+	if o == nil || o.ReviewerMessageChannelId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.ReviewerMessageChannelId.Get()
+}
+
+// GetReviewerMessageChannelIdOk returns a tuple with the ReviewerMessageChannelId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Owner) GetReviewerMessageChannelIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ReviewerMessageChannelId.Get(), o.ReviewerMessageChannelId.IsSet()
+}
+
+// HasReviewerMessageChannelId returns a boolean if a field has been set.
+func (o *Owner) HasReviewerMessageChannelId() bool {
+	if o != nil && o.ReviewerMessageChannelId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetReviewerMessageChannelId gets a reference to the given NullableString and assigns it to the ReviewerMessageChannelId field.
+func (o *Owner) SetReviewerMessageChannelId(v string) {
+	o.ReviewerMessageChannelId.Set(&v)
+}
+// SetReviewerMessageChannelIdNil sets the value for ReviewerMessageChannelId to be an explicit nil
+func (o *Owner) SetReviewerMessageChannelIdNil() {
+	o.ReviewerMessageChannelId.Set(nil)
+}
+
+// UnsetReviewerMessageChannelId ensures that no value is present for ReviewerMessageChannelId, not even an explicit nil
+func (o *Owner) UnsetReviewerMessageChannelId() {
+	o.ReviewerMessageChannelId.Unset()
+}
+
 func (o Owner) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -178,6 +221,9 @@ func (o Owner) MarshalJSON() ([]byte, error) {
 	}
 	if o.AccessRequestEscalationPeriod != nil {
 		toSerialize["access_request_escalation_period"] = o.AccessRequestEscalationPeriod
+	}
+	if o.ReviewerMessageChannelId.IsSet() {
+		toSerialize["reviewer_message_channel_id"] = o.ReviewerMessageChannelId.Get()
 	}
 	return json.Marshal(toSerialize)
 }

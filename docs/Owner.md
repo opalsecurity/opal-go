@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the owner. | [optional] 
 **Description** | Pointer to **string** | A description of the owner. | [optional] 
 **AccessRequestEscalationPeriod** | Pointer to **int32** | The amount of time (in minutes) before the next reviewer is notified. Use 0 to remove escalation policy. | [optional] 
+**ReviewerMessageChannelId** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -123,6 +124,41 @@ SetAccessRequestEscalationPeriod sets AccessRequestEscalationPeriod field to giv
 
 HasAccessRequestEscalationPeriod returns a boolean if a field has been set.
 
+### GetReviewerMessageChannelId
+
+`func (o *Owner) GetReviewerMessageChannelId() string`
+
+GetReviewerMessageChannelId returns the ReviewerMessageChannelId field if non-nil, zero value otherwise.
+
+### GetReviewerMessageChannelIdOk
+
+`func (o *Owner) GetReviewerMessageChannelIdOk() (*string, bool)`
+
+GetReviewerMessageChannelIdOk returns a tuple with the ReviewerMessageChannelId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReviewerMessageChannelId
+
+`func (o *Owner) SetReviewerMessageChannelId(v string)`
+
+SetReviewerMessageChannelId sets ReviewerMessageChannelId field to given value.
+
+### HasReviewerMessageChannelId
+
+`func (o *Owner) HasReviewerMessageChannelId() bool`
+
+HasReviewerMessageChannelId returns a boolean if a field has been set.
+
+### SetReviewerMessageChannelIdNil
+
+`func (o *Owner) SetReviewerMessageChannelIdNil(b bool)`
+
+ SetReviewerMessageChannelIdNil sets the value for ReviewerMessageChannelId to be an explicit nil
+
+### UnsetReviewerMessageChannelId
+`func (o *Owner) UnsetReviewerMessageChannelId()`
+
+UnsetReviewerMessageChannelId ensures that no value is present for ReviewerMessageChannelId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

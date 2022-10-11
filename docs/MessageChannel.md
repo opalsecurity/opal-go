@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **ThirdPartyProvider** | Pointer to [**MessageChannelProviderEnum**](MessageChannelProviderEnum.md) |  | [optional] 
 **RemoteId** | Pointer to **string** | The remote ID of the message channel | [optional] 
 **Name** | Pointer to **string** | The name of the message channel. | [optional] 
-**MessageChannelType** | Pointer to [**MessageChannelTypeEnum**](MessageChannelTypeEnum.md) |  | [optional] 
 **IsPrivate** | Pointer to **bool** | A bool representing whether or not the message channel is private. | [optional] 
 
 ## Methods
@@ -124,31 +123,6 @@ SetName sets Name field to given value.
 `func (o *MessageChannel) HasName() bool`
 
 HasName returns a boolean if a field has been set.
-
-### GetMessageChannelType
-
-`func (o *MessageChannel) GetMessageChannelType() MessageChannelTypeEnum`
-
-GetMessageChannelType returns the MessageChannelType field if non-nil, zero value otherwise.
-
-### GetMessageChannelTypeOk
-
-`func (o *MessageChannel) GetMessageChannelTypeOk() (*MessageChannelTypeEnum, bool)`
-
-GetMessageChannelTypeOk returns a tuple with the MessageChannelType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessageChannelType
-
-`func (o *MessageChannel) SetMessageChannelType(v MessageChannelTypeEnum)`
-
-SetMessageChannelType sets MessageChannelType field to given value.
-
-### HasMessageChannelType
-
-`func (o *MessageChannel) HasMessageChannelType() bool`
-
-HasMessageChannelType returns a boolean if a field has been set.
 
 ### GetIsPrivate
 

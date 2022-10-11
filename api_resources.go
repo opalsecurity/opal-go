@@ -173,7 +173,7 @@ func (r ApiCreateResourceRequest) Execute() (*Resource, *http.Response, error) {
 /*
 CreateResource Method for CreateResource
 
-Creates a resource. See [here](https://docs.opal.dev/docs/how-opal) for details about importing resources.
+Creates a resource. See [here](https://docs.opal.dev/reference/end-system-objects) for details about importing resources.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateResourceRequest
@@ -476,7 +476,7 @@ func (r ApiGetResourceRequest) Execute() (*Resource, *http.Response, error) {
 /*
 GetResource Method for GetResource
 
-Returns a `Resource` object.
+Retrieves a resource.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param resourceId The ID of the resource.

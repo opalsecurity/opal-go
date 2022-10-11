@@ -50,6 +50,32 @@ paths:
       - BearerAuth: []
       tags:
       - apps
+  /apps/{app_id}:
+    get:
+      description: Returns an `App` object.
+      operationId: getApp
+      parameters:
+      - description: The ID of the app.
+        example: 32acc112-21ff-4669-91c2-21e27683eaa1
+        explode: true
+        in: path
+        name: app_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+          description: The requested `App`.
+      security:
+      - BearerAuth: []
+      tags:
+      - apps
   /events:
     get:
       description: Returns a list of `Event` objects.
@@ -156,15 +182,6 @@ paths:
           maximum: 1000
           type: integer
         style: form
-      - description: The group function to filter by.
-        example: REGULAR
-        explode: true
-        in: query
-        name: group_function_filter
-        required: false
-        schema:
-          $ref: '#/components/schemas/GroupFunctionEnum'
-        style: form
       - description: The group type to filter by.
         example: OPAL_GROUP
         explode: true
@@ -210,7 +227,7 @@ paths:
       tags:
       - groups
     post:
-      description: "Creates a group. See [here](https://docs.opal.dev/docs/how-opal)\
+      description: "Creates a group. See [here](https://docs.opal.dev/reference/end-system-objects)\
         \ for details about importing groups."
       operationId: createGroup
       requestBody:
@@ -331,6 +348,78 @@ paths:
                   type: string
                 type: array
           description: The updated audit message channel IDs for the group.
+      security:
+      - BearerAuth: []
+      tags:
+      - groups
+  /groups/{group_id}/resources:
+    get:
+      description: Gets the list of resources that the group gives access to.
+      operationId: get_group_resources
+      parameters:
+      - description: The ID of the group.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupResourceList'
+          description: The resources that the group gives access to to.
+      security:
+      - BearerAuth: []
+      tags:
+      - groups
+  /groups/{group_id}/resources/{resource_id}:
+    post:
+      description: Adds a resource to a group.
+      operationId: add_group_resource
+      parameters:
+      - description: The ID of the group.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The ID of the resource.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: "The remote ID of the access level to grant to this user. If\
+          \ omitted, the default access level remote ID value (empty string) is used."
+        example: arn:aws:iam::590304332660:role/AdministratorAccess
+        explode: true
+        in: query
+        name: access_level_remote_id
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupResource'
+          description: The created `GroupResource` object.
       security:
       - BearerAuth: []
       tags:
@@ -734,7 +823,7 @@ paths:
       tags:
       - resources
     post:
-      description: "Creates a resource. See [here](https://docs.opal.dev/docs/how-opal)\
+      description: "Creates a resource. See [here](https://docs.opal.dev/reference/end-system-objects)\
         \ for details about importing resources."
       operationId: createResource
       requestBody:
@@ -798,12 +887,12 @@ paths:
       tags:
       - resources
     get:
-      description: Returns a `Resource` object.
-      operationId: getResource
+      description: Retrieves a resource.
+      operationId: get_resource
       parameters:
       - description: The ID of the resource.
-        example: 32acc112-21ff-4669-91c2-21e27683eaa1
-        explode: true
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
         in: path
         name: resource_id
         required: true
@@ -817,7 +906,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Resource'
-          description: The resource object associated with the passed-in ID.
+          description: The requested resource.
       security:
       - BearerAuth: []
       tags:
@@ -1665,6 +1754,42 @@ paths:
       - BearerAuth: []
       tags:
       - tags
+  /message-channels:
+    get:
+      description: Returns a list of `MessageChannel` objects.
+      operationId: get_message_channels
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageChannelList'
+          description: A list of message channels for your organization.
+      security:
+      - BearerAuth: []
+      tags:
+      - message-channels
+    post:
+      description: Creates a `MessageChannel` objects.
+      operationId: create_message_channel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMessageChannelInfo'
+        description: The `MessageChannel` object to be created.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageChannel'
+          description: The message channel that was created.
+      security:
+      - BearerAuth: []
+      tags:
+      - message-channels
   /uars:
     get:
       description: Returns a list of `UAR` objects.
@@ -2107,6 +2232,14 @@ components:
           example: 29827fb8-f2dd-4e80-9576-28e31e9934ac
           format: uuid
           type: string
+        actor_name:
+          description: The name of the actor user.
+          example: John Smith
+          format: string
+        actor_email:
+          description: The email of the actor user.
+          example: john@acmecorp.com
+          type: string
         event_type:
           description: The event type.
           example: USERS_CREATED
@@ -2116,11 +2249,39 @@ components:
           example: 2022-01-23T04:56:07Z
           format: date-time
           type: string
+        sub_events:
+          items:
+            $ref: '#/components/schemas/SubEvent'
+          type: array
       required:
+      - actor_name
       - actor_user_id
       - created_at
       - event_id
       - event_type
+      type: object
+    SubEvent:
+      additionalProperties: true
+      description: |-
+        # Sub event Object
+        ### Description
+        The `SubEvent` object is used to represent a subevent.
+
+        ### Usage Example
+        Fetch from the `LIST Events` endpoint.
+      example:
+        sub_event_type: USERS_CREATED
+        user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+        user_name: John Smith
+        resource_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+        resource_name: Figma
+      properties:
+        sub_event_type:
+          description: The subevent type.
+          example: USERS_CREATED
+          type: string
+      required:
+      - sub_event_type
       type: object
     PaginatedEventList:
       example:
@@ -2296,10 +2457,13 @@ components:
       - user_id
       type: object
     ResourceAccessUser:
-      description: "# Resource Access User Object\n### Description\nThe `ResourceAccessUser`\
-        \ object is used to represent a user with access to a resource, either directly\
-        \ or indirectly through group(s).\n\n### Usage Example\nFetch from the `LIST\
-        \ ResourceUsers` endpoint."
+      description: |-
+        # Resource Access User Object
+        ### Description
+        The `ResourceAccessUser` object is used to represent a user with access to a resource, either directly or indirectly through group(s).
+
+        ### Usage Example
+        Fetch from the `LIST ResourceUsers` endpoint.
       example:
         full_name: Jake Barnes
         user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
@@ -2589,6 +2753,33 @@ components:
       required:
       - results
       type: object
+    GroupResource:
+      description: |-
+        # GroupResource Object
+        ### Description
+        The `GroupResource` object is used to represent a relationship between a group and a resource.
+      example:
+        group_id: f454d283-ca87-4a8a-bdbb-df212eca5353
+        resource_id: b5a5ca27-0ea3-4d86-9199-2126d57d1fbd
+        access_level_remote_it: write
+      properties:
+        group_id:
+          description: The ID of the group.
+          example: f454d283-ca87-4a8a-bdbb-df212eca5353
+          format: uuid
+          type: string
+        resource_id:
+          description: The ID of the resource.
+          example: b5a5ca27-0ea3-4d86-9199-2126d57d1fbd
+          format: uuid
+          type: string
+        access_level:
+          $ref: '#/components/schemas/ResourceAccessLevel'
+      required:
+      - access_level
+      - group_id
+      - resource_id
+      type: object
     Group:
       description: |-
         # Group Object
@@ -2643,13 +2834,16 @@ components:
           description: The name of the remote.
           example: Finance team
           type: string
-        group_function:
-          $ref: '#/components/schemas/GroupFunctionEnum'
         group_type:
           $ref: '#/components/schemas/GroupTypeEnum'
         max_duration:
           description: The maximum duration for which the group can be requested (in
             minutes).
+          example: 120
+          type: integer
+        recommended_duration:
+          description: The recommended duration for which the group should be requested
+            (in minutes). -1 represents an indefinite duration.
           example: 120
           type: integer
         require_manager_approval:
@@ -2659,7 +2853,7 @@ components:
           type: boolean
         require_support_ticket:
           description: A bool representing whether or not access requests to the group
-            require a support ticket.
+            require an access ticket.
           example: false
           type: boolean
         folder_id:
@@ -2681,6 +2875,13 @@ components:
           description: The ID of the associated request template.
           example: 06851574-e50d-40ca-8c78-f72ae6ab4304
           format: uuid
+          type: string
+        metadata:
+          description: "JSON metadata about the remote group. Only set for items linked\
+            \ to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects)\
+            \ for details."
+          example: "{ \"okta_directory_group\": { \"group_id\": \"00g4bs66kwtpe1g12345\"\
+            \ } }"
           type: string
       required:
       - group_id
@@ -2753,7 +2954,13 @@ components:
           type: string
         max_duration:
           description: The maximum duration for which the group can be requested (in
-            minutes). Use 0 to set to indefinite.
+            minutes). Use -1 to set to indefinite.
+          example: 120
+          type: integer
+        recommended_duration:
+          description: The recommended duration for which the group should be requested
+            (in minutes). Will be the default value in a request. Use -1 to set to
+            indefinite and 0 to unset.
           example: 120
           type: integer
         require_manager_approval:
@@ -2763,7 +2970,7 @@ components:
           type: boolean
         require_support_ticket:
           description: A bool representing whether or not access requests to the group
-            require a support ticket.
+            require an access ticket.
           example: false
           type: boolean
         folder_id:
@@ -2801,14 +3008,6 @@ components:
       - OPAL_GROUP
       example: OPAL_GROUP
       type: string
-    GroupFunctionEnum:
-      description: The function type of the group.
-      enum:
-      - ON_CALL
-      - REGULAR
-      - UNKNOWN
-      example: REGULAR
-      type: string
     ResourceTypeEnum:
       description: The type of the resource.
       enum:
@@ -2833,7 +3032,6 @@ components:
       - MYSQL_INSTANCE
       - OKTA_APP
       - OKTA_ROLE
-      - OPAL_ROLE
       - PAGERDUTY_ROLE
       - SALESFORCE_PERMISSION_SET
       - SALESFORCE_PROFILE
@@ -2848,6 +3046,23 @@ components:
       - LIMITED
       example: GLOBAL
       type: string
+    GroupResourceList:
+      example:
+        group_resources:
+        - group_id: 7870617d-e72a-47f5-a84c-693817ab4567
+          resource_id: 1520617d-e72a-47f5-a84c-693817ab48ad2
+          access_level_remote_id: ""
+        - group_id: 50333e67-73ce-47ab-b049-d8abcd45f7a1
+          resource_id: 6f99639b-7928-4043-8184-47cbc6766145
+          access_level_remote_id: write
+      properties:
+        group_resources:
+          items:
+            $ref: '#/components/schemas/GroupResource'
+          type: array
+      required:
+      - group_resources
+      type: object
     MessageChannelList:
       example:
         channels:
@@ -2855,13 +3070,11 @@ components:
           third_party_provider: SLACK
           remote_id: C03FJR97276
           name: api-team-audit-channel
-          message_channel_type: AUDIT
           is_private: false
         - message_channel_id: 1520617d-e72a-47f5-a84c-693817ab48ad2
           third_party_provider: SLACK
           remote_id: A4FJR97365D
           name: api-team-monitor-channel
-          message_channel_type: MONITOR
           is_private: false
       properties:
         channels:
@@ -2932,7 +3145,6 @@ components:
         third_party_provider: SLACK
         remote_id: C03FJR97276
         name: api-team-audit-channel
-        message_channel_type: AUDIT
         is_private: false
       properties:
         message_channel_id:
@@ -2950,8 +3162,6 @@ components:
           description: The name of the message channel.
           example: api-team-audit-channel
           type: string
-        message_channel_type:
-          $ref: '#/components/schemas/MessageChannelTypeEnum'
         is_private:
           description: A bool representing whether or not the message channel is private.
           example: false
@@ -2959,20 +3169,69 @@ components:
       required:
       - message_channel_id
       type: object
-    MessageChannelTypeEnum:
-      description: The type of the message channel.
-      enum:
-      - AUDIT
-      - MONITOR
-      - REVIEWER
-      example: AUDIT
-      type: string
+    CreateMessageChannelInfo:
+      description: |-
+        # CreateMessageChannelInfo Object
+        ### Description
+        The `CreateMessageChannelInfo` object is used to describe the message channel object to be created.
+      example:
+        third_party_provider: SLACK
+        remote_id: C03FJR97276
+      properties:
+        third_party_provider:
+          $ref: '#/components/schemas/MessageChannelProviderEnum'
+        remote_id:
+          description: The remote ID of the message channel
+          example: C03FJR97276
+          type: string
+      required:
+      - remote_id
+      - third_party_provider
+      type: object
     MessageChannelProviderEnum:
       description: The third party provider of the message channel.
       enum:
       - SLACK
       example: SLACK
       type: string
+    GroupRemoteInfo:
+      description: Remote info that is required for the creation of remote groups.
+        Providing this will allow you to omit deprecated remote_id and metadata fields.
+      properties:
+        active_directory_group:
+          $ref: '#/components/schemas/GroupRemoteInfo_active_directory_group'
+        github_team:
+          $ref: '#/components/schemas/GroupRemoteInfo_github_team'
+        google_group:
+          $ref: '#/components/schemas/GroupRemoteInfo_google_group'
+        ldap_group:
+          $ref: '#/components/schemas/GroupRemoteInfo_ldap_group'
+        okta_group:
+          $ref: '#/components/schemas/GroupRemoteInfo_okta_group'
+        duo_group:
+          $ref: '#/components/schemas/GroupRemoteInfo_duo_group'
+      type: object
+    ResourceRemoteInfo:
+      description: Remote info that is required for the creation of remote resources.
+        Providing this will allow you to omit deprecated remote_id and metadata fields.
+      properties:
+        aws_iam_role:
+          $ref: '#/components/schemas/ResourceRemoteInfo_aws_iam_role'
+        aws_ec2_instance:
+          $ref: '#/components/schemas/ResourceRemoteInfo_aws_ec2_instance'
+        aws_rds_instance:
+          $ref: '#/components/schemas/ResourceRemoteInfo_aws_rds_instance'
+        aws_eks_cluster:
+          $ref: '#/components/schemas/ResourceRemoteInfo_aws_eks_cluster'
+        github_repo:
+          $ref: '#/components/schemas/ResourceRemoteInfo_github_repo'
+        okta_app:
+          $ref: '#/components/schemas/ResourceRemoteInfo_okta_app'
+        okta_standard_role:
+          $ref: '#/components/schemas/ResourceRemoteInfo_okta_standard_role'
+        okta_custom_role:
+          $ref: '#/components/schemas/ResourceRemoteInfo_okta_custom_role'
+      type: object
     CreateResourceInfo:
       description: |-
         # CreateResourceInfo Object
@@ -2986,8 +3245,14 @@ components:
         name: Okta Engineering Super Admin
         description: Okta super admin role.
         resource_type: OKTA_ROLE
-        metadata: "{\n  \"okta_directory_role\":\n    {\n      \"role_id\": \"SUPER_ADMIN-b52aa037-4a35-4ac3-9350-f6260fd12345\"\
-          ,\n      \"role_type\": \"SUPER_ADMIN\",\n    },\n}"
+        metadata: |-
+          {
+            "okta_directory_role":
+              {
+                "role_id": "SUPER_ADMIN-b52aa037-4a35-4ac3-9350-f6260fd12345",
+                "role_type": "SUPER_ADMIN",
+              },
+          }
         app_id: f454d283-ca87-4a8a-bdbb-df212eca5353
       properties:
         name:
@@ -3005,96 +3270,248 @@ components:
           example: f454d283-ca87-4a8a-bdbb-df212eca5353
           format: uuid
           type: string
+        remote_info:
+          $ref: '#/components/schemas/ResourceRemoteInfo'
         remote_resource_id:
-          description: "The ID of the resource on the remote system. Include only\
-            \ for items linked to remote systems. See [this guide](https://docs.opal.dev/docs/how-opal)\
+          deprecated: true
+          description: "Deprecated - use remote_info instead. The ID of the resource\
+            \ on the remote system. Include only for items linked to remote systems.\
+            \ See [this guide](https://docs.opal.dev/reference/end-system-objects)\
             \ for details on how to specify this field."
           example: API_ACCESS_MANAGEMENT_ADMIN-51d203da-313a-4fd9-8fcf-420ce6312345
           type: string
         metadata:
-          description: "JSON metadata about the remote resource. Include only for\
-            \ items linked to remote systems. See [this guide](https://docs.opal.dev/docs/how-opal)\
-            \ for details on how to specify this field.\nThe required format is dependent\
-            \ on resource_type and should have the following schema:\n<style type=\"\
-            text/css\">\ncode {max-height:300px !important}\n</style>\n```json\n{\n\
-            \  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\n  \"title\"\
-            : \"Resource Metadata\",\n  \"properties\": {\n    \"aws_ec2_instance\"\
-            : {\n      \"properties\": {\n        \"instance_id\": {\n          \"\
-            type\": \"string\"\n        },\n        \"region\": {\n          \"type\"\
-            : \"string\"\n        }\n      },\n      \"required\": [\"instance_id\"\
-            , \"region\"],\n      \"additionalProperties\": false,\n      \"type\"\
-            : \"object\",\n      \"title\": \"AWS EC2 Instance\"\n    },\n    \"aws_eks_cluster\"\
-            : {\n      \"properties\": {\n        \"cluster_name\": {\n          \"\
-            type\": \"string\"\n        },\n        \"cluster_region\": {\n      \
-            \    \"type\": \"string\"\n        },\n        \"cluster_arn\": {\n  \
-            \        \"type\": \"string\"\n        }\n      },\n      \"required\"\
-            : [\"cluster_name\", \"cluster_region\", \"cluster_arn\"],\n      \"additionalProperties\"\
-            : false,\n      \"type\": \"object\",\n      \"title\": \"AWS EKS Cluster\"\
-            \n    },\n    \"aws_rds_instance\": {\n      \"properties\": {\n     \
-            \   \"instance_id\": {\n          \"type\": \"string\"\n        },\n \
-            \       \"engine\": {\n          \"type\": \"string\"\n        },\n  \
-            \      \"region\": {\n          \"type\": \"string\"\n        },\n   \
-            \     \"resource_id\": {\n          \"type\": \"string\"\n        },\n\
-            \        \"database_name\": {\n          \"type\": \"string\"\n      \
-            \  }\n      },\n      \"required\": [\n        \"instance_id\",\n    \
-            \    \"engine\",\n        \"region\",\n        \"resource_id\",\n    \
-            \    \"database_name\"\n      ],\n      \"additionalProperties\": false,\n\
-            \      \"type\": \"object\",\n      \"title\": \"AWS RDS Instance\"\n\
-            \    },\n    \"aws_role\": {\n      \"properties\": {\n        \"arn\"\
-            : {\n          \"type\": \"string\"\n        },\n        \"name\": {\n\
-            \          \"type\": \"string\"\n        }\n      },\n      \"required\"\
-            : [\"arn\", \"name\"],\n      \"additionalProperties\": false,\n     \
-            \ \"type\": \"object\",\n      \"title\": \"AWS Role\"\n    },\n    \"\
-            gcp_bucket\": {\n      \"properties\": {\n        \"bucket_id\": {\n \
-            \         \"type\": \"string\"\n        }\n      },\n      \"required\"\
-            : [\"bucket_id\"],\n      \"additionalProperties\": false,\n      \"type\"\
-            : \"object\",\n      \"title\": \"GCP Bucket\"\n    },\n    \"gcp_compute_instance\"\
-            : {\n      \"properties\": {\n        \"instance_id\": {\n          \"\
-            type\": \"string\"\n        },\n        \"project_id\": {\n          \"\
-            type\": \"string\"\n        },\n        \"zone\": {\n          \"type\"\
-            : \"string\"\n        }\n      },\n      \"required\": [\"instance_id\"\
-            , \"project_id\", \"zone\"],\n      \"additionalProperties\": false,\n\
-            \      \"type\": \"object\",\n      \"title\": \"GCP Compute Instance\"\
-            \n    },\n    \"gcp_folder\": {\n      \"properties\": {\n        \"folder_id\"\
-            : {\n          \"type\": \"string\"\n        }\n      },\n      \"required\"\
-            : [\"folder_id\"],\n      \"additionalProperties\": false,\n      \"type\"\
-            : \"object\",\n      \"title\": \"GCP Folder\"\n    },\n    \"gcp_gke_cluster\"\
-            : {\n      \"properties\": {\n        \"cluster_name\": {\n          \"\
-            type\": \"string\"\n        }\n      },\n      \"required\": [\"cluster_name\"\
-            ],\n      \"additionalProperties\": false,\n      \"type\": \"object\"\
-            ,\n      \"title\": \"GCP GKE Cluster\"\n    },\n    \"gcp_project\":\
-            \ {\n      \"properties\": {\n        \"project_id\": {\n          \"\
-            type\": \"string\"\n        }\n      },\n      \"required\": [\"project_id\"\
-            ],\n      \"additionalProperties\": false,\n      \"type\": \"object\"\
-            ,\n      \"title\": \"GCP Project\"\n    },\n    \"gcp_sql_instance\"\
-            : {\n      \"properties\": {\n        \"instance_id\": {\n          \"\
-            type\": \"string\"\n        },\n        \"project_id\": {\n          \"\
-            type\": \"string\"\n        }\n      },\n      \"required\": [\"instance_id\"\
-            , \"project_id\"],\n      \"additionalProperties\": false,\n      \"type\"\
-            : \"object\",\n      \"title\": \"GCP SQL Instance\"\n    },\n    \"git_hub_repo\"\
-            : {\n      \"properties\": {\n        \"org_name\": {\n          \"type\"\
-            : \"string\"\n        },\n        \"repo_name\": {\n          \"type\"\
-            : \"string\"\n        }\n      },\n      \"required\": [\"org_name\",\
-            \ \"repo_name\"],\n      \"additionalProperties\": false,\n      \"type\"\
-            : \"object\",\n      \"title\": \"GitHub Repo\"\n    },\n    \"okta_directory_app\"\
-            : {\n      \"properties\": {\n        \"app_id\": {\n          \"type\"\
-            : \"string\"\n        },\n        \"logo_url\": {\n          \"type\"\
-            : \"string\"\n        }\n      },\n      \"required\": [\"app_id\", \"\
-            logo_url\"],\n      \"additionalProperties\": false,\n      \"type\":\
-            \ \"object\",\n      \"title\": \"Okta Directory App\"\n    },\n    \"\
-            okta_directory_role\": {\n      \"properties\": {\n        \"role_type\"\
-            : {\n          \"type\": \"string\"\n        },\n        \"role_id\":\
-            \ {\n          \"type\": \"string\"\n        }\n      },\n      \"required\"\
-            : [\"role_type\", \"role_id\"],\n      \"additionalProperties\": false,\n\
-            \      \"type\": \"object\",\n      \"title\": \"Okta Directory Role\"\
-            \n    },\n    \"salesforce_profile\": {\n      \"properties\": {\n   \
-            \     \"user_license\": {\n          \"type\": \"string\"\n        }\n\
-            \      },\n      \"required\": [\"user_license\"],\n      \"additionalProperties\"\
-            : false,\n      \"type\": \"object\",\n      \"title\": \"Salesforce Profile\"\
-            \n    }\n  },\n  \"additionalProperties\": false,\n  \"minProperties\"\
-            : 1,\n  \"maxProperties\": 1,\n  \"type\": \"object\"\n}\n```"
-          example: "{\n  \"okta_directory_role\":\n    {\n      \"role_id\": \"SUPER_ADMIN-b52aa037-4a35-4ac3-9350-f6260fd12345\"\
-            ,\n      \"role_type\": \"SUPER_ADMIN\",\n    },\n}"
+          deprecated: true
+          description: |-
+            Deprecated - use remote_info instead.
+
+            JSON metadata about the remote resource. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details on how to specify this field.
+            The required format is dependent on resource_type and should have the following schema:
+            <style type="text/css">
+            code {max-height:300px !important}
+            </style>
+            ```json
+            {
+              "$schema": "http://json-schema.org/draft-04/schema#",
+              "title": "Resource Metadata",
+              "properties": {
+                "aws_ec2_instance": {
+                  "properties": {
+                    "instance_id": {
+                      "type": "string"
+                    },
+                    "region": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["instance_id", "region"],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "AWS EC2 Instance"
+                },
+                "aws_eks_cluster": {
+                  "properties": {
+                    "cluster_name": {
+                      "type": "string"
+                    },
+                    "cluster_region": {
+                      "type": "string"
+                    },
+                    "cluster_arn": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["cluster_name", "cluster_region", "cluster_arn"],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "AWS EKS Cluster"
+                },
+                "aws_rds_instance": {
+                  "properties": {
+                    "instance_id": {
+                      "type": "string"
+                    },
+                    "engine": {
+                      "type": "string"
+                    },
+                    "region": {
+                      "type": "string"
+                    },
+                    "resource_id": {
+                      "type": "string"
+                    },
+                    "database_name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "instance_id",
+                    "engine",
+                    "region",
+                    "resource_id",
+                    "database_name"
+                  ],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "AWS RDS Instance"
+                },
+                "aws_role": {
+                  "properties": {
+                    "arn": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["arn", "name"],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "AWS Role"
+                },
+                "gcp_bucket": {
+                  "properties": {
+                    "bucket_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["bucket_id"],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "GCP Bucket"
+                },
+                "gcp_compute_instance": {
+                  "properties": {
+                    "instance_id": {
+                      "type": "string"
+                    },
+                    "project_id": {
+                      "type": "string"
+                    },
+                    "zone": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["instance_id", "project_id", "zone"],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "GCP Compute Instance"
+                },
+                "gcp_folder": {
+                  "properties": {
+                    "folder_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["folder_id"],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "GCP Folder"
+                },
+                "gcp_gke_cluster": {
+                  "properties": {
+                    "cluster_name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["cluster_name"],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "GCP GKE Cluster"
+                },
+                "gcp_project": {
+                  "properties": {
+                    "project_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["project_id"],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "GCP Project"
+                },
+                "gcp_sql_instance": {
+                  "properties": {
+                    "instance_id": {
+                      "type": "string"
+                    },
+                    "project_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["instance_id", "project_id"],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "GCP SQL Instance"
+                },
+                "git_hub_repo": {
+                  "properties": {
+                    "org_name": {
+                      "type": "string"
+                    },
+                    "repo_name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["org_name", "repo_name"],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "GitHub Repo"
+                },
+                "okta_directory_app": {
+                  "properties": {
+                    "app_id": {
+                      "type": "string"
+                    },
+                    "logo_url": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["app_id", "logo_url"],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "Okta Directory App"
+                },
+                "okta_directory_role": {
+                  "properties": {
+                    "role_type": {
+                      "type": "string"
+                    },
+                    "role_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["role_type", "role_id"],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "Okta Directory Role"
+                },
+                "salesforce_profile": {
+                  "properties": {
+                    "user_license": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["user_license"],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "Salesforce Profile"
+                }
+              },
+              "additionalProperties": false,
+              "minProperties": 1,
+              "maxProperties": 1,
+              "type": "object"
+            }
+            ```
+          example: |-
+            {
+              "okta_directory_role":
+                {
+                  "role_id": "SUPER_ADMIN-b52aa037-4a35-4ac3-9350-f6260fd12345",
+                  "role_type": "SUPER_ADMIN",
+                },
+            }
           type: string
       required:
       - app_id
@@ -3133,47 +3550,107 @@ components:
           example: f454d283-ca87-4a8a-bdbb-df212eca5353
           format: uuid
           type: string
+        remote_info:
+          $ref: '#/components/schemas/GroupRemoteInfo'
         remote_group_id:
-          description: "The ID of the group on the remote system. Include only for\
-            \ items linked to remote systems. See [this guide](https://docs.opal.dev/docs/how-opal)\
+          deprecated: true
+          description: "Deprecated - use remote_info instead. The ID of the group\
+            \ on the remote system. Include only for items linked to remote systems.\
+            \ See [this guide](https://docs.opal.dev/reference/end-system-objects)\
             \ for details on how to specify this field."
           example: 00g4fixjd6Bc9w012345
           type: string
         metadata:
-          description: "JSON metadata about the remote group. Include only for items\
-            \ linked to remote systems. See [this guide](https://docs.opal.dev/docs/how-opal)\
-            \ for details on how to specify this field.\nThe required format is dependent\
-            \ on group_type and should have the following schema:\n<style type=\"\
-            text/css\">\ncode {max-height:300px !important}\n</style>\n```json\n{\n\
-            \  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\n  \"title\"\
-            : \"Group Metadata\",\n  \"properties\": {\n    \"ad_group\": {\n    \
-            \  \"properties\": {\n        \"object_guid\": {\n          \"type\":\
-            \ \"string\"\n        }\n      },\n      \"required\": [\"object_guid\"\
-            ],\n      \"additionalProperties\": false,\n      \"type\": \"object\"\
-            ,\n      \"title\": \"Active Directory Group\"\n    },\n    \"duo_group\"\
-            : {\n      \"properties\": {\n        \"group_id\": {\n          \"type\"\
-            : \"string\"\n        }\n      },\n      \"required\": [\"group_id\"],\n\
-            \      \"additionalProperties\": false,\n      \"type\": \"object\",\n\
-            \      \"title\": \"Duo Group\"\n    },\n    \"git_hub_team\": {\n   \
-            \   \"properties\": {\n        \"org_name\": {\n          \"type\": \"\
-            string\"\n        },\n        \"team_slug\": {\n          \"type\": \"\
-            string\"\n        }\n      },\n      \"required\": [\"org_name\", \"team_slug\"\
-            ],\n      \"additionalProperties\": false,\n      \"type\": \"object\"\
-            ,\n      \"title\": \"GitHub Team\"\n    },\n    \"google_groups_group\"\
-            : {\n      \"properties\": {\n        \"group_id\": {\n          \"type\"\
-            : \"string\"\n        }\n      },\n      \"required\": [\"group_id\"],\n\
-            \      \"additionalProperties\": false,\n      \"type\": \"object\",\n\
-            \      \"title\": \"Google Groups Group\"\n    },\n    \"ldap_group\"\
-            : {\n      \"properties\": {\n        \"group_uid\": {\n          \"type\"\
-            : \"string\"\n        }\n      },\n      \"required\": [\"group_uid\"\
-            ],\n      \"additionalProperties\": false,\n      \"type\": \"object\"\
-            ,\n      \"title\": \"LDAP Group\"\n    },\n    \"okta_directory_group\"\
-            : {\n      \"properties\": {\n        \"group_id\": {\n          \"type\"\
-            : \"string\"\n        }\n      },\n      \"required\": [\"group_id\"],\n\
-            \      \"additionalProperties\": false,\n      \"type\": \"object\",\n\
-            \      \"title\": \"Okta Directory Group\"\n    }\n  },\n  \"additionalProperties\"\
-            : false,\n  \"minProperties\": 1,\n  \"maxProperties\": 1,\n  \"type\"\
-            : \"object\"\n}\n```"
+          deprecated: true
+          description: |-
+            Deprecated - use remote_info instead.
+
+            JSON metadata about the remote group. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details on how to specify this field.
+            The required format is dependent on group_type and should have the following schema:
+            <style type="text/css">
+            code {max-height:300px !important}
+            </style>
+            ```json
+            {
+              "$schema": "http://json-schema.org/draft-04/schema#",
+              "title": "Group Metadata",
+              "properties": {
+                "ad_group": {
+                  "properties": {
+                    "object_guid": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["object_guid"],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "Active Directory Group"
+                },
+                "duo_group": {
+                  "properties": {
+                    "group_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["group_id"],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "Duo Group"
+                },
+                "git_hub_team": {
+                  "properties": {
+                    "org_name": {
+                      "type": "string"
+                    },
+                    "team_slug": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["org_name", "team_slug"],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "GitHub Team"
+                },
+                "google_groups_group": {
+                  "properties": {
+                    "group_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["group_id"],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "Google Groups Group"
+                },
+                "ldap_group": {
+                  "properties": {
+                    "group_uid": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["group_uid"],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "LDAP Group"
+                },
+                "okta_directory_group": {
+                  "properties": {
+                    "group_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["group_id"],
+                  "additionalProperties": false,
+                  "type": "object",
+                  "title": "Okta Directory Group"
+                }
+              },
+              "additionalProperties": false,
+              "minProperties": 1,
+              "maxProperties": 1,
+              "type": "object"
+            }
+            ```
           example: "{ \"okta_directory_group\": { \"group_id\": \"00g4bs66kwtpe1g12345\"\
             \ } }"
           type: string
@@ -3279,6 +3756,11 @@ components:
             (in minutes).
           example: 120
           type: integer
+        recommended_duration:
+          description: The recommended duration for which the resource should be requested
+            (in minutes). -1 represents an indefinite duration.
+          example: 120
+          type: integer
         require_manager_approval:
           description: A bool representing whether or not access requests to the resource
             require manager approval.
@@ -3286,7 +3768,7 @@ components:
           type: boolean
         require_support_ticket:
           description: A bool representing whether or not access requests to the resource
-            require a support ticket.
+            require an access ticket.
           example: false
           type: boolean
         folder_id:
@@ -3299,6 +3781,11 @@ components:
             to approve requests for this resource.
           example: false
           type: boolean
+        require_mfa_to_connect:
+          description: A bool representing whether or not to require MFA to connect
+            to this resource.
+          example: false
+          type: boolean
         auto_approval:
           description: A bool representing whether or not to automatically approve
             requests to this resource.
@@ -3308,6 +3795,19 @@ components:
           description: The ID of the associated request template.
           example: 06851574-e50d-40ca-8c78-f72ae6ab4304
           format: uuid
+          type: string
+        metadata:
+          description: "JSON metadata about the remote resource. Only set for items\
+            \ linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects)\
+            \ for details."
+          example: |-
+            {
+              "okta_directory_role":
+                {
+                  "role_id": "SUPER_ADMIN-b52aa037-4a35-4ac3-9350-f6260fd12345",
+                  "role_type": "SUPER_ADMIN",
+                },
+            }
           type: string
       required:
       - resource_id
@@ -3372,7 +3872,13 @@ components:
           type: string
         max_duration:
           description: The maximum duration for which the resource can be requested
-            (in minutes). Use 0 to set to indefinite.
+            (in minutes). Use -1 to set to indefinite.
+          example: 120
+          type: integer
+        recommended_duration:
+          description: The recommended duration for which the resource should be requested
+            (in minutes). Will be the default value in a request. Use -1 to set to
+            indefinite and 0 to unset.
           example: 120
           type: integer
         require_manager_approval:
@@ -3382,7 +3888,7 @@ components:
           type: boolean
         require_support_ticket:
           description: A bool representing whether or not access requests to the resource
-            require a support ticket.
+            require an access ticket.
           example: false
           type: boolean
         folder_id:
@@ -3393,6 +3899,11 @@ components:
         require_mfa_to_approve:
           description: A bool representing whether or not to require MFA for reviewers
             to approve requests for this resource.
+          example: false
+          type: boolean
+        require_mfa_to_connect:
+          description: A bool representing whether or not to require MFA to connect
+            to this resource.
           example: false
           type: boolean
         auto_approval:
@@ -3579,6 +4090,11 @@ components:
             notified. Use 0 to remove escalation policy.
           example: 120
           type: integer
+        reviewer_message_channel_id:
+          example: 37cb7e41-12ba-46da-92ff-030abe0450b1
+          format: uuid
+          nullable: true
+          type: string
       required:
       - owner_id
       type: object
@@ -3617,6 +4133,11 @@ components:
             format: uuid
             type: string
           type: array
+        reviewer_message_channel_id:
+          description: The message channel id for the reviewer channel.
+          example: 37cb7e41-12ba-46da-92ff-030abe0450b1
+          format: uuid
+          type: string
       required:
       - name
       - user_ids
@@ -3670,8 +4191,179 @@ components:
             notified. Use 0 to remove escalation policy.
           example: 120
           type: integer
+        reviewer_message_channel_id:
+          description: The message channel id for the reviewer channel. Use "" to
+            remove an existing message channel.
+          example: 37cb7e41-12ba-46da-92ff-030abe0450b1
+          format: uuid
+          type: string
       required:
       - owner_id
+      type: object
+    GroupRemoteInfo_active_directory_group:
+      description: Remote info for Active Directory group.
+      properties:
+        group_id:
+          description: The id of the Google group.
+          example: 01fa7402-01d8-103b-8deb-5f3a0ab7884
+          type: string
+      required:
+      - group_id
+      type: object
+    GroupRemoteInfo_github_team:
+      description: Remote info for GitHub team.
+      properties:
+        team_id:
+          description: The id of the GitHub team.
+          example: "898931321"
+          type: string
+        team_slug:
+          description: The slug of the GitHub team.
+          example: opal-security
+          type: string
+      required:
+      - team_id
+      - team_slug
+      type: object
+    GroupRemoteInfo_google_group:
+      description: Remote info for Google group.
+      properties:
+        group_id:
+          description: The id of the Google group.
+          example: 1y6w882181n7sg
+          type: string
+      required:
+      - group_id
+      type: object
+    GroupRemoteInfo_ldap_group:
+      description: Remote info for LDAP group.
+      properties:
+        group_id:
+          description: The id of the LDAP group.
+          example: 01fa7402-01d8-103b-8deb-5f3a0ab7884
+          type: string
+      required:
+      - group_id
+      type: object
+    GroupRemoteInfo_okta_group:
+      description: Remote info for Okta Directory group.
+      properties:
+        group_id:
+          description: The id of the Okta Directory group.
+          example: 00gjs33pe8rtmRrp3rd6
+          type: string
+      required:
+      - group_id
+      type: object
+    GroupRemoteInfo_duo_group:
+      description: Remote info for Duo Security group.
+      properties:
+        group_id:
+          description: The id of the Duo Security group.
+          example: DSRD8W89B9DNDBY4RHAC
+          type: string
+      required:
+      - group_id
+      type: object
+    ResourceRemoteInfo_aws_iam_role:
+      description: Remote info for AWS IAM role.
+      properties:
+        arn:
+          description: The ARN of the IAM role.
+          example: arn:aws:iam::179308207300:role/MyRole
+          type: string
+      required:
+      - arn
+      type: object
+    ResourceRemoteInfo_aws_ec2_instance:
+      description: Remote info for AWS EC2 instance.
+      properties:
+        instance_id:
+          description: The instanceId of the EC2 instance.
+          example: i-13f1a1e2899f9e93a
+          type: string
+        region:
+          description: The region of the EC2 instance.
+          example: us-east-2
+          type: string
+      required:
+      - instance_id
+      - region
+      type: object
+    ResourceRemoteInfo_aws_rds_instance:
+      description: Remote info for AWS RDS instance.
+      properties:
+        instance_id:
+          description: The instanceId of the RDS instance.
+          example: demo-mysql-db
+          type: string
+        region:
+          description: The region of the RDS instance.
+          example: us-east-2
+          type: string
+        resource_id:
+          description: The resourceId of the RDS instance.
+          example: db-AOO8V0XUCNU13XLZXQDQRSN0NQ
+          type: string
+      required:
+      - instance_id
+      - region
+      - resource_id
+      type: object
+    ResourceRemoteInfo_aws_eks_cluster:
+      description: Remote info for AWS EKS cluster.
+      properties:
+        arn:
+          description: The ARN of the EKS cluster.
+          example: arn:aws:eks:us-east-2:234234234234:cluster/testcluster
+          type: string
+      required:
+      - arn
+      type: object
+    ResourceRemoteInfo_github_repo:
+      description: Remote info for GitHub repositories.
+      properties:
+        repo_id:
+          description: The id of the repository.
+          example: "898931321"
+          type: string
+        repo_name:
+          description: The name of the repository.
+          example: Opal Security
+          type: string
+      required:
+      - repo_id
+      - repo_name
+      type: object
+    ResourceRemoteInfo_okta_app:
+      description: Remote info for Okta directory app.
+      properties:
+        app_id:
+          description: The id of the app.
+          example: a9dfas0f678asdf67867
+          type: string
+      required:
+      - app_id
+      type: object
+    ResourceRemoteInfo_okta_standard_role:
+      description: Remote info for Okta directory standard role.
+      properties:
+        role_type:
+          description: The type of the standard role.
+          example: ORG_ADMIN
+          type: string
+      required:
+      - role_type
+      type: object
+    ResourceRemoteInfo_okta_custom_role:
+      description: Remote info for Okta directory custom role.
+      properties:
+        role_id:
+          description: The id of the custom role.
+          example: a9dfas0f678asdf67867
+          type: string
+      required:
+      - role_id
       type: object
   securitySchemes:
     BearerAuth:

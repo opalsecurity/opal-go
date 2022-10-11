@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the owner. | [optional] 
 **Description** | Pointer to **string** | A description of the owner. | [optional] 
 **AccessRequestEscalationPeriod** | Pointer to **int32** | The amount of time (in minutes) before the next reviewer is notified. Use 0 to remove escalation policy. | [optional] 
+**ReviewerMessageChannelId** | Pointer to **string** | The message channel id for the reviewer channel. Use \&quot;\&quot; to remove an existing message channel. | [optional] 
 
 ## Methods
 
@@ -122,6 +123,31 @@ SetAccessRequestEscalationPeriod sets AccessRequestEscalationPeriod field to giv
 `func (o *UpdateOwnerInfo) HasAccessRequestEscalationPeriod() bool`
 
 HasAccessRequestEscalationPeriod returns a boolean if a field has been set.
+
+### GetReviewerMessageChannelId
+
+`func (o *UpdateOwnerInfo) GetReviewerMessageChannelId() string`
+
+GetReviewerMessageChannelId returns the ReviewerMessageChannelId field if non-nil, zero value otherwise.
+
+### GetReviewerMessageChannelIdOk
+
+`func (o *UpdateOwnerInfo) GetReviewerMessageChannelIdOk() (*string, bool)`
+
+GetReviewerMessageChannelIdOk returns a tuple with the ReviewerMessageChannelId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReviewerMessageChannelId
+
+`func (o *UpdateOwnerInfo) SetReviewerMessageChannelId(v string)`
+
+SetReviewerMessageChannelId sets ReviewerMessageChannelId field to given value.
+
+### HasReviewerMessageChannelId
+
+`func (o *UpdateOwnerInfo) HasReviewerMessageChannelId() bool`
+
+HasReviewerMessageChannelId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

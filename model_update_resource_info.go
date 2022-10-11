@@ -25,16 +25,20 @@ type UpdateResourceInfo struct {
 	Description *string `json:"description,omitempty"`
 	// The ID of the owner of the resource.
 	AdminOwnerId *string `json:"admin_owner_id,omitempty"`
-	// The maximum duration for which the resource can be requested (in minutes). Use 0 to set to indefinite.
+	// The maximum duration for which the resource can be requested (in minutes). Use -1 to set to indefinite.
 	MaxDuration *int32 `json:"max_duration,omitempty"`
+	// The recommended duration for which the resource should be requested (in minutes). Will be the default value in a request. Use -1 to set to indefinite and 0 to unset.
+	RecommendedDuration *int32 `json:"recommended_duration,omitempty"`
 	// A bool representing whether or not access requests to the resource require manager approval.
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
-	// A bool representing whether or not access requests to the resource require a support ticket.
+	// A bool representing whether or not access requests to the resource require an access ticket.
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
 	// The ID of the folder that the resource is located in.
 	FolderId *string `json:"folder_id,omitempty"`
 	// A bool representing whether or not to require MFA for reviewers to approve requests for this resource.
 	RequireMfaToApprove *bool `json:"require_mfa_to_approve,omitempty"`
+	// A bool representing whether or not to require MFA to connect to this resource.
+	RequireMfaToConnect *bool `json:"require_mfa_to_connect,omitempty"`
 	// A bool representing whether or not to automatically approve requests to this resource.
 	AutoApproval *bool `json:"auto_approval,omitempty"`
 	// The ID of the associated request template.
@@ -211,6 +215,38 @@ func (o *UpdateResourceInfo) SetMaxDuration(v int32) {
 	o.MaxDuration = &v
 }
 
+// GetRecommendedDuration returns the RecommendedDuration field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetRecommendedDuration() int32 {
+	if o == nil || o.RecommendedDuration == nil {
+		var ret int32
+		return ret
+	}
+	return *o.RecommendedDuration
+}
+
+// GetRecommendedDurationOk returns a tuple with the RecommendedDuration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceInfo) GetRecommendedDurationOk() (*int32, bool) {
+	if o == nil || o.RecommendedDuration == nil {
+		return nil, false
+	}
+	return o.RecommendedDuration, true
+}
+
+// HasRecommendedDuration returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasRecommendedDuration() bool {
+	if o != nil && o.RecommendedDuration != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRecommendedDuration gets a reference to the given int32 and assigns it to the RecommendedDuration field.
+func (o *UpdateResourceInfo) SetRecommendedDuration(v int32) {
+	o.RecommendedDuration = &v
+}
+
 // GetRequireManagerApproval returns the RequireManagerApproval field value if set, zero value otherwise.
 func (o *UpdateResourceInfo) GetRequireManagerApproval() bool {
 	if o == nil || o.RequireManagerApproval == nil {
@@ -339,6 +375,38 @@ func (o *UpdateResourceInfo) SetRequireMfaToApprove(v bool) {
 	o.RequireMfaToApprove = &v
 }
 
+// GetRequireMfaToConnect returns the RequireMfaToConnect field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetRequireMfaToConnect() bool {
+	if o == nil || o.RequireMfaToConnect == nil {
+		var ret bool
+		return ret
+	}
+	return *o.RequireMfaToConnect
+}
+
+// GetRequireMfaToConnectOk returns a tuple with the RequireMfaToConnect field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceInfo) GetRequireMfaToConnectOk() (*bool, bool) {
+	if o == nil || o.RequireMfaToConnect == nil {
+		return nil, false
+	}
+	return o.RequireMfaToConnect, true
+}
+
+// HasRequireMfaToConnect returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasRequireMfaToConnect() bool {
+	if o != nil && o.RequireMfaToConnect != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRequireMfaToConnect gets a reference to the given bool and assigns it to the RequireMfaToConnect field.
+func (o *UpdateResourceInfo) SetRequireMfaToConnect(v bool) {
+	o.RequireMfaToConnect = &v
+}
+
 // GetAutoApproval returns the AutoApproval field value if set, zero value otherwise.
 func (o *UpdateResourceInfo) GetAutoApproval() bool {
 	if o == nil || o.AutoApproval == nil {
@@ -420,6 +488,9 @@ func (o UpdateResourceInfo) MarshalJSON() ([]byte, error) {
 	if o.MaxDuration != nil {
 		toSerialize["max_duration"] = o.MaxDuration
 	}
+	if o.RecommendedDuration != nil {
+		toSerialize["recommended_duration"] = o.RecommendedDuration
+	}
 	if o.RequireManagerApproval != nil {
 		toSerialize["require_manager_approval"] = o.RequireManagerApproval
 	}
@@ -431,6 +502,9 @@ func (o UpdateResourceInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.RequireMfaToApprove != nil {
 		toSerialize["require_mfa_to_approve"] = o.RequireMfaToApprove
+	}
+	if o.RequireMfaToConnect != nil {
+		toSerialize["require_mfa_to_connect"] = o.RequireMfaToConnect
 	}
 	if o.AutoApproval != nil {
 		toSerialize["auto_approval"] = o.AutoApproval

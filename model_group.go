@@ -31,13 +31,14 @@ type Group struct {
 	RemoteId *string `json:"remote_id,omitempty"`
 	// The name of the remote.
 	RemoteName *string `json:"remote_name,omitempty"`
-	GroupFunction *GroupFunctionEnum `json:"group_function,omitempty"`
 	GroupType *GroupTypeEnum `json:"group_type,omitempty"`
 	// The maximum duration for which the group can be requested (in minutes).
 	MaxDuration *int32 `json:"max_duration,omitempty"`
+	// The recommended duration for which the group should be requested (in minutes). -1 represents an indefinite duration.
+	RecommendedDuration *int32 `json:"recommended_duration,omitempty"`
 	// A bool representing whether or not access requests to the group require manager approval.
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
-	// A bool representing whether or not access requests to the group require a support ticket.
+	// A bool representing whether or not access requests to the group require an access ticket.
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
 	// The ID of the folder that the group is located in.
 	FolderId *string `json:"folder_id,omitempty"`
@@ -47,6 +48,8 @@ type Group struct {
 	AutoApproval *bool `json:"auto_approval,omitempty"`
 	// The ID of the associated request template.
 	RequestTemplateId *string `json:"request_template_id,omitempty"`
+	// JSON metadata about the remote group. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details.
+	Metadata *string `json:"metadata,omitempty"`
 }
 
 // NewGroup instantiates a new Group object
@@ -283,38 +286,6 @@ func (o *Group) SetRemoteName(v string) {
 	o.RemoteName = &v
 }
 
-// GetGroupFunction returns the GroupFunction field value if set, zero value otherwise.
-func (o *Group) GetGroupFunction() GroupFunctionEnum {
-	if o == nil || o.GroupFunction == nil {
-		var ret GroupFunctionEnum
-		return ret
-	}
-	return *o.GroupFunction
-}
-
-// GetGroupFunctionOk returns a tuple with the GroupFunction field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Group) GetGroupFunctionOk() (*GroupFunctionEnum, bool) {
-	if o == nil || o.GroupFunction == nil {
-		return nil, false
-	}
-	return o.GroupFunction, true
-}
-
-// HasGroupFunction returns a boolean if a field has been set.
-func (o *Group) HasGroupFunction() bool {
-	if o != nil && o.GroupFunction != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetGroupFunction gets a reference to the given GroupFunctionEnum and assigns it to the GroupFunction field.
-func (o *Group) SetGroupFunction(v GroupFunctionEnum) {
-	o.GroupFunction = &v
-}
-
 // GetGroupType returns the GroupType field value if set, zero value otherwise.
 func (o *Group) GetGroupType() GroupTypeEnum {
 	if o == nil || o.GroupType == nil {
@@ -377,6 +348,38 @@ func (o *Group) HasMaxDuration() bool {
 // SetMaxDuration gets a reference to the given int32 and assigns it to the MaxDuration field.
 func (o *Group) SetMaxDuration(v int32) {
 	o.MaxDuration = &v
+}
+
+// GetRecommendedDuration returns the RecommendedDuration field value if set, zero value otherwise.
+func (o *Group) GetRecommendedDuration() int32 {
+	if o == nil || o.RecommendedDuration == nil {
+		var ret int32
+		return ret
+	}
+	return *o.RecommendedDuration
+}
+
+// GetRecommendedDurationOk returns a tuple with the RecommendedDuration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetRecommendedDurationOk() (*int32, bool) {
+	if o == nil || o.RecommendedDuration == nil {
+		return nil, false
+	}
+	return o.RecommendedDuration, true
+}
+
+// HasRecommendedDuration returns a boolean if a field has been set.
+func (o *Group) HasRecommendedDuration() bool {
+	if o != nil && o.RecommendedDuration != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRecommendedDuration gets a reference to the given int32 and assigns it to the RecommendedDuration field.
+func (o *Group) SetRecommendedDuration(v int32) {
+	o.RecommendedDuration = &v
 }
 
 // GetRequireManagerApproval returns the RequireManagerApproval field value if set, zero value otherwise.
@@ -571,6 +574,38 @@ func (o *Group) SetRequestTemplateId(v string) {
 	o.RequestTemplateId = &v
 }
 
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
+func (o *Group) GetMetadata() string {
+	if o == nil || o.Metadata == nil {
+		var ret string
+		return ret
+	}
+	return *o.Metadata
+}
+
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetMetadataOk() (*string, bool) {
+	if o == nil || o.Metadata == nil {
+		return nil, false
+	}
+	return o.Metadata, true
+}
+
+// HasMetadata returns a boolean if a field has been set.
+func (o *Group) HasMetadata() bool {
+	if o != nil && o.Metadata != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given string and assigns it to the Metadata field.
+func (o *Group) SetMetadata(v string) {
+	o.Metadata = &v
+}
+
 func (o Group) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -594,14 +629,14 @@ func (o Group) MarshalJSON() ([]byte, error) {
 	if o.RemoteName != nil {
 		toSerialize["remote_name"] = o.RemoteName
 	}
-	if o.GroupFunction != nil {
-		toSerialize["group_function"] = o.GroupFunction
-	}
 	if o.GroupType != nil {
 		toSerialize["group_type"] = o.GroupType
 	}
 	if o.MaxDuration != nil {
 		toSerialize["max_duration"] = o.MaxDuration
+	}
+	if o.RecommendedDuration != nil {
+		toSerialize["recommended_duration"] = o.RecommendedDuration
 	}
 	if o.RequireManagerApproval != nil {
 		toSerialize["require_manager_approval"] = o.RequireManagerApproval
@@ -620,6 +655,9 @@ func (o Group) MarshalJSON() ([]byte, error) {
 	}
 	if o.RequestTemplateId != nil {
 		toSerialize["request_template_id"] = o.RequestTemplateId
+	}
+	if o.Metadata != nil {
+		toSerialize["metadata"] = o.Metadata
 	}
 	return json.Marshal(toSerialize)
 }

@@ -24,7 +24,6 @@ type MessageChannel struct {
 	RemoteId *string `json:"remote_id,omitempty"`
 	// The name of the message channel.
 	Name *string `json:"name,omitempty"`
-	MessageChannelType *MessageChannelTypeEnum `json:"message_channel_type,omitempty"`
 	// A bool representing whether or not the message channel is private.
 	IsPrivate *bool `json:"is_private,omitempty"`
 }
@@ -167,38 +166,6 @@ func (o *MessageChannel) SetName(v string) {
 	o.Name = &v
 }
 
-// GetMessageChannelType returns the MessageChannelType field value if set, zero value otherwise.
-func (o *MessageChannel) GetMessageChannelType() MessageChannelTypeEnum {
-	if o == nil || o.MessageChannelType == nil {
-		var ret MessageChannelTypeEnum
-		return ret
-	}
-	return *o.MessageChannelType
-}
-
-// GetMessageChannelTypeOk returns a tuple with the MessageChannelType field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *MessageChannel) GetMessageChannelTypeOk() (*MessageChannelTypeEnum, bool) {
-	if o == nil || o.MessageChannelType == nil {
-		return nil, false
-	}
-	return o.MessageChannelType, true
-}
-
-// HasMessageChannelType returns a boolean if a field has been set.
-func (o *MessageChannel) HasMessageChannelType() bool {
-	if o != nil && o.MessageChannelType != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetMessageChannelType gets a reference to the given MessageChannelTypeEnum and assigns it to the MessageChannelType field.
-func (o *MessageChannel) SetMessageChannelType(v MessageChannelTypeEnum) {
-	o.MessageChannelType = &v
-}
-
 // GetIsPrivate returns the IsPrivate field value if set, zero value otherwise.
 func (o *MessageChannel) GetIsPrivate() bool {
 	if o == nil || o.IsPrivate == nil {
@@ -244,9 +211,6 @@ func (o MessageChannel) MarshalJSON() ([]byte, error) {
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
-	}
-	if o.MessageChannelType != nil {
-		toSerialize["message_channel_type"] = o.MessageChannelType
 	}
 	if o.IsPrivate != nil {
 		toSerialize["is_private"] = o.IsPrivate

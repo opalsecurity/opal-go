@@ -34,18 +34,24 @@ type Resource struct {
 	ResourceType *ResourceTypeEnum `json:"resource_type,omitempty"`
 	// The maximum duration for which the resource can be requested (in minutes).
 	MaxDuration *int32 `json:"max_duration,omitempty"`
+	// The recommended duration for which the resource should be requested (in minutes). -1 represents an indefinite duration.
+	RecommendedDuration *int32 `json:"recommended_duration,omitempty"`
 	// A bool representing whether or not access requests to the resource require manager approval.
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
-	// A bool representing whether or not access requests to the resource require a support ticket.
+	// A bool representing whether or not access requests to the resource require an access ticket.
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
 	// The ID of the folder that the resource is located in.
 	FolderId *string `json:"folder_id,omitempty"`
 	// A bool representing whether or not to require MFA for reviewers to approve requests for this resource.
 	RequireMfaToApprove *bool `json:"require_mfa_to_approve,omitempty"`
+	// A bool representing whether or not to require MFA to connect to this resource.
+	RequireMfaToConnect *bool `json:"require_mfa_to_connect,omitempty"`
 	// A bool representing whether or not to automatically approve requests to this resource.
 	AutoApproval *bool `json:"auto_approval,omitempty"`
 	// The ID of the associated request template.
 	RequestTemplateId *string `json:"request_template_id,omitempty"`
+	// JSON metadata about the remote resource. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details.
+	Metadata *string `json:"metadata,omitempty"`
 }
 
 // NewResource instantiates a new Resource object
@@ -346,6 +352,38 @@ func (o *Resource) SetMaxDuration(v int32) {
 	o.MaxDuration = &v
 }
 
+// GetRecommendedDuration returns the RecommendedDuration field value if set, zero value otherwise.
+func (o *Resource) GetRecommendedDuration() int32 {
+	if o == nil || o.RecommendedDuration == nil {
+		var ret int32
+		return ret
+	}
+	return *o.RecommendedDuration
+}
+
+// GetRecommendedDurationOk returns a tuple with the RecommendedDuration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetRecommendedDurationOk() (*int32, bool) {
+	if o == nil || o.RecommendedDuration == nil {
+		return nil, false
+	}
+	return o.RecommendedDuration, true
+}
+
+// HasRecommendedDuration returns a boolean if a field has been set.
+func (o *Resource) HasRecommendedDuration() bool {
+	if o != nil && o.RecommendedDuration != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRecommendedDuration gets a reference to the given int32 and assigns it to the RecommendedDuration field.
+func (o *Resource) SetRecommendedDuration(v int32) {
+	o.RecommendedDuration = &v
+}
+
 // GetRequireManagerApproval returns the RequireManagerApproval field value if set, zero value otherwise.
 func (o *Resource) GetRequireManagerApproval() bool {
 	if o == nil || o.RequireManagerApproval == nil {
@@ -474,6 +512,38 @@ func (o *Resource) SetRequireMfaToApprove(v bool) {
 	o.RequireMfaToApprove = &v
 }
 
+// GetRequireMfaToConnect returns the RequireMfaToConnect field value if set, zero value otherwise.
+func (o *Resource) GetRequireMfaToConnect() bool {
+	if o == nil || o.RequireMfaToConnect == nil {
+		var ret bool
+		return ret
+	}
+	return *o.RequireMfaToConnect
+}
+
+// GetRequireMfaToConnectOk returns a tuple with the RequireMfaToConnect field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetRequireMfaToConnectOk() (*bool, bool) {
+	if o == nil || o.RequireMfaToConnect == nil {
+		return nil, false
+	}
+	return o.RequireMfaToConnect, true
+}
+
+// HasRequireMfaToConnect returns a boolean if a field has been set.
+func (o *Resource) HasRequireMfaToConnect() bool {
+	if o != nil && o.RequireMfaToConnect != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRequireMfaToConnect gets a reference to the given bool and assigns it to the RequireMfaToConnect field.
+func (o *Resource) SetRequireMfaToConnect(v bool) {
+	o.RequireMfaToConnect = &v
+}
+
 // GetAutoApproval returns the AutoApproval field value if set, zero value otherwise.
 func (o *Resource) GetAutoApproval() bool {
 	if o == nil || o.AutoApproval == nil {
@@ -538,6 +608,38 @@ func (o *Resource) SetRequestTemplateId(v string) {
 	o.RequestTemplateId = &v
 }
 
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
+func (o *Resource) GetMetadata() string {
+	if o == nil || o.Metadata == nil {
+		var ret string
+		return ret
+	}
+	return *o.Metadata
+}
+
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetMetadataOk() (*string, bool) {
+	if o == nil || o.Metadata == nil {
+		return nil, false
+	}
+	return o.Metadata, true
+}
+
+// HasMetadata returns a boolean if a field has been set.
+func (o *Resource) HasMetadata() bool {
+	if o != nil && o.Metadata != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given string and assigns it to the Metadata field.
+func (o *Resource) SetMetadata(v string) {
+	o.Metadata = &v
+}
+
 func (o Resource) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -567,6 +669,9 @@ func (o Resource) MarshalJSON() ([]byte, error) {
 	if o.MaxDuration != nil {
 		toSerialize["max_duration"] = o.MaxDuration
 	}
+	if o.RecommendedDuration != nil {
+		toSerialize["recommended_duration"] = o.RecommendedDuration
+	}
 	if o.RequireManagerApproval != nil {
 		toSerialize["require_manager_approval"] = o.RequireManagerApproval
 	}
@@ -579,11 +684,17 @@ func (o Resource) MarshalJSON() ([]byte, error) {
 	if o.RequireMfaToApprove != nil {
 		toSerialize["require_mfa_to_approve"] = o.RequireMfaToApprove
 	}
+	if o.RequireMfaToConnect != nil {
+		toSerialize["require_mfa_to_connect"] = o.RequireMfaToConnect
+	}
 	if o.AutoApproval != nil {
 		toSerialize["auto_approval"] = o.AutoApproval
 	}
 	if o.RequestTemplateId != nil {
 		toSerialize["request_template_id"] = o.RequestTemplateId
+	}
+	if o.Metadata != nil {
+		toSerialize["metadata"] = o.Metadata
 	}
 	return json.Marshal(toSerialize)
 }

@@ -25,11 +25,13 @@ type UpdateGroupInfo struct {
 	Description *string `json:"description,omitempty"`
 	// The ID of the owner of the group.
 	AdminOwnerId *string `json:"admin_owner_id,omitempty"`
-	// The maximum duration for which the group can be requested (in minutes). Use 0 to set to indefinite.
+	// The maximum duration for which the group can be requested (in minutes). Use -1 to set to indefinite.
 	MaxDuration *int32 `json:"max_duration,omitempty"`
+	// The recommended duration for which the group should be requested (in minutes). Will be the default value in a request. Use -1 to set to indefinite and 0 to unset.
+	RecommendedDuration *int32 `json:"recommended_duration,omitempty"`
 	// A bool representing whether or not access requests to the group require manager approval.
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
-	// A bool representing whether or not access requests to the group require a support ticket.
+	// A bool representing whether or not access requests to the group require an access ticket.
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
 	// The ID of the folder that the group is located in.
 	FolderId *string `json:"folder_id,omitempty"`
@@ -209,6 +211,38 @@ func (o *UpdateGroupInfo) HasMaxDuration() bool {
 // SetMaxDuration gets a reference to the given int32 and assigns it to the MaxDuration field.
 func (o *UpdateGroupInfo) SetMaxDuration(v int32) {
 	o.MaxDuration = &v
+}
+
+// GetRecommendedDuration returns the RecommendedDuration field value if set, zero value otherwise.
+func (o *UpdateGroupInfo) GetRecommendedDuration() int32 {
+	if o == nil || o.RecommendedDuration == nil {
+		var ret int32
+		return ret
+	}
+	return *o.RecommendedDuration
+}
+
+// GetRecommendedDurationOk returns a tuple with the RecommendedDuration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateGroupInfo) GetRecommendedDurationOk() (*int32, bool) {
+	if o == nil || o.RecommendedDuration == nil {
+		return nil, false
+	}
+	return o.RecommendedDuration, true
+}
+
+// HasRecommendedDuration returns a boolean if a field has been set.
+func (o *UpdateGroupInfo) HasRecommendedDuration() bool {
+	if o != nil && o.RecommendedDuration != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRecommendedDuration gets a reference to the given int32 and assigns it to the RecommendedDuration field.
+func (o *UpdateGroupInfo) SetRecommendedDuration(v int32) {
+	o.RecommendedDuration = &v
 }
 
 // GetRequireManagerApproval returns the RequireManagerApproval field value if set, zero value otherwise.
@@ -419,6 +453,9 @@ func (o UpdateGroupInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.MaxDuration != nil {
 		toSerialize["max_duration"] = o.MaxDuration
+	}
+	if o.RecommendedDuration != nil {
+		toSerialize["recommended_duration"] = o.RecommendedDuration
 	}
 	if o.RequireManagerApproval != nil {
 		toSerialize["require_manager_approval"] = o.RequireManagerApproval

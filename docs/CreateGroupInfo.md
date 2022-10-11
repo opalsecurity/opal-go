@@ -8,8 +8,9 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | A description of the remote group. | [optional] 
 **GroupType** | [**GroupTypeEnum**](GroupTypeEnum.md) |  | 
 **AppId** | **string** | The ID of the app for the group. | 
-**RemoteGroupId** | Pointer to **string** | The ID of the group on the remote system. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/docs/how-opal) for details on how to specify this field. | [optional] 
-**Metadata** | Pointer to **string** | JSON metadata about the remote group. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/docs/how-opal) for details on how to specify this field. The required format is dependent on group_type and should have the following schema: &lt;style type&#x3D;\&quot;text/css\&quot;&gt; code {max-height:300px !important} &lt;/style&gt; &#x60;&#x60;&#x60;json {   \&quot;$schema\&quot;: \&quot;http://json-schema.org/draft-04/schema#\&quot;,   \&quot;title\&quot;: \&quot;Group Metadata\&quot;,   \&quot;properties\&quot;: {     \&quot;ad_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;object_guid\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;object_guid\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Active Directory Group\&quot;     },     \&quot;duo_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;group_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;group_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Duo Group\&quot;     },     \&quot;git_hub_team\&quot;: {       \&quot;properties\&quot;: {         \&quot;org_name\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;team_slug\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;org_name\&quot;, \&quot;team_slug\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;GitHub Team\&quot;     },     \&quot;google_groups_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;group_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;group_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Google Groups Group\&quot;     },     \&quot;ldap_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;group_uid\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;group_uid\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;LDAP Group\&quot;     },     \&quot;okta_directory_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;group_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;group_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Okta Directory Group\&quot;     }   },   \&quot;additionalProperties\&quot;: false,   \&quot;minProperties\&quot;: 1,   \&quot;maxProperties\&quot;: 1,   \&quot;type\&quot;: \&quot;object\&quot; } &#x60;&#x60;&#x60; | [optional] 
+**RemoteInfo** | Pointer to [**GroupRemoteInfo**](GroupRemoteInfo.md) |  | [optional] 
+**RemoteGroupId** | Pointer to **string** | Deprecated - use remote_info instead. The ID of the group on the remote system. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details on how to specify this field. | [optional] 
+**Metadata** | Pointer to **string** | Deprecated - use remote_info instead.  JSON metadata about the remote group. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details on how to specify this field. The required format is dependent on group_type and should have the following schema: &lt;style type&#x3D;\&quot;text/css\&quot;&gt; code {max-height:300px !important} &lt;/style&gt; &#x60;&#x60;&#x60;json {   \&quot;$schema\&quot;: \&quot;http://json-schema.org/draft-04/schema#\&quot;,   \&quot;title\&quot;: \&quot;Group Metadata\&quot;,   \&quot;properties\&quot;: {     \&quot;ad_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;object_guid\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;object_guid\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Active Directory Group\&quot;     },     \&quot;duo_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;group_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;group_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Duo Group\&quot;     },     \&quot;git_hub_team\&quot;: {       \&quot;properties\&quot;: {         \&quot;org_name\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;team_slug\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;org_name\&quot;, \&quot;team_slug\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;GitHub Team\&quot;     },     \&quot;google_groups_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;group_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;group_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Google Groups Group\&quot;     },     \&quot;ldap_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;group_uid\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;group_uid\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;LDAP Group\&quot;     },     \&quot;okta_directory_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;group_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;group_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Okta Directory Group\&quot;     }   },   \&quot;additionalProperties\&quot;: false,   \&quot;minProperties\&quot;: 1,   \&quot;maxProperties\&quot;: 1,   \&quot;type\&quot;: \&quot;object\&quot; } &#x60;&#x60;&#x60; | [optional] 
 
 ## Methods
 
@@ -114,6 +115,31 @@ and a boolean to check if the value has been set.
 
 SetAppId sets AppId field to given value.
 
+
+### GetRemoteInfo
+
+`func (o *CreateGroupInfo) GetRemoteInfo() GroupRemoteInfo`
+
+GetRemoteInfo returns the RemoteInfo field if non-nil, zero value otherwise.
+
+### GetRemoteInfoOk
+
+`func (o *CreateGroupInfo) GetRemoteInfoOk() (*GroupRemoteInfo, bool)`
+
+GetRemoteInfoOk returns a tuple with the RemoteInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemoteInfo
+
+`func (o *CreateGroupInfo) SetRemoteInfo(v GroupRemoteInfo)`
+
+SetRemoteInfo sets RemoteInfo field to given value.
+
+### HasRemoteInfo
+
+`func (o *CreateGroupInfo) HasRemoteInfo() bool`
+
+HasRemoteInfo returns a boolean if a field has been set.
 
 ### GetRemoteGroupId
 

@@ -11,15 +11,16 @@ Name | Type | Description | Notes
 **AdminOwnerId** | Pointer to **string** | The ID of the owner of the group. | [optional] 
 **RemoteId** | Pointer to **string** | The ID of the remote. | [optional] 
 **RemoteName** | Pointer to **string** | The name of the remote. | [optional] 
-**GroupFunction** | Pointer to [**GroupFunctionEnum**](GroupFunctionEnum.md) |  | [optional] 
 **GroupType** | Pointer to [**GroupTypeEnum**](GroupTypeEnum.md) |  | [optional] 
 **MaxDuration** | Pointer to **int32** | The maximum duration for which the group can be requested (in minutes). | [optional] 
+**RecommendedDuration** | Pointer to **int32** | The recommended duration for which the group should be requested (in minutes). -1 represents an indefinite duration. | [optional] 
 **RequireManagerApproval** | Pointer to **bool** | A bool representing whether or not access requests to the group require manager approval. | [optional] 
-**RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the group require a support ticket. | [optional] 
+**RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the group require an access ticket. | [optional] 
 **FolderId** | Pointer to **string** | The ID of the folder that the group is located in. | [optional] 
 **RequireMfaToApprove** | Pointer to **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this group. | [optional] 
 **AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this group. | [optional] 
 **RequestTemplateId** | Pointer to **string** | The ID of the associated request template. | [optional] 
+**Metadata** | Pointer to **string** | JSON metadata about the remote group. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details. | [optional] 
 
 ## Methods
 
@@ -210,31 +211,6 @@ SetRemoteName sets RemoteName field to given value.
 
 HasRemoteName returns a boolean if a field has been set.
 
-### GetGroupFunction
-
-`func (o *Group) GetGroupFunction() GroupFunctionEnum`
-
-GetGroupFunction returns the GroupFunction field if non-nil, zero value otherwise.
-
-### GetGroupFunctionOk
-
-`func (o *Group) GetGroupFunctionOk() (*GroupFunctionEnum, bool)`
-
-GetGroupFunctionOk returns a tuple with the GroupFunction field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetGroupFunction
-
-`func (o *Group) SetGroupFunction(v GroupFunctionEnum)`
-
-SetGroupFunction sets GroupFunction field to given value.
-
-### HasGroupFunction
-
-`func (o *Group) HasGroupFunction() bool`
-
-HasGroupFunction returns a boolean if a field has been set.
-
 ### GetGroupType
 
 `func (o *Group) GetGroupType() GroupTypeEnum`
@@ -284,6 +260,31 @@ SetMaxDuration sets MaxDuration field to given value.
 `func (o *Group) HasMaxDuration() bool`
 
 HasMaxDuration returns a boolean if a field has been set.
+
+### GetRecommendedDuration
+
+`func (o *Group) GetRecommendedDuration() int32`
+
+GetRecommendedDuration returns the RecommendedDuration field if non-nil, zero value otherwise.
+
+### GetRecommendedDurationOk
+
+`func (o *Group) GetRecommendedDurationOk() (*int32, bool)`
+
+GetRecommendedDurationOk returns a tuple with the RecommendedDuration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecommendedDuration
+
+`func (o *Group) SetRecommendedDuration(v int32)`
+
+SetRecommendedDuration sets RecommendedDuration field to given value.
+
+### HasRecommendedDuration
+
+`func (o *Group) HasRecommendedDuration() bool`
+
+HasRecommendedDuration returns a boolean if a field has been set.
 
 ### GetRequireManagerApproval
 
@@ -434,6 +435,31 @@ SetRequestTemplateId sets RequestTemplateId field to given value.
 `func (o *Group) HasRequestTemplateId() bool`
 
 HasRequestTemplateId returns a boolean if a field has been set.
+
+### GetMetadata
+
+`func (o *Group) GetMetadata() string`
+
+GetMetadata returns the Metadata field if non-nil, zero value otherwise.
+
+### GetMetadataOk
+
+`func (o *Group) GetMetadataOk() (*string, bool)`
+
+GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetadata
+
+`func (o *Group) SetMetadata(v string)`
+
+SetMetadata sets Metadata field to given value.
+
+### HasMetadata
+
+`func (o *Group) HasMetadata() bool`
+
+HasMetadata returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

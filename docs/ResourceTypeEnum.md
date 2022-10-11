@@ -45,8 +45,6 @@
 
 * `OKTA_ROLE` (value: `"OKTA_ROLE"`)
 
-* `OPAL_ROLE` (value: `"OPAL_ROLE"`)
-
 * `PAGERDUTY_ROLE` (value: `"PAGERDUTY_ROLE"`)
 
 * `SALESFORCE_PERMISSION_SET` (value: `"SALESFORCE_PERMISSION_SET"`)

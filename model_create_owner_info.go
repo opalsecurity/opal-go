@@ -25,6 +25,8 @@ type CreateOwnerInfo struct {
 	AccessRequestEscalationPeriod *int32 `json:"access_request_escalation_period,omitempty"`
 	// Users to add to the created owner.
 	UserIds []string `json:"user_ids"`
+	// The message channel id for the reviewer channel.
+	ReviewerMessageChannelId *string `json:"reviewer_message_channel_id,omitempty"`
 }
 
 // NewCreateOwnerInfo instantiates a new CreateOwnerInfo object
@@ -158,6 +160,38 @@ func (o *CreateOwnerInfo) SetUserIds(v []string) {
 	o.UserIds = v
 }
 
+// GetReviewerMessageChannelId returns the ReviewerMessageChannelId field value if set, zero value otherwise.
+func (o *CreateOwnerInfo) GetReviewerMessageChannelId() string {
+	if o == nil || o.ReviewerMessageChannelId == nil {
+		var ret string
+		return ret
+	}
+	return *o.ReviewerMessageChannelId
+}
+
+// GetReviewerMessageChannelIdOk returns a tuple with the ReviewerMessageChannelId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateOwnerInfo) GetReviewerMessageChannelIdOk() (*string, bool) {
+	if o == nil || o.ReviewerMessageChannelId == nil {
+		return nil, false
+	}
+	return o.ReviewerMessageChannelId, true
+}
+
+// HasReviewerMessageChannelId returns a boolean if a field has been set.
+func (o *CreateOwnerInfo) HasReviewerMessageChannelId() bool {
+	if o != nil && o.ReviewerMessageChannelId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetReviewerMessageChannelId gets a reference to the given string and assigns it to the ReviewerMessageChannelId field.
+func (o *CreateOwnerInfo) SetReviewerMessageChannelId(v string) {
+	o.ReviewerMessageChannelId = &v
+}
+
 func (o CreateOwnerInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -171,6 +205,9 @@ func (o CreateOwnerInfo) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["user_ids"] = o.UserIds
+	}
+	if o.ReviewerMessageChannelId != nil {
+		toSerialize["reviewer_message_channel_id"] = o.ReviewerMessageChannelId
 	}
 	return json.Marshal(toSerialize)
 }

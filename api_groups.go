@@ -24,6 +24,123 @@ import (
 // GroupsApiService GroupsApi service
 type GroupsApiService service
 
+type ApiAddGroupResourceRequest struct {
+	ctx context.Context
+	ApiService *GroupsApiService
+	groupId string
+	resourceId string
+	accessLevelRemoteId *string
+}
+
+// The remote ID of the access level to grant to this user. If omitted, the default access level remote ID value (empty string) is used.
+func (r ApiAddGroupResourceRequest) AccessLevelRemoteId(accessLevelRemoteId string) ApiAddGroupResourceRequest {
+	r.accessLevelRemoteId = &accessLevelRemoteId
+	return r
+}
+
+func (r ApiAddGroupResourceRequest) Execute() (*GroupResource, *http.Response, error) {
+	return r.ApiService.AddGroupResourceExecute(r)
+}
+
+/*
+AddGroupResource Method for AddGroupResource
+
+Adds a resource to a group.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param groupId The ID of the group.
+ @param resourceId The ID of the resource.
+ @return ApiAddGroupResourceRequest
+*/
+func (a *GroupsApiService) AddGroupResource(ctx context.Context, groupId string, resourceId string) ApiAddGroupResourceRequest {
+	return ApiAddGroupResourceRequest{
+		ApiService: a,
+		ctx: ctx,
+		groupId: groupId,
+		resourceId: resourceId,
+	}
+}
+
+// Execute executes the request
+//  @return GroupResource
+func (a *GroupsApiService) AddGroupResourceExecute(r ApiAddGroupResourceRequest) (*GroupResource, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GroupResource
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GroupsApiService.AddGroupResource")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/groups/{group_id}/resources/{resource_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterToString(r.groupId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterToString(r.resourceId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.accessLevelRemoteId != nil {
+		localVarQueryParams.Add("access_level_remote_id", parameterToString(*r.accessLevelRemoteId, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCreateGroupRequest struct {
 	ctx context.Context
 	ApiService *GroupsApiService
@@ -42,7 +159,7 @@ func (r ApiCreateGroupRequest) Execute() (*Group, *http.Response, error) {
 /*
 CreateGroup Method for CreateGroup
 
-Creates a group. See [here](https://docs.opal.dev/docs/how-opal) for details about importing groups.
+Creates a group. See [here](https://docs.opal.dev/reference/end-system-objects) for details about importing groups.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateGroupRequest
@@ -269,6 +386,109 @@ func (a *GroupsApiService) GetGroupMessageChannelsExecute(r ApiGetGroupMessageCh
 	}
 
 	localVarPath := localBasePath + "/groups/{group_id}/message-channels"
+	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterToString(r.groupId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetGroupResourcesRequest struct {
+	ctx context.Context
+	ApiService *GroupsApiService
+	groupId string
+}
+
+func (r ApiGetGroupResourcesRequest) Execute() (*GroupResourceList, *http.Response, error) {
+	return r.ApiService.GetGroupResourcesExecute(r)
+}
+
+/*
+GetGroupResources Method for GetGroupResources
+
+Gets the list of resources that the group gives access to.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param groupId The ID of the group.
+ @return ApiGetGroupResourcesRequest
+*/
+func (a *GroupsApiService) GetGroupResources(ctx context.Context, groupId string) ApiGetGroupResourcesRequest {
+	return ApiGetGroupResourcesRequest{
+		ApiService: a,
+		ctx: ctx,
+		groupId: groupId,
+	}
+}
+
+// Execute executes the request
+//  @return GroupResourceList
+func (a *GroupsApiService) GetGroupResourcesExecute(r ApiGetGroupResourcesRequest) (*GroupResourceList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GroupResourceList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GroupsApiService.GetGroupResources")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/groups/{group_id}/resources"
 	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterToString(r.groupId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -643,7 +863,6 @@ type ApiGetGroupsRequest struct {
 	ApiService *GroupsApiService
 	cursor *string
 	pageSize *int32
-	groupFunctionFilter *GroupFunctionEnum
 	groupTypeFilter *GroupTypeEnum
 	groupIds *[]string
 	groupName *string
@@ -658,12 +877,6 @@ func (r ApiGetGroupsRequest) Cursor(cursor string) ApiGetGroupsRequest {
 // Number of results to return per page. Default is 200.
 func (r ApiGetGroupsRequest) PageSize(pageSize int32) ApiGetGroupsRequest {
 	r.pageSize = &pageSize
-	return r
-}
-
-// The group function to filter by.
-func (r ApiGetGroupsRequest) GroupFunctionFilter(groupFunctionFilter GroupFunctionEnum) ApiGetGroupsRequest {
-	r.groupFunctionFilter = &groupFunctionFilter
 	return r
 }
 
@@ -730,9 +943,6 @@ func (a *GroupsApiService) GetGroupsExecute(r ApiGetGroupsRequest) (*PaginatedGr
 	}
 	if r.pageSize != nil {
 		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
-	}
-	if r.groupFunctionFilter != nil {
-		localVarQueryParams.Add("group_function_filter", parameterToString(*r.groupFunctionFilter, ""))
 	}
 	if r.groupTypeFilter != nil {
 		localVarQueryParams.Add("group_type_filter", parameterToString(*r.groupTypeFilter, ""))

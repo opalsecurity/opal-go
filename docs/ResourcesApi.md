@@ -328,7 +328,7 @@ import (
 )
 
 func main() {
-    resourceId := "32acc112-21ff-4669-91c2-21e27683eaa1" // string | The ID of the resource.
+    resourceId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the resource.
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

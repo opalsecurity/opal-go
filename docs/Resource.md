@@ -13,12 +13,15 @@ Name | Type | Description | Notes
 **RemoteResourceName** | Pointer to **string** | The name of the resource on the remote system. | [optional] 
 **ResourceType** | Pointer to [**ResourceTypeEnum**](ResourceTypeEnum.md) |  | [optional] 
 **MaxDuration** | Pointer to **int32** | The maximum duration for which the resource can be requested (in minutes). | [optional] 
+**RecommendedDuration** | Pointer to **int32** | The recommended duration for which the resource should be requested (in minutes). -1 represents an indefinite duration. | [optional] 
 **RequireManagerApproval** | Pointer to **bool** | A bool representing whether or not access requests to the resource require manager approval. | [optional] 
-**RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the resource require a support ticket. | [optional] 
+**RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the resource require an access ticket. | [optional] 
 **FolderId** | Pointer to **string** | The ID of the folder that the resource is located in. | [optional] 
 **RequireMfaToApprove** | Pointer to **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this resource. | [optional] 
+**RequireMfaToConnect** | Pointer to **bool** | A bool representing whether or not to require MFA to connect to this resource. | [optional] 
 **AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this resource. | [optional] 
 **RequestTemplateId** | Pointer to **string** | The ID of the associated request template. | [optional] 
+**Metadata** | Pointer to **string** | JSON metadata about the remote resource. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details. | [optional] 
 
 ## Methods
 
@@ -259,6 +262,31 @@ SetMaxDuration sets MaxDuration field to given value.
 
 HasMaxDuration returns a boolean if a field has been set.
 
+### GetRecommendedDuration
+
+`func (o *Resource) GetRecommendedDuration() int32`
+
+GetRecommendedDuration returns the RecommendedDuration field if non-nil, zero value otherwise.
+
+### GetRecommendedDurationOk
+
+`func (o *Resource) GetRecommendedDurationOk() (*int32, bool)`
+
+GetRecommendedDurationOk returns a tuple with the RecommendedDuration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecommendedDuration
+
+`func (o *Resource) SetRecommendedDuration(v int32)`
+
+SetRecommendedDuration sets RecommendedDuration field to given value.
+
+### HasRecommendedDuration
+
+`func (o *Resource) HasRecommendedDuration() bool`
+
+HasRecommendedDuration returns a boolean if a field has been set.
+
 ### GetRequireManagerApproval
 
 `func (o *Resource) GetRequireManagerApproval() bool`
@@ -359,6 +387,31 @@ SetRequireMfaToApprove sets RequireMfaToApprove field to given value.
 
 HasRequireMfaToApprove returns a boolean if a field has been set.
 
+### GetRequireMfaToConnect
+
+`func (o *Resource) GetRequireMfaToConnect() bool`
+
+GetRequireMfaToConnect returns the RequireMfaToConnect field if non-nil, zero value otherwise.
+
+### GetRequireMfaToConnectOk
+
+`func (o *Resource) GetRequireMfaToConnectOk() (*bool, bool)`
+
+GetRequireMfaToConnectOk returns a tuple with the RequireMfaToConnect field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequireMfaToConnect
+
+`func (o *Resource) SetRequireMfaToConnect(v bool)`
+
+SetRequireMfaToConnect sets RequireMfaToConnect field to given value.
+
+### HasRequireMfaToConnect
+
+`func (o *Resource) HasRequireMfaToConnect() bool`
+
+HasRequireMfaToConnect returns a boolean if a field has been set.
+
 ### GetAutoApproval
 
 `func (o *Resource) GetAutoApproval() bool`
@@ -408,6 +461,31 @@ SetRequestTemplateId sets RequestTemplateId field to given value.
 `func (o *Resource) HasRequestTemplateId() bool`
 
 HasRequestTemplateId returns a boolean if a field has been set.
+
+### GetMetadata
+
+`func (o *Resource) GetMetadata() string`
+
+GetMetadata returns the Metadata field if non-nil, zero value otherwise.
+
+### GetMetadataOk
+
+`func (o *Resource) GetMetadataOk() (*string, bool)`
+
+GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetadata
+
+`func (o *Resource) SetMetadata(v string)`
+
+SetMetadata sets Metadata field to given value.
+
+### HasMetadata
+
+`func (o *Resource) HasMetadata() bool`
+
+HasMetadata returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

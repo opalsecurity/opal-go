@@ -24,9 +24,12 @@ type CreateGroupInfo struct {
 	GroupType GroupTypeEnum `json:"group_type"`
 	// The ID of the app for the group.
 	AppId string `json:"app_id"`
-	// The ID of the group on the remote system. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/docs/how-opal) for details on how to specify this field.
+	RemoteInfo *GroupRemoteInfo `json:"remote_info,omitempty"`
+	// Deprecated - use remote_info instead. The ID of the group on the remote system. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details on how to specify this field.
+	// Deprecated
 	RemoteGroupId *string `json:"remote_group_id,omitempty"`
-	// JSON metadata about the remote group. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/docs/how-opal) for details on how to specify this field. The required format is dependent on group_type and should have the following schema: <style type=\"text/css\"> code {max-height:300px !important} </style> ```json {   \"$schema\": \"http://json-schema.org/draft-04/schema#\",   \"title\": \"Group Metadata\",   \"properties\": {     \"ad_group\": {       \"properties\": {         \"object_guid\": {           \"type\": \"string\"         }       },       \"required\": [\"object_guid\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"Active Directory Group\"     },     \"duo_group\": {       \"properties\": {         \"group_id\": {           \"type\": \"string\"         }       },       \"required\": [\"group_id\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"Duo Group\"     },     \"git_hub_team\": {       \"properties\": {         \"org_name\": {           \"type\": \"string\"         },         \"team_slug\": {           \"type\": \"string\"         }       },       \"required\": [\"org_name\", \"team_slug\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"GitHub Team\"     },     \"google_groups_group\": {       \"properties\": {         \"group_id\": {           \"type\": \"string\"         }       },       \"required\": [\"group_id\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"Google Groups Group\"     },     \"ldap_group\": {       \"properties\": {         \"group_uid\": {           \"type\": \"string\"         }       },       \"required\": [\"group_uid\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"LDAP Group\"     },     \"okta_directory_group\": {       \"properties\": {         \"group_id\": {           \"type\": \"string\"         }       },       \"required\": [\"group_id\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"Okta Directory Group\"     }   },   \"additionalProperties\": false,   \"minProperties\": 1,   \"maxProperties\": 1,   \"type\": \"object\" } ```
+	// Deprecated - use remote_info instead.  JSON metadata about the remote group. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details on how to specify this field. The required format is dependent on group_type and should have the following schema: <style type=\"text/css\"> code {max-height:300px !important} </style> ```json {   \"$schema\": \"http://json-schema.org/draft-04/schema#\",   \"title\": \"Group Metadata\",   \"properties\": {     \"ad_group\": {       \"properties\": {         \"object_guid\": {           \"type\": \"string\"         }       },       \"required\": [\"object_guid\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"Active Directory Group\"     },     \"duo_group\": {       \"properties\": {         \"group_id\": {           \"type\": \"string\"         }       },       \"required\": [\"group_id\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"Duo Group\"     },     \"git_hub_team\": {       \"properties\": {         \"org_name\": {           \"type\": \"string\"         },         \"team_slug\": {           \"type\": \"string\"         }       },       \"required\": [\"org_name\", \"team_slug\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"GitHub Team\"     },     \"google_groups_group\": {       \"properties\": {         \"group_id\": {           \"type\": \"string\"         }       },       \"required\": [\"group_id\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"Google Groups Group\"     },     \"ldap_group\": {       \"properties\": {         \"group_uid\": {           \"type\": \"string\"         }       },       \"required\": [\"group_uid\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"LDAP Group\"     },     \"okta_directory_group\": {       \"properties\": {         \"group_id\": {           \"type\": \"string\"         }       },       \"required\": [\"group_id\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"Okta Directory Group\"     }   },   \"additionalProperties\": false,   \"minProperties\": 1,   \"maxProperties\": 1,   \"type\": \"object\" } ```
+	// Deprecated
 	Metadata *string `json:"metadata,omitempty"`
 }
 
@@ -154,7 +157,40 @@ func (o *CreateGroupInfo) SetAppId(v string) {
 	o.AppId = v
 }
 
+// GetRemoteInfo returns the RemoteInfo field value if set, zero value otherwise.
+func (o *CreateGroupInfo) GetRemoteInfo() GroupRemoteInfo {
+	if o == nil || o.RemoteInfo == nil {
+		var ret GroupRemoteInfo
+		return ret
+	}
+	return *o.RemoteInfo
+}
+
+// GetRemoteInfoOk returns a tuple with the RemoteInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateGroupInfo) GetRemoteInfoOk() (*GroupRemoteInfo, bool) {
+	if o == nil || o.RemoteInfo == nil {
+		return nil, false
+	}
+	return o.RemoteInfo, true
+}
+
+// HasRemoteInfo returns a boolean if a field has been set.
+func (o *CreateGroupInfo) HasRemoteInfo() bool {
+	if o != nil && o.RemoteInfo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRemoteInfo gets a reference to the given GroupRemoteInfo and assigns it to the RemoteInfo field.
+func (o *CreateGroupInfo) SetRemoteInfo(v GroupRemoteInfo) {
+	o.RemoteInfo = &v
+}
+
 // GetRemoteGroupId returns the RemoteGroupId field value if set, zero value otherwise.
+// Deprecated
 func (o *CreateGroupInfo) GetRemoteGroupId() string {
 	if o == nil || o.RemoteGroupId == nil {
 		var ret string
@@ -165,6 +201,7 @@ func (o *CreateGroupInfo) GetRemoteGroupId() string {
 
 // GetRemoteGroupIdOk returns a tuple with the RemoteGroupId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CreateGroupInfo) GetRemoteGroupIdOk() (*string, bool) {
 	if o == nil || o.RemoteGroupId == nil {
 		return nil, false
@@ -182,11 +219,13 @@ func (o *CreateGroupInfo) HasRemoteGroupId() bool {
 }
 
 // SetRemoteGroupId gets a reference to the given string and assigns it to the RemoteGroupId field.
+// Deprecated
 func (o *CreateGroupInfo) SetRemoteGroupId(v string) {
 	o.RemoteGroupId = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
+// Deprecated
 func (o *CreateGroupInfo) GetMetadata() string {
 	if o == nil || o.Metadata == nil {
 		var ret string
@@ -197,6 +236,7 @@ func (o *CreateGroupInfo) GetMetadata() string {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CreateGroupInfo) GetMetadataOk() (*string, bool) {
 	if o == nil || o.Metadata == nil {
 		return nil, false
@@ -214,6 +254,7 @@ func (o *CreateGroupInfo) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given string and assigns it to the Metadata field.
+// Deprecated
 func (o *CreateGroupInfo) SetMetadata(v string) {
 	o.Metadata = &v
 }
@@ -231,6 +272,9 @@ func (o CreateGroupInfo) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["app_id"] = o.AppId
+	}
+	if o.RemoteInfo != nil {
+		toSerialize["remote_info"] = o.RemoteInfo
 	}
 	if o.RemoteGroupId != nil {
 		toSerialize["remote_group_id"] = o.RemoteGroupId

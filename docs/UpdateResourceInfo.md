@@ -8,11 +8,13 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the resource. | [optional] 
 **Description** | Pointer to **string** | A description of the resource. | [optional] 
 **AdminOwnerId** | Pointer to **string** | The ID of the owner of the resource. | [optional] 
-**MaxDuration** | Pointer to **int32** | The maximum duration for which the resource can be requested (in minutes). Use 0 to set to indefinite. | [optional] 
+**MaxDuration** | Pointer to **int32** | The maximum duration for which the resource can be requested (in minutes). Use -1 to set to indefinite. | [optional] 
+**RecommendedDuration** | Pointer to **int32** | The recommended duration for which the resource should be requested (in minutes). Will be the default value in a request. Use -1 to set to indefinite and 0 to unset. | [optional] 
 **RequireManagerApproval** | Pointer to **bool** | A bool representing whether or not access requests to the resource require manager approval. | [optional] 
-**RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the resource require a support ticket. | [optional] 
+**RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the resource require an access ticket. | [optional] 
 **FolderId** | Pointer to **string** | The ID of the folder that the resource is located in. | [optional] 
 **RequireMfaToApprove** | Pointer to **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this resource. | [optional] 
+**RequireMfaToConnect** | Pointer to **bool** | A bool representing whether or not to require MFA to connect to this resource. | [optional] 
 **AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this resource. | [optional] 
 **RequestTemplateId** | Pointer to **string** | The ID of the associated request template. | [optional] 
 
@@ -155,6 +157,31 @@ SetMaxDuration sets MaxDuration field to given value.
 
 HasMaxDuration returns a boolean if a field has been set.
 
+### GetRecommendedDuration
+
+`func (o *UpdateResourceInfo) GetRecommendedDuration() int32`
+
+GetRecommendedDuration returns the RecommendedDuration field if non-nil, zero value otherwise.
+
+### GetRecommendedDurationOk
+
+`func (o *UpdateResourceInfo) GetRecommendedDurationOk() (*int32, bool)`
+
+GetRecommendedDurationOk returns a tuple with the RecommendedDuration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecommendedDuration
+
+`func (o *UpdateResourceInfo) SetRecommendedDuration(v int32)`
+
+SetRecommendedDuration sets RecommendedDuration field to given value.
+
+### HasRecommendedDuration
+
+`func (o *UpdateResourceInfo) HasRecommendedDuration() bool`
+
+HasRecommendedDuration returns a boolean if a field has been set.
+
 ### GetRequireManagerApproval
 
 `func (o *UpdateResourceInfo) GetRequireManagerApproval() bool`
@@ -254,6 +281,31 @@ SetRequireMfaToApprove sets RequireMfaToApprove field to given value.
 `func (o *UpdateResourceInfo) HasRequireMfaToApprove() bool`
 
 HasRequireMfaToApprove returns a boolean if a field has been set.
+
+### GetRequireMfaToConnect
+
+`func (o *UpdateResourceInfo) GetRequireMfaToConnect() bool`
+
+GetRequireMfaToConnect returns the RequireMfaToConnect field if non-nil, zero value otherwise.
+
+### GetRequireMfaToConnectOk
+
+`func (o *UpdateResourceInfo) GetRequireMfaToConnectOk() (*bool, bool)`
+
+GetRequireMfaToConnectOk returns a tuple with the RequireMfaToConnect field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequireMfaToConnect
+
+`func (o *UpdateResourceInfo) SetRequireMfaToConnect(v bool)`
+
+SetRequireMfaToConnect sets RequireMfaToConnect field to given value.
+
+### HasRequireMfaToConnect
+
+`func (o *UpdateResourceInfo) HasRequireMfaToConnect() bool`
+
+HasRequireMfaToConnect returns a boolean if a field has been set.
 
 ### GetAutoApproval
 

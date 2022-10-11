@@ -25,6 +25,8 @@ type UpdateOwnerInfo struct {
 	Description *string `json:"description,omitempty"`
 	// The amount of time (in minutes) before the next reviewer is notified. Use 0 to remove escalation policy.
 	AccessRequestEscalationPeriod *int32 `json:"access_request_escalation_period,omitempty"`
+	// The message channel id for the reviewer channel. Use \"\" to remove an existing message channel.
+	ReviewerMessageChannelId *string `json:"reviewer_message_channel_id,omitempty"`
 }
 
 // NewUpdateOwnerInfo instantiates a new UpdateOwnerInfo object
@@ -165,6 +167,38 @@ func (o *UpdateOwnerInfo) SetAccessRequestEscalationPeriod(v int32) {
 	o.AccessRequestEscalationPeriod = &v
 }
 
+// GetReviewerMessageChannelId returns the ReviewerMessageChannelId field value if set, zero value otherwise.
+func (o *UpdateOwnerInfo) GetReviewerMessageChannelId() string {
+	if o == nil || o.ReviewerMessageChannelId == nil {
+		var ret string
+		return ret
+	}
+	return *o.ReviewerMessageChannelId
+}
+
+// GetReviewerMessageChannelIdOk returns a tuple with the ReviewerMessageChannelId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateOwnerInfo) GetReviewerMessageChannelIdOk() (*string, bool) {
+	if o == nil || o.ReviewerMessageChannelId == nil {
+		return nil, false
+	}
+	return o.ReviewerMessageChannelId, true
+}
+
+// HasReviewerMessageChannelId returns a boolean if a field has been set.
+func (o *UpdateOwnerInfo) HasReviewerMessageChannelId() bool {
+	if o != nil && o.ReviewerMessageChannelId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetReviewerMessageChannelId gets a reference to the given string and assigns it to the ReviewerMessageChannelId field.
+func (o *UpdateOwnerInfo) SetReviewerMessageChannelId(v string) {
+	o.ReviewerMessageChannelId = &v
+}
+
 func (o UpdateOwnerInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -178,6 +212,9 @@ func (o UpdateOwnerInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.AccessRequestEscalationPeriod != nil {
 		toSerialize["access_request_escalation_period"] = o.AccessRequestEscalationPeriod
+	}
+	if o.ReviewerMessageChannelId != nil {
+		toSerialize["reviewer_message_channel_id"] = o.ReviewerMessageChannelId
 	}
 	return json.Marshal(toSerialize)
 }

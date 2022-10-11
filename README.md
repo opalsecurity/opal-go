@@ -79,11 +79,14 @@ All URIs are relative to *https://api.opal.dev/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AppsApi* | [**GetApp**](docs/AppsApi.md#getapp) | **Get** /apps/{app_id} | 
 *AppsApi* | [**GetApps**](docs/AppsApi.md#getapps) | **Get** /apps | 
 *EventsApi* | [**Events**](docs/EventsApi.md#events) | **Get** /events | 
+*GroupsApi* | [**AddGroupResource**](docs/GroupsApi.md#addgroupresource) | **Post** /groups/{group_id}/resources/{resource_id} | 
 *GroupsApi* | [**CreateGroup**](docs/GroupsApi.md#creategroup) | **Post** /groups | 
 *GroupsApi* | [**DeleteGroup**](docs/GroupsApi.md#deletegroup) | **Delete** /groups/{group_id} | 
 *GroupsApi* | [**GetGroupMessageChannels**](docs/GroupsApi.md#getgroupmessagechannels) | **Get** /groups/{group_id}/message-channels | 
+*GroupsApi* | [**GetGroupResources**](docs/GroupsApi.md#getgroupresources) | **Get** /groups/{group_id}/resources | 
 *GroupsApi* | [**GetGroupReviewers**](docs/GroupsApi.md#getgroupreviewers) | **Get** /groups/{group_id}/reviewers | 
 *GroupsApi* | [**GetGroupTags**](docs/GroupsApi.md#getgrouptags) | **Get** /groups/{group_id}/tags | 
 *GroupsApi* | [**GetGroupVisibility**](docs/GroupsApi.md#getgroupvisibility) | **Get** /groups/{group_id}/visibility | 
@@ -92,6 +95,8 @@ Class | Method | HTTP request | Description
 *GroupsApi* | [**SetGroupReviewers**](docs/GroupsApi.md#setgroupreviewers) | **Put** /groups/{group_id}/reviewers | 
 *GroupsApi* | [**SetGroupVisibility**](docs/GroupsApi.md#setgroupvisibility) | **Put** /groups/{group_id}/visibility | 
 *GroupsApi* | [**UpdateGroups**](docs/GroupsApi.md#updategroups) | **Put** /groups | 
+*MessageChannelsApi* | [**CreateMessageChannel**](docs/MessageChannelsApi.md#createmessagechannel) | **Post** /message-channels | 
+*MessageChannelsApi* | [**GetMessageChannels**](docs/MessageChannelsApi.md#getmessagechannels) | **Get** /message-channels | 
 *OwnersApi* | [**CreateOwner**](docs/OwnersApi.md#createowner) | **Post** /owners | 
 *OwnersApi* | [**DeleteOwner**](docs/OwnersApi.md#deleteowner) | **Delete** /owners/{owner_id} | 
 *OwnersApi* | [**GetOwner**](docs/OwnersApi.md#getowner) | **Get** /owners/{owner_id} | 
@@ -139,19 +144,27 @@ Class | Method | HTTP request | Description
  - [AppTypeEnum](docs/AppTypeEnum.md)
  - [AppsList](docs/AppsList.md)
  - [CreateGroupInfo](docs/CreateGroupInfo.md)
+ - [CreateMessageChannelInfo](docs/CreateMessageChannelInfo.md)
  - [CreateOwnerInfo](docs/CreateOwnerInfo.md)
  - [CreateResourceInfo](docs/CreateResourceInfo.md)
  - [CreateUARInfo](docs/CreateUARInfo.md)
  - [EntityTypeEnum](docs/EntityTypeEnum.md)
  - [Event](docs/Event.md)
  - [Group](docs/Group.md)
- - [GroupFunctionEnum](docs/GroupFunctionEnum.md)
+ - [GroupRemoteInfo](docs/GroupRemoteInfo.md)
+ - [GroupRemoteInfoActiveDirectoryGroup](docs/GroupRemoteInfoActiveDirectoryGroup.md)
+ - [GroupRemoteInfoDuoGroup](docs/GroupRemoteInfoDuoGroup.md)
+ - [GroupRemoteInfoGithubTeam](docs/GroupRemoteInfoGithubTeam.md)
+ - [GroupRemoteInfoGoogleGroup](docs/GroupRemoteInfoGoogleGroup.md)
+ - [GroupRemoteInfoLdapGroup](docs/GroupRemoteInfoLdapGroup.md)
+ - [GroupRemoteInfoOktaGroup](docs/GroupRemoteInfoOktaGroup.md)
+ - [GroupResource](docs/GroupResource.md)
+ - [GroupResourceList](docs/GroupResourceList.md)
  - [GroupTypeEnum](docs/GroupTypeEnum.md)
  - [MessageChannel](docs/MessageChannel.md)
  - [MessageChannelIDList](docs/MessageChannelIDList.md)
  - [MessageChannelList](docs/MessageChannelList.md)
  - [MessageChannelProviderEnum](docs/MessageChannelProviderEnum.md)
- - [MessageChannelTypeEnum](docs/MessageChannelTypeEnum.md)
  - [Owner](docs/Owner.md)
  - [PaginatedEventList](docs/PaginatedEventList.md)
  - [PaginatedGroupsList](docs/PaginatedGroupsList.md)
@@ -164,6 +177,15 @@ Class | Method | HTTP request | Description
  - [ResourceAccessLevel](docs/ResourceAccessLevel.md)
  - [ResourceAccessUser](docs/ResourceAccessUser.md)
  - [ResourceAccessUserList](docs/ResourceAccessUserList.md)
+ - [ResourceRemoteInfo](docs/ResourceRemoteInfo.md)
+ - [ResourceRemoteInfoAwsEc2Instance](docs/ResourceRemoteInfoAwsEc2Instance.md)
+ - [ResourceRemoteInfoAwsEksCluster](docs/ResourceRemoteInfoAwsEksCluster.md)
+ - [ResourceRemoteInfoAwsIamRole](docs/ResourceRemoteInfoAwsIamRole.md)
+ - [ResourceRemoteInfoAwsRdsInstance](docs/ResourceRemoteInfoAwsRdsInstance.md)
+ - [ResourceRemoteInfoGithubRepo](docs/ResourceRemoteInfoGithubRepo.md)
+ - [ResourceRemoteInfoOktaApp](docs/ResourceRemoteInfoOktaApp.md)
+ - [ResourceRemoteInfoOktaCustomRole](docs/ResourceRemoteInfoOktaCustomRole.md)
+ - [ResourceRemoteInfoOktaStandardRole](docs/ResourceRemoteInfoOktaStandardRole.md)
  - [ResourceTypeEnum](docs/ResourceTypeEnum.md)
  - [ResourceUser](docs/ResourceUser.md)
  - [ResourceUserAccessStatus](docs/ResourceUserAccessStatus.md)
@@ -171,6 +193,7 @@ Class | Method | HTTP request | Description
  - [ReviewerIDList](docs/ReviewerIDList.md)
  - [Session](docs/Session.md)
  - [SessionsList](docs/SessionsList.md)
+ - [SubEvent](docs/SubEvent.md)
  - [Tag](docs/Tag.md)
  - [TagFilter](docs/TagFilter.md)
  - [TagsList](docs/TagsList.md)

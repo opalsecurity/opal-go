@@ -22,20 +22,26 @@ type Event struct {
 	EventId string `json:"event_id"`
 	// The ID of the actor user.
 	ActorUserId string `json:"actor_user_id"`
+	// The name of the actor user.
+	ActorName interface{} `json:"actor_name"`
+	// The email of the actor user.
+	ActorEmail *string `json:"actor_email,omitempty"`
 	// The event type.
 	EventType string `json:"event_type"`
 	// The day and time the event was created.
 	CreatedAt time.Time `json:"created_at"`
+	SubEvents []SubEvent `json:"sub_events,omitempty"`
 }
 
 // NewEvent instantiates a new Event object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEvent(eventId string, actorUserId string, eventType string, createdAt time.Time) *Event {
+func NewEvent(eventId string, actorUserId string, actorName interface{}, eventType string, createdAt time.Time) *Event {
 	this := Event{}
 	this.EventId = eventId
 	this.ActorUserId = actorUserId
+	this.ActorName = actorName
 	this.EventType = eventType
 	this.CreatedAt = createdAt
 	return &this
@@ -97,6 +103,64 @@ func (o *Event) SetActorUserId(v string) {
 	o.ActorUserId = v
 }
 
+// GetActorName returns the ActorName field value
+// If the value is explicit nil, the zero value for interface{} will be returned
+func (o *Event) GetActorName() interface{} {
+	if o == nil {
+		var ret interface{}
+		return ret
+	}
+
+	return o.ActorName
+}
+
+// GetActorNameOk returns a tuple with the ActorName field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Event) GetActorNameOk() (*interface{}, bool) {
+	if o == nil || o.ActorName == nil {
+		return nil, false
+	}
+	return &o.ActorName, true
+}
+
+// SetActorName sets field value
+func (o *Event) SetActorName(v interface{}) {
+	o.ActorName = v
+}
+
+// GetActorEmail returns the ActorEmail field value if set, zero value otherwise.
+func (o *Event) GetActorEmail() string {
+	if o == nil || o.ActorEmail == nil {
+		var ret string
+		return ret
+	}
+	return *o.ActorEmail
+}
+
+// GetActorEmailOk returns a tuple with the ActorEmail field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Event) GetActorEmailOk() (*string, bool) {
+	if o == nil || o.ActorEmail == nil {
+		return nil, false
+	}
+	return o.ActorEmail, true
+}
+
+// HasActorEmail returns a boolean if a field has been set.
+func (o *Event) HasActorEmail() bool {
+	if o != nil && o.ActorEmail != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetActorEmail gets a reference to the given string and assigns it to the ActorEmail field.
+func (o *Event) SetActorEmail(v string) {
+	o.ActorEmail = &v
+}
+
 // GetEventType returns the EventType field value
 func (o *Event) GetEventType() string {
 	if o == nil {
@@ -145,6 +209,38 @@ func (o *Event) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
 }
 
+// GetSubEvents returns the SubEvents field value if set, zero value otherwise.
+func (o *Event) GetSubEvents() []SubEvent {
+	if o == nil || o.SubEvents == nil {
+		var ret []SubEvent
+		return ret
+	}
+	return o.SubEvents
+}
+
+// GetSubEventsOk returns a tuple with the SubEvents field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Event) GetSubEventsOk() ([]SubEvent, bool) {
+	if o == nil || o.SubEvents == nil {
+		return nil, false
+	}
+	return o.SubEvents, true
+}
+
+// HasSubEvents returns a boolean if a field has been set.
+func (o *Event) HasSubEvents() bool {
+	if o != nil && o.SubEvents != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSubEvents gets a reference to the given []SubEvent and assigns it to the SubEvents field.
+func (o *Event) SetSubEvents(v []SubEvent) {
+	o.SubEvents = v
+}
+
 func (o Event) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -153,11 +249,20 @@ func (o Event) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["actor_user_id"] = o.ActorUserId
 	}
+	if o.ActorName != nil {
+		toSerialize["actor_name"] = o.ActorName
+	}
+	if o.ActorEmail != nil {
+		toSerialize["actor_email"] = o.ActorEmail
+	}
 	if true {
 		toSerialize["event_type"] = o.EventType
 	}
 	if true {
 		toSerialize["created_at"] = o.CreatedAt
+	}
+	if o.SubEvents != nil {
+		toSerialize["sub_events"] = o.SubEvents
 	}
 	return json.Marshal(toSerialize)
 }

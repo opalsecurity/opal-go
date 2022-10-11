@@ -24,9 +24,12 @@ type CreateResourceInfo struct {
 	ResourceType ResourceTypeEnum `json:"resource_type"`
 	// The ID of the app for the resource.
 	AppId string `json:"app_id"`
-	// The ID of the resource on the remote system. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/docs/how-opal) for details on how to specify this field.
+	RemoteInfo *ResourceRemoteInfo `json:"remote_info,omitempty"`
+	// Deprecated - use remote_info instead. The ID of the resource on the remote system. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details on how to specify this field.
+	// Deprecated
 	RemoteResourceId *string `json:"remote_resource_id,omitempty"`
-	// JSON metadata about the remote resource. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/docs/how-opal) for details on how to specify this field. The required format is dependent on resource_type and should have the following schema: <style type=\"text/css\"> code {max-height:300px !important} </style> ```json {   \"$schema\": \"http://json-schema.org/draft-04/schema#\",   \"title\": \"Resource Metadata\",   \"properties\": {     \"aws_ec2_instance\": {       \"properties\": {         \"instance_id\": {           \"type\": \"string\"         },         \"region\": {           \"type\": \"string\"         }       },       \"required\": [\"instance_id\", \"region\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"AWS EC2 Instance\"     },     \"aws_eks_cluster\": {       \"properties\": {         \"cluster_name\": {           \"type\": \"string\"         },         \"cluster_region\": {           \"type\": \"string\"         },         \"cluster_arn\": {           \"type\": \"string\"         }       },       \"required\": [\"cluster_name\", \"cluster_region\", \"cluster_arn\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"AWS EKS Cluster\"     },     \"aws_rds_instance\": {       \"properties\": {         \"instance_id\": {           \"type\": \"string\"         },         \"engine\": {           \"type\": \"string\"         },         \"region\": {           \"type\": \"string\"         },         \"resource_id\": {           \"type\": \"string\"         },         \"database_name\": {           \"type\": \"string\"         }       },       \"required\": [         \"instance_id\",         \"engine\",         \"region\",         \"resource_id\",         \"database_name\"       ],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"AWS RDS Instance\"     },     \"aws_role\": {       \"properties\": {         \"arn\": {           \"type\": \"string\"         },         \"name\": {           \"type\": \"string\"         }       },       \"required\": [\"arn\", \"name\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"AWS Role\"     },     \"gcp_bucket\": {       \"properties\": {         \"bucket_id\": {           \"type\": \"string\"         }       },       \"required\": [\"bucket_id\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"GCP Bucket\"     },     \"gcp_compute_instance\": {       \"properties\": {         \"instance_id\": {           \"type\": \"string\"         },         \"project_id\": {           \"type\": \"string\"         },         \"zone\": {           \"type\": \"string\"         }       },       \"required\": [\"instance_id\", \"project_id\", \"zone\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"GCP Compute Instance\"     },     \"gcp_folder\": {       \"properties\": {         \"folder_id\": {           \"type\": \"string\"         }       },       \"required\": [\"folder_id\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"GCP Folder\"     },     \"gcp_gke_cluster\": {       \"properties\": {         \"cluster_name\": {           \"type\": \"string\"         }       },       \"required\": [\"cluster_name\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"GCP GKE Cluster\"     },     \"gcp_project\": {       \"properties\": {         \"project_id\": {           \"type\": \"string\"         }       },       \"required\": [\"project_id\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"GCP Project\"     },     \"gcp_sql_instance\": {       \"properties\": {         \"instance_id\": {           \"type\": \"string\"         },         \"project_id\": {           \"type\": \"string\"         }       },       \"required\": [\"instance_id\", \"project_id\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"GCP SQL Instance\"     },     \"git_hub_repo\": {       \"properties\": {         \"org_name\": {           \"type\": \"string\"         },         \"repo_name\": {           \"type\": \"string\"         }       },       \"required\": [\"org_name\", \"repo_name\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"GitHub Repo\"     },     \"okta_directory_app\": {       \"properties\": {         \"app_id\": {           \"type\": \"string\"         },         \"logo_url\": {           \"type\": \"string\"         }       },       \"required\": [\"app_id\", \"logo_url\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"Okta Directory App\"     },     \"okta_directory_role\": {       \"properties\": {         \"role_type\": {           \"type\": \"string\"         },         \"role_id\": {           \"type\": \"string\"         }       },       \"required\": [\"role_type\", \"role_id\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"Okta Directory Role\"     },     \"salesforce_profile\": {       \"properties\": {         \"user_license\": {           \"type\": \"string\"         }       },       \"required\": [\"user_license\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"Salesforce Profile\"     }   },   \"additionalProperties\": false,   \"minProperties\": 1,   \"maxProperties\": 1,   \"type\": \"object\" } ```
+	// Deprecated - use remote_info instead.  JSON metadata about the remote resource. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details on how to specify this field. The required format is dependent on resource_type and should have the following schema: <style type=\"text/css\"> code {max-height:300px !important} </style> ```json {   \"$schema\": \"http://json-schema.org/draft-04/schema#\",   \"title\": \"Resource Metadata\",   \"properties\": {     \"aws_ec2_instance\": {       \"properties\": {         \"instance_id\": {           \"type\": \"string\"         },         \"region\": {           \"type\": \"string\"         }       },       \"required\": [\"instance_id\", \"region\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"AWS EC2 Instance\"     },     \"aws_eks_cluster\": {       \"properties\": {         \"cluster_name\": {           \"type\": \"string\"         },         \"cluster_region\": {           \"type\": \"string\"         },         \"cluster_arn\": {           \"type\": \"string\"         }       },       \"required\": [\"cluster_name\", \"cluster_region\", \"cluster_arn\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"AWS EKS Cluster\"     },     \"aws_rds_instance\": {       \"properties\": {         \"instance_id\": {           \"type\": \"string\"         },         \"engine\": {           \"type\": \"string\"         },         \"region\": {           \"type\": \"string\"         },         \"resource_id\": {           \"type\": \"string\"         },         \"database_name\": {           \"type\": \"string\"         }       },       \"required\": [         \"instance_id\",         \"engine\",         \"region\",         \"resource_id\",         \"database_name\"       ],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"AWS RDS Instance\"     },     \"aws_role\": {       \"properties\": {         \"arn\": {           \"type\": \"string\"         },         \"name\": {           \"type\": \"string\"         }       },       \"required\": [\"arn\", \"name\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"AWS Role\"     },     \"gcp_bucket\": {       \"properties\": {         \"bucket_id\": {           \"type\": \"string\"         }       },       \"required\": [\"bucket_id\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"GCP Bucket\"     },     \"gcp_compute_instance\": {       \"properties\": {         \"instance_id\": {           \"type\": \"string\"         },         \"project_id\": {           \"type\": \"string\"         },         \"zone\": {           \"type\": \"string\"         }       },       \"required\": [\"instance_id\", \"project_id\", \"zone\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"GCP Compute Instance\"     },     \"gcp_folder\": {       \"properties\": {         \"folder_id\": {           \"type\": \"string\"         }       },       \"required\": [\"folder_id\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"GCP Folder\"     },     \"gcp_gke_cluster\": {       \"properties\": {         \"cluster_name\": {           \"type\": \"string\"         }       },       \"required\": [\"cluster_name\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"GCP GKE Cluster\"     },     \"gcp_project\": {       \"properties\": {         \"project_id\": {           \"type\": \"string\"         }       },       \"required\": [\"project_id\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"GCP Project\"     },     \"gcp_sql_instance\": {       \"properties\": {         \"instance_id\": {           \"type\": \"string\"         },         \"project_id\": {           \"type\": \"string\"         }       },       \"required\": [\"instance_id\", \"project_id\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"GCP SQL Instance\"     },     \"git_hub_repo\": {       \"properties\": {         \"org_name\": {           \"type\": \"string\"         },         \"repo_name\": {           \"type\": \"string\"         }       },       \"required\": [\"org_name\", \"repo_name\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"GitHub Repo\"     },     \"okta_directory_app\": {       \"properties\": {         \"app_id\": {           \"type\": \"string\"         },         \"logo_url\": {           \"type\": \"string\"         }       },       \"required\": [\"app_id\", \"logo_url\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"Okta Directory App\"     },     \"okta_directory_role\": {       \"properties\": {         \"role_type\": {           \"type\": \"string\"         },         \"role_id\": {           \"type\": \"string\"         }       },       \"required\": [\"role_type\", \"role_id\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"Okta Directory Role\"     },     \"salesforce_profile\": {       \"properties\": {         \"user_license\": {           \"type\": \"string\"         }       },       \"required\": [\"user_license\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"Salesforce Profile\"     }   },   \"additionalProperties\": false,   \"minProperties\": 1,   \"maxProperties\": 1,   \"type\": \"object\" } ```
+	// Deprecated
 	Metadata *string `json:"metadata,omitempty"`
 }
 
@@ -154,7 +157,40 @@ func (o *CreateResourceInfo) SetAppId(v string) {
 	o.AppId = v
 }
 
+// GetRemoteInfo returns the RemoteInfo field value if set, zero value otherwise.
+func (o *CreateResourceInfo) GetRemoteInfo() ResourceRemoteInfo {
+	if o == nil || o.RemoteInfo == nil {
+		var ret ResourceRemoteInfo
+		return ret
+	}
+	return *o.RemoteInfo
+}
+
+// GetRemoteInfoOk returns a tuple with the RemoteInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateResourceInfo) GetRemoteInfoOk() (*ResourceRemoteInfo, bool) {
+	if o == nil || o.RemoteInfo == nil {
+		return nil, false
+	}
+	return o.RemoteInfo, true
+}
+
+// HasRemoteInfo returns a boolean if a field has been set.
+func (o *CreateResourceInfo) HasRemoteInfo() bool {
+	if o != nil && o.RemoteInfo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRemoteInfo gets a reference to the given ResourceRemoteInfo and assigns it to the RemoteInfo field.
+func (o *CreateResourceInfo) SetRemoteInfo(v ResourceRemoteInfo) {
+	o.RemoteInfo = &v
+}
+
 // GetRemoteResourceId returns the RemoteResourceId field value if set, zero value otherwise.
+// Deprecated
 func (o *CreateResourceInfo) GetRemoteResourceId() string {
 	if o == nil || o.RemoteResourceId == nil {
 		var ret string
@@ -165,6 +201,7 @@ func (o *CreateResourceInfo) GetRemoteResourceId() string {
 
 // GetRemoteResourceIdOk returns a tuple with the RemoteResourceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CreateResourceInfo) GetRemoteResourceIdOk() (*string, bool) {
 	if o == nil || o.RemoteResourceId == nil {
 		return nil, false
@@ -182,11 +219,13 @@ func (o *CreateResourceInfo) HasRemoteResourceId() bool {
 }
 
 // SetRemoteResourceId gets a reference to the given string and assigns it to the RemoteResourceId field.
+// Deprecated
 func (o *CreateResourceInfo) SetRemoteResourceId(v string) {
 	o.RemoteResourceId = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
+// Deprecated
 func (o *CreateResourceInfo) GetMetadata() string {
 	if o == nil || o.Metadata == nil {
 		var ret string
@@ -197,6 +236,7 @@ func (o *CreateResourceInfo) GetMetadata() string {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CreateResourceInfo) GetMetadataOk() (*string, bool) {
 	if o == nil || o.Metadata == nil {
 		return nil, false
@@ -214,6 +254,7 @@ func (o *CreateResourceInfo) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given string and assigns it to the Metadata field.
+// Deprecated
 func (o *CreateResourceInfo) SetMetadata(v string) {
 	o.Metadata = &v
 }
@@ -231,6 +272,9 @@ func (o CreateResourceInfo) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["app_id"] = o.AppId
+	}
+	if o.RemoteInfo != nil {
+		toSerialize["remote_info"] = o.RemoteInfo
 	}
 	if o.RemoteResourceId != nil {
 		toSerialize["remote_resource_id"] = o.RemoteResourceId

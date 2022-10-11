@@ -6,14 +6,17 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EventId** | **string** | The ID of the event. | 
 **ActorUserId** | **string** | The ID of the actor user. | 
+**ActorName** | **interface{}** | The name of the actor user. | 
+**ActorEmail** | Pointer to **string** | The email of the actor user. | [optional] 
 **EventType** | **string** | The event type. | 
 **CreatedAt** | **time.Time** | The day and time the event was created. | 
+**SubEvents** | Pointer to [**[]SubEvent**](SubEvent.md) |  | [optional] 
 
 ## Methods
 
 ### NewEvent
 
-`func NewEvent(eventId string, actorUserId string, eventType string, createdAt time.Time, ) *Event`
+`func NewEvent(eventId string, actorUserId string, actorName interface{}, eventType string, createdAt time.Time, ) *Event`
 
 NewEvent instantiates a new Event object
 This constructor will assign default values to properties that have it defined,
@@ -68,6 +71,61 @@ and a boolean to check if the value has been set.
 SetActorUserId sets ActorUserId field to given value.
 
 
+### GetActorName
+
+`func (o *Event) GetActorName() interface{}`
+
+GetActorName returns the ActorName field if non-nil, zero value otherwise.
+
+### GetActorNameOk
+
+`func (o *Event) GetActorNameOk() (*interface{}, bool)`
+
+GetActorNameOk returns a tuple with the ActorName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActorName
+
+`func (o *Event) SetActorName(v interface{})`
+
+SetActorName sets ActorName field to given value.
+
+
+### SetActorNameNil
+
+`func (o *Event) SetActorNameNil(b bool)`
+
+ SetActorNameNil sets the value for ActorName to be an explicit nil
+
+### UnsetActorName
+`func (o *Event) UnsetActorName()`
+
+UnsetActorName ensures that no value is present for ActorName, not even an explicit nil
+### GetActorEmail
+
+`func (o *Event) GetActorEmail() string`
+
+GetActorEmail returns the ActorEmail field if non-nil, zero value otherwise.
+
+### GetActorEmailOk
+
+`func (o *Event) GetActorEmailOk() (*string, bool)`
+
+GetActorEmailOk returns a tuple with the ActorEmail field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActorEmail
+
+`func (o *Event) SetActorEmail(v string)`
+
+SetActorEmail sets ActorEmail field to given value.
+
+### HasActorEmail
+
+`func (o *Event) HasActorEmail() bool`
+
+HasActorEmail returns a boolean if a field has been set.
+
 ### GetEventType
 
 `func (o *Event) GetEventType() string`
@@ -107,6 +165,31 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
+
+### GetSubEvents
+
+`func (o *Event) GetSubEvents() []SubEvent`
+
+GetSubEvents returns the SubEvents field if non-nil, zero value otherwise.
+
+### GetSubEventsOk
+
+`func (o *Event) GetSubEventsOk() (*[]SubEvent, bool)`
+
+GetSubEventsOk returns a tuple with the SubEvents field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSubEvents
+
+`func (o *Event) SetSubEvents(v []SubEvent)`
+
+SetSubEvents sets SubEvents field to given value.
+
+### HasSubEvents
+
+`func (o *Event) HasSubEvents() bool`
+
+HasSubEvents returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
