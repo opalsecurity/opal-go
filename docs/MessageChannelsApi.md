@@ -5,6 +5,7 @@ All URIs are relative to *https://api.opal.dev/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateMessageChannel**](MessageChannelsApi.md#CreateMessageChannel) | **Post** /message-channels | 
+[**GetMessageChannel**](MessageChannelsApi.md#GetMessageChannel) | **Get** /message-channels/{message_channel_id} | 
 [**GetMessageChannels**](MessageChannelsApi.md#GetMessageChannels) | **Get** /message-channels | 
 
 
@@ -68,6 +69,76 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetMessageChannel
+
+> MessageChannel GetMessageChannel(ctx, messageChannelId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    messageChannelId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the message_channel.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.MessageChannelsApi.GetMessageChannel(context.Background(), messageChannelId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MessageChannelsApi.GetMessageChannel``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetMessageChannel`: MessageChannel
+    fmt.Fprintf(os.Stdout, "Response from `MessageChannelsApi.GetMessageChannel`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**messageChannelId** | **string** | The ID of the message_channel. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetMessageChannelRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**MessageChannel**](MessageChannel.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

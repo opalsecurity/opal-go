@@ -1790,6 +1790,32 @@ paths:
       - BearerAuth: []
       tags:
       - message-channels
+  /message-channels/{message_channel_id}:
+    get:
+      description: Gets a `MessageChannel` object.
+      operationId: get_message_channel
+      parameters:
+      - description: The ID of the message_channel.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: message_channel_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageChannel'
+          description: The requested message channel.
+      security:
+      - BearerAuth: []
+      tags:
+      - message-channels
   /uars:
     get:
       description: Returns a list of `UAR` objects.

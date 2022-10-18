@@ -96,6 +96,7 @@ Class | Method | HTTP request | Description
 *GroupsApi* | [**SetGroupVisibility**](docs/GroupsApi.md#setgroupvisibility) | **Put** /groups/{group_id}/visibility | 
 *GroupsApi* | [**UpdateGroups**](docs/GroupsApi.md#updategroups) | **Put** /groups | 
 *MessageChannelsApi* | [**CreateMessageChannel**](docs/MessageChannelsApi.md#createmessagechannel) | **Post** /message-channels | 
+*MessageChannelsApi* | [**GetMessageChannel**](docs/MessageChannelsApi.md#getmessagechannel) | **Get** /message-channels/{message_channel_id} | 
 *MessageChannelsApi* | [**GetMessageChannels**](docs/MessageChannelsApi.md#getmessagechannels) | **Get** /message-channels | 
 *OwnersApi* | [**CreateOwner**](docs/OwnersApi.md#createowner) | **Post** /owners | 
 *OwnersApi* | [**DeleteOwner**](docs/OwnersApi.md#deleteowner) | **Delete** /owners/{owner_id} | 
