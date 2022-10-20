@@ -121,7 +121,7 @@ import (
 )
 
 func main() {
-    createResourceInfo := *openapiclient.NewCreateResourceInfo("mongo-db-prod", openapiclient.ResourceTypeEnum("AWS_EC2_INSTANCE"), "f454d283-ca87-4a8a-bdbb-df212eca5353") // CreateResourceInfo | 
+    createResourceInfo := *openapiclient.NewCreateResourceInfo("mongo-db-prod", openapiclient.ResourceTypeEnum("AWS_ACCOUNT"), "f454d283-ca87-4a8a-bdbb-df212eca5353") // CreateResourceInfo | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -752,7 +752,7 @@ import (
 func main() {
     cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
     pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
-    resourceTypeFilter := openapiclient.ResourceTypeEnum("AWS_EC2_INSTANCE") // ResourceTypeEnum | The resource type to filter by. (optional)
+    resourceTypeFilter := openapiclient.ResourceTypeEnum("AWS_ACCOUNT") // ResourceTypeEnum | The resource type to filter by. (optional)
     resourceIds := []string{"1b978423-db0a-4037-a4cf-f79c60cb67b3"} // []string | The resource ids to filter by. (optional)
     resourceName := "example-name" // string | Resource name. (optional)
 

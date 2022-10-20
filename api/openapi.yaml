@@ -3026,6 +3026,7 @@ components:
       description: The type of the group.
       enum:
       - ACTIVE_DIRECTORY_GROUP
+      - AWS_SSO_GROUP
       - DUO_GROUP
       - GIT_HUB_TEAM
       - GOOGLE_GROUPS_GROUP
@@ -3037,11 +3038,13 @@ components:
     ResourceTypeEnum:
       description: The type of the resource.
       enum:
+      - AWS_ACCOUNT
       - AWS_EC2_INSTANCE
       - AWS_EKS_CLUSTER
       - AWS_IAM_ROLE
       - AWS_RDS_MYSQL_INSTANCE
       - AWS_RDS_POSTGRES_INSTANCE
+      - AWS_SSO_PERMISSION_SET
       - CUSTOM
       - GCP_BUCKET
       - GCP_CLOUD_SQL_MYSQL_INSTANCE
@@ -3058,6 +3061,7 @@ components:
       - MYSQL_INSTANCE
       - OKTA_APP
       - OKTA_ROLE
+      - OPAL_ROLE
       - PAGERDUTY_ROLE
       - SALESFORCE_PERMISSION_SET
       - SALESFORCE_PROFILE

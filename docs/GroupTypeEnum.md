@@ -5,6 +5,8 @@
 
 * `ACTIVE_DIRECTORY_GROUP` (value: `"ACTIVE_DIRECTORY_GROUP"`)
 
+* `AWS_SSO_GROUP` (value: `"AWS_SSO_GROUP"`)
+
 * `DUO_GROUP` (value: `"DUO_GROUP"`)
 
 * `GIT_HUB_TEAM` (value: `"GIT_HUB_TEAM"`)

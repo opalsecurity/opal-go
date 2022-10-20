@@ -22,6 +22,7 @@ type GroupTypeEnum string
 // List of GroupTypeEnum
 const (
 	GROUPTYPEENUM_ACTIVE_DIRECTORY_GROUP GroupTypeEnum = "ACTIVE_DIRECTORY_GROUP"
+	GROUPTYPEENUM_AWS_SSO_GROUP GroupTypeEnum = "AWS_SSO_GROUP"
 	GROUPTYPEENUM_DUO_GROUP GroupTypeEnum = "DUO_GROUP"
 	GROUPTYPEENUM_GIT_HUB_TEAM GroupTypeEnum = "GIT_HUB_TEAM"
 	GROUPTYPEENUM_GOOGLE_GROUPS_GROUP GroupTypeEnum = "GOOGLE_GROUPS_GROUP"
@@ -33,6 +34,7 @@ const (
 // All allowed values of GroupTypeEnum enum
 var AllowedGroupTypeEnumEnumValues = []GroupTypeEnum{
 	"ACTIVE_DIRECTORY_GROUP",
+	"AWS_SSO_GROUP",
 	"DUO_GROUP",
 	"GIT_HUB_TEAM",
 	"GOOGLE_GROUPS_GROUP",

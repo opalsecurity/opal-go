@@ -3,6 +3,8 @@
 ## Enum
 
 
+* `AWS_ACCOUNT` (value: `"AWS_ACCOUNT"`)
+
 * `AWS_EC2_INSTANCE` (value: `"AWS_EC2_INSTANCE"`)
 
 * `AWS_EKS_CLUSTER` (value: `"AWS_EKS_CLUSTER"`)
@@ -12,6 +14,8 @@
 * `AWS_RDS_MYSQL_INSTANCE` (value: `"AWS_RDS_MYSQL_INSTANCE"`)
 
 * `AWS_RDS_POSTGRES_INSTANCE` (value: `"AWS_RDS_POSTGRES_INSTANCE"`)
+
+* `AWS_SSO_PERMISSION_SET` (value: `"AWS_SSO_PERMISSION_SET"`)
 
 * `CUSTOM` (value: `"CUSTOM"`)
 
@@ -44,6 +48,8 @@
 * `OKTA_APP` (value: `"OKTA_APP"`)
 
 * `OKTA_ROLE` (value: `"OKTA_ROLE"`)
+
+* `OPAL_ROLE` (value: `"OPAL_ROLE"`)
 
 * `PAGERDUTY_ROLE` (value: `"PAGERDUTY_ROLE"`)
 
