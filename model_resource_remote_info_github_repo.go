@@ -18,7 +18,8 @@ import (
 // ResourceRemoteInfoGithubRepo Remote info for GitHub repositories.
 type ResourceRemoteInfoGithubRepo struct {
 	// The id of the repository.
-	RepoId string `json:"repo_id"`
+	// Deprecated
+	RepoId *string `json:"repo_id,omitempty"`
 	// The name of the repository.
 	RepoName string `json:"repo_name"`
 }
@@ -27,9 +28,8 @@ type ResourceRemoteInfoGithubRepo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResourceRemoteInfoGithubRepo(repoId string, repoName string) *ResourceRemoteInfoGithubRepo {
+func NewResourceRemoteInfoGithubRepo(repoName string) *ResourceRemoteInfoGithubRepo {
 	this := ResourceRemoteInfoGithubRepo{}
-	this.RepoId = repoId
 	this.RepoName = repoName
 	return &this
 }
@@ -42,28 +42,39 @@ func NewResourceRemoteInfoGithubRepoWithDefaults() *ResourceRemoteInfoGithubRepo
 	return &this
 }
 
-// GetRepoId returns the RepoId field value
+// GetRepoId returns the RepoId field value if set, zero value otherwise.
+// Deprecated
 func (o *ResourceRemoteInfoGithubRepo) GetRepoId() string {
-	if o == nil {
+	if o == nil || o.RepoId == nil {
 		var ret string
 		return ret
 	}
-
-	return o.RepoId
+	return *o.RepoId
 }
 
-// GetRepoIdOk returns a tuple with the RepoId field value
+// GetRepoIdOk returns a tuple with the RepoId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *ResourceRemoteInfoGithubRepo) GetRepoIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || o.RepoId == nil {
 		return nil, false
 	}
-	return &o.RepoId, true
+	return o.RepoId, true
 }
 
-// SetRepoId sets field value
+// HasRepoId returns a boolean if a field has been set.
+func (o *ResourceRemoteInfoGithubRepo) HasRepoId() bool {
+	if o != nil && o.RepoId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRepoId gets a reference to the given string and assigns it to the RepoId field.
+// Deprecated
 func (o *ResourceRemoteInfoGithubRepo) SetRepoId(v string) {
-	o.RepoId = v
+	o.RepoId = &v
 }
 
 // GetRepoName returns the RepoName field value
@@ -92,7 +103,7 @@ func (o *ResourceRemoteInfoGithubRepo) SetRepoName(v string) {
 
 func (o ResourceRemoteInfoGithubRepo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.RepoId != nil {
 		toSerialize["repo_id"] = o.RepoId
 	}
 	if true {

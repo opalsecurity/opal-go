@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RepoId** | **string** | The id of the repository. | 
+**RepoId** | Pointer to **string** | The id of the repository. | [optional] 
 **RepoName** | **string** | The name of the repository. | 
 
 ## Methods
 
 ### NewResourceRemoteInfoGithubRepo
 
-`func NewResourceRemoteInfoGithubRepo(repoId string, repoName string, ) *ResourceRemoteInfoGithubRepo`
+`func NewResourceRemoteInfoGithubRepo(repoName string, ) *ResourceRemoteInfoGithubRepo`
 
 NewResourceRemoteInfoGithubRepo instantiates a new ResourceRemoteInfoGithubRepo object
 This constructor will assign default values to properties that have it defined,
@@ -45,6 +45,11 @@ and a boolean to check if the value has been set.
 
 SetRepoId sets RepoId field to given value.
 
+### HasRepoId
+
+`func (o *ResourceRemoteInfoGithubRepo) HasRepoId() bool`
+
+HasRepoId returns a boolean if a field has been set.
 
 ### GetRepoName
 

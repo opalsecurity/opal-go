@@ -37,6 +37,7 @@ type Resource struct {
 	// The recommended duration for which the resource should be requested (in minutes). -1 represents an indefinite duration.
 	RecommendedDuration *int32 `json:"recommended_duration,omitempty"`
 	// A bool representing whether or not access requests to the resource require manager approval.
+	// Deprecated
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
 	// A bool representing whether or not access requests to the resource require an access ticket.
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
@@ -50,6 +51,8 @@ type Resource struct {
 	AutoApproval *bool `json:"auto_approval,omitempty"`
 	// The ID of the associated request template.
 	RequestTemplateId *string `json:"request_template_id,omitempty"`
+	// The ID of the parent resource.
+	ParentResourceId *string `json:"parent_resource_id,omitempty"`
 	// JSON metadata about the remote resource. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details.
 	Metadata *string `json:"metadata,omitempty"`
 }
@@ -385,6 +388,7 @@ func (o *Resource) SetRecommendedDuration(v int32) {
 }
 
 // GetRequireManagerApproval returns the RequireManagerApproval field value if set, zero value otherwise.
+// Deprecated
 func (o *Resource) GetRequireManagerApproval() bool {
 	if o == nil || o.RequireManagerApproval == nil {
 		var ret bool
@@ -395,6 +399,7 @@ func (o *Resource) GetRequireManagerApproval() bool {
 
 // GetRequireManagerApprovalOk returns a tuple with the RequireManagerApproval field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Resource) GetRequireManagerApprovalOk() (*bool, bool) {
 	if o == nil || o.RequireManagerApproval == nil {
 		return nil, false
@@ -412,6 +417,7 @@ func (o *Resource) HasRequireManagerApproval() bool {
 }
 
 // SetRequireManagerApproval gets a reference to the given bool and assigns it to the RequireManagerApproval field.
+// Deprecated
 func (o *Resource) SetRequireManagerApproval(v bool) {
 	o.RequireManagerApproval = &v
 }
@@ -608,6 +614,38 @@ func (o *Resource) SetRequestTemplateId(v string) {
 	o.RequestTemplateId = &v
 }
 
+// GetParentResourceId returns the ParentResourceId field value if set, zero value otherwise.
+func (o *Resource) GetParentResourceId() string {
+	if o == nil || o.ParentResourceId == nil {
+		var ret string
+		return ret
+	}
+	return *o.ParentResourceId
+}
+
+// GetParentResourceIdOk returns a tuple with the ParentResourceId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetParentResourceIdOk() (*string, bool) {
+	if o == nil || o.ParentResourceId == nil {
+		return nil, false
+	}
+	return o.ParentResourceId, true
+}
+
+// HasParentResourceId returns a boolean if a field has been set.
+func (o *Resource) HasParentResourceId() bool {
+	if o != nil && o.ParentResourceId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetParentResourceId gets a reference to the given string and assigns it to the ParentResourceId field.
+func (o *Resource) SetParentResourceId(v string) {
+	o.ParentResourceId = &v
+}
+
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
 func (o *Resource) GetMetadata() string {
 	if o == nil || o.Metadata == nil {
@@ -692,6 +730,9 @@ func (o Resource) MarshalJSON() ([]byte, error) {
 	}
 	if o.RequestTemplateId != nil {
 		toSerialize["request_template_id"] = o.RequestTemplateId
+	}
+	if o.ParentResourceId != nil {
+		toSerialize["parent_resource_id"] = o.ParentResourceId
 	}
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata

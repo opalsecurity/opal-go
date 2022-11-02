@@ -483,6 +483,7 @@ paths:
       - groups
   /groups/{group_id}/reviewers:
     get:
+      deprecated: true
       description: Gets the list of owner IDs of the reviewers for a group.
       operationId: get_group_reviewers
       parameters:
@@ -512,6 +513,7 @@ paths:
       tags:
       - groups
     put:
+      deprecated: true
       description: Sets the list of reviewers for a group.
       operationId: set_group_reviewers
       parameters:
@@ -530,6 +532,70 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ReviewerIDList'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+                  format: uuid
+                  type: string
+                type: array
+          description: The updated IDs of owners that are reviewers for this group
+      security:
+      - BearerAuth: []
+      tags:
+      - groups
+  /groups/{group_id}/reviewer_stages:
+    get:
+      description: Gets the list of reviewer stages for a group.
+      operationId: get_group_reviewer_stages
+      parameters:
+      - description: The ID of the group.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: A list of reviewer stages.
+                items:
+                  $ref: '#/components/schemas/ReviewerStage'
+                type: array
+          description: The IDs of owners that are reviewers for this group.
+      security:
+      - BearerAuth: []
+      tags:
+      - groups
+    put:
+      description: Sets the list of reviewer stages for a group.
+      operationId: set_group_reviewer_stages
+      parameters:
+      - description: The ID of the group.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewerStageList'
         required: true
       responses:
         "200":
@@ -811,6 +877,17 @@ paths:
         schema:
           type: string
         style: form
+      - description: The parent resource id to filter by.
+        example:
+        - 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: query
+        name: parent_resource_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -1078,6 +1155,70 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ReviewerIDList'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+                  format: uuid
+                  type: string
+                type: array
+          description: The updated IDs of owners that are reviewers for this resource
+      security:
+      - BearerAuth: []
+      tags:
+      - resources
+  /resources/{resource_id}/reviewer_stages:
+    get:
+      description: Gets the list reviewer stages for a resource.
+      operationId: get_resource_reviewer_stages
+      parameters:
+      - description: The ID of the resource.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: A list of reviewer stages.
+                items:
+                  $ref: '#/components/schemas/ReviewerStage'
+                type: array
+          description: The IDs of owners that are reviewers for this resource.
+      security:
+      - BearerAuth: []
+      tags:
+      - resources
+    put:
+      description: Sets the list of reviewer stages for a resource.
+      operationId: set_resource_reviewer_stages
+      parameters:
+      - description: The ID of the resource.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewerStageList'
         required: true
       responses:
         "200":
@@ -2873,6 +3014,7 @@ components:
           example: 120
           type: integer
         require_manager_approval:
+          deprecated: true
           description: A bool representing whether or not access requests to the group
             require manager approval.
           example: false
@@ -2990,6 +3132,7 @@ components:
           example: 120
           type: integer
         require_manager_approval:
+          deprecated: true
           description: A bool representing whether or not access requests to the group
             require manager approval.
           example: false
@@ -3161,6 +3304,52 @@ components:
           type: array
       required:
       - reviewer_ids
+      type: object
+    ReviewerStageList:
+      example:
+        stages:
+        - reviewer_ids:
+          - 7870617d-e72a-47f5-a84c-693817ab4567
+          - 1520617d-e72a-47f5-a84c-693817ab48ad2
+        - reviewer_ids:
+          - 7870617d-e72a-47f5-a84c-693817ab4567
+          - 1520617d-e72a-47f5-a84c-693817ab48ad2
+      properties:
+        stages:
+          description: A list of reviewer stages.
+          items:
+            $ref: '#/components/schemas/ReviewerStage'
+          type: array
+      required:
+      - stages
+      type: object
+    ReviewerStage:
+      description: A reviewer stage.
+      example:
+        reviewer_ids:
+        - 7870617d-e72a-47f5-a84c-693817ab4567
+        - 1520617d-e72a-47f5-a84c-693817ab48ad2
+      properties:
+        require_manager_approval:
+          description: Whether this reviewer stage should require manager approval.
+          example: false
+          type: boolean
+        operator:
+          description: The operator of the reviewer stage.
+          enum:
+          - AND
+          - OR
+          example: AND
+          type: string
+        owner_ids:
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - operator
+      - owner_ids
+      - require_manager_approval
       type: object
     MessageChannel:
       description: |-
@@ -3702,6 +3891,7 @@ components:
           max_duration: 120
           require_manager_approval: false
           require_support_ticket: false
+          parent_resource_id: f454d283-ca67-4a8a-bdbb-df212eca5345
         - resource_id: 99d0b81d-14be-4cf6-bd27-348b4af1d11b
           description: This resource represents GCP project "app-demo".
           remote_id: app-demo-307223
@@ -3747,6 +3937,7 @@ components:
         max_duration: 120
         require_manager_approval: false
         require_support_ticket: false
+        parent_resource_id: f454d283-ca67-4a8a-bdbb-df212eca5345
       properties:
         resource_id:
           description: The ID of the resource.
@@ -3792,6 +3983,7 @@ components:
           example: 120
           type: integer
         require_manager_approval:
+          deprecated: true
           description: A bool representing whether or not access requests to the resource
             require manager approval.
           example: false
@@ -3824,6 +4016,11 @@ components:
         request_template_id:
           description: The ID of the associated request template.
           example: 06851574-e50d-40ca-8c78-f72ae6ab4304
+          format: uuid
+          type: string
+        parent_resource_id:
+          description: The ID of the parent resource.
+          example: 06851574-e50d-40ca-8c78-f72ae6ab4305
           format: uuid
           type: string
         metadata:
@@ -3912,6 +4109,7 @@ components:
           example: 120
           type: integer
         require_manager_approval:
+          deprecated: true
           description: A bool representing whether or not access requests to the resource
             require manager approval.
           example: false
@@ -4244,6 +4442,7 @@ components:
       description: Remote info for GitHub team.
       properties:
         team_id:
+          deprecated: true
           description: The id of the GitHub team.
           example: "898931321"
           type: string
@@ -4252,7 +4451,6 @@ components:
           example: opal-security
           type: string
       required:
-      - team_id
       - team_slug
       type: object
     GroupRemoteInfo_google_group:
@@ -4354,6 +4552,7 @@ components:
       description: Remote info for GitHub repositories.
       properties:
         repo_id:
+          deprecated: true
           description: The id of the repository.
           example: "898931321"
           type: string
@@ -4362,7 +4561,6 @@ components:
           example: Opal Security
           type: string
       required:
-      - repo_id
       - repo_name
       type: object
     ResourceRemoteInfo_okta_app:

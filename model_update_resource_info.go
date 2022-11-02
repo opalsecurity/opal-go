@@ -30,6 +30,7 @@ type UpdateResourceInfo struct {
 	// The recommended duration for which the resource should be requested (in minutes). Will be the default value in a request. Use -1 to set to indefinite and 0 to unset.
 	RecommendedDuration *int32 `json:"recommended_duration,omitempty"`
 	// A bool representing whether or not access requests to the resource require manager approval.
+	// Deprecated
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
 	// A bool representing whether or not access requests to the resource require an access ticket.
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
@@ -248,6 +249,7 @@ func (o *UpdateResourceInfo) SetRecommendedDuration(v int32) {
 }
 
 // GetRequireManagerApproval returns the RequireManagerApproval field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateResourceInfo) GetRequireManagerApproval() bool {
 	if o == nil || o.RequireManagerApproval == nil {
 		var ret bool
@@ -258,6 +260,7 @@ func (o *UpdateResourceInfo) GetRequireManagerApproval() bool {
 
 // GetRequireManagerApprovalOk returns a tuple with the RequireManagerApproval field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateResourceInfo) GetRequireManagerApprovalOk() (*bool, bool) {
 	if o == nil || o.RequireManagerApproval == nil {
 		return nil, false
@@ -275,6 +278,7 @@ func (o *UpdateResourceInfo) HasRequireManagerApproval() bool {
 }
 
 // SetRequireManagerApproval gets a reference to the given bool and assigns it to the RequireManagerApproval field.
+// Deprecated
 func (o *UpdateResourceInfo) SetRequireManagerApproval(v bool) {
 	o.RequireManagerApproval = &v
 }

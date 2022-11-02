@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **RequireMfaToConnect** | Pointer to **bool** | A bool representing whether or not to require MFA to connect to this resource. | [optional] 
 **AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this resource. | [optional] 
 **RequestTemplateId** | Pointer to **string** | The ID of the associated request template. | [optional] 
+**ParentResourceId** | Pointer to **string** | The ID of the parent resource. | [optional] 
 **Metadata** | Pointer to **string** | JSON metadata about the remote resource. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details. | [optional] 
 
 ## Methods
@@ -461,6 +462,31 @@ SetRequestTemplateId sets RequestTemplateId field to given value.
 `func (o *Resource) HasRequestTemplateId() bool`
 
 HasRequestTemplateId returns a boolean if a field has been set.
+
+### GetParentResourceId
+
+`func (o *Resource) GetParentResourceId() string`
+
+GetParentResourceId returns the ParentResourceId field if non-nil, zero value otherwise.
+
+### GetParentResourceIdOk
+
+`func (o *Resource) GetParentResourceIdOk() (*string, bool)`
+
+GetParentResourceIdOk returns a tuple with the ParentResourceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParentResourceId
+
+`func (o *Resource) SetParentResourceId(v string)`
+
+SetParentResourceId sets ParentResourceId field to given value.
+
+### HasParentResourceId
+
+`func (o *Resource) HasParentResourceId() bool`
+
+HasParentResourceId returns a boolean if a field has been set.
 
 ### GetMetadata
 

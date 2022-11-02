@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TeamId** | **string** | The id of the GitHub team. | 
+**TeamId** | Pointer to **string** | The id of the GitHub team. | [optional] 
 **TeamSlug** | **string** | The slug of the GitHub team. | 
 
 ## Methods
 
 ### NewGroupRemoteInfoGithubTeam
 
-`func NewGroupRemoteInfoGithubTeam(teamId string, teamSlug string, ) *GroupRemoteInfoGithubTeam`
+`func NewGroupRemoteInfoGithubTeam(teamSlug string, ) *GroupRemoteInfoGithubTeam`
 
 NewGroupRemoteInfoGithubTeam instantiates a new GroupRemoteInfoGithubTeam object
 This constructor will assign default values to properties that have it defined,
@@ -45,6 +45,11 @@ and a boolean to check if the value has been set.
 
 SetTeamId sets TeamId field to given value.
 
+### HasTeamId
+
+`func (o *GroupRemoteInfoGithubTeam) HasTeamId() bool`
+
+HasTeamId returns a boolean if a field has been set.
 
 ### GetTeamSlug
 

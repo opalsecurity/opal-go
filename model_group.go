@@ -37,6 +37,7 @@ type Group struct {
 	// The recommended duration for which the group should be requested (in minutes). -1 represents an indefinite duration.
 	RecommendedDuration *int32 `json:"recommended_duration,omitempty"`
 	// A bool representing whether or not access requests to the group require manager approval.
+	// Deprecated
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
 	// A bool representing whether or not access requests to the group require an access ticket.
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
@@ -383,6 +384,7 @@ func (o *Group) SetRecommendedDuration(v int32) {
 }
 
 // GetRequireManagerApproval returns the RequireManagerApproval field value if set, zero value otherwise.
+// Deprecated
 func (o *Group) GetRequireManagerApproval() bool {
 	if o == nil || o.RequireManagerApproval == nil {
 		var ret bool
@@ -393,6 +395,7 @@ func (o *Group) GetRequireManagerApproval() bool {
 
 // GetRequireManagerApprovalOk returns a tuple with the RequireManagerApproval field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Group) GetRequireManagerApprovalOk() (*bool, bool) {
 	if o == nil || o.RequireManagerApproval == nil {
 		return nil, false
@@ -410,6 +413,7 @@ func (o *Group) HasRequireManagerApproval() bool {
 }
 
 // SetRequireManagerApproval gets a reference to the given bool and assigns it to the RequireManagerApproval field.
+// Deprecated
 func (o *Group) SetRequireManagerApproval(v bool) {
 	o.RequireManagerApproval = &v
 }

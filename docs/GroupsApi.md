@@ -9,11 +9,13 @@ Method | HTTP request | Description
 [**DeleteGroup**](GroupsApi.md#DeleteGroup) | **Delete** /groups/{group_id} | 
 [**GetGroupMessageChannels**](GroupsApi.md#GetGroupMessageChannels) | **Get** /groups/{group_id}/message-channels | 
 [**GetGroupResources**](GroupsApi.md#GetGroupResources) | **Get** /groups/{group_id}/resources | 
+[**GetGroupReviewerStages**](GroupsApi.md#GetGroupReviewerStages) | **Get** /groups/{group_id}/reviewer_stages | 
 [**GetGroupReviewers**](GroupsApi.md#GetGroupReviewers) | **Get** /groups/{group_id}/reviewers | 
 [**GetGroupTags**](GroupsApi.md#GetGroupTags) | **Get** /groups/{group_id}/tags | 
 [**GetGroupVisibility**](GroupsApi.md#GetGroupVisibility) | **Get** /groups/{group_id}/visibility | 
 [**GetGroups**](GroupsApi.md#GetGroups) | **Get** /groups | 
 [**SetGroupMessageChannels**](GroupsApi.md#SetGroupMessageChannels) | **Put** /groups/{group_id}/message-channels | 
+[**SetGroupReviewerStages**](GroupsApi.md#SetGroupReviewerStages) | **Put** /groups/{group_id}/reviewer_stages | 
 [**SetGroupReviewers**](GroupsApi.md#SetGroupReviewers) | **Put** /groups/{group_id}/reviewers | 
 [**SetGroupVisibility**](GroupsApi.md#SetGroupVisibility) | **Put** /groups/{group_id}/visibility | 
 [**UpdateGroups**](GroupsApi.md#UpdateGroups) | **Put** /groups | 
@@ -369,6 +371,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetGroupReviewerStages
+
+> []ReviewerStage GetGroupReviewerStages(ctx, groupId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.GroupsApi.GetGroupReviewerStages(context.Background(), groupId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.GetGroupReviewerStages``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetGroupReviewerStages`: []ReviewerStage
+    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.GetGroupReviewerStages`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**groupId** | **string** | The ID of the group. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetGroupReviewerStagesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**[]ReviewerStage**](ReviewerStage.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetGroupReviewers
 
 > []string GetGroupReviewers(ctx, groupId).Execute()
@@ -706,6 +778,78 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **messageChannelIDList** | [**MessageChannelIDList**](MessageChannelIDList.md) |  | 
+
+### Return type
+
+**[]string**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SetGroupReviewerStages
+
+> []string SetGroupReviewerStages(ctx, groupId).ReviewerStageList(reviewerStageList).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+    reviewerStageList := *openapiclient.NewReviewerStageList([]openapiclient.ReviewerStage{*openapiclient.NewReviewerStage(false, "AND", []string{"OwnerIds_example"})}) // ReviewerStageList | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.GroupsApi.SetGroupReviewerStages(context.Background(), groupId).ReviewerStageList(reviewerStageList).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.SetGroupReviewerStages``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `SetGroupReviewerStages`: []string
+    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.SetGroupReviewerStages`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**groupId** | **string** | The ID of the group. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSetGroupReviewerStagesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **reviewerStageList** | [**ReviewerStageList**](ReviewerStageList.md) |  | 
 
 ### Return type
 

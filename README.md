@@ -87,11 +87,13 @@ Class | Method | HTTP request | Description
 *GroupsApi* | [**DeleteGroup**](docs/GroupsApi.md#deletegroup) | **Delete** /groups/{group_id} | 
 *GroupsApi* | [**GetGroupMessageChannels**](docs/GroupsApi.md#getgroupmessagechannels) | **Get** /groups/{group_id}/message-channels | 
 *GroupsApi* | [**GetGroupResources**](docs/GroupsApi.md#getgroupresources) | **Get** /groups/{group_id}/resources | 
+*GroupsApi* | [**GetGroupReviewerStages**](docs/GroupsApi.md#getgroupreviewerstages) | **Get** /groups/{group_id}/reviewer_stages | 
 *GroupsApi* | [**GetGroupReviewers**](docs/GroupsApi.md#getgroupreviewers) | **Get** /groups/{group_id}/reviewers | 
 *GroupsApi* | [**GetGroupTags**](docs/GroupsApi.md#getgrouptags) | **Get** /groups/{group_id}/tags | 
 *GroupsApi* | [**GetGroupVisibility**](docs/GroupsApi.md#getgroupvisibility) | **Get** /groups/{group_id}/visibility | 
 *GroupsApi* | [**GetGroups**](docs/GroupsApi.md#getgroups) | **Get** /groups | 
 *GroupsApi* | [**SetGroupMessageChannels**](docs/GroupsApi.md#setgroupmessagechannels) | **Put** /groups/{group_id}/message-channels | 
+*GroupsApi* | [**SetGroupReviewerStages**](docs/GroupsApi.md#setgroupreviewerstages) | **Put** /groups/{group_id}/reviewer_stages | 
 *GroupsApi* | [**SetGroupReviewers**](docs/GroupsApi.md#setgroupreviewers) | **Put** /groups/{group_id}/reviewers | 
 *GroupsApi* | [**SetGroupVisibility**](docs/GroupsApi.md#setgroupvisibility) | **Put** /groups/{group_id}/visibility | 
 *GroupsApi* | [**UpdateGroups**](docs/GroupsApi.md#updategroups) | **Put** /groups | 
@@ -111,6 +113,7 @@ Class | Method | HTTP request | Description
 *ResourcesApi* | [**DeleteResourceUser**](docs/ResourcesApi.md#deleteresourceuser) | **Delete** /resources/{resource_id}/users/{user_id} | 
 *ResourcesApi* | [**GetResource**](docs/ResourcesApi.md#getresource) | **Get** /resources/{resource_id} | 
 *ResourcesApi* | [**GetResourceMessageChannels**](docs/ResourcesApi.md#getresourcemessagechannels) | **Get** /resources/{resource_id}/message-channels | 
+*ResourcesApi* | [**GetResourceReviewerStages**](docs/ResourcesApi.md#getresourcereviewerstages) | **Get** /resources/{resource_id}/reviewer_stages | 
 *ResourcesApi* | [**GetResourceReviewers**](docs/ResourcesApi.md#getresourcereviewers) | **Get** /resources/{resource_id}/reviewers | 
 *ResourcesApi* | [**GetResourceTags**](docs/ResourcesApi.md#getresourcetags) | **Get** /resources/{resource_id}/tags | 
 *ResourcesApi* | [**GetResourceUsers**](docs/ResourcesApi.md#getresourceusers) | **Get** /resources/{resource_id}/users | 
@@ -118,6 +121,7 @@ Class | Method | HTTP request | Description
 *ResourcesApi* | [**GetResources**](docs/ResourcesApi.md#getresources) | **Get** /resources | 
 *ResourcesApi* | [**ResourceUserAccessStatusRetrieve**](docs/ResourcesApi.md#resourceuseraccessstatusretrieve) | **Get** /resource-user-access-status/{resource_id}/{user_id} | 
 *ResourcesApi* | [**SetResourceMessageChannels**](docs/ResourcesApi.md#setresourcemessagechannels) | **Put** /resources/{resource_id}/message-channels | 
+*ResourcesApi* | [**SetResourceReviewerStages**](docs/ResourcesApi.md#setresourcereviewerstages) | **Put** /resources/{resource_id}/reviewer_stages | 
 *ResourcesApi* | [**SetResourceReviewers**](docs/ResourcesApi.md#setresourcereviewers) | **Put** /resources/{resource_id}/reviewers | 
 *ResourcesApi* | [**SetResourceVisibility**](docs/ResourcesApi.md#setresourcevisibility) | **Put** /resources/{resource_id}/visibility | 
 *ResourcesApi* | [**UpdateResources**](docs/ResourcesApi.md#updateresources) | **Put** /resources | 
@@ -192,6 +196,8 @@ Class | Method | HTTP request | Description
  - [ResourceUserAccessStatus](docs/ResourceUserAccessStatus.md)
  - [ResourceUserAccessStatusEnum](docs/ResourceUserAccessStatusEnum.md)
  - [ReviewerIDList](docs/ReviewerIDList.md)
+ - [ReviewerStage](docs/ReviewerStage.md)
+ - [ReviewerStageList](docs/ReviewerStageList.md)
  - [Session](docs/Session.md)
  - [SessionsList](docs/SessionsList.md)
  - [SubEvent](docs/SubEvent.md)

@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**DeleteResourceUser**](ResourcesApi.md#DeleteResourceUser) | **Delete** /resources/{resource_id}/users/{user_id} | 
 [**GetResource**](ResourcesApi.md#GetResource) | **Get** /resources/{resource_id} | 
 [**GetResourceMessageChannels**](ResourcesApi.md#GetResourceMessageChannels) | **Get** /resources/{resource_id}/message-channels | 
+[**GetResourceReviewerStages**](ResourcesApi.md#GetResourceReviewerStages) | **Get** /resources/{resource_id}/reviewer_stages | 
 [**GetResourceReviewers**](ResourcesApi.md#GetResourceReviewers) | **Get** /resources/{resource_id}/reviewers | 
 [**GetResourceTags**](ResourcesApi.md#GetResourceTags) | **Get** /resources/{resource_id}/tags | 
 [**GetResourceUsers**](ResourcesApi.md#GetResourceUsers) | **Get** /resources/{resource_id}/users | 
@@ -17,6 +18,7 @@ Method | HTTP request | Description
 [**GetResources**](ResourcesApi.md#GetResources) | **Get** /resources | 
 [**ResourceUserAccessStatusRetrieve**](ResourcesApi.md#ResourceUserAccessStatusRetrieve) | **Get** /resource-user-access-status/{resource_id}/{user_id} | 
 [**SetResourceMessageChannels**](ResourcesApi.md#SetResourceMessageChannels) | **Put** /resources/{resource_id}/message-channels | 
+[**SetResourceReviewerStages**](ResourcesApi.md#SetResourceReviewerStages) | **Put** /resources/{resource_id}/reviewer_stages | 
 [**SetResourceReviewers**](ResourcesApi.md#SetResourceReviewers) | **Put** /resources/{resource_id}/reviewers | 
 [**SetResourceVisibility**](ResourcesApi.md#SetResourceVisibility) | **Put** /resources/{resource_id}/visibility | 
 [**UpdateResources**](ResourcesApi.md#UpdateResources) | **Put** /resources | 
@@ -447,6 +449,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetResourceReviewerStages
+
+> []ReviewerStage GetResourceReviewerStages(ctx, resourceId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    resourceId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the resource.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ResourcesApi.GetResourceReviewerStages(context.Background(), resourceId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ResourcesApi.GetResourceReviewerStages``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetResourceReviewerStages`: []ReviewerStage
+    fmt.Fprintf(os.Stdout, "Response from `ResourcesApi.GetResourceReviewerStages`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetResourceReviewerStagesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**[]ReviewerStage**](ReviewerStage.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetResourceReviewers
 
 > []string GetResourceReviewers(ctx, resourceId).Execute()
@@ -731,7 +803,7 @@ Name | Type | Description  | Notes
 
 ## GetResources
 
-> PaginatedResourcesList GetResources(ctx).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).Execute()
+> PaginatedResourcesList GetResources(ctx).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).Execute()
 
 
 
@@ -755,10 +827,11 @@ func main() {
     resourceTypeFilter := openapiclient.ResourceTypeEnum("AWS_ACCOUNT") // ResourceTypeEnum | The resource type to filter by. (optional)
     resourceIds := []string{"1b978423-db0a-4037-a4cf-f79c60cb67b3"} // []string | The resource ids to filter by. (optional)
     resourceName := "example-name" // string | Resource name. (optional)
+    parentResourceId := "["4baf8423-db0a-4037-a4cf-f79c60cb67a5"]" // string | The parent resource id to filter by. (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ResourcesApi.GetResources(context.Background()).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).Execute()
+    resp, r, err := apiClient.ResourcesApi.GetResources(context.Background()).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ResourcesApi.GetResources``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -784,6 +857,7 @@ Name | Type | Description  | Notes
  **resourceTypeFilter** | [**ResourceTypeEnum**](ResourceTypeEnum.md) | The resource type to filter by. | 
  **resourceIds** | **[]string** | The resource ids to filter by. | 
  **resourceName** | **string** | Resource name. | 
+ **parentResourceId** | **string** | The parent resource id to filter by. | 
 
 ### Return type
 
@@ -935,6 +1009,78 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **messageChannelIDList** | [**MessageChannelIDList**](MessageChannelIDList.md) |  | 
+
+### Return type
+
+**[]string**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SetResourceReviewerStages
+
+> []string SetResourceReviewerStages(ctx, resourceId).ReviewerStageList(reviewerStageList).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    resourceId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the resource.
+    reviewerStageList := *openapiclient.NewReviewerStageList([]openapiclient.ReviewerStage{*openapiclient.NewReviewerStage(false, "AND", []string{"OwnerIds_example"})}) // ReviewerStageList | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ResourcesApi.SetResourceReviewerStages(context.Background(), resourceId).ReviewerStageList(reviewerStageList).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ResourcesApi.SetResourceReviewerStages``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `SetResourceReviewerStages`: []string
+    fmt.Fprintf(os.Stdout, "Response from `ResourcesApi.SetResourceReviewerStages`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSetResourceReviewerStagesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **reviewerStageList** | [**ReviewerStageList**](ReviewerStageList.md) |  | 
 
 ### Return type
 

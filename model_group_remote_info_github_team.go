@@ -18,7 +18,8 @@ import (
 // GroupRemoteInfoGithubTeam Remote info for GitHub team.
 type GroupRemoteInfoGithubTeam struct {
 	// The id of the GitHub team.
-	TeamId string `json:"team_id"`
+	// Deprecated
+	TeamId *string `json:"team_id,omitempty"`
 	// The slug of the GitHub team.
 	TeamSlug string `json:"team_slug"`
 }
@@ -27,9 +28,8 @@ type GroupRemoteInfoGithubTeam struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGroupRemoteInfoGithubTeam(teamId string, teamSlug string) *GroupRemoteInfoGithubTeam {
+func NewGroupRemoteInfoGithubTeam(teamSlug string) *GroupRemoteInfoGithubTeam {
 	this := GroupRemoteInfoGithubTeam{}
-	this.TeamId = teamId
 	this.TeamSlug = teamSlug
 	return &this
 }
@@ -42,28 +42,39 @@ func NewGroupRemoteInfoGithubTeamWithDefaults() *GroupRemoteInfoGithubTeam {
 	return &this
 }
 
-// GetTeamId returns the TeamId field value
+// GetTeamId returns the TeamId field value if set, zero value otherwise.
+// Deprecated
 func (o *GroupRemoteInfoGithubTeam) GetTeamId() string {
-	if o == nil {
+	if o == nil || o.TeamId == nil {
 		var ret string
 		return ret
 	}
-
-	return o.TeamId
+	return *o.TeamId
 }
 
-// GetTeamIdOk returns a tuple with the TeamId field value
+// GetTeamIdOk returns a tuple with the TeamId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *GroupRemoteInfoGithubTeam) GetTeamIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || o.TeamId == nil {
 		return nil, false
 	}
-	return &o.TeamId, true
+	return o.TeamId, true
 }
 
-// SetTeamId sets field value
+// HasTeamId returns a boolean if a field has been set.
+func (o *GroupRemoteInfoGithubTeam) HasTeamId() bool {
+	if o != nil && o.TeamId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTeamId gets a reference to the given string and assigns it to the TeamId field.
+// Deprecated
 func (o *GroupRemoteInfoGithubTeam) SetTeamId(v string) {
-	o.TeamId = v
+	o.TeamId = &v
 }
 
 // GetTeamSlug returns the TeamSlug field value
@@ -92,7 +103,7 @@ func (o *GroupRemoteInfoGithubTeam) SetTeamSlug(v string) {
 
 func (o GroupRemoteInfoGithubTeam) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.TeamId != nil {
 		toSerialize["team_id"] = o.TeamId
 	}
 	if true {

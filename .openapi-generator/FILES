@@ -71,6 +71,8 @@ docs/ResourceUserAccessStatus.md
 docs/ResourceUserAccessStatusEnum.md
 docs/ResourcesApi.md
 docs/ReviewerIDList.md
+docs/ReviewerStage.md
+docs/ReviewerStageList.md
 docs/Session.md
 docs/SessionsApi.md
 docs/SessionsList.md
@@ -149,6 +151,8 @@ model_resource_user.go
 model_resource_user_access_status.go
 model_resource_user_access_status_enum.go
 model_reviewer_id_list.go
+model_reviewer_stage.go
+model_reviewer_stage_list.go
 model_session.go
 model_sessions_list.go
 model_sub_event.go

@@ -669,6 +669,109 @@ func (a *ResourcesApiService) GetResourceMessageChannelsExecute(r ApiGetResource
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetResourceReviewerStagesRequest struct {
+	ctx context.Context
+	ApiService *ResourcesApiService
+	resourceId string
+}
+
+func (r ApiGetResourceReviewerStagesRequest) Execute() ([]ReviewerStage, *http.Response, error) {
+	return r.ApiService.GetResourceReviewerStagesExecute(r)
+}
+
+/*
+GetResourceReviewerStages Method for GetResourceReviewerStages
+
+Gets the list reviewer stages for a resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param resourceId The ID of the resource.
+ @return ApiGetResourceReviewerStagesRequest
+*/
+func (a *ResourcesApiService) GetResourceReviewerStages(ctx context.Context, resourceId string) ApiGetResourceReviewerStagesRequest {
+	return ApiGetResourceReviewerStagesRequest{
+		ApiService: a,
+		ctx: ctx,
+		resourceId: resourceId,
+	}
+}
+
+// Execute executes the request
+//  @return []ReviewerStage
+func (a *ResourcesApiService) GetResourceReviewerStagesExecute(r ApiGetResourceReviewerStagesRequest) ([]ReviewerStage, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []ReviewerStage
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesApiService.GetResourceReviewerStages")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/{resource_id}/reviewer_stages"
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterToString(r.resourceId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetResourceReviewersRequest struct {
 	ctx context.Context
 	ApiService *ResourcesApiService
@@ -1099,6 +1202,7 @@ type ApiGetResourcesRequest struct {
 	resourceTypeFilter *ResourceTypeEnum
 	resourceIds *[]string
 	resourceName *string
+	parentResourceId *string
 }
 
 // The pagination cursor value.
@@ -1128,6 +1232,12 @@ func (r ApiGetResourcesRequest) ResourceIds(resourceIds []string) ApiGetResource
 // Resource name.
 func (r ApiGetResourcesRequest) ResourceName(resourceName string) ApiGetResourcesRequest {
 	r.resourceName = &resourceName
+	return r
+}
+
+// The parent resource id to filter by.
+func (r ApiGetResourcesRequest) ParentResourceId(parentResourceId string) ApiGetResourcesRequest {
+	r.parentResourceId = &parentResourceId
 	return r
 }
 
@@ -1185,6 +1295,9 @@ func (a *ResourcesApiService) GetResourcesExecute(r ApiGetResourcesRequest) (*Pa
 	}
 	if r.resourceName != nil {
 		localVarQueryParams.Add("resource_name", parameterToString(*r.resourceName, ""))
+	}
+	if r.parentResourceId != nil {
+		localVarQueryParams.Add("parent_resource_id", parameterToString(*r.parentResourceId, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1454,6 +1567,120 @@ func (a *ResourcesApiService) SetResourceMessageChannelsExecute(r ApiSetResource
 	}
 	// body params
 	localVarPostBody = r.messageChannelIDList
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiSetResourceReviewerStagesRequest struct {
+	ctx context.Context
+	ApiService *ResourcesApiService
+	resourceId string
+	reviewerStageList *ReviewerStageList
+}
+
+func (r ApiSetResourceReviewerStagesRequest) ReviewerStageList(reviewerStageList ReviewerStageList) ApiSetResourceReviewerStagesRequest {
+	r.reviewerStageList = &reviewerStageList
+	return r
+}
+
+func (r ApiSetResourceReviewerStagesRequest) Execute() ([]string, *http.Response, error) {
+	return r.ApiService.SetResourceReviewerStagesExecute(r)
+}
+
+/*
+SetResourceReviewerStages Method for SetResourceReviewerStages
+
+Sets the list of reviewer stages for a resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param resourceId The ID of the resource.
+ @return ApiSetResourceReviewerStagesRequest
+*/
+func (a *ResourcesApiService) SetResourceReviewerStages(ctx context.Context, resourceId string) ApiSetResourceReviewerStagesRequest {
+	return ApiSetResourceReviewerStagesRequest{
+		ApiService: a,
+		ctx: ctx,
+		resourceId: resourceId,
+	}
+}
+
+// Execute executes the request
+//  @return []string
+func (a *ResourcesApiService) SetResourceReviewerStagesExecute(r ApiSetResourceReviewerStagesRequest) ([]string, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []string
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesApiService.SetResourceReviewerStages")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/{resource_id}/reviewer_stages"
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterToString(r.resourceId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.reviewerStageList == nil {
+		return localVarReturnValue, nil, reportError("reviewerStageList is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.reviewerStageList
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
