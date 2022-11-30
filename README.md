@@ -93,6 +93,7 @@ Class | Method | HTTP request | Description
 *GroupsApi* | [**GetGroupVisibility**](docs/GroupsApi.md#getgroupvisibility) | **Get** /groups/{group_id}/visibility | 
 *GroupsApi* | [**GetGroups**](docs/GroupsApi.md#getgroups) | **Get** /groups | 
 *GroupsApi* | [**SetGroupMessageChannels**](docs/GroupsApi.md#setgroupmessagechannels) | **Put** /groups/{group_id}/message-channels | 
+*GroupsApi* | [**SetGroupResources**](docs/GroupsApi.md#setgroupresources) | **Put** /groups/{group_id}/resources | 
 *GroupsApi* | [**SetGroupReviewerStages**](docs/GroupsApi.md#setgroupreviewerstages) | **Put** /groups/{group_id}/reviewer_stages | 
 *GroupsApi* | [**SetGroupReviewers**](docs/GroupsApi.md#setgroupreviewers) | **Put** /groups/{group_id}/reviewers | 
 *GroupsApi* | [**SetGroupVisibility**](docs/GroupsApi.md#setgroupvisibility) | **Put** /groups/{group_id}/visibility | 
@@ -195,6 +196,7 @@ Class | Method | HTTP request | Description
  - [ResourceUser](docs/ResourceUser.md)
  - [ResourceUserAccessStatus](docs/ResourceUserAccessStatus.md)
  - [ResourceUserAccessStatusEnum](docs/ResourceUserAccessStatusEnum.md)
+ - [ResourceWithAccessLevel](docs/ResourceWithAccessLevel.md)
  - [ReviewerIDList](docs/ReviewerIDList.md)
  - [ReviewerStage](docs/ReviewerStage.md)
  - [ReviewerStageList](docs/ReviewerStageList.md)
@@ -209,6 +211,7 @@ Class | Method | HTTP request | Description
  - [UARScope](docs/UARScope.md)
  - [UpdateGroupInfo](docs/UpdateGroupInfo.md)
  - [UpdateGroupInfoList](docs/UpdateGroupInfoList.md)
+ - [UpdateGroupResourcesInfo](docs/UpdateGroupResourcesInfo.md)
  - [UpdateOwnerInfo](docs/UpdateOwnerInfo.md)
  - [UpdateOwnerInfoList](docs/UpdateOwnerInfoList.md)
  - [UpdateResourceInfo](docs/UpdateResourceInfo.md)

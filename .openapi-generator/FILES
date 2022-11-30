@@ -69,6 +69,7 @@ docs/ResourceTypeEnum.md
 docs/ResourceUser.md
 docs/ResourceUserAccessStatus.md
 docs/ResourceUserAccessStatusEnum.md
+docs/ResourceWithAccessLevel.md
 docs/ResourcesApi.md
 docs/ReviewerIDList.md
 docs/ReviewerStage.md
@@ -87,6 +88,7 @@ docs/UARScope.md
 docs/UarsApi.md
 docs/UpdateGroupInfo.md
 docs/UpdateGroupInfoList.md
+docs/UpdateGroupResourcesInfo.md
 docs/UpdateOwnerInfo.md
 docs/UpdateOwnerInfoList.md
 docs/UpdateResourceInfo.md
@@ -150,6 +152,7 @@ model_resource_type_enum.go
 model_resource_user.go
 model_resource_user_access_status.go
 model_resource_user_access_status_enum.go
+model_resource_with_access_level.go
 model_reviewer_id_list.go
 model_reviewer_stage.go
 model_reviewer_stage_list.go
@@ -164,6 +167,7 @@ model_uar_reviewer_assignment_policy_enum.go
 model_uar_scope.go
 model_update_group_info.go
 model_update_group_info_list.go
+model_update_group_resources_info.go
 model_update_owner_info.go
 model_update_owner_info_list.go
 model_update_resource_info.go

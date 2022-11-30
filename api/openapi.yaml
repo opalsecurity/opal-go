@@ -378,6 +378,33 @@ paths:
       - BearerAuth: []
       tags:
       - groups
+    put:
+      description: Sets the list of resources that the group gives access to.
+      operationId: set_group_resources
+      parameters:
+      - description: The ID of the group.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGroupResourcesInfo'
+        required: true
+      responses:
+        "200":
+          description: The group resource were successfully set.
+      security:
+      - BearerAuth: []
+      tags:
+      - groups
   /groups/{group_id}/resources/{resource_id}:
     post:
       description: Adds a resource to a group.
@@ -3219,6 +3246,39 @@ components:
       - LIMITED
       example: GLOBAL
       type: string
+    UpdateGroupResourcesInfo:
+      example:
+        group_resources:
+        - resource_id: 1520617d-e72a-47f5-a84c-693817ab48ad2
+          access_level_remote_id: ""
+        - resource_id: 6f99639b-7928-4043-8184-47cbc6766145
+          access_level_remote_id: write
+      properties:
+        resources:
+          items:
+            $ref: '#/components/schemas/ResourceWithAccessLevel'
+          type: array
+      required:
+      - resources
+      type: object
+    ResourceWithAccessLevel:
+      description: Information about a resource and corresponding access level
+      example:
+        resource_id: b5a5ca27-0ea3-4d86-9199-2126d57d1fbd
+        access_level_remote_id: write
+      properties:
+        resource_id:
+          description: The ID of the resource.
+          example: b5a5ca27-0ea3-4d86-9199-2126d57d1fbd
+          format: uuid
+          type: string
+        access_level_remote_id:
+          description: The ID of the resource.
+          example: write
+          type: string
+      required:
+      - resource_id
+      type: object
     GroupResourceList:
       example:
         group_resources:
