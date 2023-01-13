@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | A description of the owner. | [optional] 
 **AccessRequestEscalationPeriod** | Pointer to **int32** | The amount of time (in minutes) before the next reviewer is notified. Use 0 to remove escalation policy. | [optional] 
 **ReviewerMessageChannelId** | Pointer to **NullableString** |  | [optional] 
+**SourceGroupId** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -159,6 +160,41 @@ HasReviewerMessageChannelId returns a boolean if a field has been set.
 `func (o *Owner) UnsetReviewerMessageChannelId()`
 
 UnsetReviewerMessageChannelId ensures that no value is present for ReviewerMessageChannelId, not even an explicit nil
+### GetSourceGroupId
+
+`func (o *Owner) GetSourceGroupId() string`
+
+GetSourceGroupId returns the SourceGroupId field if non-nil, zero value otherwise.
+
+### GetSourceGroupIdOk
+
+`func (o *Owner) GetSourceGroupIdOk() (*string, bool)`
+
+GetSourceGroupIdOk returns a tuple with the SourceGroupId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceGroupId
+
+`func (o *Owner) SetSourceGroupId(v string)`
+
+SetSourceGroupId sets SourceGroupId field to given value.
+
+### HasSourceGroupId
+
+`func (o *Owner) HasSourceGroupId() bool`
+
+HasSourceGroupId returns a boolean if a field has been set.
+
+### SetSourceGroupIdNil
+
+`func (o *Owner) SetSourceGroupIdNil(b bool)`
+
+ SetSourceGroupIdNil sets the value for SourceGroupId to be an explicit nil
+
+### UnsetSourceGroupId
+`func (o *Owner) UnsetSourceGroupId()`
+
+UnsetSourceGroupId ensures that no value is present for SourceGroupId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

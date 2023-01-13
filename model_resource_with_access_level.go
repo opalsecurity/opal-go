@@ -55,7 +55,7 @@ func (o *ResourceWithAccessLevel) GetResourceId() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceWithAccessLevel) GetResourceIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ResourceId, true
 }
@@ -67,7 +67,7 @@ func (o *ResourceWithAccessLevel) SetResourceId(v string) {
 
 // GetAccessLevelRemoteId returns the AccessLevelRemoteId field value if set, zero value otherwise.
 func (o *ResourceWithAccessLevel) GetAccessLevelRemoteId() string {
-	if o == nil || o.AccessLevelRemoteId == nil {
+	if o == nil || isNil(o.AccessLevelRemoteId) {
 		var ret string
 		return ret
 	}
@@ -77,15 +77,15 @@ func (o *ResourceWithAccessLevel) GetAccessLevelRemoteId() string {
 // GetAccessLevelRemoteIdOk returns a tuple with the AccessLevelRemoteId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceWithAccessLevel) GetAccessLevelRemoteIdOk() (*string, bool) {
-	if o == nil || o.AccessLevelRemoteId == nil {
-		return nil, false
+	if o == nil || isNil(o.AccessLevelRemoteId) {
+    return nil, false
 	}
 	return o.AccessLevelRemoteId, true
 }
 
 // HasAccessLevelRemoteId returns a boolean if a field has been set.
 func (o *ResourceWithAccessLevel) HasAccessLevelRemoteId() bool {
-	if o != nil && o.AccessLevelRemoteId != nil {
+	if o != nil && !isNil(o.AccessLevelRemoteId) {
 		return true
 	}
 
@@ -102,7 +102,7 @@ func (o ResourceWithAccessLevel) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["resource_id"] = o.ResourceId
 	}
-	if o.AccessLevelRemoteId != nil {
+	if !isNil(o.AccessLevelRemoteId) {
 		toSerialize["access_level_remote_id"] = o.AccessLevelRemoteId
 	}
 	return json.Marshal(toSerialize)

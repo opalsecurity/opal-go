@@ -59,7 +59,7 @@ func (o *ResourceRemoteInfoAwsRdsInstance) GetInstanceId() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfoAwsRdsInstance) GetInstanceIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.InstanceId, true
 }
@@ -83,7 +83,7 @@ func (o *ResourceRemoteInfoAwsRdsInstance) GetRegion() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfoAwsRdsInstance) GetRegionOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Region, true
 }
@@ -107,7 +107,7 @@ func (o *ResourceRemoteInfoAwsRdsInstance) GetResourceId() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfoAwsRdsInstance) GetResourceIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ResourceId, true
 }

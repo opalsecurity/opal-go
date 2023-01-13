@@ -67,7 +67,7 @@ func (o *CreateResourceInfo) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *CreateResourceInfo) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -79,7 +79,7 @@ func (o *CreateResourceInfo) SetName(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *CreateResourceInfo) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || isNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -89,15 +89,15 @@ func (o *CreateResourceInfo) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateResourceInfo) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
+	if o == nil || isNil(o.Description) {
+    return nil, false
 	}
 	return o.Description, true
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *CreateResourceInfo) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !isNil(o.Description) {
 		return true
 	}
 
@@ -123,7 +123,7 @@ func (o *CreateResourceInfo) GetResourceType() ResourceTypeEnum {
 // and a boolean to check if the value has been set.
 func (o *CreateResourceInfo) GetResourceTypeOk() (*ResourceTypeEnum, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ResourceType, true
 }
@@ -147,7 +147,7 @@ func (o *CreateResourceInfo) GetAppId() string {
 // and a boolean to check if the value has been set.
 func (o *CreateResourceInfo) GetAppIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.AppId, true
 }
@@ -159,7 +159,7 @@ func (o *CreateResourceInfo) SetAppId(v string) {
 
 // GetRemoteInfo returns the RemoteInfo field value if set, zero value otherwise.
 func (o *CreateResourceInfo) GetRemoteInfo() ResourceRemoteInfo {
-	if o == nil || o.RemoteInfo == nil {
+	if o == nil || isNil(o.RemoteInfo) {
 		var ret ResourceRemoteInfo
 		return ret
 	}
@@ -169,15 +169,15 @@ func (o *CreateResourceInfo) GetRemoteInfo() ResourceRemoteInfo {
 // GetRemoteInfoOk returns a tuple with the RemoteInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateResourceInfo) GetRemoteInfoOk() (*ResourceRemoteInfo, bool) {
-	if o == nil || o.RemoteInfo == nil {
-		return nil, false
+	if o == nil || isNil(o.RemoteInfo) {
+    return nil, false
 	}
 	return o.RemoteInfo, true
 }
 
 // HasRemoteInfo returns a boolean if a field has been set.
 func (o *CreateResourceInfo) HasRemoteInfo() bool {
-	if o != nil && o.RemoteInfo != nil {
+	if o != nil && !isNil(o.RemoteInfo) {
 		return true
 	}
 
@@ -192,7 +192,7 @@ func (o *CreateResourceInfo) SetRemoteInfo(v ResourceRemoteInfo) {
 // GetRemoteResourceId returns the RemoteResourceId field value if set, zero value otherwise.
 // Deprecated
 func (o *CreateResourceInfo) GetRemoteResourceId() string {
-	if o == nil || o.RemoteResourceId == nil {
+	if o == nil || isNil(o.RemoteResourceId) {
 		var ret string
 		return ret
 	}
@@ -203,15 +203,15 @@ func (o *CreateResourceInfo) GetRemoteResourceId() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *CreateResourceInfo) GetRemoteResourceIdOk() (*string, bool) {
-	if o == nil || o.RemoteResourceId == nil {
-		return nil, false
+	if o == nil || isNil(o.RemoteResourceId) {
+    return nil, false
 	}
 	return o.RemoteResourceId, true
 }
 
 // HasRemoteResourceId returns a boolean if a field has been set.
 func (o *CreateResourceInfo) HasRemoteResourceId() bool {
-	if o != nil && o.RemoteResourceId != nil {
+	if o != nil && !isNil(o.RemoteResourceId) {
 		return true
 	}
 
@@ -227,7 +227,7 @@ func (o *CreateResourceInfo) SetRemoteResourceId(v string) {
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
 // Deprecated
 func (o *CreateResourceInfo) GetMetadata() string {
-	if o == nil || o.Metadata == nil {
+	if o == nil || isNil(o.Metadata) {
 		var ret string
 		return ret
 	}
@@ -238,15 +238,15 @@ func (o *CreateResourceInfo) GetMetadata() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *CreateResourceInfo) GetMetadataOk() (*string, bool) {
-	if o == nil || o.Metadata == nil {
-		return nil, false
+	if o == nil || isNil(o.Metadata) {
+    return nil, false
 	}
 	return o.Metadata, true
 }
 
 // HasMetadata returns a boolean if a field has been set.
 func (o *CreateResourceInfo) HasMetadata() bool {
-	if o != nil && o.Metadata != nil {
+	if o != nil && !isNil(o.Metadata) {
 		return true
 	}
 
@@ -264,7 +264,7 @@ func (o CreateResourceInfo) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["name"] = o.Name
 	}
-	if o.Description != nil {
+	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
 	if true {
@@ -273,13 +273,13 @@ func (o CreateResourceInfo) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["app_id"] = o.AppId
 	}
-	if o.RemoteInfo != nil {
+	if !isNil(o.RemoteInfo) {
 		toSerialize["remote_info"] = o.RemoteInfo
 	}
-	if o.RemoteResourceId != nil {
+	if !isNil(o.RemoteResourceId) {
 		toSerialize["remote_resource_id"] = o.RemoteResourceId
 	}
-	if o.Metadata != nil {
+	if !isNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
 	return json.Marshal(toSerialize)

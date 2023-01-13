@@ -570,7 +570,7 @@ func (r ApiSetOwnerUsersRequest) Execute() (*UserList, *http.Response, error) {
 /*
 SetOwnerUsers Method for SetOwnerUsers
 
-Sets the list of users for this owner. If escalation is enabled, the order of this list is the escalation priority order of the users.
+Sets the list of users for this owner. If escalation is enabled, the order of this list is the escalation priority order of the users. If the owner has a source group, adding or removing users from this list won't be possible.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param ownerId The ID of the owner.

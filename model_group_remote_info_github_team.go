@@ -45,7 +45,7 @@ func NewGroupRemoteInfoGithubTeamWithDefaults() *GroupRemoteInfoGithubTeam {
 // GetTeamId returns the TeamId field value if set, zero value otherwise.
 // Deprecated
 func (o *GroupRemoteInfoGithubTeam) GetTeamId() string {
-	if o == nil || o.TeamId == nil {
+	if o == nil || isNil(o.TeamId) {
 		var ret string
 		return ret
 	}
@@ -56,15 +56,15 @@ func (o *GroupRemoteInfoGithubTeam) GetTeamId() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *GroupRemoteInfoGithubTeam) GetTeamIdOk() (*string, bool) {
-	if o == nil || o.TeamId == nil {
-		return nil, false
+	if o == nil || isNil(o.TeamId) {
+    return nil, false
 	}
 	return o.TeamId, true
 }
 
 // HasTeamId returns a boolean if a field has been set.
 func (o *GroupRemoteInfoGithubTeam) HasTeamId() bool {
-	if o != nil && o.TeamId != nil {
+	if o != nil && !isNil(o.TeamId) {
 		return true
 	}
 
@@ -91,7 +91,7 @@ func (o *GroupRemoteInfoGithubTeam) GetTeamSlug() string {
 // and a boolean to check if the value has been set.
 func (o *GroupRemoteInfoGithubTeam) GetTeamSlugOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.TeamSlug, true
 }
@@ -103,7 +103,7 @@ func (o *GroupRemoteInfoGithubTeam) SetTeamSlug(v string) {
 
 func (o GroupRemoteInfoGithubTeam) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.TeamId != nil {
+	if !isNil(o.TeamId) {
 		toSerialize["team_id"] = o.TeamId
 	}
 	if true {

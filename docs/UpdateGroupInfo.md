@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the group require an access ticket. | [optional] 
 **FolderId** | Pointer to **string** | The ID of the folder that the group is located in. | [optional] 
 **RequireMfaToApprove** | Pointer to **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this group. | [optional] 
+**RequireMfaToRequest** | Pointer to **bool** | A bool representing whether or not to require MFA for requesting access to this group. | [optional] 
 **AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this group. | [optional] 
 **RequestTemplateId** | Pointer to **string** | The ID of the associated request template. | [optional] 
 
@@ -280,6 +281,31 @@ SetRequireMfaToApprove sets RequireMfaToApprove field to given value.
 `func (o *UpdateGroupInfo) HasRequireMfaToApprove() bool`
 
 HasRequireMfaToApprove returns a boolean if a field has been set.
+
+### GetRequireMfaToRequest
+
+`func (o *UpdateGroupInfo) GetRequireMfaToRequest() bool`
+
+GetRequireMfaToRequest returns the RequireMfaToRequest field if non-nil, zero value otherwise.
+
+### GetRequireMfaToRequestOk
+
+`func (o *UpdateGroupInfo) GetRequireMfaToRequestOk() (*bool, bool)`
+
+GetRequireMfaToRequestOk returns a tuple with the RequireMfaToRequest field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequireMfaToRequest
+
+`func (o *UpdateGroupInfo) SetRequireMfaToRequest(v bool)`
+
+SetRequireMfaToRequest sets RequireMfaToRequest field to given value.
+
+### HasRequireMfaToRequest
+
+`func (o *UpdateGroupInfo) HasRequireMfaToRequest() bool`
+
+HasRequireMfaToRequest returns a boolean if a field has been set.
 
 ### GetAutoApproval
 

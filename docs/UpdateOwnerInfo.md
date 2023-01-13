@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | A description of the owner. | [optional] 
 **AccessRequestEscalationPeriod** | Pointer to **int32** | The amount of time (in minutes) before the next reviewer is notified. Use 0 to remove escalation policy. | [optional] 
 **ReviewerMessageChannelId** | Pointer to **string** | The message channel id for the reviewer channel. Use \&quot;\&quot; to remove an existing message channel. | [optional] 
+**SourceGroupId** | Pointer to **string** | Sync this owner&#39;s user list with a source group. Use \&quot;\&quot; to remove an existing source group. | [optional] 
 
 ## Methods
 
@@ -148,6 +149,31 @@ SetReviewerMessageChannelId sets ReviewerMessageChannelId field to given value.
 `func (o *UpdateOwnerInfo) HasReviewerMessageChannelId() bool`
 
 HasReviewerMessageChannelId returns a boolean if a field has been set.
+
+### GetSourceGroupId
+
+`func (o *UpdateOwnerInfo) GetSourceGroupId() string`
+
+GetSourceGroupId returns the SourceGroupId field if non-nil, zero value otherwise.
+
+### GetSourceGroupIdOk
+
+`func (o *UpdateOwnerInfo) GetSourceGroupIdOk() (*string, bool)`
+
+GetSourceGroupIdOk returns a tuple with the SourceGroupId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceGroupId
+
+`func (o *UpdateOwnerInfo) SetSourceGroupId(v string)`
+
+SetSourceGroupId sets SourceGroupId field to given value.
+
+### HasSourceGroupId
+
+`func (o *UpdateOwnerInfo) HasSourceGroupId() bool`
+
+HasSourceGroupId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

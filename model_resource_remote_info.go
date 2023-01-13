@@ -46,7 +46,7 @@ func NewResourceRemoteInfoWithDefaults() *ResourceRemoteInfo {
 
 // GetAwsIamRole returns the AwsIamRole field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetAwsIamRole() ResourceRemoteInfoAwsIamRole {
-	if o == nil || o.AwsIamRole == nil {
+	if o == nil || isNil(o.AwsIamRole) {
 		var ret ResourceRemoteInfoAwsIamRole
 		return ret
 	}
@@ -56,15 +56,15 @@ func (o *ResourceRemoteInfo) GetAwsIamRole() ResourceRemoteInfoAwsIamRole {
 // GetAwsIamRoleOk returns a tuple with the AwsIamRole field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfo) GetAwsIamRoleOk() (*ResourceRemoteInfoAwsIamRole, bool) {
-	if o == nil || o.AwsIamRole == nil {
-		return nil, false
+	if o == nil || isNil(o.AwsIamRole) {
+    return nil, false
 	}
 	return o.AwsIamRole, true
 }
 
 // HasAwsIamRole returns a boolean if a field has been set.
 func (o *ResourceRemoteInfo) HasAwsIamRole() bool {
-	if o != nil && o.AwsIamRole != nil {
+	if o != nil && !isNil(o.AwsIamRole) {
 		return true
 	}
 
@@ -78,7 +78,7 @@ func (o *ResourceRemoteInfo) SetAwsIamRole(v ResourceRemoteInfoAwsIamRole) {
 
 // GetAwsEc2Instance returns the AwsEc2Instance field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetAwsEc2Instance() ResourceRemoteInfoAwsEc2Instance {
-	if o == nil || o.AwsEc2Instance == nil {
+	if o == nil || isNil(o.AwsEc2Instance) {
 		var ret ResourceRemoteInfoAwsEc2Instance
 		return ret
 	}
@@ -88,15 +88,15 @@ func (o *ResourceRemoteInfo) GetAwsEc2Instance() ResourceRemoteInfoAwsEc2Instanc
 // GetAwsEc2InstanceOk returns a tuple with the AwsEc2Instance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfo) GetAwsEc2InstanceOk() (*ResourceRemoteInfoAwsEc2Instance, bool) {
-	if o == nil || o.AwsEc2Instance == nil {
-		return nil, false
+	if o == nil || isNil(o.AwsEc2Instance) {
+    return nil, false
 	}
 	return o.AwsEc2Instance, true
 }
 
 // HasAwsEc2Instance returns a boolean if a field has been set.
 func (o *ResourceRemoteInfo) HasAwsEc2Instance() bool {
-	if o != nil && o.AwsEc2Instance != nil {
+	if o != nil && !isNil(o.AwsEc2Instance) {
 		return true
 	}
 
@@ -110,7 +110,7 @@ func (o *ResourceRemoteInfo) SetAwsEc2Instance(v ResourceRemoteInfoAwsEc2Instanc
 
 // GetAwsRdsInstance returns the AwsRdsInstance field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetAwsRdsInstance() ResourceRemoteInfoAwsRdsInstance {
-	if o == nil || o.AwsRdsInstance == nil {
+	if o == nil || isNil(o.AwsRdsInstance) {
 		var ret ResourceRemoteInfoAwsRdsInstance
 		return ret
 	}
@@ -120,15 +120,15 @@ func (o *ResourceRemoteInfo) GetAwsRdsInstance() ResourceRemoteInfoAwsRdsInstanc
 // GetAwsRdsInstanceOk returns a tuple with the AwsRdsInstance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfo) GetAwsRdsInstanceOk() (*ResourceRemoteInfoAwsRdsInstance, bool) {
-	if o == nil || o.AwsRdsInstance == nil {
-		return nil, false
+	if o == nil || isNil(o.AwsRdsInstance) {
+    return nil, false
 	}
 	return o.AwsRdsInstance, true
 }
 
 // HasAwsRdsInstance returns a boolean if a field has been set.
 func (o *ResourceRemoteInfo) HasAwsRdsInstance() bool {
-	if o != nil && o.AwsRdsInstance != nil {
+	if o != nil && !isNil(o.AwsRdsInstance) {
 		return true
 	}
 
@@ -142,7 +142,7 @@ func (o *ResourceRemoteInfo) SetAwsRdsInstance(v ResourceRemoteInfoAwsRdsInstanc
 
 // GetAwsEksCluster returns the AwsEksCluster field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetAwsEksCluster() ResourceRemoteInfoAwsEksCluster {
-	if o == nil || o.AwsEksCluster == nil {
+	if o == nil || isNil(o.AwsEksCluster) {
 		var ret ResourceRemoteInfoAwsEksCluster
 		return ret
 	}
@@ -152,15 +152,15 @@ func (o *ResourceRemoteInfo) GetAwsEksCluster() ResourceRemoteInfoAwsEksCluster 
 // GetAwsEksClusterOk returns a tuple with the AwsEksCluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfo) GetAwsEksClusterOk() (*ResourceRemoteInfoAwsEksCluster, bool) {
-	if o == nil || o.AwsEksCluster == nil {
-		return nil, false
+	if o == nil || isNil(o.AwsEksCluster) {
+    return nil, false
 	}
 	return o.AwsEksCluster, true
 }
 
 // HasAwsEksCluster returns a boolean if a field has been set.
 func (o *ResourceRemoteInfo) HasAwsEksCluster() bool {
-	if o != nil && o.AwsEksCluster != nil {
+	if o != nil && !isNil(o.AwsEksCluster) {
 		return true
 	}
 
@@ -174,7 +174,7 @@ func (o *ResourceRemoteInfo) SetAwsEksCluster(v ResourceRemoteInfoAwsEksCluster)
 
 // GetGithubRepo returns the GithubRepo field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetGithubRepo() ResourceRemoteInfoGithubRepo {
-	if o == nil || o.GithubRepo == nil {
+	if o == nil || isNil(o.GithubRepo) {
 		var ret ResourceRemoteInfoGithubRepo
 		return ret
 	}
@@ -184,15 +184,15 @@ func (o *ResourceRemoteInfo) GetGithubRepo() ResourceRemoteInfoGithubRepo {
 // GetGithubRepoOk returns a tuple with the GithubRepo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfo) GetGithubRepoOk() (*ResourceRemoteInfoGithubRepo, bool) {
-	if o == nil || o.GithubRepo == nil {
-		return nil, false
+	if o == nil || isNil(o.GithubRepo) {
+    return nil, false
 	}
 	return o.GithubRepo, true
 }
 
 // HasGithubRepo returns a boolean if a field has been set.
 func (o *ResourceRemoteInfo) HasGithubRepo() bool {
-	if o != nil && o.GithubRepo != nil {
+	if o != nil && !isNil(o.GithubRepo) {
 		return true
 	}
 
@@ -206,7 +206,7 @@ func (o *ResourceRemoteInfo) SetGithubRepo(v ResourceRemoteInfoGithubRepo) {
 
 // GetOktaApp returns the OktaApp field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetOktaApp() ResourceRemoteInfoOktaApp {
-	if o == nil || o.OktaApp == nil {
+	if o == nil || isNil(o.OktaApp) {
 		var ret ResourceRemoteInfoOktaApp
 		return ret
 	}
@@ -216,15 +216,15 @@ func (o *ResourceRemoteInfo) GetOktaApp() ResourceRemoteInfoOktaApp {
 // GetOktaAppOk returns a tuple with the OktaApp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfo) GetOktaAppOk() (*ResourceRemoteInfoOktaApp, bool) {
-	if o == nil || o.OktaApp == nil {
-		return nil, false
+	if o == nil || isNil(o.OktaApp) {
+    return nil, false
 	}
 	return o.OktaApp, true
 }
 
 // HasOktaApp returns a boolean if a field has been set.
 func (o *ResourceRemoteInfo) HasOktaApp() bool {
-	if o != nil && o.OktaApp != nil {
+	if o != nil && !isNil(o.OktaApp) {
 		return true
 	}
 
@@ -238,7 +238,7 @@ func (o *ResourceRemoteInfo) SetOktaApp(v ResourceRemoteInfoOktaApp) {
 
 // GetOktaStandardRole returns the OktaStandardRole field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetOktaStandardRole() ResourceRemoteInfoOktaStandardRole {
-	if o == nil || o.OktaStandardRole == nil {
+	if o == nil || isNil(o.OktaStandardRole) {
 		var ret ResourceRemoteInfoOktaStandardRole
 		return ret
 	}
@@ -248,15 +248,15 @@ func (o *ResourceRemoteInfo) GetOktaStandardRole() ResourceRemoteInfoOktaStandar
 // GetOktaStandardRoleOk returns a tuple with the OktaStandardRole field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfo) GetOktaStandardRoleOk() (*ResourceRemoteInfoOktaStandardRole, bool) {
-	if o == nil || o.OktaStandardRole == nil {
-		return nil, false
+	if o == nil || isNil(o.OktaStandardRole) {
+    return nil, false
 	}
 	return o.OktaStandardRole, true
 }
 
 // HasOktaStandardRole returns a boolean if a field has been set.
 func (o *ResourceRemoteInfo) HasOktaStandardRole() bool {
-	if o != nil && o.OktaStandardRole != nil {
+	if o != nil && !isNil(o.OktaStandardRole) {
 		return true
 	}
 
@@ -270,7 +270,7 @@ func (o *ResourceRemoteInfo) SetOktaStandardRole(v ResourceRemoteInfoOktaStandar
 
 // GetOktaCustomRole returns the OktaCustomRole field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetOktaCustomRole() ResourceRemoteInfoOktaCustomRole {
-	if o == nil || o.OktaCustomRole == nil {
+	if o == nil || isNil(o.OktaCustomRole) {
 		var ret ResourceRemoteInfoOktaCustomRole
 		return ret
 	}
@@ -280,15 +280,15 @@ func (o *ResourceRemoteInfo) GetOktaCustomRole() ResourceRemoteInfoOktaCustomRol
 // GetOktaCustomRoleOk returns a tuple with the OktaCustomRole field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfo) GetOktaCustomRoleOk() (*ResourceRemoteInfoOktaCustomRole, bool) {
-	if o == nil || o.OktaCustomRole == nil {
-		return nil, false
+	if o == nil || isNil(o.OktaCustomRole) {
+    return nil, false
 	}
 	return o.OktaCustomRole, true
 }
 
 // HasOktaCustomRole returns a boolean if a field has been set.
 func (o *ResourceRemoteInfo) HasOktaCustomRole() bool {
-	if o != nil && o.OktaCustomRole != nil {
+	if o != nil && !isNil(o.OktaCustomRole) {
 		return true
 	}
 
@@ -302,28 +302,28 @@ func (o *ResourceRemoteInfo) SetOktaCustomRole(v ResourceRemoteInfoOktaCustomRol
 
 func (o ResourceRemoteInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.AwsIamRole != nil {
+	if !isNil(o.AwsIamRole) {
 		toSerialize["aws_iam_role"] = o.AwsIamRole
 	}
-	if o.AwsEc2Instance != nil {
+	if !isNil(o.AwsEc2Instance) {
 		toSerialize["aws_ec2_instance"] = o.AwsEc2Instance
 	}
-	if o.AwsRdsInstance != nil {
+	if !isNil(o.AwsRdsInstance) {
 		toSerialize["aws_rds_instance"] = o.AwsRdsInstance
 	}
-	if o.AwsEksCluster != nil {
+	if !isNil(o.AwsEksCluster) {
 		toSerialize["aws_eks_cluster"] = o.AwsEksCluster
 	}
-	if o.GithubRepo != nil {
+	if !isNil(o.GithubRepo) {
 		toSerialize["github_repo"] = o.GithubRepo
 	}
-	if o.OktaApp != nil {
+	if !isNil(o.OktaApp) {
 		toSerialize["okta_app"] = o.OktaApp
 	}
-	if o.OktaStandardRole != nil {
+	if !isNil(o.OktaStandardRole) {
 		toSerialize["okta_standard_role"] = o.OktaStandardRole
 	}
-	if o.OktaCustomRole != nil {
+	if !isNil(o.OktaCustomRole) {
 		toSerialize["okta_custom_role"] = o.OktaCustomRole
 	}
 	return json.Marshal(toSerialize)

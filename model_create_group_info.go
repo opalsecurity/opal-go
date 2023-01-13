@@ -67,7 +67,7 @@ func (o *CreateGroupInfo) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *CreateGroupInfo) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -79,7 +79,7 @@ func (o *CreateGroupInfo) SetName(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *CreateGroupInfo) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || isNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -89,15 +89,15 @@ func (o *CreateGroupInfo) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateGroupInfo) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
+	if o == nil || isNil(o.Description) {
+    return nil, false
 	}
 	return o.Description, true
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *CreateGroupInfo) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !isNil(o.Description) {
 		return true
 	}
 
@@ -123,7 +123,7 @@ func (o *CreateGroupInfo) GetGroupType() GroupTypeEnum {
 // and a boolean to check if the value has been set.
 func (o *CreateGroupInfo) GetGroupTypeOk() (*GroupTypeEnum, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.GroupType, true
 }
@@ -147,7 +147,7 @@ func (o *CreateGroupInfo) GetAppId() string {
 // and a boolean to check if the value has been set.
 func (o *CreateGroupInfo) GetAppIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.AppId, true
 }
@@ -159,7 +159,7 @@ func (o *CreateGroupInfo) SetAppId(v string) {
 
 // GetRemoteInfo returns the RemoteInfo field value if set, zero value otherwise.
 func (o *CreateGroupInfo) GetRemoteInfo() GroupRemoteInfo {
-	if o == nil || o.RemoteInfo == nil {
+	if o == nil || isNil(o.RemoteInfo) {
 		var ret GroupRemoteInfo
 		return ret
 	}
@@ -169,15 +169,15 @@ func (o *CreateGroupInfo) GetRemoteInfo() GroupRemoteInfo {
 // GetRemoteInfoOk returns a tuple with the RemoteInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateGroupInfo) GetRemoteInfoOk() (*GroupRemoteInfo, bool) {
-	if o == nil || o.RemoteInfo == nil {
-		return nil, false
+	if o == nil || isNil(o.RemoteInfo) {
+    return nil, false
 	}
 	return o.RemoteInfo, true
 }
 
 // HasRemoteInfo returns a boolean if a field has been set.
 func (o *CreateGroupInfo) HasRemoteInfo() bool {
-	if o != nil && o.RemoteInfo != nil {
+	if o != nil && !isNil(o.RemoteInfo) {
 		return true
 	}
 
@@ -192,7 +192,7 @@ func (o *CreateGroupInfo) SetRemoteInfo(v GroupRemoteInfo) {
 // GetRemoteGroupId returns the RemoteGroupId field value if set, zero value otherwise.
 // Deprecated
 func (o *CreateGroupInfo) GetRemoteGroupId() string {
-	if o == nil || o.RemoteGroupId == nil {
+	if o == nil || isNil(o.RemoteGroupId) {
 		var ret string
 		return ret
 	}
@@ -203,15 +203,15 @@ func (o *CreateGroupInfo) GetRemoteGroupId() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *CreateGroupInfo) GetRemoteGroupIdOk() (*string, bool) {
-	if o == nil || o.RemoteGroupId == nil {
-		return nil, false
+	if o == nil || isNil(o.RemoteGroupId) {
+    return nil, false
 	}
 	return o.RemoteGroupId, true
 }
 
 // HasRemoteGroupId returns a boolean if a field has been set.
 func (o *CreateGroupInfo) HasRemoteGroupId() bool {
-	if o != nil && o.RemoteGroupId != nil {
+	if o != nil && !isNil(o.RemoteGroupId) {
 		return true
 	}
 
@@ -227,7 +227,7 @@ func (o *CreateGroupInfo) SetRemoteGroupId(v string) {
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
 // Deprecated
 func (o *CreateGroupInfo) GetMetadata() string {
-	if o == nil || o.Metadata == nil {
+	if o == nil || isNil(o.Metadata) {
 		var ret string
 		return ret
 	}
@@ -238,15 +238,15 @@ func (o *CreateGroupInfo) GetMetadata() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *CreateGroupInfo) GetMetadataOk() (*string, bool) {
-	if o == nil || o.Metadata == nil {
-		return nil, false
+	if o == nil || isNil(o.Metadata) {
+    return nil, false
 	}
 	return o.Metadata, true
 }
 
 // HasMetadata returns a boolean if a field has been set.
 func (o *CreateGroupInfo) HasMetadata() bool {
-	if o != nil && o.Metadata != nil {
+	if o != nil && !isNil(o.Metadata) {
 		return true
 	}
 
@@ -264,7 +264,7 @@ func (o CreateGroupInfo) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["name"] = o.Name
 	}
-	if o.Description != nil {
+	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
 	if true {
@@ -273,13 +273,13 @@ func (o CreateGroupInfo) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["app_id"] = o.AppId
 	}
-	if o.RemoteInfo != nil {
+	if !isNil(o.RemoteInfo) {
 		toSerialize["remote_info"] = o.RemoteInfo
 	}
-	if o.RemoteGroupId != nil {
+	if !isNil(o.RemoteGroupId) {
 		toSerialize["remote_group_id"] = o.RemoteGroupId
 	}
-	if o.Metadata != nil {
+	if !isNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
 	return json.Marshal(toSerialize)
