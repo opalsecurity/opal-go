@@ -53,7 +53,7 @@ func (o *VisibilityInfo) GetVisibility() VisibilityTypeEnum {
 // and a boolean to check if the value has been set.
 func (o *VisibilityInfo) GetVisibilityOk() (*VisibilityTypeEnum, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Visibility, true
 }
@@ -65,7 +65,7 @@ func (o *VisibilityInfo) SetVisibility(v VisibilityTypeEnum) {
 
 // GetVisibilityGroupIds returns the VisibilityGroupIds field value if set, zero value otherwise.
 func (o *VisibilityInfo) GetVisibilityGroupIds() []string {
-	if o == nil || o.VisibilityGroupIds == nil {
+	if o == nil || isNil(o.VisibilityGroupIds) {
 		var ret []string
 		return ret
 	}
@@ -75,15 +75,15 @@ func (o *VisibilityInfo) GetVisibilityGroupIds() []string {
 // GetVisibilityGroupIdsOk returns a tuple with the VisibilityGroupIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VisibilityInfo) GetVisibilityGroupIdsOk() ([]string, bool) {
-	if o == nil || o.VisibilityGroupIds == nil {
-		return nil, false
+	if o == nil || isNil(o.VisibilityGroupIds) {
+    return nil, false
 	}
 	return o.VisibilityGroupIds, true
 }
 
 // HasVisibilityGroupIds returns a boolean if a field has been set.
 func (o *VisibilityInfo) HasVisibilityGroupIds() bool {
-	if o != nil && o.VisibilityGroupIds != nil {
+	if o != nil && !isNil(o.VisibilityGroupIds) {
 		return true
 	}
 
@@ -100,7 +100,7 @@ func (o VisibilityInfo) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["visibility"] = o.Visibility
 	}
-	if o.VisibilityGroupIds != nil {
+	if !isNil(o.VisibilityGroupIds) {
 		toSerialize["visibility_group_ids"] = o.VisibilityGroupIds
 	}
 	return json.Marshal(toSerialize)

@@ -43,7 +43,7 @@ func NewSessionsListWithDefaults() *SessionsList {
 
 // GetNext returns the Next field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SessionsList) GetNext() string {
-	if o == nil || o.Next.Get() == nil {
+	if o == nil || isNil(o.Next.Get()) {
 		var ret string
 		return ret
 	}
@@ -55,7 +55,7 @@ func (o *SessionsList) GetNext() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SessionsList) GetNextOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Next.Get(), o.Next.IsSet()
 }
@@ -85,7 +85,7 @@ func (o *SessionsList) UnsetNext() {
 
 // GetPrevious returns the Previous field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SessionsList) GetPrevious() string {
-	if o == nil || o.Previous.Get() == nil {
+	if o == nil || isNil(o.Previous.Get()) {
 		var ret string
 		return ret
 	}
@@ -97,7 +97,7 @@ func (o *SessionsList) GetPrevious() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SessionsList) GetPreviousOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Previous.Get(), o.Previous.IsSet()
 }
@@ -127,7 +127,7 @@ func (o *SessionsList) UnsetPrevious() {
 
 // GetResults returns the Results field value if set, zero value otherwise.
 func (o *SessionsList) GetResults() []Session {
-	if o == nil || o.Results == nil {
+	if o == nil || isNil(o.Results) {
 		var ret []Session
 		return ret
 	}
@@ -137,15 +137,15 @@ func (o *SessionsList) GetResults() []Session {
 // GetResultsOk returns a tuple with the Results field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SessionsList) GetResultsOk() ([]Session, bool) {
-	if o == nil || o.Results == nil {
-		return nil, false
+	if o == nil || isNil(o.Results) {
+    return nil, false
 	}
 	return o.Results, true
 }
 
 // HasResults returns a boolean if a field has been set.
 func (o *SessionsList) HasResults() bool {
-	if o != nil && o.Results != nil {
+	if o != nil && !isNil(o.Results) {
 		return true
 	}
 
@@ -165,7 +165,7 @@ func (o SessionsList) MarshalJSON() ([]byte, error) {
 	if o.Previous.IsSet() {
 		toSerialize["previous"] = o.Previous.Get()
 	}
-	if o.Results != nil {
+	if !isNil(o.Results) {
 		toSerialize["results"] = o.Results
 	}
 	return json.Marshal(toSerialize)

@@ -55,7 +55,7 @@ func (o *TagFilter) GetKey() string {
 // and a boolean to check if the value has been set.
 func (o *TagFilter) GetKeyOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Key, true
 }
@@ -67,7 +67,7 @@ func (o *TagFilter) SetKey(v string) {
 
 // GetValue returns the Value field value if set, zero value otherwise.
 func (o *TagFilter) GetValue() string {
-	if o == nil || o.Value == nil {
+	if o == nil || isNil(o.Value) {
 		var ret string
 		return ret
 	}
@@ -77,15 +77,15 @@ func (o *TagFilter) GetValue() string {
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TagFilter) GetValueOk() (*string, bool) {
-	if o == nil || o.Value == nil {
-		return nil, false
+	if o == nil || isNil(o.Value) {
+    return nil, false
 	}
 	return o.Value, true
 }
 
 // HasValue returns a boolean if a field has been set.
 func (o *TagFilter) HasValue() bool {
-	if o != nil && o.Value != nil {
+	if o != nil && !isNil(o.Value) {
 		return true
 	}
 
@@ -102,7 +102,7 @@ func (o TagFilter) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["key"] = o.Key
 	}
-	if o.Value != nil {
+	if !isNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
 	return json.Marshal(toSerialize)

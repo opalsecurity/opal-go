@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the resource require an access ticket. | [optional] 
 **FolderId** | Pointer to **string** | The ID of the folder that the resource is located in. | [optional] 
 **RequireMfaToApprove** | Pointer to **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this resource. | [optional] 
+**RequireMfaToRequest** | Pointer to **bool** | A bool representing whether or not to require MFA for requesting access to this resource. | [optional] 
 **RequireMfaToConnect** | Pointer to **bool** | A bool representing whether or not to require MFA to connect to this resource. | [optional] 
 **AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this resource. | [optional] 
 **RequestTemplateId** | Pointer to **string** | The ID of the associated request template. | [optional] 
@@ -281,6 +282,31 @@ SetRequireMfaToApprove sets RequireMfaToApprove field to given value.
 `func (o *UpdateResourceInfo) HasRequireMfaToApprove() bool`
 
 HasRequireMfaToApprove returns a boolean if a field has been set.
+
+### GetRequireMfaToRequest
+
+`func (o *UpdateResourceInfo) GetRequireMfaToRequest() bool`
+
+GetRequireMfaToRequest returns the RequireMfaToRequest field if non-nil, zero value otherwise.
+
+### GetRequireMfaToRequestOk
+
+`func (o *UpdateResourceInfo) GetRequireMfaToRequestOk() (*bool, bool)`
+
+GetRequireMfaToRequestOk returns a tuple with the RequireMfaToRequest field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequireMfaToRequest
+
+`func (o *UpdateResourceInfo) SetRequireMfaToRequest(v bool)`
+
+SetRequireMfaToRequest sets RequireMfaToRequest field to given value.
+
+### HasRequireMfaToRequest
+
+`func (o *UpdateResourceInfo) HasRequireMfaToRequest() bool`
+
+HasRequireMfaToRequest returns a boolean if a field has been set.
 
 ### GetRequireMfaToConnect
 

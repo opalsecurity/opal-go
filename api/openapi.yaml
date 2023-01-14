@@ -817,7 +817,9 @@ paths:
       - owners
     put:
       description: "Sets the list of users for this owner. If escalation is enabled,\
-        \ the order of this list is the escalation priority order of the users."
+        \ the order of this list is the escalation priority order of the users. If\
+        \ the owner has a source group, adding or removing users from this list won't\
+        \ be possible."
       operationId: set_owner_users
       parameters:
       - description: The ID of the owner.
@@ -3061,6 +3063,11 @@ components:
             to approve requests for this group.
           example: false
           type: boolean
+        require_mfa_to_request:
+          description: A bool representing whether or not to require MFA for requesting
+            access to this group.
+          example: false
+          type: boolean
         auto_approval:
           description: A bool representing whether or not to automatically approve
             requests to this group.
@@ -3179,6 +3186,11 @@ components:
             to approve requests for this group.
           example: false
           type: boolean
+        require_mfa_to_request:
+          description: A bool representing whether or not to require MFA for requesting
+            access to this group.
+          example: false
+          type: boolean
         auto_approval:
           description: A bool representing whether or not to automatically approve
             requests to this group.
@@ -3199,44 +3211,50 @@ components:
       - AWS_SSO_GROUP
       - DUO_GROUP
       - GIT_HUB_TEAM
+      - GIT_LAB_GROUP
       - GOOGLE_GROUPS_GROUP
       - LDAP_GROUP
       - OKTA_GROUP
       - OPAL_GROUP
+      - AZURE_AD_SECURITY_GROUP
+      - AZURE_AD_MICROSOFT_365_GROUP
       example: OPAL_GROUP
       type: string
     ResourceTypeEnum:
       description: The type of the resource.
       enum:
-      - AWS_ACCOUNT
+      - AWS_IAM_ROLE
       - AWS_EC2_INSTANCE
       - AWS_EKS_CLUSTER
-      - AWS_IAM_ROLE
-      - AWS_RDS_MYSQL_INSTANCE
       - AWS_RDS_POSTGRES_INSTANCE
+      - AWS_RDS_MYSQL_INSTANCE
+      - AWS_ACCOUNT
       - AWS_SSO_PERMISSION_SET
       - CUSTOM
       - GCP_BUCKET
-      - GCP_CLOUD_SQL_MYSQL_INSTANCE
-      - GCP_CLOUD_SQL_POSTGRES_INSTANCE
       - GCP_COMPUTE_INSTANCE
       - GCP_FOLDER
       - GCP_GKE_CLUSTER
       - GCP_PROJECT
+      - GCP_CLOUD_SQL_POSTGRES_INSTANCE
+      - GCP_CLOUD_SQL_MYSQL_INSTANCE
       - GIT_HUB_REPO
+      - GIT_LAB_PROJECT
       - GOOGLE_WORKSPACE_ROLE
-      - MARIADB_INSTANCE
-      - MONGO_ATLAS_INSTANCE
       - MONGO_INSTANCE
-      - MYSQL_INSTANCE
+      - MONGO_ATLAS_INSTANCE
       - OKTA_APP
       - OKTA_ROLE
       - OPAL_ROLE
       - PAGERDUTY_ROLE
+      - TAILSCALE_SSH
       - SALESFORCE_PERMISSION_SET
       - SALESFORCE_PROFILE
       - SALESFORCE_ROLE
       - WORKDAY_ROLE
+      - MYSQL_INSTANCE
+      - MARIADB_INSTANCE
+      - TELEPORT_ROLE
       example: AWS_IAM_ROLE
       type: string
     VisibilityTypeEnum:
@@ -4063,6 +4081,11 @@ components:
             to approve requests for this resource.
           example: false
           type: boolean
+        require_mfa_to_request:
+          description: A bool representing whether or not to require MFA for requesting
+            access to this resource.
+          example: false
+          type: boolean
         require_mfa_to_connect:
           description: A bool representing whether or not to require MFA to connect
             to this resource.
@@ -4187,6 +4210,11 @@ components:
         require_mfa_to_approve:
           description: A bool representing whether or not to require MFA for reviewers
             to approve requests for this resource.
+          example: false
+          type: boolean
+        require_mfa_to_request:
+          description: A bool representing whether or not to require MFA for requesting
+            access to this resource.
           example: false
           type: boolean
         require_mfa_to_connect:
@@ -4383,6 +4411,11 @@ components:
           format: uuid
           nullable: true
           type: string
+        source_group_id:
+          example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          format: uuid
+          nullable: true
+          type: string
       required:
       - owner_id
       type: object
@@ -4413,7 +4446,8 @@ components:
           example: 120
           type: integer
         user_ids:
-          description: Users to add to the created owner.
+          description: Users to add to the created owner. If setting a source_group_id
+            this list must be empty.
           example:
           - 7870617d-e72a-47f5-a84c-693817ab4567
           - 1520617d-e72a-47f5-a84c-693817ab48ad2
@@ -4424,6 +4458,11 @@ components:
         reviewer_message_channel_id:
           description: The message channel id for the reviewer channel.
           example: 37cb7e41-12ba-46da-92ff-030abe0450b1
+          format: uuid
+          type: string
+        source_group_id:
+          description: Sync this owner's user list with a source group.
+          example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
           format: uuid
           type: string
       required:
@@ -4483,6 +4522,12 @@ components:
           description: The message channel id for the reviewer channel. Use "" to
             remove an existing message channel.
           example: 37cb7e41-12ba-46da-92ff-030abe0450b1
+          format: uuid
+          type: string
+        source_group_id:
+          description: Sync this owner's user list with a source group. Use "" to
+            remove an existing source group.
+          example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
           format: uuid
           type: string
       required:

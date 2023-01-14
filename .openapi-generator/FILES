@@ -178,4 +178,14 @@ model_user_list.go
 model_visibility_info.go
 model_visibility_type_enum.go
 response.go
+test/api_apps_test.go
+test/api_events_test.go
+test/api_groups_test.go
+test/api_message_channels_test.go
+test/api_owners_test.go
+test/api_resources_test.go
+test/api_sessions_test.go
+test/api_tags_test.go
+test/api_uars_test.go
+test/api_users_test.go
 utils.go

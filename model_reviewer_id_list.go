@@ -52,7 +52,7 @@ func (o *ReviewerIDList) GetReviewerIds() []string {
 // and a boolean to check if the value has been set.
 func (o *ReviewerIDList) GetReviewerIdsOk() ([]string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.ReviewerIds, true
 }
