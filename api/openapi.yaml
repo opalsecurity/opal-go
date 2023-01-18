@@ -3078,6 +3078,11 @@ components:
           example: 06851574-e50d-40ca-8c78-f72ae6ab4304
           format: uuid
           type: string
+        is_requestable:
+          description: A bool representing whether or not to allow access requests
+            to this group.
+          example: false
+          type: boolean
         metadata:
           description: "JSON metadata about the remote group. Only set for items linked\
             \ to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects)\
@@ -3201,6 +3206,11 @@ components:
           example: 06851574-e50d-40ca-8c78-f72ae6ab4304
           format: uuid
           type: string
+        is_requestable:
+          description: A bool representing whether or not to allow access requests
+            to this group.
+          example: false
+          type: boolean
       required:
       - group_id
       type: object
@@ -4101,6 +4111,11 @@ components:
           example: 06851574-e50d-40ca-8c78-f72ae6ab4304
           format: uuid
           type: string
+        is_requestable:
+          description: A bool representing whether or not to allow access requests
+            to this resource.
+          example: false
+          type: boolean
         parent_resource_id:
           description: The ID of the parent resource.
           example: 06851574-e50d-40ca-8c78-f72ae6ab4305
@@ -4232,6 +4247,11 @@ components:
           example: 06851574-e50d-40ca-8c78-f72ae6ab4304
           format: uuid
           type: string
+        is_requestable:
+          description: A bool representing whether or not to allow access requests
+            to this resource.
+          example: false
+          type: boolean
       required:
       - resource_id
       type: object

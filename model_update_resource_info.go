@@ -46,6 +46,8 @@ type UpdateResourceInfo struct {
 	AutoApproval *bool `json:"auto_approval,omitempty"`
 	// The ID of the associated request template.
 	RequestTemplateId *string `json:"request_template_id,omitempty"`
+	// A bool representing whether or not to allow access requests to this resource.
+	IsRequestable *bool `json:"is_requestable,omitempty"`
 }
 
 // NewUpdateResourceInfo instantiates a new UpdateResourceInfo object
@@ -509,6 +511,38 @@ func (o *UpdateResourceInfo) SetRequestTemplateId(v string) {
 	o.RequestTemplateId = &v
 }
 
+// GetIsRequestable returns the IsRequestable field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetIsRequestable() bool {
+	if o == nil || isNil(o.IsRequestable) {
+		var ret bool
+		return ret
+	}
+	return *o.IsRequestable
+}
+
+// GetIsRequestableOk returns a tuple with the IsRequestable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceInfo) GetIsRequestableOk() (*bool, bool) {
+	if o == nil || isNil(o.IsRequestable) {
+    return nil, false
+	}
+	return o.IsRequestable, true
+}
+
+// HasIsRequestable returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasIsRequestable() bool {
+	if o != nil && !isNil(o.IsRequestable) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsRequestable gets a reference to the given bool and assigns it to the IsRequestable field.
+func (o *UpdateResourceInfo) SetIsRequestable(v bool) {
+	o.IsRequestable = &v
+}
+
 func (o UpdateResourceInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -552,6 +586,9 @@ func (o UpdateResourceInfo) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.RequestTemplateId) {
 		toSerialize["request_template_id"] = o.RequestTemplateId
+	}
+	if !isNil(o.IsRequestable) {
+		toSerialize["is_requestable"] = o.IsRequestable
 	}
 	return json.Marshal(toSerialize)
 }

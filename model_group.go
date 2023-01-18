@@ -51,6 +51,8 @@ type Group struct {
 	AutoApproval *bool `json:"auto_approval,omitempty"`
 	// The ID of the associated request template.
 	RequestTemplateId *string `json:"request_template_id,omitempty"`
+	// A bool representing whether or not to allow access requests to this group.
+	IsRequestable *bool `json:"is_requestable,omitempty"`
 	// JSON metadata about the remote group. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details.
 	Metadata *string `json:"metadata,omitempty"`
 }
@@ -612,6 +614,38 @@ func (o *Group) SetRequestTemplateId(v string) {
 	o.RequestTemplateId = &v
 }
 
+// GetIsRequestable returns the IsRequestable field value if set, zero value otherwise.
+func (o *Group) GetIsRequestable() bool {
+	if o == nil || isNil(o.IsRequestable) {
+		var ret bool
+		return ret
+	}
+	return *o.IsRequestable
+}
+
+// GetIsRequestableOk returns a tuple with the IsRequestable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetIsRequestableOk() (*bool, bool) {
+	if o == nil || isNil(o.IsRequestable) {
+    return nil, false
+	}
+	return o.IsRequestable, true
+}
+
+// HasIsRequestable returns a boolean if a field has been set.
+func (o *Group) HasIsRequestable() bool {
+	if o != nil && !isNil(o.IsRequestable) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsRequestable gets a reference to the given bool and assigns it to the IsRequestable field.
+func (o *Group) SetIsRequestable(v bool) {
+	o.IsRequestable = &v
+}
+
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
 func (o *Group) GetMetadata() string {
 	if o == nil || isNil(o.Metadata) {
@@ -696,6 +730,9 @@ func (o Group) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.RequestTemplateId) {
 		toSerialize["request_template_id"] = o.RequestTemplateId
+	}
+	if !isNil(o.IsRequestable) {
+		toSerialize["is_requestable"] = o.IsRequestable
 	}
 	if !isNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
