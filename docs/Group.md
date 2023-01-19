@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **RequireMfaToRequest** | Pointer to **bool** | A bool representing whether or not to require MFA for requesting access to this group. | [optional] 
 **AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this group. | [optional] 
 **RequestTemplateId** | Pointer to **string** | The ID of the associated request template. | [optional] 
+**IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this group. | [optional] 
 **Metadata** | Pointer to **string** | JSON metadata about the remote group. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details. | [optional] 
 
 ## Methods
@@ -461,6 +462,31 @@ SetRequestTemplateId sets RequestTemplateId field to given value.
 `func (o *Group) HasRequestTemplateId() bool`
 
 HasRequestTemplateId returns a boolean if a field has been set.
+
+### GetIsRequestable
+
+`func (o *Group) GetIsRequestable() bool`
+
+GetIsRequestable returns the IsRequestable field if non-nil, zero value otherwise.
+
+### GetIsRequestableOk
+
+`func (o *Group) GetIsRequestableOk() (*bool, bool)`
+
+GetIsRequestableOk returns a tuple with the IsRequestable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsRequestable
+
+`func (o *Group) SetIsRequestable(v bool)`
+
+SetIsRequestable sets IsRequestable field to given value.
+
+### HasIsRequestable
+
+`func (o *Group) HasIsRequestable() bool`
+
+HasIsRequestable returns a boolean if a field has been set.
 
 ### GetMetadata
 
