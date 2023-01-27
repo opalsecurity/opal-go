@@ -595,11 +595,10 @@ paths:
           content:
             application/json:
               schema:
-                description: A list of reviewer stages.
                 items:
                   $ref: '#/components/schemas/ReviewerStage'
                 type: array
-          description: The IDs of owners that are reviewers for this group.
+          description: The reviewer stages for this group
       security:
       - BearerAuth: []
       tags:
@@ -630,11 +629,9 @@ paths:
             application/json:
               schema:
                 items:
-                  example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
-                  format: uuid
-                  type: string
+                  $ref: '#/components/schemas/ReviewerStage'
                 type: array
-          description: The updated IDs of owners that are reviewers for this group
+          description: The updated reviewer stages for this group
       security:
       - BearerAuth: []
       tags:
@@ -661,6 +658,120 @@ paths:
               schema:
                 $ref: '#/components/schemas/TagsList'
           description: The tags applied to the group.
+      security:
+      - BearerAuth: []
+      tags:
+      - groups
+  /groups/{group_id}/users:
+    get:
+      description: Gets the list of users for this group.
+      operationId: get_group_users
+      parameters:
+      - description: The ID of the group.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupUserList'
+          description: List of users with access to this group.
+      security:
+      - BearerAuth: []
+      tags:
+      - groups
+  /groups/{group_id}/users/{user_id}:
+    delete:
+      description: Removes a user's access from this group.
+      operationId: delete_group_user
+      parameters:
+      - description: The ID of the group.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The ID of a user to remove from this group.
+        example: f92aa855-cea9-4814-b9d8-f2a60d3e4a06
+        explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: This user's access was successfully removed from this group.
+      security:
+      - BearerAuth: []
+      tags:
+      - groups
+    post:
+      description: Adds a user to this group.
+      operationId: add_group_user
+      parameters:
+      - description: The ID of the group.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The ID of the user to add.
+        example: f92aa855-cea9-4814-b9d8-f2a60d3e4a06
+        explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The duration for which the group can be accessed (in minutes).
+          Use 0 to set to indefinite.
+        example: 60
+        explode: true
+        in: query
+        name: duration_minutes
+        required: true
+        schema:
+          maximum: 525960
+          type: integer
+        style: form
+      - description: "The remote ID of the access level to grant to this user. If\
+          \ omitted, the default access level remote ID value (empty string) is used."
+        example: arn:aws:iam::590304332660:role/AdministratorAccess
+        explode: true
+        in: query
+        name: access_level_remote_id
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupUser'
+          description: The GroupUser that was created.
       security:
       - BearerAuth: []
       tags:
@@ -3092,6 +3203,99 @@ components:
           type: string
       required:
       - group_id
+      type: object
+    GroupUserList:
+      example:
+        results:
+        - full_name: Jake Barnes
+          user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+          group_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          expiration_date: 2022-01-23T04:56:07Z
+          email: jake@company.dev
+        - full_name: Brett Ashley
+          user_id: 7646aa9a-e2ee-4eb5-8c62-91f29038a373
+          group_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          expiration_date: 2022-02-03T12:33:02Z
+          email: brett@company.dev
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/GroupUser'
+          type: array
+      type: object
+    GroupAccessLevel:
+      description: |-
+        # Access Level Object
+        ### Description
+        The `GroupAccessLevel` object is used to represent the level of access that a user has to a group or a group has to a group. The "default" access
+        level is a `GroupAccessLevel` object whose fields are all empty strings.
+
+        ### Usage Example
+        View the `GroupAccessLevel` of a group/user or group/group pair to see the level of access granted to the group.
+      example:
+        access_level_name: Developer
+        access_level_remote_id: 20
+      properties:
+        access_level_name:
+          description: The human-readable name of the access level.
+          example: Developer
+          type: string
+        access_level_remote_id:
+          description: The machine-readable identifier of the access level.
+          example: "20"
+          type: string
+      required:
+      - access_level_name
+      - access_level_remote_id
+      type: object
+    GroupUser:
+      description: |-
+        # Group Access User Object
+        ### Description
+        The `GroupAccessUser` object is used to represent a user with access to a group.
+
+        ### Usage Example
+        Fetch from the `LIST GroupUsers` endpoint.
+      example:
+        full_name: Jake Barnes
+        user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+        group_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+        expiration_date: 2022-01-23T04:56:07Z
+        email: jake@company.dev
+      properties:
+        group_id:
+          description: The ID of the group.
+          example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          format: uuid
+          type: string
+        user_id:
+          description: The ID of the user.
+          example: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+          format: uuid
+          type: string
+        access_level:
+          $ref: '#/components/schemas/GroupAccessLevel'
+        full_name:
+          description: The user's full name.
+          example: Jake Barnes
+          type: string
+        email:
+          description: The user's email.
+          example: jake@company.dev
+          format: email
+          type: string
+        expiration_date:
+          description: The day and time the user's access will expire.
+          example: 2022-01-23T04:56:07Z
+          format: date-time
+          nullable: true
+          type: string
+      required:
+      - email
+      - expiration_date
+      - full_name
+      - group_id
+      - user_id
       type: object
     UpdateGroupInfoList:
       example:

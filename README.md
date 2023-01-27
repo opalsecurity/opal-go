@@ -83,13 +83,16 @@ Class | Method | HTTP request | Description
 *AppsApi* | [**GetApps**](docs/AppsApi.md#getapps) | **Get** /apps | 
 *EventsApi* | [**Events**](docs/EventsApi.md#events) | **Get** /events | 
 *GroupsApi* | [**AddGroupResource**](docs/GroupsApi.md#addgroupresource) | **Post** /groups/{group_id}/resources/{resource_id} | 
+*GroupsApi* | [**AddGroupUser**](docs/GroupsApi.md#addgroupuser) | **Post** /groups/{group_id}/users/{user_id} | 
 *GroupsApi* | [**CreateGroup**](docs/GroupsApi.md#creategroup) | **Post** /groups | 
 *GroupsApi* | [**DeleteGroup**](docs/GroupsApi.md#deletegroup) | **Delete** /groups/{group_id} | 
+*GroupsApi* | [**DeleteGroupUser**](docs/GroupsApi.md#deletegroupuser) | **Delete** /groups/{group_id}/users/{user_id} | 
 *GroupsApi* | [**GetGroupMessageChannels**](docs/GroupsApi.md#getgroupmessagechannels) | **Get** /groups/{group_id}/message-channels | 
 *GroupsApi* | [**GetGroupResources**](docs/GroupsApi.md#getgroupresources) | **Get** /groups/{group_id}/resources | 
 *GroupsApi* | [**GetGroupReviewerStages**](docs/GroupsApi.md#getgroupreviewerstages) | **Get** /groups/{group_id}/reviewer_stages | 
 *GroupsApi* | [**GetGroupReviewers**](docs/GroupsApi.md#getgroupreviewers) | **Get** /groups/{group_id}/reviewers | 
 *GroupsApi* | [**GetGroupTags**](docs/GroupsApi.md#getgrouptags) | **Get** /groups/{group_id}/tags | 
+*GroupsApi* | [**GetGroupUsers**](docs/GroupsApi.md#getgroupusers) | **Get** /groups/{group_id}/users | 
 *GroupsApi* | [**GetGroupVisibility**](docs/GroupsApi.md#getgroupvisibility) | **Get** /groups/{group_id}/visibility | 
 *GroupsApi* | [**GetGroups**](docs/GroupsApi.md#getgroups) | **Get** /groups | 
 *GroupsApi* | [**SetGroupMessageChannels**](docs/GroupsApi.md#setgroupmessagechannels) | **Put** /groups/{group_id}/message-channels | 
@@ -157,6 +160,7 @@ Class | Method | HTTP request | Description
  - [EntityTypeEnum](docs/EntityTypeEnum.md)
  - [Event](docs/Event.md)
  - [Group](docs/Group.md)
+ - [GroupAccessLevel](docs/GroupAccessLevel.md)
  - [GroupRemoteInfo](docs/GroupRemoteInfo.md)
  - [GroupRemoteInfoActiveDirectoryGroup](docs/GroupRemoteInfoActiveDirectoryGroup.md)
  - [GroupRemoteInfoDuoGroup](docs/GroupRemoteInfoDuoGroup.md)
@@ -167,6 +171,8 @@ Class | Method | HTTP request | Description
  - [GroupResource](docs/GroupResource.md)
  - [GroupResourceList](docs/GroupResourceList.md)
  - [GroupTypeEnum](docs/GroupTypeEnum.md)
+ - [GroupUser](docs/GroupUser.md)
+ - [GroupUserList](docs/GroupUserList.md)
  - [MessageChannel](docs/MessageChannel.md)
  - [MessageChannelIDList](docs/MessageChannelIDList.md)
  - [MessageChannelList](docs/MessageChannelList.md)

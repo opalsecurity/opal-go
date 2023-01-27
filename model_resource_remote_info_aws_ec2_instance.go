@@ -56,7 +56,7 @@ func (o *ResourceRemoteInfoAwsEc2Instance) GetInstanceId() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfoAwsEc2Instance) GetInstanceIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.InstanceId, true
 }
@@ -80,7 +80,7 @@ func (o *ResourceRemoteInfoAwsEc2Instance) GetRegion() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfoAwsEc2Instance) GetRegionOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Region, true
 }

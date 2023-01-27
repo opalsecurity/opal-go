@@ -5,13 +5,16 @@ All URIs are relative to *https://api.opal.dev/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddGroupResource**](GroupsApi.md#AddGroupResource) | **Post** /groups/{group_id}/resources/{resource_id} | 
+[**AddGroupUser**](GroupsApi.md#AddGroupUser) | **Post** /groups/{group_id}/users/{user_id} | 
 [**CreateGroup**](GroupsApi.md#CreateGroup) | **Post** /groups | 
 [**DeleteGroup**](GroupsApi.md#DeleteGroup) | **Delete** /groups/{group_id} | 
+[**DeleteGroupUser**](GroupsApi.md#DeleteGroupUser) | **Delete** /groups/{group_id}/users/{user_id} | 
 [**GetGroupMessageChannels**](GroupsApi.md#GetGroupMessageChannels) | **Get** /groups/{group_id}/message-channels | 
 [**GetGroupResources**](GroupsApi.md#GetGroupResources) | **Get** /groups/{group_id}/resources | 
 [**GetGroupReviewerStages**](GroupsApi.md#GetGroupReviewerStages) | **Get** /groups/{group_id}/reviewer_stages | 
 [**GetGroupReviewers**](GroupsApi.md#GetGroupReviewers) | **Get** /groups/{group_id}/reviewers | 
 [**GetGroupTags**](GroupsApi.md#GetGroupTags) | **Get** /groups/{group_id}/tags | 
+[**GetGroupUsers**](GroupsApi.md#GetGroupUsers) | **Get** /groups/{group_id}/users | 
 [**GetGroupVisibility**](GroupsApi.md#GetGroupVisibility) | **Get** /groups/{group_id}/visibility | 
 [**GetGroups**](GroupsApi.md#GetGroups) | **Get** /groups | 
 [**SetGroupMessageChannels**](GroupsApi.md#SetGroupMessageChannels) | **Put** /groups/{group_id}/message-channels | 
@@ -83,6 +86,83 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GroupResource**](GroupResource.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## AddGroupUser
+
+> GroupUser AddGroupUser(ctx, groupId, userId).DurationMinutes(durationMinutes).AccessLevelRemoteId(accessLevelRemoteId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+    userId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of the user to add.
+    durationMinutes := int32(60) // int32 | The duration for which the group can be accessed (in minutes). Use 0 to set to indefinite.
+    accessLevelRemoteId := "arn:aws:iam::590304332660:role/AdministratorAccess" // string | The remote ID of the access level to grant to this user. If omitted, the default access level remote ID value (empty string) is used. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.GroupsApi.AddGroupUser(context.Background(), groupId, userId).DurationMinutes(durationMinutes).AccessLevelRemoteId(accessLevelRemoteId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.AddGroupUser``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `AddGroupUser`: GroupUser
+    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.AddGroupUser`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**groupId** | **string** | The ID of the group. | 
+**userId** | **string** | The ID of the user to add. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAddGroupUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **durationMinutes** | **int32** | The duration for which the group can be accessed (in minutes). Use 0 to set to indefinite. | 
+ **accessLevelRemoteId** | **string** | The remote ID of the access level to grant to this user. If omitted, the default access level remote ID value (empty string) is used. | 
+
+### Return type
+
+[**GroupUser**](GroupUser.md)
 
 ### Authorization
 
@@ -212,6 +292,77 @@ Other parameters are passed through a pointer to a apiDeleteGroupRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteGroupUser
+
+> DeleteGroupUser(ctx, groupId, userId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+    userId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of a user to remove from this group.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.GroupsApi.DeleteGroupUser(context.Background(), groupId, userId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.DeleteGroupUser``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**groupId** | **string** | The ID of the group. | 
+**userId** | **string** | The ID of a user to remove from this group. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteGroupUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 
 ### Return type
@@ -582,6 +733,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetGroupUsers
+
+> GroupUserList GetGroupUsers(ctx, groupId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.GroupsApi.GetGroupUsers(context.Background(), groupId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.GetGroupUsers``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetGroupUsers`: GroupUserList
+    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.GetGroupUsers`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**groupId** | **string** | The ID of the group. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetGroupUsersRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**GroupUserList**](GroupUserList.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetGroupVisibility
 
 > VisibilityInfo GetGroupVisibility(ctx, groupId).Execute()
@@ -870,7 +1091,7 @@ Name | Type | Description  | Notes
 
 ## SetGroupReviewerStages
 
-> []string SetGroupReviewerStages(ctx, groupId).ReviewerStageList(reviewerStageList).Execute()
+> []ReviewerStage SetGroupReviewerStages(ctx, groupId).ReviewerStageList(reviewerStageList).Execute()
 
 
 
@@ -899,7 +1120,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.SetGroupReviewerStages``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `SetGroupReviewerStages`: []string
+    // response from `SetGroupReviewerStages`: []ReviewerStage
     fmt.Fprintf(os.Stdout, "Response from `GroupsApi.SetGroupReviewerStages`: %v\n", resp)
 }
 ```
@@ -924,7 +1145,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**[]string**
+[**[]ReviewerStage**](ReviewerStage.md)
 
 ### Authorization
 

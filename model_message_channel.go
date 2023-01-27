@@ -60,7 +60,7 @@ func (o *MessageChannel) GetMessageChannelId() string {
 // and a boolean to check if the value has been set.
 func (o *MessageChannel) GetMessageChannelIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.MessageChannelId, true
 }
@@ -72,7 +72,7 @@ func (o *MessageChannel) SetMessageChannelId(v string) {
 
 // GetThirdPartyProvider returns the ThirdPartyProvider field value if set, zero value otherwise.
 func (o *MessageChannel) GetThirdPartyProvider() MessageChannelProviderEnum {
-	if o == nil || isNil(o.ThirdPartyProvider) {
+	if o == nil || o.ThirdPartyProvider == nil {
 		var ret MessageChannelProviderEnum
 		return ret
 	}
@@ -82,15 +82,15 @@ func (o *MessageChannel) GetThirdPartyProvider() MessageChannelProviderEnum {
 // GetThirdPartyProviderOk returns a tuple with the ThirdPartyProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MessageChannel) GetThirdPartyProviderOk() (*MessageChannelProviderEnum, bool) {
-	if o == nil || isNil(o.ThirdPartyProvider) {
-    return nil, false
+	if o == nil || o.ThirdPartyProvider == nil {
+		return nil, false
 	}
 	return o.ThirdPartyProvider, true
 }
 
 // HasThirdPartyProvider returns a boolean if a field has been set.
 func (o *MessageChannel) HasThirdPartyProvider() bool {
-	if o != nil && !isNil(o.ThirdPartyProvider) {
+	if o != nil && o.ThirdPartyProvider != nil {
 		return true
 	}
 
@@ -104,7 +104,7 @@ func (o *MessageChannel) SetThirdPartyProvider(v MessageChannelProviderEnum) {
 
 // GetRemoteId returns the RemoteId field value if set, zero value otherwise.
 func (o *MessageChannel) GetRemoteId() string {
-	if o == nil || isNil(o.RemoteId) {
+	if o == nil || o.RemoteId == nil {
 		var ret string
 		return ret
 	}
@@ -114,15 +114,15 @@ func (o *MessageChannel) GetRemoteId() string {
 // GetRemoteIdOk returns a tuple with the RemoteId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MessageChannel) GetRemoteIdOk() (*string, bool) {
-	if o == nil || isNil(o.RemoteId) {
-    return nil, false
+	if o == nil || o.RemoteId == nil {
+		return nil, false
 	}
 	return o.RemoteId, true
 }
 
 // HasRemoteId returns a boolean if a field has been set.
 func (o *MessageChannel) HasRemoteId() bool {
-	if o != nil && !isNil(o.RemoteId) {
+	if o != nil && o.RemoteId != nil {
 		return true
 	}
 
@@ -136,7 +136,7 @@ func (o *MessageChannel) SetRemoteId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *MessageChannel) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || o.Name == nil {
 		var ret string
 		return ret
 	}
@@ -146,15 +146,15 @@ func (o *MessageChannel) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MessageChannel) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
-    return nil, false
+	if o == nil || o.Name == nil {
+		return nil, false
 	}
 	return o.Name, true
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *MessageChannel) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && o.Name != nil {
 		return true
 	}
 
@@ -168,7 +168,7 @@ func (o *MessageChannel) SetName(v string) {
 
 // GetIsPrivate returns the IsPrivate field value if set, zero value otherwise.
 func (o *MessageChannel) GetIsPrivate() bool {
-	if o == nil || isNil(o.IsPrivate) {
+	if o == nil || o.IsPrivate == nil {
 		var ret bool
 		return ret
 	}
@@ -178,15 +178,15 @@ func (o *MessageChannel) GetIsPrivate() bool {
 // GetIsPrivateOk returns a tuple with the IsPrivate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MessageChannel) GetIsPrivateOk() (*bool, bool) {
-	if o == nil || isNil(o.IsPrivate) {
-    return nil, false
+	if o == nil || o.IsPrivate == nil {
+		return nil, false
 	}
 	return o.IsPrivate, true
 }
 
 // HasIsPrivate returns a boolean if a field has been set.
 func (o *MessageChannel) HasIsPrivate() bool {
-	if o != nil && !isNil(o.IsPrivate) {
+	if o != nil && o.IsPrivate != nil {
 		return true
 	}
 
@@ -203,16 +203,16 @@ func (o MessageChannel) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["message_channel_id"] = o.MessageChannelId
 	}
-	if !isNil(o.ThirdPartyProvider) {
+	if o.ThirdPartyProvider != nil {
 		toSerialize["third_party_provider"] = o.ThirdPartyProvider
 	}
-	if !isNil(o.RemoteId) {
+	if o.RemoteId != nil {
 		toSerialize["remote_id"] = o.RemoteId
 	}
-	if !isNil(o.Name) {
+	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
-	if !isNil(o.IsPrivate) {
+	if o.IsPrivate != nil {
 		toSerialize["is_private"] = o.IsPrivate
 	}
 	return json.Marshal(toSerialize)

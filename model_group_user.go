@@ -16,13 +16,13 @@ import (
 	"time"
 )
 
-// ResourceUser # Resource User Object ### Description The `ResourceUser` object is used to represent a user with direct access to a resource.
-type ResourceUser struct {
-	// The ID of the resource.
-	ResourceId string `json:"resource_id"`
+// GroupUser # Group Access User Object ### Description The `GroupAccessUser` object is used to represent a user with access to a group.  ### Usage Example Fetch from the `LIST GroupUsers` endpoint.
+type GroupUser struct {
+	// The ID of the group.
+	GroupId string `json:"group_id"`
 	// The ID of the user.
 	UserId string `json:"user_id"`
-	AccessLevel ResourceAccessLevel `json:"access_level"`
+	AccessLevel *GroupAccessLevel `json:"access_level,omitempty"`
 	// The user's full name.
 	FullName string `json:"full_name"`
 	// The user's email.
@@ -31,55 +31,54 @@ type ResourceUser struct {
 	ExpirationDate NullableTime `json:"expiration_date"`
 }
 
-// NewResourceUser instantiates a new ResourceUser object
+// NewGroupUser instantiates a new GroupUser object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResourceUser(resourceId string, userId string, accessLevel ResourceAccessLevel, fullName string, email string, expirationDate NullableTime) *ResourceUser {
-	this := ResourceUser{}
-	this.ResourceId = resourceId
+func NewGroupUser(groupId string, userId string, fullName string, email string, expirationDate NullableTime) *GroupUser {
+	this := GroupUser{}
+	this.GroupId = groupId
 	this.UserId = userId
-	this.AccessLevel = accessLevel
 	this.FullName = fullName
 	this.Email = email
 	this.ExpirationDate = expirationDate
 	return &this
 }
 
-// NewResourceUserWithDefaults instantiates a new ResourceUser object
+// NewGroupUserWithDefaults instantiates a new GroupUser object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewResourceUserWithDefaults() *ResourceUser {
-	this := ResourceUser{}
+func NewGroupUserWithDefaults() *GroupUser {
+	this := GroupUser{}
 	return &this
 }
 
-// GetResourceId returns the ResourceId field value
-func (o *ResourceUser) GetResourceId() string {
+// GetGroupId returns the GroupId field value
+func (o *GroupUser) GetGroupId() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.ResourceId
+	return o.GroupId
 }
 
-// GetResourceIdOk returns a tuple with the ResourceId field value
+// GetGroupIdOk returns a tuple with the GroupId field value
 // and a boolean to check if the value has been set.
-func (o *ResourceUser) GetResourceIdOk() (*string, bool) {
+func (o *GroupUser) GetGroupIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ResourceId, true
+	return &o.GroupId, true
 }
 
-// SetResourceId sets field value
-func (o *ResourceUser) SetResourceId(v string) {
-	o.ResourceId = v
+// SetGroupId sets field value
+func (o *GroupUser) SetGroupId(v string) {
+	o.GroupId = v
 }
 
 // GetUserId returns the UserId field value
-func (o *ResourceUser) GetUserId() string {
+func (o *GroupUser) GetUserId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -90,7 +89,7 @@ func (o *ResourceUser) GetUserId() string {
 
 // GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
-func (o *ResourceUser) GetUserIdOk() (*string, bool) {
+func (o *GroupUser) GetUserIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -98,36 +97,44 @@ func (o *ResourceUser) GetUserIdOk() (*string, bool) {
 }
 
 // SetUserId sets field value
-func (o *ResourceUser) SetUserId(v string) {
+func (o *GroupUser) SetUserId(v string) {
 	o.UserId = v
 }
 
-// GetAccessLevel returns the AccessLevel field value
-func (o *ResourceUser) GetAccessLevel() ResourceAccessLevel {
-	if o == nil {
-		var ret ResourceAccessLevel
+// GetAccessLevel returns the AccessLevel field value if set, zero value otherwise.
+func (o *GroupUser) GetAccessLevel() GroupAccessLevel {
+	if o == nil || o.AccessLevel == nil {
+		var ret GroupAccessLevel
 		return ret
 	}
-
-	return o.AccessLevel
+	return *o.AccessLevel
 }
 
-// GetAccessLevelOk returns a tuple with the AccessLevel field value
+// GetAccessLevelOk returns a tuple with the AccessLevel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ResourceUser) GetAccessLevelOk() (*ResourceAccessLevel, bool) {
-	if o == nil {
+func (o *GroupUser) GetAccessLevelOk() (*GroupAccessLevel, bool) {
+	if o == nil || o.AccessLevel == nil {
 		return nil, false
 	}
-	return &o.AccessLevel, true
+	return o.AccessLevel, true
 }
 
-// SetAccessLevel sets field value
-func (o *ResourceUser) SetAccessLevel(v ResourceAccessLevel) {
-	o.AccessLevel = v
+// HasAccessLevel returns a boolean if a field has been set.
+func (o *GroupUser) HasAccessLevel() bool {
+	if o != nil && o.AccessLevel != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessLevel gets a reference to the given GroupAccessLevel and assigns it to the AccessLevel field.
+func (o *GroupUser) SetAccessLevel(v GroupAccessLevel) {
+	o.AccessLevel = &v
 }
 
 // GetFullName returns the FullName field value
-func (o *ResourceUser) GetFullName() string {
+func (o *GroupUser) GetFullName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -138,7 +145,7 @@ func (o *ResourceUser) GetFullName() string {
 
 // GetFullNameOk returns a tuple with the FullName field value
 // and a boolean to check if the value has been set.
-func (o *ResourceUser) GetFullNameOk() (*string, bool) {
+func (o *GroupUser) GetFullNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -146,12 +153,12 @@ func (o *ResourceUser) GetFullNameOk() (*string, bool) {
 }
 
 // SetFullName sets field value
-func (o *ResourceUser) SetFullName(v string) {
+func (o *GroupUser) SetFullName(v string) {
 	o.FullName = v
 }
 
 // GetEmail returns the Email field value
-func (o *ResourceUser) GetEmail() string {
+func (o *GroupUser) GetEmail() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -162,7 +169,7 @@ func (o *ResourceUser) GetEmail() string {
 
 // GetEmailOk returns a tuple with the Email field value
 // and a boolean to check if the value has been set.
-func (o *ResourceUser) GetEmailOk() (*string, bool) {
+func (o *GroupUser) GetEmailOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -170,13 +177,13 @@ func (o *ResourceUser) GetEmailOk() (*string, bool) {
 }
 
 // SetEmail sets field value
-func (o *ResourceUser) SetEmail(v string) {
+func (o *GroupUser) SetEmail(v string) {
 	o.Email = v
 }
 
 // GetExpirationDate returns the ExpirationDate field value
 // If the value is explicit nil, the zero value for time.Time will be returned
-func (o *ResourceUser) GetExpirationDate() time.Time {
+func (o *GroupUser) GetExpirationDate() time.Time {
 	if o == nil || o.ExpirationDate.Get() == nil {
 		var ret time.Time
 		return ret
@@ -188,7 +195,7 @@ func (o *ResourceUser) GetExpirationDate() time.Time {
 // GetExpirationDateOk returns a tuple with the ExpirationDate field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ResourceUser) GetExpirationDateOk() (*time.Time, bool) {
+func (o *GroupUser) GetExpirationDateOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -196,19 +203,19 @@ func (o *ResourceUser) GetExpirationDateOk() (*time.Time, bool) {
 }
 
 // SetExpirationDate sets field value
-func (o *ResourceUser) SetExpirationDate(v time.Time) {
+func (o *GroupUser) SetExpirationDate(v time.Time) {
 	o.ExpirationDate.Set(&v)
 }
 
-func (o ResourceUser) MarshalJSON() ([]byte, error) {
+func (o GroupUser) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
-		toSerialize["resource_id"] = o.ResourceId
+		toSerialize["group_id"] = o.GroupId
 	}
 	if true {
 		toSerialize["user_id"] = o.UserId
 	}
-	if true {
+	if o.AccessLevel != nil {
 		toSerialize["access_level"] = o.AccessLevel
 	}
 	if true {
@@ -223,38 +230,38 @@ func (o ResourceUser) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableResourceUser struct {
-	value *ResourceUser
+type NullableGroupUser struct {
+	value *GroupUser
 	isSet bool
 }
 
-func (v NullableResourceUser) Get() *ResourceUser {
+func (v NullableGroupUser) Get() *GroupUser {
 	return v.value
 }
 
-func (v *NullableResourceUser) Set(val *ResourceUser) {
+func (v *NullableGroupUser) Set(val *GroupUser) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableResourceUser) IsSet() bool {
+func (v NullableGroupUser) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableResourceUser) Unset() {
+func (v *NullableGroupUser) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableResourceUser(val *ResourceUser) *NullableResourceUser {
-	return &NullableResourceUser{value: val, isSet: true}
+func NewNullableGroupUser(val *GroupUser) *NullableGroupUser {
+	return &NullableGroupUser{value: val, isSet: true}
 }
 
-func (v NullableResourceUser) MarshalJSON() ([]byte, error) {
+func (v NullableGroupUser) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableResourceUser) UnmarshalJSON(src []byte) error {
+func (v *NullableGroupUser) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

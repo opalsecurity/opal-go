@@ -74,7 +74,7 @@ func (o *ResourceAccessUser) GetResourceId() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceAccessUser) GetResourceIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ResourceId, true
 }
@@ -98,7 +98,7 @@ func (o *ResourceAccessUser) GetUserId() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceAccessUser) GetUserIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.UserId, true
 }
@@ -122,7 +122,7 @@ func (o *ResourceAccessUser) GetAccessLevel() ResourceAccessLevel {
 // and a boolean to check if the value has been set.
 func (o *ResourceAccessUser) GetAccessLevelOk() (*ResourceAccessLevel, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.AccessLevel, true
 }
@@ -146,7 +146,7 @@ func (o *ResourceAccessUser) GetFullName() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceAccessUser) GetFullNameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.FullName, true
 }
@@ -170,7 +170,7 @@ func (o *ResourceAccessUser) GetEmail() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceAccessUser) GetEmailOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Email, true
 }
@@ -196,7 +196,7 @@ func (o *ResourceAccessUser) GetExpirationDate() time.Time {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceAccessUser) GetExpirationDateOk() (*time.Time, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.ExpirationDate.Get(), o.ExpirationDate.IsSet()
 }
@@ -220,7 +220,7 @@ func (o *ResourceAccessUser) GetHasDirectAccess() bool {
 // and a boolean to check if the value has been set.
 func (o *ResourceAccessUser) GetHasDirectAccessOk() (*bool, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.HasDirectAccess, true
 }
@@ -244,7 +244,7 @@ func (o *ResourceAccessUser) GetNumAccessPaths() int32 {
 // and a boolean to check if the value has been set.
 func (o *ResourceAccessUser) GetNumAccessPathsOk() (*int32, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.NumAccessPaths, true
 }

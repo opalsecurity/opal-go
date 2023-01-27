@@ -64,7 +64,7 @@ func (o *App) GetAppId() string {
 // and a boolean to check if the value has been set.
 func (o *App) GetAppIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.AppId, true
 }
@@ -88,7 +88,7 @@ func (o *App) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *App) GetNameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Name, true
 }
@@ -112,7 +112,7 @@ func (o *App) GetDescription() string {
 // and a boolean to check if the value has been set.
 func (o *App) GetDescriptionOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Description, true
 }
@@ -136,7 +136,7 @@ func (o *App) GetAdminOwnerId() string {
 // and a boolean to check if the value has been set.
 func (o *App) GetAdminOwnerIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.AdminOwnerId, true
 }
@@ -160,7 +160,7 @@ func (o *App) GetAppType() AppTypeEnum {
 // and a boolean to check if the value has been set.
 func (o *App) GetAppTypeOk() (*AppTypeEnum, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.AppType, true
 }

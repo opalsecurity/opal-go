@@ -53,7 +53,7 @@ func (o *GroupRemoteInfoActiveDirectoryGroup) GetGroupId() string {
 // and a boolean to check if the value has been set.
 func (o *GroupRemoteInfoActiveDirectoryGroup) GetGroupIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.GroupId, true
 }

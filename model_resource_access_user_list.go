@@ -39,7 +39,7 @@ func NewResourceAccessUserListWithDefaults() *ResourceAccessUserList {
 
 // GetResults returns the Results field value if set, zero value otherwise.
 func (o *ResourceAccessUserList) GetResults() []ResourceAccessUser {
-	if o == nil || isNil(o.Results) {
+	if o == nil || o.Results == nil {
 		var ret []ResourceAccessUser
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *ResourceAccessUserList) GetResults() []ResourceAccessUser {
 // GetResultsOk returns a tuple with the Results field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceAccessUserList) GetResultsOk() ([]ResourceAccessUser, bool) {
-	if o == nil || isNil(o.Results) {
-    return nil, false
+	if o == nil || o.Results == nil {
+		return nil, false
 	}
 	return o.Results, true
 }
 
 // HasResults returns a boolean if a field has been set.
 func (o *ResourceAccessUserList) HasResults() bool {
-	if o != nil && !isNil(o.Results) {
+	if o != nil && o.Results != nil {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *ResourceAccessUserList) SetResults(v []ResourceAccessUser) {
 
 func (o ResourceAccessUserList) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Results) {
+	if o.Results != nil {
 		toSerialize["results"] = o.Results
 	}
 	return json.Marshal(toSerialize)

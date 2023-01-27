@@ -53,7 +53,7 @@ func (o *UpdateOwnerInfoList) GetOwners() []UpdateOwnerInfo {
 // and a boolean to check if the value has been set.
 func (o *UpdateOwnerInfoList) GetOwnersOk() ([]UpdateOwnerInfo, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Owners, true
 }

@@ -43,7 +43,7 @@ func NewPaginatedEventListWithDefaults() *PaginatedEventList {
 
 // GetNext returns the Next field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaginatedEventList) GetNext() string {
-	if o == nil || isNil(o.Next.Get()) {
+	if o == nil || o.Next.Get() == nil {
 		var ret string
 		return ret
 	}
@@ -55,7 +55,7 @@ func (o *PaginatedEventList) GetNext() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaginatedEventList) GetNextOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Next.Get(), o.Next.IsSet()
 }
@@ -85,7 +85,7 @@ func (o *PaginatedEventList) UnsetNext() {
 
 // GetPrevious returns the Previous field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaginatedEventList) GetPrevious() string {
-	if o == nil || isNil(o.Previous.Get()) {
+	if o == nil || o.Previous.Get() == nil {
 		var ret string
 		return ret
 	}
@@ -97,7 +97,7 @@ func (o *PaginatedEventList) GetPrevious() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaginatedEventList) GetPreviousOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Previous.Get(), o.Previous.IsSet()
 }
@@ -127,7 +127,7 @@ func (o *PaginatedEventList) UnsetPrevious() {
 
 // GetResults returns the Results field value if set, zero value otherwise.
 func (o *PaginatedEventList) GetResults() []Event {
-	if o == nil || isNil(o.Results) {
+	if o == nil || o.Results == nil {
 		var ret []Event
 		return ret
 	}
@@ -137,15 +137,15 @@ func (o *PaginatedEventList) GetResults() []Event {
 // GetResultsOk returns a tuple with the Results field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PaginatedEventList) GetResultsOk() ([]Event, bool) {
-	if o == nil || isNil(o.Results) {
-    return nil, false
+	if o == nil || o.Results == nil {
+		return nil, false
 	}
 	return o.Results, true
 }
 
 // HasResults returns a boolean if a field has been set.
 func (o *PaginatedEventList) HasResults() bool {
-	if o != nil && !isNil(o.Results) {
+	if o != nil && o.Results != nil {
 		return true
 	}
 
@@ -165,7 +165,7 @@ func (o PaginatedEventList) MarshalJSON() ([]byte, error) {
 	if o.Previous.IsSet() {
 		toSerialize["previous"] = o.Previous.Get()
 	}
-	if !isNil(o.Results) {
+	if o.Results != nil {
 		toSerialize["results"] = o.Results
 	}
 	return json.Marshal(toSerialize)

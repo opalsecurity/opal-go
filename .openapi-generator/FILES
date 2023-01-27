@@ -27,6 +27,7 @@ docs/EntityTypeEnum.md
 docs/Event.md
 docs/EventsApi.md
 docs/Group.md
+docs/GroupAccessLevel.md
 docs/GroupRemoteInfo.md
 docs/GroupRemoteInfoActiveDirectoryGroup.md
 docs/GroupRemoteInfoDuoGroup.md
@@ -37,6 +38,8 @@ docs/GroupRemoteInfoOktaGroup.md
 docs/GroupResource.md
 docs/GroupResourceList.md
 docs/GroupTypeEnum.md
+docs/GroupUser.md
+docs/GroupUserList.md
 docs/GroupsApi.md
 docs/MessageChannel.md
 docs/MessageChannelIDList.md
@@ -113,6 +116,7 @@ model_create_uar_info.go
 model_entity_type_enum.go
 model_event.go
 model_group.go
+model_group_access_level.go
 model_group_remote_info.go
 model_group_remote_info_active_directory_group.go
 model_group_remote_info_duo_group.go
@@ -123,6 +127,8 @@ model_group_remote_info_okta_group.go
 model_group_resource.go
 model_group_resource_list.go
 model_group_type_enum.go
+model_group_user.go
+model_group_user_list.go
 model_message_channel.go
 model_message_channel_id_list.go
 model_message_channel_list.go

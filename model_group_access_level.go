@@ -15,35 +15,35 @@ import (
 	"encoding/json"
 )
 
-// ResourceAccessLevel # Access Level Object ### Description The `ResourceAccessLevel` object is used to represent the level of access that a user has to a resource or a resource has to a group. The \"default\" access level is a `ResourceAccessLevel` object whose fields are all empty strings.  ### Usage Example View the `ResourceAccessLevel` of a resource/user or resource/group pair to see the level of access granted to the resource.
-type ResourceAccessLevel struct {
+// GroupAccessLevel # Access Level Object ### Description The `GroupAccessLevel` object is used to represent the level of access that a user has to a group or a group has to a group. The \"default\" access level is a `GroupAccessLevel` object whose fields are all empty strings.  ### Usage Example View the `GroupAccessLevel` of a group/user or group/group pair to see the level of access granted to the group.
+type GroupAccessLevel struct {
 	// The human-readable name of the access level.
 	AccessLevelName string `json:"access_level_name"`
 	// The machine-readable identifier of the access level.
 	AccessLevelRemoteId string `json:"access_level_remote_id"`
 }
 
-// NewResourceAccessLevel instantiates a new ResourceAccessLevel object
+// NewGroupAccessLevel instantiates a new GroupAccessLevel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResourceAccessLevel(accessLevelName string, accessLevelRemoteId string) *ResourceAccessLevel {
-	this := ResourceAccessLevel{}
+func NewGroupAccessLevel(accessLevelName string, accessLevelRemoteId string) *GroupAccessLevel {
+	this := GroupAccessLevel{}
 	this.AccessLevelName = accessLevelName
 	this.AccessLevelRemoteId = accessLevelRemoteId
 	return &this
 }
 
-// NewResourceAccessLevelWithDefaults instantiates a new ResourceAccessLevel object
+// NewGroupAccessLevelWithDefaults instantiates a new GroupAccessLevel object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewResourceAccessLevelWithDefaults() *ResourceAccessLevel {
-	this := ResourceAccessLevel{}
+func NewGroupAccessLevelWithDefaults() *GroupAccessLevel {
+	this := GroupAccessLevel{}
 	return &this
 }
 
 // GetAccessLevelName returns the AccessLevelName field value
-func (o *ResourceAccessLevel) GetAccessLevelName() string {
+func (o *GroupAccessLevel) GetAccessLevelName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -54,7 +54,7 @@ func (o *ResourceAccessLevel) GetAccessLevelName() string {
 
 // GetAccessLevelNameOk returns a tuple with the AccessLevelName field value
 // and a boolean to check if the value has been set.
-func (o *ResourceAccessLevel) GetAccessLevelNameOk() (*string, bool) {
+func (o *GroupAccessLevel) GetAccessLevelNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -62,12 +62,12 @@ func (o *ResourceAccessLevel) GetAccessLevelNameOk() (*string, bool) {
 }
 
 // SetAccessLevelName sets field value
-func (o *ResourceAccessLevel) SetAccessLevelName(v string) {
+func (o *GroupAccessLevel) SetAccessLevelName(v string) {
 	o.AccessLevelName = v
 }
 
 // GetAccessLevelRemoteId returns the AccessLevelRemoteId field value
-func (o *ResourceAccessLevel) GetAccessLevelRemoteId() string {
+func (o *GroupAccessLevel) GetAccessLevelRemoteId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -78,7 +78,7 @@ func (o *ResourceAccessLevel) GetAccessLevelRemoteId() string {
 
 // GetAccessLevelRemoteIdOk returns a tuple with the AccessLevelRemoteId field value
 // and a boolean to check if the value has been set.
-func (o *ResourceAccessLevel) GetAccessLevelRemoteIdOk() (*string, bool) {
+func (o *GroupAccessLevel) GetAccessLevelRemoteIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -86,11 +86,11 @@ func (o *ResourceAccessLevel) GetAccessLevelRemoteIdOk() (*string, bool) {
 }
 
 // SetAccessLevelRemoteId sets field value
-func (o *ResourceAccessLevel) SetAccessLevelRemoteId(v string) {
+func (o *GroupAccessLevel) SetAccessLevelRemoteId(v string) {
 	o.AccessLevelRemoteId = v
 }
 
-func (o ResourceAccessLevel) MarshalJSON() ([]byte, error) {
+func (o GroupAccessLevel) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["access_level_name"] = o.AccessLevelName
@@ -101,38 +101,38 @@ func (o ResourceAccessLevel) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableResourceAccessLevel struct {
-	value *ResourceAccessLevel
+type NullableGroupAccessLevel struct {
+	value *GroupAccessLevel
 	isSet bool
 }
 
-func (v NullableResourceAccessLevel) Get() *ResourceAccessLevel {
+func (v NullableGroupAccessLevel) Get() *GroupAccessLevel {
 	return v.value
 }
 
-func (v *NullableResourceAccessLevel) Set(val *ResourceAccessLevel) {
+func (v *NullableGroupAccessLevel) Set(val *GroupAccessLevel) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableResourceAccessLevel) IsSet() bool {
+func (v NullableGroupAccessLevel) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableResourceAccessLevel) Unset() {
+func (v *NullableGroupAccessLevel) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableResourceAccessLevel(val *ResourceAccessLevel) *NullableResourceAccessLevel {
-	return &NullableResourceAccessLevel{value: val, isSet: true}
+func NewNullableGroupAccessLevel(val *GroupAccessLevel) *NullableGroupAccessLevel {
+	return &NullableGroupAccessLevel{value: val, isSet: true}
 }
 
-func (v NullableResourceAccessLevel) MarshalJSON() ([]byte, error) {
+func (v NullableGroupAccessLevel) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableResourceAccessLevel) UnmarshalJSON(src []byte) error {
+func (v *NullableGroupAccessLevel) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

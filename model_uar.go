@@ -72,7 +72,7 @@ func (o *UAR) GetUarId() string {
 // and a boolean to check if the value has been set.
 func (o *UAR) GetUarIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.UarId, true
 }
@@ -96,7 +96,7 @@ func (o *UAR) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *UAR) GetNameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Name, true
 }
@@ -120,7 +120,7 @@ func (o *UAR) GetReviewerAssignmentPolicy() UARReviewerAssignmentPolicyEnum {
 // and a boolean to check if the value has been set.
 func (o *UAR) GetReviewerAssignmentPolicyOk() (*UARReviewerAssignmentPolicyEnum, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ReviewerAssignmentPolicy, true
 }
@@ -144,7 +144,7 @@ func (o *UAR) GetSendReviewerAssignmentNotification() bool {
 // and a boolean to check if the value has been set.
 func (o *UAR) GetSendReviewerAssignmentNotificationOk() (*bool, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.SendReviewerAssignmentNotification, true
 }
@@ -168,7 +168,7 @@ func (o *UAR) GetDeadline() time.Time {
 // and a boolean to check if the value has been set.
 func (o *UAR) GetDeadlineOk() (*time.Time, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Deadline, true
 }
@@ -192,7 +192,7 @@ func (o *UAR) GetTimeZone() string {
 // and a boolean to check if the value has been set.
 func (o *UAR) GetTimeZoneOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.TimeZone, true
 }
@@ -216,7 +216,7 @@ func (o *UAR) GetSelfReviewAllowed() bool {
 // and a boolean to check if the value has been set.
 func (o *UAR) GetSelfReviewAllowedOk() (*bool, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.SelfReviewAllowed, true
 }
@@ -228,7 +228,7 @@ func (o *UAR) SetSelfReviewAllowed(v bool) {
 
 // GetUarScope returns the UarScope field value if set, zero value otherwise.
 func (o *UAR) GetUarScope() UARScope {
-	if o == nil || isNil(o.UarScope) {
+	if o == nil || o.UarScope == nil {
 		var ret UARScope
 		return ret
 	}
@@ -238,15 +238,15 @@ func (o *UAR) GetUarScope() UARScope {
 // GetUarScopeOk returns a tuple with the UarScope field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UAR) GetUarScopeOk() (*UARScope, bool) {
-	if o == nil || isNil(o.UarScope) {
-    return nil, false
+	if o == nil || o.UarScope == nil {
+		return nil, false
 	}
 	return o.UarScope, true
 }
 
 // HasUarScope returns a boolean if a field has been set.
 func (o *UAR) HasUarScope() bool {
-	if o != nil && !isNil(o.UarScope) {
+	if o != nil && o.UarScope != nil {
 		return true
 	}
 
@@ -281,7 +281,7 @@ func (o UAR) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["self_review_allowed"] = o.SelfReviewAllowed
 	}
-	if !isNil(o.UarScope) {
+	if o.UarScope != nil {
 		toSerialize["uar_scope"] = o.UarScope
 	}
 	return json.Marshal(toSerialize)
