@@ -63,7 +63,7 @@ func (o *ResourceUserAccessStatus) GetResourceId() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceUserAccessStatus) GetResourceIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ResourceId, true
 }
@@ -87,7 +87,7 @@ func (o *ResourceUserAccessStatus) GetUserId() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceUserAccessStatus) GetUserIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.UserId, true
 }
@@ -99,7 +99,7 @@ func (o *ResourceUserAccessStatus) SetUserId(v string) {
 
 // GetAccessLevel returns the AccessLevel field value if set, zero value otherwise.
 func (o *ResourceUserAccessStatus) GetAccessLevel() ResourceAccessLevel {
-	if o == nil || o.AccessLevel == nil {
+	if o == nil || isNil(o.AccessLevel) {
 		var ret ResourceAccessLevel
 		return ret
 	}
@@ -109,15 +109,15 @@ func (o *ResourceUserAccessStatus) GetAccessLevel() ResourceAccessLevel {
 // GetAccessLevelOk returns a tuple with the AccessLevel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceUserAccessStatus) GetAccessLevelOk() (*ResourceAccessLevel, bool) {
-	if o == nil || o.AccessLevel == nil {
-		return nil, false
+	if o == nil || isNil(o.AccessLevel) {
+    return nil, false
 	}
 	return o.AccessLevel, true
 }
 
 // HasAccessLevel returns a boolean if a field has been set.
 func (o *ResourceUserAccessStatus) HasAccessLevel() bool {
-	if o != nil && o.AccessLevel != nil {
+	if o != nil && !isNil(o.AccessLevel) {
 		return true
 	}
 
@@ -143,7 +143,7 @@ func (o *ResourceUserAccessStatus) GetStatus() ResourceUserAccessStatusEnum {
 // and a boolean to check if the value has been set.
 func (o *ResourceUserAccessStatus) GetStatusOk() (*ResourceUserAccessStatusEnum, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Status, true
 }
@@ -169,7 +169,7 @@ func (o *ResourceUserAccessStatus) GetExpirationDate() time.Time {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceUserAccessStatus) GetExpirationDateOk() (*time.Time, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.ExpirationDate.Get(), o.ExpirationDate.IsSet()
 }
@@ -187,7 +187,7 @@ func (o ResourceUserAccessStatus) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["user_id"] = o.UserId
 	}
-	if o.AccessLevel != nil {
+	if !isNil(o.AccessLevel) {
 		toSerialize["access_level"] = o.AccessLevel
 	}
 	if true {

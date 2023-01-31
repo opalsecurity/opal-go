@@ -53,7 +53,7 @@ func (o *UpdateResourceInfoList) GetResources() []UpdateResourceInfo {
 // and a boolean to check if the value has been set.
 func (o *UpdateResourceInfoList) GetResourcesOk() ([]UpdateResourceInfo, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Resources, true
 }

@@ -68,7 +68,7 @@ func (o *User) GetUserId() string {
 // and a boolean to check if the value has been set.
 func (o *User) GetUserIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.UserId, true
 }
@@ -92,7 +92,7 @@ func (o *User) GetEmail() string {
 // and a boolean to check if the value has been set.
 func (o *User) GetEmailOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Email, true
 }
@@ -116,7 +116,7 @@ func (o *User) GetFullName() string {
 // and a boolean to check if the value has been set.
 func (o *User) GetFullNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.FullName, true
 }
@@ -140,7 +140,7 @@ func (o *User) GetFirstName() string {
 // and a boolean to check if the value has been set.
 func (o *User) GetFirstNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.FirstName, true
 }
@@ -164,7 +164,7 @@ func (o *User) GetLastName() string {
 // and a boolean to check if the value has been set.
 func (o *User) GetLastNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.LastName, true
 }
@@ -188,7 +188,7 @@ func (o *User) GetPosition() string {
 // and a boolean to check if the value has been set.
 func (o *User) GetPositionOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Position, true
 }

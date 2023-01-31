@@ -64,7 +64,7 @@ func (o *Tag) GetTagId() string {
 // and a boolean to check if the value has been set.
 func (o *Tag) GetTagIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.TagId, true
 }
@@ -76,7 +76,7 @@ func (o *Tag) SetTagId(v string) {
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *Tag) GetCreatedAt() time.Time {
-	if o == nil || o.CreatedAt == nil {
+	if o == nil || isNil(o.CreatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -86,15 +86,15 @@ func (o *Tag) GetCreatedAt() time.Time {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Tag) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || o.CreatedAt == nil {
-		return nil, false
+	if o == nil || isNil(o.CreatedAt) {
+    return nil, false
 	}
 	return o.CreatedAt, true
 }
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *Tag) HasCreatedAt() bool {
-	if o != nil && o.CreatedAt != nil {
+	if o != nil && !isNil(o.CreatedAt) {
 		return true
 	}
 
@@ -108,7 +108,7 @@ func (o *Tag) SetCreatedAt(v time.Time) {
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *Tag) GetUpdatedAt() time.Time {
-	if o == nil || o.UpdatedAt == nil {
+	if o == nil || isNil(o.UpdatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -118,15 +118,15 @@ func (o *Tag) GetUpdatedAt() time.Time {
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Tag) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || o.UpdatedAt == nil {
-		return nil, false
+	if o == nil || isNil(o.UpdatedAt) {
+    return nil, false
 	}
 	return o.UpdatedAt, true
 }
 
 // HasUpdatedAt returns a boolean if a field has been set.
 func (o *Tag) HasUpdatedAt() bool {
-	if o != nil && o.UpdatedAt != nil {
+	if o != nil && !isNil(o.UpdatedAt) {
 		return true
 	}
 
@@ -140,7 +140,7 @@ func (o *Tag) SetUpdatedAt(v time.Time) {
 
 // GetUserCreatorId returns the UserCreatorId field value if set, zero value otherwise.
 func (o *Tag) GetUserCreatorId() string {
-	if o == nil || o.UserCreatorId == nil {
+	if o == nil || isNil(o.UserCreatorId) {
 		var ret string
 		return ret
 	}
@@ -150,15 +150,15 @@ func (o *Tag) GetUserCreatorId() string {
 // GetUserCreatorIdOk returns a tuple with the UserCreatorId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Tag) GetUserCreatorIdOk() (*string, bool) {
-	if o == nil || o.UserCreatorId == nil {
-		return nil, false
+	if o == nil || isNil(o.UserCreatorId) {
+    return nil, false
 	}
 	return o.UserCreatorId, true
 }
 
 // HasUserCreatorId returns a boolean if a field has been set.
 func (o *Tag) HasUserCreatorId() bool {
-	if o != nil && o.UserCreatorId != nil {
+	if o != nil && !isNil(o.UserCreatorId) {
 		return true
 	}
 
@@ -172,7 +172,7 @@ func (o *Tag) SetUserCreatorId(v string) {
 
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *Tag) GetKey() string {
-	if o == nil || o.Key == nil {
+	if o == nil || isNil(o.Key) {
 		var ret string
 		return ret
 	}
@@ -182,15 +182,15 @@ func (o *Tag) GetKey() string {
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Tag) GetKeyOk() (*string, bool) {
-	if o == nil || o.Key == nil {
-		return nil, false
+	if o == nil || isNil(o.Key) {
+    return nil, false
 	}
 	return o.Key, true
 }
 
 // HasKey returns a boolean if a field has been set.
 func (o *Tag) HasKey() bool {
-	if o != nil && o.Key != nil {
+	if o != nil && !isNil(o.Key) {
 		return true
 	}
 
@@ -204,7 +204,7 @@ func (o *Tag) SetKey(v string) {
 
 // GetValue returns the Value field value if set, zero value otherwise.
 func (o *Tag) GetValue() string {
-	if o == nil || o.Value == nil {
+	if o == nil || isNil(o.Value) {
 		var ret string
 		return ret
 	}
@@ -214,15 +214,15 @@ func (o *Tag) GetValue() string {
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Tag) GetValueOk() (*string, bool) {
-	if o == nil || o.Value == nil {
-		return nil, false
+	if o == nil || isNil(o.Value) {
+    return nil, false
 	}
 	return o.Value, true
 }
 
 // HasValue returns a boolean if a field has been set.
 func (o *Tag) HasValue() bool {
-	if o != nil && o.Value != nil {
+	if o != nil && !isNil(o.Value) {
 		return true
 	}
 
@@ -239,19 +239,19 @@ func (o Tag) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["tag_id"] = o.TagId
 	}
-	if o.CreatedAt != nil {
+	if !isNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
-	if o.UpdatedAt != nil {
+	if !isNil(o.UpdatedAt) {
 		toSerialize["updated_at"] = o.UpdatedAt
 	}
-	if o.UserCreatorId != nil {
+	if !isNil(o.UserCreatorId) {
 		toSerialize["user_creator_id"] = o.UserCreatorId
 	}
-	if o.Key != nil {
+	if !isNil(o.Key) {
 		toSerialize["key"] = o.Key
 	}
-	if o.Value != nil {
+	if !isNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
 	return json.Marshal(toSerialize)

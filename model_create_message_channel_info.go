@@ -55,7 +55,7 @@ func (o *CreateMessageChannelInfo) GetThirdPartyProvider() MessageChannelProvide
 // and a boolean to check if the value has been set.
 func (o *CreateMessageChannelInfo) GetThirdPartyProviderOk() (*MessageChannelProviderEnum, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ThirdPartyProvider, true
 }
@@ -79,7 +79,7 @@ func (o *CreateMessageChannelInfo) GetRemoteId() string {
 // and a boolean to check if the value has been set.
 func (o *CreateMessageChannelInfo) GetRemoteIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.RemoteId, true
 }

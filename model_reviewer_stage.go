@@ -58,7 +58,7 @@ func (o *ReviewerStage) GetRequireManagerApproval() bool {
 // and a boolean to check if the value has been set.
 func (o *ReviewerStage) GetRequireManagerApprovalOk() (*bool, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.RequireManagerApproval, true
 }
@@ -82,7 +82,7 @@ func (o *ReviewerStage) GetOperator() string {
 // and a boolean to check if the value has been set.
 func (o *ReviewerStage) GetOperatorOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Operator, true
 }
@@ -106,7 +106,7 @@ func (o *ReviewerStage) GetOwnerIds() []string {
 // and a boolean to check if the value has been set.
 func (o *ReviewerStage) GetOwnerIdsOk() ([]string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.OwnerIds, true
 }
