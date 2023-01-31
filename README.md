@@ -107,10 +107,8 @@ Class | Method | HTTP request | Description
 *MessageChannelsApi* | [**GetMessageChannel**](docs/MessageChannelsApi.md#getmessagechannel) | **Get** /message-channels/{message_channel_id} | 
 *MessageChannelsApi* | [**GetMessageChannels**](docs/MessageChannelsApi.md#getmessagechannels) | **Get** /message-channels | 
 *OnCallSchedulesApi* | [**CreateOnCallSchedule**](docs/OnCallSchedulesApi.md#createoncallschedule) | **Post** /on-call-schedules | 
-*OnCallSchedulesApi* | [**GetGroupOnCallSchedules**](docs/OnCallSchedulesApi.md#getgrouponcallschedules) | **Get** /groups/{group_id}/on-call-schedules | 
 *OnCallSchedulesApi* | [**GetOnCallSchedule**](docs/OnCallSchedulesApi.md#getoncallschedule) | **Get** /on-call-schedules/{on_call_schedule_id} | 
 *OnCallSchedulesApi* | [**GetOnCallSchedules**](docs/OnCallSchedulesApi.md#getoncallschedules) | **Get** /on-call-schedules | 
-*OnCallSchedulesApi* | [**SetGroupOnCallSchedules**](docs/OnCallSchedulesApi.md#setgrouponcallschedules) | **Put** /groups/{group_id}/on-call-schedules | 
 *OwnersApi* | [**CreateOwner**](docs/OwnersApi.md#createowner) | **Post** /owners | 
 *OwnersApi* | [**DeleteOwner**](docs/OwnersApi.md#deleteowner) | **Delete** /owners/{owner_id} | 
 *OwnersApi* | [**GetOwner**](docs/OwnersApi.md#getowner) | **Get** /owners/{owner_id} | 

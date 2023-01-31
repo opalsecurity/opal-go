@@ -196,5 +196,4 @@ model_user_list.go
 model_visibility_info.go
 model_visibility_type_enum.go
 response.go
-test/api_on_call_schedules_test.go
 utils.go
