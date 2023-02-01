@@ -58,7 +58,7 @@ func (o *GroupResource) GetGroupId() string {
 // and a boolean to check if the value has been set.
 func (o *GroupResource) GetGroupIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.GroupId, true
 }
@@ -82,7 +82,7 @@ func (o *GroupResource) GetResourceId() string {
 // and a boolean to check if the value has been set.
 func (o *GroupResource) GetResourceIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ResourceId, true
 }
@@ -106,7 +106,7 @@ func (o *GroupResource) GetAccessLevel() ResourceAccessLevel {
 // and a boolean to check if the value has been set.
 func (o *GroupResource) GetAccessLevelOk() (*ResourceAccessLevel, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.AccessLevel, true
 }

@@ -52,7 +52,7 @@ func (o *OnCallScheduleList) GetOnCallSchedules() []OnCallSchedule {
 // and a boolean to check if the value has been set.
 func (o *OnCallScheduleList) GetOnCallSchedulesOk() ([]OnCallSchedule, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.OnCallSchedules, true
 }

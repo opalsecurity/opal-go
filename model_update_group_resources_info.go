@@ -52,7 +52,7 @@ func (o *UpdateGroupResourcesInfo) GetResources() []ResourceWithAccessLevel {
 // and a boolean to check if the value has been set.
 func (o *UpdateGroupResourcesInfo) GetResourcesOk() ([]ResourceWithAccessLevel, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Resources, true
 }

@@ -65,7 +65,7 @@ func (o *Session) GetConnectionId() string {
 // and a boolean to check if the value has been set.
 func (o *Session) GetConnectionIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ConnectionId, true
 }
@@ -89,7 +89,7 @@ func (o *Session) GetUserId() string {
 // and a boolean to check if the value has been set.
 func (o *Session) GetUserIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.UserId, true
 }
@@ -113,7 +113,7 @@ func (o *Session) GetResourceId() string {
 // and a boolean to check if the value has been set.
 func (o *Session) GetResourceIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ResourceId, true
 }
@@ -137,7 +137,7 @@ func (o *Session) GetAccessLevel() ResourceAccessLevel {
 // and a boolean to check if the value has been set.
 func (o *Session) GetAccessLevelOk() (*ResourceAccessLevel, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.AccessLevel, true
 }
@@ -161,7 +161,7 @@ func (o *Session) GetExpirationDate() time.Time {
 // and a boolean to check if the value has been set.
 func (o *Session) GetExpirationDateOk() (*time.Time, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ExpirationDate, true
 }

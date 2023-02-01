@@ -53,7 +53,7 @@ func (o *ResourceRemoteInfoOktaStandardRole) GetRoleType() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfoOktaStandardRole) GetRoleTypeOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.RoleType, true
 }

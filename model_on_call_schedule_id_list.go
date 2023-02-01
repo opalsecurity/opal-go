@@ -52,7 +52,7 @@ func (o *OnCallScheduleIDList) GetOnCallScheduleIds() []string {
 // and a boolean to check if the value has been set.
 func (o *OnCallScheduleIDList) GetOnCallScheduleIdsOk() ([]string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.OnCallScheduleIds, true
 }

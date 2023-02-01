@@ -52,7 +52,7 @@ func (o *MessageChannelList) GetChannels() []MessageChannel {
 // and a boolean to check if the value has been set.
 func (o *MessageChannelList) GetChannelsOk() ([]MessageChannel, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Channels, true
 }

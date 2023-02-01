@@ -52,7 +52,7 @@ func (o *UserList) GetUsers() []User {
 // and a boolean to check if the value has been set.
 func (o *UserList) GetUsersOk() ([]User, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Users, true
 }

@@ -52,7 +52,7 @@ func (o *GroupResourceList) GetGroupResources() []GroupResource {
 // and a boolean to check if the value has been set.
 func (o *GroupResourceList) GetGroupResourcesOk() ([]GroupResource, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.GroupResources, true
 }

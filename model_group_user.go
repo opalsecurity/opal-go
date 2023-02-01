@@ -67,7 +67,7 @@ func (o *GroupUser) GetGroupId() string {
 // and a boolean to check if the value has been set.
 func (o *GroupUser) GetGroupIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.GroupId, true
 }
@@ -91,7 +91,7 @@ func (o *GroupUser) GetUserId() string {
 // and a boolean to check if the value has been set.
 func (o *GroupUser) GetUserIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.UserId, true
 }
@@ -103,7 +103,7 @@ func (o *GroupUser) SetUserId(v string) {
 
 // GetAccessLevel returns the AccessLevel field value if set, zero value otherwise.
 func (o *GroupUser) GetAccessLevel() GroupAccessLevel {
-	if o == nil || isNil(o.AccessLevel) {
+	if o == nil || o.AccessLevel == nil {
 		var ret GroupAccessLevel
 		return ret
 	}
@@ -113,15 +113,15 @@ func (o *GroupUser) GetAccessLevel() GroupAccessLevel {
 // GetAccessLevelOk returns a tuple with the AccessLevel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupUser) GetAccessLevelOk() (*GroupAccessLevel, bool) {
-	if o == nil || isNil(o.AccessLevel) {
-    return nil, false
+	if o == nil || o.AccessLevel == nil {
+		return nil, false
 	}
 	return o.AccessLevel, true
 }
 
 // HasAccessLevel returns a boolean if a field has been set.
 func (o *GroupUser) HasAccessLevel() bool {
-	if o != nil && !isNil(o.AccessLevel) {
+	if o != nil && o.AccessLevel != nil {
 		return true
 	}
 
@@ -147,7 +147,7 @@ func (o *GroupUser) GetFullName() string {
 // and a boolean to check if the value has been set.
 func (o *GroupUser) GetFullNameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.FullName, true
 }
@@ -171,7 +171,7 @@ func (o *GroupUser) GetEmail() string {
 // and a boolean to check if the value has been set.
 func (o *GroupUser) GetEmailOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Email, true
 }
@@ -197,7 +197,7 @@ func (o *GroupUser) GetExpirationDate() time.Time {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GroupUser) GetExpirationDateOk() (*time.Time, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.ExpirationDate.Get(), o.ExpirationDate.IsSet()
 }
@@ -215,7 +215,7 @@ func (o GroupUser) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["user_id"] = o.UserId
 	}
-	if !isNil(o.AccessLevel) {
+	if o.AccessLevel != nil {
 		toSerialize["access_level"] = o.AccessLevel
 	}
 	if true {

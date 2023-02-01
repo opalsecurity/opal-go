@@ -44,7 +44,7 @@ func NewPaginatedOwnersListWithDefaults() *PaginatedOwnersList {
 
 // GetNext returns the Next field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaginatedOwnersList) GetNext() string {
-	if o == nil || isNil(o.Next.Get()) {
+	if o == nil || o.Next.Get() == nil {
 		var ret string
 		return ret
 	}
@@ -56,7 +56,7 @@ func (o *PaginatedOwnersList) GetNext() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaginatedOwnersList) GetNextOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Next.Get(), o.Next.IsSet()
 }
@@ -86,7 +86,7 @@ func (o *PaginatedOwnersList) UnsetNext() {
 
 // GetPrevious returns the Previous field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaginatedOwnersList) GetPrevious() string {
-	if o == nil || isNil(o.Previous.Get()) {
+	if o == nil || o.Previous.Get() == nil {
 		var ret string
 		return ret
 	}
@@ -98,7 +98,7 @@ func (o *PaginatedOwnersList) GetPrevious() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaginatedOwnersList) GetPreviousOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Previous.Get(), o.Previous.IsSet()
 }
@@ -140,7 +140,7 @@ func (o *PaginatedOwnersList) GetResults() []Owner {
 // and a boolean to check if the value has been set.
 func (o *PaginatedOwnersList) GetResultsOk() ([]Owner, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Results, true
 }

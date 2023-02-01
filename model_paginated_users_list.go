@@ -44,7 +44,7 @@ func NewPaginatedUsersListWithDefaults() *PaginatedUsersList {
 
 // GetNext returns the Next field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaginatedUsersList) GetNext() string {
-	if o == nil || isNil(o.Next.Get()) {
+	if o == nil || o.Next.Get() == nil {
 		var ret string
 		return ret
 	}
@@ -56,7 +56,7 @@ func (o *PaginatedUsersList) GetNext() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaginatedUsersList) GetNextOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Next.Get(), o.Next.IsSet()
 }
@@ -86,7 +86,7 @@ func (o *PaginatedUsersList) UnsetNext() {
 
 // GetPrevious returns the Previous field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaginatedUsersList) GetPrevious() string {
-	if o == nil || isNil(o.Previous.Get()) {
+	if o == nil || o.Previous.Get() == nil {
 		var ret string
 		return ret
 	}
@@ -98,7 +98,7 @@ func (o *PaginatedUsersList) GetPrevious() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaginatedUsersList) GetPreviousOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Previous.Get(), o.Previous.IsSet()
 }
@@ -140,7 +140,7 @@ func (o *PaginatedUsersList) GetResults() []User {
 // and a boolean to check if the value has been set.
 func (o *PaginatedUsersList) GetResultsOk() ([]User, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Results, true
 }

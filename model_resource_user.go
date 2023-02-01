@@ -68,7 +68,7 @@ func (o *ResourceUser) GetResourceId() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceUser) GetResourceIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ResourceId, true
 }
@@ -92,7 +92,7 @@ func (o *ResourceUser) GetUserId() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceUser) GetUserIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.UserId, true
 }
@@ -116,7 +116,7 @@ func (o *ResourceUser) GetAccessLevel() ResourceAccessLevel {
 // and a boolean to check if the value has been set.
 func (o *ResourceUser) GetAccessLevelOk() (*ResourceAccessLevel, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.AccessLevel, true
 }
@@ -140,7 +140,7 @@ func (o *ResourceUser) GetFullName() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceUser) GetFullNameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.FullName, true
 }
@@ -164,7 +164,7 @@ func (o *ResourceUser) GetEmail() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceUser) GetEmailOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Email, true
 }
@@ -190,7 +190,7 @@ func (o *ResourceUser) GetExpirationDate() time.Time {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceUser) GetExpirationDateOk() (*time.Time, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.ExpirationDate.Get(), o.ExpirationDate.IsSet()
 }

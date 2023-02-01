@@ -55,7 +55,7 @@ func (o *CreateOnCallScheduleInfo) GetThirdPartyProvider() OnCallScheduleProvide
 // and a boolean to check if the value has been set.
 func (o *CreateOnCallScheduleInfo) GetThirdPartyProviderOk() (*OnCallScheduleProviderEnum, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ThirdPartyProvider, true
 }
@@ -79,7 +79,7 @@ func (o *CreateOnCallScheduleInfo) GetRemoteId() string {
 // and a boolean to check if the value has been set.
 func (o *CreateOnCallScheduleInfo) GetRemoteIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.RemoteId, true
 }

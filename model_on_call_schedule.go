@@ -45,7 +45,7 @@ func NewOnCallScheduleWithDefaults() *OnCallSchedule {
 
 // GetOnCallScheduleId returns the OnCallScheduleId field value if set, zero value otherwise.
 func (o *OnCallSchedule) GetOnCallScheduleId() string {
-	if o == nil || isNil(o.OnCallScheduleId) {
+	if o == nil || o.OnCallScheduleId == nil {
 		var ret string
 		return ret
 	}
@@ -55,15 +55,15 @@ func (o *OnCallSchedule) GetOnCallScheduleId() string {
 // GetOnCallScheduleIdOk returns a tuple with the OnCallScheduleId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnCallSchedule) GetOnCallScheduleIdOk() (*string, bool) {
-	if o == nil || isNil(o.OnCallScheduleId) {
-    return nil, false
+	if o == nil || o.OnCallScheduleId == nil {
+		return nil, false
 	}
 	return o.OnCallScheduleId, true
 }
 
 // HasOnCallScheduleId returns a boolean if a field has been set.
 func (o *OnCallSchedule) HasOnCallScheduleId() bool {
-	if o != nil && !isNil(o.OnCallScheduleId) {
+	if o != nil && o.OnCallScheduleId != nil {
 		return true
 	}
 
@@ -77,7 +77,7 @@ func (o *OnCallSchedule) SetOnCallScheduleId(v string) {
 
 // GetThirdPartyProvider returns the ThirdPartyProvider field value if set, zero value otherwise.
 func (o *OnCallSchedule) GetThirdPartyProvider() OnCallScheduleProviderEnum {
-	if o == nil || isNil(o.ThirdPartyProvider) {
+	if o == nil || o.ThirdPartyProvider == nil {
 		var ret OnCallScheduleProviderEnum
 		return ret
 	}
@@ -87,15 +87,15 @@ func (o *OnCallSchedule) GetThirdPartyProvider() OnCallScheduleProviderEnum {
 // GetThirdPartyProviderOk returns a tuple with the ThirdPartyProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnCallSchedule) GetThirdPartyProviderOk() (*OnCallScheduleProviderEnum, bool) {
-	if o == nil || isNil(o.ThirdPartyProvider) {
-    return nil, false
+	if o == nil || o.ThirdPartyProvider == nil {
+		return nil, false
 	}
 	return o.ThirdPartyProvider, true
 }
 
 // HasThirdPartyProvider returns a boolean if a field has been set.
 func (o *OnCallSchedule) HasThirdPartyProvider() bool {
-	if o != nil && !isNil(o.ThirdPartyProvider) {
+	if o != nil && o.ThirdPartyProvider != nil {
 		return true
 	}
 
@@ -109,7 +109,7 @@ func (o *OnCallSchedule) SetThirdPartyProvider(v OnCallScheduleProviderEnum) {
 
 // GetRemoteId returns the RemoteId field value if set, zero value otherwise.
 func (o *OnCallSchedule) GetRemoteId() string {
-	if o == nil || isNil(o.RemoteId) {
+	if o == nil || o.RemoteId == nil {
 		var ret string
 		return ret
 	}
@@ -119,15 +119,15 @@ func (o *OnCallSchedule) GetRemoteId() string {
 // GetRemoteIdOk returns a tuple with the RemoteId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnCallSchedule) GetRemoteIdOk() (*string, bool) {
-	if o == nil || isNil(o.RemoteId) {
-    return nil, false
+	if o == nil || o.RemoteId == nil {
+		return nil, false
 	}
 	return o.RemoteId, true
 }
 
 // HasRemoteId returns a boolean if a field has been set.
 func (o *OnCallSchedule) HasRemoteId() bool {
-	if o != nil && !isNil(o.RemoteId) {
+	if o != nil && o.RemoteId != nil {
 		return true
 	}
 
@@ -141,7 +141,7 @@ func (o *OnCallSchedule) SetRemoteId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *OnCallSchedule) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || o.Name == nil {
 		var ret string
 		return ret
 	}
@@ -151,15 +151,15 @@ func (o *OnCallSchedule) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnCallSchedule) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
-    return nil, false
+	if o == nil || o.Name == nil {
+		return nil, false
 	}
 	return o.Name, true
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *OnCallSchedule) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && o.Name != nil {
 		return true
 	}
 
@@ -173,16 +173,16 @@ func (o *OnCallSchedule) SetName(v string) {
 
 func (o OnCallSchedule) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.OnCallScheduleId) {
+	if o.OnCallScheduleId != nil {
 		toSerialize["on_call_schedule_id"] = o.OnCallScheduleId
 	}
-	if !isNil(o.ThirdPartyProvider) {
+	if o.ThirdPartyProvider != nil {
 		toSerialize["third_party_provider"] = o.ThirdPartyProvider
 	}
-	if !isNil(o.RemoteId) {
+	if o.RemoteId != nil {
 		toSerialize["remote_id"] = o.RemoteId
 	}
-	if !isNil(o.Name) {
+	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
 	return json.Marshal(toSerialize)

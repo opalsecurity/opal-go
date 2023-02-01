@@ -69,7 +69,7 @@ func (o *Event) GetEventId() string {
 // and a boolean to check if the value has been set.
 func (o *Event) GetEventIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.EventId, true
 }
@@ -93,7 +93,7 @@ func (o *Event) GetActorUserId() string {
 // and a boolean to check if the value has been set.
 func (o *Event) GetActorUserIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ActorUserId, true
 }
@@ -118,8 +118,8 @@ func (o *Event) GetActorName() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Event) GetActorNameOk() (*interface{}, bool) {
-	if o == nil || isNil(o.ActorName) {
-    return nil, false
+	if o == nil || o.ActorName == nil {
+		return nil, false
 	}
 	return &o.ActorName, true
 }
@@ -131,7 +131,7 @@ func (o *Event) SetActorName(v interface{}) {
 
 // GetActorEmail returns the ActorEmail field value if set, zero value otherwise.
 func (o *Event) GetActorEmail() string {
-	if o == nil || isNil(o.ActorEmail) {
+	if o == nil || o.ActorEmail == nil {
 		var ret string
 		return ret
 	}
@@ -141,15 +141,15 @@ func (o *Event) GetActorEmail() string {
 // GetActorEmailOk returns a tuple with the ActorEmail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Event) GetActorEmailOk() (*string, bool) {
-	if o == nil || isNil(o.ActorEmail) {
-    return nil, false
+	if o == nil || o.ActorEmail == nil {
+		return nil, false
 	}
 	return o.ActorEmail, true
 }
 
 // HasActorEmail returns a boolean if a field has been set.
 func (o *Event) HasActorEmail() bool {
-	if o != nil && !isNil(o.ActorEmail) {
+	if o != nil && o.ActorEmail != nil {
 		return true
 	}
 
@@ -175,7 +175,7 @@ func (o *Event) GetEventType() string {
 // and a boolean to check if the value has been set.
 func (o *Event) GetEventTypeOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.EventType, true
 }
@@ -199,7 +199,7 @@ func (o *Event) GetCreatedAt() time.Time {
 // and a boolean to check if the value has been set.
 func (o *Event) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.CreatedAt, true
 }
@@ -211,7 +211,7 @@ func (o *Event) SetCreatedAt(v time.Time) {
 
 // GetSubEvents returns the SubEvents field value if set, zero value otherwise.
 func (o *Event) GetSubEvents() []SubEvent {
-	if o == nil || isNil(o.SubEvents) {
+	if o == nil || o.SubEvents == nil {
 		var ret []SubEvent
 		return ret
 	}
@@ -221,15 +221,15 @@ func (o *Event) GetSubEvents() []SubEvent {
 // GetSubEventsOk returns a tuple with the SubEvents field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Event) GetSubEventsOk() ([]SubEvent, bool) {
-	if o == nil || isNil(o.SubEvents) {
-    return nil, false
+	if o == nil || o.SubEvents == nil {
+		return nil, false
 	}
 	return o.SubEvents, true
 }
 
 // HasSubEvents returns a boolean if a field has been set.
 func (o *Event) HasSubEvents() bool {
-	if o != nil && !isNil(o.SubEvents) {
+	if o != nil && o.SubEvents != nil {
 		return true
 	}
 
@@ -252,7 +252,7 @@ func (o Event) MarshalJSON() ([]byte, error) {
 	if o.ActorName != nil {
 		toSerialize["actor_name"] = o.ActorName
 	}
-	if !isNil(o.ActorEmail) {
+	if o.ActorEmail != nil {
 		toSerialize["actor_email"] = o.ActorEmail
 	}
 	if true {
@@ -261,7 +261,7 @@ func (o Event) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["created_at"] = o.CreatedAt
 	}
-	if !isNil(o.SubEvents) {
+	if o.SubEvents != nil {
 		toSerialize["sub_events"] = o.SubEvents
 	}
 	return json.Marshal(toSerialize)
