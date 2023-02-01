@@ -44,7 +44,7 @@ func NewGroupRemoteInfoWithDefaults() *GroupRemoteInfo {
 
 // GetActiveDirectoryGroup returns the ActiveDirectoryGroup field value if set, zero value otherwise.
 func (o *GroupRemoteInfo) GetActiveDirectoryGroup() GroupRemoteInfoActiveDirectoryGroup {
-	if o == nil || o.ActiveDirectoryGroup == nil {
+	if o == nil || isNil(o.ActiveDirectoryGroup) {
 		var ret GroupRemoteInfoActiveDirectoryGroup
 		return ret
 	}
@@ -54,15 +54,15 @@ func (o *GroupRemoteInfo) GetActiveDirectoryGroup() GroupRemoteInfoActiveDirecto
 // GetActiveDirectoryGroupOk returns a tuple with the ActiveDirectoryGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupRemoteInfo) GetActiveDirectoryGroupOk() (*GroupRemoteInfoActiveDirectoryGroup, bool) {
-	if o == nil || o.ActiveDirectoryGroup == nil {
-		return nil, false
+	if o == nil || isNil(o.ActiveDirectoryGroup) {
+    return nil, false
 	}
 	return o.ActiveDirectoryGroup, true
 }
 
 // HasActiveDirectoryGroup returns a boolean if a field has been set.
 func (o *GroupRemoteInfo) HasActiveDirectoryGroup() bool {
-	if o != nil && o.ActiveDirectoryGroup != nil {
+	if o != nil && !isNil(o.ActiveDirectoryGroup) {
 		return true
 	}
 
@@ -76,7 +76,7 @@ func (o *GroupRemoteInfo) SetActiveDirectoryGroup(v GroupRemoteInfoActiveDirecto
 
 // GetGithubTeam returns the GithubTeam field value if set, zero value otherwise.
 func (o *GroupRemoteInfo) GetGithubTeam() GroupRemoteInfoGithubTeam {
-	if o == nil || o.GithubTeam == nil {
+	if o == nil || isNil(o.GithubTeam) {
 		var ret GroupRemoteInfoGithubTeam
 		return ret
 	}
@@ -86,15 +86,15 @@ func (o *GroupRemoteInfo) GetGithubTeam() GroupRemoteInfoGithubTeam {
 // GetGithubTeamOk returns a tuple with the GithubTeam field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupRemoteInfo) GetGithubTeamOk() (*GroupRemoteInfoGithubTeam, bool) {
-	if o == nil || o.GithubTeam == nil {
-		return nil, false
+	if o == nil || isNil(o.GithubTeam) {
+    return nil, false
 	}
 	return o.GithubTeam, true
 }
 
 // HasGithubTeam returns a boolean if a field has been set.
 func (o *GroupRemoteInfo) HasGithubTeam() bool {
-	if o != nil && o.GithubTeam != nil {
+	if o != nil && !isNil(o.GithubTeam) {
 		return true
 	}
 
@@ -108,7 +108,7 @@ func (o *GroupRemoteInfo) SetGithubTeam(v GroupRemoteInfoGithubTeam) {
 
 // GetGoogleGroup returns the GoogleGroup field value if set, zero value otherwise.
 func (o *GroupRemoteInfo) GetGoogleGroup() GroupRemoteInfoGoogleGroup {
-	if o == nil || o.GoogleGroup == nil {
+	if o == nil || isNil(o.GoogleGroup) {
 		var ret GroupRemoteInfoGoogleGroup
 		return ret
 	}
@@ -118,15 +118,15 @@ func (o *GroupRemoteInfo) GetGoogleGroup() GroupRemoteInfoGoogleGroup {
 // GetGoogleGroupOk returns a tuple with the GoogleGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupRemoteInfo) GetGoogleGroupOk() (*GroupRemoteInfoGoogleGroup, bool) {
-	if o == nil || o.GoogleGroup == nil {
-		return nil, false
+	if o == nil || isNil(o.GoogleGroup) {
+    return nil, false
 	}
 	return o.GoogleGroup, true
 }
 
 // HasGoogleGroup returns a boolean if a field has been set.
 func (o *GroupRemoteInfo) HasGoogleGroup() bool {
-	if o != nil && o.GoogleGroup != nil {
+	if o != nil && !isNil(o.GoogleGroup) {
 		return true
 	}
 
@@ -140,7 +140,7 @@ func (o *GroupRemoteInfo) SetGoogleGroup(v GroupRemoteInfoGoogleGroup) {
 
 // GetLdapGroup returns the LdapGroup field value if set, zero value otherwise.
 func (o *GroupRemoteInfo) GetLdapGroup() GroupRemoteInfoLdapGroup {
-	if o == nil || o.LdapGroup == nil {
+	if o == nil || isNil(o.LdapGroup) {
 		var ret GroupRemoteInfoLdapGroup
 		return ret
 	}
@@ -150,15 +150,15 @@ func (o *GroupRemoteInfo) GetLdapGroup() GroupRemoteInfoLdapGroup {
 // GetLdapGroupOk returns a tuple with the LdapGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupRemoteInfo) GetLdapGroupOk() (*GroupRemoteInfoLdapGroup, bool) {
-	if o == nil || o.LdapGroup == nil {
-		return nil, false
+	if o == nil || isNil(o.LdapGroup) {
+    return nil, false
 	}
 	return o.LdapGroup, true
 }
 
 // HasLdapGroup returns a boolean if a field has been set.
 func (o *GroupRemoteInfo) HasLdapGroup() bool {
-	if o != nil && o.LdapGroup != nil {
+	if o != nil && !isNil(o.LdapGroup) {
 		return true
 	}
 
@@ -172,7 +172,7 @@ func (o *GroupRemoteInfo) SetLdapGroup(v GroupRemoteInfoLdapGroup) {
 
 // GetOktaGroup returns the OktaGroup field value if set, zero value otherwise.
 func (o *GroupRemoteInfo) GetOktaGroup() GroupRemoteInfoOktaGroup {
-	if o == nil || o.OktaGroup == nil {
+	if o == nil || isNil(o.OktaGroup) {
 		var ret GroupRemoteInfoOktaGroup
 		return ret
 	}
@@ -182,15 +182,15 @@ func (o *GroupRemoteInfo) GetOktaGroup() GroupRemoteInfoOktaGroup {
 // GetOktaGroupOk returns a tuple with the OktaGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupRemoteInfo) GetOktaGroupOk() (*GroupRemoteInfoOktaGroup, bool) {
-	if o == nil || o.OktaGroup == nil {
-		return nil, false
+	if o == nil || isNil(o.OktaGroup) {
+    return nil, false
 	}
 	return o.OktaGroup, true
 }
 
 // HasOktaGroup returns a boolean if a field has been set.
 func (o *GroupRemoteInfo) HasOktaGroup() bool {
-	if o != nil && o.OktaGroup != nil {
+	if o != nil && !isNil(o.OktaGroup) {
 		return true
 	}
 
@@ -204,7 +204,7 @@ func (o *GroupRemoteInfo) SetOktaGroup(v GroupRemoteInfoOktaGroup) {
 
 // GetDuoGroup returns the DuoGroup field value if set, zero value otherwise.
 func (o *GroupRemoteInfo) GetDuoGroup() GroupRemoteInfoDuoGroup {
-	if o == nil || o.DuoGroup == nil {
+	if o == nil || isNil(o.DuoGroup) {
 		var ret GroupRemoteInfoDuoGroup
 		return ret
 	}
@@ -214,15 +214,15 @@ func (o *GroupRemoteInfo) GetDuoGroup() GroupRemoteInfoDuoGroup {
 // GetDuoGroupOk returns a tuple with the DuoGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupRemoteInfo) GetDuoGroupOk() (*GroupRemoteInfoDuoGroup, bool) {
-	if o == nil || o.DuoGroup == nil {
-		return nil, false
+	if o == nil || isNil(o.DuoGroup) {
+    return nil, false
 	}
 	return o.DuoGroup, true
 }
 
 // HasDuoGroup returns a boolean if a field has been set.
 func (o *GroupRemoteInfo) HasDuoGroup() bool {
-	if o != nil && o.DuoGroup != nil {
+	if o != nil && !isNil(o.DuoGroup) {
 		return true
 	}
 
@@ -236,22 +236,22 @@ func (o *GroupRemoteInfo) SetDuoGroup(v GroupRemoteInfoDuoGroup) {
 
 func (o GroupRemoteInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.ActiveDirectoryGroup != nil {
+	if !isNil(o.ActiveDirectoryGroup) {
 		toSerialize["active_directory_group"] = o.ActiveDirectoryGroup
 	}
-	if o.GithubTeam != nil {
+	if !isNil(o.GithubTeam) {
 		toSerialize["github_team"] = o.GithubTeam
 	}
-	if o.GoogleGroup != nil {
+	if !isNil(o.GoogleGroup) {
 		toSerialize["google_group"] = o.GoogleGroup
 	}
-	if o.LdapGroup != nil {
+	if !isNil(o.LdapGroup) {
 		toSerialize["ldap_group"] = o.LdapGroup
 	}
-	if o.OktaGroup != nil {
+	if !isNil(o.OktaGroup) {
 		toSerialize["okta_group"] = o.OktaGroup
 	}
-	if o.DuoGroup != nil {
+	if !isNil(o.DuoGroup) {
 		toSerialize["duo_group"] = o.DuoGroup
 	}
 	return json.Marshal(toSerialize)

@@ -39,7 +39,7 @@ func NewGroupUserListWithDefaults() *GroupUserList {
 
 // GetResults returns the Results field value if set, zero value otherwise.
 func (o *GroupUserList) GetResults() []GroupUser {
-	if o == nil || o.Results == nil {
+	if o == nil || isNil(o.Results) {
 		var ret []GroupUser
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *GroupUserList) GetResults() []GroupUser {
 // GetResultsOk returns a tuple with the Results field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupUserList) GetResultsOk() ([]GroupUser, bool) {
-	if o == nil || o.Results == nil {
-		return nil, false
+	if o == nil || isNil(o.Results) {
+    return nil, false
 	}
 	return o.Results, true
 }
 
 // HasResults returns a boolean if a field has been set.
 func (o *GroupUserList) HasResults() bool {
-	if o != nil && o.Results != nil {
+	if o != nil && !isNil(o.Results) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *GroupUserList) SetResults(v []GroupUser) {
 
 func (o GroupUserList) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Results != nil {
+	if !isNil(o.Results) {
 		toSerialize["results"] = o.Results
 	}
 	return json.Marshal(toSerialize)

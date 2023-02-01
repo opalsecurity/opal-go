@@ -88,6 +88,7 @@ Class | Method | HTTP request | Description
 *GroupsApi* | [**DeleteGroup**](docs/GroupsApi.md#deletegroup) | **Delete** /groups/{group_id} | 
 *GroupsApi* | [**DeleteGroupUser**](docs/GroupsApi.md#deletegroupuser) | **Delete** /groups/{group_id}/users/{user_id} | 
 *GroupsApi* | [**GetGroupMessageChannels**](docs/GroupsApi.md#getgroupmessagechannels) | **Get** /groups/{group_id}/message-channels | 
+*GroupsApi* | [**GetGroupOnCallSchedules**](docs/GroupsApi.md#getgrouponcallschedules) | **Get** /groups/{group_id}/on-call-schedules | 
 *GroupsApi* | [**GetGroupResources**](docs/GroupsApi.md#getgroupresources) | **Get** /groups/{group_id}/resources | 
 *GroupsApi* | [**GetGroupReviewerStages**](docs/GroupsApi.md#getgroupreviewerstages) | **Get** /groups/{group_id}/reviewer_stages | 
 *GroupsApi* | [**GetGroupReviewers**](docs/GroupsApi.md#getgroupreviewers) | **Get** /groups/{group_id}/reviewers | 
@@ -96,6 +97,7 @@ Class | Method | HTTP request | Description
 *GroupsApi* | [**GetGroupVisibility**](docs/GroupsApi.md#getgroupvisibility) | **Get** /groups/{group_id}/visibility | 
 *GroupsApi* | [**GetGroups**](docs/GroupsApi.md#getgroups) | **Get** /groups | 
 *GroupsApi* | [**SetGroupMessageChannels**](docs/GroupsApi.md#setgroupmessagechannels) | **Put** /groups/{group_id}/message-channels | 
+*GroupsApi* | [**SetGroupOnCallSchedules**](docs/GroupsApi.md#setgrouponcallschedules) | **Put** /groups/{group_id}/on-call-schedules | 
 *GroupsApi* | [**SetGroupResources**](docs/GroupsApi.md#setgroupresources) | **Put** /groups/{group_id}/resources | 
 *GroupsApi* | [**SetGroupReviewerStages**](docs/GroupsApi.md#setgroupreviewerstages) | **Put** /groups/{group_id}/reviewer_stages | 
 *GroupsApi* | [**SetGroupReviewers**](docs/GroupsApi.md#setgroupreviewers) | **Put** /groups/{group_id}/reviewers | 
@@ -104,6 +106,9 @@ Class | Method | HTTP request | Description
 *MessageChannelsApi* | [**CreateMessageChannel**](docs/MessageChannelsApi.md#createmessagechannel) | **Post** /message-channels | 
 *MessageChannelsApi* | [**GetMessageChannel**](docs/MessageChannelsApi.md#getmessagechannel) | **Get** /message-channels/{message_channel_id} | 
 *MessageChannelsApi* | [**GetMessageChannels**](docs/MessageChannelsApi.md#getmessagechannels) | **Get** /message-channels | 
+*OnCallSchedulesApi* | [**CreateOnCallSchedule**](docs/OnCallSchedulesApi.md#createoncallschedule) | **Post** /on-call-schedules | 
+*OnCallSchedulesApi* | [**GetOnCallSchedule**](docs/OnCallSchedulesApi.md#getoncallschedule) | **Get** /on-call-schedules/{on_call_schedule_id} | 
+*OnCallSchedulesApi* | [**GetOnCallSchedules**](docs/OnCallSchedulesApi.md#getoncallschedules) | **Get** /on-call-schedules | 
 *OwnersApi* | [**CreateOwner**](docs/OwnersApi.md#createowner) | **Post** /owners | 
 *OwnersApi* | [**DeleteOwner**](docs/OwnersApi.md#deleteowner) | **Delete** /owners/{owner_id} | 
 *OwnersApi* | [**GetOwner**](docs/OwnersApi.md#getowner) | **Get** /owners/{owner_id} | 
@@ -154,6 +159,7 @@ Class | Method | HTTP request | Description
  - [AppsList](docs/AppsList.md)
  - [CreateGroupInfo](docs/CreateGroupInfo.md)
  - [CreateMessageChannelInfo](docs/CreateMessageChannelInfo.md)
+ - [CreateOnCallScheduleInfo](docs/CreateOnCallScheduleInfo.md)
  - [CreateOwnerInfo](docs/CreateOwnerInfo.md)
  - [CreateResourceInfo](docs/CreateResourceInfo.md)
  - [CreateUARInfo](docs/CreateUARInfo.md)
@@ -177,6 +183,10 @@ Class | Method | HTTP request | Description
  - [MessageChannelIDList](docs/MessageChannelIDList.md)
  - [MessageChannelList](docs/MessageChannelList.md)
  - [MessageChannelProviderEnum](docs/MessageChannelProviderEnum.md)
+ - [OnCallSchedule](docs/OnCallSchedule.md)
+ - [OnCallScheduleIDList](docs/OnCallScheduleIDList.md)
+ - [OnCallScheduleList](docs/OnCallScheduleList.md)
+ - [OnCallScheduleProviderEnum](docs/OnCallScheduleProviderEnum.md)
  - [Owner](docs/Owner.md)
  - [PaginatedEventList](docs/PaginatedEventList.md)
  - [PaginatedGroupsList](docs/PaginatedGroupsList.md)

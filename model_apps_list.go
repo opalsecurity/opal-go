@@ -52,7 +52,7 @@ func (o *AppsList) GetApps() []App {
 // and a boolean to check if the value has been set.
 func (o *AppsList) GetAppsOk() ([]App, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Apps, true
 }

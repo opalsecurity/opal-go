@@ -44,7 +44,7 @@ func NewPaginatedUARsListWithDefaults() *PaginatedUARsList {
 
 // GetNext returns the Next field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaginatedUARsList) GetNext() string {
-	if o == nil || o.Next.Get() == nil {
+	if o == nil || isNil(o.Next.Get()) {
 		var ret string
 		return ret
 	}
@@ -56,7 +56,7 @@ func (o *PaginatedUARsList) GetNext() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaginatedUARsList) GetNextOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Next.Get(), o.Next.IsSet()
 }
@@ -86,7 +86,7 @@ func (o *PaginatedUARsList) UnsetNext() {
 
 // GetPrevious returns the Previous field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaginatedUARsList) GetPrevious() string {
-	if o == nil || o.Previous.Get() == nil {
+	if o == nil || isNil(o.Previous.Get()) {
 		var ret string
 		return ret
 	}
@@ -98,7 +98,7 @@ func (o *PaginatedUARsList) GetPrevious() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaginatedUARsList) GetPreviousOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Previous.Get(), o.Previous.IsSet()
 }
@@ -140,7 +140,7 @@ func (o *PaginatedUARsList) GetResults() []UAR {
 // and a boolean to check if the value has been set.
 func (o *PaginatedUARsList) GetResultsOk() ([]UAR, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Results, true
 }

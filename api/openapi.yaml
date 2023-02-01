@@ -352,6 +352,67 @@ paths:
       - BearerAuth: []
       tags:
       - groups
+  /groups/{group_id}/on-call-schedules:
+    get:
+      description: Gets the list of on call schedules attached to a group.
+      operationId: get_group_on_call_schedules
+      parameters:
+      - description: The ID of the group.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnCallScheduleList'
+          description: The on call schedules attached to the group.
+      security:
+      - BearerAuth: []
+      tags:
+      - groups
+    put:
+      description: Sets the list of on call schedules attached to a group.
+      operationId: set_group_on_call_schedules
+      parameters:
+      - description: The ID of the group.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnCallScheduleIDList'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  example: bb0197c0-5ea5-45d9-b3b7-b6c439be6435
+                  format: uuid
+                  type: string
+                type: array
+          description: The updated on call schedule IDs for the group.
+      security:
+      - BearerAuth: []
+      tags:
+      - groups
   /groups/{group_id}/resources:
     get:
       description: Gets the list of resources that the group gives access to.
@@ -595,10 +656,11 @@ paths:
           content:
             application/json:
               schema:
+                description: A list of reviewer stages.
                 items:
                   $ref: '#/components/schemas/ReviewerStage'
                 type: array
-          description: The reviewer stages for this group
+          description: The reviewer stages for this group.
       security:
       - BearerAuth: []
       tags:
@@ -628,10 +690,11 @@ paths:
           content:
             application/json:
               schema:
+                description: A list of reviewer stages.
                 items:
                   $ref: '#/components/schemas/ReviewerStage'
                 type: array
-          description: The updated reviewer stages for this group
+          description: The updated reviewer stages for this group.
       security:
       - BearerAuth: []
       tags:
@@ -2097,6 +2160,68 @@ paths:
       - BearerAuth: []
       tags:
       - message-channels
+  /on-call-schedules:
+    get:
+      description: Returns a list of `OnCallSchedule` objects.
+      operationId: get_on_call_schedules
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnCallScheduleList'
+          description: A list of on call schedules for your organization.
+      security:
+      - BearerAuth: []
+      tags:
+      - on-call-schedules
+    post:
+      description: Creates a `OnCallSchedule` objects.
+      operationId: create_on_call_schedule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOnCallScheduleInfo'
+        description: The `OnCallSchedule` object to be created.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnCallSchedule'
+          description: The on call schedule that was created.
+      security:
+      - BearerAuth: []
+      tags:
+      - on-call-schedules
+  /on-call-schedules/{on_call_schedule_id}:
+    get:
+      description: Gets a `OnCallSchedule` object.
+      operationId: get_on_call_schedule
+      parameters:
+      - description: The ID of the on_call_schedule.
+        example: 9546209c-42c2-4801-96d7-9ec42df0f59c
+        explode: false
+        in: path
+        name: on_call_schedule_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnCallSchedule'
+          description: The requested on call schedule.
+      security:
+      - BearerAuth: []
+      tags:
+      - on-call-schedules
   /uars:
     get:
       description: Returns a list of `UAR` objects.
@@ -3549,6 +3674,25 @@ components:
       required:
       - channels
       type: object
+    OnCallScheduleList:
+      example:
+        on_call_schedules:
+        - on_call_schedule_id: 50d5e9f6-f23f-4d5a-ae91-b2640cf3975e
+          third_party_provider: PAGER_DUTY
+          remote_id: P7OWH2R
+          name: Customer Support On-Call
+        - on_call_schedule_id: 4d61592c-ed61-4b13-8f22-2fac1c49f574
+          third_party_provider: OPSGENIE
+          remote_id: 72a8cb04-9e25-465d-a932-992f72077c61
+          name: Opal Backend On-Call
+      properties:
+        on_call_schedules:
+          items:
+            $ref: '#/components/schemas/OnCallSchedule'
+          type: array
+      required:
+      - on_call_schedules
+      type: object
     VisibilityInfo:
       description: Visibility infomation of an entity.
       example:
@@ -3581,6 +3725,22 @@ components:
           type: array
       required:
       - message_channel_ids
+      type: object
+    OnCallScheduleIDList:
+      description: "A list of on call schedule Opal UUIDs. To get the matching remote\
+        \ IDs, use the /on-call-schedules endpoints."
+      example:
+        on_call_schedule_ids:
+        - 9546209c-42c2-4801-96d7-9ec42df0f59c
+        - bb0197c0-5ea5-45d9-b3b7-b6c439be6435
+      properties:
+        on_call_schedule_ids:
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - on_call_schedule_ids
       type: object
     ReviewerIDList:
       description: A list of reviewer IDs.
@@ -3704,6 +3864,64 @@ components:
       enum:
       - SLACK
       example: SLACK
+      type: string
+    OnCallSchedule:
+      description: |-
+        # OnCallSchedule Object
+        ### Description
+        The `OnCallSchedule` object is used to represent an on call schedule.
+
+        ### Usage Example
+        Update a groups on call schedule from the `UPDATE Groups` endpoint.
+      example:
+        on_call_schedule_id: 50d5e9f6-f23f-4d5a-ae91-b2640cf3975e
+        third_party_provider: PAGER_DUTY
+        remote_id: P7OWH2R
+        name: Customer Support On-Call
+      properties:
+        on_call_schedule_id:
+          description: The ID of the on-call schedule.
+          example: 50d5e9f6-f23f-4d5a-ae91-b2640cf3975e
+          format: uuid
+          type: string
+        third_party_provider:
+          $ref: '#/components/schemas/OnCallScheduleProviderEnum'
+        remote_id:
+          description: The remote ID of the on call schedule
+          example: P7OWH2R
+          type: string
+        name:
+          description: The name of the on call schedule.
+          example: Customer Support On-Call
+          type: string
+      required:
+      - message_channel_id
+      type: object
+    CreateOnCallScheduleInfo:
+      description: |-
+        # CreateOnCallScheduleInfo Object
+        ### Description
+        The `CreateOnCallScheduleInfo` object is used to describe the on call schedule object to be created.
+      example:
+        third_party_provider: PAGER_DUTY
+        remote_id: PNZNINN
+      properties:
+        third_party_provider:
+          $ref: '#/components/schemas/OnCallScheduleProviderEnum'
+        remote_id:
+          description: The remote ID of the on call schedule
+          example: PNZNINN
+          type: string
+      required:
+      - remote_id
+      - third_party_provider
+      type: object
+    OnCallScheduleProviderEnum:
+      description: The third party provider of the on call schedule.
+      enum:
+      - OPSGENIE
+      - PAGER_DUTY
+      example: PAGER_DUTY
       type: string
     GroupRemoteInfo:
       description: Remote info that is required for the creation of remote groups.

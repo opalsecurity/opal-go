@@ -56,7 +56,7 @@ func (o *ResourceAccessLevel) GetAccessLevelName() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceAccessLevel) GetAccessLevelNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.AccessLevelName, true
 }
@@ -80,7 +80,7 @@ func (o *ResourceAccessLevel) GetAccessLevelRemoteId() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceAccessLevel) GetAccessLevelRemoteIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.AccessLevelRemoteId, true
 }

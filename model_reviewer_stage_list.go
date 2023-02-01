@@ -53,7 +53,7 @@ func (o *ReviewerStageList) GetStages() []ReviewerStage {
 // and a boolean to check if the value has been set.
 func (o *ReviewerStageList) GetStagesOk() ([]ReviewerStage, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Stages, true
 }

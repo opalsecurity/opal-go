@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**DeleteGroup**](GroupsApi.md#DeleteGroup) | **Delete** /groups/{group_id} | 
 [**DeleteGroupUser**](GroupsApi.md#DeleteGroupUser) | **Delete** /groups/{group_id}/users/{user_id} | 
 [**GetGroupMessageChannels**](GroupsApi.md#GetGroupMessageChannels) | **Get** /groups/{group_id}/message-channels | 
+[**GetGroupOnCallSchedules**](GroupsApi.md#GetGroupOnCallSchedules) | **Get** /groups/{group_id}/on-call-schedules | 
 [**GetGroupResources**](GroupsApi.md#GetGroupResources) | **Get** /groups/{group_id}/resources | 
 [**GetGroupReviewerStages**](GroupsApi.md#GetGroupReviewerStages) | **Get** /groups/{group_id}/reviewer_stages | 
 [**GetGroupReviewers**](GroupsApi.md#GetGroupReviewers) | **Get** /groups/{group_id}/reviewers | 
@@ -18,6 +19,7 @@ Method | HTTP request | Description
 [**GetGroupVisibility**](GroupsApi.md#GetGroupVisibility) | **Get** /groups/{group_id}/visibility | 
 [**GetGroups**](GroupsApi.md#GetGroups) | **Get** /groups | 
 [**SetGroupMessageChannels**](GroupsApi.md#SetGroupMessageChannels) | **Put** /groups/{group_id}/message-channels | 
+[**SetGroupOnCallSchedules**](GroupsApi.md#SetGroupOnCallSchedules) | **Put** /groups/{group_id}/on-call-schedules | 
 [**SetGroupResources**](GroupsApi.md#SetGroupResources) | **Put** /groups/{group_id}/resources | 
 [**SetGroupReviewerStages**](GroupsApi.md#SetGroupReviewerStages) | **Put** /groups/{group_id}/reviewer_stages | 
 [**SetGroupReviewers**](GroupsApi.md#SetGroupReviewers) | **Put** /groups/{group_id}/reviewers | 
@@ -438,6 +440,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**MessageChannelList**](MessageChannelList.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetGroupOnCallSchedules
+
+> OnCallScheduleList GetGroupOnCallSchedules(ctx, groupId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.GroupsApi.GetGroupOnCallSchedules(context.Background(), groupId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.GetGroupOnCallSchedules``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetGroupOnCallSchedules`: OnCallScheduleList
+    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.GetGroupOnCallSchedules`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**groupId** | **string** | The ID of the group. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetGroupOnCallSchedulesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**OnCallScheduleList**](OnCallScheduleList.md)
 
 ### Authorization
 
@@ -1000,6 +1072,78 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **messageChannelIDList** | [**MessageChannelIDList**](MessageChannelIDList.md) |  | 
+
+### Return type
+
+**[]string**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SetGroupOnCallSchedules
+
+> []string SetGroupOnCallSchedules(ctx, groupId).OnCallScheduleIDList(onCallScheduleIDList).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+    onCallScheduleIDList := *openapiclient.NewOnCallScheduleIDList([]string{"OnCallScheduleIds_example"}) // OnCallScheduleIDList | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.GroupsApi.SetGroupOnCallSchedules(context.Background(), groupId).OnCallScheduleIDList(onCallScheduleIDList).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.SetGroupOnCallSchedules``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `SetGroupOnCallSchedules`: []string
+    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.SetGroupOnCallSchedules`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**groupId** | **string** | The ID of the group. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSetGroupOnCallSchedulesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **onCallScheduleIDList** | [**OnCallScheduleIDList**](OnCallScheduleIDList.md) |  | 
 
 ### Return type
 

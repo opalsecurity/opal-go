@@ -52,7 +52,7 @@ func (o *TagsList) GetTags() []Tag {
 // and a boolean to check if the value has been set.
 func (o *TagsList) GetTagsOk() ([]Tag, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Tags, true
 }

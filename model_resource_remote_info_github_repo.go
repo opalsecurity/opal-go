@@ -45,7 +45,7 @@ func NewResourceRemoteInfoGithubRepoWithDefaults() *ResourceRemoteInfoGithubRepo
 // GetRepoId returns the RepoId field value if set, zero value otherwise.
 // Deprecated
 func (o *ResourceRemoteInfoGithubRepo) GetRepoId() string {
-	if o == nil || o.RepoId == nil {
+	if o == nil || isNil(o.RepoId) {
 		var ret string
 		return ret
 	}
@@ -56,15 +56,15 @@ func (o *ResourceRemoteInfoGithubRepo) GetRepoId() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *ResourceRemoteInfoGithubRepo) GetRepoIdOk() (*string, bool) {
-	if o == nil || o.RepoId == nil {
-		return nil, false
+	if o == nil || isNil(o.RepoId) {
+    return nil, false
 	}
 	return o.RepoId, true
 }
 
 // HasRepoId returns a boolean if a field has been set.
 func (o *ResourceRemoteInfoGithubRepo) HasRepoId() bool {
-	if o != nil && o.RepoId != nil {
+	if o != nil && !isNil(o.RepoId) {
 		return true
 	}
 
@@ -91,7 +91,7 @@ func (o *ResourceRemoteInfoGithubRepo) GetRepoName() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfoGithubRepo) GetRepoNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.RepoName, true
 }
@@ -103,7 +103,7 @@ func (o *ResourceRemoteInfoGithubRepo) SetRepoName(v string) {
 
 func (o ResourceRemoteInfoGithubRepo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.RepoId != nil {
+	if !isNil(o.RepoId) {
 		toSerialize["repo_id"] = o.RepoId
 	}
 	if true {

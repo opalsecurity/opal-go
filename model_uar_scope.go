@@ -44,7 +44,7 @@ func NewUARScopeWithDefaults() *UARScope {
 
 // GetTags returns the Tags field value if set, zero value otherwise.
 func (o *UARScope) GetTags() []TagFilter {
-	if o == nil || o.Tags == nil {
+	if o == nil || isNil(o.Tags) {
 		var ret []TagFilter
 		return ret
 	}
@@ -54,15 +54,15 @@ func (o *UARScope) GetTags() []TagFilter {
 // GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UARScope) GetTagsOk() ([]TagFilter, bool) {
-	if o == nil || o.Tags == nil {
-		return nil, false
+	if o == nil || isNil(o.Tags) {
+    return nil, false
 	}
 	return o.Tags, true
 }
 
 // HasTags returns a boolean if a field has been set.
 func (o *UARScope) HasTags() bool {
-	if o != nil && o.Tags != nil {
+	if o != nil && !isNil(o.Tags) {
 		return true
 	}
 
@@ -76,7 +76,7 @@ func (o *UARScope) SetTags(v []TagFilter) {
 
 // GetNames returns the Names field value if set, zero value otherwise.
 func (o *UARScope) GetNames() []string {
-	if o == nil || o.Names == nil {
+	if o == nil || isNil(o.Names) {
 		var ret []string
 		return ret
 	}
@@ -86,15 +86,15 @@ func (o *UARScope) GetNames() []string {
 // GetNamesOk returns a tuple with the Names field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UARScope) GetNamesOk() ([]string, bool) {
-	if o == nil || o.Names == nil {
-		return nil, false
+	if o == nil || isNil(o.Names) {
+    return nil, false
 	}
 	return o.Names, true
 }
 
 // HasNames returns a boolean if a field has been set.
 func (o *UARScope) HasNames() bool {
-	if o != nil && o.Names != nil {
+	if o != nil && !isNil(o.Names) {
 		return true
 	}
 
@@ -108,7 +108,7 @@ func (o *UARScope) SetNames(v []string) {
 
 // GetAdmins returns the Admins field value if set, zero value otherwise.
 func (o *UARScope) GetAdmins() []string {
-	if o == nil || o.Admins == nil {
+	if o == nil || isNil(o.Admins) {
 		var ret []string
 		return ret
 	}
@@ -118,15 +118,15 @@ func (o *UARScope) GetAdmins() []string {
 // GetAdminsOk returns a tuple with the Admins field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UARScope) GetAdminsOk() ([]string, bool) {
-	if o == nil || o.Admins == nil {
-		return nil, false
+	if o == nil || isNil(o.Admins) {
+    return nil, false
 	}
 	return o.Admins, true
 }
 
 // HasAdmins returns a boolean if a field has been set.
 func (o *UARScope) HasAdmins() bool {
-	if o != nil && o.Admins != nil {
+	if o != nil && !isNil(o.Admins) {
 		return true
 	}
 
@@ -140,13 +140,13 @@ func (o *UARScope) SetAdmins(v []string) {
 
 func (o UARScope) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Tags != nil {
+	if !isNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
 	}
-	if o.Names != nil {
+	if !isNil(o.Names) {
 		toSerialize["names"] = o.Names
 	}
-	if o.Admins != nil {
+	if !isNil(o.Admins) {
 		toSerialize["admins"] = o.Admins
 	}
 	return json.Marshal(toSerialize)

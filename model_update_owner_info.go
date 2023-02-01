@@ -63,7 +63,7 @@ func (o *UpdateOwnerInfo) GetOwnerId() string {
 // and a boolean to check if the value has been set.
 func (o *UpdateOwnerInfo) GetOwnerIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.OwnerId, true
 }
@@ -75,7 +75,7 @@ func (o *UpdateOwnerInfo) SetOwnerId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *UpdateOwnerInfo) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || isNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -85,15 +85,15 @@ func (o *UpdateOwnerInfo) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateOwnerInfo) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
-		return nil, false
+	if o == nil || isNil(o.Name) {
+    return nil, false
 	}
 	return o.Name, true
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *UpdateOwnerInfo) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !isNil(o.Name) {
 		return true
 	}
 
@@ -107,7 +107,7 @@ func (o *UpdateOwnerInfo) SetName(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *UpdateOwnerInfo) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || isNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -117,15 +117,15 @@ func (o *UpdateOwnerInfo) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateOwnerInfo) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
+	if o == nil || isNil(o.Description) {
+    return nil, false
 	}
 	return o.Description, true
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *UpdateOwnerInfo) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !isNil(o.Description) {
 		return true
 	}
 
@@ -139,7 +139,7 @@ func (o *UpdateOwnerInfo) SetDescription(v string) {
 
 // GetAccessRequestEscalationPeriod returns the AccessRequestEscalationPeriod field value if set, zero value otherwise.
 func (o *UpdateOwnerInfo) GetAccessRequestEscalationPeriod() int32 {
-	if o == nil || o.AccessRequestEscalationPeriod == nil {
+	if o == nil || isNil(o.AccessRequestEscalationPeriod) {
 		var ret int32
 		return ret
 	}
@@ -149,15 +149,15 @@ func (o *UpdateOwnerInfo) GetAccessRequestEscalationPeriod() int32 {
 // GetAccessRequestEscalationPeriodOk returns a tuple with the AccessRequestEscalationPeriod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateOwnerInfo) GetAccessRequestEscalationPeriodOk() (*int32, bool) {
-	if o == nil || o.AccessRequestEscalationPeriod == nil {
-		return nil, false
+	if o == nil || isNil(o.AccessRequestEscalationPeriod) {
+    return nil, false
 	}
 	return o.AccessRequestEscalationPeriod, true
 }
 
 // HasAccessRequestEscalationPeriod returns a boolean if a field has been set.
 func (o *UpdateOwnerInfo) HasAccessRequestEscalationPeriod() bool {
-	if o != nil && o.AccessRequestEscalationPeriod != nil {
+	if o != nil && !isNil(o.AccessRequestEscalationPeriod) {
 		return true
 	}
 
@@ -171,7 +171,7 @@ func (o *UpdateOwnerInfo) SetAccessRequestEscalationPeriod(v int32) {
 
 // GetReviewerMessageChannelId returns the ReviewerMessageChannelId field value if set, zero value otherwise.
 func (o *UpdateOwnerInfo) GetReviewerMessageChannelId() string {
-	if o == nil || o.ReviewerMessageChannelId == nil {
+	if o == nil || isNil(o.ReviewerMessageChannelId) {
 		var ret string
 		return ret
 	}
@@ -181,15 +181,15 @@ func (o *UpdateOwnerInfo) GetReviewerMessageChannelId() string {
 // GetReviewerMessageChannelIdOk returns a tuple with the ReviewerMessageChannelId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateOwnerInfo) GetReviewerMessageChannelIdOk() (*string, bool) {
-	if o == nil || o.ReviewerMessageChannelId == nil {
-		return nil, false
+	if o == nil || isNil(o.ReviewerMessageChannelId) {
+    return nil, false
 	}
 	return o.ReviewerMessageChannelId, true
 }
 
 // HasReviewerMessageChannelId returns a boolean if a field has been set.
 func (o *UpdateOwnerInfo) HasReviewerMessageChannelId() bool {
-	if o != nil && o.ReviewerMessageChannelId != nil {
+	if o != nil && !isNil(o.ReviewerMessageChannelId) {
 		return true
 	}
 
@@ -203,7 +203,7 @@ func (o *UpdateOwnerInfo) SetReviewerMessageChannelId(v string) {
 
 // GetSourceGroupId returns the SourceGroupId field value if set, zero value otherwise.
 func (o *UpdateOwnerInfo) GetSourceGroupId() string {
-	if o == nil || o.SourceGroupId == nil {
+	if o == nil || isNil(o.SourceGroupId) {
 		var ret string
 		return ret
 	}
@@ -213,15 +213,15 @@ func (o *UpdateOwnerInfo) GetSourceGroupId() string {
 // GetSourceGroupIdOk returns a tuple with the SourceGroupId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateOwnerInfo) GetSourceGroupIdOk() (*string, bool) {
-	if o == nil || o.SourceGroupId == nil {
-		return nil, false
+	if o == nil || isNil(o.SourceGroupId) {
+    return nil, false
 	}
 	return o.SourceGroupId, true
 }
 
 // HasSourceGroupId returns a boolean if a field has been set.
 func (o *UpdateOwnerInfo) HasSourceGroupId() bool {
-	if o != nil && o.SourceGroupId != nil {
+	if o != nil && !isNil(o.SourceGroupId) {
 		return true
 	}
 
@@ -238,19 +238,19 @@ func (o UpdateOwnerInfo) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["owner_id"] = o.OwnerId
 	}
-	if o.Name != nil {
+	if !isNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if o.Description != nil {
+	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if o.AccessRequestEscalationPeriod != nil {
+	if !isNil(o.AccessRequestEscalationPeriod) {
 		toSerialize["access_request_escalation_period"] = o.AccessRequestEscalationPeriod
 	}
-	if o.ReviewerMessageChannelId != nil {
+	if !isNil(o.ReviewerMessageChannelId) {
 		toSerialize["reviewer_message_channel_id"] = o.ReviewerMessageChannelId
 	}
-	if o.SourceGroupId != nil {
+	if !isNil(o.SourceGroupId) {
 		toSerialize["source_group_id"] = o.SourceGroupId
 	}
 	return json.Marshal(toSerialize)
