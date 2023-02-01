@@ -12,7 +12,7 @@ Method | HTTP request | Description
 [**GetGroupMessageChannels**](GroupsApi.md#GetGroupMessageChannels) | **Get** /groups/{group_id}/message-channels | 
 [**GetGroupOnCallSchedules**](GroupsApi.md#GetGroupOnCallSchedules) | **Get** /groups/{group_id}/on-call-schedules | 
 [**GetGroupResources**](GroupsApi.md#GetGroupResources) | **Get** /groups/{group_id}/resources | 
-[**GetGroupReviewerStages**](GroupsApi.md#GetGroupReviewerStages) | **Get** /groups/{group_id}/reviewer_stages | 
+[**GetGroupReviewerStages**](GroupsApi.md#GetGroupReviewerStages) | **Get** /groups/{group_id}/reviewer-stages | 
 [**GetGroupReviewers**](GroupsApi.md#GetGroupReviewers) | **Get** /groups/{group_id}/reviewers | 
 [**GetGroupTags**](GroupsApi.md#GetGroupTags) | **Get** /groups/{group_id}/tags | 
 [**GetGroupUsers**](GroupsApi.md#GetGroupUsers) | **Get** /groups/{group_id}/users | 
@@ -21,7 +21,7 @@ Method | HTTP request | Description
 [**SetGroupMessageChannels**](GroupsApi.md#SetGroupMessageChannels) | **Put** /groups/{group_id}/message-channels | 
 [**SetGroupOnCallSchedules**](GroupsApi.md#SetGroupOnCallSchedules) | **Put** /groups/{group_id}/on-call-schedules | 
 [**SetGroupResources**](GroupsApi.md#SetGroupResources) | **Put** /groups/{group_id}/resources | 
-[**SetGroupReviewerStages**](GroupsApi.md#SetGroupReviewerStages) | **Put** /groups/{group_id}/reviewer_stages | 
+[**SetGroupReviewerStages**](GroupsApi.md#SetGroupReviewerStages) | **Put** /groups/{group_id}/reviewer-stages | 
 [**SetGroupReviewers**](GroupsApi.md#SetGroupReviewers) | **Put** /groups/{group_id}/reviewers | 
 [**SetGroupVisibility**](GroupsApi.md#SetGroupVisibility) | **Put** /groups/{group_id}/visibility | 
 [**UpdateGroups**](GroupsApi.md#UpdateGroups) | **Put** /groups | 

@@ -636,7 +636,7 @@ paths:
       - BearerAuth: []
       tags:
       - groups
-  /groups/{group_id}/reviewer_stages:
+  /groups/{group_id}/reviewer-stages:
     get:
       description: Gets the list of reviewer stages for a group.
       operationId: get_group_reviewer_stages
@@ -1374,7 +1374,7 @@ paths:
       - BearerAuth: []
       tags:
       - resources
-  /resources/{resource_id}/reviewer_stages:
+  /resources/{resource_id}/reviewer-stages:
     get:
       description: Gets the list reviewer stages for a resource.
       operationId: get_resource_reviewer_stages

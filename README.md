@@ -90,7 +90,7 @@ Class | Method | HTTP request | Description
 *GroupsApi* | [**GetGroupMessageChannels**](docs/GroupsApi.md#getgroupmessagechannels) | **Get** /groups/{group_id}/message-channels | 
 *GroupsApi* | [**GetGroupOnCallSchedules**](docs/GroupsApi.md#getgrouponcallschedules) | **Get** /groups/{group_id}/on-call-schedules | 
 *GroupsApi* | [**GetGroupResources**](docs/GroupsApi.md#getgroupresources) | **Get** /groups/{group_id}/resources | 
-*GroupsApi* | [**GetGroupReviewerStages**](docs/GroupsApi.md#getgroupreviewerstages) | **Get** /groups/{group_id}/reviewer_stages | 
+*GroupsApi* | [**GetGroupReviewerStages**](docs/GroupsApi.md#getgroupreviewerstages) | **Get** /groups/{group_id}/reviewer-stages | 
 *GroupsApi* | [**GetGroupReviewers**](docs/GroupsApi.md#getgroupreviewers) | **Get** /groups/{group_id}/reviewers | 
 *GroupsApi* | [**GetGroupTags**](docs/GroupsApi.md#getgrouptags) | **Get** /groups/{group_id}/tags | 
 *GroupsApi* | [**GetGroupUsers**](docs/GroupsApi.md#getgroupusers) | **Get** /groups/{group_id}/users | 
@@ -99,7 +99,7 @@ Class | Method | HTTP request | Description
 *GroupsApi* | [**SetGroupMessageChannels**](docs/GroupsApi.md#setgroupmessagechannels) | **Put** /groups/{group_id}/message-channels | 
 *GroupsApi* | [**SetGroupOnCallSchedules**](docs/GroupsApi.md#setgrouponcallschedules) | **Put** /groups/{group_id}/on-call-schedules | 
 *GroupsApi* | [**SetGroupResources**](docs/GroupsApi.md#setgroupresources) | **Put** /groups/{group_id}/resources | 
-*GroupsApi* | [**SetGroupReviewerStages**](docs/GroupsApi.md#setgroupreviewerstages) | **Put** /groups/{group_id}/reviewer_stages | 
+*GroupsApi* | [**SetGroupReviewerStages**](docs/GroupsApi.md#setgroupreviewerstages) | **Put** /groups/{group_id}/reviewer-stages | 
 *GroupsApi* | [**SetGroupReviewers**](docs/GroupsApi.md#setgroupreviewers) | **Put** /groups/{group_id}/reviewers | 
 *GroupsApi* | [**SetGroupVisibility**](docs/GroupsApi.md#setgroupvisibility) | **Put** /groups/{group_id}/visibility | 
 *GroupsApi* | [**UpdateGroups**](docs/GroupsApi.md#updategroups) | **Put** /groups | 
@@ -122,7 +122,7 @@ Class | Method | HTTP request | Description
 *ResourcesApi* | [**DeleteResourceUser**](docs/ResourcesApi.md#deleteresourceuser) | **Delete** /resources/{resource_id}/users/{user_id} | 
 *ResourcesApi* | [**GetResource**](docs/ResourcesApi.md#getresource) | **Get** /resources/{resource_id} | 
 *ResourcesApi* | [**GetResourceMessageChannels**](docs/ResourcesApi.md#getresourcemessagechannels) | **Get** /resources/{resource_id}/message-channels | 
-*ResourcesApi* | [**GetResourceReviewerStages**](docs/ResourcesApi.md#getresourcereviewerstages) | **Get** /resources/{resource_id}/reviewer_stages | 
+*ResourcesApi* | [**GetResourceReviewerStages**](docs/ResourcesApi.md#getresourcereviewerstages) | **Get** /resources/{resource_id}/reviewer-stages | 
 *ResourcesApi* | [**GetResourceReviewers**](docs/ResourcesApi.md#getresourcereviewers) | **Get** /resources/{resource_id}/reviewers | 
 *ResourcesApi* | [**GetResourceTags**](docs/ResourcesApi.md#getresourcetags) | **Get** /resources/{resource_id}/tags | 
 *ResourcesApi* | [**GetResourceUsers**](docs/ResourcesApi.md#getresourceusers) | **Get** /resources/{resource_id}/users | 
@@ -130,7 +130,7 @@ Class | Method | HTTP request | Description
 *ResourcesApi* | [**GetResources**](docs/ResourcesApi.md#getresources) | **Get** /resources | 
 *ResourcesApi* | [**ResourceUserAccessStatusRetrieve**](docs/ResourcesApi.md#resourceuseraccessstatusretrieve) | **Get** /resource-user-access-status/{resource_id}/{user_id} | 
 *ResourcesApi* | [**SetResourceMessageChannels**](docs/ResourcesApi.md#setresourcemessagechannels) | **Put** /resources/{resource_id}/message-channels | 
-*ResourcesApi* | [**SetResourceReviewerStages**](docs/ResourcesApi.md#setresourcereviewerstages) | **Put** /resources/{resource_id}/reviewer_stages | 
+*ResourcesApi* | [**SetResourceReviewerStages**](docs/ResourcesApi.md#setresourcereviewerstages) | **Put** /resources/{resource_id}/reviewer-stages | 
 *ResourcesApi* | [**SetResourceReviewers**](docs/ResourcesApi.md#setresourcereviewers) | **Put** /resources/{resource_id}/reviewers | 
 *ResourcesApi* | [**SetResourceVisibility**](docs/ResourcesApi.md#setresourcevisibility) | **Put** /resources/{resource_id}/visibility | 
 *ResourcesApi* | [**UpdateResources**](docs/ResourcesApi.md#updateresources) | **Put** /resources | 

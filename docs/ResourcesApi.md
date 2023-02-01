@@ -10,7 +10,7 @@ Method | HTTP request | Description
 [**DeleteResourceUser**](ResourcesApi.md#DeleteResourceUser) | **Delete** /resources/{resource_id}/users/{user_id} | 
 [**GetResource**](ResourcesApi.md#GetResource) | **Get** /resources/{resource_id} | 
 [**GetResourceMessageChannels**](ResourcesApi.md#GetResourceMessageChannels) | **Get** /resources/{resource_id}/message-channels | 
-[**GetResourceReviewerStages**](ResourcesApi.md#GetResourceReviewerStages) | **Get** /resources/{resource_id}/reviewer_stages | 
+[**GetResourceReviewerStages**](ResourcesApi.md#GetResourceReviewerStages) | **Get** /resources/{resource_id}/reviewer-stages | 
 [**GetResourceReviewers**](ResourcesApi.md#GetResourceReviewers) | **Get** /resources/{resource_id}/reviewers | 
 [**GetResourceTags**](ResourcesApi.md#GetResourceTags) | **Get** /resources/{resource_id}/tags | 
 [**GetResourceUsers**](ResourcesApi.md#GetResourceUsers) | **Get** /resources/{resource_id}/users | 
@@ -18,7 +18,7 @@ Method | HTTP request | Description
 [**GetResources**](ResourcesApi.md#GetResources) | **Get** /resources | 
 [**ResourceUserAccessStatusRetrieve**](ResourcesApi.md#ResourceUserAccessStatusRetrieve) | **Get** /resource-user-access-status/{resource_id}/{user_id} | 
 [**SetResourceMessageChannels**](ResourcesApi.md#SetResourceMessageChannels) | **Put** /resources/{resource_id}/message-channels | 
-[**SetResourceReviewerStages**](ResourcesApi.md#SetResourceReviewerStages) | **Put** /resources/{resource_id}/reviewer_stages | 
+[**SetResourceReviewerStages**](ResourcesApi.md#SetResourceReviewerStages) | **Put** /resources/{resource_id}/reviewer-stages | 
 [**SetResourceReviewers**](ResourcesApi.md#SetResourceReviewers) | **Put** /resources/{resource_id}/reviewers | 
 [**SetResourceVisibility**](ResourcesApi.md#SetResourceVisibility) | **Put** /resources/{resource_id}/visibility | 
 [**UpdateResources**](ResourcesApi.md#UpdateResources) | **Put** /resources | 

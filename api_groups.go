@@ -921,7 +921,7 @@ func (a *GroupsApiService) GetGroupReviewerStagesExecute(r ApiGetGroupReviewerSt
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/groups/{group_id}/reviewer_stages"
+	localVarPath := localBasePath + "/groups/{group_id}/reviewer-stages"
 	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterToString(r.groupId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1925,7 +1925,7 @@ func (a *GroupsApiService) SetGroupReviewerStagesExecute(r ApiSetGroupReviewerSt
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/groups/{group_id}/reviewer_stages"
+	localVarPath := localBasePath + "/groups/{group_id}/reviewer-stages"
 	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterToString(r.groupId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)

@@ -711,7 +711,7 @@ func (a *ResourcesApiService) GetResourceReviewerStagesExecute(r ApiGetResourceR
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/resources/{resource_id}/reviewer_stages"
+	localVarPath := localBasePath + "/resources/{resource_id}/reviewer-stages"
 	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterToString(r.resourceId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1652,7 +1652,7 @@ func (a *ResourcesApiService) SetResourceReviewerStagesExecute(r ApiSetResourceR
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/resources/{resource_id}/reviewer_stages"
+	localVarPath := localBasePath + "/resources/{resource_id}/reviewer-stages"
 	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterToString(r.resourceId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
