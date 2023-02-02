@@ -1030,7 +1030,7 @@ Name | Type | Description  | Notes
 
 ## SetResourceReviewerStages
 
-> []string SetResourceReviewerStages(ctx, resourceId).ReviewerStageList(reviewerStageList).Execute()
+> []ReviewerStage SetResourceReviewerStages(ctx, resourceId).ReviewerStageList(reviewerStageList).Execute()
 
 
 
@@ -1059,7 +1059,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ResourcesApi.SetResourceReviewerStages``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `SetResourceReviewerStages`: []string
+    // response from `SetResourceReviewerStages`: []ReviewerStage
     fmt.Fprintf(os.Stdout, "Response from `ResourcesApi.SetResourceReviewerStages`: %v\n", resp)
 }
 ```
@@ -1084,7 +1084,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**[]string**
+[**[]ReviewerStage**](ReviewerStage.md)
 
 ### Authorization
 

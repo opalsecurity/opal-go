@@ -1616,7 +1616,7 @@ func (r ApiSetResourceReviewerStagesRequest) ReviewerStageList(reviewerStageList
 	return r
 }
 
-func (r ApiSetResourceReviewerStagesRequest) Execute() ([]string, *http.Response, error) {
+func (r ApiSetResourceReviewerStagesRequest) Execute() ([]ReviewerStage, *http.Response, error) {
 	return r.ApiService.SetResourceReviewerStagesExecute(r)
 }
 
@@ -1638,13 +1638,13 @@ func (a *ResourcesApiService) SetResourceReviewerStages(ctx context.Context, res
 }
 
 // Execute executes the request
-//  @return []string
-func (a *ResourcesApiService) SetResourceReviewerStagesExecute(r ApiSetResourceReviewerStagesRequest) ([]string, *http.Response, error) {
+//  @return []ReviewerStage
+func (a *ResourcesApiService) SetResourceReviewerStagesExecute(r ApiSetResourceReviewerStagesRequest) ([]ReviewerStage, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []string
+		localVarReturnValue  []ReviewerStage
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesApiService.SetResourceReviewerStages")

@@ -1398,7 +1398,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/ReviewerStage'
                 type: array
-          description: The IDs of owners that are reviewers for this resource.
+          description: The reviewer stages for this resource.
       security:
       - BearerAuth: []
       tags:
@@ -1428,12 +1428,11 @@ paths:
           content:
             application/json:
               schema:
+                description: A list of reviewer stages.
                 items:
-                  example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
-                  format: uuid
-                  type: string
+                  $ref: '#/components/schemas/ReviewerStage'
                 type: array
-          description: The updated IDs of owners that are reviewers for this resource
+          description: The updated reviewer stages for this resource.
       security:
       - BearerAuth: []
       tags:
