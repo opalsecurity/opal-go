@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the GroupRemoteInfoActiveDirectoryGroup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GroupRemoteInfoActiveDirectoryGroup{}
+
 // GroupRemoteInfoActiveDirectoryGroup Remote info for Active Directory group.
 type GroupRemoteInfoActiveDirectoryGroup struct {
 	// The id of the Google group.
@@ -64,11 +67,17 @@ func (o *GroupRemoteInfoActiveDirectoryGroup) SetGroupId(v string) {
 }
 
 func (o GroupRemoteInfoActiveDirectoryGroup) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["group_id"] = o.GroupId
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o GroupRemoteInfoActiveDirectoryGroup) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["group_id"] = o.GroupId
+	return toSerialize, nil
 }
 
 type NullableGroupRemoteInfoActiveDirectoryGroup struct {

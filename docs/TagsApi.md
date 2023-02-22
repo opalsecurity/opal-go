@@ -33,7 +33,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -42,7 +42,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TagsApi.AddGroupTag(context.Background(), tagId, groupId).Execute()
+    r, err := apiClient.TagsApi.AddGroupTag(context.Background(), tagId, groupId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TagsApi.AddGroupTag``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -104,7 +104,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -113,7 +113,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TagsApi.AddResourceTag(context.Background(), tagId, resourceId).Execute()
+    r, err := apiClient.TagsApi.AddResourceTag(context.Background(), tagId, resourceId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TagsApi.AddResourceTag``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -175,7 +175,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -184,7 +184,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TagsApi.AddUserTag(context.Background(), tagId, userId).Execute()
+    r, err := apiClient.TagsApi.AddUserTag(context.Background(), tagId, userId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TagsApi.AddUserTag``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -246,7 +246,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -316,7 +316,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -384,7 +384,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -452,7 +452,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -461,7 +461,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TagsApi.RemoveGroupTag(context.Background(), tagId, groupId).Execute()
+    r, err := apiClient.TagsApi.RemoveGroupTag(context.Background(), tagId, groupId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TagsApi.RemoveGroupTag``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -523,7 +523,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -532,7 +532,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TagsApi.RemoveResourceTag(context.Background(), tagId, resourceId).Execute()
+    r, err := apiClient.TagsApi.RemoveResourceTag(context.Background(), tagId, resourceId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TagsApi.RemoveResourceTag``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -594,7 +594,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -603,7 +603,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TagsApi.RemoveUserTag(context.Background(), tagId, userId).Execute()
+    r, err := apiClient.TagsApi.RemoveUserTag(context.Background(), tagId, userId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TagsApi.RemoveUserTag``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

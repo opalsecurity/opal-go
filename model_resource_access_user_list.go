@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ResourceAccessUserList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceAccessUserList{}
+
 // ResourceAccessUserList struct for ResourceAccessUserList
 type ResourceAccessUserList struct {
 	Results []ResourceAccessUser `json:"results,omitempty"`
@@ -39,7 +42,7 @@ func NewResourceAccessUserListWithDefaults() *ResourceAccessUserList {
 
 // GetResults returns the Results field value if set, zero value otherwise.
 func (o *ResourceAccessUserList) GetResults() []ResourceAccessUser {
-	if o == nil || o.Results == nil {
+	if o == nil || IsNil(o.Results) {
 		var ret []ResourceAccessUser
 		return ret
 	}
@@ -49,7 +52,7 @@ func (o *ResourceAccessUserList) GetResults() []ResourceAccessUser {
 // GetResultsOk returns a tuple with the Results field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceAccessUserList) GetResultsOk() ([]ResourceAccessUser, bool) {
-	if o == nil || o.Results == nil {
+	if o == nil || IsNil(o.Results) {
 		return nil, false
 	}
 	return o.Results, true
@@ -57,7 +60,7 @@ func (o *ResourceAccessUserList) GetResultsOk() ([]ResourceAccessUser, bool) {
 
 // HasResults returns a boolean if a field has been set.
 func (o *ResourceAccessUserList) HasResults() bool {
-	if o != nil && o.Results != nil {
+	if o != nil && !IsNil(o.Results) {
 		return true
 	}
 
@@ -70,11 +73,19 @@ func (o *ResourceAccessUserList) SetResults(v []ResourceAccessUser) {
 }
 
 func (o ResourceAccessUserList) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Results != nil {
-		toSerialize["results"] = o.Results
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ResourceAccessUserList) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Results) {
+		toSerialize["results"] = o.Results
+	}
+	return toSerialize, nil
 }
 
 type NullableResourceAccessUserList struct {

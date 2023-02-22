@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the VisibilityInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VisibilityInfo{}
+
 // VisibilityInfo Visibility infomation of an entity.
 type VisibilityInfo struct {
 	Visibility VisibilityTypeEnum `json:"visibility"`
@@ -65,7 +68,7 @@ func (o *VisibilityInfo) SetVisibility(v VisibilityTypeEnum) {
 
 // GetVisibilityGroupIds returns the VisibilityGroupIds field value if set, zero value otherwise.
 func (o *VisibilityInfo) GetVisibilityGroupIds() []string {
-	if o == nil || o.VisibilityGroupIds == nil {
+	if o == nil || IsNil(o.VisibilityGroupIds) {
 		var ret []string
 		return ret
 	}
@@ -75,7 +78,7 @@ func (o *VisibilityInfo) GetVisibilityGroupIds() []string {
 // GetVisibilityGroupIdsOk returns a tuple with the VisibilityGroupIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VisibilityInfo) GetVisibilityGroupIdsOk() ([]string, bool) {
-	if o == nil || o.VisibilityGroupIds == nil {
+	if o == nil || IsNil(o.VisibilityGroupIds) {
 		return nil, false
 	}
 	return o.VisibilityGroupIds, true
@@ -83,7 +86,7 @@ func (o *VisibilityInfo) GetVisibilityGroupIdsOk() ([]string, bool) {
 
 // HasVisibilityGroupIds returns a boolean if a field has been set.
 func (o *VisibilityInfo) HasVisibilityGroupIds() bool {
-	if o != nil && o.VisibilityGroupIds != nil {
+	if o != nil && !IsNil(o.VisibilityGroupIds) {
 		return true
 	}
 
@@ -96,14 +99,20 @@ func (o *VisibilityInfo) SetVisibilityGroupIds(v []string) {
 }
 
 func (o VisibilityInfo) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["visibility"] = o.Visibility
-	}
-	if o.VisibilityGroupIds != nil {
-		toSerialize["visibility_group_ids"] = o.VisibilityGroupIds
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o VisibilityInfo) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["visibility"] = o.Visibility
+	if !IsNil(o.VisibilityGroupIds) {
+		toSerialize["visibility_group_ids"] = o.VisibilityGroupIds
+	}
+	return toSerialize, nil
 }
 
 type NullableVisibilityInfo struct {

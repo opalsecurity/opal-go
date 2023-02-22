@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the OnCallScheduleIDList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OnCallScheduleIDList{}
+
 // OnCallScheduleIDList A list of on call schedule Opal UUIDs. To get the matching remote IDs, use the /on-call-schedules endpoints.
 type OnCallScheduleIDList struct {
 	OnCallScheduleIds []string `json:"on_call_schedule_ids"`
@@ -63,11 +66,17 @@ func (o *OnCallScheduleIDList) SetOnCallScheduleIds(v []string) {
 }
 
 func (o OnCallScheduleIDList) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["on_call_schedule_ids"] = o.OnCallScheduleIds
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o OnCallScheduleIDList) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["on_call_schedule_ids"] = o.OnCallScheduleIds
+	return toSerialize, nil
 }
 
 type NullableOnCallScheduleIDList struct {

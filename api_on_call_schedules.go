@@ -14,7 +14,7 @@ package opal
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -108,9 +108,9 @@ func (a *OnCallSchedulesApiService) CreateOnCallScheduleExecute(r ApiCreateOnCal
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -178,7 +178,7 @@ func (a *OnCallSchedulesApiService) GetOnCallScheduleExecute(r ApiGetOnCallSched
 	}
 
 	localVarPath := localBasePath + "/on-call-schedules/{on_call_schedule_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"on_call_schedule_id"+"}", url.PathEscape(parameterToString(r.onCallScheduleId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"on_call_schedule_id"+"}", url.PathEscape(parameterValueToString(r.onCallScheduleId, "onCallScheduleId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -211,9 +211,9 @@ func (a *OnCallSchedulesApiService) GetOnCallScheduleExecute(r ApiGetOnCallSched
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -310,9 +310,9 @@ func (a *OnCallSchedulesApiService) GetOnCallSchedulesExecute(r ApiGetOnCallSche
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the User type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &User{}
+
 // User # User Object ### Description The `User` object is used to represent a user.  ### Usage Example Fetch from the `LIST Sessions` endpoint.
 type User struct {
 	// The ID of the user.
@@ -199,26 +202,22 @@ func (o *User) SetPosition(v string) {
 }
 
 func (o User) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["user_id"] = o.UserId
-	}
-	if true {
-		toSerialize["email"] = o.Email
-	}
-	if true {
-		toSerialize["full_name"] = o.FullName
-	}
-	if true {
-		toSerialize["first_name"] = o.FirstName
-	}
-	if true {
-		toSerialize["last_name"] = o.LastName
-	}
-	if true {
-		toSerialize["position"] = o.Position
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o User) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["user_id"] = o.UserId
+	toSerialize["email"] = o.Email
+	toSerialize["full_name"] = o.FullName
+	toSerialize["first_name"] = o.FirstName
+	toSerialize["last_name"] = o.LastName
+	toSerialize["position"] = o.Position
+	return toSerialize, nil
 }
 
 type NullableUser struct {

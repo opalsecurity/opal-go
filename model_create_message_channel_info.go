@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the CreateMessageChannelInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateMessageChannelInfo{}
+
 // CreateMessageChannelInfo # CreateMessageChannelInfo Object ### Description The `CreateMessageChannelInfo` object is used to describe the message channel object to be created.
 type CreateMessageChannelInfo struct {
 	ThirdPartyProvider MessageChannelProviderEnum `json:"third_party_provider"`
@@ -90,14 +93,18 @@ func (o *CreateMessageChannelInfo) SetRemoteId(v string) {
 }
 
 func (o CreateMessageChannelInfo) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["third_party_provider"] = o.ThirdPartyProvider
-	}
-	if true {
-		toSerialize["remote_id"] = o.RemoteId
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o CreateMessageChannelInfo) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["third_party_provider"] = o.ThirdPartyProvider
+	toSerialize["remote_id"] = o.RemoteId
+	return toSerialize, nil
 }
 
 type NullableCreateMessageChannelInfo struct {

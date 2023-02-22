@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the GroupRemoteInfoDuoGroup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GroupRemoteInfoDuoGroup{}
+
 // GroupRemoteInfoDuoGroup Remote info for Duo Security group.
 type GroupRemoteInfoDuoGroup struct {
 	// The id of the Duo Security group.
@@ -64,11 +67,17 @@ func (o *GroupRemoteInfoDuoGroup) SetGroupId(v string) {
 }
 
 func (o GroupRemoteInfoDuoGroup) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["group_id"] = o.GroupId
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o GroupRemoteInfoDuoGroup) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["group_id"] = o.GroupId
+	return toSerialize, nil
 }
 
 type NullableGroupRemoteInfoDuoGroup struct {

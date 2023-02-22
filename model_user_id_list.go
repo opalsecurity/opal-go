@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the UserIDList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UserIDList{}
+
 // UserIDList A list of user IDs.
 type UserIDList struct {
 	UserIds []string `json:"user_ids"`
@@ -63,11 +66,17 @@ func (o *UserIDList) SetUserIds(v []string) {
 }
 
 func (o UserIDList) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["user_ids"] = o.UserIds
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UserIDList) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["user_ids"] = o.UserIds
+	return toSerialize, nil
 }
 
 type NullableUserIDList struct {

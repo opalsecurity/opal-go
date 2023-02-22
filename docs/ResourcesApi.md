@@ -42,7 +42,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -119,7 +119,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -185,7 +185,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -193,7 +193,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ResourcesApi.DeleteResource(context.Background(), resourceId).Execute()
+    r, err := apiClient.ResourcesApi.DeleteResource(context.Background(), resourceId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ResourcesApi.DeleteResource``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -253,7 +253,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -263,7 +263,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ResourcesApi.DeleteResourceUser(context.Background(), resourceId, userId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
+    r, err := apiClient.ResourcesApi.DeleteResourceUser(context.Background(), resourceId, userId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ResourcesApi.DeleteResourceUser``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -326,7 +326,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -396,7 +396,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -466,7 +466,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -536,7 +536,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -606,7 +606,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -676,7 +676,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -748,7 +748,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -818,7 +818,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -894,7 +894,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -973,7 +973,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -1045,7 +1045,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -1117,7 +1117,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -1189,7 +1189,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -1261,7 +1261,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {

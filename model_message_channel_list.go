@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the MessageChannelList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MessageChannelList{}
+
 // MessageChannelList struct for MessageChannelList
 type MessageChannelList struct {
 	Channels []MessageChannel `json:"channels"`
@@ -63,11 +66,17 @@ func (o *MessageChannelList) SetChannels(v []MessageChannel) {
 }
 
 func (o MessageChannelList) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["channels"] = o.Channels
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o MessageChannelList) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["channels"] = o.Channels
+	return toSerialize, nil
 }
 
 type NullableMessageChannelList struct {

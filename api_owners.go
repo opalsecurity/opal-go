@@ -14,7 +14,7 @@ package opal
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -107,9 +107,9 @@ func (a *OwnersApiService) CreateOwnerExecute(r ApiCreateOwnerRequest) (*Owner, 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -175,7 +175,7 @@ func (a *OwnersApiService) DeleteOwnerExecute(r ApiDeleteOwnerRequest) (*http.Re
 	}
 
 	localVarPath := localBasePath + "/owners/{owner_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"owner_id"+"}", url.PathEscape(parameterToString(r.ownerId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"owner_id"+"}", url.PathEscape(parameterValueToString(r.ownerId, "ownerId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -208,9 +208,9 @@ func (a *OwnersApiService) DeleteOwnerExecute(r ApiDeleteOwnerRequest) (*http.Re
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
@@ -269,7 +269,7 @@ func (a *OwnersApiService) GetOwnerExecute(r ApiGetOwnerRequest) (*Owner, *http.
 	}
 
 	localVarPath := localBasePath + "/owners/{owner_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"owner_id"+"}", url.PathEscape(parameterToString(r.ownerId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"owner_id"+"}", url.PathEscape(parameterValueToString(r.ownerId, "ownerId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -302,9 +302,112 @@ func (a *OwnersApiService) GetOwnerExecute(r ApiGetOwnerRequest) (*Owner, *http.
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetOwnerFromNameRequest struct {
+	ctx context.Context
+	ApiService *OwnersApiService
+	ownerName string
+}
+
+func (r ApiGetOwnerFromNameRequest) Execute() (*Owner, *http.Response, error) {
+	return r.ApiService.GetOwnerFromNameExecute(r)
+}
+
+/*
+GetOwnerFromName Method for GetOwnerFromName
+
+Returns an `Owner` object.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ownerName The name of the owner.
+ @return ApiGetOwnerFromNameRequest
+*/
+func (a *OwnersApiService) GetOwnerFromName(ctx context.Context, ownerName string) ApiGetOwnerFromNameRequest {
+	return ApiGetOwnerFromNameRequest{
+		ApiService: a,
+		ctx: ctx,
+		ownerName: ownerName,
+	}
+}
+
+// Execute executes the request
+//  @return Owner
+func (a *OwnersApiService) GetOwnerFromNameExecute(r ApiGetOwnerFromNameRequest) (*Owner, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Owner
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OwnersApiService.GetOwnerFromName")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/owners/name/{owner_name}"
+	localVarPath = strings.Replace(localVarPath, "{"+"owner_name"+"}", url.PathEscape(parameterValueToString(r.ownerName, "ownerName")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -372,7 +475,7 @@ func (a *OwnersApiService) GetOwnerUsersExecute(r ApiGetOwnerUsersRequest) (*Use
 	}
 
 	localVarPath := localBasePath + "/owners/{owner_id}/users"
-	localVarPath = strings.Replace(localVarPath, "{"+"owner_id"+"}", url.PathEscape(parameterToString(r.ownerId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"owner_id"+"}", url.PathEscape(parameterValueToString(r.ownerId, "ownerId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -405,9 +508,9 @@ func (a *OwnersApiService) GetOwnerUsersExecute(r ApiGetOwnerUsersRequest) (*Use
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -492,10 +595,10 @@ func (a *OwnersApiService) GetOwnersExecute(r ApiGetOwnersRequest) (*PaginatedOw
 	localVarFormParams := url.Values{}
 
 	if r.cursor != nil {
-		localVarQueryParams.Add("cursor", parameterToString(*r.cursor, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "")
 	}
 	if r.pageSize != nil {
-		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -524,9 +627,9 @@ func (a *OwnersApiService) GetOwnersExecute(r ApiGetOwnersRequest) (*PaginatedOw
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -600,7 +703,7 @@ func (a *OwnersApiService) SetOwnerUsersExecute(r ApiSetOwnerUsersRequest) (*Use
 	}
 
 	localVarPath := localBasePath + "/owners/{owner_id}/users"
-	localVarPath = strings.Replace(localVarPath, "{"+"owner_id"+"}", url.PathEscape(parameterToString(r.ownerId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"owner_id"+"}", url.PathEscape(parameterValueToString(r.ownerId, "ownerId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -638,9 +741,9 @@ func (a *OwnersApiService) SetOwnerUsersExecute(r ApiSetOwnerUsersRequest) (*Use
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -749,9 +852,9 @@ func (a *OwnersApiService) UpdateOwnersExecute(r ApiUpdateOwnersRequest) (*Updat
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}

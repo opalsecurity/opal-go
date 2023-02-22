@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the GroupRemoteInfoLdapGroup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GroupRemoteInfoLdapGroup{}
+
 // GroupRemoteInfoLdapGroup Remote info for LDAP group.
 type GroupRemoteInfoLdapGroup struct {
 	// The id of the LDAP group.
@@ -64,11 +67,17 @@ func (o *GroupRemoteInfoLdapGroup) SetGroupId(v string) {
 }
 
 func (o GroupRemoteInfoLdapGroup) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["group_id"] = o.GroupId
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o GroupRemoteInfoLdapGroup) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["group_id"] = o.GroupId
+	return toSerialize, nil
 }
 
 type NullableGroupRemoteInfoLdapGroup struct {

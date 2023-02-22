@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the AppsList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AppsList{}
+
 // AppsList A list of apps.
 type AppsList struct {
 	Apps []App `json:"apps"`
@@ -63,11 +66,17 @@ func (o *AppsList) SetApps(v []App) {
 }
 
 func (o AppsList) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["apps"] = o.Apps
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o AppsList) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["apps"] = o.Apps
+	return toSerialize, nil
 }
 
 type NullableAppsList struct {

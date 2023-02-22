@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ResourceWithAccessLevel type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceWithAccessLevel{}
+
 // ResourceWithAccessLevel Information about a resource and corresponding access level
 type ResourceWithAccessLevel struct {
 	// The ID of the resource.
@@ -67,7 +70,7 @@ func (o *ResourceWithAccessLevel) SetResourceId(v string) {
 
 // GetAccessLevelRemoteId returns the AccessLevelRemoteId field value if set, zero value otherwise.
 func (o *ResourceWithAccessLevel) GetAccessLevelRemoteId() string {
-	if o == nil || o.AccessLevelRemoteId == nil {
+	if o == nil || IsNil(o.AccessLevelRemoteId) {
 		var ret string
 		return ret
 	}
@@ -77,7 +80,7 @@ func (o *ResourceWithAccessLevel) GetAccessLevelRemoteId() string {
 // GetAccessLevelRemoteIdOk returns a tuple with the AccessLevelRemoteId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceWithAccessLevel) GetAccessLevelRemoteIdOk() (*string, bool) {
-	if o == nil || o.AccessLevelRemoteId == nil {
+	if o == nil || IsNil(o.AccessLevelRemoteId) {
 		return nil, false
 	}
 	return o.AccessLevelRemoteId, true
@@ -85,7 +88,7 @@ func (o *ResourceWithAccessLevel) GetAccessLevelRemoteIdOk() (*string, bool) {
 
 // HasAccessLevelRemoteId returns a boolean if a field has been set.
 func (o *ResourceWithAccessLevel) HasAccessLevelRemoteId() bool {
-	if o != nil && o.AccessLevelRemoteId != nil {
+	if o != nil && !IsNil(o.AccessLevelRemoteId) {
 		return true
 	}
 
@@ -98,14 +101,20 @@ func (o *ResourceWithAccessLevel) SetAccessLevelRemoteId(v string) {
 }
 
 func (o ResourceWithAccessLevel) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["resource_id"] = o.ResourceId
-	}
-	if o.AccessLevelRemoteId != nil {
-		toSerialize["access_level_remote_id"] = o.AccessLevelRemoteId
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ResourceWithAccessLevel) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["resource_id"] = o.ResourceId
+	if !IsNil(o.AccessLevelRemoteId) {
+		toSerialize["access_level_remote_id"] = o.AccessLevelRemoteId
+	}
+	return toSerialize, nil
 }
 
 type NullableResourceWithAccessLevel struct {

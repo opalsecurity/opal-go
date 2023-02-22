@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the CreateOnCallScheduleInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateOnCallScheduleInfo{}
+
 // CreateOnCallScheduleInfo # CreateOnCallScheduleInfo Object ### Description The `CreateOnCallScheduleInfo` object is used to describe the on call schedule object to be created.
 type CreateOnCallScheduleInfo struct {
 	ThirdPartyProvider OnCallScheduleProviderEnum `json:"third_party_provider"`
@@ -90,14 +93,18 @@ func (o *CreateOnCallScheduleInfo) SetRemoteId(v string) {
 }
 
 func (o CreateOnCallScheduleInfo) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["third_party_provider"] = o.ThirdPartyProvider
-	}
-	if true {
-		toSerialize["remote_id"] = o.RemoteId
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o CreateOnCallScheduleInfo) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["third_party_provider"] = o.ThirdPartyProvider
+	toSerialize["remote_id"] = o.RemoteId
+	return toSerialize, nil
 }
 
 type NullableCreateOnCallScheduleInfo struct {

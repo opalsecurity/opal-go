@@ -9,9 +9,11 @@ Name | Type | Description | Notes
 **AwsRdsInstance** | Pointer to [**ResourceRemoteInfoAwsRdsInstance**](ResourceRemoteInfoAwsRdsInstance.md) |  | [optional] 
 **AwsEksCluster** | Pointer to [**ResourceRemoteInfoAwsEksCluster**](ResourceRemoteInfoAwsEksCluster.md) |  | [optional] 
 **GithubRepo** | Pointer to [**ResourceRemoteInfoGithubRepo**](ResourceRemoteInfoGithubRepo.md) |  | [optional] 
+**GitlabProject** | Pointer to [**ResourceRemoteInfoGitlabProject**](ResourceRemoteInfoGitlabProject.md) |  | [optional] 
 **OktaApp** | Pointer to [**ResourceRemoteInfoOktaApp**](ResourceRemoteInfoOktaApp.md) |  | [optional] 
 **OktaStandardRole** | Pointer to [**ResourceRemoteInfoOktaStandardRole**](ResourceRemoteInfoOktaStandardRole.md) |  | [optional] 
 **OktaCustomRole** | Pointer to [**ResourceRemoteInfoOktaCustomRole**](ResourceRemoteInfoOktaCustomRole.md) |  | [optional] 
+**TeleportRole** | Pointer to [**ResourceRemoteInfoTeleportRole**](ResourceRemoteInfoTeleportRole.md) |  | [optional] 
 
 ## Methods
 
@@ -157,6 +159,31 @@ SetGithubRepo sets GithubRepo field to given value.
 
 HasGithubRepo returns a boolean if a field has been set.
 
+### GetGitlabProject
+
+`func (o *ResourceRemoteInfo) GetGitlabProject() ResourceRemoteInfoGitlabProject`
+
+GetGitlabProject returns the GitlabProject field if non-nil, zero value otherwise.
+
+### GetGitlabProjectOk
+
+`func (o *ResourceRemoteInfo) GetGitlabProjectOk() (*ResourceRemoteInfoGitlabProject, bool)`
+
+GetGitlabProjectOk returns a tuple with the GitlabProject field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGitlabProject
+
+`func (o *ResourceRemoteInfo) SetGitlabProject(v ResourceRemoteInfoGitlabProject)`
+
+SetGitlabProject sets GitlabProject field to given value.
+
+### HasGitlabProject
+
+`func (o *ResourceRemoteInfo) HasGitlabProject() bool`
+
+HasGitlabProject returns a boolean if a field has been set.
+
 ### GetOktaApp
 
 `func (o *ResourceRemoteInfo) GetOktaApp() ResourceRemoteInfoOktaApp`
@@ -231,6 +258,31 @@ SetOktaCustomRole sets OktaCustomRole field to given value.
 `func (o *ResourceRemoteInfo) HasOktaCustomRole() bool`
 
 HasOktaCustomRole returns a boolean if a field has been set.
+
+### GetTeleportRole
+
+`func (o *ResourceRemoteInfo) GetTeleportRole() ResourceRemoteInfoTeleportRole`
+
+GetTeleportRole returns the TeleportRole field if non-nil, zero value otherwise.
+
+### GetTeleportRoleOk
+
+`func (o *ResourceRemoteInfo) GetTeleportRoleOk() (*ResourceRemoteInfoTeleportRole, bool)`
+
+GetTeleportRoleOk returns a tuple with the TeleportRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTeleportRole
+
+`func (o *ResourceRemoteInfo) SetTeleportRole(v ResourceRemoteInfoTeleportRole)`
+
+SetTeleportRole sets TeleportRole field to given value.
+
+### HasTeleportRole
+
+`func (o *ResourceRemoteInfo) HasTeleportRole() bool`
+
+HasTeleportRole returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

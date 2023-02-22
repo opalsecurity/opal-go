@@ -34,6 +34,7 @@ docs/GroupRemoteInfo.md
 docs/GroupRemoteInfoActiveDirectoryGroup.md
 docs/GroupRemoteInfoDuoGroup.md
 docs/GroupRemoteInfoGithubTeam.md
+docs/GroupRemoteInfoGitlabGroup.md
 docs/GroupRemoteInfoGoogleGroup.md
 docs/GroupRemoteInfoLdapGroup.md
 docs/GroupRemoteInfoOktaGroup.md
@@ -72,9 +73,11 @@ docs/ResourceRemoteInfoAwsEksCluster.md
 docs/ResourceRemoteInfoAwsIamRole.md
 docs/ResourceRemoteInfoAwsRdsInstance.md
 docs/ResourceRemoteInfoGithubRepo.md
+docs/ResourceRemoteInfoGitlabProject.md
 docs/ResourceRemoteInfoOktaApp.md
 docs/ResourceRemoteInfoOktaCustomRole.md
 docs/ResourceRemoteInfoOktaStandardRole.md
+docs/ResourceRemoteInfoTeleportRole.md
 docs/ResourceTypeEnum.md
 docs/ResourceUser.md
 docs/ResourceUserAccessStatus.md
@@ -129,6 +132,7 @@ model_group_remote_info.go
 model_group_remote_info_active_directory_group.go
 model_group_remote_info_duo_group.go
 model_group_remote_info_github_team.go
+model_group_remote_info_gitlab_group.go
 model_group_remote_info_google_group.go
 model_group_remote_info_ldap_group.go
 model_group_remote_info_okta_group.go
@@ -163,9 +167,11 @@ model_resource_remote_info_aws_eks_cluster.go
 model_resource_remote_info_aws_iam_role.go
 model_resource_remote_info_aws_rds_instance.go
 model_resource_remote_info_github_repo.go
+model_resource_remote_info_gitlab_project.go
 model_resource_remote_info_okta_app.go
 model_resource_remote_info_okta_custom_role.go
 model_resource_remote_info_okta_standard_role.go
+model_resource_remote_info_teleport_role.go
 model_resource_type_enum.go
 model_resource_user.go
 model_resource_user_access_status.go
@@ -196,4 +202,15 @@ model_user_list.go
 model_visibility_info.go
 model_visibility_type_enum.go
 response.go
+test/api_apps_test.go
+test/api_events_test.go
+test/api_groups_test.go
+test/api_message_channels_test.go
+test/api_on_call_schedules_test.go
+test/api_owners_test.go
+test/api_resources_test.go
+test/api_sessions_test.go
+test/api_tags_test.go
+test/api_uars_test.go
+test/api_users_test.go
 utils.go

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the UpdateGroupInfoList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateGroupInfoList{}
+
 // UpdateGroupInfoList struct for UpdateGroupInfoList
 type UpdateGroupInfoList struct {
 	// A list of groups with information to update.
@@ -64,11 +67,17 @@ func (o *UpdateGroupInfoList) SetGroups(v []UpdateGroupInfo) {
 }
 
 func (o UpdateGroupInfoList) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["groups"] = o.Groups
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UpdateGroupInfoList) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["groups"] = o.Groups
+	return toSerialize, nil
 }
 
 type NullableUpdateGroupInfoList struct {

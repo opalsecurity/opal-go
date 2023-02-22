@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the UAR type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UAR{}
+
 // UAR A user access review.
 type UAR struct {
 	// The ID of the UAR.
@@ -228,7 +231,7 @@ func (o *UAR) SetSelfReviewAllowed(v bool) {
 
 // GetUarScope returns the UarScope field value if set, zero value otherwise.
 func (o *UAR) GetUarScope() UARScope {
-	if o == nil || o.UarScope == nil {
+	if o == nil || IsNil(o.UarScope) {
 		var ret UARScope
 		return ret
 	}
@@ -238,7 +241,7 @@ func (o *UAR) GetUarScope() UARScope {
 // GetUarScopeOk returns a tuple with the UarScope field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UAR) GetUarScopeOk() (*UARScope, bool) {
-	if o == nil || o.UarScope == nil {
+	if o == nil || IsNil(o.UarScope) {
 		return nil, false
 	}
 	return o.UarScope, true
@@ -246,7 +249,7 @@ func (o *UAR) GetUarScopeOk() (*UARScope, bool) {
 
 // HasUarScope returns a boolean if a field has been set.
 func (o *UAR) HasUarScope() bool {
-	if o != nil && o.UarScope != nil {
+	if o != nil && !IsNil(o.UarScope) {
 		return true
 	}
 
@@ -259,32 +262,26 @@ func (o *UAR) SetUarScope(v UARScope) {
 }
 
 func (o UAR) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["uar_id"] = o.UarId
-	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if true {
-		toSerialize["reviewer_assignment_policy"] = o.ReviewerAssignmentPolicy
-	}
-	if true {
-		toSerialize["send_reviewer_assignment_notification"] = o.SendReviewerAssignmentNotification
-	}
-	if true {
-		toSerialize["deadline"] = o.Deadline
-	}
-	if true {
-		toSerialize["time_zone"] = o.TimeZone
-	}
-	if true {
-		toSerialize["self_review_allowed"] = o.SelfReviewAllowed
-	}
-	if o.UarScope != nil {
-		toSerialize["uar_scope"] = o.UarScope
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UAR) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["uar_id"] = o.UarId
+	toSerialize["name"] = o.Name
+	toSerialize["reviewer_assignment_policy"] = o.ReviewerAssignmentPolicy
+	toSerialize["send_reviewer_assignment_notification"] = o.SendReviewerAssignmentNotification
+	toSerialize["deadline"] = o.Deadline
+	toSerialize["time_zone"] = o.TimeZone
+	toSerialize["self_review_allowed"] = o.SelfReviewAllowed
+	if !IsNil(o.UarScope) {
+		toSerialize["uar_scope"] = o.UarScope
+	}
+	return toSerialize, nil
 }
 
 type NullableUAR struct {

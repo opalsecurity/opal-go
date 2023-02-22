@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the GroupResourceList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GroupResourceList{}
+
 // GroupResourceList struct for GroupResourceList
 type GroupResourceList struct {
 	GroupResources []GroupResource `json:"group_resources"`
@@ -63,11 +66,17 @@ func (o *GroupResourceList) SetGroupResources(v []GroupResource) {
 }
 
 func (o GroupResourceList) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["group_resources"] = o.GroupResources
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o GroupResourceList) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["group_resources"] = o.GroupResources
+	return toSerialize, nil
 }
 
 type NullableGroupResourceList struct {

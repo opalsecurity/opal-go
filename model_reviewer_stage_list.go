@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ReviewerStageList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ReviewerStageList{}
+
 // ReviewerStageList struct for ReviewerStageList
 type ReviewerStageList struct {
 	// A list of reviewer stages.
@@ -64,11 +67,17 @@ func (o *ReviewerStageList) SetStages(v []ReviewerStage) {
 }
 
 func (o ReviewerStageList) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["stages"] = o.Stages
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ReviewerStageList) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["stages"] = o.Stages
+	return toSerialize, nil
 }
 
 type NullableReviewerStageList struct {

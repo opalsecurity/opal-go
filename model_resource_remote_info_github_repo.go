@@ -15,7 +15,10 @@ import (
 	"encoding/json"
 )
 
-// ResourceRemoteInfoGithubRepo Remote info for GitHub repositories.
+// checks if the ResourceRemoteInfoGithubRepo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceRemoteInfoGithubRepo{}
+
+// ResourceRemoteInfoGithubRepo Remote info for GitHub repository.
 type ResourceRemoteInfoGithubRepo struct {
 	// The id of the repository.
 	// Deprecated
@@ -45,7 +48,7 @@ func NewResourceRemoteInfoGithubRepoWithDefaults() *ResourceRemoteInfoGithubRepo
 // GetRepoId returns the RepoId field value if set, zero value otherwise.
 // Deprecated
 func (o *ResourceRemoteInfoGithubRepo) GetRepoId() string {
-	if o == nil || o.RepoId == nil {
+	if o == nil || IsNil(o.RepoId) {
 		var ret string
 		return ret
 	}
@@ -56,7 +59,7 @@ func (o *ResourceRemoteInfoGithubRepo) GetRepoId() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *ResourceRemoteInfoGithubRepo) GetRepoIdOk() (*string, bool) {
-	if o == nil || o.RepoId == nil {
+	if o == nil || IsNil(o.RepoId) {
 		return nil, false
 	}
 	return o.RepoId, true
@@ -64,7 +67,7 @@ func (o *ResourceRemoteInfoGithubRepo) GetRepoIdOk() (*string, bool) {
 
 // HasRepoId returns a boolean if a field has been set.
 func (o *ResourceRemoteInfoGithubRepo) HasRepoId() bool {
-	if o != nil && o.RepoId != nil {
+	if o != nil && !IsNil(o.RepoId) {
 		return true
 	}
 
@@ -102,14 +105,20 @@ func (o *ResourceRemoteInfoGithubRepo) SetRepoName(v string) {
 }
 
 func (o ResourceRemoteInfoGithubRepo) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.RepoId != nil {
-		toSerialize["repo_id"] = o.RepoId
-	}
-	if true {
-		toSerialize["repo_name"] = o.RepoName
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ResourceRemoteInfoGithubRepo) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.RepoId) {
+		toSerialize["repo_id"] = o.RepoId
+	}
+	toSerialize["repo_name"] = o.RepoName
+	return toSerialize, nil
 }
 
 type NullableResourceRemoteInfoGithubRepo struct {

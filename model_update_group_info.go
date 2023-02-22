@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the UpdateGroupInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateGroupInfo{}
+
 // UpdateGroupInfo # UpdateGroupInfo Object ### Description The `UpdateGroupInfo` object is used as an input to the UpdateGroup API.
 type UpdateGroupInfo struct {
 	// The ID of the group.
@@ -92,7 +95,7 @@ func (o *UpdateGroupInfo) SetGroupId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *UpdateGroupInfo) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -102,7 +105,7 @@ func (o *UpdateGroupInfo) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateGroupInfo) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -110,7 +113,7 @@ func (o *UpdateGroupInfo) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *UpdateGroupInfo) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -124,7 +127,7 @@ func (o *UpdateGroupInfo) SetName(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *UpdateGroupInfo) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -134,7 +137,7 @@ func (o *UpdateGroupInfo) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateGroupInfo) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -142,7 +145,7 @@ func (o *UpdateGroupInfo) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *UpdateGroupInfo) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -156,7 +159,7 @@ func (o *UpdateGroupInfo) SetDescription(v string) {
 
 // GetAdminOwnerId returns the AdminOwnerId field value if set, zero value otherwise.
 func (o *UpdateGroupInfo) GetAdminOwnerId() string {
-	if o == nil || o.AdminOwnerId == nil {
+	if o == nil || IsNil(o.AdminOwnerId) {
 		var ret string
 		return ret
 	}
@@ -166,7 +169,7 @@ func (o *UpdateGroupInfo) GetAdminOwnerId() string {
 // GetAdminOwnerIdOk returns a tuple with the AdminOwnerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateGroupInfo) GetAdminOwnerIdOk() (*string, bool) {
-	if o == nil || o.AdminOwnerId == nil {
+	if o == nil || IsNil(o.AdminOwnerId) {
 		return nil, false
 	}
 	return o.AdminOwnerId, true
@@ -174,7 +177,7 @@ func (o *UpdateGroupInfo) GetAdminOwnerIdOk() (*string, bool) {
 
 // HasAdminOwnerId returns a boolean if a field has been set.
 func (o *UpdateGroupInfo) HasAdminOwnerId() bool {
-	if o != nil && o.AdminOwnerId != nil {
+	if o != nil && !IsNil(o.AdminOwnerId) {
 		return true
 	}
 
@@ -188,7 +191,7 @@ func (o *UpdateGroupInfo) SetAdminOwnerId(v string) {
 
 // GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
 func (o *UpdateGroupInfo) GetMaxDuration() int32 {
-	if o == nil || o.MaxDuration == nil {
+	if o == nil || IsNil(o.MaxDuration) {
 		var ret int32
 		return ret
 	}
@@ -198,7 +201,7 @@ func (o *UpdateGroupInfo) GetMaxDuration() int32 {
 // GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateGroupInfo) GetMaxDurationOk() (*int32, bool) {
-	if o == nil || o.MaxDuration == nil {
+	if o == nil || IsNil(o.MaxDuration) {
 		return nil, false
 	}
 	return o.MaxDuration, true
@@ -206,7 +209,7 @@ func (o *UpdateGroupInfo) GetMaxDurationOk() (*int32, bool) {
 
 // HasMaxDuration returns a boolean if a field has been set.
 func (o *UpdateGroupInfo) HasMaxDuration() bool {
-	if o != nil && o.MaxDuration != nil {
+	if o != nil && !IsNil(o.MaxDuration) {
 		return true
 	}
 
@@ -220,7 +223,7 @@ func (o *UpdateGroupInfo) SetMaxDuration(v int32) {
 
 // GetRecommendedDuration returns the RecommendedDuration field value if set, zero value otherwise.
 func (o *UpdateGroupInfo) GetRecommendedDuration() int32 {
-	if o == nil || o.RecommendedDuration == nil {
+	if o == nil || IsNil(o.RecommendedDuration) {
 		var ret int32
 		return ret
 	}
@@ -230,7 +233,7 @@ func (o *UpdateGroupInfo) GetRecommendedDuration() int32 {
 // GetRecommendedDurationOk returns a tuple with the RecommendedDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateGroupInfo) GetRecommendedDurationOk() (*int32, bool) {
-	if o == nil || o.RecommendedDuration == nil {
+	if o == nil || IsNil(o.RecommendedDuration) {
 		return nil, false
 	}
 	return o.RecommendedDuration, true
@@ -238,7 +241,7 @@ func (o *UpdateGroupInfo) GetRecommendedDurationOk() (*int32, bool) {
 
 // HasRecommendedDuration returns a boolean if a field has been set.
 func (o *UpdateGroupInfo) HasRecommendedDuration() bool {
-	if o != nil && o.RecommendedDuration != nil {
+	if o != nil && !IsNil(o.RecommendedDuration) {
 		return true
 	}
 
@@ -253,7 +256,7 @@ func (o *UpdateGroupInfo) SetRecommendedDuration(v int32) {
 // GetRequireManagerApproval returns the RequireManagerApproval field value if set, zero value otherwise.
 // Deprecated
 func (o *UpdateGroupInfo) GetRequireManagerApproval() bool {
-	if o == nil || o.RequireManagerApproval == nil {
+	if o == nil || IsNil(o.RequireManagerApproval) {
 		var ret bool
 		return ret
 	}
@@ -264,7 +267,7 @@ func (o *UpdateGroupInfo) GetRequireManagerApproval() bool {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *UpdateGroupInfo) GetRequireManagerApprovalOk() (*bool, bool) {
-	if o == nil || o.RequireManagerApproval == nil {
+	if o == nil || IsNil(o.RequireManagerApproval) {
 		return nil, false
 	}
 	return o.RequireManagerApproval, true
@@ -272,7 +275,7 @@ func (o *UpdateGroupInfo) GetRequireManagerApprovalOk() (*bool, bool) {
 
 // HasRequireManagerApproval returns a boolean if a field has been set.
 func (o *UpdateGroupInfo) HasRequireManagerApproval() bool {
-	if o != nil && o.RequireManagerApproval != nil {
+	if o != nil && !IsNil(o.RequireManagerApproval) {
 		return true
 	}
 
@@ -287,7 +290,7 @@ func (o *UpdateGroupInfo) SetRequireManagerApproval(v bool) {
 
 // GetRequireSupportTicket returns the RequireSupportTicket field value if set, zero value otherwise.
 func (o *UpdateGroupInfo) GetRequireSupportTicket() bool {
-	if o == nil || o.RequireSupportTicket == nil {
+	if o == nil || IsNil(o.RequireSupportTicket) {
 		var ret bool
 		return ret
 	}
@@ -297,7 +300,7 @@ func (o *UpdateGroupInfo) GetRequireSupportTicket() bool {
 // GetRequireSupportTicketOk returns a tuple with the RequireSupportTicket field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateGroupInfo) GetRequireSupportTicketOk() (*bool, bool) {
-	if o == nil || o.RequireSupportTicket == nil {
+	if o == nil || IsNil(o.RequireSupportTicket) {
 		return nil, false
 	}
 	return o.RequireSupportTicket, true
@@ -305,7 +308,7 @@ func (o *UpdateGroupInfo) GetRequireSupportTicketOk() (*bool, bool) {
 
 // HasRequireSupportTicket returns a boolean if a field has been set.
 func (o *UpdateGroupInfo) HasRequireSupportTicket() bool {
-	if o != nil && o.RequireSupportTicket != nil {
+	if o != nil && !IsNil(o.RequireSupportTicket) {
 		return true
 	}
 
@@ -319,7 +322,7 @@ func (o *UpdateGroupInfo) SetRequireSupportTicket(v bool) {
 
 // GetFolderId returns the FolderId field value if set, zero value otherwise.
 func (o *UpdateGroupInfo) GetFolderId() string {
-	if o == nil || o.FolderId == nil {
+	if o == nil || IsNil(o.FolderId) {
 		var ret string
 		return ret
 	}
@@ -329,7 +332,7 @@ func (o *UpdateGroupInfo) GetFolderId() string {
 // GetFolderIdOk returns a tuple with the FolderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateGroupInfo) GetFolderIdOk() (*string, bool) {
-	if o == nil || o.FolderId == nil {
+	if o == nil || IsNil(o.FolderId) {
 		return nil, false
 	}
 	return o.FolderId, true
@@ -337,7 +340,7 @@ func (o *UpdateGroupInfo) GetFolderIdOk() (*string, bool) {
 
 // HasFolderId returns a boolean if a field has been set.
 func (o *UpdateGroupInfo) HasFolderId() bool {
-	if o != nil && o.FolderId != nil {
+	if o != nil && !IsNil(o.FolderId) {
 		return true
 	}
 
@@ -351,7 +354,7 @@ func (o *UpdateGroupInfo) SetFolderId(v string) {
 
 // GetRequireMfaToApprove returns the RequireMfaToApprove field value if set, zero value otherwise.
 func (o *UpdateGroupInfo) GetRequireMfaToApprove() bool {
-	if o == nil || o.RequireMfaToApprove == nil {
+	if o == nil || IsNil(o.RequireMfaToApprove) {
 		var ret bool
 		return ret
 	}
@@ -361,7 +364,7 @@ func (o *UpdateGroupInfo) GetRequireMfaToApprove() bool {
 // GetRequireMfaToApproveOk returns a tuple with the RequireMfaToApprove field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateGroupInfo) GetRequireMfaToApproveOk() (*bool, bool) {
-	if o == nil || o.RequireMfaToApprove == nil {
+	if o == nil || IsNil(o.RequireMfaToApprove) {
 		return nil, false
 	}
 	return o.RequireMfaToApprove, true
@@ -369,7 +372,7 @@ func (o *UpdateGroupInfo) GetRequireMfaToApproveOk() (*bool, bool) {
 
 // HasRequireMfaToApprove returns a boolean if a field has been set.
 func (o *UpdateGroupInfo) HasRequireMfaToApprove() bool {
-	if o != nil && o.RequireMfaToApprove != nil {
+	if o != nil && !IsNil(o.RequireMfaToApprove) {
 		return true
 	}
 
@@ -383,7 +386,7 @@ func (o *UpdateGroupInfo) SetRequireMfaToApprove(v bool) {
 
 // GetRequireMfaToRequest returns the RequireMfaToRequest field value if set, zero value otherwise.
 func (o *UpdateGroupInfo) GetRequireMfaToRequest() bool {
-	if o == nil || o.RequireMfaToRequest == nil {
+	if o == nil || IsNil(o.RequireMfaToRequest) {
 		var ret bool
 		return ret
 	}
@@ -393,7 +396,7 @@ func (o *UpdateGroupInfo) GetRequireMfaToRequest() bool {
 // GetRequireMfaToRequestOk returns a tuple with the RequireMfaToRequest field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateGroupInfo) GetRequireMfaToRequestOk() (*bool, bool) {
-	if o == nil || o.RequireMfaToRequest == nil {
+	if o == nil || IsNil(o.RequireMfaToRequest) {
 		return nil, false
 	}
 	return o.RequireMfaToRequest, true
@@ -401,7 +404,7 @@ func (o *UpdateGroupInfo) GetRequireMfaToRequestOk() (*bool, bool) {
 
 // HasRequireMfaToRequest returns a boolean if a field has been set.
 func (o *UpdateGroupInfo) HasRequireMfaToRequest() bool {
-	if o != nil && o.RequireMfaToRequest != nil {
+	if o != nil && !IsNil(o.RequireMfaToRequest) {
 		return true
 	}
 
@@ -415,7 +418,7 @@ func (o *UpdateGroupInfo) SetRequireMfaToRequest(v bool) {
 
 // GetAutoApproval returns the AutoApproval field value if set, zero value otherwise.
 func (o *UpdateGroupInfo) GetAutoApproval() bool {
-	if o == nil || o.AutoApproval == nil {
+	if o == nil || IsNil(o.AutoApproval) {
 		var ret bool
 		return ret
 	}
@@ -425,7 +428,7 @@ func (o *UpdateGroupInfo) GetAutoApproval() bool {
 // GetAutoApprovalOk returns a tuple with the AutoApproval field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateGroupInfo) GetAutoApprovalOk() (*bool, bool) {
-	if o == nil || o.AutoApproval == nil {
+	if o == nil || IsNil(o.AutoApproval) {
 		return nil, false
 	}
 	return o.AutoApproval, true
@@ -433,7 +436,7 @@ func (o *UpdateGroupInfo) GetAutoApprovalOk() (*bool, bool) {
 
 // HasAutoApproval returns a boolean if a field has been set.
 func (o *UpdateGroupInfo) HasAutoApproval() bool {
-	if o != nil && o.AutoApproval != nil {
+	if o != nil && !IsNil(o.AutoApproval) {
 		return true
 	}
 
@@ -447,7 +450,7 @@ func (o *UpdateGroupInfo) SetAutoApproval(v bool) {
 
 // GetRequestTemplateId returns the RequestTemplateId field value if set, zero value otherwise.
 func (o *UpdateGroupInfo) GetRequestTemplateId() string {
-	if o == nil || o.RequestTemplateId == nil {
+	if o == nil || IsNil(o.RequestTemplateId) {
 		var ret string
 		return ret
 	}
@@ -457,7 +460,7 @@ func (o *UpdateGroupInfo) GetRequestTemplateId() string {
 // GetRequestTemplateIdOk returns a tuple with the RequestTemplateId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateGroupInfo) GetRequestTemplateIdOk() (*string, bool) {
-	if o == nil || o.RequestTemplateId == nil {
+	if o == nil || IsNil(o.RequestTemplateId) {
 		return nil, false
 	}
 	return o.RequestTemplateId, true
@@ -465,7 +468,7 @@ func (o *UpdateGroupInfo) GetRequestTemplateIdOk() (*string, bool) {
 
 // HasRequestTemplateId returns a boolean if a field has been set.
 func (o *UpdateGroupInfo) HasRequestTemplateId() bool {
-	if o != nil && o.RequestTemplateId != nil {
+	if o != nil && !IsNil(o.RequestTemplateId) {
 		return true
 	}
 
@@ -479,7 +482,7 @@ func (o *UpdateGroupInfo) SetRequestTemplateId(v string) {
 
 // GetIsRequestable returns the IsRequestable field value if set, zero value otherwise.
 func (o *UpdateGroupInfo) GetIsRequestable() bool {
-	if o == nil || o.IsRequestable == nil {
+	if o == nil || IsNil(o.IsRequestable) {
 		var ret bool
 		return ret
 	}
@@ -489,7 +492,7 @@ func (o *UpdateGroupInfo) GetIsRequestable() bool {
 // GetIsRequestableOk returns a tuple with the IsRequestable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateGroupInfo) GetIsRequestableOk() (*bool, bool) {
-	if o == nil || o.IsRequestable == nil {
+	if o == nil || IsNil(o.IsRequestable) {
 		return nil, false
 	}
 	return o.IsRequestable, true
@@ -497,7 +500,7 @@ func (o *UpdateGroupInfo) GetIsRequestableOk() (*bool, bool) {
 
 // HasIsRequestable returns a boolean if a field has been set.
 func (o *UpdateGroupInfo) HasIsRequestable() bool {
-	if o != nil && o.IsRequestable != nil {
+	if o != nil && !IsNil(o.IsRequestable) {
 		return true
 	}
 
@@ -510,50 +513,56 @@ func (o *UpdateGroupInfo) SetIsRequestable(v bool) {
 }
 
 func (o UpdateGroupInfo) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["group_id"] = o.GroupId
-	}
-	if o.Name != nil {
-		toSerialize["name"] = o.Name
-	}
-	if o.Description != nil {
-		toSerialize["description"] = o.Description
-	}
-	if o.AdminOwnerId != nil {
-		toSerialize["admin_owner_id"] = o.AdminOwnerId
-	}
-	if o.MaxDuration != nil {
-		toSerialize["max_duration"] = o.MaxDuration
-	}
-	if o.RecommendedDuration != nil {
-		toSerialize["recommended_duration"] = o.RecommendedDuration
-	}
-	if o.RequireManagerApproval != nil {
-		toSerialize["require_manager_approval"] = o.RequireManagerApproval
-	}
-	if o.RequireSupportTicket != nil {
-		toSerialize["require_support_ticket"] = o.RequireSupportTicket
-	}
-	if o.FolderId != nil {
-		toSerialize["folder_id"] = o.FolderId
-	}
-	if o.RequireMfaToApprove != nil {
-		toSerialize["require_mfa_to_approve"] = o.RequireMfaToApprove
-	}
-	if o.RequireMfaToRequest != nil {
-		toSerialize["require_mfa_to_request"] = o.RequireMfaToRequest
-	}
-	if o.AutoApproval != nil {
-		toSerialize["auto_approval"] = o.AutoApproval
-	}
-	if o.RequestTemplateId != nil {
-		toSerialize["request_template_id"] = o.RequestTemplateId
-	}
-	if o.IsRequestable != nil {
-		toSerialize["is_requestable"] = o.IsRequestable
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UpdateGroupInfo) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["group_id"] = o.GroupId
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.AdminOwnerId) {
+		toSerialize["admin_owner_id"] = o.AdminOwnerId
+	}
+	if !IsNil(o.MaxDuration) {
+		toSerialize["max_duration"] = o.MaxDuration
+	}
+	if !IsNil(o.RecommendedDuration) {
+		toSerialize["recommended_duration"] = o.RecommendedDuration
+	}
+	if !IsNil(o.RequireManagerApproval) {
+		toSerialize["require_manager_approval"] = o.RequireManagerApproval
+	}
+	if !IsNil(o.RequireSupportTicket) {
+		toSerialize["require_support_ticket"] = o.RequireSupportTicket
+	}
+	if !IsNil(o.FolderId) {
+		toSerialize["folder_id"] = o.FolderId
+	}
+	if !IsNil(o.RequireMfaToApprove) {
+		toSerialize["require_mfa_to_approve"] = o.RequireMfaToApprove
+	}
+	if !IsNil(o.RequireMfaToRequest) {
+		toSerialize["require_mfa_to_request"] = o.RequireMfaToRequest
+	}
+	if !IsNil(o.AutoApproval) {
+		toSerialize["auto_approval"] = o.AutoApproval
+	}
+	if !IsNil(o.RequestTemplateId) {
+		toSerialize["request_template_id"] = o.RequestTemplateId
+	}
+	if !IsNil(o.IsRequestable) {
+		toSerialize["is_requestable"] = o.IsRequestable
+	}
+	return toSerialize, nil
 }
 
 type NullableUpdateGroupInfo struct {

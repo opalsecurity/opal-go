@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ReviewerIDList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ReviewerIDList{}
+
 // ReviewerIDList A list of reviewer IDs.
 type ReviewerIDList struct {
 	ReviewerIds []string `json:"reviewer_ids"`
@@ -63,11 +66,17 @@ func (o *ReviewerIDList) SetReviewerIds(v []string) {
 }
 
 func (o ReviewerIDList) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["reviewer_ids"] = o.ReviewerIds
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ReviewerIDList) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["reviewer_ids"] = o.ReviewerIds
+	return toSerialize, nil
 }
 
 type NullableReviewerIDList struct {

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ResourceRemoteInfoAwsEc2Instance type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceRemoteInfoAwsEc2Instance{}
+
 // ResourceRemoteInfoAwsEc2Instance Remote info for AWS EC2 instance.
 type ResourceRemoteInfoAwsEc2Instance struct {
 	// The instanceId of the EC2 instance.
@@ -91,14 +94,18 @@ func (o *ResourceRemoteInfoAwsEc2Instance) SetRegion(v string) {
 }
 
 func (o ResourceRemoteInfoAwsEc2Instance) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["instance_id"] = o.InstanceId
-	}
-	if true {
-		toSerialize["region"] = o.Region
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ResourceRemoteInfoAwsEc2Instance) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["instance_id"] = o.InstanceId
+	toSerialize["region"] = o.Region
+	return toSerialize, nil
 }
 
 type NullableResourceRemoteInfoAwsEc2Instance struct {

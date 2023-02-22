@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ResourceAccessLevel type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceAccessLevel{}
+
 // ResourceAccessLevel # Access Level Object ### Description The `ResourceAccessLevel` object is used to represent the level of access that a user has to a resource or a resource has to a group. The \"default\" access level is a `ResourceAccessLevel` object whose fields are all empty strings.  ### Usage Example View the `ResourceAccessLevel` of a resource/user or resource/group pair to see the level of access granted to the resource.
 type ResourceAccessLevel struct {
 	// The human-readable name of the access level.
@@ -91,14 +94,18 @@ func (o *ResourceAccessLevel) SetAccessLevelRemoteId(v string) {
 }
 
 func (o ResourceAccessLevel) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["access_level_name"] = o.AccessLevelName
-	}
-	if true {
-		toSerialize["access_level_remote_id"] = o.AccessLevelRemoteId
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ResourceAccessLevel) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["access_level_name"] = o.AccessLevelName
+	toSerialize["access_level_remote_id"] = o.AccessLevelRemoteId
+	return toSerialize, nil
 }
 
 type NullableResourceAccessLevel struct {

@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the ResourceUserAccessStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceUserAccessStatus{}
+
 // ResourceUserAccessStatus # AccessStatus Object ### Description The `AccessStatus` object is used to represent the user's access to the resource.  ### Usage Example View the `AccessStatus` for a resource/user pair to determine if the user has access to the resource.
 type ResourceUserAccessStatus struct {
 	// The ID of the resource.
@@ -99,7 +102,7 @@ func (o *ResourceUserAccessStatus) SetUserId(v string) {
 
 // GetAccessLevel returns the AccessLevel field value if set, zero value otherwise.
 func (o *ResourceUserAccessStatus) GetAccessLevel() ResourceAccessLevel {
-	if o == nil || o.AccessLevel == nil {
+	if o == nil || IsNil(o.AccessLevel) {
 		var ret ResourceAccessLevel
 		return ret
 	}
@@ -109,7 +112,7 @@ func (o *ResourceUserAccessStatus) GetAccessLevel() ResourceAccessLevel {
 // GetAccessLevelOk returns a tuple with the AccessLevel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceUserAccessStatus) GetAccessLevelOk() (*ResourceAccessLevel, bool) {
-	if o == nil || o.AccessLevel == nil {
+	if o == nil || IsNil(o.AccessLevel) {
 		return nil, false
 	}
 	return o.AccessLevel, true
@@ -117,7 +120,7 @@ func (o *ResourceUserAccessStatus) GetAccessLevelOk() (*ResourceAccessLevel, boo
 
 // HasAccessLevel returns a boolean if a field has been set.
 func (o *ResourceUserAccessStatus) HasAccessLevel() bool {
-	if o != nil && o.AccessLevel != nil {
+	if o != nil && !IsNil(o.AccessLevel) {
 		return true
 	}
 
@@ -180,23 +183,23 @@ func (o *ResourceUserAccessStatus) SetExpirationDate(v time.Time) {
 }
 
 func (o ResourceUserAccessStatus) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["resource_id"] = o.ResourceId
-	}
-	if true {
-		toSerialize["user_id"] = o.UserId
-	}
-	if o.AccessLevel != nil {
-		toSerialize["access_level"] = o.AccessLevel
-	}
-	if true {
-		toSerialize["status"] = o.Status
-	}
-	if true {
-		toSerialize["expiration_date"] = o.ExpirationDate.Get()
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ResourceUserAccessStatus) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["resource_id"] = o.ResourceId
+	toSerialize["user_id"] = o.UserId
+	if !IsNil(o.AccessLevel) {
+		toSerialize["access_level"] = o.AccessLevel
+	}
+	toSerialize["status"] = o.Status
+	toSerialize["expiration_date"] = o.ExpirationDate.Get()
+	return toSerialize, nil
 }
 
 type NullableResourceUserAccessStatus struct {

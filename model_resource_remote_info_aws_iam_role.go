@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ResourceRemoteInfoAwsIamRole type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceRemoteInfoAwsIamRole{}
+
 // ResourceRemoteInfoAwsIamRole Remote info for AWS IAM role.
 type ResourceRemoteInfoAwsIamRole struct {
 	// The ARN of the IAM role.
@@ -64,11 +67,17 @@ func (o *ResourceRemoteInfoAwsIamRole) SetArn(v string) {
 }
 
 func (o ResourceRemoteInfoAwsIamRole) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["arn"] = o.Arn
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ResourceRemoteInfoAwsIamRole) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["arn"] = o.Arn
+	return toSerialize, nil
 }
 
 type NullableResourceRemoteInfoAwsIamRole struct {

@@ -14,7 +14,7 @@ package opal
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 )
@@ -85,9 +85,9 @@ func (a *SessionsApiService) SessionsExecute(r ApiSessionsRequest) (*SessionsLis
 		return localVarReturnValue, nil, reportError("resourceId is required and must be specified")
 	}
 
-	localVarQueryParams.Add("resource_id", parameterToString(*r.resourceId, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "resource_id", r.resourceId, "")
 	if r.userId != nil {
-		localVarQueryParams.Add("user_id", parameterToString(*r.userId, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "user_id", r.userId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -116,9 +116,9 @@ func (a *SessionsApiService) SessionsExecute(r ApiSessionsRequest) (*SessionsLis
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}

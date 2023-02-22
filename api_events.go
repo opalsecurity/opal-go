@@ -14,7 +14,7 @@ package opal
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 )
@@ -118,25 +118,25 @@ func (a *EventsApiService) EventsExecute(r ApiEventsRequest) (*PaginatedEventLis
 	localVarFormParams := url.Values{}
 
 	if r.startDateFilter != nil {
-		localVarQueryParams.Add("start_date_filter", parameterToString(*r.startDateFilter, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "start_date_filter", r.startDateFilter, "")
 	}
 	if r.endDateFilter != nil {
-		localVarQueryParams.Add("end_date_filter", parameterToString(*r.endDateFilter, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "end_date_filter", r.endDateFilter, "")
 	}
 	if r.actorFilter != nil {
-		localVarQueryParams.Add("actor_filter", parameterToString(*r.actorFilter, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "actor_filter", r.actorFilter, "")
 	}
 	if r.objectFilter != nil {
-		localVarQueryParams.Add("object_filter", parameterToString(*r.objectFilter, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "object_filter", r.objectFilter, "")
 	}
 	if r.eventTypeFilter != nil {
-		localVarQueryParams.Add("event_type_filter", parameterToString(*r.eventTypeFilter, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "event_type_filter", r.eventTypeFilter, "")
 	}
 	if r.cursor != nil {
-		localVarQueryParams.Add("cursor", parameterToString(*r.cursor, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "")
 	}
 	if r.pageSize != nil {
-		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -165,9 +165,9 @@ func (a *EventsApiService) EventsExecute(r ApiEventsRequest) (*PaginatedEventLis
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}

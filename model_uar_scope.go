@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the UARScope type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UARScope{}
+
 // UARScope If set, the access review will only contain resources and groups that match at least one of the filters in scope.
 type UARScope struct {
 	// This access review will include resources and groups who are tagged with one of the given tags.
@@ -44,7 +47,7 @@ func NewUARScopeWithDefaults() *UARScope {
 
 // GetTags returns the Tags field value if set, zero value otherwise.
 func (o *UARScope) GetTags() []TagFilter {
-	if o == nil || o.Tags == nil {
+	if o == nil || IsNil(o.Tags) {
 		var ret []TagFilter
 		return ret
 	}
@@ -54,7 +57,7 @@ func (o *UARScope) GetTags() []TagFilter {
 // GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UARScope) GetTagsOk() ([]TagFilter, bool) {
-	if o == nil || o.Tags == nil {
+	if o == nil || IsNil(o.Tags) {
 		return nil, false
 	}
 	return o.Tags, true
@@ -62,7 +65,7 @@ func (o *UARScope) GetTagsOk() ([]TagFilter, bool) {
 
 // HasTags returns a boolean if a field has been set.
 func (o *UARScope) HasTags() bool {
-	if o != nil && o.Tags != nil {
+	if o != nil && !IsNil(o.Tags) {
 		return true
 	}
 
@@ -76,7 +79,7 @@ func (o *UARScope) SetTags(v []TagFilter) {
 
 // GetNames returns the Names field value if set, zero value otherwise.
 func (o *UARScope) GetNames() []string {
-	if o == nil || o.Names == nil {
+	if o == nil || IsNil(o.Names) {
 		var ret []string
 		return ret
 	}
@@ -86,7 +89,7 @@ func (o *UARScope) GetNames() []string {
 // GetNamesOk returns a tuple with the Names field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UARScope) GetNamesOk() ([]string, bool) {
-	if o == nil || o.Names == nil {
+	if o == nil || IsNil(o.Names) {
 		return nil, false
 	}
 	return o.Names, true
@@ -94,7 +97,7 @@ func (o *UARScope) GetNamesOk() ([]string, bool) {
 
 // HasNames returns a boolean if a field has been set.
 func (o *UARScope) HasNames() bool {
-	if o != nil && o.Names != nil {
+	if o != nil && !IsNil(o.Names) {
 		return true
 	}
 
@@ -108,7 +111,7 @@ func (o *UARScope) SetNames(v []string) {
 
 // GetAdmins returns the Admins field value if set, zero value otherwise.
 func (o *UARScope) GetAdmins() []string {
-	if o == nil || o.Admins == nil {
+	if o == nil || IsNil(o.Admins) {
 		var ret []string
 		return ret
 	}
@@ -118,7 +121,7 @@ func (o *UARScope) GetAdmins() []string {
 // GetAdminsOk returns a tuple with the Admins field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UARScope) GetAdminsOk() ([]string, bool) {
-	if o == nil || o.Admins == nil {
+	if o == nil || IsNil(o.Admins) {
 		return nil, false
 	}
 	return o.Admins, true
@@ -126,7 +129,7 @@ func (o *UARScope) GetAdminsOk() ([]string, bool) {
 
 // HasAdmins returns a boolean if a field has been set.
 func (o *UARScope) HasAdmins() bool {
-	if o != nil && o.Admins != nil {
+	if o != nil && !IsNil(o.Admins) {
 		return true
 	}
 
@@ -139,17 +142,25 @@ func (o *UARScope) SetAdmins(v []string) {
 }
 
 func (o UARScope) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Tags != nil {
-		toSerialize["tags"] = o.Tags
-	}
-	if o.Names != nil {
-		toSerialize["names"] = o.Names
-	}
-	if o.Admins != nil {
-		toSerialize["admins"] = o.Admins
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UARScope) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Tags) {
+		toSerialize["tags"] = o.Tags
+	}
+	if !IsNil(o.Names) {
+		toSerialize["names"] = o.Names
+	}
+	if !IsNil(o.Admins) {
+		toSerialize["admins"] = o.Admins
+	}
+	return toSerialize, nil
 }
 
 type NullableUARScope struct {

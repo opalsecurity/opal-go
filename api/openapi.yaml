@@ -962,6 +962,31 @@ paths:
       - BearerAuth: []
       tags:
       - owners
+  /owners/name/{owner_name}:
+    get:
+      description: Returns an `Owner` object.
+      operationId: getOwnerFromName
+      parameters:
+      - description: The name of the owner.
+        example: MyOwner
+        explode: true
+        in: path
+        name: owner_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Owner'
+          description: The owner object associated with the passed-in name.
+      security:
+      - BearerAuth: []
+      tags:
+      - owners
   /owners/{owner_id}/users:
     get:
       description: "Gets the list of users for this owner, in escalation priority\
@@ -3930,6 +3955,8 @@ components:
           $ref: '#/components/schemas/GroupRemoteInfo_active_directory_group'
         github_team:
           $ref: '#/components/schemas/GroupRemoteInfo_github_team'
+        gitlab_group:
+          $ref: '#/components/schemas/GroupRemoteInfo_gitlab_group'
         google_group:
           $ref: '#/components/schemas/GroupRemoteInfo_google_group'
         ldap_group:
@@ -3953,12 +3980,16 @@ components:
           $ref: '#/components/schemas/ResourceRemoteInfo_aws_eks_cluster'
         github_repo:
           $ref: '#/components/schemas/ResourceRemoteInfo_github_repo'
+        gitlab_project:
+          $ref: '#/components/schemas/ResourceRemoteInfo_gitlab_project'
         okta_app:
           $ref: '#/components/schemas/ResourceRemoteInfo_okta_app'
         okta_standard_role:
           $ref: '#/components/schemas/ResourceRemoteInfo_okta_standard_role'
         okta_custom_role:
           $ref: '#/components/schemas/ResourceRemoteInfo_okta_custom_role'
+        teleport_role:
+          $ref: '#/components/schemas/ResourceRemoteInfo_teleport_role'
       type: object
     CreateResourceInfo:
       description: |-
@@ -4999,6 +5030,16 @@ components:
       required:
       - team_slug
       type: object
+    GroupRemoteInfo_gitlab_group:
+      description: Remote info for Gitlab group.
+      properties:
+        group_id:
+          description: The id of the Gitlab group.
+          example: "898931321"
+          type: string
+      required:
+      - group_id
+      type: object
     GroupRemoteInfo_google_group:
       description: Remote info for Google group.
       properties:
@@ -5095,7 +5136,7 @@ components:
       - arn
       type: object
     ResourceRemoteInfo_github_repo:
-      description: Remote info for GitHub repositories.
+      description: Remote info for GitHub repository.
       properties:
         repo_id:
           deprecated: true
@@ -5108,6 +5149,16 @@ components:
           type: string
       required:
       - repo_name
+      type: object
+    ResourceRemoteInfo_gitlab_project:
+      description: Remote info for Gitlab project.
+      properties:
+        project_id:
+          description: The id of the project.
+          example: "898931321"
+          type: string
+      required:
+      - project_id
       type: object
     ResourceRemoteInfo_okta_app:
       description: Remote info for Okta directory app.
@@ -5138,6 +5189,16 @@ components:
           type: string
       required:
       - role_id
+      type: object
+    ResourceRemoteInfo_teleport_role:
+      description: Remote info for Teleport role.
+      properties:
+        role_name:
+          description: The name role.
+          example: admin_role
+          type: string
+      required:
+      - role_name
       type: object
   securitySchemes:
     BearerAuth:

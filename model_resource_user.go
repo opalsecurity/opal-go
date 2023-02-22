@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the ResourceUser type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceUser{}
+
 // ResourceUser # Resource User Object ### Description The `ResourceUser` object is used to represent a user with direct access to a resource.
 type ResourceUser struct {
 	// The ID of the resource.
@@ -201,26 +204,22 @@ func (o *ResourceUser) SetExpirationDate(v time.Time) {
 }
 
 func (o ResourceUser) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["resource_id"] = o.ResourceId
-	}
-	if true {
-		toSerialize["user_id"] = o.UserId
-	}
-	if true {
-		toSerialize["access_level"] = o.AccessLevel
-	}
-	if true {
-		toSerialize["full_name"] = o.FullName
-	}
-	if true {
-		toSerialize["email"] = o.Email
-	}
-	if true {
-		toSerialize["expiration_date"] = o.ExpirationDate.Get()
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ResourceUser) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["resource_id"] = o.ResourceId
+	toSerialize["user_id"] = o.UserId
+	toSerialize["access_level"] = o.AccessLevel
+	toSerialize["full_name"] = o.FullName
+	toSerialize["email"] = o.Email
+	toSerialize["expiration_date"] = o.ExpirationDate.Get()
+	return toSerialize, nil
 }
 
 type NullableResourceUser struct {

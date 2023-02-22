@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ActiveDirectoryGroup** | Pointer to [**GroupRemoteInfoActiveDirectoryGroup**](GroupRemoteInfoActiveDirectoryGroup.md) |  | [optional] 
 **GithubTeam** | Pointer to [**GroupRemoteInfoGithubTeam**](GroupRemoteInfoGithubTeam.md) |  | [optional] 
+**GitlabGroup** | Pointer to [**GroupRemoteInfoGitlabGroup**](GroupRemoteInfoGitlabGroup.md) |  | [optional] 
 **GoogleGroup** | Pointer to [**GroupRemoteInfoGoogleGroup**](GroupRemoteInfoGoogleGroup.md) |  | [optional] 
 **LdapGroup** | Pointer to [**GroupRemoteInfoLdapGroup**](GroupRemoteInfoLdapGroup.md) |  | [optional] 
 **OktaGroup** | Pointer to [**GroupRemoteInfoOktaGroup**](GroupRemoteInfoOktaGroup.md) |  | [optional] 
@@ -79,6 +80,31 @@ SetGithubTeam sets GithubTeam field to given value.
 `func (o *GroupRemoteInfo) HasGithubTeam() bool`
 
 HasGithubTeam returns a boolean if a field has been set.
+
+### GetGitlabGroup
+
+`func (o *GroupRemoteInfo) GetGitlabGroup() GroupRemoteInfoGitlabGroup`
+
+GetGitlabGroup returns the GitlabGroup field if non-nil, zero value otherwise.
+
+### GetGitlabGroupOk
+
+`func (o *GroupRemoteInfo) GetGitlabGroupOk() (*GroupRemoteInfoGitlabGroup, bool)`
+
+GetGitlabGroupOk returns a tuple with the GitlabGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGitlabGroup
+
+`func (o *GroupRemoteInfo) SetGitlabGroup(v GroupRemoteInfoGitlabGroup)`
+
+SetGitlabGroup sets GitlabGroup field to given value.
+
+### HasGitlabGroup
+
+`func (o *GroupRemoteInfo) HasGitlabGroup() bool`
+
+HasGitlabGroup returns a boolean if a field has been set.
 
 ### GetGoogleGroup
 

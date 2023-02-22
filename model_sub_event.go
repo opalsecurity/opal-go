@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the SubEvent type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SubEvent{}
+
 // SubEvent # Sub event Object ### Description The `SubEvent` object is used to represent a subevent.  ### Usage Example Fetch from the `LIST Events` endpoint.
 type SubEvent struct {
 	// The subevent type.
@@ -67,16 +70,22 @@ func (o *SubEvent) SetSubEventType(v string) {
 }
 
 func (o SubEvent) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["sub_event_type"] = o.SubEventType
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SubEvent) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["sub_event_type"] = o.SubEventType
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 func (o *SubEvent) UnmarshalJSON(bytes []byte) (err error) {

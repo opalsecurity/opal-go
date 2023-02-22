@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the PaginatedGroupsList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PaginatedGroupsList{}
+
 // PaginatedGroupsList struct for PaginatedGroupsList
 type PaginatedGroupsList struct {
 	// The cursor with which to continue pagination if additional result pages exist.
@@ -44,7 +47,7 @@ func NewPaginatedGroupsListWithDefaults() *PaginatedGroupsList {
 
 // GetNext returns the Next field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaginatedGroupsList) GetNext() string {
-	if o == nil || o.Next.Get() == nil {
+	if o == nil || IsNil(o.Next.Get()) {
 		var ret string
 		return ret
 	}
@@ -86,7 +89,7 @@ func (o *PaginatedGroupsList) UnsetNext() {
 
 // GetPrevious returns the Previous field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaginatedGroupsList) GetPrevious() string {
-	if o == nil || o.Previous.Get() == nil {
+	if o == nil || IsNil(o.Previous.Get()) {
 		var ret string
 		return ret
 	}
@@ -151,6 +154,14 @@ func (o *PaginatedGroupsList) SetResults(v []Group) {
 }
 
 func (o PaginatedGroupsList) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PaginatedGroupsList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Next.IsSet() {
 		toSerialize["next"] = o.Next.Get()
@@ -158,10 +169,8 @@ func (o PaginatedGroupsList) MarshalJSON() ([]byte, error) {
 	if o.Previous.IsSet() {
 		toSerialize["previous"] = o.Previous.Get()
 	}
-	if true {
-		toSerialize["results"] = o.Results
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["results"] = o.Results
+	return toSerialize, nil
 }
 
 type NullablePaginatedGroupsList struct {

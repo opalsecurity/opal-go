@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the SessionsList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SessionsList{}
+
 // SessionsList struct for SessionsList
 type SessionsList struct {
 	// The cursor with which to continue pagination if additional result pages exist.
@@ -43,7 +46,7 @@ func NewSessionsListWithDefaults() *SessionsList {
 
 // GetNext returns the Next field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SessionsList) GetNext() string {
-	if o == nil || o.Next.Get() == nil {
+	if o == nil || IsNil(o.Next.Get()) {
 		var ret string
 		return ret
 	}
@@ -85,7 +88,7 @@ func (o *SessionsList) UnsetNext() {
 
 // GetPrevious returns the Previous field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SessionsList) GetPrevious() string {
-	if o == nil || o.Previous.Get() == nil {
+	if o == nil || IsNil(o.Previous.Get()) {
 		var ret string
 		return ret
 	}
@@ -127,7 +130,7 @@ func (o *SessionsList) UnsetPrevious() {
 
 // GetResults returns the Results field value if set, zero value otherwise.
 func (o *SessionsList) GetResults() []Session {
-	if o == nil || o.Results == nil {
+	if o == nil || IsNil(o.Results) {
 		var ret []Session
 		return ret
 	}
@@ -137,7 +140,7 @@ func (o *SessionsList) GetResults() []Session {
 // GetResultsOk returns a tuple with the Results field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SessionsList) GetResultsOk() ([]Session, bool) {
-	if o == nil || o.Results == nil {
+	if o == nil || IsNil(o.Results) {
 		return nil, false
 	}
 	return o.Results, true
@@ -145,7 +148,7 @@ func (o *SessionsList) GetResultsOk() ([]Session, bool) {
 
 // HasResults returns a boolean if a field has been set.
 func (o *SessionsList) HasResults() bool {
-	if o != nil && o.Results != nil {
+	if o != nil && !IsNil(o.Results) {
 		return true
 	}
 
@@ -158,6 +161,14 @@ func (o *SessionsList) SetResults(v []Session) {
 }
 
 func (o SessionsList) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SessionsList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Next.IsSet() {
 		toSerialize["next"] = o.Next.Get()
@@ -165,10 +176,10 @@ func (o SessionsList) MarshalJSON() ([]byte, error) {
 	if o.Previous.IsSet() {
 		toSerialize["previous"] = o.Previous.Get()
 	}
-	if o.Results != nil {
+	if !IsNil(o.Results) {
 		toSerialize["results"] = o.Results
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableSessionsList struct {

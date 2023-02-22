@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the Event type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Event{}
+
 // Event # Event Object ### Description The `Event` object is used to represent an event.  ### Usage Example Fetch from the `LIST Events` endpoint.
 type Event struct {
 	// The ID of the event.
@@ -118,7 +121,7 @@ func (o *Event) GetActorName() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Event) GetActorNameOk() (*interface{}, bool) {
-	if o == nil || o.ActorName == nil {
+	if o == nil || IsNil(o.ActorName) {
 		return nil, false
 	}
 	return &o.ActorName, true
@@ -131,7 +134,7 @@ func (o *Event) SetActorName(v interface{}) {
 
 // GetActorEmail returns the ActorEmail field value if set, zero value otherwise.
 func (o *Event) GetActorEmail() string {
-	if o == nil || o.ActorEmail == nil {
+	if o == nil || IsNil(o.ActorEmail) {
 		var ret string
 		return ret
 	}
@@ -141,7 +144,7 @@ func (o *Event) GetActorEmail() string {
 // GetActorEmailOk returns a tuple with the ActorEmail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Event) GetActorEmailOk() (*string, bool) {
-	if o == nil || o.ActorEmail == nil {
+	if o == nil || IsNil(o.ActorEmail) {
 		return nil, false
 	}
 	return o.ActorEmail, true
@@ -149,7 +152,7 @@ func (o *Event) GetActorEmailOk() (*string, bool) {
 
 // HasActorEmail returns a boolean if a field has been set.
 func (o *Event) HasActorEmail() bool {
-	if o != nil && o.ActorEmail != nil {
+	if o != nil && !IsNil(o.ActorEmail) {
 		return true
 	}
 
@@ -211,7 +214,7 @@ func (o *Event) SetCreatedAt(v time.Time) {
 
 // GetSubEvents returns the SubEvents field value if set, zero value otherwise.
 func (o *Event) GetSubEvents() []SubEvent {
-	if o == nil || o.SubEvents == nil {
+	if o == nil || IsNil(o.SubEvents) {
 		var ret []SubEvent
 		return ret
 	}
@@ -221,7 +224,7 @@ func (o *Event) GetSubEvents() []SubEvent {
 // GetSubEventsOk returns a tuple with the SubEvents field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Event) GetSubEventsOk() ([]SubEvent, bool) {
-	if o == nil || o.SubEvents == nil {
+	if o == nil || IsNil(o.SubEvents) {
 		return nil, false
 	}
 	return o.SubEvents, true
@@ -229,7 +232,7 @@ func (o *Event) GetSubEventsOk() ([]SubEvent, bool) {
 
 // HasSubEvents returns a boolean if a field has been set.
 func (o *Event) HasSubEvents() bool {
-	if o != nil && o.SubEvents != nil {
+	if o != nil && !IsNil(o.SubEvents) {
 		return true
 	}
 
@@ -242,29 +245,29 @@ func (o *Event) SetSubEvents(v []SubEvent) {
 }
 
 func (o Event) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Event) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["event_id"] = o.EventId
-	}
-	if true {
-		toSerialize["actor_user_id"] = o.ActorUserId
-	}
+	toSerialize["event_id"] = o.EventId
+	toSerialize["actor_user_id"] = o.ActorUserId
 	if o.ActorName != nil {
 		toSerialize["actor_name"] = o.ActorName
 	}
-	if o.ActorEmail != nil {
+	if !IsNil(o.ActorEmail) {
 		toSerialize["actor_email"] = o.ActorEmail
 	}
-	if true {
-		toSerialize["event_type"] = o.EventType
-	}
-	if true {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if o.SubEvents != nil {
+	toSerialize["event_type"] = o.EventType
+	toSerialize["created_at"] = o.CreatedAt
+	if !IsNil(o.SubEvents) {
 		toSerialize["sub_events"] = o.SubEvents
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableEvent struct {

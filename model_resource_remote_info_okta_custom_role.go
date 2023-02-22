@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ResourceRemoteInfoOktaCustomRole type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceRemoteInfoOktaCustomRole{}
+
 // ResourceRemoteInfoOktaCustomRole Remote info for Okta directory custom role.
 type ResourceRemoteInfoOktaCustomRole struct {
 	// The id of the custom role.
@@ -64,11 +67,17 @@ func (o *ResourceRemoteInfoOktaCustomRole) SetRoleId(v string) {
 }
 
 func (o ResourceRemoteInfoOktaCustomRole) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["role_id"] = o.RoleId
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ResourceRemoteInfoOktaCustomRole) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["role_id"] = o.RoleId
+	return toSerialize, nil
 }
 
 type NullableResourceRemoteInfoOktaCustomRole struct {

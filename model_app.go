@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the App type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &App{}
+
 // App # App Object ### Description The `App` object is used to represent an app to an application.  ### Usage Example List from the `GET Apps` endpoint.
 type App struct {
 	// The ID of the app.
@@ -171,23 +174,21 @@ func (o *App) SetAppType(v AppTypeEnum) {
 }
 
 func (o App) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["app_id"] = o.AppId
-	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if true {
-		toSerialize["description"] = o.Description
-	}
-	if true {
-		toSerialize["admin_owner_id"] = o.AdminOwnerId
-	}
-	if true {
-		toSerialize["app_type"] = o.AppType
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o App) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["app_id"] = o.AppId
+	toSerialize["name"] = o.Name
+	toSerialize["description"] = o.Description
+	toSerialize["admin_owner_id"] = o.AdminOwnerId
+	toSerialize["app_type"] = o.AppType
+	return toSerialize, nil
 }
 
 type NullableApp struct {

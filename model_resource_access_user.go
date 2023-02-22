@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the ResourceAccessUser type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceAccessUser{}
+
 // ResourceAccessUser # Resource Access User Object ### Description The `ResourceAccessUser` object is used to represent a user with access to a resource, either directly or indirectly through group(s).  ### Usage Example Fetch from the `LIST ResourceUsers` endpoint.
 type ResourceAccessUser struct {
 	// The ID of the resource.
@@ -255,32 +258,24 @@ func (o *ResourceAccessUser) SetNumAccessPaths(v int32) {
 }
 
 func (o ResourceAccessUser) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["resource_id"] = o.ResourceId
-	}
-	if true {
-		toSerialize["user_id"] = o.UserId
-	}
-	if true {
-		toSerialize["access_level"] = o.AccessLevel
-	}
-	if true {
-		toSerialize["full_name"] = o.FullName
-	}
-	if true {
-		toSerialize["email"] = o.Email
-	}
-	if true {
-		toSerialize["expiration_date"] = o.ExpirationDate.Get()
-	}
-	if true {
-		toSerialize["has_direct_access"] = o.HasDirectAccess
-	}
-	if true {
-		toSerialize["num_access_paths"] = o.NumAccessPaths
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ResourceAccessUser) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["resource_id"] = o.ResourceId
+	toSerialize["user_id"] = o.UserId
+	toSerialize["access_level"] = o.AccessLevel
+	toSerialize["full_name"] = o.FullName
+	toSerialize["email"] = o.Email
+	toSerialize["expiration_date"] = o.ExpirationDate.Get()
+	toSerialize["has_direct_access"] = o.HasDirectAccess
+	toSerialize["num_access_paths"] = o.NumAccessPaths
+	return toSerialize, nil
 }
 
 type NullableResourceAccessUser struct {

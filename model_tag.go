@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the Tag type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Tag{}
+
 // Tag # Tag Object ### Description The `Tag` object is used to represent a tag.  ### Usage Example Get tags from the `GET Tag` endpoint.
 type Tag struct {
 	// The ID of the tag.
@@ -76,7 +79,7 @@ func (o *Tag) SetTagId(v string) {
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *Tag) GetCreatedAt() time.Time {
-	if o == nil || o.CreatedAt == nil {
+	if o == nil || IsNil(o.CreatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -86,7 +89,7 @@ func (o *Tag) GetCreatedAt() time.Time {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Tag) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || o.CreatedAt == nil {
+	if o == nil || IsNil(o.CreatedAt) {
 		return nil, false
 	}
 	return o.CreatedAt, true
@@ -94,7 +97,7 @@ func (o *Tag) GetCreatedAtOk() (*time.Time, bool) {
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *Tag) HasCreatedAt() bool {
-	if o != nil && o.CreatedAt != nil {
+	if o != nil && !IsNil(o.CreatedAt) {
 		return true
 	}
 
@@ -108,7 +111,7 @@ func (o *Tag) SetCreatedAt(v time.Time) {
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *Tag) GetUpdatedAt() time.Time {
-	if o == nil || o.UpdatedAt == nil {
+	if o == nil || IsNil(o.UpdatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -118,7 +121,7 @@ func (o *Tag) GetUpdatedAt() time.Time {
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Tag) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || o.UpdatedAt == nil {
+	if o == nil || IsNil(o.UpdatedAt) {
 		return nil, false
 	}
 	return o.UpdatedAt, true
@@ -126,7 +129,7 @@ func (o *Tag) GetUpdatedAtOk() (*time.Time, bool) {
 
 // HasUpdatedAt returns a boolean if a field has been set.
 func (o *Tag) HasUpdatedAt() bool {
-	if o != nil && o.UpdatedAt != nil {
+	if o != nil && !IsNil(o.UpdatedAt) {
 		return true
 	}
 
@@ -140,7 +143,7 @@ func (o *Tag) SetUpdatedAt(v time.Time) {
 
 // GetUserCreatorId returns the UserCreatorId field value if set, zero value otherwise.
 func (o *Tag) GetUserCreatorId() string {
-	if o == nil || o.UserCreatorId == nil {
+	if o == nil || IsNil(o.UserCreatorId) {
 		var ret string
 		return ret
 	}
@@ -150,7 +153,7 @@ func (o *Tag) GetUserCreatorId() string {
 // GetUserCreatorIdOk returns a tuple with the UserCreatorId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Tag) GetUserCreatorIdOk() (*string, bool) {
-	if o == nil || o.UserCreatorId == nil {
+	if o == nil || IsNil(o.UserCreatorId) {
 		return nil, false
 	}
 	return o.UserCreatorId, true
@@ -158,7 +161,7 @@ func (o *Tag) GetUserCreatorIdOk() (*string, bool) {
 
 // HasUserCreatorId returns a boolean if a field has been set.
 func (o *Tag) HasUserCreatorId() bool {
-	if o != nil && o.UserCreatorId != nil {
+	if o != nil && !IsNil(o.UserCreatorId) {
 		return true
 	}
 
@@ -172,7 +175,7 @@ func (o *Tag) SetUserCreatorId(v string) {
 
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *Tag) GetKey() string {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		var ret string
 		return ret
 	}
@@ -182,7 +185,7 @@ func (o *Tag) GetKey() string {
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Tag) GetKeyOk() (*string, bool) {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		return nil, false
 	}
 	return o.Key, true
@@ -190,7 +193,7 @@ func (o *Tag) GetKeyOk() (*string, bool) {
 
 // HasKey returns a boolean if a field has been set.
 func (o *Tag) HasKey() bool {
-	if o != nil && o.Key != nil {
+	if o != nil && !IsNil(o.Key) {
 		return true
 	}
 
@@ -204,7 +207,7 @@ func (o *Tag) SetKey(v string) {
 
 // GetValue returns the Value field value if set, zero value otherwise.
 func (o *Tag) GetValue() string {
-	if o == nil || o.Value == nil {
+	if o == nil || IsNil(o.Value) {
 		var ret string
 		return ret
 	}
@@ -214,7 +217,7 @@ func (o *Tag) GetValue() string {
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Tag) GetValueOk() (*string, bool) {
-	if o == nil || o.Value == nil {
+	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
 	return o.Value, true
@@ -222,7 +225,7 @@ func (o *Tag) GetValueOk() (*string, bool) {
 
 // HasValue returns a boolean if a field has been set.
 func (o *Tag) HasValue() bool {
-	if o != nil && o.Value != nil {
+	if o != nil && !IsNil(o.Value) {
 		return true
 	}
 
@@ -235,26 +238,32 @@ func (o *Tag) SetValue(v string) {
 }
 
 func (o Tag) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["tag_id"] = o.TagId
-	}
-	if o.CreatedAt != nil {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if o.UpdatedAt != nil {
-		toSerialize["updated_at"] = o.UpdatedAt
-	}
-	if o.UserCreatorId != nil {
-		toSerialize["user_creator_id"] = o.UserCreatorId
-	}
-	if o.Key != nil {
-		toSerialize["key"] = o.Key
-	}
-	if o.Value != nil {
-		toSerialize["value"] = o.Value
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o Tag) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["tag_id"] = o.TagId
+	if !IsNil(o.CreatedAt) {
+		toSerialize["created_at"] = o.CreatedAt
+	}
+	if !IsNil(o.UpdatedAt) {
+		toSerialize["updated_at"] = o.UpdatedAt
+	}
+	if !IsNil(o.UserCreatorId) {
+		toSerialize["user_creator_id"] = o.UserCreatorId
+	}
+	if !IsNil(o.Key) {
+		toSerialize["key"] = o.Key
+	}
+	if !IsNil(o.Value) {
+		toSerialize["value"] = o.Value
+	}
+	return toSerialize, nil
 }
 
 type NullableTag struct {

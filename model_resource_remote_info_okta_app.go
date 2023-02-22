@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ResourceRemoteInfoOktaApp type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceRemoteInfoOktaApp{}
+
 // ResourceRemoteInfoOktaApp Remote info for Okta directory app.
 type ResourceRemoteInfoOktaApp struct {
 	// The id of the app.
@@ -64,11 +67,17 @@ func (o *ResourceRemoteInfoOktaApp) SetAppId(v string) {
 }
 
 func (o ResourceRemoteInfoOktaApp) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["app_id"] = o.AppId
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ResourceRemoteInfoOktaApp) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["app_id"] = o.AppId
+	return toSerialize, nil
 }
 
 type NullableResourceRemoteInfoOktaApp struct {

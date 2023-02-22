@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the PaginatedEventList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PaginatedEventList{}
+
 // PaginatedEventList struct for PaginatedEventList
 type PaginatedEventList struct {
 	// The cursor with which to continue pagination if additional result pages exist.
@@ -43,7 +46,7 @@ func NewPaginatedEventListWithDefaults() *PaginatedEventList {
 
 // GetNext returns the Next field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaginatedEventList) GetNext() string {
-	if o == nil || o.Next.Get() == nil {
+	if o == nil || IsNil(o.Next.Get()) {
 		var ret string
 		return ret
 	}
@@ -85,7 +88,7 @@ func (o *PaginatedEventList) UnsetNext() {
 
 // GetPrevious returns the Previous field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaginatedEventList) GetPrevious() string {
-	if o == nil || o.Previous.Get() == nil {
+	if o == nil || IsNil(o.Previous.Get()) {
 		var ret string
 		return ret
 	}
@@ -127,7 +130,7 @@ func (o *PaginatedEventList) UnsetPrevious() {
 
 // GetResults returns the Results field value if set, zero value otherwise.
 func (o *PaginatedEventList) GetResults() []Event {
-	if o == nil || o.Results == nil {
+	if o == nil || IsNil(o.Results) {
 		var ret []Event
 		return ret
 	}
@@ -137,7 +140,7 @@ func (o *PaginatedEventList) GetResults() []Event {
 // GetResultsOk returns a tuple with the Results field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PaginatedEventList) GetResultsOk() ([]Event, bool) {
-	if o == nil || o.Results == nil {
+	if o == nil || IsNil(o.Results) {
 		return nil, false
 	}
 	return o.Results, true
@@ -145,7 +148,7 @@ func (o *PaginatedEventList) GetResultsOk() ([]Event, bool) {
 
 // HasResults returns a boolean if a field has been set.
 func (o *PaginatedEventList) HasResults() bool {
-	if o != nil && o.Results != nil {
+	if o != nil && !IsNil(o.Results) {
 		return true
 	}
 
@@ -158,6 +161,14 @@ func (o *PaginatedEventList) SetResults(v []Event) {
 }
 
 func (o PaginatedEventList) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PaginatedEventList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Next.IsSet() {
 		toSerialize["next"] = o.Next.Get()
@@ -165,10 +176,10 @@ func (o PaginatedEventList) MarshalJSON() ([]byte, error) {
 	if o.Previous.IsSet() {
 		toSerialize["previous"] = o.Previous.Get()
 	}
-	if o.Results != nil {
+	if !IsNil(o.Results) {
 		toSerialize["results"] = o.Results
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullablePaginatedEventList struct {

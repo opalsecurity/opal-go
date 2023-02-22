@@ -45,7 +45,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -120,7 +120,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -197,7 +197,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -263,7 +263,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -271,7 +271,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.DeleteGroup(context.Background(), groupId).Execute()
+    r, err := apiClient.GroupsApi.DeleteGroup(context.Background(), groupId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.DeleteGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -331,7 +331,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -340,7 +340,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.DeleteGroupUser(context.Background(), groupId, userId).Execute()
+    r, err := apiClient.GroupsApi.DeleteGroupUser(context.Background(), groupId, userId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.DeleteGroupUser``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -402,7 +402,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -472,7 +472,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -542,7 +542,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -612,7 +612,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -682,7 +682,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -752,7 +752,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -822,7 +822,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -892,7 +892,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -962,7 +962,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -1036,7 +1036,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -1108,7 +1108,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -1180,7 +1180,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -1189,7 +1189,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.SetGroupResources(context.Background(), groupId).UpdateGroupResourcesInfo(updateGroupResourcesInfo).Execute()
+    r, err := apiClient.GroupsApi.SetGroupResources(context.Background(), groupId).UpdateGroupResourcesInfo(updateGroupResourcesInfo).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.SetGroupResources``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1250,7 +1250,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -1322,7 +1322,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -1394,7 +1394,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -1466,7 +1466,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {

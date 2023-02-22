@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the OnCallScheduleList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OnCallScheduleList{}
+
 // OnCallScheduleList struct for OnCallScheduleList
 type OnCallScheduleList struct {
 	OnCallSchedules []OnCallSchedule `json:"on_call_schedules"`
@@ -63,11 +66,17 @@ func (o *OnCallScheduleList) SetOnCallSchedules(v []OnCallSchedule) {
 }
 
 func (o OnCallScheduleList) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["on_call_schedules"] = o.OnCallSchedules
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o OnCallScheduleList) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["on_call_schedules"] = o.OnCallSchedules
+	return toSerialize, nil
 }
 
 type NullableOnCallScheduleList struct {

@@ -14,7 +14,7 @@ package opal
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -68,8 +68,8 @@ func (a *TagsApiService) AddGroupTagExecute(r ApiAddGroupTagRequest) (*http.Resp
 	}
 
 	localVarPath := localBasePath + "/tags/{tag_id}/groups/{group_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"tag_id"+"}", url.PathEscape(parameterToString(r.tagId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterToString(r.groupId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"tag_id"+"}", url.PathEscape(parameterValueToString(r.tagId, "tagId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterValueToString(r.groupId, "groupId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -102,9 +102,9 @@ func (a *TagsApiService) AddGroupTagExecute(r ApiAddGroupTagRequest) (*http.Resp
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
@@ -164,8 +164,8 @@ func (a *TagsApiService) AddResourceTagExecute(r ApiAddResourceTagRequest) (*htt
 	}
 
 	localVarPath := localBasePath + "/tags/{tag_id}/resources/{resource_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"tag_id"+"}", url.PathEscape(parameterToString(r.tagId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterToString(r.resourceId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"tag_id"+"}", url.PathEscape(parameterValueToString(r.tagId, "tagId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -198,9 +198,9 @@ func (a *TagsApiService) AddResourceTagExecute(r ApiAddResourceTagRequest) (*htt
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
@@ -260,8 +260,8 @@ func (a *TagsApiService) AddUserTagExecute(r ApiAddUserTagRequest) (*http.Respon
 	}
 
 	localVarPath := localBasePath + "/tags/{tag_id}/users/{user_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"tag_id"+"}", url.PathEscape(parameterToString(r.tagId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"user_id"+"}", url.PathEscape(parameterToString(r.userId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"tag_id"+"}", url.PathEscape(parameterValueToString(r.tagId, "tagId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"user_id"+"}", url.PathEscape(parameterValueToString(r.userId, "userId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -294,9 +294,9 @@ func (a *TagsApiService) AddUserTagExecute(r ApiAddUserTagRequest) (*http.Respon
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
@@ -382,12 +382,12 @@ func (a *TagsApiService) CreateTagExecute(r ApiCreateTagRequest) (*Tag, *http.Re
 		return localVarReturnValue, nil, reportError("tagKey is required and must be specified")
 	}
 
-	localVarQueryParams.Add("tag_key", parameterToString(*r.tagKey, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "tag_key", r.tagKey, "")
 	if r.tagValue != nil {
-		localVarQueryParams.Add("tag_value", parameterToString(*r.tagValue, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tag_value", r.tagValue, "")
 	}
 	if r.adminOwnerId != nil {
-		localVarQueryParams.Add("admin_owner_id", parameterToString(*r.adminOwnerId, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "admin_owner_id", r.adminOwnerId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -416,9 +416,9 @@ func (a *TagsApiService) CreateTagExecute(r ApiCreateTagRequest) (*Tag, *http.Re
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -505,9 +505,9 @@ func (a *TagsApiService) GetTagExecute(r ApiGetTagRequest) (*Tag, *http.Response
 		return localVarReturnValue, nil, reportError("tagKey is required and must be specified")
 	}
 
-	localVarQueryParams.Add("tag_key", parameterToString(*r.tagKey, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "tag_key", r.tagKey, "")
 	if r.tagValue != nil {
-		localVarQueryParams.Add("tag_value", parameterToString(*r.tagValue, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tag_value", r.tagValue, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -536,9 +536,9 @@ func (a *TagsApiService) GetTagExecute(r ApiGetTagRequest) (*Tag, *http.Response
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -623,10 +623,10 @@ func (a *TagsApiService) GetTagsExecute(r ApiGetTagsRequest) (*PaginatedTagsList
 	localVarFormParams := url.Values{}
 
 	if r.cursor != nil {
-		localVarQueryParams.Add("cursor", parameterToString(*r.cursor, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "")
 	}
 	if r.pageSize != nil {
-		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -655,9 +655,9 @@ func (a *TagsApiService) GetTagsExecute(r ApiGetTagsRequest) (*PaginatedTagsList
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -726,8 +726,8 @@ func (a *TagsApiService) RemoveGroupTagExecute(r ApiRemoveGroupTagRequest) (*htt
 	}
 
 	localVarPath := localBasePath + "/tags/{tag_id}/groups/{group_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"tag_id"+"}", url.PathEscape(parameterToString(r.tagId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterToString(r.groupId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"tag_id"+"}", url.PathEscape(parameterValueToString(r.tagId, "tagId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterValueToString(r.groupId, "groupId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -760,9 +760,9 @@ func (a *TagsApiService) RemoveGroupTagExecute(r ApiRemoveGroupTagRequest) (*htt
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
@@ -822,8 +822,8 @@ func (a *TagsApiService) RemoveResourceTagExecute(r ApiRemoveResourceTagRequest)
 	}
 
 	localVarPath := localBasePath + "/tags/{tag_id}/resources/{resource_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"tag_id"+"}", url.PathEscape(parameterToString(r.tagId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterToString(r.resourceId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"tag_id"+"}", url.PathEscape(parameterValueToString(r.tagId, "tagId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -856,9 +856,9 @@ func (a *TagsApiService) RemoveResourceTagExecute(r ApiRemoveResourceTagRequest)
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
@@ -918,8 +918,8 @@ func (a *TagsApiService) RemoveUserTagExecute(r ApiRemoveUserTagRequest) (*http.
 	}
 
 	localVarPath := localBasePath + "/tags/{tag_id}/users/{user_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"tag_id"+"}", url.PathEscape(parameterToString(r.tagId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"user_id"+"}", url.PathEscape(parameterToString(r.userId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"tag_id"+"}", url.PathEscape(parameterValueToString(r.tagId, "tagId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"user_id"+"}", url.PathEscape(parameterValueToString(r.userId, "userId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -952,9 +952,9 @@ func (a *TagsApiService) RemoveUserTagExecute(r ApiRemoveUserTagRequest) (*http.
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}

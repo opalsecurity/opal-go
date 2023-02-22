@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ResourceRemoteInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceRemoteInfo{}
+
 // ResourceRemoteInfo Remote info that is required for the creation of remote resources. Providing this will allow you to omit deprecated remote_id and metadata fields.
 type ResourceRemoteInfo struct {
 	AwsIamRole *ResourceRemoteInfoAwsIamRole `json:"aws_iam_role,omitempty"`
@@ -22,9 +25,11 @@ type ResourceRemoteInfo struct {
 	AwsRdsInstance *ResourceRemoteInfoAwsRdsInstance `json:"aws_rds_instance,omitempty"`
 	AwsEksCluster *ResourceRemoteInfoAwsEksCluster `json:"aws_eks_cluster,omitempty"`
 	GithubRepo *ResourceRemoteInfoGithubRepo `json:"github_repo,omitempty"`
+	GitlabProject *ResourceRemoteInfoGitlabProject `json:"gitlab_project,omitempty"`
 	OktaApp *ResourceRemoteInfoOktaApp `json:"okta_app,omitempty"`
 	OktaStandardRole *ResourceRemoteInfoOktaStandardRole `json:"okta_standard_role,omitempty"`
 	OktaCustomRole *ResourceRemoteInfoOktaCustomRole `json:"okta_custom_role,omitempty"`
+	TeleportRole *ResourceRemoteInfoTeleportRole `json:"teleport_role,omitempty"`
 }
 
 // NewResourceRemoteInfo instantiates a new ResourceRemoteInfo object
@@ -46,7 +51,7 @@ func NewResourceRemoteInfoWithDefaults() *ResourceRemoteInfo {
 
 // GetAwsIamRole returns the AwsIamRole field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetAwsIamRole() ResourceRemoteInfoAwsIamRole {
-	if o == nil || o.AwsIamRole == nil {
+	if o == nil || IsNil(o.AwsIamRole) {
 		var ret ResourceRemoteInfoAwsIamRole
 		return ret
 	}
@@ -56,7 +61,7 @@ func (o *ResourceRemoteInfo) GetAwsIamRole() ResourceRemoteInfoAwsIamRole {
 // GetAwsIamRoleOk returns a tuple with the AwsIamRole field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfo) GetAwsIamRoleOk() (*ResourceRemoteInfoAwsIamRole, bool) {
-	if o == nil || o.AwsIamRole == nil {
+	if o == nil || IsNil(o.AwsIamRole) {
 		return nil, false
 	}
 	return o.AwsIamRole, true
@@ -64,7 +69,7 @@ func (o *ResourceRemoteInfo) GetAwsIamRoleOk() (*ResourceRemoteInfoAwsIamRole, b
 
 // HasAwsIamRole returns a boolean if a field has been set.
 func (o *ResourceRemoteInfo) HasAwsIamRole() bool {
-	if o != nil && o.AwsIamRole != nil {
+	if o != nil && !IsNil(o.AwsIamRole) {
 		return true
 	}
 
@@ -78,7 +83,7 @@ func (o *ResourceRemoteInfo) SetAwsIamRole(v ResourceRemoteInfoAwsIamRole) {
 
 // GetAwsEc2Instance returns the AwsEc2Instance field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetAwsEc2Instance() ResourceRemoteInfoAwsEc2Instance {
-	if o == nil || o.AwsEc2Instance == nil {
+	if o == nil || IsNil(o.AwsEc2Instance) {
 		var ret ResourceRemoteInfoAwsEc2Instance
 		return ret
 	}
@@ -88,7 +93,7 @@ func (o *ResourceRemoteInfo) GetAwsEc2Instance() ResourceRemoteInfoAwsEc2Instanc
 // GetAwsEc2InstanceOk returns a tuple with the AwsEc2Instance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfo) GetAwsEc2InstanceOk() (*ResourceRemoteInfoAwsEc2Instance, bool) {
-	if o == nil || o.AwsEc2Instance == nil {
+	if o == nil || IsNil(o.AwsEc2Instance) {
 		return nil, false
 	}
 	return o.AwsEc2Instance, true
@@ -96,7 +101,7 @@ func (o *ResourceRemoteInfo) GetAwsEc2InstanceOk() (*ResourceRemoteInfoAwsEc2Ins
 
 // HasAwsEc2Instance returns a boolean if a field has been set.
 func (o *ResourceRemoteInfo) HasAwsEc2Instance() bool {
-	if o != nil && o.AwsEc2Instance != nil {
+	if o != nil && !IsNil(o.AwsEc2Instance) {
 		return true
 	}
 
@@ -110,7 +115,7 @@ func (o *ResourceRemoteInfo) SetAwsEc2Instance(v ResourceRemoteInfoAwsEc2Instanc
 
 // GetAwsRdsInstance returns the AwsRdsInstance field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetAwsRdsInstance() ResourceRemoteInfoAwsRdsInstance {
-	if o == nil || o.AwsRdsInstance == nil {
+	if o == nil || IsNil(o.AwsRdsInstance) {
 		var ret ResourceRemoteInfoAwsRdsInstance
 		return ret
 	}
@@ -120,7 +125,7 @@ func (o *ResourceRemoteInfo) GetAwsRdsInstance() ResourceRemoteInfoAwsRdsInstanc
 // GetAwsRdsInstanceOk returns a tuple with the AwsRdsInstance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfo) GetAwsRdsInstanceOk() (*ResourceRemoteInfoAwsRdsInstance, bool) {
-	if o == nil || o.AwsRdsInstance == nil {
+	if o == nil || IsNil(o.AwsRdsInstance) {
 		return nil, false
 	}
 	return o.AwsRdsInstance, true
@@ -128,7 +133,7 @@ func (o *ResourceRemoteInfo) GetAwsRdsInstanceOk() (*ResourceRemoteInfoAwsRdsIns
 
 // HasAwsRdsInstance returns a boolean if a field has been set.
 func (o *ResourceRemoteInfo) HasAwsRdsInstance() bool {
-	if o != nil && o.AwsRdsInstance != nil {
+	if o != nil && !IsNil(o.AwsRdsInstance) {
 		return true
 	}
 
@@ -142,7 +147,7 @@ func (o *ResourceRemoteInfo) SetAwsRdsInstance(v ResourceRemoteInfoAwsRdsInstanc
 
 // GetAwsEksCluster returns the AwsEksCluster field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetAwsEksCluster() ResourceRemoteInfoAwsEksCluster {
-	if o == nil || o.AwsEksCluster == nil {
+	if o == nil || IsNil(o.AwsEksCluster) {
 		var ret ResourceRemoteInfoAwsEksCluster
 		return ret
 	}
@@ -152,7 +157,7 @@ func (o *ResourceRemoteInfo) GetAwsEksCluster() ResourceRemoteInfoAwsEksCluster 
 // GetAwsEksClusterOk returns a tuple with the AwsEksCluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfo) GetAwsEksClusterOk() (*ResourceRemoteInfoAwsEksCluster, bool) {
-	if o == nil || o.AwsEksCluster == nil {
+	if o == nil || IsNil(o.AwsEksCluster) {
 		return nil, false
 	}
 	return o.AwsEksCluster, true
@@ -160,7 +165,7 @@ func (o *ResourceRemoteInfo) GetAwsEksClusterOk() (*ResourceRemoteInfoAwsEksClus
 
 // HasAwsEksCluster returns a boolean if a field has been set.
 func (o *ResourceRemoteInfo) HasAwsEksCluster() bool {
-	if o != nil && o.AwsEksCluster != nil {
+	if o != nil && !IsNil(o.AwsEksCluster) {
 		return true
 	}
 
@@ -174,7 +179,7 @@ func (o *ResourceRemoteInfo) SetAwsEksCluster(v ResourceRemoteInfoAwsEksCluster)
 
 // GetGithubRepo returns the GithubRepo field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetGithubRepo() ResourceRemoteInfoGithubRepo {
-	if o == nil || o.GithubRepo == nil {
+	if o == nil || IsNil(o.GithubRepo) {
 		var ret ResourceRemoteInfoGithubRepo
 		return ret
 	}
@@ -184,7 +189,7 @@ func (o *ResourceRemoteInfo) GetGithubRepo() ResourceRemoteInfoGithubRepo {
 // GetGithubRepoOk returns a tuple with the GithubRepo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfo) GetGithubRepoOk() (*ResourceRemoteInfoGithubRepo, bool) {
-	if o == nil || o.GithubRepo == nil {
+	if o == nil || IsNil(o.GithubRepo) {
 		return nil, false
 	}
 	return o.GithubRepo, true
@@ -192,7 +197,7 @@ func (o *ResourceRemoteInfo) GetGithubRepoOk() (*ResourceRemoteInfoGithubRepo, b
 
 // HasGithubRepo returns a boolean if a field has been set.
 func (o *ResourceRemoteInfo) HasGithubRepo() bool {
-	if o != nil && o.GithubRepo != nil {
+	if o != nil && !IsNil(o.GithubRepo) {
 		return true
 	}
 
@@ -204,9 +209,41 @@ func (o *ResourceRemoteInfo) SetGithubRepo(v ResourceRemoteInfoGithubRepo) {
 	o.GithubRepo = &v
 }
 
+// GetGitlabProject returns the GitlabProject field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetGitlabProject() ResourceRemoteInfoGitlabProject {
+	if o == nil || IsNil(o.GitlabProject) {
+		var ret ResourceRemoteInfoGitlabProject
+		return ret
+	}
+	return *o.GitlabProject
+}
+
+// GetGitlabProjectOk returns a tuple with the GitlabProject field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetGitlabProjectOk() (*ResourceRemoteInfoGitlabProject, bool) {
+	if o == nil || IsNil(o.GitlabProject) {
+		return nil, false
+	}
+	return o.GitlabProject, true
+}
+
+// HasGitlabProject returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasGitlabProject() bool {
+	if o != nil && !IsNil(o.GitlabProject) {
+		return true
+	}
+
+	return false
+}
+
+// SetGitlabProject gets a reference to the given ResourceRemoteInfoGitlabProject and assigns it to the GitlabProject field.
+func (o *ResourceRemoteInfo) SetGitlabProject(v ResourceRemoteInfoGitlabProject) {
+	o.GitlabProject = &v
+}
+
 // GetOktaApp returns the OktaApp field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetOktaApp() ResourceRemoteInfoOktaApp {
-	if o == nil || o.OktaApp == nil {
+	if o == nil || IsNil(o.OktaApp) {
 		var ret ResourceRemoteInfoOktaApp
 		return ret
 	}
@@ -216,7 +253,7 @@ func (o *ResourceRemoteInfo) GetOktaApp() ResourceRemoteInfoOktaApp {
 // GetOktaAppOk returns a tuple with the OktaApp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfo) GetOktaAppOk() (*ResourceRemoteInfoOktaApp, bool) {
-	if o == nil || o.OktaApp == nil {
+	if o == nil || IsNil(o.OktaApp) {
 		return nil, false
 	}
 	return o.OktaApp, true
@@ -224,7 +261,7 @@ func (o *ResourceRemoteInfo) GetOktaAppOk() (*ResourceRemoteInfoOktaApp, bool) {
 
 // HasOktaApp returns a boolean if a field has been set.
 func (o *ResourceRemoteInfo) HasOktaApp() bool {
-	if o != nil && o.OktaApp != nil {
+	if o != nil && !IsNil(o.OktaApp) {
 		return true
 	}
 
@@ -238,7 +275,7 @@ func (o *ResourceRemoteInfo) SetOktaApp(v ResourceRemoteInfoOktaApp) {
 
 // GetOktaStandardRole returns the OktaStandardRole field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetOktaStandardRole() ResourceRemoteInfoOktaStandardRole {
-	if o == nil || o.OktaStandardRole == nil {
+	if o == nil || IsNil(o.OktaStandardRole) {
 		var ret ResourceRemoteInfoOktaStandardRole
 		return ret
 	}
@@ -248,7 +285,7 @@ func (o *ResourceRemoteInfo) GetOktaStandardRole() ResourceRemoteInfoOktaStandar
 // GetOktaStandardRoleOk returns a tuple with the OktaStandardRole field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfo) GetOktaStandardRoleOk() (*ResourceRemoteInfoOktaStandardRole, bool) {
-	if o == nil || o.OktaStandardRole == nil {
+	if o == nil || IsNil(o.OktaStandardRole) {
 		return nil, false
 	}
 	return o.OktaStandardRole, true
@@ -256,7 +293,7 @@ func (o *ResourceRemoteInfo) GetOktaStandardRoleOk() (*ResourceRemoteInfoOktaSta
 
 // HasOktaStandardRole returns a boolean if a field has been set.
 func (o *ResourceRemoteInfo) HasOktaStandardRole() bool {
-	if o != nil && o.OktaStandardRole != nil {
+	if o != nil && !IsNil(o.OktaStandardRole) {
 		return true
 	}
 
@@ -270,7 +307,7 @@ func (o *ResourceRemoteInfo) SetOktaStandardRole(v ResourceRemoteInfoOktaStandar
 
 // GetOktaCustomRole returns the OktaCustomRole field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetOktaCustomRole() ResourceRemoteInfoOktaCustomRole {
-	if o == nil || o.OktaCustomRole == nil {
+	if o == nil || IsNil(o.OktaCustomRole) {
 		var ret ResourceRemoteInfoOktaCustomRole
 		return ret
 	}
@@ -280,7 +317,7 @@ func (o *ResourceRemoteInfo) GetOktaCustomRole() ResourceRemoteInfoOktaCustomRol
 // GetOktaCustomRoleOk returns a tuple with the OktaCustomRole field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceRemoteInfo) GetOktaCustomRoleOk() (*ResourceRemoteInfoOktaCustomRole, bool) {
-	if o == nil || o.OktaCustomRole == nil {
+	if o == nil || IsNil(o.OktaCustomRole) {
 		return nil, false
 	}
 	return o.OktaCustomRole, true
@@ -288,7 +325,7 @@ func (o *ResourceRemoteInfo) GetOktaCustomRoleOk() (*ResourceRemoteInfoOktaCusto
 
 // HasOktaCustomRole returns a boolean if a field has been set.
 func (o *ResourceRemoteInfo) HasOktaCustomRole() bool {
-	if o != nil && o.OktaCustomRole != nil {
+	if o != nil && !IsNil(o.OktaCustomRole) {
 		return true
 	}
 
@@ -300,33 +337,79 @@ func (o *ResourceRemoteInfo) SetOktaCustomRole(v ResourceRemoteInfoOktaCustomRol
 	o.OktaCustomRole = &v
 }
 
+// GetTeleportRole returns the TeleportRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetTeleportRole() ResourceRemoteInfoTeleportRole {
+	if o == nil || IsNil(o.TeleportRole) {
+		var ret ResourceRemoteInfoTeleportRole
+		return ret
+	}
+	return *o.TeleportRole
+}
+
+// GetTeleportRoleOk returns a tuple with the TeleportRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetTeleportRoleOk() (*ResourceRemoteInfoTeleportRole, bool) {
+	if o == nil || IsNil(o.TeleportRole) {
+		return nil, false
+	}
+	return o.TeleportRole, true
+}
+
+// HasTeleportRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasTeleportRole() bool {
+	if o != nil && !IsNil(o.TeleportRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetTeleportRole gets a reference to the given ResourceRemoteInfoTeleportRole and assigns it to the TeleportRole field.
+func (o *ResourceRemoteInfo) SetTeleportRole(v ResourceRemoteInfoTeleportRole) {
+	o.TeleportRole = &v
+}
+
 func (o ResourceRemoteInfo) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.AwsIamRole != nil {
-		toSerialize["aws_iam_role"] = o.AwsIamRole
-	}
-	if o.AwsEc2Instance != nil {
-		toSerialize["aws_ec2_instance"] = o.AwsEc2Instance
-	}
-	if o.AwsRdsInstance != nil {
-		toSerialize["aws_rds_instance"] = o.AwsRdsInstance
-	}
-	if o.AwsEksCluster != nil {
-		toSerialize["aws_eks_cluster"] = o.AwsEksCluster
-	}
-	if o.GithubRepo != nil {
-		toSerialize["github_repo"] = o.GithubRepo
-	}
-	if o.OktaApp != nil {
-		toSerialize["okta_app"] = o.OktaApp
-	}
-	if o.OktaStandardRole != nil {
-		toSerialize["okta_standard_role"] = o.OktaStandardRole
-	}
-	if o.OktaCustomRole != nil {
-		toSerialize["okta_custom_role"] = o.OktaCustomRole
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AwsIamRole) {
+		toSerialize["aws_iam_role"] = o.AwsIamRole
+	}
+	if !IsNil(o.AwsEc2Instance) {
+		toSerialize["aws_ec2_instance"] = o.AwsEc2Instance
+	}
+	if !IsNil(o.AwsRdsInstance) {
+		toSerialize["aws_rds_instance"] = o.AwsRdsInstance
+	}
+	if !IsNil(o.AwsEksCluster) {
+		toSerialize["aws_eks_cluster"] = o.AwsEksCluster
+	}
+	if !IsNil(o.GithubRepo) {
+		toSerialize["github_repo"] = o.GithubRepo
+	}
+	if !IsNil(o.GitlabProject) {
+		toSerialize["gitlab_project"] = o.GitlabProject
+	}
+	if !IsNil(o.OktaApp) {
+		toSerialize["okta_app"] = o.OktaApp
+	}
+	if !IsNil(o.OktaStandardRole) {
+		toSerialize["okta_standard_role"] = o.OktaStandardRole
+	}
+	if !IsNil(o.OktaCustomRole) {
+		toSerialize["okta_custom_role"] = o.OktaCustomRole
+	}
+	if !IsNil(o.TeleportRole) {
+		toSerialize["teleport_role"] = o.TeleportRole
+	}
+	return toSerialize, nil
 }
 
 type NullableResourceRemoteInfo struct {

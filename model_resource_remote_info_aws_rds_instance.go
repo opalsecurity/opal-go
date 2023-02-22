@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ResourceRemoteInfoAwsRdsInstance type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceRemoteInfoAwsRdsInstance{}
+
 // ResourceRemoteInfoAwsRdsInstance Remote info for AWS RDS instance.
 type ResourceRemoteInfoAwsRdsInstance struct {
 	// The instanceId of the RDS instance.
@@ -118,17 +121,19 @@ func (o *ResourceRemoteInfoAwsRdsInstance) SetResourceId(v string) {
 }
 
 func (o ResourceRemoteInfoAwsRdsInstance) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["instance_id"] = o.InstanceId
-	}
-	if true {
-		toSerialize["region"] = o.Region
-	}
-	if true {
-		toSerialize["resource_id"] = o.ResourceId
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ResourceRemoteInfoAwsRdsInstance) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["instance_id"] = o.InstanceId
+	toSerialize["region"] = o.Region
+	toSerialize["resource_id"] = o.ResourceId
+	return toSerialize, nil
 }
 
 type NullableResourceRemoteInfoAwsRdsInstance struct {

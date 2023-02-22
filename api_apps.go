@@ -14,7 +14,7 @@ package opal
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -67,7 +67,7 @@ func (a *AppsApiService) GetAppExecute(r ApiGetAppRequest) (*App, *http.Response
 	}
 
 	localVarPath := localBasePath + "/apps/{app_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"app_id"+"}", url.PathEscape(parameterToString(r.appId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"app_id"+"}", url.PathEscape(parameterValueToString(r.appId, "appId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -100,9 +100,9 @@ func (a *AppsApiService) GetAppExecute(r ApiGetAppRequest) (*App, *http.Response
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -187,10 +187,10 @@ func (a *AppsApiService) GetAppsExecute(r ApiGetAppsRequest) (*AppsList, *http.R
 	localVarFormParams := url.Values{}
 
 	if r.appTypeFilter != nil {
-		localVarQueryParams.Add("app_type_filter", parameterToString(*r.appTypeFilter, "csv"))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "app_type_filter", r.appTypeFilter, "csv")
 	}
 	if r.ownerFilter != nil {
-		localVarQueryParams.Add("owner_filter", parameterToString(*r.ownerFilter, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "owner_filter", r.ownerFilter, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -219,9 +219,9 @@ func (a *AppsApiService) GetAppsExecute(r ApiGetAppsRequest) (*AppsList, *http.R
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}

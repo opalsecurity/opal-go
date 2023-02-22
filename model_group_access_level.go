@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the GroupAccessLevel type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GroupAccessLevel{}
+
 // GroupAccessLevel # Access Level Object ### Description The `GroupAccessLevel` object is used to represent the level of access that a user has to a group or a group has to a group. The \"default\" access level is a `GroupAccessLevel` object whose fields are all empty strings.  ### Usage Example View the `GroupAccessLevel` of a group/user or group/group pair to see the level of access granted to the group.
 type GroupAccessLevel struct {
 	// The human-readable name of the access level.
@@ -91,14 +94,18 @@ func (o *GroupAccessLevel) SetAccessLevelRemoteId(v string) {
 }
 
 func (o GroupAccessLevel) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["access_level_name"] = o.AccessLevelName
-	}
-	if true {
-		toSerialize["access_level_remote_id"] = o.AccessLevelRemoteId
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o GroupAccessLevel) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["access_level_name"] = o.AccessLevelName
+	toSerialize["access_level_remote_id"] = o.AccessLevelRemoteId
+	return toSerialize, nil
 }
 
 type NullableGroupAccessLevel struct {

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the GroupResource type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GroupResource{}
+
 // GroupResource # GroupResource Object ### Description The `GroupResource` object is used to represent a relationship between a group and a resource.
 type GroupResource struct {
 	// The ID of the group.
@@ -117,17 +120,19 @@ func (o *GroupResource) SetAccessLevel(v ResourceAccessLevel) {
 }
 
 func (o GroupResource) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["group_id"] = o.GroupId
-	}
-	if true {
-		toSerialize["resource_id"] = o.ResourceId
-	}
-	if true {
-		toSerialize["access_level"] = o.AccessLevel
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o GroupResource) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["group_id"] = o.GroupId
+	toSerialize["resource_id"] = o.ResourceId
+	toSerialize["access_level"] = o.AccessLevel
+	return toSerialize, nil
 }
 
 type NullableGroupResource struct {

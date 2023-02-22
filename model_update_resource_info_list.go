@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the UpdateResourceInfoList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateResourceInfoList{}
+
 // UpdateResourceInfoList struct for UpdateResourceInfoList
 type UpdateResourceInfoList struct {
 	// A list of resources with information to update.
@@ -64,11 +67,17 @@ func (o *UpdateResourceInfoList) SetResources(v []UpdateResourceInfo) {
 }
 
 func (o UpdateResourceInfoList) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["resources"] = o.Resources
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UpdateResourceInfoList) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["resources"] = o.Resources
+	return toSerialize, nil
 }
 
 type NullableUpdateResourceInfoList struct {

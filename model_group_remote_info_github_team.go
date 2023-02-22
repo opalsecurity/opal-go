@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the GroupRemoteInfoGithubTeam type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GroupRemoteInfoGithubTeam{}
+
 // GroupRemoteInfoGithubTeam Remote info for GitHub team.
 type GroupRemoteInfoGithubTeam struct {
 	// The id of the GitHub team.
@@ -45,7 +48,7 @@ func NewGroupRemoteInfoGithubTeamWithDefaults() *GroupRemoteInfoGithubTeam {
 // GetTeamId returns the TeamId field value if set, zero value otherwise.
 // Deprecated
 func (o *GroupRemoteInfoGithubTeam) GetTeamId() string {
-	if o == nil || o.TeamId == nil {
+	if o == nil || IsNil(o.TeamId) {
 		var ret string
 		return ret
 	}
@@ -56,7 +59,7 @@ func (o *GroupRemoteInfoGithubTeam) GetTeamId() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *GroupRemoteInfoGithubTeam) GetTeamIdOk() (*string, bool) {
-	if o == nil || o.TeamId == nil {
+	if o == nil || IsNil(o.TeamId) {
 		return nil, false
 	}
 	return o.TeamId, true
@@ -64,7 +67,7 @@ func (o *GroupRemoteInfoGithubTeam) GetTeamIdOk() (*string, bool) {
 
 // HasTeamId returns a boolean if a field has been set.
 func (o *GroupRemoteInfoGithubTeam) HasTeamId() bool {
-	if o != nil && o.TeamId != nil {
+	if o != nil && !IsNil(o.TeamId) {
 		return true
 	}
 
@@ -102,14 +105,20 @@ func (o *GroupRemoteInfoGithubTeam) SetTeamSlug(v string) {
 }
 
 func (o GroupRemoteInfoGithubTeam) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.TeamId != nil {
-		toSerialize["team_id"] = o.TeamId
-	}
-	if true {
-		toSerialize["team_slug"] = o.TeamSlug
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o GroupRemoteInfoGithubTeam) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.TeamId) {
+		toSerialize["team_id"] = o.TeamId
+	}
+	toSerialize["team_slug"] = o.TeamSlug
+	return toSerialize, nil
 }
 
 type NullableGroupRemoteInfoGithubTeam struct {

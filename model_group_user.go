@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the GroupUser type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GroupUser{}
+
 // GroupUser # Group Access User Object ### Description The `GroupAccessUser` object is used to represent a user with access to a group.  ### Usage Example Fetch from the `LIST GroupUsers` endpoint.
 type GroupUser struct {
 	// The ID of the group.
@@ -103,7 +106,7 @@ func (o *GroupUser) SetUserId(v string) {
 
 // GetAccessLevel returns the AccessLevel field value if set, zero value otherwise.
 func (o *GroupUser) GetAccessLevel() GroupAccessLevel {
-	if o == nil || o.AccessLevel == nil {
+	if o == nil || IsNil(o.AccessLevel) {
 		var ret GroupAccessLevel
 		return ret
 	}
@@ -113,7 +116,7 @@ func (o *GroupUser) GetAccessLevel() GroupAccessLevel {
 // GetAccessLevelOk returns a tuple with the AccessLevel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupUser) GetAccessLevelOk() (*GroupAccessLevel, bool) {
-	if o == nil || o.AccessLevel == nil {
+	if o == nil || IsNil(o.AccessLevel) {
 		return nil, false
 	}
 	return o.AccessLevel, true
@@ -121,7 +124,7 @@ func (o *GroupUser) GetAccessLevelOk() (*GroupAccessLevel, bool) {
 
 // HasAccessLevel returns a boolean if a field has been set.
 func (o *GroupUser) HasAccessLevel() bool {
-	if o != nil && o.AccessLevel != nil {
+	if o != nil && !IsNil(o.AccessLevel) {
 		return true
 	}
 
@@ -208,26 +211,24 @@ func (o *GroupUser) SetExpirationDate(v time.Time) {
 }
 
 func (o GroupUser) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["group_id"] = o.GroupId
-	}
-	if true {
-		toSerialize["user_id"] = o.UserId
-	}
-	if o.AccessLevel != nil {
-		toSerialize["access_level"] = o.AccessLevel
-	}
-	if true {
-		toSerialize["full_name"] = o.FullName
-	}
-	if true {
-		toSerialize["email"] = o.Email
-	}
-	if true {
-		toSerialize["expiration_date"] = o.ExpirationDate.Get()
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o GroupUser) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["group_id"] = o.GroupId
+	toSerialize["user_id"] = o.UserId
+	if !IsNil(o.AccessLevel) {
+		toSerialize["access_level"] = o.AccessLevel
+	}
+	toSerialize["full_name"] = o.FullName
+	toSerialize["email"] = o.Email
+	toSerialize["expiration_date"] = o.ExpirationDate.Get()
+	return toSerialize, nil
 }
 
 type NullableGroupUser struct {

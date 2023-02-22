@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the UpdateOwnerInfoList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateOwnerInfoList{}
+
 // UpdateOwnerInfoList struct for UpdateOwnerInfoList
 type UpdateOwnerInfoList struct {
 	// A list of owners with information to update.
@@ -64,11 +67,17 @@ func (o *UpdateOwnerInfoList) SetOwners(v []UpdateOwnerInfo) {
 }
 
 func (o UpdateOwnerInfoList) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["owners"] = o.Owners
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UpdateOwnerInfoList) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["owners"] = o.Owners
+	return toSerialize, nil
 }
 
 type NullableUpdateOwnerInfoList struct {

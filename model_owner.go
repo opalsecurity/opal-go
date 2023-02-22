@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the Owner type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Owner{}
+
 // Owner # Owner Object ### Description The `Owner` object is used to represent an owner.
 type Owner struct {
 	// The ID of the owner.
@@ -73,7 +76,7 @@ func (o *Owner) SetOwnerId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *Owner) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -83,7 +86,7 @@ func (o *Owner) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Owner) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -91,7 +94,7 @@ func (o *Owner) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *Owner) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -105,7 +108,7 @@ func (o *Owner) SetName(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *Owner) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -115,7 +118,7 @@ func (o *Owner) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Owner) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -123,7 +126,7 @@ func (o *Owner) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *Owner) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -137,7 +140,7 @@ func (o *Owner) SetDescription(v string) {
 
 // GetAccessRequestEscalationPeriod returns the AccessRequestEscalationPeriod field value if set, zero value otherwise.
 func (o *Owner) GetAccessRequestEscalationPeriod() int32 {
-	if o == nil || o.AccessRequestEscalationPeriod == nil {
+	if o == nil || IsNil(o.AccessRequestEscalationPeriod) {
 		var ret int32
 		return ret
 	}
@@ -147,7 +150,7 @@ func (o *Owner) GetAccessRequestEscalationPeriod() int32 {
 // GetAccessRequestEscalationPeriodOk returns a tuple with the AccessRequestEscalationPeriod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Owner) GetAccessRequestEscalationPeriodOk() (*int32, bool) {
-	if o == nil || o.AccessRequestEscalationPeriod == nil {
+	if o == nil || IsNil(o.AccessRequestEscalationPeriod) {
 		return nil, false
 	}
 	return o.AccessRequestEscalationPeriod, true
@@ -155,7 +158,7 @@ func (o *Owner) GetAccessRequestEscalationPeriodOk() (*int32, bool) {
 
 // HasAccessRequestEscalationPeriod returns a boolean if a field has been set.
 func (o *Owner) HasAccessRequestEscalationPeriod() bool {
-	if o != nil && o.AccessRequestEscalationPeriod != nil {
+	if o != nil && !IsNil(o.AccessRequestEscalationPeriod) {
 		return true
 	}
 
@@ -169,7 +172,7 @@ func (o *Owner) SetAccessRequestEscalationPeriod(v int32) {
 
 // GetReviewerMessageChannelId returns the ReviewerMessageChannelId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Owner) GetReviewerMessageChannelId() string {
-	if o == nil || o.ReviewerMessageChannelId.Get() == nil {
+	if o == nil || IsNil(o.ReviewerMessageChannelId.Get()) {
 		var ret string
 		return ret
 	}
@@ -211,7 +214,7 @@ func (o *Owner) UnsetReviewerMessageChannelId() {
 
 // GetSourceGroupId returns the SourceGroupId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Owner) GetSourceGroupId() string {
-	if o == nil || o.SourceGroupId.Get() == nil {
+	if o == nil || IsNil(o.SourceGroupId.Get()) {
 		var ret string
 		return ret
 	}
@@ -252,17 +255,23 @@ func (o *Owner) UnsetSourceGroupId() {
 }
 
 func (o Owner) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["owner_id"] = o.OwnerId
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
-	if o.Name != nil {
+	return json.Marshal(toSerialize)
+}
+
+func (o Owner) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["owner_id"] = o.OwnerId
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if o.AccessRequestEscalationPeriod != nil {
+	if !IsNil(o.AccessRequestEscalationPeriod) {
 		toSerialize["access_request_escalation_period"] = o.AccessRequestEscalationPeriod
 	}
 	if o.ReviewerMessageChannelId.IsSet() {
@@ -271,7 +280,7 @@ func (o Owner) MarshalJSON() ([]byte, error) {
 	if o.SourceGroupId.IsSet() {
 		toSerialize["source_group_id"] = o.SourceGroupId.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableOwner struct {

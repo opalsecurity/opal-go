@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the Session type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Session{}
+
 // Session # Session Object ### Description The `Session` object is used to represent an access session. Some resources can be accessed temporarily via a time-bounded session.  ### Usage Example Fetch from the `LIST Sessions` endpoint.
 type Session struct {
 	// The ID of the connection.
@@ -172,23 +175,21 @@ func (o *Session) SetExpirationDate(v time.Time) {
 }
 
 func (o Session) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["connection_id"] = o.ConnectionId
-	}
-	if true {
-		toSerialize["user_id"] = o.UserId
-	}
-	if true {
-		toSerialize["resource_id"] = o.ResourceId
-	}
-	if true {
-		toSerialize["access_level"] = o.AccessLevel
-	}
-	if true {
-		toSerialize["expiration_date"] = o.ExpirationDate
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o Session) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["connection_id"] = o.ConnectionId
+	toSerialize["user_id"] = o.UserId
+	toSerialize["resource_id"] = o.ResourceId
+	toSerialize["access_level"] = o.AccessLevel
+	toSerialize["expiration_date"] = o.ExpirationDate
+	return toSerialize, nil
 }
 
 type NullableSession struct {

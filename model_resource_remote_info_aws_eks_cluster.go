@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ResourceRemoteInfoAwsEksCluster type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceRemoteInfoAwsEksCluster{}
+
 // ResourceRemoteInfoAwsEksCluster Remote info for AWS EKS cluster.
 type ResourceRemoteInfoAwsEksCluster struct {
 	// The ARN of the EKS cluster.
@@ -64,11 +67,17 @@ func (o *ResourceRemoteInfoAwsEksCluster) SetArn(v string) {
 }
 
 func (o ResourceRemoteInfoAwsEksCluster) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["arn"] = o.Arn
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ResourceRemoteInfoAwsEksCluster) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["arn"] = o.Arn
+	return toSerialize, nil
 }
 
 type NullableResourceRemoteInfoAwsEksCluster struct {

@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**CreateOwner**](OwnersApi.md#CreateOwner) | **Post** /owners | 
 [**DeleteOwner**](OwnersApi.md#DeleteOwner) | **Delete** /owners/{owner_id} | 
 [**GetOwner**](OwnersApi.md#GetOwner) | **Get** /owners/{owner_id} | 
+[**GetOwnerFromName**](OwnersApi.md#GetOwnerFromName) | **Get** /owners/name/{owner_name} | 
 [**GetOwnerUsers**](OwnersApi.md#GetOwnerUsers) | **Get** /owners/{owner_id}/users | 
 [**GetOwners**](OwnersApi.md#GetOwners) | **Get** /owners | 
 [**SetOwnerUsers**](OwnersApi.md#SetOwnerUsers) | **Put** /owners/{owner_id}/users | 
@@ -31,7 +32,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -97,7 +98,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -105,7 +106,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OwnersApi.DeleteOwner(context.Background(), ownerId).Execute()
+    r, err := apiClient.OwnersApi.DeleteOwner(context.Background(), ownerId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OwnersApi.DeleteOwner``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -165,7 +166,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -218,6 +219,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetOwnerFromName
+
+> Owner GetOwnerFromName(ctx, ownerName).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+    ownerName := "MyOwner" // string | The name of the owner.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OwnersApi.GetOwnerFromName(context.Background(), ownerName).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OwnersApi.GetOwnerFromName``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetOwnerFromName`: Owner
+    fmt.Fprintf(os.Stdout, "Response from `OwnersApi.GetOwnerFromName`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**ownerName** | **string** | The name of the owner. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetOwnerFromNameRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**Owner**](Owner.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetOwnerUsers
 
 > UserList GetOwnerUsers(ctx, ownerId).Execute()
@@ -235,7 +306,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -305,7 +376,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -373,7 +444,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
@@ -445,7 +516,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {

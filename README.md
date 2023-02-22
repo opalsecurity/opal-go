@@ -16,7 +16,6 @@ Install the following dependencies:
 
 ```shell
 go get github.com/stretchr/testify/assert
-go get golang.org/x/oauth2
 go get golang.org/x/net/context
 ```
 
@@ -112,6 +111,7 @@ Class | Method | HTTP request | Description
 *OwnersApi* | [**CreateOwner**](docs/OwnersApi.md#createowner) | **Post** /owners | 
 *OwnersApi* | [**DeleteOwner**](docs/OwnersApi.md#deleteowner) | **Delete** /owners/{owner_id} | 
 *OwnersApi* | [**GetOwner**](docs/OwnersApi.md#getowner) | **Get** /owners/{owner_id} | 
+*OwnersApi* | [**GetOwnerFromName**](docs/OwnersApi.md#getownerfromname) | **Get** /owners/name/{owner_name} | 
 *OwnersApi* | [**GetOwnerUsers**](docs/OwnersApi.md#getownerusers) | **Get** /owners/{owner_id}/users | 
 *OwnersApi* | [**GetOwners**](docs/OwnersApi.md#getowners) | **Get** /owners | 
 *OwnersApi* | [**SetOwnerUsers**](docs/OwnersApi.md#setownerusers) | **Put** /owners/{owner_id}/users | 
@@ -171,6 +171,7 @@ Class | Method | HTTP request | Description
  - [GroupRemoteInfoActiveDirectoryGroup](docs/GroupRemoteInfoActiveDirectoryGroup.md)
  - [GroupRemoteInfoDuoGroup](docs/GroupRemoteInfoDuoGroup.md)
  - [GroupRemoteInfoGithubTeam](docs/GroupRemoteInfoGithubTeam.md)
+ - [GroupRemoteInfoGitlabGroup](docs/GroupRemoteInfoGitlabGroup.md)
  - [GroupRemoteInfoGoogleGroup](docs/GroupRemoteInfoGoogleGroup.md)
  - [GroupRemoteInfoLdapGroup](docs/GroupRemoteInfoLdapGroup.md)
  - [GroupRemoteInfoOktaGroup](docs/GroupRemoteInfoOktaGroup.md)
@@ -205,9 +206,11 @@ Class | Method | HTTP request | Description
  - [ResourceRemoteInfoAwsIamRole](docs/ResourceRemoteInfoAwsIamRole.md)
  - [ResourceRemoteInfoAwsRdsInstance](docs/ResourceRemoteInfoAwsRdsInstance.md)
  - [ResourceRemoteInfoGithubRepo](docs/ResourceRemoteInfoGithubRepo.md)
+ - [ResourceRemoteInfoGitlabProject](docs/ResourceRemoteInfoGitlabProject.md)
  - [ResourceRemoteInfoOktaApp](docs/ResourceRemoteInfoOktaApp.md)
  - [ResourceRemoteInfoOktaCustomRole](docs/ResourceRemoteInfoOktaCustomRole.md)
  - [ResourceRemoteInfoOktaStandardRole](docs/ResourceRemoteInfoOktaStandardRole.md)
+ - [ResourceRemoteInfoTeleportRole](docs/ResourceRemoteInfoTeleportRole.md)
  - [ResourceTypeEnum](docs/ResourceTypeEnum.md)
  - [ResourceUser](docs/ResourceUser.md)
  - [ResourceUserAccessStatus](docs/ResourceUserAccessStatus.md)

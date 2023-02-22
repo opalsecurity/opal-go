@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ReviewerStage type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ReviewerStage{}
+
 // ReviewerStage A reviewer stage.
 type ReviewerStage struct {
 	// Whether this reviewer stage should require manager approval.
@@ -117,17 +120,19 @@ func (o *ReviewerStage) SetOwnerIds(v []string) {
 }
 
 func (o ReviewerStage) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["require_manager_approval"] = o.RequireManagerApproval
-	}
-	if true {
-		toSerialize["operator"] = o.Operator
-	}
-	if true {
-		toSerialize["owner_ids"] = o.OwnerIds
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ReviewerStage) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["require_manager_approval"] = o.RequireManagerApproval
+	toSerialize["operator"] = o.Operator
+	toSerialize["owner_ids"] = o.OwnerIds
+	return toSerialize, nil
 }
 
 type NullableReviewerStage struct {
