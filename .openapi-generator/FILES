@@ -1,5 +1,4 @@
 .gitignore
-.travis.yml
 README.md
 api/openapi.yaml
 api_apps.go
@@ -112,7 +111,6 @@ docs/UserList.md
 docs/UsersApi.md
 docs/VisibilityInfo.md
 docs/VisibilityTypeEnum.md
-git_push.sh
 go.mod
 go.sum
 model_app.go
@@ -202,15 +200,4 @@ model_user_list.go
 model_visibility_info.go
 model_visibility_type_enum.go
 response.go
-test/api_apps_test.go
-test/api_events_test.go
-test/api_groups_test.go
-test/api_message_channels_test.go
-test/api_on_call_schedules_test.go
-test/api_owners_test.go
-test/api_resources_test.go
-test/api_sessions_test.go
-test/api_tags_test.go
-test/api_uars_test.go
-test/api_users_test.go
 utils.go
