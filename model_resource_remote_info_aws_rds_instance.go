@@ -26,6 +26,8 @@ type ResourceRemoteInfoAwsRdsInstance struct {
 	Region string `json:"region"`
 	// The resourceId of the RDS instance.
 	ResourceId string `json:"resource_id"`
+	// The id of the AWS account. Required for AWS Organizations.
+	AccountId *string `json:"account_id,omitempty"`
 }
 
 // NewResourceRemoteInfoAwsRdsInstance instantiates a new ResourceRemoteInfoAwsRdsInstance object
@@ -120,6 +122,38 @@ func (o *ResourceRemoteInfoAwsRdsInstance) SetResourceId(v string) {
 	o.ResourceId = v
 }
 
+// GetAccountId returns the AccountId field value if set, zero value otherwise.
+func (o *ResourceRemoteInfoAwsRdsInstance) GetAccountId() string {
+	if o == nil || IsNil(o.AccountId) {
+		var ret string
+		return ret
+	}
+	return *o.AccountId
+}
+
+// GetAccountIdOk returns a tuple with the AccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfoAwsRdsInstance) GetAccountIdOk() (*string, bool) {
+	if o == nil || IsNil(o.AccountId) {
+		return nil, false
+	}
+	return o.AccountId, true
+}
+
+// HasAccountId returns a boolean if a field has been set.
+func (o *ResourceRemoteInfoAwsRdsInstance) HasAccountId() bool {
+	if o != nil && !IsNil(o.AccountId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountId gets a reference to the given string and assigns it to the AccountId field.
+func (o *ResourceRemoteInfoAwsRdsInstance) SetAccountId(v string) {
+	o.AccountId = &v
+}
+
 func (o ResourceRemoteInfoAwsRdsInstance) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -133,6 +167,9 @@ func (o ResourceRemoteInfoAwsRdsInstance) ToMap() (map[string]interface{}, error
 	toSerialize["instance_id"] = o.InstanceId
 	toSerialize["region"] = o.Region
 	toSerialize["resource_id"] = o.ResourceId
+	if !IsNil(o.AccountId) {
+		toSerialize["account_id"] = o.AccountId
+	}
 	return toSerialize, nil
 }
 

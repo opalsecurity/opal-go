@@ -24,6 +24,8 @@ type ResourceRemoteInfoAwsEc2Instance struct {
 	InstanceId string `json:"instance_id"`
 	// The region of the EC2 instance.
 	Region string `json:"region"`
+	// The id of the AWS account. Required for AWS Organizations.
+	AccountId *string `json:"account_id,omitempty"`
 }
 
 // NewResourceRemoteInfoAwsEc2Instance instantiates a new ResourceRemoteInfoAwsEc2Instance object
@@ -93,6 +95,38 @@ func (o *ResourceRemoteInfoAwsEc2Instance) SetRegion(v string) {
 	o.Region = v
 }
 
+// GetAccountId returns the AccountId field value if set, zero value otherwise.
+func (o *ResourceRemoteInfoAwsEc2Instance) GetAccountId() string {
+	if o == nil || IsNil(o.AccountId) {
+		var ret string
+		return ret
+	}
+	return *o.AccountId
+}
+
+// GetAccountIdOk returns a tuple with the AccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfoAwsEc2Instance) GetAccountIdOk() (*string, bool) {
+	if o == nil || IsNil(o.AccountId) {
+		return nil, false
+	}
+	return o.AccountId, true
+}
+
+// HasAccountId returns a boolean if a field has been set.
+func (o *ResourceRemoteInfoAwsEc2Instance) HasAccountId() bool {
+	if o != nil && !IsNil(o.AccountId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountId gets a reference to the given string and assigns it to the AccountId field.
+func (o *ResourceRemoteInfoAwsEc2Instance) SetAccountId(v string) {
+	o.AccountId = &v
+}
+
 func (o ResourceRemoteInfoAwsEc2Instance) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -105,6 +139,9 @@ func (o ResourceRemoteInfoAwsEc2Instance) ToMap() (map[string]interface{}, error
 	toSerialize := map[string]interface{}{}
 	toSerialize["instance_id"] = o.InstanceId
 	toSerialize["region"] = o.Region
+	if !IsNil(o.AccountId) {
+		toSerialize["account_id"] = o.AccountId
+	}
 	return toSerialize, nil
 }
 

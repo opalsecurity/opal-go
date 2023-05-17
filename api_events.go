@@ -17,6 +17,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"time"
 )
 
 
@@ -26,8 +27,8 @@ type EventsApiService service
 type ApiEventsRequest struct {
 	ctx context.Context
 	ApiService *EventsApiService
-	startDateFilter *string
-	endDateFilter *string
+	startDateFilter *time.Time
+	endDateFilter *time.Time
 	actorFilter *string
 	objectFilter *string
 	eventTypeFilter *string
@@ -36,13 +37,13 @@ type ApiEventsRequest struct {
 }
 
 // A start date filter for the events.
-func (r ApiEventsRequest) StartDateFilter(startDateFilter string) ApiEventsRequest {
+func (r ApiEventsRequest) StartDateFilter(startDateFilter time.Time) ApiEventsRequest {
 	r.startDateFilter = &startDateFilter
 	return r
 }
 
 // An end date filter for the events.
-func (r ApiEventsRequest) EndDateFilter(endDateFilter string) ApiEventsRequest {
+func (r ApiEventsRequest) EndDateFilter(endDateFilter time.Time) ApiEventsRequest {
 	r.endDateFilter = &endDateFilter
 	return r
 }

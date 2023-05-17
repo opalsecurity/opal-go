@@ -5,7 +5,11 @@
 
 * `ACTIVE_DIRECTORY` (value: `"ACTIVE_DIRECTORY"`)
 
+* `AZURE_AD` (value: `"AZURE_AD"`)
+
 * `AWS` (value: `"AWS"`)
+
+* `AWS_SSO` (value: `"AWS_SSO"`)
 
 * `CUSTOM` (value: `"CUSTOM"`)
 
@@ -14,6 +18,8 @@
 * `GCP` (value: `"GCP"`)
 
 * `GIT_HUB` (value: `"GIT_HUB"`)
+
+* `GIT_LAB` (value: `"GIT_LAB"`)
 
 * `GOOGLE_GROUPS` (value: `"GOOGLE_GROUPS"`)
 
@@ -36,6 +42,10 @@
 * `PAGERDUTY` (value: `"PAGERDUTY"`)
 
 * `SALESFORCE` (value: `"SALESFORCE"`)
+
+* `TAILSCALE` (value: `"TAILSCALE"`)
+
+* `TELEPORT` (value: `"TELEPORT"`)
 
 * `WORKDAY` (value: `"WORKDAY"`)
 

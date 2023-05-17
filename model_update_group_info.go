@@ -38,6 +38,7 @@ type UpdateGroupInfo struct {
 	// A bool representing whether or not access requests to the group require an access ticket.
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
 	// The ID of the folder that the group is located in.
+	// Deprecated
 	FolderId *string `json:"folder_id,omitempty"`
 	// A bool representing whether or not to require MFA for reviewers to approve requests for this group.
 	RequireMfaToApprove *bool `json:"require_mfa_to_approve,omitempty"`
@@ -321,6 +322,7 @@ func (o *UpdateGroupInfo) SetRequireSupportTicket(v bool) {
 }
 
 // GetFolderId returns the FolderId field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateGroupInfo) GetFolderId() string {
 	if o == nil || IsNil(o.FolderId) {
 		var ret string
@@ -331,6 +333,7 @@ func (o *UpdateGroupInfo) GetFolderId() string {
 
 // GetFolderIdOk returns a tuple with the FolderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateGroupInfo) GetFolderIdOk() (*string, bool) {
 	if o == nil || IsNil(o.FolderId) {
 		return nil, false
@@ -348,6 +351,7 @@ func (o *UpdateGroupInfo) HasFolderId() bool {
 }
 
 // SetFolderId gets a reference to the given string and assigns it to the FolderId field.
+// Deprecated
 func (o *UpdateGroupInfo) SetFolderId(v string) {
 	o.FolderId = &v
 }

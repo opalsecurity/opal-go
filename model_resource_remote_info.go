@@ -20,6 +20,7 @@ var _ MappedNullable = &ResourceRemoteInfo{}
 
 // ResourceRemoteInfo Remote info that is required for the creation of remote resources. Providing this will allow you to omit deprecated remote_id and metadata fields.
 type ResourceRemoteInfo struct {
+	AwsAccount *ResourceRemoteInfoAwsAccount `json:"aws_account,omitempty"`
 	AwsIamRole *ResourceRemoteInfoAwsIamRole `json:"aws_iam_role,omitempty"`
 	AwsEc2Instance *ResourceRemoteInfoAwsEc2Instance `json:"aws_ec2_instance,omitempty"`
 	AwsRdsInstance *ResourceRemoteInfoAwsRdsInstance `json:"aws_rds_instance,omitempty"`
@@ -47,6 +48,38 @@ func NewResourceRemoteInfo() *ResourceRemoteInfo {
 func NewResourceRemoteInfoWithDefaults() *ResourceRemoteInfo {
 	this := ResourceRemoteInfo{}
 	return &this
+}
+
+// GetAwsAccount returns the AwsAccount field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAwsAccount() ResourceRemoteInfoAwsAccount {
+	if o == nil || IsNil(o.AwsAccount) {
+		var ret ResourceRemoteInfoAwsAccount
+		return ret
+	}
+	return *o.AwsAccount
+}
+
+// GetAwsAccountOk returns a tuple with the AwsAccount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAwsAccountOk() (*ResourceRemoteInfoAwsAccount, bool) {
+	if o == nil || IsNil(o.AwsAccount) {
+		return nil, false
+	}
+	return o.AwsAccount, true
+}
+
+// HasAwsAccount returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAwsAccount() bool {
+	if o != nil && !IsNil(o.AwsAccount) {
+		return true
+	}
+
+	return false
+}
+
+// SetAwsAccount gets a reference to the given ResourceRemoteInfoAwsAccount and assigns it to the AwsAccount field.
+func (o *ResourceRemoteInfo) SetAwsAccount(v ResourceRemoteInfoAwsAccount) {
+	o.AwsAccount = &v
 }
 
 // GetAwsIamRole returns the AwsIamRole field value if set, zero value otherwise.
@@ -379,6 +412,9 @@ func (o ResourceRemoteInfo) MarshalJSON() ([]byte, error) {
 
 func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AwsAccount) {
+		toSerialize["aws_account"] = o.AwsAccount
+	}
 	if !IsNil(o.AwsIamRole) {
 		toSerialize["aws_iam_role"] = o.AwsIamRole
 	}

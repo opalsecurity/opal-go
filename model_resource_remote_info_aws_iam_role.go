@@ -22,6 +22,8 @@ var _ MappedNullable = &ResourceRemoteInfoAwsIamRole{}
 type ResourceRemoteInfoAwsIamRole struct {
 	// The ARN of the IAM role.
 	Arn string `json:"arn"`
+	// The id of the AWS account. Required for AWS Organizations.
+	AccountId *string `json:"account_id,omitempty"`
 }
 
 // NewResourceRemoteInfoAwsIamRole instantiates a new ResourceRemoteInfoAwsIamRole object
@@ -66,6 +68,38 @@ func (o *ResourceRemoteInfoAwsIamRole) SetArn(v string) {
 	o.Arn = v
 }
 
+// GetAccountId returns the AccountId field value if set, zero value otherwise.
+func (o *ResourceRemoteInfoAwsIamRole) GetAccountId() string {
+	if o == nil || IsNil(o.AccountId) {
+		var ret string
+		return ret
+	}
+	return *o.AccountId
+}
+
+// GetAccountIdOk returns a tuple with the AccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfoAwsIamRole) GetAccountIdOk() (*string, bool) {
+	if o == nil || IsNil(o.AccountId) {
+		return nil, false
+	}
+	return o.AccountId, true
+}
+
+// HasAccountId returns a boolean if a field has been set.
+func (o *ResourceRemoteInfoAwsIamRole) HasAccountId() bool {
+	if o != nil && !IsNil(o.AccountId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountId gets a reference to the given string and assigns it to the AccountId field.
+func (o *ResourceRemoteInfoAwsIamRole) SetAccountId(v string) {
+	o.AccountId = &v
+}
+
 func (o ResourceRemoteInfoAwsIamRole) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -77,6 +111,9 @@ func (o ResourceRemoteInfoAwsIamRole) MarshalJSON() ([]byte, error) {
 func (o ResourceRemoteInfoAwsIamRole) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["arn"] = o.Arn
+	if !IsNil(o.AccountId) {
+		toSerialize["account_id"] = o.AccountId
+	}
 	return toSerialize, nil
 }
 

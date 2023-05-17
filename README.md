@@ -201,6 +201,7 @@ Class | Method | HTTP request | Description
  - [ResourceAccessUser](docs/ResourceAccessUser.md)
  - [ResourceAccessUserList](docs/ResourceAccessUserList.md)
  - [ResourceRemoteInfo](docs/ResourceRemoteInfo.md)
+ - [ResourceRemoteInfoAwsAccount](docs/ResourceRemoteInfoAwsAccount.md)
  - [ResourceRemoteInfoAwsEc2Instance](docs/ResourceRemoteInfoAwsEc2Instance.md)
  - [ResourceRemoteInfoAwsEksCluster](docs/ResourceRemoteInfoAwsEksCluster.md)
  - [ResourceRemoteInfoAwsIamRole](docs/ResourceRemoteInfoAwsIamRole.md)
@@ -245,7 +246,7 @@ Class | Method | HTTP request | Description
 ## Documentation For Authorization
 
 
-
+Authentication schemes defined for the API:
 ### BearerAuth
 
 - **Type**: HTTP Bearer token authentication
