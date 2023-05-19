@@ -67,6 +67,7 @@ docs/ResourceAccessLevel.md
 docs/ResourceAccessUser.md
 docs/ResourceAccessUserList.md
 docs/ResourceRemoteInfo.md
+docs/ResourceRemoteInfoAwsAccount.md
 docs/ResourceRemoteInfoAwsEc2Instance.md
 docs/ResourceRemoteInfoAwsEksCluster.md
 docs/ResourceRemoteInfoAwsIamRole.md
@@ -160,6 +161,7 @@ model_resource_access_level.go
 model_resource_access_user.go
 model_resource_access_user_list.go
 model_resource_remote_info.go
+model_resource_remote_info_aws_account.go
 model_resource_remote_info_aws_ec2_instance.go
 model_resource_remote_info_aws_eks_cluster.go
 model_resource_remote_info_aws_iam_role.go

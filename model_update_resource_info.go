@@ -38,6 +38,7 @@ type UpdateResourceInfo struct {
 	// A bool representing whether or not access requests to the resource require an access ticket.
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
 	// The ID of the folder that the resource is located in.
+	// Deprecated
 	FolderId *string `json:"folder_id,omitempty"`
 	// A bool representing whether or not to require MFA for reviewers to approve requests for this resource.
 	RequireMfaToApprove *bool `json:"require_mfa_to_approve,omitempty"`
@@ -323,6 +324,7 @@ func (o *UpdateResourceInfo) SetRequireSupportTicket(v bool) {
 }
 
 // GetFolderId returns the FolderId field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateResourceInfo) GetFolderId() string {
 	if o == nil || IsNil(o.FolderId) {
 		var ret string
@@ -333,6 +335,7 @@ func (o *UpdateResourceInfo) GetFolderId() string {
 
 // GetFolderIdOk returns a tuple with the FolderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateResourceInfo) GetFolderIdOk() (*string, bool) {
 	if o == nil || IsNil(o.FolderId) {
 		return nil, false
@@ -350,6 +353,7 @@ func (o *UpdateResourceInfo) HasFolderId() bool {
 }
 
 // SetFolderId gets a reference to the given string and assigns it to the FolderId field.
+// Deprecated
 func (o *UpdateResourceInfo) SetFolderId(v string) {
 	o.FolderId = &v
 }

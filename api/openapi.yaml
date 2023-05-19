@@ -82,21 +82,35 @@ paths:
       operationId: events
       parameters:
       - description: A start date filter for the events.
-        example: 2021/11/01
+        examples:
+          withDate:
+            summary: Example with date
+            value: 2021-11-01
+          withDatetime:
+            summary: Example with date and time
+            value: 2021-11-01 12:00:00
         explode: true
         in: query
         name: start_date_filter
         required: false
         schema:
+          format: date-time
           type: string
         style: form
       - description: An end date filter for the events.
-        example: 2021-11-12
+        examples:
+          withDate:
+            summary: Example with date
+            value: 2021-11-12
+          withDatetime:
+            summary: Example with date and time
+            value: 2021-11-12 12:00:00
         explode: true
         in: query
         name: end_date_filter
         required: false
         schema:
+          format: date-time
           type: string
         style: form
       - description: An actor filter for the events. Supply the ID of the actor.
@@ -2461,8 +2475,7 @@ components:
           example: false
           type: boolean
         deadline:
-          description: The last day for reviewers to complete their access reviews
-            before access is frozen for incomplete reviews.
+          description: The last day for reviewers to complete their access reviews.
           format: date-time
           type: string
         time_zone:
@@ -2518,8 +2531,7 @@ components:
           example: false
           type: boolean
         deadline:
-          description: The last day for reviewers to complete their access reviews
-            before access is frozen for incomplete reviews.
+          description: The last day for reviewers to complete their access reviews.
           format: date-time
           type: string
         time_zone:
@@ -2637,11 +2649,14 @@ components:
       description: The type of an app.
       enum:
       - ACTIVE_DIRECTORY
+      - AZURE_AD
       - AWS
+      - AWS_SSO
       - CUSTOM
       - DUO
       - GCP
       - GIT_HUB
+      - GIT_LAB
       - GOOGLE_GROUPS
       - GOOGLE_WORKSPACE
       - LDAP
@@ -2653,6 +2668,8 @@ components:
       - OPAL
       - PAGERDUTY
       - SALESFORCE
+      - TAILSCALE
+      - TELEPORT
       - WORKDAY
       example: OKTA_DIRECTORY
       type: string
@@ -3313,11 +3330,6 @@ components:
             require an access ticket.
           example: false
           type: boolean
-        folder_id:
-          description: The ID of the folder that the group is located in.
-          example: e27cb7b0-98e2-4555-9916-9e6d8ca6b079
-          format: uuid
-          type: string
         require_mfa_to_approve:
           description: A bool representing whether or not to require MFA for reviewers
             to approve requests for this group.
@@ -3535,6 +3547,7 @@ components:
           example: false
           type: boolean
         folder_id:
+          deprecated: true
           description: The ID of the folder that the group is located in.
           example: e27cb7b0-98e2-4555-9916-9e6d8ca6b079
           format: uuid
@@ -3970,6 +3983,8 @@ components:
       description: Remote info that is required for the creation of remote resources.
         Providing this will allow you to omit deprecated remote_id and metadata fields.
       properties:
+        aws_account:
+          $ref: '#/components/schemas/ResourceRemoteInfo_aws_account'
         aws_iam_role:
           $ref: '#/components/schemas/ResourceRemoteInfo_aws_iam_role'
         aws_ec2_instance:
@@ -4533,11 +4548,6 @@ components:
             require an access ticket.
           example: false
           type: boolean
-        folder_id:
-          description: The ID of the folder that the resource is located in.
-          example: e27cb7b0-98e2-4555-9916-9e6d8ca6b079
-          format: uuid
-          type: string
         require_mfa_to_approve:
           description: A bool representing whether or not to require MFA for reviewers
             to approve requests for this resource.
@@ -4670,6 +4680,7 @@ components:
           example: false
           type: boolean
         folder_id:
+          deprecated: true
           description: The ID of the folder that the resource is located in.
           example: e27cb7b0-98e2-4555-9916-9e6d8ca6b079
           format: uuid
@@ -5080,12 +5091,26 @@ components:
       required:
       - group_id
       type: object
+    ResourceRemoteInfo_aws_account:
+      description: Remote info for AWS account.
+      properties:
+        account_id:
+          description: The id of the AWS account.
+          example: "234234234234"
+          type: string
+      required:
+      - account_id
+      type: object
     ResourceRemoteInfo_aws_iam_role:
       description: Remote info for AWS IAM role.
       properties:
         arn:
           description: The ARN of the IAM role.
           example: arn:aws:iam::179308207300:role/MyRole
+          type: string
+        account_id:
+          description: The id of the AWS account. Required for AWS Organizations.
+          example: "234234234234"
           type: string
       required:
       - arn
@@ -5100,6 +5125,10 @@ components:
         region:
           description: The region of the EC2 instance.
           example: us-east-2
+          type: string
+        account_id:
+          description: The id of the AWS account. Required for AWS Organizations.
+          example: "234234234234"
           type: string
       required:
       - instance_id
@@ -5120,6 +5149,10 @@ components:
           description: The resourceId of the RDS instance.
           example: db-AOO8V0XUCNU13XLZXQDQRSN0NQ
           type: string
+        account_id:
+          description: The id of the AWS account. Required for AWS Organizations.
+          example: "234234234234"
+          type: string
       required:
       - instance_id
       - region
@@ -5131,6 +5164,10 @@ components:
         arn:
           description: The ARN of the EKS cluster.
           example: arn:aws:eks:us-east-2:234234234234:cluster/testcluster
+          type: string
+        account_id:
+          description: The id of the AWS account. Required for AWS Organizations.
+          example: "234234234234"
           type: string
       required:
       - arn

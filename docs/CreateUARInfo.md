@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Name** | **string** | The name of the UAR. | 
 **ReviewerAssignmentPolicy** | [**UARReviewerAssignmentPolicyEnum**](UARReviewerAssignmentPolicyEnum.md) |  | 
 **SendReviewerAssignmentNotification** | **bool** | A bool representing whether to send a notification to reviewers when they&#39;re assigned a new review. Default is False. | 
-**Deadline** | **time.Time** | The last day for reviewers to complete their access reviews before access is frozen for incomplete reviews. | 
+**Deadline** | **time.Time** | The last day for reviewers to complete their access reviews. | 
 **TimeZone** | **string** | The time zone name (as defined by the IANA Time Zone database) used in the access review deadline and exported audit report. Default is America/Los_Angeles. | 
 **SelfReviewAllowed** | **bool** | A bool representing whether to present a warning when a user is the only reviewer for themself. Default is False. | 
 **UarScope** | Pointer to [**UARScope**](UARScope.md) |  | [optional] 

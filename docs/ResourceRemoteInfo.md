@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AwsAccount** | Pointer to [**ResourceRemoteInfoAwsAccount**](ResourceRemoteInfoAwsAccount.md) |  | [optional] 
 **AwsIamRole** | Pointer to [**ResourceRemoteInfoAwsIamRole**](ResourceRemoteInfoAwsIamRole.md) |  | [optional] 
 **AwsEc2Instance** | Pointer to [**ResourceRemoteInfoAwsEc2Instance**](ResourceRemoteInfoAwsEc2Instance.md) |  | [optional] 
 **AwsRdsInstance** | Pointer to [**ResourceRemoteInfoAwsRdsInstance**](ResourceRemoteInfoAwsRdsInstance.md) |  | [optional] 
@@ -33,6 +34,31 @@ will change when the set of required properties is changed
 NewResourceRemoteInfoWithDefaults instantiates a new ResourceRemoteInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAwsAccount
+
+`func (o *ResourceRemoteInfo) GetAwsAccount() ResourceRemoteInfoAwsAccount`
+
+GetAwsAccount returns the AwsAccount field if non-nil, zero value otherwise.
+
+### GetAwsAccountOk
+
+`func (o *ResourceRemoteInfo) GetAwsAccountOk() (*ResourceRemoteInfoAwsAccount, bool)`
+
+GetAwsAccountOk returns a tuple with the AwsAccount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAwsAccount
+
+`func (o *ResourceRemoteInfo) SetAwsAccount(v ResourceRemoteInfoAwsAccount)`
+
+SetAwsAccount sets AwsAccount field to given value.
+
+### HasAwsAccount
+
+`func (o *ResourceRemoteInfo) HasAwsAccount() bool`
+
+HasAwsAccount returns a boolean if a field has been set.
 
 ### GetAwsIamRole
 

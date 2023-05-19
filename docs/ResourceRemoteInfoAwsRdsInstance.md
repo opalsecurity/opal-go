@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **InstanceId** | **string** | The instanceId of the RDS instance. | 
 **Region** | **string** | The region of the RDS instance. | 
 **ResourceId** | **string** | The resourceId of the RDS instance. | 
+**AccountId** | Pointer to **string** | The id of the AWS account. Required for AWS Organizations. | [optional] 
 
 ## Methods
 
@@ -86,6 +87,31 @@ and a boolean to check if the value has been set.
 
 SetResourceId sets ResourceId field to given value.
 
+
+### GetAccountId
+
+`func (o *ResourceRemoteInfoAwsRdsInstance) GetAccountId() string`
+
+GetAccountId returns the AccountId field if non-nil, zero value otherwise.
+
+### GetAccountIdOk
+
+`func (o *ResourceRemoteInfoAwsRdsInstance) GetAccountIdOk() (*string, bool)`
+
+GetAccountIdOk returns a tuple with the AccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountId
+
+`func (o *ResourceRemoteInfoAwsRdsInstance) SetAccountId(v string)`
+
+SetAccountId sets AccountId field to given value.
+
+### HasAccountId
+
+`func (o *ResourceRemoteInfoAwsRdsInstance) HasAccountId() bool`
+
+HasAccountId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

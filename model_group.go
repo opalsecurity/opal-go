@@ -44,8 +44,6 @@ type Group struct {
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
 	// A bool representing whether or not access requests to the group require an access ticket.
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
-	// The ID of the folder that the group is located in.
-	FolderId *string `json:"folder_id,omitempty"`
 	// A bool representing whether or not to require MFA for reviewers to approve requests for this group.
 	RequireMfaToApprove *bool `json:"require_mfa_to_approve,omitempty"`
 	// A bool representing whether or not to require MFA for requesting access to this group.
@@ -457,38 +455,6 @@ func (o *Group) SetRequireSupportTicket(v bool) {
 	o.RequireSupportTicket = &v
 }
 
-// GetFolderId returns the FolderId field value if set, zero value otherwise.
-func (o *Group) GetFolderId() string {
-	if o == nil || IsNil(o.FolderId) {
-		var ret string
-		return ret
-	}
-	return *o.FolderId
-}
-
-// GetFolderIdOk returns a tuple with the FolderId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Group) GetFolderIdOk() (*string, bool) {
-	if o == nil || IsNil(o.FolderId) {
-		return nil, false
-	}
-	return o.FolderId, true
-}
-
-// HasFolderId returns a boolean if a field has been set.
-func (o *Group) HasFolderId() bool {
-	if o != nil && !IsNil(o.FolderId) {
-		return true
-	}
-
-	return false
-}
-
-// SetFolderId gets a reference to the given string and assigns it to the FolderId field.
-func (o *Group) SetFolderId(v string) {
-	o.FolderId = &v
-}
-
 // GetRequireMfaToApprove returns the RequireMfaToApprove field value if set, zero value otherwise.
 func (o *Group) GetRequireMfaToApprove() bool {
 	if o == nil || IsNil(o.RequireMfaToApprove) {
@@ -724,9 +690,6 @@ func (o Group) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.RequireSupportTicket) {
 		toSerialize["require_support_ticket"] = o.RequireSupportTicket
-	}
-	if !IsNil(o.FolderId) {
-		toSerialize["folder_id"] = o.FolderId
 	}
 	if !IsNil(o.RequireMfaToApprove) {
 		toSerialize["require_mfa_to_approve"] = o.RequireMfaToApprove

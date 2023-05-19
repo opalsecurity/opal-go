@@ -26,7 +26,7 @@ type CreateUARInfo struct {
 	ReviewerAssignmentPolicy UARReviewerAssignmentPolicyEnum `json:"reviewer_assignment_policy"`
 	// A bool representing whether to send a notification to reviewers when they're assigned a new review. Default is False.
 	SendReviewerAssignmentNotification bool `json:"send_reviewer_assignment_notification"`
-	// The last day for reviewers to complete their access reviews before access is frozen for incomplete reviews.
+	// The last day for reviewers to complete their access reviews.
 	Deadline time.Time `json:"deadline"`
 	// The time zone name (as defined by the IANA Time Zone database) used in the access review deadline and exported audit report. Default is America/Los_Angeles.
 	TimeZone string `json:"time_zone"`

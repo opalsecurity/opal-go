@@ -1,5 +1,5 @@
 /*
-   Utils to facilitate easier usage of the SDK.
+Utils to facilitate easier usage of the SDK.
 */
 package opal
 
@@ -12,7 +12,6 @@ func GroupToUpdateGroupInfo(group Group) (updateGroupInfo UpdateGroupInfo) {
 		RequireManagerApproval: group.RequireManagerApproval,
 		RequireSupportTicket:   group.RequireSupportTicket,
 		Name:                   group.Name,
-		FolderId:               group.FolderId,
 		RequireMfaToApprove:    group.RequireMfaToApprove,
 		AutoApproval:           group.AutoApproval,
 		RequestTemplateId:      group.RequestTemplateId,
@@ -28,7 +27,6 @@ func ResourceToUpdateResourceInfo(resource Resource) (updateResourceInfo UpdateR
 		RequireManagerApproval: resource.RequireManagerApproval,
 		RequireSupportTicket:   resource.RequireSupportTicket,
 		Name:                   resource.Name,
-		FolderId:               resource.FolderId,
 		RequireMfaToApprove:    resource.RequireMfaToApprove,
 		AutoApproval:           resource.AutoApproval,
 		RequestTemplateId:      resource.RequestTemplateId,

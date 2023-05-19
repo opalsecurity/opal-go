@@ -25,12 +25,13 @@ import (
     "context"
     "fmt"
     "os"
+    "time"
     openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    startDateFilter := "2021/11/01" // string | A start date filter for the events. (optional)
-    endDateFilter := "2021-11-12" // string | An end date filter for the events. (optional)
+    startDateFilter := time.Now() // time.Time | A start date filter for the events. (optional)
+    endDateFilter := time.Now() // time.Time | An end date filter for the events. (optional)
     actorFilter := "29827fb8-f2dd-4e80-9576-28e31e9934ac" // string | An actor filter for the events. Supply the ID of the actor. (optional)
     objectFilter := "29827fb8-f2dd-4e80-9576-28e31e9934ac" // string | An object filter for the events. Supply the ID of the object. (optional)
     eventTypeFilter := "29827fb8-f2dd-4e80-9576-28e31e9934ac" // string | An event type filter for the events. (optional)
@@ -60,8 +61,8 @@ Other parameters are passed through a pointer to a apiEventsRequest struct via t
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **startDateFilter** | **string** | A start date filter for the events. | 
- **endDateFilter** | **string** | An end date filter for the events. | 
+ **startDateFilter** | **time.Time** | A start date filter for the events. | 
+ **endDateFilter** | **time.Time** | An end date filter for the events. | 
  **actorFilter** | **string** | An actor filter for the events. Supply the ID of the actor. | 
  **objectFilter** | **string** | An object filter for the events. Supply the ID of the object. | 
  **eventTypeFilter** | **string** | An event type filter for the events. | 
