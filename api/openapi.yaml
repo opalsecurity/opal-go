@@ -94,7 +94,6 @@ paths:
         name: start_date_filter
         required: false
         schema:
-          format: date-time
           type: string
         style: form
       - description: An end date filter for the events.
@@ -110,7 +109,6 @@ paths:
         name: end_date_filter
         required: false
         schema:
-          format: date-time
           type: string
         style: form
       - description: An actor filter for the events. Supply the ID of the actor.
@@ -3985,6 +3983,8 @@ components:
       properties:
         aws_account:
           $ref: '#/components/schemas/ResourceRemoteInfo_aws_account'
+        aws_permission_set:
+          $ref: '#/components/schemas/ResourceRemoteInfo_aws_permission_set'
         aws_iam_role:
           $ref: '#/components/schemas/ResourceRemoteInfo_aws_iam_role'
         aws_ec2_instance:
@@ -4599,6 +4599,14 @@ components:
       required:
       - resource_id
       type: object
+    AwsPermissionSetMetadata:
+      description: Metadata for AWS Identity Center permission set.
+      properties:
+        aws_permission_set:
+          $ref: '#/components/schemas/AwsPermissionSetMetadata_aws_permission_set'
+      required:
+      - aws_permission_set
+      type: object
     UpdateResourceInfoList:
       example:
         resources:
@@ -5101,6 +5109,21 @@ components:
       required:
       - account_id
       type: object
+    ResourceRemoteInfo_aws_permission_set:
+      description: Remote info for AWS Identity Center permission set.
+      properties:
+        arn:
+          description: The ARN of the permission set.
+          example: arn:aws:sso:::permissionSet/asdf-32139302d201d32/ps-f03323201211e1b9
+          type: string
+        account_id:
+          description: The ID of an AWS account to which this permission set is provisioned.
+          example: "234234234234"
+          type: string
+      required:
+      - account_id
+      - arn
+      type: object
     ResourceRemoteInfo_aws_iam_role:
       description: Remote info for AWS IAM role.
       properties:
@@ -5236,6 +5259,20 @@ components:
           type: string
       required:
       - role_name
+      type: object
+    AwsPermissionSetMetadata_aws_permission_set:
+      properties:
+        arn:
+          description: The ARN of the permission set.
+          example: arn:aws:sso:::permissionSet/asdf-32139302d201d32/ps-f03323201211e1b9
+          type: string
+        account_id:
+          description: The ID of an AWS account to which this permission set is provisioned.
+          example: "234234234234"
+          type: string
+      required:
+      - account_id
+      - arn
       type: object
   securitySchemes:
     BearerAuth:

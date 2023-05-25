@@ -18,6 +18,8 @@ docs/App.md
 docs/AppTypeEnum.md
 docs/AppsApi.md
 docs/AppsList.md
+docs/AwsPermissionSetMetadata.md
+docs/AwsPermissionSetMetadataAwsPermissionSet.md
 docs/CreateGroupInfo.md
 docs/CreateMessageChannelInfo.md
 docs/CreateOnCallScheduleInfo.md
@@ -71,6 +73,7 @@ docs/ResourceRemoteInfoAwsAccount.md
 docs/ResourceRemoteInfoAwsEc2Instance.md
 docs/ResourceRemoteInfoAwsEksCluster.md
 docs/ResourceRemoteInfoAwsIamRole.md
+docs/ResourceRemoteInfoAwsPermissionSet.md
 docs/ResourceRemoteInfoAwsRdsInstance.md
 docs/ResourceRemoteInfoGithubRepo.md
 docs/ResourceRemoteInfoGitlabProject.md
@@ -117,6 +120,8 @@ go.sum
 model_app.go
 model_app_type_enum.go
 model_apps_list.go
+model_aws_permission_set_metadata.go
+model_aws_permission_set_metadata_aws_permission_set.go
 model_create_group_info.go
 model_create_message_channel_info.go
 model_create_on_call_schedule_info.go
@@ -165,6 +170,7 @@ model_resource_remote_info_aws_account.go
 model_resource_remote_info_aws_ec2_instance.go
 model_resource_remote_info_aws_eks_cluster.go
 model_resource_remote_info_aws_iam_role.go
+model_resource_remote_info_aws_permission_set.go
 model_resource_remote_info_aws_rds_instance.go
 model_resource_remote_info_github_repo.go
 model_resource_remote_info_gitlab_project.go

@@ -21,6 +21,7 @@ var _ MappedNullable = &ResourceRemoteInfo{}
 // ResourceRemoteInfo Remote info that is required for the creation of remote resources. Providing this will allow you to omit deprecated remote_id and metadata fields.
 type ResourceRemoteInfo struct {
 	AwsAccount *ResourceRemoteInfoAwsAccount `json:"aws_account,omitempty"`
+	AwsPermissionSet *ResourceRemoteInfoAwsPermissionSet `json:"aws_permission_set,omitempty"`
 	AwsIamRole *ResourceRemoteInfoAwsIamRole `json:"aws_iam_role,omitempty"`
 	AwsEc2Instance *ResourceRemoteInfoAwsEc2Instance `json:"aws_ec2_instance,omitempty"`
 	AwsRdsInstance *ResourceRemoteInfoAwsRdsInstance `json:"aws_rds_instance,omitempty"`
@@ -80,6 +81,38 @@ func (o *ResourceRemoteInfo) HasAwsAccount() bool {
 // SetAwsAccount gets a reference to the given ResourceRemoteInfoAwsAccount and assigns it to the AwsAccount field.
 func (o *ResourceRemoteInfo) SetAwsAccount(v ResourceRemoteInfoAwsAccount) {
 	o.AwsAccount = &v
+}
+
+// GetAwsPermissionSet returns the AwsPermissionSet field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAwsPermissionSet() ResourceRemoteInfoAwsPermissionSet {
+	if o == nil || IsNil(o.AwsPermissionSet) {
+		var ret ResourceRemoteInfoAwsPermissionSet
+		return ret
+	}
+	return *o.AwsPermissionSet
+}
+
+// GetAwsPermissionSetOk returns a tuple with the AwsPermissionSet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAwsPermissionSetOk() (*ResourceRemoteInfoAwsPermissionSet, bool) {
+	if o == nil || IsNil(o.AwsPermissionSet) {
+		return nil, false
+	}
+	return o.AwsPermissionSet, true
+}
+
+// HasAwsPermissionSet returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAwsPermissionSet() bool {
+	if o != nil && !IsNil(o.AwsPermissionSet) {
+		return true
+	}
+
+	return false
+}
+
+// SetAwsPermissionSet gets a reference to the given ResourceRemoteInfoAwsPermissionSet and assigns it to the AwsPermissionSet field.
+func (o *ResourceRemoteInfo) SetAwsPermissionSet(v ResourceRemoteInfoAwsPermissionSet) {
+	o.AwsPermissionSet = &v
 }
 
 // GetAwsIamRole returns the AwsIamRole field value if set, zero value otherwise.
@@ -414,6 +447,9 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.AwsAccount) {
 		toSerialize["aws_account"] = o.AwsAccount
+	}
+	if !IsNil(o.AwsPermissionSet) {
+		toSerialize["aws_permission_set"] = o.AwsPermissionSet
 	}
 	if !IsNil(o.AwsIamRole) {
 		toSerialize["aws_iam_role"] = o.AwsIamRole

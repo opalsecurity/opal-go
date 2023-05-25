@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AwsAccount** | Pointer to [**ResourceRemoteInfoAwsAccount**](ResourceRemoteInfoAwsAccount.md) |  | [optional] 
+**AwsPermissionSet** | Pointer to [**ResourceRemoteInfoAwsPermissionSet**](ResourceRemoteInfoAwsPermissionSet.md) |  | [optional] 
 **AwsIamRole** | Pointer to [**ResourceRemoteInfoAwsIamRole**](ResourceRemoteInfoAwsIamRole.md) |  | [optional] 
 **AwsEc2Instance** | Pointer to [**ResourceRemoteInfoAwsEc2Instance**](ResourceRemoteInfoAwsEc2Instance.md) |  | [optional] 
 **AwsRdsInstance** | Pointer to [**ResourceRemoteInfoAwsRdsInstance**](ResourceRemoteInfoAwsRdsInstance.md) |  | [optional] 
@@ -59,6 +60,31 @@ SetAwsAccount sets AwsAccount field to given value.
 `func (o *ResourceRemoteInfo) HasAwsAccount() bool`
 
 HasAwsAccount returns a boolean if a field has been set.
+
+### GetAwsPermissionSet
+
+`func (o *ResourceRemoteInfo) GetAwsPermissionSet() ResourceRemoteInfoAwsPermissionSet`
+
+GetAwsPermissionSet returns the AwsPermissionSet field if non-nil, zero value otherwise.
+
+### GetAwsPermissionSetOk
+
+`func (o *ResourceRemoteInfo) GetAwsPermissionSetOk() (*ResourceRemoteInfoAwsPermissionSet, bool)`
+
+GetAwsPermissionSetOk returns a tuple with the AwsPermissionSet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAwsPermissionSet
+
+`func (o *ResourceRemoteInfo) SetAwsPermissionSet(v ResourceRemoteInfoAwsPermissionSet)`
+
+SetAwsPermissionSet sets AwsPermissionSet field to given value.
+
+### HasAwsPermissionSet
+
+`func (o *ResourceRemoteInfo) HasAwsPermissionSet() bool`
+
+HasAwsPermissionSet returns a boolean if a field has been set.
 
 ### GetAwsIamRole
 
