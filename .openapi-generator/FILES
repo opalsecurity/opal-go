@@ -7,6 +7,7 @@ api_groups.go
 api_message_channels.go
 api_on_call_schedules.go
 api_owners.go
+api_requests.go
 api_resources.go
 api_sessions.go
 api_tags.go
@@ -64,6 +65,10 @@ docs/PaginatedResourcesList.md
 docs/PaginatedTagsList.md
 docs/PaginatedUARsList.md
 docs/PaginatedUsersList.md
+docs/Request.md
+docs/RequestList.md
+docs/RequestStatusEnum.md
+docs/RequestsApi.md
 docs/Resource.md
 docs/ResourceAccessLevel.md
 docs/ResourceAccessUser.md
@@ -161,6 +166,9 @@ model_paginated_resources_list.go
 model_paginated_tags_list.go
 model_paginated_uars_list.go
 model_paginated_users_list.go
+model_request.go
+model_request_list.go
+model_request_status_enum.go
 model_resource.go
 model_resource_access_level.go
 model_resource_access_user.go

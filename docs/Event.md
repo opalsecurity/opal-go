@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **ActorEmail** | Pointer to **string** | The email of the actor user. | [optional] 
 **EventType** | **string** | The event type. | 
 **CreatedAt** | **time.Time** | The day and time the event was created. | 
+**ActorIpAddress** | Pointer to **string** | The IP address of the event actor. | [optional] 
 **SubEvents** | Pointer to [**[]SubEvent**](SubEvent.md) |  | [optional] 
 
 ## Methods
@@ -165,6 +166,31 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
+
+### GetActorIpAddress
+
+`func (o *Event) GetActorIpAddress() string`
+
+GetActorIpAddress returns the ActorIpAddress field if non-nil, zero value otherwise.
+
+### GetActorIpAddressOk
+
+`func (o *Event) GetActorIpAddressOk() (*string, bool)`
+
+GetActorIpAddressOk returns a tuple with the ActorIpAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActorIpAddress
+
+`func (o *Event) SetActorIpAddress(v string)`
+
+SetActorIpAddress sets ActorIpAddress field to given value.
+
+### HasActorIpAddress
+
+`func (o *Event) HasActorIpAddress() bool`
+
+HasActorIpAddress returns a boolean if a field has been set.
 
 ### GetSubEvents
 

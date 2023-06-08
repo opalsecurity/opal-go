@@ -62,6 +62,8 @@ type APIClient struct {
 
 	OwnersApi *OwnersApiService
 
+	RequestsApi *RequestsApiService
+
 	ResourcesApi *ResourcesApiService
 
 	SessionsApi *SessionsApiService
@@ -95,6 +97,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.MessageChannelsApi = (*MessageChannelsApiService)(&c.common)
 	c.OnCallSchedulesApi = (*OnCallSchedulesApiService)(&c.common)
 	c.OwnersApi = (*OwnersApiService)(&c.common)
+	c.RequestsApi = (*RequestsApiService)(&c.common)
 	c.ResourcesApi = (*ResourcesApiService)(&c.common)
 	c.SessionsApi = (*SessionsApiService)(&c.common)
 	c.TagsApi = (*TagsApiService)(&c.common)

@@ -33,6 +33,8 @@ type Event struct {
 	EventType string `json:"event_type"`
 	// The day and time the event was created.
 	CreatedAt time.Time `json:"created_at"`
+	// The IP address of the event actor.
+	ActorIpAddress *string `json:"actor_ip_address,omitempty"`
 	SubEvents []SubEvent `json:"sub_events,omitempty"`
 }
 
@@ -212,6 +214,38 @@ func (o *Event) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
 }
 
+// GetActorIpAddress returns the ActorIpAddress field value if set, zero value otherwise.
+func (o *Event) GetActorIpAddress() string {
+	if o == nil || IsNil(o.ActorIpAddress) {
+		var ret string
+		return ret
+	}
+	return *o.ActorIpAddress
+}
+
+// GetActorIpAddressOk returns a tuple with the ActorIpAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Event) GetActorIpAddressOk() (*string, bool) {
+	if o == nil || IsNil(o.ActorIpAddress) {
+		return nil, false
+	}
+	return o.ActorIpAddress, true
+}
+
+// HasActorIpAddress returns a boolean if a field has been set.
+func (o *Event) HasActorIpAddress() bool {
+	if o != nil && !IsNil(o.ActorIpAddress) {
+		return true
+	}
+
+	return false
+}
+
+// SetActorIpAddress gets a reference to the given string and assigns it to the ActorIpAddress field.
+func (o *Event) SetActorIpAddress(v string) {
+	o.ActorIpAddress = &v
+}
+
 // GetSubEvents returns the SubEvents field value if set, zero value otherwise.
 func (o *Event) GetSubEvents() []SubEvent {
 	if o == nil || IsNil(o.SubEvents) {
@@ -264,6 +298,9 @@ func (o Event) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["event_type"] = o.EventType
 	toSerialize["created_at"] = o.CreatedAt
+	if !IsNil(o.ActorIpAddress) {
+		toSerialize["actor_ip_address"] = o.ActorIpAddress
+	}
 	if !IsNil(o.SubEvents) {
 		toSerialize["sub_events"] = o.SubEvents
 	}

@@ -1060,6 +1060,50 @@ paths:
       - BearerAuth: []
       tags:
       - owners
+  /requests:
+    get:
+      description: Returns a list of requests for your organization that is visible
+        by the admin.
+      operationId: getRequests
+      parameters:
+      - description: The pagination cursor value.
+        example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Number of results to return per page. Default is 200.
+        example: 200
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          maximum: 1000
+          type: integer
+        style: form
+      - description: Boolean toggle for if it should only show pending requests.
+        explode: true
+        in: query
+        name: show_pending_only
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestList'
+          description: The list of requests.
+      security:
+      - BearerAuth: []
+      tags:
+      - requests
   /resources:
     get:
       description: Returns a list of resources for your organization.
@@ -2719,6 +2763,10 @@ components:
           description: The day and time the event was created.
           example: 2022-01-23T04:56:07Z
           format: date-time
+          type: string
+        actor_ip_address:
+          description: The IP address of the event actor.
+          example: 255.255.255.0
           type: string
         sub_events:
           items:
@@ -4474,6 +4522,127 @@ components:
       required:
       - results
       type: object
+    RequestStatusEnum:
+      description: |-
+        # Request Status
+        ### Description
+        The `RequestStatus` enum is used to represent the status of a request.
+
+        ### Usage Example
+        Returned from the `GET Requests` endpoint.
+      enum:
+      - pending
+      - approved
+      - denied
+      - canceled
+      type: string
+    Request:
+      description: |-
+        # Request Object
+        ### Description
+        The `Request` object is used to represent a request.
+
+        ### Usage Example
+        Returned from the `GET Requests` endpoint.
+      example:
+        id: 7c86c85d-0651-43e2-a748-d69d658418e8
+        created_at: 2021-01-06T20:00:00Z
+        updated_at: 2021-01-06T20:00:00Z
+        requester_id: c86c85d-0651-43e2-a748-d69d658418e8
+        target_user_id: r86c85d-0651-43e2-a748-d69d658418e8
+        status: pending
+        reason: I need this resource.
+        duration_minutes: 1440
+        request_comments:
+        - id: 7c86c85d-0651-43e2-a748-d69d658418e8
+          created_at: 2021-01-06T20:00:00Z
+          updated_at: 2021-01-06T20:00:00Z
+          request_id: 4c86c85d-0651-43e2-a748-d69d658418e8
+          user_id: c86c85d-0651-43e2-a748-d69d658418e8
+          comment: This is a comment.
+      properties:
+        id:
+          description: The unique identifier of the request.
+          example: 7c86c85d-0651-43e2-a748-d69d658418e8
+          format: uuid
+          type: string
+        created_at:
+          description: The date and time the request was created.
+          example: 2021-01-06T20:00:00Z
+          format: date-time
+          type: string
+        updated_at:
+          description: The date and time the request was last updated.
+          example: 2021-01-06T20:00:00Z
+          format: date-time
+          type: string
+        requester_id:
+          description: The unique identifier of the user who created the request.
+          example: 7c86c85d-0651-43e2-a748-d69d658418e8
+          format: uuid
+          type: string
+        target_user_id:
+          description: The unique identifier of the user who is the target of the
+            request.
+          example: 7c86c85d-0651-43e2-a748-d69d658418e8
+          format: uuid
+          type: string
+        status:
+          $ref: '#/components/schemas/RequestStatusEnum'
+        reason:
+          description: The reason for the request.
+          example: I need access to the AWS account.
+          type: string
+        duration_minutes:
+          description: The duration of the request in minutes.
+          example: 120
+          type: integer
+      required:
+      - created_at
+      - id
+      - reason
+      - requester_id
+      - status
+      - target_user_id
+      - updated_at
+    RequestList:
+      description: |-
+        # Request List
+        ### Description
+        The `RequestList` object is used to represent a list of requests.
+
+        ### Usage Example
+        Returned from the `GET Requests` endpoint.
+      example:
+        requests:
+        - id: 7c86c85d-0651-43e2-a748-d69d658418e8
+          organization_id: w86c85d-0651-43e2-a748-d69d658418e8
+          created_at: 2021-01-06T20:00:00Z
+          updated_at: 2021-01-06T20:00:00Z
+          requester_id: c86c85d-0651-43e2-a748-d69d658418e8
+          target_user_id: r86c85d-0651-43e2-a748-d69d658418e8
+          status: pending
+          reason: I need this resource.
+          duration_minutes: 1440
+          request_comments:
+          - id: 4c86c85d-0651-43e2-a748-d69d658418e8
+            created_at: 2021-01-06T20:00:00Z
+            updated_at: 2021-01-06T20:00:00Z
+            request_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+            user_id: c86c85d-0651-43e2-a748-d69d658418e8
+            comment: This is a comment.
+        cursor: eyJjcmVhdGVkX2F0IjoiMjAyMS0wMS0wNlQyMDo0NzowMFoiLCJ2YWx1ZSI6ImFkbWluIn0=
+      properties:
+        requests:
+          description: The list of requests.
+          items:
+            $ref: '#/components/schemas/Request'
+          type: array
+        cursor:
+          description: The cursor to use in the next request to get the next page
+            of results.
+          example: eyJjcmVhdGVkX2F0IjoiMjAyMS0wMS0wNlQyMDo0NzowMFoiLCJ2YWx1ZSI6ImFkbWluIn0=
+          type: string
     Resource:
       description: |-
         # Resource Object

@@ -116,6 +116,7 @@ Class | Method | HTTP request | Description
 *OwnersApi* | [**GetOwners**](docs/OwnersApi.md#getowners) | **Get** /owners | 
 *OwnersApi* | [**SetOwnerUsers**](docs/OwnersApi.md#setownerusers) | **Put** /owners/{owner_id}/users | 
 *OwnersApi* | [**UpdateOwners**](docs/OwnersApi.md#updateowners) | **Put** /owners | 
+*RequestsApi* | [**GetRequests**](docs/RequestsApi.md#getrequests) | **Get** /requests | 
 *ResourcesApi* | [**AddResourceUser**](docs/ResourcesApi.md#addresourceuser) | **Post** /resources/{resource_id}/users/{user_id} | 
 *ResourcesApi* | [**CreateResource**](docs/ResourcesApi.md#createresource) | **Post** /resources | 
 *ResourcesApi* | [**DeleteResource**](docs/ResourcesApi.md#deleteresource) | **Delete** /resources/{resource_id} | 
@@ -198,6 +199,9 @@ Class | Method | HTTP request | Description
  - [PaginatedTagsList](docs/PaginatedTagsList.md)
  - [PaginatedUARsList](docs/PaginatedUARsList.md)
  - [PaginatedUsersList](docs/PaginatedUsersList.md)
+ - [Request](docs/Request.md)
+ - [RequestList](docs/RequestList.md)
+ - [RequestStatusEnum](docs/RequestStatusEnum.md)
  - [Resource](docs/Resource.md)
  - [ResourceAccessLevel](docs/ResourceAccessLevel.md)
  - [ResourceAccessUser](docs/ResourceAccessUser.md)
