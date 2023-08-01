@@ -52,6 +52,8 @@ type Group struct {
 	AutoApproval *bool `json:"auto_approval,omitempty"`
 	// The ID of the associated request template.
 	RequestTemplateId *string `json:"request_template_id,omitempty"`
+	// The ID of the associated configuration template.
+	ConfigurationTemplateId *string `json:"configuration_template_id,omitempty"`
 	// A bool representing whether or not to allow access requests to this group.
 	IsRequestable *bool `json:"is_requestable,omitempty"`
 	// JSON metadata about the remote group. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details.
@@ -583,6 +585,38 @@ func (o *Group) SetRequestTemplateId(v string) {
 	o.RequestTemplateId = &v
 }
 
+// GetConfigurationTemplateId returns the ConfigurationTemplateId field value if set, zero value otherwise.
+func (o *Group) GetConfigurationTemplateId() string {
+	if o == nil || IsNil(o.ConfigurationTemplateId) {
+		var ret string
+		return ret
+	}
+	return *o.ConfigurationTemplateId
+}
+
+// GetConfigurationTemplateIdOk returns a tuple with the ConfigurationTemplateId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetConfigurationTemplateIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ConfigurationTemplateId) {
+		return nil, false
+	}
+	return o.ConfigurationTemplateId, true
+}
+
+// HasConfigurationTemplateId returns a boolean if a field has been set.
+func (o *Group) HasConfigurationTemplateId() bool {
+	if o != nil && !IsNil(o.ConfigurationTemplateId) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigurationTemplateId gets a reference to the given string and assigns it to the ConfigurationTemplateId field.
+func (o *Group) SetConfigurationTemplateId(v string) {
+	o.ConfigurationTemplateId = &v
+}
+
 // GetIsRequestable returns the IsRequestable field value if set, zero value otherwise.
 func (o *Group) GetIsRequestable() bool {
 	if o == nil || IsNil(o.IsRequestable) {
@@ -702,6 +736,9 @@ func (o Group) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.RequestTemplateId) {
 		toSerialize["request_template_id"] = o.RequestTemplateId
+	}
+	if !IsNil(o.ConfigurationTemplateId) {
+		toSerialize["configuration_template_id"] = o.ConfigurationTemplateId
 	}
 	if !IsNil(o.IsRequestable) {
 		toSerialize["is_requestable"] = o.IsRequestable

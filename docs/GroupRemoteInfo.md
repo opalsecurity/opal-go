@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **LdapGroup** | Pointer to [**GroupRemoteInfoLdapGroup**](GroupRemoteInfoLdapGroup.md) |  | [optional] 
 **OktaGroup** | Pointer to [**GroupRemoteInfoOktaGroup**](GroupRemoteInfoOktaGroup.md) |  | [optional] 
 **DuoGroup** | Pointer to [**GroupRemoteInfoDuoGroup**](GroupRemoteInfoDuoGroup.md) |  | [optional] 
+**AzureAdSecurityGroup** | Pointer to [**GroupRemoteInfoAzureAdSecurityGroup**](GroupRemoteInfoAzureAdSecurityGroup.md) |  | [optional] 
+**AzureAdMicrosoft365Group** | Pointer to [**GroupRemoteInfoAzureAdMicrosoft365Group**](GroupRemoteInfoAzureAdMicrosoft365Group.md) |  | [optional] 
 
 ## Methods
 
@@ -205,6 +207,56 @@ SetDuoGroup sets DuoGroup field to given value.
 `func (o *GroupRemoteInfo) HasDuoGroup() bool`
 
 HasDuoGroup returns a boolean if a field has been set.
+
+### GetAzureAdSecurityGroup
+
+`func (o *GroupRemoteInfo) GetAzureAdSecurityGroup() GroupRemoteInfoAzureAdSecurityGroup`
+
+GetAzureAdSecurityGroup returns the AzureAdSecurityGroup field if non-nil, zero value otherwise.
+
+### GetAzureAdSecurityGroupOk
+
+`func (o *GroupRemoteInfo) GetAzureAdSecurityGroupOk() (*GroupRemoteInfoAzureAdSecurityGroup, bool)`
+
+GetAzureAdSecurityGroupOk returns a tuple with the AzureAdSecurityGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzureAdSecurityGroup
+
+`func (o *GroupRemoteInfo) SetAzureAdSecurityGroup(v GroupRemoteInfoAzureAdSecurityGroup)`
+
+SetAzureAdSecurityGroup sets AzureAdSecurityGroup field to given value.
+
+### HasAzureAdSecurityGroup
+
+`func (o *GroupRemoteInfo) HasAzureAdSecurityGroup() bool`
+
+HasAzureAdSecurityGroup returns a boolean if a field has been set.
+
+### GetAzureAdMicrosoft365Group
+
+`func (o *GroupRemoteInfo) GetAzureAdMicrosoft365Group() GroupRemoteInfoAzureAdMicrosoft365Group`
+
+GetAzureAdMicrosoft365Group returns the AzureAdMicrosoft365Group field if non-nil, zero value otherwise.
+
+### GetAzureAdMicrosoft365GroupOk
+
+`func (o *GroupRemoteInfo) GetAzureAdMicrosoft365GroupOk() (*GroupRemoteInfoAzureAdMicrosoft365Group, bool)`
+
+GetAzureAdMicrosoft365GroupOk returns a tuple with the AzureAdMicrosoft365Group field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzureAdMicrosoft365Group
+
+`func (o *GroupRemoteInfo) SetAzureAdMicrosoft365Group(v GroupRemoteInfoAzureAdMicrosoft365Group)`
+
+SetAzureAdMicrosoft365Group sets AzureAdMicrosoft365Group field to given value.
+
+### HasAzureAdMicrosoft365Group
+
+`func (o *GroupRemoteInfo) HasAzureAdMicrosoft365Group() bool`
+
+HasAzureAdMicrosoft365Group returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
