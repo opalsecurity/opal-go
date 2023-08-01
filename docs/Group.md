@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **RequireMfaToRequest** | Pointer to **bool** | A bool representing whether or not to require MFA for requesting access to this group. | [optional] 
 **AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this group. | [optional] 
 **RequestTemplateId** | Pointer to **string** | The ID of the associated request template. | [optional] 
+**ConfigurationTemplateId** | Pointer to **string** | The ID of the associated configuration template. | [optional] 
 **IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this group. | [optional] 
 **Metadata** | Pointer to **string** | JSON metadata about the remote group. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details. | [optional] 
 
@@ -436,6 +437,31 @@ SetRequestTemplateId sets RequestTemplateId field to given value.
 `func (o *Group) HasRequestTemplateId() bool`
 
 HasRequestTemplateId returns a boolean if a field has been set.
+
+### GetConfigurationTemplateId
+
+`func (o *Group) GetConfigurationTemplateId() string`
+
+GetConfigurationTemplateId returns the ConfigurationTemplateId field if non-nil, zero value otherwise.
+
+### GetConfigurationTemplateIdOk
+
+`func (o *Group) GetConfigurationTemplateIdOk() (*string, bool)`
+
+GetConfigurationTemplateIdOk returns a tuple with the ConfigurationTemplateId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigurationTemplateId
+
+`func (o *Group) SetConfigurationTemplateId(v string)`
+
+SetConfigurationTemplateId sets ConfigurationTemplateId field to given value.
+
+### HasConfigurationTemplateId
+
+`func (o *Group) HasConfigurationTemplateId() bool`
+
+HasConfigurationTemplateId returns a boolean if a field has been set.
 
 ### GetIsRequestable
 

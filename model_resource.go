@@ -58,6 +58,8 @@ type Resource struct {
 	IsRequestable *bool `json:"is_requestable,omitempty"`
 	// The ID of the parent resource.
 	ParentResourceId *string `json:"parent_resource_id,omitempty"`
+	// The ID of the associated configuration template.
+	ConfigurationTemplateId *string `json:"configuration_template_id,omitempty"`
 	// JSON metadata about the remote resource. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details.
 	Metadata *string `json:"metadata,omitempty"`
 }
@@ -683,6 +685,38 @@ func (o *Resource) SetParentResourceId(v string) {
 	o.ParentResourceId = &v
 }
 
+// GetConfigurationTemplateId returns the ConfigurationTemplateId field value if set, zero value otherwise.
+func (o *Resource) GetConfigurationTemplateId() string {
+	if o == nil || IsNil(o.ConfigurationTemplateId) {
+		var ret string
+		return ret
+	}
+	return *o.ConfigurationTemplateId
+}
+
+// GetConfigurationTemplateIdOk returns a tuple with the ConfigurationTemplateId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetConfigurationTemplateIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ConfigurationTemplateId) {
+		return nil, false
+	}
+	return o.ConfigurationTemplateId, true
+}
+
+// HasConfigurationTemplateId returns a boolean if a field has been set.
+func (o *Resource) HasConfigurationTemplateId() bool {
+	if o != nil && !IsNil(o.ConfigurationTemplateId) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigurationTemplateId gets a reference to the given string and assigns it to the ConfigurationTemplateId field.
+func (o *Resource) SetConfigurationTemplateId(v string) {
+	o.ConfigurationTemplateId = &v
+}
+
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
 func (o *Resource) GetMetadata() string {
 	if o == nil || IsNil(o.Metadata) {
@@ -779,6 +813,9 @@ func (o Resource) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ParentResourceId) {
 		toSerialize["parent_resource_id"] = o.ParentResourceId
+	}
+	if !IsNil(o.ConfigurationTemplateId) {
+		toSerialize["configuration_template_id"] = o.ConfigurationTemplateId
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata

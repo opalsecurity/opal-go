@@ -20,133 +20,83 @@ import (
 )
 
 
-// EventsApiService EventsApi service
-type EventsApiService service
+// RequestsApiService RequestsApi service
+type RequestsApiService service
 
-type ApiEventsRequest struct {
+type ApiGetRequestsRequest struct {
 	ctx context.Context
-	ApiService *EventsApiService
-	startDateFilter *string
-	endDateFilter *string
-	actorFilter *string
-	objectFilter *string
-	eventTypeFilter *string
-	apiTokenFilter *string
+	ApiService *RequestsApiService
 	cursor *string
 	pageSize *int32
-}
-
-// A start date filter for the events.
-func (r ApiEventsRequest) StartDateFilter(startDateFilter string) ApiEventsRequest {
-	r.startDateFilter = &startDateFilter
-	return r
-}
-
-// An end date filter for the events.
-func (r ApiEventsRequest) EndDateFilter(endDateFilter string) ApiEventsRequest {
-	r.endDateFilter = &endDateFilter
-	return r
-}
-
-// An actor filter for the events. Supply the ID of the actor.
-func (r ApiEventsRequest) ActorFilter(actorFilter string) ApiEventsRequest {
-	r.actorFilter = &actorFilter
-	return r
-}
-
-// An object filter for the events. Supply the ID of the object.
-func (r ApiEventsRequest) ObjectFilter(objectFilter string) ApiEventsRequest {
-	r.objectFilter = &objectFilter
-	return r
-}
-
-// An event type filter for the events.
-func (r ApiEventsRequest) EventTypeFilter(eventTypeFilter string) ApiEventsRequest {
-	r.eventTypeFilter = &eventTypeFilter
-	return r
-}
-
-// An API filter for the events. Supply the name and preview of the API token.
-func (r ApiEventsRequest) ApiTokenFilter(apiTokenFilter string) ApiEventsRequest {
-	r.apiTokenFilter = &apiTokenFilter
-	return r
+	showPendingOnly *bool
 }
 
 // The pagination cursor value.
-func (r ApiEventsRequest) Cursor(cursor string) ApiEventsRequest {
+func (r ApiGetRequestsRequest) Cursor(cursor string) ApiGetRequestsRequest {
 	r.cursor = &cursor
 	return r
 }
 
 // Number of results to return per page. Default is 200.
-func (r ApiEventsRequest) PageSize(pageSize int32) ApiEventsRequest {
+func (r ApiGetRequestsRequest) PageSize(pageSize int32) ApiGetRequestsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiEventsRequest) Execute() (*PaginatedEventList, *http.Response, error) {
-	return r.ApiService.EventsExecute(r)
+// Boolean toggle for if it should only show pending requests.
+func (r ApiGetRequestsRequest) ShowPendingOnly(showPendingOnly bool) ApiGetRequestsRequest {
+	r.showPendingOnly = &showPendingOnly
+	return r
+}
+
+func (r ApiGetRequestsRequest) Execute() (*RequestList, *http.Response, error) {
+	return r.ApiService.GetRequestsExecute(r)
 }
 
 /*
-Events Method for Events
+GetRequests Method for GetRequests
 
-Returns a list of `Event` objects.
+Returns a list of requests for your organization that is visible by the admin.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiEventsRequest
+ @return ApiGetRequestsRequest
 */
-func (a *EventsApiService) Events(ctx context.Context) ApiEventsRequest {
-	return ApiEventsRequest{
+func (a *RequestsApiService) GetRequests(ctx context.Context) ApiGetRequestsRequest {
+	return ApiGetRequestsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return PaginatedEventList
-func (a *EventsApiService) EventsExecute(r ApiEventsRequest) (*PaginatedEventList, *http.Response, error) {
+//  @return RequestList
+func (a *RequestsApiService) GetRequestsExecute(r ApiGetRequestsRequest) (*RequestList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *PaginatedEventList
+		localVarReturnValue  *RequestList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsApiService.Events")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RequestsApiService.GetRequests")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/events"
+	localVarPath := localBasePath + "/requests"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.startDateFilter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "start_date_filter", r.startDateFilter, "")
-	}
-	if r.endDateFilter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "end_date_filter", r.endDateFilter, "")
-	}
-	if r.actorFilter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "actor_filter", r.actorFilter, "")
-	}
-	if r.objectFilter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "object_filter", r.objectFilter, "")
-	}
-	if r.eventTypeFilter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "event_type_filter", r.eventTypeFilter, "")
-	}
-	if r.apiTokenFilter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "api_token_filter", r.apiTokenFilter, "")
-	}
 	if r.cursor != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "")
 	}
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+	}
+	if r.showPendingOnly != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "show_pending_only", r.showPendingOnly, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

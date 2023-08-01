@@ -10,6 +10,9 @@ Name | Type | Description | Notes
 **ActorEmail** | Pointer to **string** | The email of the actor user. | [optional] 
 **EventType** | **string** | The event type. | 
 **CreatedAt** | **time.Time** | The day and time the event was created. | 
+**ActorIpAddress** | Pointer to **string** | The IP address of the event actor. | [optional] 
+**ApiTokenName** | Pointer to **string** | The name of the API token used to create the event. | [optional] 
+**ApiTokenPreview** | Pointer to **string** | The preview of the API token used to create the event. | [optional] 
 **SubEvents** | Pointer to [**[]SubEvent**](SubEvent.md) |  | [optional] 
 
 ## Methods
@@ -165,6 +168,81 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
+
+### GetActorIpAddress
+
+`func (o *Event) GetActorIpAddress() string`
+
+GetActorIpAddress returns the ActorIpAddress field if non-nil, zero value otherwise.
+
+### GetActorIpAddressOk
+
+`func (o *Event) GetActorIpAddressOk() (*string, bool)`
+
+GetActorIpAddressOk returns a tuple with the ActorIpAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActorIpAddress
+
+`func (o *Event) SetActorIpAddress(v string)`
+
+SetActorIpAddress sets ActorIpAddress field to given value.
+
+### HasActorIpAddress
+
+`func (o *Event) HasActorIpAddress() bool`
+
+HasActorIpAddress returns a boolean if a field has been set.
+
+### GetApiTokenName
+
+`func (o *Event) GetApiTokenName() string`
+
+GetApiTokenName returns the ApiTokenName field if non-nil, zero value otherwise.
+
+### GetApiTokenNameOk
+
+`func (o *Event) GetApiTokenNameOk() (*string, bool)`
+
+GetApiTokenNameOk returns a tuple with the ApiTokenName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApiTokenName
+
+`func (o *Event) SetApiTokenName(v string)`
+
+SetApiTokenName sets ApiTokenName field to given value.
+
+### HasApiTokenName
+
+`func (o *Event) HasApiTokenName() bool`
+
+HasApiTokenName returns a boolean if a field has been set.
+
+### GetApiTokenPreview
+
+`func (o *Event) GetApiTokenPreview() string`
+
+GetApiTokenPreview returns the ApiTokenPreview field if non-nil, zero value otherwise.
+
+### GetApiTokenPreviewOk
+
+`func (o *Event) GetApiTokenPreviewOk() (*string, bool)`
+
+GetApiTokenPreviewOk returns a tuple with the ApiTokenPreview field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApiTokenPreview
+
+`func (o *Event) SetApiTokenPreview(v string)`
+
+SetApiTokenPreview sets ApiTokenPreview field to given value.
+
+### HasApiTokenPreview
+
+`func (o *Event) HasApiTokenPreview() bool`
+
+HasApiTokenPreview returns a boolean if a field has been set.
 
 ### GetSubEvents
 

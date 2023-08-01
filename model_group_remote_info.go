@@ -27,6 +27,8 @@ type GroupRemoteInfo struct {
 	LdapGroup *GroupRemoteInfoLdapGroup `json:"ldap_group,omitempty"`
 	OktaGroup *GroupRemoteInfoOktaGroup `json:"okta_group,omitempty"`
 	DuoGroup *GroupRemoteInfoDuoGroup `json:"duo_group,omitempty"`
+	AzureAdSecurityGroup *GroupRemoteInfoAzureAdSecurityGroup `json:"azure_ad_security_group,omitempty"`
+	AzureAdMicrosoft365Group *GroupRemoteInfoAzureAdMicrosoft365Group `json:"azure_ad_microsoft_365_group,omitempty"`
 }
 
 // NewGroupRemoteInfo instantiates a new GroupRemoteInfo object
@@ -270,6 +272,70 @@ func (o *GroupRemoteInfo) SetDuoGroup(v GroupRemoteInfoDuoGroup) {
 	o.DuoGroup = &v
 }
 
+// GetAzureAdSecurityGroup returns the AzureAdSecurityGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetAzureAdSecurityGroup() GroupRemoteInfoAzureAdSecurityGroup {
+	if o == nil || IsNil(o.AzureAdSecurityGroup) {
+		var ret GroupRemoteInfoAzureAdSecurityGroup
+		return ret
+	}
+	return *o.AzureAdSecurityGroup
+}
+
+// GetAzureAdSecurityGroupOk returns a tuple with the AzureAdSecurityGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetAzureAdSecurityGroupOk() (*GroupRemoteInfoAzureAdSecurityGroup, bool) {
+	if o == nil || IsNil(o.AzureAdSecurityGroup) {
+		return nil, false
+	}
+	return o.AzureAdSecurityGroup, true
+}
+
+// HasAzureAdSecurityGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasAzureAdSecurityGroup() bool {
+	if o != nil && !IsNil(o.AzureAdSecurityGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetAzureAdSecurityGroup gets a reference to the given GroupRemoteInfoAzureAdSecurityGroup and assigns it to the AzureAdSecurityGroup field.
+func (o *GroupRemoteInfo) SetAzureAdSecurityGroup(v GroupRemoteInfoAzureAdSecurityGroup) {
+	o.AzureAdSecurityGroup = &v
+}
+
+// GetAzureAdMicrosoft365Group returns the AzureAdMicrosoft365Group field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetAzureAdMicrosoft365Group() GroupRemoteInfoAzureAdMicrosoft365Group {
+	if o == nil || IsNil(o.AzureAdMicrosoft365Group) {
+		var ret GroupRemoteInfoAzureAdMicrosoft365Group
+		return ret
+	}
+	return *o.AzureAdMicrosoft365Group
+}
+
+// GetAzureAdMicrosoft365GroupOk returns a tuple with the AzureAdMicrosoft365Group field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetAzureAdMicrosoft365GroupOk() (*GroupRemoteInfoAzureAdMicrosoft365Group, bool) {
+	if o == nil || IsNil(o.AzureAdMicrosoft365Group) {
+		return nil, false
+	}
+	return o.AzureAdMicrosoft365Group, true
+}
+
+// HasAzureAdMicrosoft365Group returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasAzureAdMicrosoft365Group() bool {
+	if o != nil && !IsNil(o.AzureAdMicrosoft365Group) {
+		return true
+	}
+
+	return false
+}
+
+// SetAzureAdMicrosoft365Group gets a reference to the given GroupRemoteInfoAzureAdMicrosoft365Group and assigns it to the AzureAdMicrosoft365Group field.
+func (o *GroupRemoteInfo) SetAzureAdMicrosoft365Group(v GroupRemoteInfoAzureAdMicrosoft365Group) {
+	o.AzureAdMicrosoft365Group = &v
+}
+
 func (o GroupRemoteInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -300,6 +366,12 @@ func (o GroupRemoteInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.DuoGroup) {
 		toSerialize["duo_group"] = o.DuoGroup
+	}
+	if !IsNil(o.AzureAdSecurityGroup) {
+		toSerialize["azure_ad_security_group"] = o.AzureAdSecurityGroup
+	}
+	if !IsNil(o.AzureAdMicrosoft365Group) {
+		toSerialize["azure_ad_microsoft_365_group"] = o.AzureAdMicrosoft365Group
 	}
 	return toSerialize, nil
 }

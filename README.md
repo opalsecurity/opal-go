@@ -80,6 +80,9 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AppsApi* | [**GetApp**](docs/AppsApi.md#getapp) | **Get** /apps/{app_id} | 
 *AppsApi* | [**GetApps**](docs/AppsApi.md#getapps) | **Get** /apps | 
+*ConfigurationTemplatesApi* | [**CreateConfigurationTemplate**](docs/ConfigurationTemplatesApi.md#createconfigurationtemplate) | **Post** /configuration-templates | 
+*ConfigurationTemplatesApi* | [**GetConfigurationTemplates**](docs/ConfigurationTemplatesApi.md#getconfigurationtemplates) | **Get** /configuration-templates | 
+*DefaultApi* | [**UpdateConfigurationTemplate**](docs/DefaultApi.md#updateconfigurationtemplate) | **Put** /configuration-templates | 
 *EventsApi* | [**Events**](docs/EventsApi.md#events) | **Get** /events | 
 *GroupsApi* | [**AddGroupResource**](docs/GroupsApi.md#addgroupresource) | **Post** /groups/{group_id}/resources/{resource_id} | 
 *GroupsApi* | [**AddGroupUser**](docs/GroupsApi.md#addgroupuser) | **Post** /groups/{group_id}/users/{user_id} | 
@@ -116,6 +119,7 @@ Class | Method | HTTP request | Description
 *OwnersApi* | [**GetOwners**](docs/OwnersApi.md#getowners) | **Get** /owners | 
 *OwnersApi* | [**SetOwnerUsers**](docs/OwnersApi.md#setownerusers) | **Put** /owners/{owner_id}/users | 
 *OwnersApi* | [**UpdateOwners**](docs/OwnersApi.md#updateowners) | **Put** /owners | 
+*RequestsApi* | [**GetRequests**](docs/RequestsApi.md#getrequests) | **Get** /requests | 
 *ResourcesApi* | [**AddResourceUser**](docs/ResourcesApi.md#addresourceuser) | **Post** /resources/{resource_id}/users/{user_id} | 
 *ResourcesApi* | [**CreateResource**](docs/ResourcesApi.md#createresource) | **Post** /resources | 
 *ResourcesApi* | [**DeleteResource**](docs/ResourcesApi.md#deleteresource) | **Delete** /resources/{resource_id} | 
@@ -159,6 +163,8 @@ Class | Method | HTTP request | Description
  - [AppsList](docs/AppsList.md)
  - [AwsPermissionSetMetadata](docs/AwsPermissionSetMetadata.md)
  - [AwsPermissionSetMetadataAwsPermissionSet](docs/AwsPermissionSetMetadataAwsPermissionSet.md)
+ - [ConfigurationTemplate](docs/ConfigurationTemplate.md)
+ - [CreateConfigurationTemplateInfo](docs/CreateConfigurationTemplateInfo.md)
  - [CreateGroupInfo](docs/CreateGroupInfo.md)
  - [CreateMessageChannelInfo](docs/CreateMessageChannelInfo.md)
  - [CreateOnCallScheduleInfo](docs/CreateOnCallScheduleInfo.md)
@@ -171,6 +177,8 @@ Class | Method | HTTP request | Description
  - [GroupAccessLevel](docs/GroupAccessLevel.md)
  - [GroupRemoteInfo](docs/GroupRemoteInfo.md)
  - [GroupRemoteInfoActiveDirectoryGroup](docs/GroupRemoteInfoActiveDirectoryGroup.md)
+ - [GroupRemoteInfoAzureAdMicrosoft365Group](docs/GroupRemoteInfoAzureAdMicrosoft365Group.md)
+ - [GroupRemoteInfoAzureAdSecurityGroup](docs/GroupRemoteInfoAzureAdSecurityGroup.md)
  - [GroupRemoteInfoDuoGroup](docs/GroupRemoteInfoDuoGroup.md)
  - [GroupRemoteInfoGithubTeam](docs/GroupRemoteInfoGithubTeam.md)
  - [GroupRemoteInfoGitlabGroup](docs/GroupRemoteInfoGitlabGroup.md)
@@ -191,6 +199,7 @@ Class | Method | HTTP request | Description
  - [OnCallScheduleList](docs/OnCallScheduleList.md)
  - [OnCallScheduleProviderEnum](docs/OnCallScheduleProviderEnum.md)
  - [Owner](docs/Owner.md)
+ - [PaginatedConfigurationTemplateList](docs/PaginatedConfigurationTemplateList.md)
  - [PaginatedEventList](docs/PaginatedEventList.md)
  - [PaginatedGroupsList](docs/PaginatedGroupsList.md)
  - [PaginatedOwnersList](docs/PaginatedOwnersList.md)
@@ -198,6 +207,9 @@ Class | Method | HTTP request | Description
  - [PaginatedTagsList](docs/PaginatedTagsList.md)
  - [PaginatedUARsList](docs/PaginatedUARsList.md)
  - [PaginatedUsersList](docs/PaginatedUsersList.md)
+ - [Request](docs/Request.md)
+ - [RequestList](docs/RequestList.md)
+ - [RequestStatusEnum](docs/RequestStatusEnum.md)
  - [Resource](docs/Resource.md)
  - [ResourceAccessLevel](docs/ResourceAccessLevel.md)
  - [ResourceAccessUser](docs/ResourceAccessUser.md)
@@ -232,6 +244,7 @@ Class | Method | HTTP request | Description
  - [UAR](docs/UAR.md)
  - [UARReviewerAssignmentPolicyEnum](docs/UARReviewerAssignmentPolicyEnum.md)
  - [UARScope](docs/UARScope.md)
+ - [UpdateConfigurationTemplateInfo](docs/UpdateConfigurationTemplateInfo.md)
  - [UpdateGroupInfo](docs/UpdateGroupInfo.md)
  - [UpdateGroupInfoList](docs/UpdateGroupInfoList.md)
  - [UpdateGroupResourcesInfo](docs/UpdateGroupResourcesInfo.md)

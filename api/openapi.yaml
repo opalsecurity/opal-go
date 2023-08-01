@@ -76,6 +76,58 @@ paths:
       - BearerAuth: []
       tags:
       - apps
+  /configuration-templates:
+    get:
+      description: Returns a list of `ConfigurationTemplate` objects.
+      operationId: getConfigurationTemplates
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedConfigurationTemplateList'
+          description: One page worth of configuration templates for your organization.
+      security:
+      - BearerAuth: []
+      tags:
+      - configuration-templates
+    post:
+      description: Creates a configuration template.
+      operationId: createConfigurationTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConfigurationTemplateInfo'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigurationTemplate'
+          description: The configuration template just created.
+      security:
+      - BearerAuth: []
+      tags:
+      - configuration-templates
+    put:
+      description: Update a configuration template.
+      operationId: updateConfigurationTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConfigurationTemplateInfo'
+        description: Configuration template to be updated
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigurationTemplate'
+          description: The configuration template just updated.
   /events:
     get:
       description: Returns a list of `Event` objects.
@@ -136,6 +188,16 @@ paths:
         explode: true
         in: query
         name: event_type_filter
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: An API filter for the events. Supply the name and preview of
+          the API token.
+        example: fullaccess:**************************M_g==
+        explode: true
+        in: query
+        name: api_token_filter
         required: false
         schema:
           type: string
@@ -1060,6 +1122,50 @@ paths:
       - BearerAuth: []
       tags:
       - owners
+  /requests:
+    get:
+      description: Returns a list of requests for your organization that is visible
+        by the admin.
+      operationId: getRequests
+      parameters:
+      - description: The pagination cursor value.
+        example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Number of results to return per page. Default is 200.
+        example: 200
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          maximum: 1000
+          type: integer
+        style: form
+      - description: Boolean toggle for if it should only show pending requests.
+        explode: true
+        in: query
+        name: show_pending_only
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestList'
+          description: The list of requests.
+      security:
+      - BearerAuth: []
+      tags:
+      - requests
   /resources:
     get:
       description: Returns a list of resources for your organization.
@@ -2720,6 +2826,18 @@ components:
           example: 2022-01-23T04:56:07Z
           format: date-time
           type: string
+        actor_ip_address:
+          description: The IP address of the event actor.
+          example: 255.255.255.0
+          type: string
+        api_token_name:
+          description: The name of the API token used to create the event.
+          example: My API Token
+          type: string
+        api_token_preview:
+          description: The preview of the API token used to create the event.
+          example: '**************************M_g=='
+          type: string
         sub_events:
           items:
             $ref: '#/components/schemas/SubEvent'
@@ -3345,6 +3463,11 @@ components:
           type: boolean
         request_template_id:
           description: The ID of the associated request template.
+          example: 06851574-e50d-40ca-8c78-f72ae6ab4304
+          format: uuid
+          type: string
+        configuration_template_id:
+          description: The ID of the associated configuration template.
           example: 06851574-e50d-40ca-8c78-f72ae6ab4304
           format: uuid
           type: string
@@ -3976,6 +4099,10 @@ components:
           $ref: '#/components/schemas/GroupRemoteInfo_okta_group'
         duo_group:
           $ref: '#/components/schemas/GroupRemoteInfo_duo_group'
+        azure_ad_security_group:
+          $ref: '#/components/schemas/GroupRemoteInfo_azure_ad_security_group'
+        azure_ad_microsoft_365_group:
+          $ref: '#/components/schemas/GroupRemoteInfo_azure_ad_microsoft_365_group'
       type: object
     ResourceRemoteInfo:
       description: Remote info that is required for the creation of remote resources.
@@ -4474,6 +4601,127 @@ components:
       required:
       - results
       type: object
+    RequestStatusEnum:
+      description: |-
+        # Request Status
+        ### Description
+        The `RequestStatus` enum is used to represent the status of a request.
+
+        ### Usage Example
+        Returned from the `GET Requests` endpoint.
+      enum:
+      - pending
+      - approved
+      - denied
+      - canceled
+      type: string
+    Request:
+      description: |-
+        # Request Object
+        ### Description
+        The `Request` object is used to represent a request.
+
+        ### Usage Example
+        Returned from the `GET Requests` endpoint.
+      example:
+        id: 7c86c85d-0651-43e2-a748-d69d658418e8
+        created_at: 2021-01-06T20:00:00Z
+        updated_at: 2021-01-06T20:00:00Z
+        requester_id: c86c85d-0651-43e2-a748-d69d658418e8
+        target_user_id: r86c85d-0651-43e2-a748-d69d658418e8
+        status: pending
+        reason: I need this resource.
+        duration_minutes: 1440
+        request_comments:
+        - id: 7c86c85d-0651-43e2-a748-d69d658418e8
+          created_at: 2021-01-06T20:00:00Z
+          updated_at: 2021-01-06T20:00:00Z
+          request_id: 4c86c85d-0651-43e2-a748-d69d658418e8
+          user_id: c86c85d-0651-43e2-a748-d69d658418e8
+          comment: This is a comment.
+      properties:
+        id:
+          description: The unique identifier of the request.
+          example: 7c86c85d-0651-43e2-a748-d69d658418e8
+          format: uuid
+          type: string
+        created_at:
+          description: The date and time the request was created.
+          example: 2021-01-06T20:00:00Z
+          format: date-time
+          type: string
+        updated_at:
+          description: The date and time the request was last updated.
+          example: 2021-01-06T20:00:00Z
+          format: date-time
+          type: string
+        requester_id:
+          description: The unique identifier of the user who created the request.
+          example: 7c86c85d-0651-43e2-a748-d69d658418e8
+          format: uuid
+          type: string
+        target_user_id:
+          description: The unique identifier of the user who is the target of the
+            request.
+          example: 7c86c85d-0651-43e2-a748-d69d658418e8
+          format: uuid
+          type: string
+        status:
+          $ref: '#/components/schemas/RequestStatusEnum'
+        reason:
+          description: The reason for the request.
+          example: I need access to the AWS account.
+          type: string
+        duration_minutes:
+          description: The duration of the request in minutes.
+          example: 120
+          type: integer
+      required:
+      - created_at
+      - id
+      - reason
+      - requester_id
+      - status
+      - target_user_id
+      - updated_at
+    RequestList:
+      description: |-
+        # Request List
+        ### Description
+        The `RequestList` object is used to represent a list of requests.
+
+        ### Usage Example
+        Returned from the `GET Requests` endpoint.
+      example:
+        requests:
+        - id: 7c86c85d-0651-43e2-a748-d69d658418e8
+          organization_id: w86c85d-0651-43e2-a748-d69d658418e8
+          created_at: 2021-01-06T20:00:00Z
+          updated_at: 2021-01-06T20:00:00Z
+          requester_id: c86c85d-0651-43e2-a748-d69d658418e8
+          target_user_id: r86c85d-0651-43e2-a748-d69d658418e8
+          status: pending
+          reason: I need this resource.
+          duration_minutes: 1440
+          request_comments:
+          - id: 4c86c85d-0651-43e2-a748-d69d658418e8
+            created_at: 2021-01-06T20:00:00Z
+            updated_at: 2021-01-06T20:00:00Z
+            request_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+            user_id: c86c85d-0651-43e2-a748-d69d658418e8
+            comment: This is a comment.
+        cursor: eyJjcmVhdGVkX2F0IjoiMjAyMS0wMS0wNlQyMDo0NzowMFoiLCJ2YWx1ZSI6ImFkbWluIn0=
+      properties:
+        requests:
+          description: The list of requests.
+          items:
+            $ref: '#/components/schemas/Request'
+          type: array
+        cursor:
+          description: The cursor to use in the next request to get the next page
+            of results.
+          example: eyJjcmVhdGVkX2F0IjoiMjAyMS0wMS0wNlQyMDo0NzowMFoiLCJ2YWx1ZSI6ImFkbWluIn0=
+          type: string
     Resource:
       description: |-
         # Resource Object
@@ -4581,6 +4829,11 @@ components:
         parent_resource_id:
           description: The ID of the parent resource.
           example: 06851574-e50d-40ca-8c78-f72ae6ab4305
+          format: uuid
+          type: string
+        configuration_template_id:
+          description: The ID of the associated configuration template.
+          example: 06851574-e50d-40ca-8c78-f72ae6ab4304
           format: uuid
           type: string
         metadata:
@@ -5024,6 +5277,302 @@ components:
       required:
       - owner_id
       type: object
+    CreateConfigurationTemplateInfo:
+      description: |-
+        # CreateConfigurationTemplateInfo Object
+        ### Description
+        The `CreateConfigurationTemplateInfo` object is used to store creation info for a configuration template.
+
+        ### Usage Example
+        Use in the `POST Configuration Templates` endpoint.
+      example:
+        admin_owner_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+        visibility: private
+        linked_audit_message_channel_ids:
+        - 37cb7e41-12ba-46da-92ff-030abe0450b1
+        - 37cb7e41-12ba-46da-92ff-030abe0450b2
+        request_configuration_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+        member_oncall_schedule_ids:
+        - 37cb7e41-12ba-46da-92ff-030abe0450b1
+        - 37cb7e41-12ba-46da-92ff-030abe0450b2
+        break_glass_user_ids:
+        - 37cb7e41-12ba-46da-92ff-030abe0450b1
+        - 37cb7e41-12ba-46da-92ff-030abe0450b2
+        require_mfa_to_approve: false
+        require_mfa_to_connect: false
+        name: Prod AWS Template
+      properties:
+        admin_owner_id:
+          description: The ID of the owner of the configuration template.
+          example: 7c86c85d-0651-43e2-a748-d69d658418e8
+          format: uuid
+          type: string
+        visibility:
+          $ref: '#/components/schemas/VisibilityInfo'
+        linked_audit_message_channel_ids:
+          description: The IDs of the audit message channels linked to the configuration
+            template.
+          example:
+          - 37cb7e41-12ba-46da-92ff-030abe0450b1
+          - 37cb7e41-12ba-46da-92ff-030abe0450b2
+          items:
+            format: uuid
+            type: string
+          type: array
+        request_configuration_id:
+          description: The ID of the request configuration linked to the configuration
+            template.
+          example: 7c86c85d-0651-43e2-a748-d69d658418e8
+          format: uuid
+          type: string
+        member_oncall_schedule_ids:
+          description: The IDs of the on-call schedules linked to the configuration
+            template.
+          example:
+          - 37cb7e41-12ba-46da-92ff-030abe0450b1
+          - 37cb7e41-12ba-46da-92ff-030abe0450b2
+          items:
+            format: uuid
+            type: string
+          type: array
+        break_glass_user_ids:
+          description: The IDs of the break glass users linked to the configuration
+            template.
+          example:
+          - 37cb7e41-12ba-46da-92ff-030abe0450b1
+          - 37cb7e41-12ba-46da-92ff-030abe0450b2
+          items:
+            format: uuid
+            type: string
+          type: array
+        require_mfa_to_approve:
+          description: A bool representing whether or not to require MFA for reviewers
+            to approve requests for this configuration template.
+          example: false
+          type: boolean
+        require_mfa_to_connect:
+          description: A bool representing whether or not to require MFA to connect
+            to resources associated with this configuration template.
+          example: false
+          type: boolean
+        name:
+          description: The name of the configuration template.
+          example: Prod AWS Template
+          type: string
+      required:
+      - admin_owner_id
+      - name
+      - require_mfa_to_approve
+      - require_mfa_to_connect
+      - visibility
+    ConfigurationTemplate:
+      description: |-
+        # Configuration Template Object
+        ### Description
+        The `ConfigurationTemplate` object is used to represent a configuration template.
+
+        ### Usage Example
+        Returned from the `GET Configuration Templates` endpoint.
+      example:
+        configuration_template_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+        admin_owner_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+        visibility: private
+        linked_audit_message_channel_ids:
+        - 37cb7e41-12ba-46da-92ff-030abe0450b1
+        - 37cb7e41-12ba-46da-92ff-030abe0450b2
+        request_configuration_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+        member_oncall_schedule_ids:
+        - 37cb7e41-12ba-46da-92ff-030abe0450b1
+        - 37cb7e41-12ba-46da-92ff-030abe0450b2
+        break_glass_user_ids:
+        - 37cb7e41-12ba-46da-92ff-030abe0450b1
+        - 37cb7e41-12ba-46da-92ff-030abe0450b2
+        require_mfa_to_approve: false
+        require_mfa_to_connect: false
+        name: Prod AWS Template
+      properties:
+        configuration_template_id:
+          description: The ID of the configuration template.
+          example: 7c86c85d-0651-43e2-a748-d69d658418e8
+          format: uuid
+          type: string
+        name:
+          description: The name of the configuration template.
+          example: Prod AWS Template
+          type: string
+        admin_owner_id:
+          description: The ID of the owner of the configuration template.
+          example: 7c86c85d-0651-43e2-a748-d69d658418e8
+          format: uuid
+          type: string
+        visibility:
+          $ref: '#/components/schemas/VisibilityInfo'
+        linked_audit_message_channel_ids:
+          description: The IDs of the audit message channels linked to the configuration
+            template.
+          example:
+          - 37cb7e41-12ba-46da-92ff-030abe0450b1
+          - 37cb7e41-12ba-46da-92ff-030abe0450b2
+          items:
+            format: uuid
+            type: string
+          type: array
+        request_configuration_id:
+          description: The ID of the request configuration linked to the configuration
+            template.
+          example: 7c86c85d-0651-43e2-a748-d69d658418e8
+          format: uuid
+          type: string
+        member_oncall_schedule_ids:
+          description: The IDs of the on-call schedules linked to the configuration
+            template.
+          example:
+          - 37cb7e41-12ba-46da-92ff-030abe0450b1
+          - 37cb7e41-12ba-46da-92ff-030abe0450b2
+          items:
+            format: uuid
+            type: string
+          type: array
+        break_glass_user_ids:
+          description: The IDs of the break glass users linked to the configuration
+            template.
+          example:
+          - 37cb7e41-12ba-46da-92ff-030abe0450b1
+          - 37cb7e41-12ba-46da-92ff-030abe0450b2
+          items:
+            format: uuid
+            type: string
+          type: array
+        require_mfa_to_approve:
+          description: A bool representing whether or not to require MFA for reviewers
+            to approve requests for this configuration template.
+          example: false
+          type: boolean
+        require_mfa_to_connect:
+          description: A bool representing whether or not to require MFA to connect
+            to resources associated with this configuration template.
+          example: false
+          type: boolean
+    UpdateConfigurationTemplateInfo:
+      description: |-
+        # UpdateConfigurationTemplateInfo Object
+        ### Description
+        The `ConfigurationTemplate` object is used to represent an update to a configuration template.
+
+        ### Usage Example
+        Use in the `PUT Configuration Templates` endpoint.
+      example:
+        configuration_template_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+        admin_owner_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+        visibility: private
+        linked_audit_message_channel_ids:
+        - 37cb7e41-12ba-46da-92ff-030abe0450b1
+        - 37cb7e41-12ba-46da-92ff-030abe0450b2
+        request_configuration_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+        member_oncall_schedule_ids:
+        - 37cb7e41-12ba-46da-92ff-030abe0450b1
+        - 37cb7e41-12ba-46da-92ff-030abe0450b2
+        break_glass_user_ids:
+        - 37cb7e41-12ba-46da-92ff-030abe0450b1
+        - 37cb7e41-12ba-46da-92ff-030abe0450b2
+        require_mfa_to_approve: false
+        require_mfa_to_connect: false
+        name: Prod AWS Template
+      properties:
+        configuration_template_id:
+          description: The ID of the configuration template.
+          example: 7c86c85d-0651-43e2-a748-d69d658418e8
+          format: uuid
+          type: string
+        name:
+          description: The name of the configuration template.
+          example: Prod AWS Template
+          type: string
+        admin_owner_id:
+          description: The ID of the owner of the configuration template.
+          example: 7c86c85d-0651-43e2-a748-d69d658418e8
+          format: uuid
+          type: string
+        visibility:
+          $ref: '#/components/schemas/VisibilityInfo'
+        linked_audit_message_channel_ids:
+          description: The IDs of the audit message channels linked to the configuration
+            template.
+          example:
+          - 37cb7e41-12ba-46da-92ff-030abe0450b1
+          - 37cb7e41-12ba-46da-92ff-030abe0450b2
+          items:
+            format: uuid
+            type: string
+          type: array
+        request_configuration_id:
+          description: The ID of the request configuration linked to the configuration
+            template.
+          example: 7c86c85d-0651-43e2-a748-d69d658418e8
+          format: uuid
+          type: string
+        member_oncall_schedule_ids:
+          description: The IDs of the on-call schedules linked to the configuration
+            template.
+          example:
+          - 37cb7e41-12ba-46da-92ff-030abe0450b1
+          - 7c86c85d-0651-43e2-a748-d69d658418e8
+          items:
+            format: uuid
+            type: string
+          type: array
+        break_glass_user_ids:
+          description: The IDs of the break glass users linked to the configuration
+            template.
+          example:
+          - 37cb7e41-12ba-46da-92ff-030abe0450b1
+          - 37cb7e41-12ba-46da-92ff-030abe0450b2
+          items:
+            format: uuid
+            type: string
+          type: array
+        require_mfa_to_approve:
+          description: A bool representing whether or not to require MFA for reviewers
+            to approve requests for this configuration template.
+          example: false
+          type: boolean
+        require_mfa_to_connect:
+          description: A bool representing whether or not to require MFA to connect
+            to resources associated with this configuration template.
+          example: false
+          type: boolean
+      required:
+      - configuration_template_id
+    PaginatedConfigurationTemplateList:
+      description: |-
+        # PaginatedConfigurationTemplateList Object
+        ### Description
+        The `PaginatedConfigurationTemplateList` object is used to store a list of configuration templates.
+
+        ### Usage Example
+        Returned from the `GET Configuration Templates` endpoint.
+      example:
+        results:
+        - configuration_template_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+          admin_owner_id: a4d7d928-783e-4599-8ec6-088d635af4ac
+          visibility: private
+          linked_audit_message_channel_ids:
+          - l3cb7e41-12ba-46da-92ff-030abe0450b1
+          - f3cb7e41-12ba-46da-92ff-030abe0450b2
+          request_configuration_id: r3cb7e41-12ba-46da-92ff-030abe0450b1
+          member_oncall_schedule_ids:
+          - 23cb7e41-12ba-46da-92ff-030abe0450b1
+          - m3cb7e41-12ba-46da-92ff-030abe0450b2
+          break_glass_user_ids:
+          - 63cb7e41-12ba-46da-92ff-030abe0450b1
+          - b3cb7e41-12ba-46da-92ff-030abe0450b2
+          require_mfa_to_approve: false
+          require_mfa_to_connect: false
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/ConfigurationTemplate'
+          type: array
     GroupRemoteInfo_active_directory_group:
       description: Remote info for Active Directory group.
       properties:
@@ -5095,6 +5644,26 @@ components:
         group_id:
           description: The id of the Duo Security group.
           example: DSRD8W89B9DNDBY4RHAC
+          type: string
+      required:
+      - group_id
+      type: object
+    GroupRemoteInfo_azure_ad_security_group:
+      description: Remote info for Azure AD Security group.
+      properties:
+        group_id:
+          description: The id of the Azure AD Security group.
+          example: 01fa7402-01d8-103b-8deb-5f3a0ab7884
+          type: string
+      required:
+      - group_id
+      type: object
+    GroupRemoteInfo_azure_ad_microsoft_365_group:
+      description: Remote info for Azure AD Microsoft 365 group.
+      properties:
+        group_id:
+          description: The id of the Azure AD Microsoft 365 group.
+          example: 01fa7402-01d8-103b-8deb-5f3a0ab7884
           type: string
       required:
       - group_id
