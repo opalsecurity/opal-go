@@ -4143,6 +4143,18 @@ components:
           $ref: '#/components/schemas/ResourceRemoteInfo_aws_rds_instance'
         aws_eks_cluster:
           $ref: '#/components/schemas/ResourceRemoteInfo_aws_eks_cluster'
+        gcp_bucket:
+          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_bucket'
+        gcp_compute_instance:
+          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_compute_instance'
+        gcp_folder:
+          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_folder'
+        gcp_gke_cluster:
+          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_gke_cluster'
+        gcp_project:
+          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_project'
+        gcp_sql_instance:
+          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_sql_instance'
         github_repo:
           $ref: '#/components/schemas/ResourceRemoteInfo_github_repo'
         gitlab_project:
@@ -4153,6 +4165,14 @@ components:
           $ref: '#/components/schemas/ResourceRemoteInfo_okta_standard_role'
         okta_custom_role:
           $ref: '#/components/schemas/ResourceRemoteInfo_okta_custom_role'
+        pagerduty_role:
+          $ref: '#/components/schemas/ResourceRemoteInfo_pagerduty_role'
+        salesforce_permission_set:
+          $ref: '#/components/schemas/ResourceRemoteInfo_salesforce_permission_set'
+        salesforce_profile:
+          $ref: '#/components/schemas/ResourceRemoteInfo_salesforce_profile'
+        salesforce_role:
+          $ref: '#/components/schemas/ResourceRemoteInfo_salesforce_role'
         teleport_role:
           $ref: '#/components/schemas/ResourceRemoteInfo_teleport_role'
       type: object
@@ -5966,6 +5986,81 @@ components:
       required:
       - arn
       type: object
+    ResourceRemoteInfo_gcp_bucket:
+      description: Remote info for GCP bucket.
+      properties:
+        bucket_id:
+          description: The id of the bucket.
+          example: example-bucket-898931321
+          type: string
+      required:
+      - bucket_id
+      type: object
+    ResourceRemoteInfo_gcp_compute_instance:
+      description: Remote info for GCP compute instance.
+      properties:
+        instance_id:
+          description: The id of the instance.
+          example: example-instance-898931321
+          type: string
+        project_id:
+          description: The id of the project the instance is in.
+          example: example-project-898931321
+          type: string
+        zone:
+          description: The zone the instance is in.
+          example: us-central1-a
+          type: string
+      required:
+      - instance_id
+      - project_id
+      - zone
+      type: object
+    ResourceRemoteInfo_gcp_folder:
+      description: Remote info for GCP folder.
+      properties:
+        folder_id:
+          description: The id of the folder.
+          example: folder/898931321
+          type: string
+      required:
+      - folder_id
+      type: object
+    ResourceRemoteInfo_gcp_gke_cluster:
+      description: Remote info for GCP GKE cluster.
+      properties:
+        cluster_name:
+          description: The name of the GKE cluster.
+          example: example-cluster-898931321
+          type: string
+      required:
+      - cluster_name
+      type: object
+    ResourceRemoteInfo_gcp_project:
+      description: Remote info for GCP project.
+      properties:
+        project_id:
+          description: The id of the project.
+          example: example-project-898931321
+          type: string
+      required:
+      - project_id
+      type: object
+    ResourceRemoteInfo_gcp_sql_instance:
+      description: Remote info for GCP SQL instance.
+      properties:
+        instance_id:
+          description: The id of the SQL instance.
+          example: example-sql-898931321
+          type: string
+        project_id:
+          description: The id of the project the instance is in.
+          example: example-project-898931321
+          type: string
+      required:
+      - instance_id
+      - project_id
+      type: object
     ResourceRemoteInfo_github_repo:
       description: Remote info for GitHub repository.
       properties:
@@ -6017,6 +6112,51 @@ components:
         role_id:
           description: The id of the custom role.
           example: a9dfas0f678asdf67867
+          type: string
+      required:
+      - role_id
+      type: object
+    ResourceRemoteInfo_pagerduty_role:
+      description: Remote info for Pagerduty role.
+      properties:
+        role_name:
+          description: The name of the role.
+          example: owner
+          type: string
+      required:
+      - role_name
+      type: object
+    ResourceRemoteInfo_salesforce_permission_set:
+      description: Remote info for Salesforce permission set.
+      properties:
+        permission_set_id:
+          description: The id of the permission set.
+          example: 0PS5Y090202wOV7WAM
+          type: string
+      required:
+      - permission_set_id
+      type: object
+    ResourceRemoteInfo_salesforce_profile:
+      description: Remote info for Salesforce profile.
+      properties:
+        profile_id:
+          description: The id of the permission set.
+          example: 0PS5Y090202wOV7WAM
+          type: string
+        user_license_id:
+          description: The id of the user license.
+          example: 1005Y030081Qb5XJHS
+          type: string
+      required:
+      - profile_id
+      - user_license_id
+      type: object
+    ResourceRemoteInfo_salesforce_role:
+      description: Remote info for Salesforce role.
+      properties:
+        role_id:
+          description: The id of the role.
+          example: 0PS5Y090202wOV7WAM
           type: string
       required:
       - role_id
