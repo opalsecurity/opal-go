@@ -26,21 +26,11 @@ type ResourceRemoteInfo struct {
 	AwsEc2Instance *ResourceRemoteInfoAwsEc2Instance `json:"aws_ec2_instance,omitempty"`
 	AwsRdsInstance *ResourceRemoteInfoAwsRdsInstance `json:"aws_rds_instance,omitempty"`
 	AwsEksCluster *ResourceRemoteInfoAwsEksCluster `json:"aws_eks_cluster,omitempty"`
-	GcpBucket *ResourceRemoteInfoGcpBucket `json:"gcp_bucket,omitempty"`
-	GcpComputeInstance *ResourceRemoteInfoGcpComputeInstance `json:"gcp_compute_instance,omitempty"`
-	GcpFolder *ResourceRemoteInfoGcpFolder `json:"gcp_folder,omitempty"`
-	GcpGkeCluster *ResourceRemoteInfoGcpGkeCluster `json:"gcp_gke_cluster,omitempty"`
-	GcpProject *ResourceRemoteInfoGcpProject `json:"gcp_project,omitempty"`
-	GcpSqlInstance *ResourceRemoteInfoGcpSqlInstance `json:"gcp_sql_instance,omitempty"`
 	GithubRepo *ResourceRemoteInfoGithubRepo `json:"github_repo,omitempty"`
 	GitlabProject *ResourceRemoteInfoGitlabProject `json:"gitlab_project,omitempty"`
 	OktaApp *ResourceRemoteInfoOktaApp `json:"okta_app,omitempty"`
 	OktaStandardRole *ResourceRemoteInfoOktaStandardRole `json:"okta_standard_role,omitempty"`
 	OktaCustomRole *ResourceRemoteInfoOktaCustomRole `json:"okta_custom_role,omitempty"`
-	PagerdutyRole *ResourceRemoteInfoPagerdutyRole `json:"pagerduty_role,omitempty"`
-	SalesforcePermissionSet *ResourceRemoteInfoSalesforcePermissionSet `json:"salesforce_permission_set,omitempty"`
-	SalesforceProfile *ResourceRemoteInfoSalesforceProfile `json:"salesforce_profile,omitempty"`
-	SalesforceRole *ResourceRemoteInfoSalesforceRole `json:"salesforce_role,omitempty"`
 	TeleportRole *ResourceRemoteInfoTeleportRole `json:"teleport_role,omitempty"`
 }
 
@@ -253,198 +243,6 @@ func (o *ResourceRemoteInfo) SetAwsEksCluster(v ResourceRemoteInfoAwsEksCluster)
 	o.AwsEksCluster = &v
 }
 
-// GetGcpBucket returns the GcpBucket field value if set, zero value otherwise.
-func (o *ResourceRemoteInfo) GetGcpBucket() ResourceRemoteInfoGcpBucket {
-	if o == nil || IsNil(o.GcpBucket) {
-		var ret ResourceRemoteInfoGcpBucket
-		return ret
-	}
-	return *o.GcpBucket
-}
-
-// GetGcpBucketOk returns a tuple with the GcpBucket field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ResourceRemoteInfo) GetGcpBucketOk() (*ResourceRemoteInfoGcpBucket, bool) {
-	if o == nil || IsNil(o.GcpBucket) {
-		return nil, false
-	}
-	return o.GcpBucket, true
-}
-
-// HasGcpBucket returns a boolean if a field has been set.
-func (o *ResourceRemoteInfo) HasGcpBucket() bool {
-	if o != nil && !IsNil(o.GcpBucket) {
-		return true
-	}
-
-	return false
-}
-
-// SetGcpBucket gets a reference to the given ResourceRemoteInfoGcpBucket and assigns it to the GcpBucket field.
-func (o *ResourceRemoteInfo) SetGcpBucket(v ResourceRemoteInfoGcpBucket) {
-	o.GcpBucket = &v
-}
-
-// GetGcpComputeInstance returns the GcpComputeInstance field value if set, zero value otherwise.
-func (o *ResourceRemoteInfo) GetGcpComputeInstance() ResourceRemoteInfoGcpComputeInstance {
-	if o == nil || IsNil(o.GcpComputeInstance) {
-		var ret ResourceRemoteInfoGcpComputeInstance
-		return ret
-	}
-	return *o.GcpComputeInstance
-}
-
-// GetGcpComputeInstanceOk returns a tuple with the GcpComputeInstance field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ResourceRemoteInfo) GetGcpComputeInstanceOk() (*ResourceRemoteInfoGcpComputeInstance, bool) {
-	if o == nil || IsNil(o.GcpComputeInstance) {
-		return nil, false
-	}
-	return o.GcpComputeInstance, true
-}
-
-// HasGcpComputeInstance returns a boolean if a field has been set.
-func (o *ResourceRemoteInfo) HasGcpComputeInstance() bool {
-	if o != nil && !IsNil(o.GcpComputeInstance) {
-		return true
-	}
-
-	return false
-}
-
-// SetGcpComputeInstance gets a reference to the given ResourceRemoteInfoGcpComputeInstance and assigns it to the GcpComputeInstance field.
-func (o *ResourceRemoteInfo) SetGcpComputeInstance(v ResourceRemoteInfoGcpComputeInstance) {
-	o.GcpComputeInstance = &v
-}
-
-// GetGcpFolder returns the GcpFolder field value if set, zero value otherwise.
-func (o *ResourceRemoteInfo) GetGcpFolder() ResourceRemoteInfoGcpFolder {
-	if o == nil || IsNil(o.GcpFolder) {
-		var ret ResourceRemoteInfoGcpFolder
-		return ret
-	}
-	return *o.GcpFolder
-}
-
-// GetGcpFolderOk returns a tuple with the GcpFolder field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ResourceRemoteInfo) GetGcpFolderOk() (*ResourceRemoteInfoGcpFolder, bool) {
-	if o == nil || IsNil(o.GcpFolder) {
-		return nil, false
-	}
-	return o.GcpFolder, true
-}
-
-// HasGcpFolder returns a boolean if a field has been set.
-func (o *ResourceRemoteInfo) HasGcpFolder() bool {
-	if o != nil && !IsNil(o.GcpFolder) {
-		return true
-	}
-
-	return false
-}
-
-// SetGcpFolder gets a reference to the given ResourceRemoteInfoGcpFolder and assigns it to the GcpFolder field.
-func (o *ResourceRemoteInfo) SetGcpFolder(v ResourceRemoteInfoGcpFolder) {
-	o.GcpFolder = &v
-}
-
-// GetGcpGkeCluster returns the GcpGkeCluster field value if set, zero value otherwise.
-func (o *ResourceRemoteInfo) GetGcpGkeCluster() ResourceRemoteInfoGcpGkeCluster {
-	if o == nil || IsNil(o.GcpGkeCluster) {
-		var ret ResourceRemoteInfoGcpGkeCluster
-		return ret
-	}
-	return *o.GcpGkeCluster
-}
-
-// GetGcpGkeClusterOk returns a tuple with the GcpGkeCluster field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ResourceRemoteInfo) GetGcpGkeClusterOk() (*ResourceRemoteInfoGcpGkeCluster, bool) {
-	if o == nil || IsNil(o.GcpGkeCluster) {
-		return nil, false
-	}
-	return o.GcpGkeCluster, true
-}
-
-// HasGcpGkeCluster returns a boolean if a field has been set.
-func (o *ResourceRemoteInfo) HasGcpGkeCluster() bool {
-	if o != nil && !IsNil(o.GcpGkeCluster) {
-		return true
-	}
-
-	return false
-}
-
-// SetGcpGkeCluster gets a reference to the given ResourceRemoteInfoGcpGkeCluster and assigns it to the GcpGkeCluster field.
-func (o *ResourceRemoteInfo) SetGcpGkeCluster(v ResourceRemoteInfoGcpGkeCluster) {
-	o.GcpGkeCluster = &v
-}
-
-// GetGcpProject returns the GcpProject field value if set, zero value otherwise.
-func (o *ResourceRemoteInfo) GetGcpProject() ResourceRemoteInfoGcpProject {
-	if o == nil || IsNil(o.GcpProject) {
-		var ret ResourceRemoteInfoGcpProject
-		return ret
-	}
-	return *o.GcpProject
-}
-
-// GetGcpProjectOk returns a tuple with the GcpProject field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ResourceRemoteInfo) GetGcpProjectOk() (*ResourceRemoteInfoGcpProject, bool) {
-	if o == nil || IsNil(o.GcpProject) {
-		return nil, false
-	}
-	return o.GcpProject, true
-}
-
-// HasGcpProject returns a boolean if a field has been set.
-func (o *ResourceRemoteInfo) HasGcpProject() bool {
-	if o != nil && !IsNil(o.GcpProject) {
-		return true
-	}
-
-	return false
-}
-
-// SetGcpProject gets a reference to the given ResourceRemoteInfoGcpProject and assigns it to the GcpProject field.
-func (o *ResourceRemoteInfo) SetGcpProject(v ResourceRemoteInfoGcpProject) {
-	o.GcpProject = &v
-}
-
-// GetGcpSqlInstance returns the GcpSqlInstance field value if set, zero value otherwise.
-func (o *ResourceRemoteInfo) GetGcpSqlInstance() ResourceRemoteInfoGcpSqlInstance {
-	if o == nil || IsNil(o.GcpSqlInstance) {
-		var ret ResourceRemoteInfoGcpSqlInstance
-		return ret
-	}
-	return *o.GcpSqlInstance
-}
-
-// GetGcpSqlInstanceOk returns a tuple with the GcpSqlInstance field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ResourceRemoteInfo) GetGcpSqlInstanceOk() (*ResourceRemoteInfoGcpSqlInstance, bool) {
-	if o == nil || IsNil(o.GcpSqlInstance) {
-		return nil, false
-	}
-	return o.GcpSqlInstance, true
-}
-
-// HasGcpSqlInstance returns a boolean if a field has been set.
-func (o *ResourceRemoteInfo) HasGcpSqlInstance() bool {
-	if o != nil && !IsNil(o.GcpSqlInstance) {
-		return true
-	}
-
-	return false
-}
-
-// SetGcpSqlInstance gets a reference to the given ResourceRemoteInfoGcpSqlInstance and assigns it to the GcpSqlInstance field.
-func (o *ResourceRemoteInfo) SetGcpSqlInstance(v ResourceRemoteInfoGcpSqlInstance) {
-	o.GcpSqlInstance = &v
-}
-
 // GetGithubRepo returns the GithubRepo field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetGithubRepo() ResourceRemoteInfoGithubRepo {
 	if o == nil || IsNil(o.GithubRepo) {
@@ -605,134 +403,6 @@ func (o *ResourceRemoteInfo) SetOktaCustomRole(v ResourceRemoteInfoOktaCustomRol
 	o.OktaCustomRole = &v
 }
 
-// GetPagerdutyRole returns the PagerdutyRole field value if set, zero value otherwise.
-func (o *ResourceRemoteInfo) GetPagerdutyRole() ResourceRemoteInfoPagerdutyRole {
-	if o == nil || IsNil(o.PagerdutyRole) {
-		var ret ResourceRemoteInfoPagerdutyRole
-		return ret
-	}
-	return *o.PagerdutyRole
-}
-
-// GetPagerdutyRoleOk returns a tuple with the PagerdutyRole field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ResourceRemoteInfo) GetPagerdutyRoleOk() (*ResourceRemoteInfoPagerdutyRole, bool) {
-	if o == nil || IsNil(o.PagerdutyRole) {
-		return nil, false
-	}
-	return o.PagerdutyRole, true
-}
-
-// HasPagerdutyRole returns a boolean if a field has been set.
-func (o *ResourceRemoteInfo) HasPagerdutyRole() bool {
-	if o != nil && !IsNil(o.PagerdutyRole) {
-		return true
-	}
-
-	return false
-}
-
-// SetPagerdutyRole gets a reference to the given ResourceRemoteInfoPagerdutyRole and assigns it to the PagerdutyRole field.
-func (o *ResourceRemoteInfo) SetPagerdutyRole(v ResourceRemoteInfoPagerdutyRole) {
-	o.PagerdutyRole = &v
-}
-
-// GetSalesforcePermissionSet returns the SalesforcePermissionSet field value if set, zero value otherwise.
-func (o *ResourceRemoteInfo) GetSalesforcePermissionSet() ResourceRemoteInfoSalesforcePermissionSet {
-	if o == nil || IsNil(o.SalesforcePermissionSet) {
-		var ret ResourceRemoteInfoSalesforcePermissionSet
-		return ret
-	}
-	return *o.SalesforcePermissionSet
-}
-
-// GetSalesforcePermissionSetOk returns a tuple with the SalesforcePermissionSet field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ResourceRemoteInfo) GetSalesforcePermissionSetOk() (*ResourceRemoteInfoSalesforcePermissionSet, bool) {
-	if o == nil || IsNil(o.SalesforcePermissionSet) {
-		return nil, false
-	}
-	return o.SalesforcePermissionSet, true
-}
-
-// HasSalesforcePermissionSet returns a boolean if a field has been set.
-func (o *ResourceRemoteInfo) HasSalesforcePermissionSet() bool {
-	if o != nil && !IsNil(o.SalesforcePermissionSet) {
-		return true
-	}
-
-	return false
-}
-
-// SetSalesforcePermissionSet gets a reference to the given ResourceRemoteInfoSalesforcePermissionSet and assigns it to the SalesforcePermissionSet field.
-func (o *ResourceRemoteInfo) SetSalesforcePermissionSet(v ResourceRemoteInfoSalesforcePermissionSet) {
-	o.SalesforcePermissionSet = &v
-}
-
-// GetSalesforceProfile returns the SalesforceProfile field value if set, zero value otherwise.
-func (o *ResourceRemoteInfo) GetSalesforceProfile() ResourceRemoteInfoSalesforceProfile {
-	if o == nil || IsNil(o.SalesforceProfile) {
-		var ret ResourceRemoteInfoSalesforceProfile
-		return ret
-	}
-	return *o.SalesforceProfile
-}
-
-// GetSalesforceProfileOk returns a tuple with the SalesforceProfile field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ResourceRemoteInfo) GetSalesforceProfileOk() (*ResourceRemoteInfoSalesforceProfile, bool) {
-	if o == nil || IsNil(o.SalesforceProfile) {
-		return nil, false
-	}
-	return o.SalesforceProfile, true
-}
-
-// HasSalesforceProfile returns a boolean if a field has been set.
-func (o *ResourceRemoteInfo) HasSalesforceProfile() bool {
-	if o != nil && !IsNil(o.SalesforceProfile) {
-		return true
-	}
-
-	return false
-}
-
-// SetSalesforceProfile gets a reference to the given ResourceRemoteInfoSalesforceProfile and assigns it to the SalesforceProfile field.
-func (o *ResourceRemoteInfo) SetSalesforceProfile(v ResourceRemoteInfoSalesforceProfile) {
-	o.SalesforceProfile = &v
-}
-
-// GetSalesforceRole returns the SalesforceRole field value if set, zero value otherwise.
-func (o *ResourceRemoteInfo) GetSalesforceRole() ResourceRemoteInfoSalesforceRole {
-	if o == nil || IsNil(o.SalesforceRole) {
-		var ret ResourceRemoteInfoSalesforceRole
-		return ret
-	}
-	return *o.SalesforceRole
-}
-
-// GetSalesforceRoleOk returns a tuple with the SalesforceRole field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ResourceRemoteInfo) GetSalesforceRoleOk() (*ResourceRemoteInfoSalesforceRole, bool) {
-	if o == nil || IsNil(o.SalesforceRole) {
-		return nil, false
-	}
-	return o.SalesforceRole, true
-}
-
-// HasSalesforceRole returns a boolean if a field has been set.
-func (o *ResourceRemoteInfo) HasSalesforceRole() bool {
-	if o != nil && !IsNil(o.SalesforceRole) {
-		return true
-	}
-
-	return false
-}
-
-// SetSalesforceRole gets a reference to the given ResourceRemoteInfoSalesforceRole and assigns it to the SalesforceRole field.
-func (o *ResourceRemoteInfo) SetSalesforceRole(v ResourceRemoteInfoSalesforceRole) {
-	o.SalesforceRole = &v
-}
-
 // GetTeleportRole returns the TeleportRole field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetTeleportRole() ResourceRemoteInfoTeleportRole {
 	if o == nil || IsNil(o.TeleportRole) {
@@ -793,24 +463,6 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AwsEksCluster) {
 		toSerialize["aws_eks_cluster"] = o.AwsEksCluster
 	}
-	if !IsNil(o.GcpBucket) {
-		toSerialize["gcp_bucket"] = o.GcpBucket
-	}
-	if !IsNil(o.GcpComputeInstance) {
-		toSerialize["gcp_compute_instance"] = o.GcpComputeInstance
-	}
-	if !IsNil(o.GcpFolder) {
-		toSerialize["gcp_folder"] = o.GcpFolder
-	}
-	if !IsNil(o.GcpGkeCluster) {
-		toSerialize["gcp_gke_cluster"] = o.GcpGkeCluster
-	}
-	if !IsNil(o.GcpProject) {
-		toSerialize["gcp_project"] = o.GcpProject
-	}
-	if !IsNil(o.GcpSqlInstance) {
-		toSerialize["gcp_sql_instance"] = o.GcpSqlInstance
-	}
 	if !IsNil(o.GithubRepo) {
 		toSerialize["github_repo"] = o.GithubRepo
 	}
@@ -825,18 +477,6 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.OktaCustomRole) {
 		toSerialize["okta_custom_role"] = o.OktaCustomRole
-	}
-	if !IsNil(o.PagerdutyRole) {
-		toSerialize["pagerduty_role"] = o.PagerdutyRole
-	}
-	if !IsNil(o.SalesforcePermissionSet) {
-		toSerialize["salesforce_permission_set"] = o.SalesforcePermissionSet
-	}
-	if !IsNil(o.SalesforceProfile) {
-		toSerialize["salesforce_profile"] = o.SalesforceProfile
-	}
-	if !IsNil(o.SalesforceRole) {
-		toSerialize["salesforce_role"] = o.SalesforceRole
 	}
 	if !IsNil(o.TeleportRole) {
 		toSerialize["teleport_role"] = o.TeleportRole

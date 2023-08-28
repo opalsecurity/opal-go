@@ -8,18 +8,19 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the resource. | [optional] 
 **Description** | Pointer to **string** | A description of the resource. | [optional] 
 **AdminOwnerId** | Pointer to **string** | The ID of the owner of the resource. | [optional] 
-**MaxDuration** | Pointer to **int32** | The maximum duration for which the resource can be requested (in minutes). Use -1 to set to indefinite. | [optional] 
-**RecommendedDuration** | Pointer to **int32** | The recommended duration for which the resource should be requested (in minutes). Will be the default value in a request. Use -1 to set to indefinite and 0 to unset. | [optional] 
+**MaxDuration** | Pointer to **int32** | The maximum duration for which the resource can be requested (in minutes). Use -1 to set to indefinite. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
+**RecommendedDuration** | Pointer to **int32** | The recommended duration for which the resource should be requested (in minutes). Will be the default value in a request. Use -1 to set to indefinite and 0 to unset. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
 **RequireManagerApproval** | Pointer to **bool** | A bool representing whether or not access requests to the resource require manager approval. | [optional] 
-**RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the resource require an access ticket. | [optional] 
+**RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the resource require an access ticket. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
 **FolderId** | Pointer to **string** | The ID of the folder that the resource is located in. | [optional] 
 **RequireMfaToApprove** | Pointer to **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this resource. | [optional] 
-**RequireMfaToRequest** | Pointer to **bool** | A bool representing whether or not to require MFA for requesting access to this resource. | [optional] 
+**RequireMfaToRequest** | Pointer to **bool** | A bool representing whether or not to require MFA for requesting access to this resource. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
 **RequireMfaToConnect** | Pointer to **bool** | A bool representing whether or not to require MFA to connect to this resource. | [optional] 
-**AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this resource. | [optional] 
+**AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this resource. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
 **ConfigurationTemplateId** | Pointer to **string** | The ID of the associated configuration template. | [optional] 
-**RequestTemplateId** | Pointer to **string** | The ID of the associated request template. | [optional] 
-**IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this resource. | [optional] 
+**RequestTemplateId** | Pointer to **string** | The ID of the associated request template. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
+**IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this resource. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
+**RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) |  | [optional] 
 
 ## Methods
 
@@ -434,6 +435,31 @@ SetIsRequestable sets IsRequestable field to given value.
 `func (o *UpdateResourceInfo) HasIsRequestable() bool`
 
 HasIsRequestable returns a boolean if a field has been set.
+
+### GetRequestConfigurationList
+
+`func (o *UpdateResourceInfo) GetRequestConfigurationList() CreateRequestConfigurationInfoList`
+
+GetRequestConfigurationList returns the RequestConfigurationList field if non-nil, zero value otherwise.
+
+### GetRequestConfigurationListOk
+
+`func (o *UpdateResourceInfo) GetRequestConfigurationListOk() (*CreateRequestConfigurationInfoList, bool)`
+
+GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestConfigurationList
+
+`func (o *UpdateResourceInfo) SetRequestConfigurationList(v CreateRequestConfigurationInfoList)`
+
+SetRequestConfigurationList sets RequestConfigurationList field to given value.
+
+### HasRequestConfigurationList
+
+`func (o *UpdateResourceInfo) HasRequestConfigurationList() bool`
+
+HasRequestConfigurationList returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

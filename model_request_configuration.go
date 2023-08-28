@@ -20,8 +20,7 @@ var _ MappedNullable = &RequestConfiguration{}
 
 // RequestConfiguration # Request Configuration Object ### Description The `RequestConfiguration` object is used to represent a request configuration.  ### Usage Example Returned from the `GET Request Configurations` endpoint.
 type RequestConfiguration struct {
-	// The condition for the request configuration.
-	Condition *string `json:"condition,omitempty"`
+	Condition *Condition `json:"condition,omitempty"`
 	// A bool representing whether or not to allow requests for this resource.
 	AllowRequests bool `json:"allow_requests"`
 	// A bool representing whether or not to automatically approve requests for this resource.
@@ -66,9 +65,9 @@ func NewRequestConfigurationWithDefaults() *RequestConfiguration {
 }
 
 // GetCondition returns the Condition field value if set, zero value otherwise.
-func (o *RequestConfiguration) GetCondition() string {
+func (o *RequestConfiguration) GetCondition() Condition {
 	if o == nil || IsNil(o.Condition) {
-		var ret string
+		var ret Condition
 		return ret
 	}
 	return *o.Condition
@@ -76,7 +75,7 @@ func (o *RequestConfiguration) GetCondition() string {
 
 // GetConditionOk returns a tuple with the Condition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RequestConfiguration) GetConditionOk() (*string, bool) {
+func (o *RequestConfiguration) GetConditionOk() (*Condition, bool) {
 	if o == nil || IsNil(o.Condition) {
 		return nil, false
 	}
@@ -92,8 +91,8 @@ func (o *RequestConfiguration) HasCondition() bool {
 	return false
 }
 
-// SetCondition gets a reference to the given string and assigns it to the Condition field.
-func (o *RequestConfiguration) SetCondition(v string) {
+// SetCondition gets a reference to the given Condition and assigns it to the Condition field.
+func (o *RequestConfiguration) SetCondition(v Condition) {
 	o.Condition = &v
 }
 

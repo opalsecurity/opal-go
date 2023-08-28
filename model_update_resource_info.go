@@ -28,32 +28,40 @@ type UpdateResourceInfo struct {
 	Description *string `json:"description,omitempty"`
 	// The ID of the owner of the resource.
 	AdminOwnerId *string `json:"admin_owner_id,omitempty"`
-	// The maximum duration for which the resource can be requested (in minutes). Use -1 to set to indefinite.
+	// The maximum duration for which the resource can be requested (in minutes). Use -1 to set to indefinite. Deprecated in favor of `request_configuration_list`.
+	// Deprecated
 	MaxDuration *int32 `json:"max_duration,omitempty"`
-	// The recommended duration for which the resource should be requested (in minutes). Will be the default value in a request. Use -1 to set to indefinite and 0 to unset.
+	// The recommended duration for which the resource should be requested (in minutes). Will be the default value in a request. Use -1 to set to indefinite and 0 to unset. Deprecated in favor of `request_configuration_list`.
+	// Deprecated
 	RecommendedDuration *int32 `json:"recommended_duration,omitempty"`
 	// A bool representing whether or not access requests to the resource require manager approval.
 	// Deprecated
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
-	// A bool representing whether or not access requests to the resource require an access ticket.
+	// A bool representing whether or not access requests to the resource require an access ticket. Deprecated in favor of `request_configuration_list`.
+	// Deprecated
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
 	// The ID of the folder that the resource is located in.
 	// Deprecated
 	FolderId *string `json:"folder_id,omitempty"`
 	// A bool representing whether or not to require MFA for reviewers to approve requests for this resource.
 	RequireMfaToApprove *bool `json:"require_mfa_to_approve,omitempty"`
-	// A bool representing whether or not to require MFA for requesting access to this resource.
+	// A bool representing whether or not to require MFA for requesting access to this resource. Deprecated in favor of `request_configuration_list`.
+	// Deprecated
 	RequireMfaToRequest *bool `json:"require_mfa_to_request,omitempty"`
 	// A bool representing whether or not to require MFA to connect to this resource.
 	RequireMfaToConnect *bool `json:"require_mfa_to_connect,omitempty"`
-	// A bool representing whether or not to automatically approve requests to this resource.
+	// A bool representing whether or not to automatically approve requests to this resource. Deprecated in favor of `request_configuration_list`.
+	// Deprecated
 	AutoApproval *bool `json:"auto_approval,omitempty"`
 	// The ID of the associated configuration template.
 	ConfigurationTemplateId *string `json:"configuration_template_id,omitempty"`
-	// The ID of the associated request template.
+	// The ID of the associated request template. Deprecated in favor of `request_configuration_list`.
+	// Deprecated
 	RequestTemplateId *string `json:"request_template_id,omitempty"`
-	// A bool representing whether or not to allow access requests to this resource.
+	// A bool representing whether or not to allow access requests to this resource. Deprecated in favor of `request_configuration_list`.
+	// Deprecated
 	IsRequestable *bool `json:"is_requestable,omitempty"`
+	RequestConfigurationList *CreateRequestConfigurationInfoList `json:"request_configuration_list,omitempty"`
 }
 
 // NewUpdateResourceInfo instantiates a new UpdateResourceInfo object
@@ -195,6 +203,7 @@ func (o *UpdateResourceInfo) SetAdminOwnerId(v string) {
 }
 
 // GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateResourceInfo) GetMaxDuration() int32 {
 	if o == nil || IsNil(o.MaxDuration) {
 		var ret int32
@@ -205,6 +214,7 @@ func (o *UpdateResourceInfo) GetMaxDuration() int32 {
 
 // GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateResourceInfo) GetMaxDurationOk() (*int32, bool) {
 	if o == nil || IsNil(o.MaxDuration) {
 		return nil, false
@@ -222,11 +232,13 @@ func (o *UpdateResourceInfo) HasMaxDuration() bool {
 }
 
 // SetMaxDuration gets a reference to the given int32 and assigns it to the MaxDuration field.
+// Deprecated
 func (o *UpdateResourceInfo) SetMaxDuration(v int32) {
 	o.MaxDuration = &v
 }
 
 // GetRecommendedDuration returns the RecommendedDuration field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateResourceInfo) GetRecommendedDuration() int32 {
 	if o == nil || IsNil(o.RecommendedDuration) {
 		var ret int32
@@ -237,6 +249,7 @@ func (o *UpdateResourceInfo) GetRecommendedDuration() int32 {
 
 // GetRecommendedDurationOk returns a tuple with the RecommendedDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateResourceInfo) GetRecommendedDurationOk() (*int32, bool) {
 	if o == nil || IsNil(o.RecommendedDuration) {
 		return nil, false
@@ -254,6 +267,7 @@ func (o *UpdateResourceInfo) HasRecommendedDuration() bool {
 }
 
 // SetRecommendedDuration gets a reference to the given int32 and assigns it to the RecommendedDuration field.
+// Deprecated
 func (o *UpdateResourceInfo) SetRecommendedDuration(v int32) {
 	o.RecommendedDuration = &v
 }
@@ -294,6 +308,7 @@ func (o *UpdateResourceInfo) SetRequireManagerApproval(v bool) {
 }
 
 // GetRequireSupportTicket returns the RequireSupportTicket field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateResourceInfo) GetRequireSupportTicket() bool {
 	if o == nil || IsNil(o.RequireSupportTicket) {
 		var ret bool
@@ -304,6 +319,7 @@ func (o *UpdateResourceInfo) GetRequireSupportTicket() bool {
 
 // GetRequireSupportTicketOk returns a tuple with the RequireSupportTicket field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateResourceInfo) GetRequireSupportTicketOk() (*bool, bool) {
 	if o == nil || IsNil(o.RequireSupportTicket) {
 		return nil, false
@@ -321,6 +337,7 @@ func (o *UpdateResourceInfo) HasRequireSupportTicket() bool {
 }
 
 // SetRequireSupportTicket gets a reference to the given bool and assigns it to the RequireSupportTicket field.
+// Deprecated
 func (o *UpdateResourceInfo) SetRequireSupportTicket(v bool) {
 	o.RequireSupportTicket = &v
 }
@@ -393,6 +410,7 @@ func (o *UpdateResourceInfo) SetRequireMfaToApprove(v bool) {
 }
 
 // GetRequireMfaToRequest returns the RequireMfaToRequest field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateResourceInfo) GetRequireMfaToRequest() bool {
 	if o == nil || IsNil(o.RequireMfaToRequest) {
 		var ret bool
@@ -403,6 +421,7 @@ func (o *UpdateResourceInfo) GetRequireMfaToRequest() bool {
 
 // GetRequireMfaToRequestOk returns a tuple with the RequireMfaToRequest field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateResourceInfo) GetRequireMfaToRequestOk() (*bool, bool) {
 	if o == nil || IsNil(o.RequireMfaToRequest) {
 		return nil, false
@@ -420,6 +439,7 @@ func (o *UpdateResourceInfo) HasRequireMfaToRequest() bool {
 }
 
 // SetRequireMfaToRequest gets a reference to the given bool and assigns it to the RequireMfaToRequest field.
+// Deprecated
 func (o *UpdateResourceInfo) SetRequireMfaToRequest(v bool) {
 	o.RequireMfaToRequest = &v
 }
@@ -457,6 +477,7 @@ func (o *UpdateResourceInfo) SetRequireMfaToConnect(v bool) {
 }
 
 // GetAutoApproval returns the AutoApproval field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateResourceInfo) GetAutoApproval() bool {
 	if o == nil || IsNil(o.AutoApproval) {
 		var ret bool
@@ -467,6 +488,7 @@ func (o *UpdateResourceInfo) GetAutoApproval() bool {
 
 // GetAutoApprovalOk returns a tuple with the AutoApproval field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateResourceInfo) GetAutoApprovalOk() (*bool, bool) {
 	if o == nil || IsNil(o.AutoApproval) {
 		return nil, false
@@ -484,6 +506,7 @@ func (o *UpdateResourceInfo) HasAutoApproval() bool {
 }
 
 // SetAutoApproval gets a reference to the given bool and assigns it to the AutoApproval field.
+// Deprecated
 func (o *UpdateResourceInfo) SetAutoApproval(v bool) {
 	o.AutoApproval = &v
 }
@@ -521,6 +544,7 @@ func (o *UpdateResourceInfo) SetConfigurationTemplateId(v string) {
 }
 
 // GetRequestTemplateId returns the RequestTemplateId field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateResourceInfo) GetRequestTemplateId() string {
 	if o == nil || IsNil(o.RequestTemplateId) {
 		var ret string
@@ -531,6 +555,7 @@ func (o *UpdateResourceInfo) GetRequestTemplateId() string {
 
 // GetRequestTemplateIdOk returns a tuple with the RequestTemplateId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateResourceInfo) GetRequestTemplateIdOk() (*string, bool) {
 	if o == nil || IsNil(o.RequestTemplateId) {
 		return nil, false
@@ -548,11 +573,13 @@ func (o *UpdateResourceInfo) HasRequestTemplateId() bool {
 }
 
 // SetRequestTemplateId gets a reference to the given string and assigns it to the RequestTemplateId field.
+// Deprecated
 func (o *UpdateResourceInfo) SetRequestTemplateId(v string) {
 	o.RequestTemplateId = &v
 }
 
 // GetIsRequestable returns the IsRequestable field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateResourceInfo) GetIsRequestable() bool {
 	if o == nil || IsNil(o.IsRequestable) {
 		var ret bool
@@ -563,6 +590,7 @@ func (o *UpdateResourceInfo) GetIsRequestable() bool {
 
 // GetIsRequestableOk returns a tuple with the IsRequestable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateResourceInfo) GetIsRequestableOk() (*bool, bool) {
 	if o == nil || IsNil(o.IsRequestable) {
 		return nil, false
@@ -580,8 +608,41 @@ func (o *UpdateResourceInfo) HasIsRequestable() bool {
 }
 
 // SetIsRequestable gets a reference to the given bool and assigns it to the IsRequestable field.
+// Deprecated
 func (o *UpdateResourceInfo) SetIsRequestable(v bool) {
 	o.IsRequestable = &v
+}
+
+// GetRequestConfigurationList returns the RequestConfigurationList field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetRequestConfigurationList() CreateRequestConfigurationInfoList {
+	if o == nil || IsNil(o.RequestConfigurationList) {
+		var ret CreateRequestConfigurationInfoList
+		return ret
+	}
+	return *o.RequestConfigurationList
+}
+
+// GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceInfo) GetRequestConfigurationListOk() (*CreateRequestConfigurationInfoList, bool) {
+	if o == nil || IsNil(o.RequestConfigurationList) {
+		return nil, false
+	}
+	return o.RequestConfigurationList, true
+}
+
+// HasRequestConfigurationList returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasRequestConfigurationList() bool {
+	if o != nil && !IsNil(o.RequestConfigurationList) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestConfigurationList gets a reference to the given CreateRequestConfigurationInfoList and assigns it to the RequestConfigurationList field.
+func (o *UpdateResourceInfo) SetRequestConfigurationList(v CreateRequestConfigurationInfoList) {
+	o.RequestConfigurationList = &v
 }
 
 func (o UpdateResourceInfo) MarshalJSON() ([]byte, error) {
@@ -639,6 +700,9 @@ func (o UpdateResourceInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.IsRequestable) {
 		toSerialize["is_requestable"] = o.IsRequestable
+	}
+	if !IsNil(o.RequestConfigurationList) {
+		toSerialize["request_configuration_list"] = o.RequestConfigurationList
 	}
 	return toSerialize, nil
 }

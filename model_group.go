@@ -56,6 +56,8 @@ type Group struct {
 	ConfigurationTemplateId *string `json:"configuration_template_id,omitempty"`
 	// A bool representing whether or not to allow access requests to this group.
 	IsRequestable *bool `json:"is_requestable,omitempty"`
+	// A list of request configurations for this group.
+	RequestConfigurationList []RequestConfiguration `json:"request_configuration_list,omitempty"`
 	// JSON metadata about the remote group. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details.
 	Metadata *string `json:"metadata,omitempty"`
 }
@@ -649,6 +651,38 @@ func (o *Group) SetIsRequestable(v bool) {
 	o.IsRequestable = &v
 }
 
+// GetRequestConfigurationList returns the RequestConfigurationList field value if set, zero value otherwise.
+func (o *Group) GetRequestConfigurationList() []RequestConfiguration {
+	if o == nil || IsNil(o.RequestConfigurationList) {
+		var ret []RequestConfiguration
+		return ret
+	}
+	return o.RequestConfigurationList
+}
+
+// GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetRequestConfigurationListOk() ([]RequestConfiguration, bool) {
+	if o == nil || IsNil(o.RequestConfigurationList) {
+		return nil, false
+	}
+	return o.RequestConfigurationList, true
+}
+
+// HasRequestConfigurationList returns a boolean if a field has been set.
+func (o *Group) HasRequestConfigurationList() bool {
+	if o != nil && !IsNil(o.RequestConfigurationList) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestConfigurationList gets a reference to the given []RequestConfiguration and assigns it to the RequestConfigurationList field.
+func (o *Group) SetRequestConfigurationList(v []RequestConfiguration) {
+	o.RequestConfigurationList = v
+}
+
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
 func (o *Group) GetMetadata() string {
 	if o == nil || IsNil(o.Metadata) {
@@ -742,6 +776,9 @@ func (o Group) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.IsRequestable) {
 		toSerialize["is_requestable"] = o.IsRequestable
+	}
+	if !IsNil(o.RequestConfigurationList) {
+		toSerialize["request_configuration_list"] = o.RequestConfigurationList
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata

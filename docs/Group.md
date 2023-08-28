@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **RequestTemplateId** | Pointer to **string** | The ID of the associated request template. | [optional] 
 **ConfigurationTemplateId** | Pointer to **string** | The ID of the associated configuration template. | [optional] 
 **IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this group. | [optional] 
+**RequestConfigurationList** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | A list of request configurations for this group. | [optional] 
 **Metadata** | Pointer to **string** | JSON metadata about the remote group. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details. | [optional] 
 
 ## Methods
@@ -487,6 +488,31 @@ SetIsRequestable sets IsRequestable field to given value.
 `func (o *Group) HasIsRequestable() bool`
 
 HasIsRequestable returns a boolean if a field has been set.
+
+### GetRequestConfigurationList
+
+`func (o *Group) GetRequestConfigurationList() []RequestConfiguration`
+
+GetRequestConfigurationList returns the RequestConfigurationList field if non-nil, zero value otherwise.
+
+### GetRequestConfigurationListOk
+
+`func (o *Group) GetRequestConfigurationListOk() (*[]RequestConfiguration, bool)`
+
+GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestConfigurationList
+
+`func (o *Group) SetRequestConfigurationList(v []RequestConfiguration)`
+
+SetRequestConfigurationList sets RequestConfigurationList field to given value.
+
+### HasRequestConfigurationList
+
+`func (o *Group) HasRequestConfigurationList() bool`
+
+HasRequestConfigurationList returns a boolean if a field has been set.
 
 ### GetMetadata
 
