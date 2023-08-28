@@ -82,7 +82,7 @@ Class | Method | HTTP request | Description
 *AppsApi* | [**GetApps**](docs/AppsApi.md#getapps) | **Get** /apps | 
 *ConfigurationTemplatesApi* | [**CreateConfigurationTemplate**](docs/ConfigurationTemplatesApi.md#createconfigurationtemplate) | **Post** /configuration-templates | 
 *ConfigurationTemplatesApi* | [**GetConfigurationTemplates**](docs/ConfigurationTemplatesApi.md#getconfigurationtemplates) | **Get** /configuration-templates | 
-*DefaultApi* | [**UpdateConfigurationTemplate**](docs/DefaultApi.md#updateconfigurationtemplate) | **Put** /configuration-templates | 
+*ConfigurationTemplatesApi* | [**UpdateConfigurationTemplate**](docs/ConfigurationTemplatesApi.md#updateconfigurationtemplate) | **Put** /configuration-templates | 
 *EventsApi* | [**Events**](docs/EventsApi.md#events) | **Get** /events | 
 *GroupsApi* | [**AddGroupResource**](docs/GroupsApi.md#addgroupresource) | **Post** /groups/{group_id}/resources/{resource_id} | 
 *GroupsApi* | [**AddGroupUser**](docs/GroupsApi.md#addgroupuser) | **Post** /groups/{group_id}/users/{user_id} | 
@@ -169,6 +169,7 @@ Class | Method | HTTP request | Description
  - [CreateMessageChannelInfo](docs/CreateMessageChannelInfo.md)
  - [CreateOnCallScheduleInfo](docs/CreateOnCallScheduleInfo.md)
  - [CreateOwnerInfo](docs/CreateOwnerInfo.md)
+ - [CreateRequestConfigurationInfoList](docs/CreateRequestConfigurationInfoList.md)
  - [CreateResourceInfo](docs/CreateResourceInfo.md)
  - [CreateUARInfo](docs/CreateUARInfo.md)
  - [EntityTypeEnum](docs/EntityTypeEnum.md)
@@ -208,6 +209,7 @@ Class | Method | HTTP request | Description
  - [PaginatedUARsList](docs/PaginatedUARsList.md)
  - [PaginatedUsersList](docs/PaginatedUsersList.md)
  - [Request](docs/Request.md)
+ - [RequestConfiguration](docs/RequestConfiguration.md)
  - [RequestList](docs/RequestList.md)
  - [RequestStatusEnum](docs/RequestStatusEnum.md)
  - [Resource](docs/Resource.md)
@@ -221,11 +223,21 @@ Class | Method | HTTP request | Description
  - [ResourceRemoteInfoAwsIamRole](docs/ResourceRemoteInfoAwsIamRole.md)
  - [ResourceRemoteInfoAwsPermissionSet](docs/ResourceRemoteInfoAwsPermissionSet.md)
  - [ResourceRemoteInfoAwsRdsInstance](docs/ResourceRemoteInfoAwsRdsInstance.md)
+ - [ResourceRemoteInfoGcpBucket](docs/ResourceRemoteInfoGcpBucket.md)
+ - [ResourceRemoteInfoGcpComputeInstance](docs/ResourceRemoteInfoGcpComputeInstance.md)
+ - [ResourceRemoteInfoGcpFolder](docs/ResourceRemoteInfoGcpFolder.md)
+ - [ResourceRemoteInfoGcpGkeCluster](docs/ResourceRemoteInfoGcpGkeCluster.md)
+ - [ResourceRemoteInfoGcpProject](docs/ResourceRemoteInfoGcpProject.md)
+ - [ResourceRemoteInfoGcpSqlInstance](docs/ResourceRemoteInfoGcpSqlInstance.md)
  - [ResourceRemoteInfoGithubRepo](docs/ResourceRemoteInfoGithubRepo.md)
  - [ResourceRemoteInfoGitlabProject](docs/ResourceRemoteInfoGitlabProject.md)
  - [ResourceRemoteInfoOktaApp](docs/ResourceRemoteInfoOktaApp.md)
  - [ResourceRemoteInfoOktaCustomRole](docs/ResourceRemoteInfoOktaCustomRole.md)
  - [ResourceRemoteInfoOktaStandardRole](docs/ResourceRemoteInfoOktaStandardRole.md)
+ - [ResourceRemoteInfoPagerdutyRole](docs/ResourceRemoteInfoPagerdutyRole.md)
+ - [ResourceRemoteInfoSalesforcePermissionSet](docs/ResourceRemoteInfoSalesforcePermissionSet.md)
+ - [ResourceRemoteInfoSalesforceProfile](docs/ResourceRemoteInfoSalesforceProfile.md)
+ - [ResourceRemoteInfoSalesforceRole](docs/ResourceRemoteInfoSalesforceRole.md)
  - [ResourceRemoteInfoTeleportRole](docs/ResourceRemoteInfoTeleportRole.md)
  - [ResourceTypeEnum](docs/ResourceTypeEnum.md)
  - [ResourceUser](docs/ResourceUser.md)
@@ -262,7 +274,7 @@ Class | Method | HTTP request | Description
 ## Documentation For Authorization
 
 
-Authentication schemes defined for the API:
+
 ### BearerAuth
 
 - **Type**: HTTP Bearer token authentication

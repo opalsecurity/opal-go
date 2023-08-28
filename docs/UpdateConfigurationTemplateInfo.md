@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **AdminOwnerId** | Pointer to **string** | The ID of the owner of the configuration template. | [optional] 
 **Visibility** | Pointer to [**VisibilityInfo**](VisibilityInfo.md) |  | [optional] 
 **LinkedAuditMessageChannelIds** | Pointer to **[]string** | The IDs of the audit message channels linked to the configuration template. | [optional] 
-**RequestConfigurationId** | Pointer to **string** | The ID of the request configuration linked to the configuration template. | [optional] 
+**RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) |  | [optional] 
 **MemberOncallScheduleIds** | Pointer to **[]string** | The IDs of the on-call schedules linked to the configuration template. | [optional] 
 **BreakGlassUserIds** | Pointer to **[]string** | The IDs of the break glass users linked to the configuration template. | [optional] 
 **RequireMfaToApprove** | Pointer to **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this configuration template. | [optional] 
@@ -154,30 +154,30 @@ SetLinkedAuditMessageChannelIds sets LinkedAuditMessageChannelIds field to given
 
 HasLinkedAuditMessageChannelIds returns a boolean if a field has been set.
 
-### GetRequestConfigurationId
+### GetRequestConfigurationList
 
-`func (o *UpdateConfigurationTemplateInfo) GetRequestConfigurationId() string`
+`func (o *UpdateConfigurationTemplateInfo) GetRequestConfigurationList() CreateRequestConfigurationInfoList`
 
-GetRequestConfigurationId returns the RequestConfigurationId field if non-nil, zero value otherwise.
+GetRequestConfigurationList returns the RequestConfigurationList field if non-nil, zero value otherwise.
 
-### GetRequestConfigurationIdOk
+### GetRequestConfigurationListOk
 
-`func (o *UpdateConfigurationTemplateInfo) GetRequestConfigurationIdOk() (*string, bool)`
+`func (o *UpdateConfigurationTemplateInfo) GetRequestConfigurationListOk() (*CreateRequestConfigurationInfoList, bool)`
 
-GetRequestConfigurationIdOk returns a tuple with the RequestConfigurationId field if it's non-nil, zero value otherwise
+GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetRequestConfigurationId
+### SetRequestConfigurationList
 
-`func (o *UpdateConfigurationTemplateInfo) SetRequestConfigurationId(v string)`
+`func (o *UpdateConfigurationTemplateInfo) SetRequestConfigurationList(v CreateRequestConfigurationInfoList)`
 
-SetRequestConfigurationId sets RequestConfigurationId field to given value.
+SetRequestConfigurationList sets RequestConfigurationList field to given value.
 
-### HasRequestConfigurationId
+### HasRequestConfigurationList
 
-`func (o *UpdateConfigurationTemplateInfo) HasRequestConfigurationId() bool`
+`func (o *UpdateConfigurationTemplateInfo) HasRequestConfigurationList() bool`
 
-HasRequestConfigurationId returns a boolean if a field has been set.
+HasRequestConfigurationList returns a boolean if a field has been set.
 
 ### GetMemberOncallScheduleIds
 

@@ -54,8 +54,6 @@ type APIClient struct {
 
 	ConfigurationTemplatesApi *ConfigurationTemplatesApiService
 
-	DefaultApi *DefaultApiService
-
 	EventsApi *EventsApiService
 
 	GroupsApi *GroupsApiService
@@ -97,7 +95,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.AppsApi = (*AppsApiService)(&c.common)
 	c.ConfigurationTemplatesApi = (*ConfigurationTemplatesApiService)(&c.common)
-	c.DefaultApi = (*DefaultApiService)(&c.common)
 	c.EventsApi = (*EventsApiService)(&c.common)
 	c.GroupsApi = (*GroupsApiService)(&c.common)
 	c.MessageChannelsApi = (*MessageChannelsApiService)(&c.common)
@@ -685,17 +682,16 @@ func formatErrorMessage(status string, v interface{}) string {
 	str := ""
 	metaValue := reflect.ValueOf(v).Elem()
 
-	if metaValue.Kind() == reflect.Struct {
-		field := metaValue.FieldByName("Title")
-		if field != (reflect.Value{}) {
-			str = fmt.Sprintf("%s", field.Interface())
-		}
-
-		field = metaValue.FieldByName("Detail")
-		if field != (reflect.Value{}) {
-			str = fmt.Sprintf("%s (%s)", str, field.Interface())
-		}
+	field := metaValue.FieldByName("Title")
+	if field != (reflect.Value{}) {
+		str = fmt.Sprintf("%s", field.Interface())
 	}
 
+	field = metaValue.FieldByName("Detail")
+	if field != (reflect.Value{}) {
+		str = fmt.Sprintf("%s (%s)", str, field.Interface())
+	}
+
+	// status title (detail)
 	return strings.TrimSpace(fmt.Sprintf("%s %s", status, str))
 }

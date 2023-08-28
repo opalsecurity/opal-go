@@ -128,6 +128,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/ConfigurationTemplate'
           description: The configuration template just updated.
+      security:
+      - BearerAuth: []
+      tags:
+      - configuration-templates
   /events:
     get:
       description: Returns a list of `Event` objects.
@@ -3029,7 +3033,6 @@ components:
         email:
           description: The user's email.
           example: jake@company.dev
-          format: email
           type: string
         expiration_date:
           description: The day and time the user's access will expire.
@@ -3079,7 +3082,6 @@ components:
         email:
           description: The user's email.
           example: jake@company.dev
-          format: email
           type: string
         expiration_date:
           description: The day and time the user's access will expire.
@@ -3564,7 +3566,6 @@ components:
         email:
           description: The user's email.
           example: jake@company.dev
-          format: email
           type: string
         expiration_date:
           description: The day and time the user's access will expire.
@@ -3688,6 +3689,11 @@ components:
             requests to this group.
           example: false
           type: boolean
+        configuration_template_id:
+          description: The ID of the associated configuration template.
+          example: 06851574-e50d-40ca-8c78-f72ae6ab4304
+          format: uuid
+          type: string
         request_template_id:
           description: The ID of the associated request template.
           example: 06851574-e50d-40ca-8c78-f72ae6ab4304
@@ -3918,10 +3924,10 @@ components:
     ReviewerStageList:
       example:
         stages:
-        - reviewer_ids:
+        - owner_ids:
           - 7870617d-e72a-47f5-a84c-693817ab4567
           - 1520617d-e72a-47f5-a84c-693817ab48ad2
-        - reviewer_ids:
+        - owner_ids:
           - 7870617d-e72a-47f5-a84c-693817ab4567
           - 1520617d-e72a-47f5-a84c-693817ab48ad2
       properties:
@@ -3936,7 +3942,7 @@ components:
     ReviewerStage:
       description: A reviewer stage.
       example:
-        reviewer_ids:
+        owner_ids:
         - 7870617d-e72a-47f5-a84c-693817ab4567
         - 1520617d-e72a-47f5-a84c-693817ab48ad2
       properties:
@@ -3956,10 +3962,15 @@ components:
             format: uuid
             type: string
           type: array
+        stage:
+          description: The stage of the reviewer stage.
+          example: 1
+          type: integer
       required:
       - operator
       - owner_ids
       - require_manager_approval
+      - stage
       type: object
     MessageChannel:
       description: |-
@@ -4120,6 +4131,18 @@ components:
           $ref: '#/components/schemas/ResourceRemoteInfo_aws_rds_instance'
         aws_eks_cluster:
           $ref: '#/components/schemas/ResourceRemoteInfo_aws_eks_cluster'
+        gcp_bucket:
+          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_bucket'
+        gcp_compute_instance:
+          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_compute_instance'
+        gcp_folder:
+          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_folder'
+        gcp_gke_cluster:
+          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_gke_cluster'
+        gcp_project:
+          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_project'
+        gcp_sql_instance:
+          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_sql_instance'
         github_repo:
           $ref: '#/components/schemas/ResourceRemoteInfo_github_repo'
         gitlab_project:
@@ -4130,6 +4153,14 @@ components:
           $ref: '#/components/schemas/ResourceRemoteInfo_okta_standard_role'
         okta_custom_role:
           $ref: '#/components/schemas/ResourceRemoteInfo_okta_custom_role'
+        pagerduty_role:
+          $ref: '#/components/schemas/ResourceRemoteInfo_pagerduty_role'
+        salesforce_permission_set:
+          $ref: '#/components/schemas/ResourceRemoteInfo_salesforce_permission_set'
+        salesforce_profile:
+          $ref: '#/components/schemas/ResourceRemoteInfo_salesforce_profile'
+        salesforce_role:
+          $ref: '#/components/schemas/ResourceRemoteInfo_salesforce_role'
         teleport_role:
           $ref: '#/components/schemas/ResourceRemoteInfo_teleport_role'
       type: object
@@ -4966,6 +4997,11 @@ components:
             requests to this resource.
           example: false
           type: boolean
+        configuration_template_id:
+          description: The ID of the associated configuration template.
+          example: 06851574-e50d-40ca-8c78-f72ae6ab4304
+          format: uuid
+          type: string
         request_template_id:
           description: The ID of the associated request template.
           example: 06851574-e50d-40ca-8c78-f72ae6ab4304
@@ -5277,6 +5313,159 @@ components:
       required:
       - owner_id
       type: object
+    RequestConfiguration:
+      description: |-
+        # Request Configuration Object
+        ### Description
+        The `RequestConfiguration` object is used to represent a request configuration.
+
+        ### Usage Example
+        Returned from the `GET Request Configurations` endpoint.
+      example:
+        request_configuration_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+        organization_id: w86c85d-0651-43e2-a748-d69d658418e8
+        created_at: 2021-01-06T20:00:00Z
+        updated_at: 2021-01-06T20:00:00Z
+        condition:
+          group_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+        allow_requests: true
+        auto_approval: false
+        require_mfa_to_request: false
+        max_duration_minutes: 120
+        recommended_duration_minutes: 120
+        require_support_ticket: false
+        reviewer_stages:
+        - reviewer_stage_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+          owner_ids:
+          - 37cb7e41-12ba-46da-92ff-030abe0450b1
+          - 37cb7e41-12ba-46da-92ff-030abe0450b2
+          stage: 1
+        priority: 1
+      properties:
+        condition:
+          description: The condition for the request configuration.
+          example: |-
+            {
+              "group_id": "1b978423-db0a-4037-a4cf-f79c60cb67b3",
+            }
+          format: json
+          type: string
+        allow_requests:
+          description: A bool representing whether or not to allow requests for this
+            resource.
+          example: true
+          type: boolean
+        auto_approval:
+          description: A bool representing whether or not to automatically approve
+            requests for this resource.
+          example: false
+          type: boolean
+        require_mfa_to_request:
+          description: A bool representing whether or not to require MFA for requesting
+            access to this resource.
+          example: false
+          type: boolean
+        max_duration_minutes:
+          description: The maximum duration for which the resource can be requested
+            (in minutes).
+          example: 120
+          type: integer
+        recommended_duration_minutes:
+          description: The recommended duration for which the resource should be requested
+            (in minutes). -1 represents an indefinite duration.
+          example: 120
+          type: integer
+        require_support_ticket:
+          description: A bool representing whether or not access requests to the resource
+            require an access ticket.
+          example: false
+          type: boolean
+        request_template_id:
+          description: The ID of the associated request template.
+          example: 06851574-e50d-40ca-8c78-f72ae6ab4304
+          format: uuid
+          type: string
+        reviewer_stages:
+          description: The list of reviewer stages for the request configuration.
+          items:
+            $ref: '#/components/schemas/ReviewerStage'
+          type: array
+        priority:
+          description: The priority of the request configuration.
+          example: 1
+          type: integer
+      required:
+      - allow_requests
+      - auto_approval
+      - organization_id
+      - priority
+      - require_mfa_to_request
+      - require_support_ticket
+      - reviewer_stages
+    CreateRequestConfigurationInfoList:
+      description: |-
+        # CreateRequestConfigurationInfoList Object
+        ### Description
+        The `CreateRequestConfigurationInfoList` object is used as an input to the CreateRequestConfigurations API.
+
+        ### Formatting Requirements
+        The `CreateRequestConfigurationInfoList` object must contain a list of `RequestConfiguration` objects.
+        Exactly one default `RequestConfiguration` must be provided.  A default `RequestConfiguration` is one with a `condition` of `null`
+        and a `priority` of `0`.  The default `RequestConfiguration` will be used when no other `RequestConfiguration` matches the request.
+
+        Only one `RequestConfiguration` may be provided for each priority, and the priorities must be contiguous.  For example, if there are
+        two `RequestConfigurations` with priorities 0 and 2, there must be a `RequestConfiguration` with priority 1.
+
+        To use the `condition` field, the `condition` must be a valid JSON object.
+
+        The `condition` must be a JSON object with the key `group_ids` (more options may be added in the future), whose value is a list of
+        group IDs.
+        The `condition` will match if the user requesting access is a member of any of the groups in the list. Currently, we only support
+        using a single group as a condition.
+      example:
+        request_configurations:
+        - request_configuration_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+          organization_id: w86c85d-0651-43e2-a748-d69d658418e8
+          condition: null
+          allow_requests: true
+          auto_approval: false
+          require_mfa_to_request: false
+          max_duration_minutes: 120
+          recommended_duration_minutes: 120
+          require_support_ticket: false
+          reviewer_stages:
+          - reviewer_stage_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+            owner_ids:
+            - 37cb7e41-12ba-46da-92ff-030abe0450b1
+            - 37cb7e41-12ba-46da-92ff-030abe0450b2
+            stage: 1
+          priority: 0
+        - request_configuration_id: 7c86c85d-0651-43e2-a748-d69d658418e9
+          organization_id: w86c85d-0651-43e2-a748-d69d658418e8
+          condition:
+            group_id: 1b978423-db0a-4037-a4cf-f79c60cb67b4
+          allow_requests: true
+          auto_approval: false
+          require_mfa_to_request: false
+          max_duration_minutes: 120
+          recommended_duration_minutes: 120
+          require_support_ticket: false
+          reviewer_stages:
+          - reviewer_stage_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+            owner_ids:
+            - 37cb7e41-12ba-46da-92ff-030abe0450b1
+            - 37cb7e41-12ba-46da-92ff-030abe0450b2
+            stage: 1
+          priority: 1
+      properties:
+        request_configurations:
+          description: A list of request configurations to create.
+          items:
+            $ref: '#/components/schemas/RequestConfiguration'
+          type: array
+      required:
+      - request_configurations
+      type: object
     CreateConfigurationTemplateInfo:
       description: |-
         # CreateConfigurationTemplateInfo Object
@@ -5319,12 +5508,6 @@ components:
             format: uuid
             type: string
           type: array
-        request_configuration_id:
-          description: The ID of the request configuration linked to the configuration
-            template.
-          example: 7c86c85d-0651-43e2-a748-d69d658418e8
-          format: uuid
-          type: string
         member_oncall_schedule_ids:
           description: The IDs of the on-call schedules linked to the configuration
             template.
@@ -5359,6 +5542,8 @@ components:
           description: The name of the configuration template.
           example: Prod AWS Template
           type: string
+        request_configuration_list:
+          $ref: '#/components/schemas/CreateRequestConfigurationInfoList'
       required:
       - admin_owner_id
       - name
@@ -5505,12 +5690,8 @@ components:
             format: uuid
             type: string
           type: array
-        request_configuration_id:
-          description: The ID of the request configuration linked to the configuration
-            template.
-          example: 7c86c85d-0651-43e2-a748-d69d658418e8
-          format: uuid
-          type: string
+        request_configuration_list:
+          $ref: '#/components/schemas/CreateRequestConfigurationInfoList'
         member_oncall_schedule_ids:
           description: The IDs of the on-call schedules linked to the configuration
             template.
@@ -5764,6 +5945,81 @@ components:
       required:
       - arn
       type: object
+    ResourceRemoteInfo_gcp_bucket:
+      description: Remote info for GCP bucket.
+      properties:
+        bucket_id:
+          description: The id of the bucket.
+          example: example-bucket-898931321
+          type: string
+      required:
+      - bucket_id
+      type: object
+    ResourceRemoteInfo_gcp_compute_instance:
+      description: Remote info for GCP compute instance.
+      properties:
+        instance_id:
+          description: The id of the instance.
+          example: example-instance-898931321
+          type: string
+        project_id:
+          description: The id of the project the instance is in.
+          example: example-project-898931321
+          type: string
+        zone:
+          description: The zone the instance is in.
+          example: us-central1-a
+          type: string
+      required:
+      - instance_id
+      - project_id
+      - zone
+      type: object
+    ResourceRemoteInfo_gcp_folder:
+      description: Remote info for GCP folder.
+      properties:
+        folder_id:
+          description: The id of the folder.
+          example: folder/898931321
+          type: string
+      required:
+      - folder_id
+      type: object
+    ResourceRemoteInfo_gcp_gke_cluster:
+      description: Remote info for GCP GKE cluster.
+      properties:
+        cluster_name:
+          description: The name of the GKE cluster.
+          example: example-cluster-898931321
+          type: string
+      required:
+      - cluster_name
+      type: object
+    ResourceRemoteInfo_gcp_project:
+      description: Remote info for GCP project.
+      properties:
+        project_id:
+          description: The id of the project.
+          example: example-project-898931321
+          type: string
+      required:
+      - project_id
+      type: object
+    ResourceRemoteInfo_gcp_sql_instance:
+      description: Remote info for GCP SQL instance.
+      properties:
+        instance_id:
+          description: The id of the SQL instance.
+          example: example-sql-898931321
+          type: string
+        project_id:
+          description: The id of the project the instance is in.
+          example: example-project-898931321
+          type: string
+      required:
+      - instance_id
+      - project_id
+      type: object
     ResourceRemoteInfo_github_repo:
       description: Remote info for GitHub repository.
       properties:
@@ -5815,6 +6071,51 @@ components:
         role_id:
           description: The id of the custom role.
           example: a9dfas0f678asdf67867
+          type: string
+      required:
+      - role_id
+      type: object
+    ResourceRemoteInfo_pagerduty_role:
+      description: Remote info for Pagerduty role.
+      properties:
+        role_name:
+          description: The name of the role.
+          example: owner
+          type: string
+      required:
+      - role_name
+      type: object
+    ResourceRemoteInfo_salesforce_permission_set:
+      description: Remote info for Salesforce permission set.
+      properties:
+        permission_set_id:
+          description: The id of the permission set.
+          example: 0PS5Y090202wOV7WAM
+          type: string
+      required:
+      - permission_set_id
+      type: object
+    ResourceRemoteInfo_salesforce_profile:
+      description: Remote info for Salesforce profile.
+      properties:
+        profile_id:
+          description: The id of the permission set.
+          example: 0PS5Y090202wOV7WAM
+          type: string
+        user_license_id:
+          description: The id of the user license.
+          example: 1005Y030081Qb5XJHS
+          type: string
+      required:
+      - profile_id
+      - user_license_id
+      type: object
+    ResourceRemoteInfo_salesforce_role:
+      description: Remote info for Salesforce role.
+      properties:
+        role_id:
+          description: The id of the role.
+          example: 0PS5Y090202wOV7WAM
           type: string
       required:
       - role_id
