@@ -25,20 +25,17 @@ type ReviewerStage struct {
 	// The operator of the reviewer stage.
 	Operator string `json:"operator"`
 	OwnerIds []string `json:"owner_ids"`
-	// The stage of the reviewer stage.
-	Stage int32 `json:"stage"`
 }
 
 // NewReviewerStage instantiates a new ReviewerStage object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReviewerStage(requireManagerApproval bool, operator string, ownerIds []string, stage int32) *ReviewerStage {
+func NewReviewerStage(requireManagerApproval bool, operator string, ownerIds []string) *ReviewerStage {
 	this := ReviewerStage{}
 	this.RequireManagerApproval = requireManagerApproval
 	this.Operator = operator
 	this.OwnerIds = ownerIds
-	this.Stage = stage
 	return &this
 }
 
@@ -122,30 +119,6 @@ func (o *ReviewerStage) SetOwnerIds(v []string) {
 	o.OwnerIds = v
 }
 
-// GetStage returns the Stage field value
-func (o *ReviewerStage) GetStage() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Stage
-}
-
-// GetStageOk returns a tuple with the Stage field value
-// and a boolean to check if the value has been set.
-func (o *ReviewerStage) GetStageOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Stage, true
-}
-
-// SetStage sets field value
-func (o *ReviewerStage) SetStage(v int32) {
-	o.Stage = v
-}
-
 func (o ReviewerStage) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -159,7 +132,6 @@ func (o ReviewerStage) ToMap() (map[string]interface{}, error) {
 	toSerialize["require_manager_approval"] = o.RequireManagerApproval
 	toSerialize["operator"] = o.Operator
 	toSerialize["owner_ids"] = o.OwnerIds
-	toSerialize["stage"] = o.Stage
 	return toSerialize, nil
 }
 

@@ -22,6 +22,7 @@ docs/AppsApi.md
 docs/AppsList.md
 docs/AwsPermissionSetMetadata.md
 docs/AwsPermissionSetMetadataAwsPermissionSet.md
+docs/Condition.md
 docs/ConfigurationTemplate.md
 docs/ConfigurationTemplatesApi.md
 docs/CreateConfigurationTemplateInfo.md
@@ -147,6 +148,7 @@ model_app_type_enum.go
 model_apps_list.go
 model_aws_permission_set_metadata.go
 model_aws_permission_set_metadata_aws_permission_set.go
+model_condition.go
 model_configuration_template.go
 model_create_configuration_template_info.go
 model_create_group_info.go

@@ -163,6 +163,7 @@ Class | Method | HTTP request | Description
  - [AppsList](docs/AppsList.md)
  - [AwsPermissionSetMetadata](docs/AwsPermissionSetMetadata.md)
  - [AwsPermissionSetMetadataAwsPermissionSet](docs/AwsPermissionSetMetadataAwsPermissionSet.md)
+ - [Condition](docs/Condition.md)
  - [ConfigurationTemplate](docs/ConfigurationTemplate.md)
  - [CreateConfigurationTemplateInfo](docs/CreateConfigurationTemplateInfo.md)
  - [CreateGroupInfo](docs/CreateGroupInfo.md)
@@ -274,7 +275,7 @@ Class | Method | HTTP request | Description
 ## Documentation For Authorization
 
 
-
+Authentication schemes defined for the API:
 ### BearerAuth
 
 - **Type**: HTTP Bearer token authentication

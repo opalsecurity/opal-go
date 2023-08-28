@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Condition** | Pointer to **string** | The condition for the request configuration. | [optional] 
+**Condition** | Pointer to [**Condition**](Condition.md) |  | [optional] 
 **AllowRequests** | **bool** | A bool representing whether or not to allow requests for this resource. | 
 **AutoApproval** | **bool** | A bool representing whether or not to automatically approve requests for this resource. | 
 **RequireMfaToRequest** | **bool** | A bool representing whether or not to require MFA for requesting access to this resource. | 
@@ -36,20 +36,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetCondition
 
-`func (o *RequestConfiguration) GetCondition() string`
+`func (o *RequestConfiguration) GetCondition() Condition`
 
 GetCondition returns the Condition field if non-nil, zero value otherwise.
 
 ### GetConditionOk
 
-`func (o *RequestConfiguration) GetConditionOk() (*string, bool)`
+`func (o *RequestConfiguration) GetConditionOk() (*Condition, bool)`
 
 GetConditionOk returns a tuple with the Condition field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCondition
 
-`func (o *RequestConfiguration) SetCondition(v string)`
+`func (o *RequestConfiguration) SetCondition(v Condition)`
 
 SetCondition sets Condition field to given value.
 

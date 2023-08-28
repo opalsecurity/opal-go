@@ -60,6 +60,8 @@ type Resource struct {
 	ParentResourceId *string `json:"parent_resource_id,omitempty"`
 	// The ID of the associated configuration template.
 	ConfigurationTemplateId *string `json:"configuration_template_id,omitempty"`
+	// A list of configurations for requests to this resource.
+	RequestConfigurationList []RequestConfiguration `json:"request_configuration_list,omitempty"`
 	// JSON metadata about the remote resource. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details.
 	Metadata *string `json:"metadata,omitempty"`
 }
@@ -717,6 +719,38 @@ func (o *Resource) SetConfigurationTemplateId(v string) {
 	o.ConfigurationTemplateId = &v
 }
 
+// GetRequestConfigurationList returns the RequestConfigurationList field value if set, zero value otherwise.
+func (o *Resource) GetRequestConfigurationList() []RequestConfiguration {
+	if o == nil || IsNil(o.RequestConfigurationList) {
+		var ret []RequestConfiguration
+		return ret
+	}
+	return o.RequestConfigurationList
+}
+
+// GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetRequestConfigurationListOk() ([]RequestConfiguration, bool) {
+	if o == nil || IsNil(o.RequestConfigurationList) {
+		return nil, false
+	}
+	return o.RequestConfigurationList, true
+}
+
+// HasRequestConfigurationList returns a boolean if a field has been set.
+func (o *Resource) HasRequestConfigurationList() bool {
+	if o != nil && !IsNil(o.RequestConfigurationList) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestConfigurationList gets a reference to the given []RequestConfiguration and assigns it to the RequestConfigurationList field.
+func (o *Resource) SetRequestConfigurationList(v []RequestConfiguration) {
+	o.RequestConfigurationList = v
+}
+
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
 func (o *Resource) GetMetadata() string {
 	if o == nil || IsNil(o.Metadata) {
@@ -816,6 +850,9 @@ func (o Resource) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ConfigurationTemplateId) {
 		toSerialize["configuration_template_id"] = o.ConfigurationTemplateId
+	}
+	if !IsNil(o.RequestConfigurationList) {
+		toSerialize["request_configuration_list"] = o.RequestConfigurationList
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata

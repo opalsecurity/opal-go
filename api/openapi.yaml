@@ -3478,6 +3478,12 @@ components:
             to this group.
           example: false
           type: boolean
+        request_configuration_list:
+          description: A list of request configurations for this group.
+          example: []
+          items:
+            $ref: '#/components/schemas/RequestConfiguration'
+          type: array
         metadata:
           description: "JSON metadata about the remote group. Only set for items linked\
             \ to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects)\
@@ -3647,25 +3653,28 @@ components:
           format: uuid
           type: string
         max_duration:
+          deprecated: true
           description: The maximum duration for which the group can be requested (in
-            minutes). Use -1 to set to indefinite.
+            minutes). Use -1 to set to indefinite. Deprecated in favor of `request_configuration_list`.
           example: 120
           type: integer
         recommended_duration:
+          deprecated: true
           description: The recommended duration for which the group should be requested
             (in minutes). Will be the default value in a request. Use -1 to set to
-            indefinite and 0 to unset.
+            indefinite and 0 to unset. Deprecated in favor of `request_configuration_list`.
           example: 120
           type: integer
         require_manager_approval:
           deprecated: true
           description: A bool representing whether or not access requests to the group
-            require manager approval.
+            require manager approval. Deprecated in favor of `request_configuration_list`.
           example: false
           type: boolean
         require_support_ticket:
+          deprecated: true
           description: A bool representing whether or not access requests to the group
-            require an access ticket.
+            require an access ticket. Deprecated in favor of `request_configuration_list`.
           example: false
           type: boolean
         folder_id:
@@ -3680,13 +3689,15 @@ components:
           example: false
           type: boolean
         require_mfa_to_request:
+          deprecated: true
           description: A bool representing whether or not to require MFA for requesting
-            access to this group.
+            access to this group. Deprecated in favor of `request_configuration_list`.
           example: false
           type: boolean
         auto_approval:
+          deprecated: true
           description: A bool representing whether or not to automatically approve
-            requests to this group.
+            requests to this group. Deprecated in favor of `request_configuration_list`.
           example: false
           type: boolean
         configuration_template_id:
@@ -3695,15 +3706,20 @@ components:
           format: uuid
           type: string
         request_template_id:
-          description: The ID of the associated request template.
+          deprecated: true
+          description: The ID of the associated request template. Deprecated in favor
+            of `request_configuration_list`.
           example: 06851574-e50d-40ca-8c78-f72ae6ab4304
           format: uuid
           type: string
         is_requestable:
+          deprecated: true
           description: A bool representing whether or not to allow access requests
-            to this group.
+            to this group. Deprecated in favor of `request_configuration_list`.
           example: false
           type: boolean
+        request_configuration_list:
+          $ref: '#/components/schemas/CreateRequestConfigurationInfoList'
       required:
       - group_id
       type: object
@@ -3962,10 +3978,6 @@ components:
             format: uuid
             type: string
           type: array
-        stage:
-          description: The stage of the reviewer stage.
-          example: 1
-          type: integer
       required:
       - operator
       - owner_ids
@@ -4867,6 +4879,11 @@ components:
           example: 06851574-e50d-40ca-8c78-f72ae6ab4304
           format: uuid
           type: string
+        request_configuration_list:
+          description: A list of configurations for requests to this resource.
+          items:
+            $ref: '#/components/schemas/RequestConfiguration'
+          type: array
         metadata:
           description: "JSON metadata about the remote resource. Only set for items\
             \ linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects)\
@@ -4950,14 +4967,16 @@ components:
           format: uuid
           type: string
         max_duration:
+          deprecated: true
           description: The maximum duration for which the resource can be requested
-            (in minutes). Use -1 to set to indefinite.
+            (in minutes). Use -1 to set to indefinite. Deprecated in favor of `request_configuration_list`.
           example: 120
           type: integer
         recommended_duration:
+          deprecated: true
           description: The recommended duration for which the resource should be requested
             (in minutes). Will be the default value in a request. Use -1 to set to
-            indefinite and 0 to unset.
+            indefinite and 0 to unset. Deprecated in favor of `request_configuration_list`.
           example: 120
           type: integer
         require_manager_approval:
@@ -4967,8 +4986,9 @@ components:
           example: false
           type: boolean
         require_support_ticket:
+          deprecated: true
           description: A bool representing whether or not access requests to the resource
-            require an access ticket.
+            require an access ticket. Deprecated in favor of `request_configuration_list`.
           example: false
           type: boolean
         folder_id:
@@ -4983,8 +5003,9 @@ components:
           example: false
           type: boolean
         require_mfa_to_request:
+          deprecated: true
           description: A bool representing whether or not to require MFA for requesting
-            access to this resource.
+            access to this resource. Deprecated in favor of `request_configuration_list`.
           example: false
           type: boolean
         require_mfa_to_connect:
@@ -4993,8 +5014,9 @@ components:
           example: false
           type: boolean
         auto_approval:
+          deprecated: true
           description: A bool representing whether or not to automatically approve
-            requests to this resource.
+            requests to this resource. Deprecated in favor of `request_configuration_list`.
           example: false
           type: boolean
         configuration_template_id:
@@ -5003,15 +5025,20 @@ components:
           format: uuid
           type: string
         request_template_id:
-          description: The ID of the associated request template.
+          deprecated: true
+          description: The ID of the associated request template. Deprecated in favor
+            of `request_configuration_list`.
           example: 06851574-e50d-40ca-8c78-f72ae6ab4304
           format: uuid
           type: string
         is_requestable:
+          deprecated: true
           description: A bool representing whether or not to allow access requests
-            to this resource.
+            to this resource. Deprecated in favor of `request_configuration_list`.
           example: false
           type: boolean
+        request_configuration_list:
+          $ref: '#/components/schemas/CreateRequestConfigurationInfoList'
       required:
       - resource_id
       type: object
@@ -5313,6 +5340,25 @@ components:
       required:
       - owner_id
       type: object
+    Condition:
+      description: |-
+        # Condition Object
+        ### Description
+        The `Condition` object is used to represent a condition.
+
+        ### Usage Example
+        Used to match request configurations to users in `RequestConfiguration`
+      example:
+        group_ids: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+      properties:
+        group_ids:
+          description: The list of group IDs to match.
+          example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          items:
+            format: uuid
+            type: string
+          type: array
+      type: object
     RequestConfiguration:
       description: |-
         # Request Configuration Object
@@ -5343,13 +5389,7 @@ components:
         priority: 1
       properties:
         condition:
-          description: The condition for the request configuration.
-          example: |-
-            {
-              "group_id": "1b978423-db0a-4037-a4cf-f79c60cb67b3",
-            }
-          format: json
-          type: string
+          $ref: '#/components/schemas/Condition'
         allow_requests:
           description: A bool representing whether or not to allow requests for this
             resource.
@@ -5402,6 +5442,7 @@ components:
       - require_mfa_to_request
       - require_support_ticket
       - reviewer_stages
+      type: object
     CreateRequestConfigurationInfoList:
       description: |-
         # CreateRequestConfigurationInfoList Object

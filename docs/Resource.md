@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this resource. | [optional] 
 **ParentResourceId** | Pointer to **string** | The ID of the parent resource. | [optional] 
 **ConfigurationTemplateId** | Pointer to **string** | The ID of the associated configuration template. | [optional] 
+**RequestConfigurationList** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | A list of configurations for requests to this resource. | [optional] 
 **Metadata** | Pointer to **string** | JSON metadata about the remote resource. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details. | [optional] 
 
 ## Methods
@@ -539,6 +540,31 @@ SetConfigurationTemplateId sets ConfigurationTemplateId field to given value.
 `func (o *Resource) HasConfigurationTemplateId() bool`
 
 HasConfigurationTemplateId returns a boolean if a field has been set.
+
+### GetRequestConfigurationList
+
+`func (o *Resource) GetRequestConfigurationList() []RequestConfiguration`
+
+GetRequestConfigurationList returns the RequestConfigurationList field if non-nil, zero value otherwise.
+
+### GetRequestConfigurationListOk
+
+`func (o *Resource) GetRequestConfigurationListOk() (*[]RequestConfiguration, bool)`
+
+GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestConfigurationList
+
+`func (o *Resource) SetRequestConfigurationList(v []RequestConfiguration)`
+
+SetRequestConfigurationList sets RequestConfigurationList field to given value.
+
+### HasRequestConfigurationList
+
+`func (o *Resource) HasRequestConfigurationList() bool`
+
+HasRequestConfigurationList returns a boolean if a field has been set.
 
 ### GetMetadata
 
