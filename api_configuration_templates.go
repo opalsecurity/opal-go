@@ -231,3 +231,114 @@ func (a *ConfigurationTemplatesApiService) GetConfigurationTemplatesExecute(r Ap
 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
+
+type ApiUpdateConfigurationTemplateRequest struct {
+	ctx context.Context
+	ApiService *ConfigurationTemplatesApiService
+	updateConfigurationTemplateInfo *UpdateConfigurationTemplateInfo
+}
+
+// Configuration template to be updated
+func (r ApiUpdateConfigurationTemplateRequest) UpdateConfigurationTemplateInfo(updateConfigurationTemplateInfo UpdateConfigurationTemplateInfo) ApiUpdateConfigurationTemplateRequest {
+	r.updateConfigurationTemplateInfo = &updateConfigurationTemplateInfo
+	return r
+}
+
+func (r ApiUpdateConfigurationTemplateRequest) Execute() (*ConfigurationTemplate, *http.Response, error) {
+	return r.ApiService.UpdateConfigurationTemplateExecute(r)
+}
+
+/*
+UpdateConfigurationTemplate Method for UpdateConfigurationTemplate
+
+Update a configuration template.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiUpdateConfigurationTemplateRequest
+*/
+func (a *ConfigurationTemplatesApiService) UpdateConfigurationTemplate(ctx context.Context) ApiUpdateConfigurationTemplateRequest {
+	return ApiUpdateConfigurationTemplateRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return ConfigurationTemplate
+func (a *ConfigurationTemplatesApiService) UpdateConfigurationTemplateExecute(r ApiUpdateConfigurationTemplateRequest) (*ConfigurationTemplate, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ConfigurationTemplate
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigurationTemplatesApiService.UpdateConfigurationTemplate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/configuration-templates"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.updateConfigurationTemplateInfo == nil {
+		return localVarReturnValue, nil, reportError("updateConfigurationTemplateInfo is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.updateConfigurationTemplateInfo
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}

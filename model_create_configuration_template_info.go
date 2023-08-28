@@ -25,8 +25,6 @@ type CreateConfigurationTemplateInfo struct {
 	Visibility VisibilityInfo `json:"visibility"`
 	// The IDs of the audit message channels linked to the configuration template.
 	LinkedAuditMessageChannelIds []string `json:"linked_audit_message_channel_ids,omitempty"`
-	// The ID of the request configuration linked to the configuration template.
-	RequestConfigurationId *string `json:"request_configuration_id,omitempty"`
 	// The IDs of the on-call schedules linked to the configuration template.
 	MemberOncallScheduleIds []string `json:"member_oncall_schedule_ids,omitempty"`
 	// The IDs of the break glass users linked to the configuration template.
@@ -37,6 +35,7 @@ type CreateConfigurationTemplateInfo struct {
 	RequireMfaToConnect bool `json:"require_mfa_to_connect"`
 	// The name of the configuration template.
 	Name string `json:"name"`
+	RequestConfigurationList *CreateRequestConfigurationInfoList `json:"request_configuration_list,omitempty"`
 }
 
 // NewCreateConfigurationTemplateInfo instantiates a new CreateConfigurationTemplateInfo object
@@ -139,38 +138,6 @@ func (o *CreateConfigurationTemplateInfo) HasLinkedAuditMessageChannelIds() bool
 // SetLinkedAuditMessageChannelIds gets a reference to the given []string and assigns it to the LinkedAuditMessageChannelIds field.
 func (o *CreateConfigurationTemplateInfo) SetLinkedAuditMessageChannelIds(v []string) {
 	o.LinkedAuditMessageChannelIds = v
-}
-
-// GetRequestConfigurationId returns the RequestConfigurationId field value if set, zero value otherwise.
-func (o *CreateConfigurationTemplateInfo) GetRequestConfigurationId() string {
-	if o == nil || IsNil(o.RequestConfigurationId) {
-		var ret string
-		return ret
-	}
-	return *o.RequestConfigurationId
-}
-
-// GetRequestConfigurationIdOk returns a tuple with the RequestConfigurationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateConfigurationTemplateInfo) GetRequestConfigurationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.RequestConfigurationId) {
-		return nil, false
-	}
-	return o.RequestConfigurationId, true
-}
-
-// HasRequestConfigurationId returns a boolean if a field has been set.
-func (o *CreateConfigurationTemplateInfo) HasRequestConfigurationId() bool {
-	if o != nil && !IsNil(o.RequestConfigurationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetRequestConfigurationId gets a reference to the given string and assigns it to the RequestConfigurationId field.
-func (o *CreateConfigurationTemplateInfo) SetRequestConfigurationId(v string) {
-	o.RequestConfigurationId = &v
 }
 
 // GetMemberOncallScheduleIds returns the MemberOncallScheduleIds field value if set, zero value otherwise.
@@ -309,6 +276,38 @@ func (o *CreateConfigurationTemplateInfo) SetName(v string) {
 	o.Name = v
 }
 
+// GetRequestConfigurationList returns the RequestConfigurationList field value if set, zero value otherwise.
+func (o *CreateConfigurationTemplateInfo) GetRequestConfigurationList() CreateRequestConfigurationInfoList {
+	if o == nil || IsNil(o.RequestConfigurationList) {
+		var ret CreateRequestConfigurationInfoList
+		return ret
+	}
+	return *o.RequestConfigurationList
+}
+
+// GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateConfigurationTemplateInfo) GetRequestConfigurationListOk() (*CreateRequestConfigurationInfoList, bool) {
+	if o == nil || IsNil(o.RequestConfigurationList) {
+		return nil, false
+	}
+	return o.RequestConfigurationList, true
+}
+
+// HasRequestConfigurationList returns a boolean if a field has been set.
+func (o *CreateConfigurationTemplateInfo) HasRequestConfigurationList() bool {
+	if o != nil && !IsNil(o.RequestConfigurationList) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestConfigurationList gets a reference to the given CreateRequestConfigurationInfoList and assigns it to the RequestConfigurationList field.
+func (o *CreateConfigurationTemplateInfo) SetRequestConfigurationList(v CreateRequestConfigurationInfoList) {
+	o.RequestConfigurationList = &v
+}
+
 func (o CreateConfigurationTemplateInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -324,9 +323,6 @@ func (o CreateConfigurationTemplateInfo) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.LinkedAuditMessageChannelIds) {
 		toSerialize["linked_audit_message_channel_ids"] = o.LinkedAuditMessageChannelIds
 	}
-	if !IsNil(o.RequestConfigurationId) {
-		toSerialize["request_configuration_id"] = o.RequestConfigurationId
-	}
 	if !IsNil(o.MemberOncallScheduleIds) {
 		toSerialize["member_oncall_schedule_ids"] = o.MemberOncallScheduleIds
 	}
@@ -336,6 +332,9 @@ func (o CreateConfigurationTemplateInfo) ToMap() (map[string]interface{}, error)
 	toSerialize["require_mfa_to_approve"] = o.RequireMfaToApprove
 	toSerialize["require_mfa_to_connect"] = o.RequireMfaToConnect
 	toSerialize["name"] = o.Name
+	if !IsNil(o.RequestConfigurationList) {
+		toSerialize["request_configuration_list"] = o.RequestConfigurationList
+	}
 	return toSerialize, nil
 }
 

@@ -7,12 +7,13 @@ Name | Type | Description | Notes
 **RequireManagerApproval** | **bool** | Whether this reviewer stage should require manager approval. | 
 **Operator** | **string** | The operator of the reviewer stage. | 
 **OwnerIds** | **[]string** |  | 
+**Stage** | **int32** | The stage of the reviewer stage. | 
 
 ## Methods
 
 ### NewReviewerStage
 
-`func NewReviewerStage(requireManagerApproval bool, operator string, ownerIds []string, ) *ReviewerStage`
+`func NewReviewerStage(requireManagerApproval bool, operator string, ownerIds []string, stage int32, ) *ReviewerStage`
 
 NewReviewerStage instantiates a new ReviewerStage object
 This constructor will assign default values to properties that have it defined,
@@ -85,6 +86,26 @@ and a boolean to check if the value has been set.
 `func (o *ReviewerStage) SetOwnerIds(v []string)`
 
 SetOwnerIds sets OwnerIds field to given value.
+
+
+### GetStage
+
+`func (o *ReviewerStage) GetStage() int32`
+
+GetStage returns the Stage field if non-nil, zero value otherwise.
+
+### GetStageOk
+
+`func (o *ReviewerStage) GetStageOk() (*int32, bool)`
+
+GetStageOk returns a tuple with the Stage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStage
+
+`func (o *ReviewerStage) SetStage(v int32)`
+
+SetStage sets Stage field to given value.
 
 
 

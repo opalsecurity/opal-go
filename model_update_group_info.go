@@ -46,6 +46,8 @@ type UpdateGroupInfo struct {
 	RequireMfaToRequest *bool `json:"require_mfa_to_request,omitempty"`
 	// A bool representing whether or not to automatically approve requests to this group.
 	AutoApproval *bool `json:"auto_approval,omitempty"`
+	// The ID of the associated configuration template.
+	ConfigurationTemplateId *string `json:"configuration_template_id,omitempty"`
 	// The ID of the associated request template.
 	RequestTemplateId *string `json:"request_template_id,omitempty"`
 	// A bool representing whether or not to allow access requests to this group.
@@ -452,6 +454,38 @@ func (o *UpdateGroupInfo) SetAutoApproval(v bool) {
 	o.AutoApproval = &v
 }
 
+// GetConfigurationTemplateId returns the ConfigurationTemplateId field value if set, zero value otherwise.
+func (o *UpdateGroupInfo) GetConfigurationTemplateId() string {
+	if o == nil || IsNil(o.ConfigurationTemplateId) {
+		var ret string
+		return ret
+	}
+	return *o.ConfigurationTemplateId
+}
+
+// GetConfigurationTemplateIdOk returns a tuple with the ConfigurationTemplateId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateGroupInfo) GetConfigurationTemplateIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ConfigurationTemplateId) {
+		return nil, false
+	}
+	return o.ConfigurationTemplateId, true
+}
+
+// HasConfigurationTemplateId returns a boolean if a field has been set.
+func (o *UpdateGroupInfo) HasConfigurationTemplateId() bool {
+	if o != nil && !IsNil(o.ConfigurationTemplateId) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigurationTemplateId gets a reference to the given string and assigns it to the ConfigurationTemplateId field.
+func (o *UpdateGroupInfo) SetConfigurationTemplateId(v string) {
+	o.ConfigurationTemplateId = &v
+}
+
 // GetRequestTemplateId returns the RequestTemplateId field value if set, zero value otherwise.
 func (o *UpdateGroupInfo) GetRequestTemplateId() string {
 	if o == nil || IsNil(o.RequestTemplateId) {
@@ -559,6 +593,9 @@ func (o UpdateGroupInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.AutoApproval) {
 		toSerialize["auto_approval"] = o.AutoApproval
+	}
+	if !IsNil(o.ConfigurationTemplateId) {
+		toSerialize["configuration_template_id"] = o.ConfigurationTemplateId
 	}
 	if !IsNil(o.RequestTemplateId) {
 		toSerialize["request_template_id"] = o.RequestTemplateId
