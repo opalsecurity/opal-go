@@ -7,12 +7,12 @@ Name | Type | Description | Notes
 **AdminOwnerId** | **string** | The ID of the owner of the configuration template. | 
 **Visibility** | [**VisibilityInfo**](VisibilityInfo.md) |  | 
 **LinkedAuditMessageChannelIds** | Pointer to **[]string** | The IDs of the audit message channels linked to the configuration template. | [optional] 
-**RequestConfigurationId** | Pointer to **string** | The ID of the request configuration linked to the configuration template. | [optional] 
 **MemberOncallScheduleIds** | Pointer to **[]string** | The IDs of the on-call schedules linked to the configuration template. | [optional] 
 **BreakGlassUserIds** | Pointer to **[]string** | The IDs of the break glass users linked to the configuration template. | [optional] 
 **RequireMfaToApprove** | **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this configuration template. | 
 **RequireMfaToConnect** | **bool** | A bool representing whether or not to require MFA to connect to resources associated with this configuration template. | 
 **Name** | **string** | The name of the configuration template. | 
+**RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) |  | [optional] 
 
 ## Methods
 
@@ -97,31 +97,6 @@ SetLinkedAuditMessageChannelIds sets LinkedAuditMessageChannelIds field to given
 `func (o *CreateConfigurationTemplateInfo) HasLinkedAuditMessageChannelIds() bool`
 
 HasLinkedAuditMessageChannelIds returns a boolean if a field has been set.
-
-### GetRequestConfigurationId
-
-`func (o *CreateConfigurationTemplateInfo) GetRequestConfigurationId() string`
-
-GetRequestConfigurationId returns the RequestConfigurationId field if non-nil, zero value otherwise.
-
-### GetRequestConfigurationIdOk
-
-`func (o *CreateConfigurationTemplateInfo) GetRequestConfigurationIdOk() (*string, bool)`
-
-GetRequestConfigurationIdOk returns a tuple with the RequestConfigurationId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRequestConfigurationId
-
-`func (o *CreateConfigurationTemplateInfo) SetRequestConfigurationId(v string)`
-
-SetRequestConfigurationId sets RequestConfigurationId field to given value.
-
-### HasRequestConfigurationId
-
-`func (o *CreateConfigurationTemplateInfo) HasRequestConfigurationId() bool`
-
-HasRequestConfigurationId returns a boolean if a field has been set.
 
 ### GetMemberOncallScheduleIds
 
@@ -232,6 +207,31 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+
+### GetRequestConfigurationList
+
+`func (o *CreateConfigurationTemplateInfo) GetRequestConfigurationList() CreateRequestConfigurationInfoList`
+
+GetRequestConfigurationList returns the RequestConfigurationList field if non-nil, zero value otherwise.
+
+### GetRequestConfigurationListOk
+
+`func (o *CreateConfigurationTemplateInfo) GetRequestConfigurationListOk() (*CreateRequestConfigurationInfoList, bool)`
+
+GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestConfigurationList
+
+`func (o *CreateConfigurationTemplateInfo) SetRequestConfigurationList(v CreateRequestConfigurationInfoList)`
+
+SetRequestConfigurationList sets RequestConfigurationList field to given value.
+
+### HasRequestConfigurationList
+
+`func (o *CreateConfigurationTemplateInfo) HasRequestConfigurationList() bool`
+
+HasRequestConfigurationList returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

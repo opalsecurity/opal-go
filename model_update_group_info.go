@@ -28,28 +28,38 @@ type UpdateGroupInfo struct {
 	Description *string `json:"description,omitempty"`
 	// The ID of the owner of the group.
 	AdminOwnerId *string `json:"admin_owner_id,omitempty"`
-	// The maximum duration for which the group can be requested (in minutes). Use -1 to set to indefinite.
+	// The maximum duration for which the group can be requested (in minutes). Use -1 to set to indefinite. Deprecated in favor of `request_configuration_list`.
+	// Deprecated
 	MaxDuration *int32 `json:"max_duration,omitempty"`
-	// The recommended duration for which the group should be requested (in minutes). Will be the default value in a request. Use -1 to set to indefinite and 0 to unset.
+	// The recommended duration for which the group should be requested (in minutes). Will be the default value in a request. Use -1 to set to indefinite and 0 to unset. Deprecated in favor of `request_configuration_list`.
+	// Deprecated
 	RecommendedDuration *int32 `json:"recommended_duration,omitempty"`
-	// A bool representing whether or not access requests to the group require manager approval.
+	// A bool representing whether or not access requests to the group require manager approval. Deprecated in favor of `request_configuration_list`.
 	// Deprecated
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
-	// A bool representing whether or not access requests to the group require an access ticket.
+	// A bool representing whether or not access requests to the group require an access ticket. Deprecated in favor of `request_configuration_list`.
+	// Deprecated
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
 	// The ID of the folder that the group is located in.
 	// Deprecated
 	FolderId *string `json:"folder_id,omitempty"`
 	// A bool representing whether or not to require MFA for reviewers to approve requests for this group.
 	RequireMfaToApprove *bool `json:"require_mfa_to_approve,omitempty"`
-	// A bool representing whether or not to require MFA for requesting access to this group.
+	// A bool representing whether or not to require MFA for requesting access to this group. Deprecated in favor of `request_configuration_list`.
+	// Deprecated
 	RequireMfaToRequest *bool `json:"require_mfa_to_request,omitempty"`
-	// A bool representing whether or not to automatically approve requests to this group.
+	// A bool representing whether or not to automatically approve requests to this group. Deprecated in favor of `request_configuration_list`.
+	// Deprecated
 	AutoApproval *bool `json:"auto_approval,omitempty"`
-	// The ID of the associated request template.
+	// The ID of the associated configuration template.
+	ConfigurationTemplateId *string `json:"configuration_template_id,omitempty"`
+	// The ID of the associated request template. Deprecated in favor of `request_configuration_list`.
+	// Deprecated
 	RequestTemplateId *string `json:"request_template_id,omitempty"`
-	// A bool representing whether or not to allow access requests to this group.
+	// A bool representing whether or not to allow access requests to this group. Deprecated in favor of `request_configuration_list`.
+	// Deprecated
 	IsRequestable *bool `json:"is_requestable,omitempty"`
+	RequestConfigurationList *CreateRequestConfigurationInfoList `json:"request_configuration_list,omitempty"`
 }
 
 // NewUpdateGroupInfo instantiates a new UpdateGroupInfo object
@@ -191,6 +201,7 @@ func (o *UpdateGroupInfo) SetAdminOwnerId(v string) {
 }
 
 // GetMaxDuration returns the MaxDuration field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateGroupInfo) GetMaxDuration() int32 {
 	if o == nil || IsNil(o.MaxDuration) {
 		var ret int32
@@ -201,6 +212,7 @@ func (o *UpdateGroupInfo) GetMaxDuration() int32 {
 
 // GetMaxDurationOk returns a tuple with the MaxDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateGroupInfo) GetMaxDurationOk() (*int32, bool) {
 	if o == nil || IsNil(o.MaxDuration) {
 		return nil, false
@@ -218,11 +230,13 @@ func (o *UpdateGroupInfo) HasMaxDuration() bool {
 }
 
 // SetMaxDuration gets a reference to the given int32 and assigns it to the MaxDuration field.
+// Deprecated
 func (o *UpdateGroupInfo) SetMaxDuration(v int32) {
 	o.MaxDuration = &v
 }
 
 // GetRecommendedDuration returns the RecommendedDuration field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateGroupInfo) GetRecommendedDuration() int32 {
 	if o == nil || IsNil(o.RecommendedDuration) {
 		var ret int32
@@ -233,6 +247,7 @@ func (o *UpdateGroupInfo) GetRecommendedDuration() int32 {
 
 // GetRecommendedDurationOk returns a tuple with the RecommendedDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateGroupInfo) GetRecommendedDurationOk() (*int32, bool) {
 	if o == nil || IsNil(o.RecommendedDuration) {
 		return nil, false
@@ -250,6 +265,7 @@ func (o *UpdateGroupInfo) HasRecommendedDuration() bool {
 }
 
 // SetRecommendedDuration gets a reference to the given int32 and assigns it to the RecommendedDuration field.
+// Deprecated
 func (o *UpdateGroupInfo) SetRecommendedDuration(v int32) {
 	o.RecommendedDuration = &v
 }
@@ -290,6 +306,7 @@ func (o *UpdateGroupInfo) SetRequireManagerApproval(v bool) {
 }
 
 // GetRequireSupportTicket returns the RequireSupportTicket field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateGroupInfo) GetRequireSupportTicket() bool {
 	if o == nil || IsNil(o.RequireSupportTicket) {
 		var ret bool
@@ -300,6 +317,7 @@ func (o *UpdateGroupInfo) GetRequireSupportTicket() bool {
 
 // GetRequireSupportTicketOk returns a tuple with the RequireSupportTicket field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateGroupInfo) GetRequireSupportTicketOk() (*bool, bool) {
 	if o == nil || IsNil(o.RequireSupportTicket) {
 		return nil, false
@@ -317,6 +335,7 @@ func (o *UpdateGroupInfo) HasRequireSupportTicket() bool {
 }
 
 // SetRequireSupportTicket gets a reference to the given bool and assigns it to the RequireSupportTicket field.
+// Deprecated
 func (o *UpdateGroupInfo) SetRequireSupportTicket(v bool) {
 	o.RequireSupportTicket = &v
 }
@@ -389,6 +408,7 @@ func (o *UpdateGroupInfo) SetRequireMfaToApprove(v bool) {
 }
 
 // GetRequireMfaToRequest returns the RequireMfaToRequest field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateGroupInfo) GetRequireMfaToRequest() bool {
 	if o == nil || IsNil(o.RequireMfaToRequest) {
 		var ret bool
@@ -399,6 +419,7 @@ func (o *UpdateGroupInfo) GetRequireMfaToRequest() bool {
 
 // GetRequireMfaToRequestOk returns a tuple with the RequireMfaToRequest field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateGroupInfo) GetRequireMfaToRequestOk() (*bool, bool) {
 	if o == nil || IsNil(o.RequireMfaToRequest) {
 		return nil, false
@@ -416,11 +437,13 @@ func (o *UpdateGroupInfo) HasRequireMfaToRequest() bool {
 }
 
 // SetRequireMfaToRequest gets a reference to the given bool and assigns it to the RequireMfaToRequest field.
+// Deprecated
 func (o *UpdateGroupInfo) SetRequireMfaToRequest(v bool) {
 	o.RequireMfaToRequest = &v
 }
 
 // GetAutoApproval returns the AutoApproval field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateGroupInfo) GetAutoApproval() bool {
 	if o == nil || IsNil(o.AutoApproval) {
 		var ret bool
@@ -431,6 +454,7 @@ func (o *UpdateGroupInfo) GetAutoApproval() bool {
 
 // GetAutoApprovalOk returns a tuple with the AutoApproval field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateGroupInfo) GetAutoApprovalOk() (*bool, bool) {
 	if o == nil || IsNil(o.AutoApproval) {
 		return nil, false
@@ -448,11 +472,45 @@ func (o *UpdateGroupInfo) HasAutoApproval() bool {
 }
 
 // SetAutoApproval gets a reference to the given bool and assigns it to the AutoApproval field.
+// Deprecated
 func (o *UpdateGroupInfo) SetAutoApproval(v bool) {
 	o.AutoApproval = &v
 }
 
+// GetConfigurationTemplateId returns the ConfigurationTemplateId field value if set, zero value otherwise.
+func (o *UpdateGroupInfo) GetConfigurationTemplateId() string {
+	if o == nil || IsNil(o.ConfigurationTemplateId) {
+		var ret string
+		return ret
+	}
+	return *o.ConfigurationTemplateId
+}
+
+// GetConfigurationTemplateIdOk returns a tuple with the ConfigurationTemplateId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateGroupInfo) GetConfigurationTemplateIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ConfigurationTemplateId) {
+		return nil, false
+	}
+	return o.ConfigurationTemplateId, true
+}
+
+// HasConfigurationTemplateId returns a boolean if a field has been set.
+func (o *UpdateGroupInfo) HasConfigurationTemplateId() bool {
+	if o != nil && !IsNil(o.ConfigurationTemplateId) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigurationTemplateId gets a reference to the given string and assigns it to the ConfigurationTemplateId field.
+func (o *UpdateGroupInfo) SetConfigurationTemplateId(v string) {
+	o.ConfigurationTemplateId = &v
+}
+
 // GetRequestTemplateId returns the RequestTemplateId field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateGroupInfo) GetRequestTemplateId() string {
 	if o == nil || IsNil(o.RequestTemplateId) {
 		var ret string
@@ -463,6 +521,7 @@ func (o *UpdateGroupInfo) GetRequestTemplateId() string {
 
 // GetRequestTemplateIdOk returns a tuple with the RequestTemplateId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateGroupInfo) GetRequestTemplateIdOk() (*string, bool) {
 	if o == nil || IsNil(o.RequestTemplateId) {
 		return nil, false
@@ -480,11 +539,13 @@ func (o *UpdateGroupInfo) HasRequestTemplateId() bool {
 }
 
 // SetRequestTemplateId gets a reference to the given string and assigns it to the RequestTemplateId field.
+// Deprecated
 func (o *UpdateGroupInfo) SetRequestTemplateId(v string) {
 	o.RequestTemplateId = &v
 }
 
 // GetIsRequestable returns the IsRequestable field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateGroupInfo) GetIsRequestable() bool {
 	if o == nil || IsNil(o.IsRequestable) {
 		var ret bool
@@ -495,6 +556,7 @@ func (o *UpdateGroupInfo) GetIsRequestable() bool {
 
 // GetIsRequestableOk returns a tuple with the IsRequestable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateGroupInfo) GetIsRequestableOk() (*bool, bool) {
 	if o == nil || IsNil(o.IsRequestable) {
 		return nil, false
@@ -512,8 +574,41 @@ func (o *UpdateGroupInfo) HasIsRequestable() bool {
 }
 
 // SetIsRequestable gets a reference to the given bool and assigns it to the IsRequestable field.
+// Deprecated
 func (o *UpdateGroupInfo) SetIsRequestable(v bool) {
 	o.IsRequestable = &v
+}
+
+// GetRequestConfigurationList returns the RequestConfigurationList field value if set, zero value otherwise.
+func (o *UpdateGroupInfo) GetRequestConfigurationList() CreateRequestConfigurationInfoList {
+	if o == nil || IsNil(o.RequestConfigurationList) {
+		var ret CreateRequestConfigurationInfoList
+		return ret
+	}
+	return *o.RequestConfigurationList
+}
+
+// GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateGroupInfo) GetRequestConfigurationListOk() (*CreateRequestConfigurationInfoList, bool) {
+	if o == nil || IsNil(o.RequestConfigurationList) {
+		return nil, false
+	}
+	return o.RequestConfigurationList, true
+}
+
+// HasRequestConfigurationList returns a boolean if a field has been set.
+func (o *UpdateGroupInfo) HasRequestConfigurationList() bool {
+	if o != nil && !IsNil(o.RequestConfigurationList) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestConfigurationList gets a reference to the given CreateRequestConfigurationInfoList and assigns it to the RequestConfigurationList field.
+func (o *UpdateGroupInfo) SetRequestConfigurationList(v CreateRequestConfigurationInfoList) {
+	o.RequestConfigurationList = &v
 }
 
 func (o UpdateGroupInfo) MarshalJSON() ([]byte, error) {
@@ -560,11 +655,17 @@ func (o UpdateGroupInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AutoApproval) {
 		toSerialize["auto_approval"] = o.AutoApproval
 	}
+	if !IsNil(o.ConfigurationTemplateId) {
+		toSerialize["configuration_template_id"] = o.ConfigurationTemplateId
+	}
 	if !IsNil(o.RequestTemplateId) {
 		toSerialize["request_template_id"] = o.RequestTemplateId
 	}
 	if !IsNil(o.IsRequestable) {
 		toSerialize["is_requestable"] = o.IsRequestable
+	}
+	if !IsNil(o.RequestConfigurationList) {
+		toSerialize["request_configuration_list"] = o.RequestConfigurationList
 	}
 	return toSerialize, nil
 }

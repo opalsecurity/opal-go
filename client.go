@@ -54,8 +54,6 @@ type APIClient struct {
 
 	ConfigurationTemplatesApi *ConfigurationTemplatesApiService
 
-	DefaultApi *DefaultApiService
-
 	EventsApi *EventsApiService
 
 	GroupsApi *GroupsApiService
@@ -97,7 +95,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.AppsApi = (*AppsApiService)(&c.common)
 	c.ConfigurationTemplatesApi = (*ConfigurationTemplatesApiService)(&c.common)
-	c.DefaultApi = (*DefaultApiService)(&c.common)
 	c.EventsApi = (*EventsApiService)(&c.common)
 	c.GroupsApi = (*GroupsApiService)(&c.common)
 	c.MessageChannelsApi = (*MessageChannelsApiService)(&c.common)
