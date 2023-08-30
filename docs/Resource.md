@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **ConfigurationTemplateId** | Pointer to **string** | The ID of the associated configuration template. | [optional] 
 **RequestConfigurationList** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | A list of configurations for requests to this resource. | [optional] 
 **Metadata** | Pointer to **string** | JSON metadata about the remote resource. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details. | [optional] 
+**RemoteInfo** | Pointer to [**ResourceRemoteInfo**](ResourceRemoteInfo.md) |  | [optional] 
 
 ## Methods
 
@@ -590,6 +591,31 @@ SetMetadata sets Metadata field to given value.
 `func (o *Resource) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
+
+### GetRemoteInfo
+
+`func (o *Resource) GetRemoteInfo() ResourceRemoteInfo`
+
+GetRemoteInfo returns the RemoteInfo field if non-nil, zero value otherwise.
+
+### GetRemoteInfoOk
+
+`func (o *Resource) GetRemoteInfoOk() (*ResourceRemoteInfo, bool)`
+
+GetRemoteInfoOk returns a tuple with the RemoteInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemoteInfo
+
+`func (o *Resource) SetRemoteInfo(v ResourceRemoteInfo)`
+
+SetRemoteInfo sets RemoteInfo field to given value.
+
+### HasRemoteInfo
+
+`func (o *Resource) HasRemoteInfo() bool`
+
+HasRemoteInfo returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

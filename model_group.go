@@ -59,7 +59,9 @@ type Group struct {
 	// A list of request configurations for this group.
 	RequestConfigurationList []RequestConfiguration `json:"request_configuration_list,omitempty"`
 	// JSON metadata about the remote group. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details.
+	// Deprecated
 	Metadata *string `json:"metadata,omitempty"`
+	RemoteInfo *GroupRemoteInfo `json:"remote_info,omitempty"`
 }
 
 // NewGroup instantiates a new Group object
@@ -684,6 +686,7 @@ func (o *Group) SetRequestConfigurationList(v []RequestConfiguration) {
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
+// Deprecated
 func (o *Group) GetMetadata() string {
 	if o == nil || IsNil(o.Metadata) {
 		var ret string
@@ -694,6 +697,7 @@ func (o *Group) GetMetadata() string {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Group) GetMetadataOk() (*string, bool) {
 	if o == nil || IsNil(o.Metadata) {
 		return nil, false
@@ -711,8 +715,41 @@ func (o *Group) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given string and assigns it to the Metadata field.
+// Deprecated
 func (o *Group) SetMetadata(v string) {
 	o.Metadata = &v
+}
+
+// GetRemoteInfo returns the RemoteInfo field value if set, zero value otherwise.
+func (o *Group) GetRemoteInfo() GroupRemoteInfo {
+	if o == nil || IsNil(o.RemoteInfo) {
+		var ret GroupRemoteInfo
+		return ret
+	}
+	return *o.RemoteInfo
+}
+
+// GetRemoteInfoOk returns a tuple with the RemoteInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetRemoteInfoOk() (*GroupRemoteInfo, bool) {
+	if o == nil || IsNil(o.RemoteInfo) {
+		return nil, false
+	}
+	return o.RemoteInfo, true
+}
+
+// HasRemoteInfo returns a boolean if a field has been set.
+func (o *Group) HasRemoteInfo() bool {
+	if o != nil && !IsNil(o.RemoteInfo) {
+		return true
+	}
+
+	return false
+}
+
+// SetRemoteInfo gets a reference to the given GroupRemoteInfo and assigns it to the RemoteInfo field.
+func (o *Group) SetRemoteInfo(v GroupRemoteInfo) {
+	o.RemoteInfo = &v
 }
 
 func (o Group) MarshalJSON() ([]byte, error) {
@@ -782,6 +819,9 @@ func (o Group) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
+	}
+	if !IsNil(o.RemoteInfo) {
+		toSerialize["remote_info"] = o.RemoteInfo
 	}
 	return toSerialize, nil
 }

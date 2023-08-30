@@ -63,7 +63,9 @@ type Resource struct {
 	// A list of configurations for requests to this resource.
 	RequestConfigurationList []RequestConfiguration `json:"request_configuration_list,omitempty"`
 	// JSON metadata about the remote resource. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details.
+	// Deprecated
 	Metadata *string `json:"metadata,omitempty"`
+	RemoteInfo *ResourceRemoteInfo `json:"remote_info,omitempty"`
 }
 
 // NewResource instantiates a new Resource object
@@ -752,6 +754,7 @@ func (o *Resource) SetRequestConfigurationList(v []RequestConfiguration) {
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
+// Deprecated
 func (o *Resource) GetMetadata() string {
 	if o == nil || IsNil(o.Metadata) {
 		var ret string
@@ -762,6 +765,7 @@ func (o *Resource) GetMetadata() string {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Resource) GetMetadataOk() (*string, bool) {
 	if o == nil || IsNil(o.Metadata) {
 		return nil, false
@@ -779,8 +783,41 @@ func (o *Resource) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given string and assigns it to the Metadata field.
+// Deprecated
 func (o *Resource) SetMetadata(v string) {
 	o.Metadata = &v
+}
+
+// GetRemoteInfo returns the RemoteInfo field value if set, zero value otherwise.
+func (o *Resource) GetRemoteInfo() ResourceRemoteInfo {
+	if o == nil || IsNil(o.RemoteInfo) {
+		var ret ResourceRemoteInfo
+		return ret
+	}
+	return *o.RemoteInfo
+}
+
+// GetRemoteInfoOk returns a tuple with the RemoteInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetRemoteInfoOk() (*ResourceRemoteInfo, bool) {
+	if o == nil || IsNil(o.RemoteInfo) {
+		return nil, false
+	}
+	return o.RemoteInfo, true
+}
+
+// HasRemoteInfo returns a boolean if a field has been set.
+func (o *Resource) HasRemoteInfo() bool {
+	if o != nil && !IsNil(o.RemoteInfo) {
+		return true
+	}
+
+	return false
+}
+
+// SetRemoteInfo gets a reference to the given ResourceRemoteInfo and assigns it to the RemoteInfo field.
+func (o *Resource) SetRemoteInfo(v ResourceRemoteInfo) {
+	o.RemoteInfo = &v
 }
 
 func (o Resource) MarshalJSON() ([]byte, error) {
@@ -856,6 +893,9 @@ func (o Resource) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
+	}
+	if !IsNil(o.RemoteInfo) {
+		toSerialize["remote_info"] = o.RemoteInfo
 	}
 	return toSerialize, nil
 }

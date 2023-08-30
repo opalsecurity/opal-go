@@ -3485,12 +3485,15 @@ components:
             $ref: '#/components/schemas/RequestConfiguration'
           type: array
         metadata:
+          deprecated: true
           description: "JSON metadata about the remote group. Only set for items linked\
             \ to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects)\
             \ for details."
           example: "{ \"okta_directory_group\": { \"group_id\": \"00g4bs66kwtpe1g12345\"\
             \ } }"
           type: string
+        remote_info:
+          $ref: '#/components/schemas/GroupRemoteInfo'
       required:
       - group_id
       type: object
@@ -4105,8 +4108,8 @@ components:
       example: PAGER_DUTY
       type: string
     GroupRemoteInfo:
-      description: Remote info that is required for the creation of remote groups.
-        Providing this will allow you to omit deprecated remote_id and metadata fields.
+      description: Information that defines the remote group. This replaces the deprecated
+        remote_id and metadata fields.
       properties:
         active_directory_group:
           $ref: '#/components/schemas/GroupRemoteInfo_active_directory_group'
@@ -4128,8 +4131,8 @@ components:
           $ref: '#/components/schemas/GroupRemoteInfo_azure_ad_microsoft_365_group'
       type: object
     ResourceRemoteInfo:
-      description: Remote info that is required for the creation of remote resources.
-        Providing this will allow you to omit deprecated remote_id and metadata fields.
+      description: Information that defines the remote resource. This replaces the
+        deprecated remote_id and metadata fields.
       properties:
         aws_account:
           $ref: '#/components/schemas/ResourceRemoteInfo_aws_account'
@@ -4885,6 +4888,7 @@ components:
             $ref: '#/components/schemas/RequestConfiguration'
           type: array
         metadata:
+          deprecated: true
           description: "JSON metadata about the remote resource. Only set for items\
             \ linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects)\
             \ for details."
@@ -4897,6 +4901,8 @@ components:
                 },
             }
           type: string
+        remote_info:
+          $ref: '#/components/schemas/ResourceRemoteInfo'
       required:
       - resource_id
       type: object

@@ -18,7 +18,7 @@ import (
 // checks if the GroupRemoteInfo type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GroupRemoteInfo{}
 
-// GroupRemoteInfo Remote info that is required for the creation of remote groups. Providing this will allow you to omit deprecated remote_id and metadata fields.
+// GroupRemoteInfo Information that defines the remote group. This replaces the deprecated remote_id and metadata fields.
 type GroupRemoteInfo struct {
 	ActiveDirectoryGroup *GroupRemoteInfoActiveDirectoryGroup `json:"active_directory_group,omitempty"`
 	GithubTeam *GroupRemoteInfoGithubTeam `json:"github_team,omitempty"`
