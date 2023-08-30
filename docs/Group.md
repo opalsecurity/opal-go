@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this group. | [optional] 
 **RequestConfigurationList** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | A list of request configurations for this group. | [optional] 
 **Metadata** | Pointer to **string** | JSON metadata about the remote group. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details. | [optional] 
+**RemoteInfo** | Pointer to [**GroupRemoteInfo**](GroupRemoteInfo.md) |  | [optional] 
 
 ## Methods
 
@@ -538,6 +539,31 @@ SetMetadata sets Metadata field to given value.
 `func (o *Group) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
+
+### GetRemoteInfo
+
+`func (o *Group) GetRemoteInfo() GroupRemoteInfo`
+
+GetRemoteInfo returns the RemoteInfo field if non-nil, zero value otherwise.
+
+### GetRemoteInfoOk
+
+`func (o *Group) GetRemoteInfoOk() (*GroupRemoteInfo, bool)`
+
+GetRemoteInfoOk returns a tuple with the RemoteInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemoteInfo
+
+`func (o *Group) SetRemoteInfo(v GroupRemoteInfo)`
+
+SetRemoteInfo sets RemoteInfo field to given value.
+
+### HasRemoteInfo
+
+`func (o *Group) HasRemoteInfo() bool`
+
+HasRemoteInfo returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

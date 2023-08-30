@@ -18,7 +18,7 @@ import (
 // checks if the ResourceRemoteInfo type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ResourceRemoteInfo{}
 
-// ResourceRemoteInfo Remote info that is required for the creation of remote resources. Providing this will allow you to omit deprecated remote_id and metadata fields.
+// ResourceRemoteInfo Information that defines the remote resource. This replaces the deprecated remote_id and metadata fields.
 type ResourceRemoteInfo struct {
 	AwsAccount *ResourceRemoteInfoAwsAccount `json:"aws_account,omitempty"`
 	AwsPermissionSet *ResourceRemoteInfoAwsPermissionSet `json:"aws_permission_set,omitempty"`
