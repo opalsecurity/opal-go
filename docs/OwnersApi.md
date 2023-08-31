@@ -361,7 +361,7 @@ Name | Type | Description  | Notes
 
 ## GetOwners
 
-> PaginatedOwnersList GetOwners(ctx).Cursor(cursor).PageSize(pageSize).Execute()
+> PaginatedOwnersList GetOwners(ctx).Cursor(cursor).PageSize(pageSize).Name(name).Execute()
 
 
 
@@ -382,10 +382,11 @@ import (
 func main() {
     cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
     pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
+    name := "200" // string | Owner name to filter by. (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OwnersApi.GetOwners(context.Background()).Cursor(cursor).PageSize(pageSize).Execute()
+    resp, r, err := apiClient.OwnersApi.GetOwners(context.Background()).Cursor(cursor).PageSize(pageSize).Name(name).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OwnersApi.GetOwners``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -408,6 +409,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **string** | The pagination cursor value. | 
  **pageSize** | **int32** | Number of results to return per page. Default is 200. | 
+ **name** | **string** | Owner name to filter by. | 
 
 ### Return type
 

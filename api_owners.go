@@ -342,7 +342,7 @@ func (r ApiGetOwnerFromNameRequest) Execute() (*Owner, *http.Response, error) {
 /*
 GetOwnerFromName Method for GetOwnerFromName
 
-Returns an `Owner` object.
+Returns an `Owner` object. Does not support owners with `/` in their name, use /owners?name=... instead.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param ownerName The name of the owner.
@@ -540,6 +540,7 @@ type ApiGetOwnersRequest struct {
 	ApiService *OwnersApiService
 	cursor *string
 	pageSize *int32
+	name *string
 }
 
 // The pagination cursor value.
@@ -551,6 +552,12 @@ func (r ApiGetOwnersRequest) Cursor(cursor string) ApiGetOwnersRequest {
 // Number of results to return per page. Default is 200.
 func (r ApiGetOwnersRequest) PageSize(pageSize int32) ApiGetOwnersRequest {
 	r.pageSize = &pageSize
+	return r
+}
+
+// Owner name to filter by.
+func (r ApiGetOwnersRequest) Name(name string) ApiGetOwnersRequest {
+	r.name = &name
 	return r
 }
 
@@ -599,6 +606,9 @@ func (a *OwnersApiService) GetOwnersExecute(r ApiGetOwnersRequest) (*PaginatedOw
 	}
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+	}
+	if r.name != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
