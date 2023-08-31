@@ -941,6 +941,15 @@ paths:
           maximum: 1000
           type: integer
         style: form
+      - description: Owner name to filter by.
+        example: 200
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -1042,7 +1051,8 @@ paths:
       - owners
   /owners/name/{owner_name}:
     get:
-      description: Returns an `Owner` object.
+      description: "Returns an `Owner` object. Does not support owners with `/` in\
+        \ their name, use /owners?name=... instead."
       operationId: getOwnerFromName
       parameters:
       - description: The name of the owner.
