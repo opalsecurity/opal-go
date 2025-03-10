@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -21,9 +21,9 @@ var _ MappedNullable = &SessionsList{}
 // SessionsList struct for SessionsList
 type SessionsList struct {
 	// The cursor with which to continue pagination if additional result pages exist.
-	Next NullableString `json:"next,omitempty"`
+	Next *string `json:"next,omitempty"`
 	// The cursor used to obtain the current result page.
-	Previous NullableString `json:"previous,omitempty"`
+	Previous *string `json:"previous,omitempty"`
 	Results []Session `json:"results,omitempty"`
 }
 
@@ -44,88 +44,68 @@ func NewSessionsListWithDefaults() *SessionsList {
 	return &this
 }
 
-// GetNext returns the Next field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetNext returns the Next field value if set, zero value otherwise.
 func (o *SessionsList) GetNext() string {
-	if o == nil || IsNil(o.Next.Get()) {
+	if o == nil || IsNil(o.Next) {
 		var ret string
 		return ret
 	}
-	return *o.Next.Get()
+	return *o.Next
 }
 
 // GetNextOk returns a tuple with the Next field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SessionsList) GetNextOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Next) {
 		return nil, false
 	}
-	return o.Next.Get(), o.Next.IsSet()
+	return o.Next, true
 }
 
 // HasNext returns a boolean if a field has been set.
 func (o *SessionsList) HasNext() bool {
-	if o != nil && o.Next.IsSet() {
+	if o != nil && !IsNil(o.Next) {
 		return true
 	}
 
 	return false
 }
 
-// SetNext gets a reference to the given NullableString and assigns it to the Next field.
+// SetNext gets a reference to the given string and assigns it to the Next field.
 func (o *SessionsList) SetNext(v string) {
-	o.Next.Set(&v)
-}
-// SetNextNil sets the value for Next to be an explicit nil
-func (o *SessionsList) SetNextNil() {
-	o.Next.Set(nil)
+	o.Next = &v
 }
 
-// UnsetNext ensures that no value is present for Next, not even an explicit nil
-func (o *SessionsList) UnsetNext() {
-	o.Next.Unset()
-}
-
-// GetPrevious returns the Previous field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetPrevious returns the Previous field value if set, zero value otherwise.
 func (o *SessionsList) GetPrevious() string {
-	if o == nil || IsNil(o.Previous.Get()) {
+	if o == nil || IsNil(o.Previous) {
 		var ret string
 		return ret
 	}
-	return *o.Previous.Get()
+	return *o.Previous
 }
 
 // GetPreviousOk returns a tuple with the Previous field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SessionsList) GetPreviousOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Previous) {
 		return nil, false
 	}
-	return o.Previous.Get(), o.Previous.IsSet()
+	return o.Previous, true
 }
 
 // HasPrevious returns a boolean if a field has been set.
 func (o *SessionsList) HasPrevious() bool {
-	if o != nil && o.Previous.IsSet() {
+	if o != nil && !IsNil(o.Previous) {
 		return true
 	}
 
 	return false
 }
 
-// SetPrevious gets a reference to the given NullableString and assigns it to the Previous field.
+// SetPrevious gets a reference to the given string and assigns it to the Previous field.
 func (o *SessionsList) SetPrevious(v string) {
-	o.Previous.Set(&v)
-}
-// SetPreviousNil sets the value for Previous to be an explicit nil
-func (o *SessionsList) SetPreviousNil() {
-	o.Previous.Set(nil)
-}
-
-// UnsetPrevious ensures that no value is present for Previous, not even an explicit nil
-func (o *SessionsList) UnsetPrevious() {
-	o.Previous.Unset()
+	o.Previous = &v
 }
 
 // GetResults returns the Results field value if set, zero value otherwise.
@@ -170,11 +150,11 @@ func (o SessionsList) MarshalJSON() ([]byte, error) {
 
 func (o SessionsList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Next.IsSet() {
-		toSerialize["next"] = o.Next.Get()
+	if !IsNil(o.Next) {
+		toSerialize["next"] = o.Next
 	}
-	if o.Previous.IsSet() {
-		toSerialize["previous"] = o.Previous.Get()
+	if !IsNil(o.Previous) {
+		toSerialize["previous"] = o.Previous
 	}
 	if !IsNil(o.Results) {
 		toSerialize["results"] = o.Results

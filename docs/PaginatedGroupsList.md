@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Next** | Pointer to **NullableString** | The cursor with which to continue pagination if additional result pages exist. | [optional] 
-**Previous** | Pointer to **NullableString** | The cursor used to obtain the current result page. | [optional] 
+**Next** | Pointer to **string** | The cursor with which to continue pagination if additional result pages exist. | [optional] 
+**Previous** | Pointer to **string** | The cursor used to obtain the current result page. | [optional] 
 **Results** | [**[]Group**](Group.md) |  | 
 
 ## Methods
@@ -52,16 +52,6 @@ SetNext sets Next field to given value.
 
 HasNext returns a boolean if a field has been set.
 
-### SetNextNil
-
-`func (o *PaginatedGroupsList) SetNextNil(b bool)`
-
- SetNextNil sets the value for Next to be an explicit nil
-
-### UnsetNext
-`func (o *PaginatedGroupsList) UnsetNext()`
-
-UnsetNext ensures that no value is present for Next, not even an explicit nil
 ### GetPrevious
 
 `func (o *PaginatedGroupsList) GetPrevious() string`
@@ -87,16 +77,6 @@ SetPrevious sets Previous field to given value.
 
 HasPrevious returns a boolean if a field has been set.
 
-### SetPreviousNil
-
-`func (o *PaginatedGroupsList) SetPreviousNil(b bool)`
-
- SetPreviousNil sets the value for Previous to be an explicit nil
-
-### UnsetPrevious
-`func (o *PaginatedGroupsList) UnsetPrevious()`
-
-UnsetPrevious ensures that no value is present for Previous, not even an explicit nil
 ### GetResults
 
 `func (o *PaginatedGroupsList) GetResults() []Group`

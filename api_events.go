@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -20,12 +20,12 @@ import (
 )
 
 
-// EventsApiService EventsApi service
-type EventsApiService service
+// EventsAPIService EventsAPI service
+type EventsAPIService service
 
 type ApiEventsRequest struct {
 	ctx context.Context
-	ApiService *EventsApiService
+	ApiService *EventsAPIService
 	startDateFilter *string
 	endDateFilter *string
 	actorFilter *string
@@ -96,7 +96,7 @@ Returns a list of `Event` objects.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEventsRequest
 */
-func (a *EventsApiService) Events(ctx context.Context) ApiEventsRequest {
+func (a *EventsAPIService) Events(ctx context.Context) ApiEventsRequest {
 	return ApiEventsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -105,7 +105,7 @@ func (a *EventsApiService) Events(ctx context.Context) ApiEventsRequest {
 
 // Execute executes the request
 //  @return PaginatedEventList
-func (a *EventsApiService) EventsExecute(r ApiEventsRequest) (*PaginatedEventList, *http.Response, error) {
+func (a *EventsAPIService) EventsExecute(r ApiEventsRequest) (*PaginatedEventList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -113,7 +113,7 @@ func (a *EventsApiService) EventsExecute(r ApiEventsRequest) (*PaginatedEventLis
 		localVarReturnValue  *PaginatedEventList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsApiService.Events")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventsAPIService.Events")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -125,28 +125,28 @@ func (a *EventsApiService) EventsExecute(r ApiEventsRequest) (*PaginatedEventLis
 	localVarFormParams := url.Values{}
 
 	if r.startDateFilter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "start_date_filter", r.startDateFilter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "start_date_filter", r.startDateFilter, "form", "")
 	}
 	if r.endDateFilter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "end_date_filter", r.endDateFilter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "end_date_filter", r.endDateFilter, "form", "")
 	}
 	if r.actorFilter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "actor_filter", r.actorFilter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "actor_filter", r.actorFilter, "form", "")
 	}
 	if r.objectFilter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "object_filter", r.objectFilter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "object_filter", r.objectFilter, "form", "")
 	}
 	if r.eventTypeFilter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "event_type_filter", r.eventTypeFilter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "event_type_filter", r.eventTypeFilter, "form", "")
 	}
 	if r.apiTokenFilter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "api_token_filter", r.apiTokenFilter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "api_token_filter", r.apiTokenFilter, "form", "")
 	}
 	if r.cursor != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

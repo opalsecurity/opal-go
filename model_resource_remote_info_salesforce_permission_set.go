@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,8 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ResourceRemoteInfoSalesforcePermissionSet type satisfies the MappedNullable interface at compile time
@@ -23,6 +25,8 @@ type ResourceRemoteInfoSalesforcePermissionSet struct {
 	// The id of the permission set.
 	PermissionSetId string `json:"permission_set_id"`
 }
+
+type _ResourceRemoteInfoSalesforcePermissionSet ResourceRemoteInfoSalesforcePermissionSet
 
 // NewResourceRemoteInfoSalesforcePermissionSet instantiates a new ResourceRemoteInfoSalesforcePermissionSet object
 // This constructor will assign default values to properties that have it defined,
@@ -78,6 +82,43 @@ func (o ResourceRemoteInfoSalesforcePermissionSet) ToMap() (map[string]interface
 	toSerialize := map[string]interface{}{}
 	toSerialize["permission_set_id"] = o.PermissionSetId
 	return toSerialize, nil
+}
+
+func (o *ResourceRemoteInfoSalesforcePermissionSet) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"permission_set_id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varResourceRemoteInfoSalesforcePermissionSet := _ResourceRemoteInfoSalesforcePermissionSet{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varResourceRemoteInfoSalesforcePermissionSet)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ResourceRemoteInfoSalesforcePermissionSet(varResourceRemoteInfoSalesforcePermissionSet)
+
+	return err
 }
 
 type NullableResourceRemoteInfoSalesforcePermissionSet struct {

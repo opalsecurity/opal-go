@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -14,6 +14,8 @@ package opal
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Event type satisfies the MappedNullable interface at compile time
@@ -25,7 +27,6 @@ type Event struct {
 	EventId string `json:"event_id"`
 	// The ID of the actor user.
 	ActorUserId string `json:"actor_user_id"`
-	// The name of the actor user.
 	ActorName interface{} `json:"actor_name"`
 	// The email of the actor user.
 	ActorEmail *string `json:"actor_email,omitempty"`
@@ -41,6 +42,8 @@ type Event struct {
 	ApiTokenPreview *string `json:"api_token_preview,omitempty"`
 	SubEvents []SubEvent `json:"sub_events,omitempty"`
 }
+
+type _Event Event
 
 // NewEvent instantiates a new Event object
 // This constructor will assign default values to properties that have it defined,
@@ -379,6 +382,47 @@ func (o Event) ToMap() (map[string]interface{}, error) {
 		toSerialize["sub_events"] = o.SubEvents
 	}
 	return toSerialize, nil
+}
+
+func (o *Event) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"event_id",
+		"actor_user_id",
+		"actor_name",
+		"event_type",
+		"created_at",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varEvent := _Event{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varEvent)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Event(varEvent)
+
+	return err
 }
 
 type NullableEvent struct {

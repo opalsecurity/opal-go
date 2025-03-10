@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,8 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the User type satisfies the MappedNullable interface at compile time
@@ -32,7 +34,10 @@ type User struct {
 	LastName string `json:"last_name"`
 	// The user's position.
 	Position string `json:"position"`
+	HrIdpStatus *UserHrIdpStatusEnum `json:"hr_idp_status,omitempty"`
 }
+
+type _User User
 
 // NewUser instantiates a new User object
 // This constructor will assign default values to properties that have it defined,
@@ -201,6 +206,38 @@ func (o *User) SetPosition(v string) {
 	o.Position = v
 }
 
+// GetHrIdpStatus returns the HrIdpStatus field value if set, zero value otherwise.
+func (o *User) GetHrIdpStatus() UserHrIdpStatusEnum {
+	if o == nil || IsNil(o.HrIdpStatus) {
+		var ret UserHrIdpStatusEnum
+		return ret
+	}
+	return *o.HrIdpStatus
+}
+
+// GetHrIdpStatusOk returns a tuple with the HrIdpStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *User) GetHrIdpStatusOk() (*UserHrIdpStatusEnum, bool) {
+	if o == nil || IsNil(o.HrIdpStatus) {
+		return nil, false
+	}
+	return o.HrIdpStatus, true
+}
+
+// HasHrIdpStatus returns a boolean if a field has been set.
+func (o *User) HasHrIdpStatus() bool {
+	if o != nil && !IsNil(o.HrIdpStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetHrIdpStatus gets a reference to the given UserHrIdpStatusEnum and assigns it to the HrIdpStatus field.
+func (o *User) SetHrIdpStatus(v UserHrIdpStatusEnum) {
+	o.HrIdpStatus = &v
+}
+
 func (o User) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -217,7 +254,52 @@ func (o User) ToMap() (map[string]interface{}, error) {
 	toSerialize["first_name"] = o.FirstName
 	toSerialize["last_name"] = o.LastName
 	toSerialize["position"] = o.Position
+	if !IsNil(o.HrIdpStatus) {
+		toSerialize["hr_idp_status"] = o.HrIdpStatus
+	}
 	return toSerialize, nil
+}
+
+func (o *User) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"user_id",
+		"email",
+		"full_name",
+		"first_name",
+		"last_name",
+		"position",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varUser := _User{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUser)
+
+	if err != nil {
+		return err
+	}
+
+	*o = User(varUser)
+
+	return err
 }
 
 type NullableUser struct {

@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,8 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the RequestConfiguration type satisfies the MappedNullable interface at compile time
@@ -20,6 +22,7 @@ var _ MappedNullable = &RequestConfiguration{}
 
 // RequestConfiguration # Request Configuration Object ### Description The `RequestConfiguration` object is used to represent a request configuration.  ### Usage Example Returned from the `GET Request Configurations` endpoint.
 type RequestConfiguration struct {
+	// The condition for the request configuration.
 	Condition *Condition `json:"condition,omitempty"`
 	// A bool representing whether or not to allow requests for this resource.
 	AllowRequests bool `json:"allow_requests"`
@@ -36,22 +39,23 @@ type RequestConfiguration struct {
 	// The ID of the associated request template.
 	RequestTemplateId *string `json:"request_template_id,omitempty"`
 	// The list of reviewer stages for the request configuration.
-	ReviewerStages []ReviewerStage `json:"reviewer_stages"`
+	ReviewerStages []ReviewerStage `json:"reviewer_stages,omitempty"`
 	// The priority of the request configuration.
 	Priority int32 `json:"priority"`
 }
+
+type _RequestConfiguration RequestConfiguration
 
 // NewRequestConfiguration instantiates a new RequestConfiguration object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRequestConfiguration(allowRequests bool, autoApproval bool, requireMfaToRequest bool, requireSupportTicket bool, reviewerStages []ReviewerStage, priority int32) *RequestConfiguration {
+func NewRequestConfiguration(allowRequests bool, autoApproval bool, requireMfaToRequest bool, requireSupportTicket bool, priority int32) *RequestConfiguration {
 	this := RequestConfiguration{}
 	this.AllowRequests = allowRequests
 	this.AutoApproval = autoApproval
 	this.RequireMfaToRequest = requireMfaToRequest
 	this.RequireSupportTicket = requireSupportTicket
-	this.ReviewerStages = reviewerStages
 	this.Priority = priority
 	return &this
 }
@@ -288,26 +292,34 @@ func (o *RequestConfiguration) SetRequestTemplateId(v string) {
 	o.RequestTemplateId = &v
 }
 
-// GetReviewerStages returns the ReviewerStages field value
+// GetReviewerStages returns the ReviewerStages field value if set, zero value otherwise.
 func (o *RequestConfiguration) GetReviewerStages() []ReviewerStage {
-	if o == nil {
+	if o == nil || IsNil(o.ReviewerStages) {
 		var ret []ReviewerStage
 		return ret
 	}
-
 	return o.ReviewerStages
 }
 
-// GetReviewerStagesOk returns a tuple with the ReviewerStages field value
+// GetReviewerStagesOk returns a tuple with the ReviewerStages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RequestConfiguration) GetReviewerStagesOk() ([]ReviewerStage, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ReviewerStages) {
 		return nil, false
 	}
 	return o.ReviewerStages, true
 }
 
-// SetReviewerStages sets field value
+// HasReviewerStages returns a boolean if a field has been set.
+func (o *RequestConfiguration) HasReviewerStages() bool {
+	if o != nil && !IsNil(o.ReviewerStages) {
+		return true
+	}
+
+	return false
+}
+
+// SetReviewerStages gets a reference to the given []ReviewerStage and assigns it to the ReviewerStages field.
 func (o *RequestConfiguration) SetReviewerStages(v []ReviewerStage) {
 	o.ReviewerStages = v
 }
@@ -362,9 +374,52 @@ func (o RequestConfiguration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RequestTemplateId) {
 		toSerialize["request_template_id"] = o.RequestTemplateId
 	}
-	toSerialize["reviewer_stages"] = o.ReviewerStages
+	if !IsNil(o.ReviewerStages) {
+		toSerialize["reviewer_stages"] = o.ReviewerStages
+	}
 	toSerialize["priority"] = o.Priority
 	return toSerialize, nil
+}
+
+func (o *RequestConfiguration) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"allow_requests",
+		"auto_approval",
+		"require_mfa_to_request",
+		"require_support_ticket",
+		"priority",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRequestConfiguration := _RequestConfiguration{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRequestConfiguration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RequestConfiguration(varRequestConfiguration)
+
+	return err
 }
 
 type NullableRequestConfiguration struct {

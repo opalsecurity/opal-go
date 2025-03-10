@@ -1,17 +1,17 @@
-# \OwnersApi
+# \OwnersAPI
 
 All URIs are relative to *https://api.opal.dev/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateOwner**](OwnersApi.md#CreateOwner) | **Post** /owners | 
-[**DeleteOwner**](OwnersApi.md#DeleteOwner) | **Delete** /owners/{owner_id} | 
-[**GetOwner**](OwnersApi.md#GetOwner) | **Get** /owners/{owner_id} | 
-[**GetOwnerFromName**](OwnersApi.md#GetOwnerFromName) | **Get** /owners/name/{owner_name} | 
-[**GetOwnerUsers**](OwnersApi.md#GetOwnerUsers) | **Get** /owners/{owner_id}/users | 
-[**GetOwners**](OwnersApi.md#GetOwners) | **Get** /owners | 
-[**SetOwnerUsers**](OwnersApi.md#SetOwnerUsers) | **Put** /owners/{owner_id}/users | 
-[**UpdateOwners**](OwnersApi.md#UpdateOwners) | **Put** /owners | 
+[**CreateOwner**](OwnersAPI.md#CreateOwner) | **Post** /owners | 
+[**DeleteOwner**](OwnersAPI.md#DeleteOwner) | **Delete** /owners/{owner_id} | 
+[**GetOwner**](OwnersAPI.md#GetOwner) | **Get** /owners/{owner_id} | 
+[**GetOwnerFromName**](OwnersAPI.md#GetOwnerFromName) | **Get** /owners/name/{owner_name} | 
+[**GetOwnerUsers**](OwnersAPI.md#GetOwnerUsers) | **Get** /owners/{owner_id}/users | 
+[**GetOwners**](OwnersAPI.md#GetOwners) | **Get** /owners | 
+[**SetOwnerUsers**](OwnersAPI.md#SetOwnerUsers) | **Put** /owners/{owner_id}/users | 
+[**UpdateOwners**](OwnersAPI.md#UpdateOwners) | **Put** /owners | 
 
 
 
@@ -29,24 +29,24 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    createOwnerInfo := *openapiclient.NewCreateOwnerInfo("API Owner", []string{"UserIds_example"}) // CreateOwnerInfo | 
+	createOwnerInfo := *openapiclient.NewCreateOwnerInfo("API Owner", []string{"UserIds_example"}) // CreateOwnerInfo | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OwnersApi.CreateOwner(context.Background()).CreateOwnerInfo(createOwnerInfo).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OwnersApi.CreateOwner``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateOwner`: Owner
-    fmt.Fprintf(os.Stdout, "Response from `OwnersApi.CreateOwner`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OwnersAPI.CreateOwner(context.Background()).CreateOwnerInfo(createOwnerInfo).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OwnersAPI.CreateOwner``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateOwner`: Owner
+	fmt.Fprintf(os.Stdout, "Response from `OwnersAPI.CreateOwner`: %v\n", resp)
 }
 ```
 
@@ -95,22 +95,22 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    ownerId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the owner.
+	ownerId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the owner.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.OwnersApi.DeleteOwner(context.Background(), ownerId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OwnersApi.DeleteOwner``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.OwnersAPI.DeleteOwner(context.Background(), ownerId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OwnersAPI.DeleteOwner``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -163,24 +163,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    ownerId := "32acc112-21ff-4669-91c2-21e27683eaa1" // string | The ID of the owner.
+	ownerId := "32acc112-21ff-4669-91c2-21e27683eaa1" // string | The ID of the owner.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OwnersApi.GetOwner(context.Background(), ownerId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OwnersApi.GetOwner``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetOwner`: Owner
-    fmt.Fprintf(os.Stdout, "Response from `OwnersApi.GetOwner`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OwnersAPI.GetOwner(context.Background(), ownerId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OwnersAPI.GetOwner``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetOwner`: Owner
+	fmt.Fprintf(os.Stdout, "Response from `OwnersAPI.GetOwner`: %v\n", resp)
 }
 ```
 
@@ -233,24 +233,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    ownerName := "MyOwner" // string | The name of the owner.
+	ownerName := "MyOwner" // string | The name of the owner.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OwnersApi.GetOwnerFromName(context.Background(), ownerName).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OwnersApi.GetOwnerFromName``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetOwnerFromName`: Owner
-    fmt.Fprintf(os.Stdout, "Response from `OwnersApi.GetOwnerFromName`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OwnersAPI.GetOwnerFromName(context.Background(), ownerName).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OwnersAPI.GetOwnerFromName``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetOwnerFromName`: Owner
+	fmt.Fprintf(os.Stdout, "Response from `OwnersAPI.GetOwnerFromName`: %v\n", resp)
 }
 ```
 
@@ -303,24 +303,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    ownerId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the owner.
+	ownerId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the owner.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OwnersApi.GetOwnerUsers(context.Background(), ownerId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OwnersApi.GetOwnerUsers``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetOwnerUsers`: UserList
-    fmt.Fprintf(os.Stdout, "Response from `OwnersApi.GetOwnerUsers`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OwnersAPI.GetOwnerUsers(context.Background(), ownerId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OwnersAPI.GetOwnerUsers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetOwnerUsers`: UserList
+	fmt.Fprintf(os.Stdout, "Response from `OwnersAPI.GetOwnerUsers`: %v\n", resp)
 }
 ```
 
@@ -373,26 +373,26 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
-    pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
-    name := "200" // string | Owner name to filter by. (optional)
+	cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
+	pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
+	name := "200" // string | Owner name to filter by. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OwnersApi.GetOwners(context.Background()).Cursor(cursor).PageSize(pageSize).Name(name).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OwnersApi.GetOwners``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetOwners`: PaginatedOwnersList
-    fmt.Fprintf(os.Stdout, "Response from `OwnersApi.GetOwners`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OwnersAPI.GetOwners(context.Background()).Cursor(cursor).PageSize(pageSize).Name(name).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OwnersAPI.GetOwners``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetOwners`: PaginatedOwnersList
+	fmt.Fprintf(os.Stdout, "Response from `OwnersAPI.GetOwners`: %v\n", resp)
 }
 ```
 
@@ -443,25 +443,25 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    ownerId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the owner.
-    userIDList := *openapiclient.NewUserIDList([]string{"UserIds_example"}) // UserIDList | 
+	ownerId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the owner.
+	userIDList := *openapiclient.NewUserIDList([]string{"UserIds_example"}) // UserIDList | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OwnersApi.SetOwnerUsers(context.Background(), ownerId).UserIDList(userIDList).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OwnersApi.SetOwnerUsers``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SetOwnerUsers`: UserList
-    fmt.Fprintf(os.Stdout, "Response from `OwnersApi.SetOwnerUsers`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OwnersAPI.SetOwnerUsers(context.Background(), ownerId).UserIDList(userIDList).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OwnersAPI.SetOwnerUsers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SetOwnerUsers`: UserList
+	fmt.Fprintf(os.Stdout, "Response from `OwnersAPI.SetOwnerUsers`: %v\n", resp)
 }
 ```
 
@@ -515,24 +515,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    updateOwnerInfoList := *openapiclient.NewUpdateOwnerInfoList([]openapiclient.UpdateOwnerInfo{*openapiclient.NewUpdateOwnerInfo("f454d283-ca87-4a8a-bdbb-df212eca5353")}) // UpdateOwnerInfoList | Owners to be updated
+	updateOwnerInfoList := *openapiclient.NewUpdateOwnerInfoList([]openapiclient.UpdateOwnerInfo{*openapiclient.NewUpdateOwnerInfo("f454d283-ca87-4a8a-bdbb-df212eca5353")}) // UpdateOwnerInfoList | Owners to be updated
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OwnersApi.UpdateOwners(context.Background()).UpdateOwnerInfoList(updateOwnerInfoList).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OwnersApi.UpdateOwners``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateOwners`: UpdateOwnerInfoList
-    fmt.Fprintf(os.Stdout, "Response from `OwnersApi.UpdateOwners`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OwnersAPI.UpdateOwners(context.Background()).UpdateOwnerInfoList(updateOwnerInfoList).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OwnersAPI.UpdateOwners``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateOwners`: UpdateOwnerInfoList
+	fmt.Fprintf(os.Stdout, "Response from `OwnersAPI.UpdateOwners`: %v\n", resp)
 }
 ```
 

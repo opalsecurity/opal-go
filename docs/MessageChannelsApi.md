@@ -1,12 +1,12 @@
-# \MessageChannelsApi
+# \MessageChannelsAPI
 
 All URIs are relative to *https://api.opal.dev/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateMessageChannel**](MessageChannelsApi.md#CreateMessageChannel) | **Post** /message-channels | 
-[**GetMessageChannel**](MessageChannelsApi.md#GetMessageChannel) | **Get** /message-channels/{message_channel_id} | 
-[**GetMessageChannels**](MessageChannelsApi.md#GetMessageChannels) | **Get** /message-channels | 
+[**CreateMessageChannel**](MessageChannelsAPI.md#CreateMessageChannel) | **Post** /message-channels | 
+[**GetMessageChannel**](MessageChannelsAPI.md#GetMessageChannel) | **Get** /message-channels/{message_channel_id} | 
+[**GetMessageChannels**](MessageChannelsAPI.md#GetMessageChannels) | **Get** /message-channels | 
 
 
 
@@ -24,24 +24,24 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    createMessageChannelInfo := *openapiclient.NewCreateMessageChannelInfo(openapiclient.MessageChannelProviderEnum("SLACK"), "C03FJR97276") // CreateMessageChannelInfo | The `MessageChannel` object to be created.
+	createMessageChannelInfo := *openapiclient.NewCreateMessageChannelInfo(openapiclient.MessageChannelProviderEnum("SLACK"), "C03FJR97276") // CreateMessageChannelInfo | The `MessageChannel` object to be created.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.MessageChannelsApi.CreateMessageChannel(context.Background()).CreateMessageChannelInfo(createMessageChannelInfo).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MessageChannelsApi.CreateMessageChannel``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateMessageChannel`: MessageChannel
-    fmt.Fprintf(os.Stdout, "Response from `MessageChannelsApi.CreateMessageChannel`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.MessageChannelsAPI.CreateMessageChannel(context.Background()).CreateMessageChannelInfo(createMessageChannelInfo).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MessageChannelsAPI.CreateMessageChannel``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateMessageChannel`: MessageChannel
+	fmt.Fprintf(os.Stdout, "Response from `MessageChannelsAPI.CreateMessageChannel`: %v\n", resp)
 }
 ```
 
@@ -90,24 +90,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    messageChannelId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the message_channel.
+	messageChannelId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the message_channel.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.MessageChannelsApi.GetMessageChannel(context.Background(), messageChannelId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MessageChannelsApi.GetMessageChannel``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetMessageChannel`: MessageChannel
-    fmt.Fprintf(os.Stdout, "Response from `MessageChannelsApi.GetMessageChannel`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.MessageChannelsAPI.GetMessageChannel(context.Background(), messageChannelId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MessageChannelsAPI.GetMessageChannel``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetMessageChannel`: MessageChannel
+	fmt.Fprintf(os.Stdout, "Response from `MessageChannelsAPI.GetMessageChannel`: %v\n", resp)
 }
 ```
 
@@ -160,23 +160,23 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.MessageChannelsApi.GetMessageChannels(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MessageChannelsApi.GetMessageChannels``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetMessageChannels`: MessageChannelList
-    fmt.Fprintf(os.Stdout, "Response from `MessageChannelsApi.GetMessageChannels`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.MessageChannelsAPI.GetMessageChannels(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MessageChannelsAPI.GetMessageChannels``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetMessageChannels`: MessageChannelList
+	fmt.Fprintf(os.Stdout, "Response from `MessageChannelsAPI.GetMessageChannels`: %v\n", resp)
 }
 ```
 

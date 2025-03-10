@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**GroupId** | **string** | The id of the Azure AD Microsoft 365 group. | 
+**GroupId** | **string** | The id of the Microsoft Entra ID Microsoft 365 group. | 
 
 ## Methods
 

@@ -8,13 +8,13 @@ Name | Type | Description | Notes
 **UserId** | **string** | The ID of the user. | 
 **AccessLevel** | Pointer to [**ResourceAccessLevel**](ResourceAccessLevel.md) |  | [optional] 
 **Status** | [**ResourceUserAccessStatusEnum**](ResourceUserAccessStatusEnum.md) |  | 
-**ExpirationDate** | **NullableTime** | The day and time the user&#39;s access will expire. | 
+**ExpirationDate** | Pointer to **time.Time** | The day and time the user&#39;s access will expire. | [optional] 
 
 ## Methods
 
 ### NewResourceUserAccessStatus
 
-`func NewResourceUserAccessStatus(resourceId string, userId string, status ResourceUserAccessStatusEnum, expirationDate NullableTime, ) *ResourceUserAccessStatus`
+`func NewResourceUserAccessStatus(resourceId string, userId string, status ResourceUserAccessStatusEnum, ) *ResourceUserAccessStatus`
 
 NewResourceUserAccessStatus instantiates a new ResourceUserAccessStatus object
 This constructor will assign default values to properties that have it defined,
@@ -133,17 +133,12 @@ and a boolean to check if the value has been set.
 
 SetExpirationDate sets ExpirationDate field to given value.
 
+### HasExpirationDate
 
-### SetExpirationDateNil
+`func (o *ResourceUserAccessStatus) HasExpirationDate() bool`
 
-`func (o *ResourceUserAccessStatus) SetExpirationDateNil(b bool)`
+HasExpirationDate returns a boolean if a field has been set.
 
- SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
-
-### UnsetExpirationDate
-`func (o *ResourceUserAccessStatus) UnsetExpirationDate()`
-
-UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

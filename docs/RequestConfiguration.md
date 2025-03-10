@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Condition** | Pointer to [**Condition**](Condition.md) |  | [optional] 
+**Condition** | Pointer to [**Condition**](Condition.md) | The condition for the request configuration. | [optional] 
 **AllowRequests** | **bool** | A bool representing whether or not to allow requests for this resource. | 
 **AutoApproval** | **bool** | A bool representing whether or not to automatically approve requests for this resource. | 
 **RequireMfaToRequest** | **bool** | A bool representing whether or not to require MFA for requesting access to this resource. | 
@@ -12,14 +12,14 @@ Name | Type | Description | Notes
 **RecommendedDurationMinutes** | Pointer to **int32** | The recommended duration for which the resource should be requested (in minutes). -1 represents an indefinite duration. | [optional] 
 **RequireSupportTicket** | **bool** | A bool representing whether or not access requests to the resource require an access ticket. | 
 **RequestTemplateId** | Pointer to **string** | The ID of the associated request template. | [optional] 
-**ReviewerStages** | [**[]ReviewerStage**](ReviewerStage.md) | The list of reviewer stages for the request configuration. | 
+**ReviewerStages** | Pointer to [**[]ReviewerStage**](ReviewerStage.md) | The list of reviewer stages for the request configuration. | [optional] 
 **Priority** | **int32** | The priority of the request configuration. | 
 
 ## Methods
 
 ### NewRequestConfiguration
 
-`func NewRequestConfiguration(allowRequests bool, autoApproval bool, requireMfaToRequest bool, requireSupportTicket bool, reviewerStages []ReviewerStage, priority int32, ) *RequestConfiguration`
+`func NewRequestConfiguration(allowRequests bool, autoApproval bool, requireMfaToRequest bool, requireSupportTicket bool, priority int32, ) *RequestConfiguration`
 
 NewRequestConfiguration instantiates a new RequestConfiguration object
 This constructor will assign default values to properties that have it defined,
@@ -233,6 +233,11 @@ and a boolean to check if the value has been set.
 
 SetReviewerStages sets ReviewerStages field to given value.
 
+### HasReviewerStages
+
+`func (o *RequestConfiguration) HasReviewerStages() bool`
+
+HasReviewerStages returns a boolean if a field has been set.
 
 ### GetPriority
 

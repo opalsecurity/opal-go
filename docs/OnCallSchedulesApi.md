@@ -1,12 +1,12 @@
-# \OnCallSchedulesApi
+# \OnCallSchedulesAPI
 
 All URIs are relative to *https://api.opal.dev/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateOnCallSchedule**](OnCallSchedulesApi.md#CreateOnCallSchedule) | **Post** /on-call-schedules | 
-[**GetOnCallSchedule**](OnCallSchedulesApi.md#GetOnCallSchedule) | **Get** /on-call-schedules/{on_call_schedule_id} | 
-[**GetOnCallSchedules**](OnCallSchedulesApi.md#GetOnCallSchedules) | **Get** /on-call-schedules | 
+[**CreateOnCallSchedule**](OnCallSchedulesAPI.md#CreateOnCallSchedule) | **Post** /on-call-schedules | 
+[**GetOnCallSchedule**](OnCallSchedulesAPI.md#GetOnCallSchedule) | **Get** /on-call-schedules/{on_call_schedule_id} | 
+[**GetOnCallSchedules**](OnCallSchedulesAPI.md#GetOnCallSchedules) | **Get** /on-call-schedules | 
 
 
 
@@ -24,24 +24,24 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    createOnCallScheduleInfo := *openapiclient.NewCreateOnCallScheduleInfo(openapiclient.OnCallScheduleProviderEnum("OPSGENIE"), "PNZNINN") // CreateOnCallScheduleInfo | The `OnCallSchedule` object to be created.
+	createOnCallScheduleInfo := *openapiclient.NewCreateOnCallScheduleInfo(openapiclient.OnCallScheduleProviderEnum("OPSGENIE"), "PNZNINN") // CreateOnCallScheduleInfo | The `OnCallSchedule` object to be created.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OnCallSchedulesApi.CreateOnCallSchedule(context.Background()).CreateOnCallScheduleInfo(createOnCallScheduleInfo).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OnCallSchedulesApi.CreateOnCallSchedule``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateOnCallSchedule`: OnCallSchedule
-    fmt.Fprintf(os.Stdout, "Response from `OnCallSchedulesApi.CreateOnCallSchedule`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OnCallSchedulesAPI.CreateOnCallSchedule(context.Background()).CreateOnCallScheduleInfo(createOnCallScheduleInfo).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OnCallSchedulesAPI.CreateOnCallSchedule``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateOnCallSchedule`: OnCallSchedule
+	fmt.Fprintf(os.Stdout, "Response from `OnCallSchedulesAPI.CreateOnCallSchedule`: %v\n", resp)
 }
 ```
 
@@ -90,24 +90,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    onCallScheduleId := "9546209c-42c2-4801-96d7-9ec42df0f59c" // string | The ID of the on_call_schedule.
+	onCallScheduleId := "9546209c-42c2-4801-96d7-9ec42df0f59c" // string | The ID of the on_call_schedule.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OnCallSchedulesApi.GetOnCallSchedule(context.Background(), onCallScheduleId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OnCallSchedulesApi.GetOnCallSchedule``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetOnCallSchedule`: OnCallSchedule
-    fmt.Fprintf(os.Stdout, "Response from `OnCallSchedulesApi.GetOnCallSchedule`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OnCallSchedulesAPI.GetOnCallSchedule(context.Background(), onCallScheduleId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OnCallSchedulesAPI.GetOnCallSchedule``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetOnCallSchedule`: OnCallSchedule
+	fmt.Fprintf(os.Stdout, "Response from `OnCallSchedulesAPI.GetOnCallSchedule`: %v\n", resp)
 }
 ```
 
@@ -160,23 +160,23 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OnCallSchedulesApi.GetOnCallSchedules(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OnCallSchedulesApi.GetOnCallSchedules``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetOnCallSchedules`: OnCallScheduleList
-    fmt.Fprintf(os.Stdout, "Response from `OnCallSchedulesApi.GetOnCallSchedules`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OnCallSchedulesAPI.GetOnCallSchedules(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OnCallSchedulesAPI.GetOnCallSchedules``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetOnCallSchedules`: OnCallScheduleList
+	fmt.Fprintf(os.Stdout, "Response from `OnCallSchedulesAPI.GetOnCallSchedules`: %v\n", resp)
 }
 ```
 

@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **Deadline** | **time.Time** | The last day for reviewers to complete their access reviews. | 
 **TimeZone** | **string** | The time zone name (as defined by the IANA Time Zone database) used in the access review deadline and exported audit report. Default is America/Los_Angeles. | 
 **SelfReviewAllowed** | **bool** | A bool representing whether to present a warning when a user is the only reviewer for themself. Default is False. | 
+**ReminderSchedule** | Pointer to **[]int32** |  | [optional] 
+**ReminderIncludeManager** | Pointer to **bool** |  | [optional] 
 **UarScope** | Pointer to [**UARScope**](UARScope.md) |  | [optional] 
 
 ## Methods
@@ -150,6 +152,56 @@ and a boolean to check if the value has been set.
 
 SetSelfReviewAllowed sets SelfReviewAllowed field to given value.
 
+
+### GetReminderSchedule
+
+`func (o *CreateUARInfo) GetReminderSchedule() []int32`
+
+GetReminderSchedule returns the ReminderSchedule field if non-nil, zero value otherwise.
+
+### GetReminderScheduleOk
+
+`func (o *CreateUARInfo) GetReminderScheduleOk() (*[]int32, bool)`
+
+GetReminderScheduleOk returns a tuple with the ReminderSchedule field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReminderSchedule
+
+`func (o *CreateUARInfo) SetReminderSchedule(v []int32)`
+
+SetReminderSchedule sets ReminderSchedule field to given value.
+
+### HasReminderSchedule
+
+`func (o *CreateUARInfo) HasReminderSchedule() bool`
+
+HasReminderSchedule returns a boolean if a field has been set.
+
+### GetReminderIncludeManager
+
+`func (o *CreateUARInfo) GetReminderIncludeManager() bool`
+
+GetReminderIncludeManager returns the ReminderIncludeManager field if non-nil, zero value otherwise.
+
+### GetReminderIncludeManagerOk
+
+`func (o *CreateUARInfo) GetReminderIncludeManagerOk() (*bool, bool)`
+
+GetReminderIncludeManagerOk returns a tuple with the ReminderIncludeManager field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReminderIncludeManager
+
+`func (o *CreateUARInfo) SetReminderIncludeManager(v bool)`
+
+SetReminderIncludeManager sets ReminderIncludeManager field to given value.
+
+### HasReminderIncludeManager
+
+`func (o *CreateUARInfo) HasReminderIncludeManager() bool`
+
+HasReminderIncludeManager returns a boolean if a field has been set.
 
 ### GetUarScope
 

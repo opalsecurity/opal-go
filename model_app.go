@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,8 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the App type satisfies the MappedNullable interface at compile time
@@ -29,7 +31,11 @@ type App struct {
 	// The ID of the owner of the app.
 	AdminOwnerId string `json:"admin_owner_id"`
 	AppType AppTypeEnum `json:"app_type"`
+	// Validation checks of an apps' configuration and permissions.
+	Validations []AppValidation `json:"validations,omitempty"`
 }
+
+type _App App
 
 // NewApp instantiates a new App object
 // This constructor will assign default values to properties that have it defined,
@@ -173,6 +179,38 @@ func (o *App) SetAppType(v AppTypeEnum) {
 	o.AppType = v
 }
 
+// GetValidations returns the Validations field value if set, zero value otherwise.
+func (o *App) GetValidations() []AppValidation {
+	if o == nil || IsNil(o.Validations) {
+		var ret []AppValidation
+		return ret
+	}
+	return o.Validations
+}
+
+// GetValidationsOk returns a tuple with the Validations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *App) GetValidationsOk() ([]AppValidation, bool) {
+	if o == nil || IsNil(o.Validations) {
+		return nil, false
+	}
+	return o.Validations, true
+}
+
+// HasValidations returns a boolean if a field has been set.
+func (o *App) HasValidations() bool {
+	if o != nil && !IsNil(o.Validations) {
+		return true
+	}
+
+	return false
+}
+
+// SetValidations gets a reference to the given []AppValidation and assigns it to the Validations field.
+func (o *App) SetValidations(v []AppValidation) {
+	o.Validations = v
+}
+
 func (o App) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -188,7 +226,51 @@ func (o App) ToMap() (map[string]interface{}, error) {
 	toSerialize["description"] = o.Description
 	toSerialize["admin_owner_id"] = o.AdminOwnerId
 	toSerialize["app_type"] = o.AppType
+	if !IsNil(o.Validations) {
+		toSerialize["validations"] = o.Validations
+	}
 	return toSerialize, nil
+}
+
+func (o *App) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"app_id",
+		"name",
+		"description",
+		"admin_owner_id",
+		"app_type",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varApp := _App{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varApp)
+
+	if err != nil {
+		return err
+	}
+
+	*o = App(varApp)
+
+	return err
 }
 
 type NullableApp struct {

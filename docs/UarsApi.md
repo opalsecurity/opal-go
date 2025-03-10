@@ -1,12 +1,12 @@
-# \UarsApi
+# \UarsAPI
 
 All URIs are relative to *https://api.opal.dev/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateUar**](UarsApi.md#CreateUar) | **Post** /uar | 
-[**GetUARs**](UarsApi.md#GetUARs) | **Get** /uars | 
-[**GetUar**](UarsApi.md#GetUar) | **Get** /uar/{uar_id} | 
+[**CreateUar**](UarsAPI.md#CreateUar) | **Post** /uar | 
+[**GetUARs**](UarsAPI.md#GetUARs) | **Get** /uars | 
+[**GetUar**](UarsAPI.md#GetUar) | **Get** /uar/{uar_id} | 
 
 
 
@@ -24,25 +24,25 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
+	"context"
+	"fmt"
+	"os"
     "time"
-    openapiclient "github.com/opalsecurity/opal-go"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    createUARInfo := *openapiclient.NewCreateUARInfo("Monthly UAR (July)", openapiclient.UARReviewerAssignmentPolicyEnum("MANUALLY"), false, time.Now(), "America/Los_Angeles", false) // CreateUARInfo | The settings of the UAR.
+	createUARInfo := *openapiclient.NewCreateUARInfo("Monthly UAR (July)", openapiclient.UARReviewerAssignmentPolicyEnum("MANUALLY"), false, time.Now(), "America/Los_Angeles", false) // CreateUARInfo | The settings of the UAR.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UarsApi.CreateUar(context.Background()).CreateUARInfo(createUARInfo).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UarsApi.CreateUar``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateUar`: UAR
-    fmt.Fprintf(os.Stdout, "Response from `UarsApi.CreateUar`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UarsAPI.CreateUar(context.Background()).CreateUARInfo(createUARInfo).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UarsAPI.CreateUar``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateUar`: UAR
+	fmt.Fprintf(os.Stdout, "Response from `UarsAPI.CreateUar`: %v\n", resp)
 }
 ```
 
@@ -91,25 +91,25 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
-    pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
+	cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
+	pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UarsApi.GetUARs(context.Background()).Cursor(cursor).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UarsApi.GetUARs``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetUARs`: PaginatedUARsList
-    fmt.Fprintf(os.Stdout, "Response from `UarsApi.GetUARs`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UarsAPI.GetUARs(context.Background()).Cursor(cursor).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UarsAPI.GetUARs``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUARs`: PaginatedUARsList
+	fmt.Fprintf(os.Stdout, "Response from `UarsAPI.GetUARs`: %v\n", resp)
 }
 ```
 
@@ -159,24 +159,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    uarId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the UAR.
+	uarId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the UAR.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UarsApi.GetUar(context.Background(), uarId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UarsApi.GetUar``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetUar`: UAR
-    fmt.Fprintf(os.Stdout, "Response from `UarsApi.GetUar`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UarsAPI.GetUar(context.Background(), uarId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UarsAPI.GetUar``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUar`: UAR
+	fmt.Fprintf(os.Stdout, "Response from `UarsAPI.GetUar`: %v\n", resp)
 }
 ```
 

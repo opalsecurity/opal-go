@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **GroupIds** | Pointer to **[]string** | The list of group IDs to match. | [optional] 
+**RoleRemoteIds** | Pointer to **[]string** | The list of role remote IDs to match. | [optional] 
 
 ## Methods
 
@@ -49,6 +50,31 @@ SetGroupIds sets GroupIds field to given value.
 `func (o *Condition) HasGroupIds() bool`
 
 HasGroupIds returns a boolean if a field has been set.
+
+### GetRoleRemoteIds
+
+`func (o *Condition) GetRoleRemoteIds() []string`
+
+GetRoleRemoteIds returns the RoleRemoteIds field if non-nil, zero value otherwise.
+
+### GetRoleRemoteIdsOk
+
+`func (o *Condition) GetRoleRemoteIdsOk() (*[]string, bool)`
+
+GetRoleRemoteIdsOk returns a tuple with the RoleRemoteIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRoleRemoteIds
+
+`func (o *Condition) SetRoleRemoteIds(v []string)`
+
+SetRoleRemoteIds sets RoleRemoteIds field to given value.
+
+### HasRoleRemoteIds
+
+`func (o *Condition) HasRoleRemoteIds() bool`
+
+HasRoleRemoteIds returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

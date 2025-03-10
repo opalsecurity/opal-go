@@ -8,16 +8,19 @@ Name | Type | Description | Notes
 **CreatedAt** | **time.Time** | The date and time the request was created. | 
 **UpdatedAt** | **time.Time** | The date and time the request was last updated. | 
 **RequesterId** | **string** | The unique identifier of the user who created the request. | 
-**TargetUserId** | **string** | The unique identifier of the user who is the target of the request. | 
-**Status** | [**RequestStatusEnum**](RequestStatusEnum.md) |  | 
+**TargetUserId** | Pointer to **string** | The unique identifier of the user who is the target of the request. | [optional] 
+**TargetGroupId** | Pointer to **string** | The unique identifier of the group who is the target of the request. | [optional] 
+**Status** | [**RequestStatusEnum**](RequestStatusEnum.md) | The status of the request. | 
 **Reason** | **string** | The reason for the request. | 
 **DurationMinutes** | Pointer to **int32** | The duration of the request in minutes. | [optional] 
+**RequestedItemsList** | Pointer to [**[]RequestedItem**](RequestedItem.md) | The list of targets for the request. | [optional] 
+**CustomFieldsResponses** | Pointer to [**[]RequestCustomFieldResponse**](RequestCustomFieldResponse.md) | The responses given to the custom fields associated to the request | [optional] 
 
 ## Methods
 
 ### NewRequest
 
-`func NewRequest(id string, createdAt time.Time, updatedAt time.Time, requesterId string, targetUserId string, status RequestStatusEnum, reason string, ) *Request`
+`func NewRequest(id string, createdAt time.Time, updatedAt time.Time, requesterId string, status RequestStatusEnum, reason string, ) *Request`
 
 NewRequest instantiates a new Request object
 This constructor will assign default values to properties that have it defined,
@@ -131,6 +134,36 @@ and a boolean to check if the value has been set.
 
 SetTargetUserId sets TargetUserId field to given value.
 
+### HasTargetUserId
+
+`func (o *Request) HasTargetUserId() bool`
+
+HasTargetUserId returns a boolean if a field has been set.
+
+### GetTargetGroupId
+
+`func (o *Request) GetTargetGroupId() string`
+
+GetTargetGroupId returns the TargetGroupId field if non-nil, zero value otherwise.
+
+### GetTargetGroupIdOk
+
+`func (o *Request) GetTargetGroupIdOk() (*string, bool)`
+
+GetTargetGroupIdOk returns a tuple with the TargetGroupId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetGroupId
+
+`func (o *Request) SetTargetGroupId(v string)`
+
+SetTargetGroupId sets TargetGroupId field to given value.
+
+### HasTargetGroupId
+
+`func (o *Request) HasTargetGroupId() bool`
+
+HasTargetGroupId returns a boolean if a field has been set.
 
 ### GetStatus
 
@@ -196,6 +229,56 @@ SetDurationMinutes sets DurationMinutes field to given value.
 `func (o *Request) HasDurationMinutes() bool`
 
 HasDurationMinutes returns a boolean if a field has been set.
+
+### GetRequestedItemsList
+
+`func (o *Request) GetRequestedItemsList() []RequestedItem`
+
+GetRequestedItemsList returns the RequestedItemsList field if non-nil, zero value otherwise.
+
+### GetRequestedItemsListOk
+
+`func (o *Request) GetRequestedItemsListOk() (*[]RequestedItem, bool)`
+
+GetRequestedItemsListOk returns a tuple with the RequestedItemsList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestedItemsList
+
+`func (o *Request) SetRequestedItemsList(v []RequestedItem)`
+
+SetRequestedItemsList sets RequestedItemsList field to given value.
+
+### HasRequestedItemsList
+
+`func (o *Request) HasRequestedItemsList() bool`
+
+HasRequestedItemsList returns a boolean if a field has been set.
+
+### GetCustomFieldsResponses
+
+`func (o *Request) GetCustomFieldsResponses() []RequestCustomFieldResponse`
+
+GetCustomFieldsResponses returns the CustomFieldsResponses field if non-nil, zero value otherwise.
+
+### GetCustomFieldsResponsesOk
+
+`func (o *Request) GetCustomFieldsResponsesOk() (*[]RequestCustomFieldResponse, bool)`
+
+GetCustomFieldsResponsesOk returns a tuple with the CustomFieldsResponses field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomFieldsResponses
+
+`func (o *Request) SetCustomFieldsResponses(v []RequestCustomFieldResponse)`
+
+SetCustomFieldsResponses sets CustomFieldsResponses field to given value.
+
+### HasCustomFieldsResponses
+
+`func (o *Request) HasCustomFieldsResponses() bool`
+
+HasCustomFieldsResponses returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

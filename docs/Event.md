@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EventId** | **string** | The ID of the event. | 
 **ActorUserId** | **string** | The ID of the actor user. | 
-**ActorName** | **interface{}** | The name of the actor user. | 
+**ActorName** | **interface{}** |  | 
 **ActorEmail** | Pointer to **string** | The email of the actor user. | [optional] 
 **EventType** | **string** | The event type. | 
 **CreatedAt** | **time.Time** | The day and time the event was created. | 

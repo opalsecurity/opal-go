@@ -7,13 +7,16 @@ Name | Type | Description | Notes
 **ConfigurationTemplateId** | **string** | The ID of the configuration template. | 
 **Name** | Pointer to **string** | The name of the configuration template. | [optional] 
 **AdminOwnerId** | Pointer to **string** | The ID of the owner of the configuration template. | [optional] 
-**Visibility** | Pointer to [**VisibilityInfo**](VisibilityInfo.md) |  | [optional] 
+**Visibility** | Pointer to [**VisibilityInfo**](VisibilityInfo.md) | The visibility info of the configuration template. | [optional] 
 **LinkedAuditMessageChannelIds** | Pointer to **[]string** | The IDs of the audit message channels linked to the configuration template. | [optional] 
-**RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) |  | [optional] 
+**RequestConfigurations** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | The request configuration list linked to the configuration template. | [optional] 
+**RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) | The request configuration list linked to the configuration template. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **MemberOncallScheduleIds** | Pointer to **[]string** | The IDs of the on-call schedules linked to the configuration template. | [optional] 
 **BreakGlassUserIds** | Pointer to **[]string** | The IDs of the break glass users linked to the configuration template. | [optional] 
 **RequireMfaToApprove** | Pointer to **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this configuration template. | [optional] 
 **RequireMfaToConnect** | Pointer to **bool** | A bool representing whether or not to require MFA to connect to resources associated with this configuration template. | [optional] 
+**TicketPropagation** | Pointer to [**TicketPropagationConfiguration**](TicketPropagationConfiguration.md) |  | [optional] 
+**CustomRequestNotification** | Pointer to **string** | Custom request notification sent upon request approval for this configuration template. | [optional] 
 
 ## Methods
 
@@ -154,6 +157,31 @@ SetLinkedAuditMessageChannelIds sets LinkedAuditMessageChannelIds field to given
 
 HasLinkedAuditMessageChannelIds returns a boolean if a field has been set.
 
+### GetRequestConfigurations
+
+`func (o *UpdateConfigurationTemplateInfo) GetRequestConfigurations() []RequestConfiguration`
+
+GetRequestConfigurations returns the RequestConfigurations field if non-nil, zero value otherwise.
+
+### GetRequestConfigurationsOk
+
+`func (o *UpdateConfigurationTemplateInfo) GetRequestConfigurationsOk() (*[]RequestConfiguration, bool)`
+
+GetRequestConfigurationsOk returns a tuple with the RequestConfigurations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestConfigurations
+
+`func (o *UpdateConfigurationTemplateInfo) SetRequestConfigurations(v []RequestConfiguration)`
+
+SetRequestConfigurations sets RequestConfigurations field to given value.
+
+### HasRequestConfigurations
+
+`func (o *UpdateConfigurationTemplateInfo) HasRequestConfigurations() bool`
+
+HasRequestConfigurations returns a boolean if a field has been set.
+
 ### GetRequestConfigurationList
 
 `func (o *UpdateConfigurationTemplateInfo) GetRequestConfigurationList() CreateRequestConfigurationInfoList`
@@ -278,6 +306,56 @@ SetRequireMfaToConnect sets RequireMfaToConnect field to given value.
 `func (o *UpdateConfigurationTemplateInfo) HasRequireMfaToConnect() bool`
 
 HasRequireMfaToConnect returns a boolean if a field has been set.
+
+### GetTicketPropagation
+
+`func (o *UpdateConfigurationTemplateInfo) GetTicketPropagation() TicketPropagationConfiguration`
+
+GetTicketPropagation returns the TicketPropagation field if non-nil, zero value otherwise.
+
+### GetTicketPropagationOk
+
+`func (o *UpdateConfigurationTemplateInfo) GetTicketPropagationOk() (*TicketPropagationConfiguration, bool)`
+
+GetTicketPropagationOk returns a tuple with the TicketPropagation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTicketPropagation
+
+`func (o *UpdateConfigurationTemplateInfo) SetTicketPropagation(v TicketPropagationConfiguration)`
+
+SetTicketPropagation sets TicketPropagation field to given value.
+
+### HasTicketPropagation
+
+`func (o *UpdateConfigurationTemplateInfo) HasTicketPropagation() bool`
+
+HasTicketPropagation returns a boolean if a field has been set.
+
+### GetCustomRequestNotification
+
+`func (o *UpdateConfigurationTemplateInfo) GetCustomRequestNotification() string`
+
+GetCustomRequestNotification returns the CustomRequestNotification field if non-nil, zero value otherwise.
+
+### GetCustomRequestNotificationOk
+
+`func (o *UpdateConfigurationTemplateInfo) GetCustomRequestNotificationOk() (*string, bool)`
+
+GetCustomRequestNotificationOk returns a tuple with the CustomRequestNotification field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomRequestNotification
+
+`func (o *UpdateConfigurationTemplateInfo) SetCustomRequestNotification(v string)`
+
+SetCustomRequestNotification sets CustomRequestNotification field to given value.
+
+### HasCustomRequestNotification
+
+`func (o *UpdateConfigurationTemplateInfo) HasCustomRequestNotification() bool`
+
+HasCustomRequestNotification returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

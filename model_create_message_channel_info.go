@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,8 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the CreateMessageChannelInfo type satisfies the MappedNullable interface at compile time
@@ -24,6 +26,8 @@ type CreateMessageChannelInfo struct {
 	// The remote ID of the message channel
 	RemoteId string `json:"remote_id"`
 }
+
+type _CreateMessageChannelInfo CreateMessageChannelInfo
 
 // NewCreateMessageChannelInfo instantiates a new CreateMessageChannelInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -105,6 +109,44 @@ func (o CreateMessageChannelInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize["third_party_provider"] = o.ThirdPartyProvider
 	toSerialize["remote_id"] = o.RemoteId
 	return toSerialize, nil
+}
+
+func (o *CreateMessageChannelInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"third_party_provider",
+		"remote_id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCreateMessageChannelInfo := _CreateMessageChannelInfo{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCreateMessageChannelInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateMessageChannelInfo(varCreateMessageChannelInfo)
+
+	return err
 }
 
 type NullableCreateMessageChannelInfo struct {

@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -26,12 +26,16 @@ type ResourceRemoteInfo struct {
 	AwsEc2Instance *ResourceRemoteInfoAwsEc2Instance `json:"aws_ec2_instance,omitempty"`
 	AwsRdsInstance *ResourceRemoteInfoAwsRdsInstance `json:"aws_rds_instance,omitempty"`
 	AwsEksCluster *ResourceRemoteInfoAwsEksCluster `json:"aws_eks_cluster,omitempty"`
+	GcpOrganization *ResourceRemoteInfoGcpOrganization `json:"gcp_organization,omitempty"`
 	GcpBucket *ResourceRemoteInfoGcpBucket `json:"gcp_bucket,omitempty"`
 	GcpComputeInstance *ResourceRemoteInfoGcpComputeInstance `json:"gcp_compute_instance,omitempty"`
+	GcpBigQueryDataset *ResourceRemoteInfoGcpBigQueryDataset `json:"gcp_big_query_dataset,omitempty"`
+	GcpBigQueryTable *ResourceRemoteInfoGcpBigQueryTable `json:"gcp_big_query_table,omitempty"`
 	GcpFolder *ResourceRemoteInfoGcpFolder `json:"gcp_folder,omitempty"`
 	GcpGkeCluster *ResourceRemoteInfoGcpGkeCluster `json:"gcp_gke_cluster,omitempty"`
 	GcpProject *ResourceRemoteInfoGcpProject `json:"gcp_project,omitempty"`
 	GcpSqlInstance *ResourceRemoteInfoGcpSqlInstance `json:"gcp_sql_instance,omitempty"`
+	GcpServiceAccount *ResourceRemoteInfoGcpServiceAccount `json:"gcp_service_account,omitempty"`
 	GithubRepo *ResourceRemoteInfoGithubRepo `json:"github_repo,omitempty"`
 	GitlabProject *ResourceRemoteInfoGitlabProject `json:"gitlab_project,omitempty"`
 	OktaApp *ResourceRemoteInfoOktaApp `json:"okta_app,omitempty"`
@@ -253,6 +257,38 @@ func (o *ResourceRemoteInfo) SetAwsEksCluster(v ResourceRemoteInfoAwsEksCluster)
 	o.AwsEksCluster = &v
 }
 
+// GetGcpOrganization returns the GcpOrganization field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetGcpOrganization() ResourceRemoteInfoGcpOrganization {
+	if o == nil || IsNil(o.GcpOrganization) {
+		var ret ResourceRemoteInfoGcpOrganization
+		return ret
+	}
+	return *o.GcpOrganization
+}
+
+// GetGcpOrganizationOk returns a tuple with the GcpOrganization field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetGcpOrganizationOk() (*ResourceRemoteInfoGcpOrganization, bool) {
+	if o == nil || IsNil(o.GcpOrganization) {
+		return nil, false
+	}
+	return o.GcpOrganization, true
+}
+
+// HasGcpOrganization returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasGcpOrganization() bool {
+	if o != nil && !IsNil(o.GcpOrganization) {
+		return true
+	}
+
+	return false
+}
+
+// SetGcpOrganization gets a reference to the given ResourceRemoteInfoGcpOrganization and assigns it to the GcpOrganization field.
+func (o *ResourceRemoteInfo) SetGcpOrganization(v ResourceRemoteInfoGcpOrganization) {
+	o.GcpOrganization = &v
+}
+
 // GetGcpBucket returns the GcpBucket field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetGcpBucket() ResourceRemoteInfoGcpBucket {
 	if o == nil || IsNil(o.GcpBucket) {
@@ -315,6 +351,70 @@ func (o *ResourceRemoteInfo) HasGcpComputeInstance() bool {
 // SetGcpComputeInstance gets a reference to the given ResourceRemoteInfoGcpComputeInstance and assigns it to the GcpComputeInstance field.
 func (o *ResourceRemoteInfo) SetGcpComputeInstance(v ResourceRemoteInfoGcpComputeInstance) {
 	o.GcpComputeInstance = &v
+}
+
+// GetGcpBigQueryDataset returns the GcpBigQueryDataset field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetGcpBigQueryDataset() ResourceRemoteInfoGcpBigQueryDataset {
+	if o == nil || IsNil(o.GcpBigQueryDataset) {
+		var ret ResourceRemoteInfoGcpBigQueryDataset
+		return ret
+	}
+	return *o.GcpBigQueryDataset
+}
+
+// GetGcpBigQueryDatasetOk returns a tuple with the GcpBigQueryDataset field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetGcpBigQueryDatasetOk() (*ResourceRemoteInfoGcpBigQueryDataset, bool) {
+	if o == nil || IsNil(o.GcpBigQueryDataset) {
+		return nil, false
+	}
+	return o.GcpBigQueryDataset, true
+}
+
+// HasGcpBigQueryDataset returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasGcpBigQueryDataset() bool {
+	if o != nil && !IsNil(o.GcpBigQueryDataset) {
+		return true
+	}
+
+	return false
+}
+
+// SetGcpBigQueryDataset gets a reference to the given ResourceRemoteInfoGcpBigQueryDataset and assigns it to the GcpBigQueryDataset field.
+func (o *ResourceRemoteInfo) SetGcpBigQueryDataset(v ResourceRemoteInfoGcpBigQueryDataset) {
+	o.GcpBigQueryDataset = &v
+}
+
+// GetGcpBigQueryTable returns the GcpBigQueryTable field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetGcpBigQueryTable() ResourceRemoteInfoGcpBigQueryTable {
+	if o == nil || IsNil(o.GcpBigQueryTable) {
+		var ret ResourceRemoteInfoGcpBigQueryTable
+		return ret
+	}
+	return *o.GcpBigQueryTable
+}
+
+// GetGcpBigQueryTableOk returns a tuple with the GcpBigQueryTable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetGcpBigQueryTableOk() (*ResourceRemoteInfoGcpBigQueryTable, bool) {
+	if o == nil || IsNil(o.GcpBigQueryTable) {
+		return nil, false
+	}
+	return o.GcpBigQueryTable, true
+}
+
+// HasGcpBigQueryTable returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasGcpBigQueryTable() bool {
+	if o != nil && !IsNil(o.GcpBigQueryTable) {
+		return true
+	}
+
+	return false
+}
+
+// SetGcpBigQueryTable gets a reference to the given ResourceRemoteInfoGcpBigQueryTable and assigns it to the GcpBigQueryTable field.
+func (o *ResourceRemoteInfo) SetGcpBigQueryTable(v ResourceRemoteInfoGcpBigQueryTable) {
+	o.GcpBigQueryTable = &v
 }
 
 // GetGcpFolder returns the GcpFolder field value if set, zero value otherwise.
@@ -443,6 +543,38 @@ func (o *ResourceRemoteInfo) HasGcpSqlInstance() bool {
 // SetGcpSqlInstance gets a reference to the given ResourceRemoteInfoGcpSqlInstance and assigns it to the GcpSqlInstance field.
 func (o *ResourceRemoteInfo) SetGcpSqlInstance(v ResourceRemoteInfoGcpSqlInstance) {
 	o.GcpSqlInstance = &v
+}
+
+// GetGcpServiceAccount returns the GcpServiceAccount field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetGcpServiceAccount() ResourceRemoteInfoGcpServiceAccount {
+	if o == nil || IsNil(o.GcpServiceAccount) {
+		var ret ResourceRemoteInfoGcpServiceAccount
+		return ret
+	}
+	return *o.GcpServiceAccount
+}
+
+// GetGcpServiceAccountOk returns a tuple with the GcpServiceAccount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetGcpServiceAccountOk() (*ResourceRemoteInfoGcpServiceAccount, bool) {
+	if o == nil || IsNil(o.GcpServiceAccount) {
+		return nil, false
+	}
+	return o.GcpServiceAccount, true
+}
+
+// HasGcpServiceAccount returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasGcpServiceAccount() bool {
+	if o != nil && !IsNil(o.GcpServiceAccount) {
+		return true
+	}
+
+	return false
+}
+
+// SetGcpServiceAccount gets a reference to the given ResourceRemoteInfoGcpServiceAccount and assigns it to the GcpServiceAccount field.
+func (o *ResourceRemoteInfo) SetGcpServiceAccount(v ResourceRemoteInfoGcpServiceAccount) {
+	o.GcpServiceAccount = &v
 }
 
 // GetGithubRepo returns the GithubRepo field value if set, zero value otherwise.
@@ -793,11 +925,20 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AwsEksCluster) {
 		toSerialize["aws_eks_cluster"] = o.AwsEksCluster
 	}
+	if !IsNil(o.GcpOrganization) {
+		toSerialize["gcp_organization"] = o.GcpOrganization
+	}
 	if !IsNil(o.GcpBucket) {
 		toSerialize["gcp_bucket"] = o.GcpBucket
 	}
 	if !IsNil(o.GcpComputeInstance) {
 		toSerialize["gcp_compute_instance"] = o.GcpComputeInstance
+	}
+	if !IsNil(o.GcpBigQueryDataset) {
+		toSerialize["gcp_big_query_dataset"] = o.GcpBigQueryDataset
+	}
+	if !IsNil(o.GcpBigQueryTable) {
+		toSerialize["gcp_big_query_table"] = o.GcpBigQueryTable
 	}
 	if !IsNil(o.GcpFolder) {
 		toSerialize["gcp_folder"] = o.GcpFolder
@@ -810,6 +951,9 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.GcpSqlInstance) {
 		toSerialize["gcp_sql_instance"] = o.GcpSqlInstance
+	}
+	if !IsNil(o.GcpServiceAccount) {
+		toSerialize["gcp_service_account"] = o.GcpServiceAccount
 	}
 	if !IsNil(o.GithubRepo) {
 		toSerialize["github_repo"] = o.GithubRepo

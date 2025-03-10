@@ -9,15 +9,16 @@ Name | Type | Description | Notes
 **AccessLevel** | [**ResourceAccessLevel**](ResourceAccessLevel.md) |  | 
 **FullName** | **string** | The user&#39;s full name. | 
 **Email** | **string** | The user&#39;s email. | 
-**ExpirationDate** | **NullableTime** | The day and time the user&#39;s access will expire. | 
+**ExpirationDate** | Pointer to **time.Time** | The day and time the user&#39;s access will expire. | [optional] 
 **HasDirectAccess** | **bool** | The user has direct access to this resources (vs. indirectly, like through a group). | 
 **NumAccessPaths** | **int32** | The number of ways in which the user has access through this resource (directly and indirectly). | 
+**PropagationStatus** | Pointer to [**PropagationStatus**](PropagationStatus.md) |  | [optional] 
 
 ## Methods
 
 ### NewResourceAccessUser
 
-`func NewResourceAccessUser(resourceId string, userId string, accessLevel ResourceAccessLevel, fullName string, email string, expirationDate NullableTime, hasDirectAccess bool, numAccessPaths int32, ) *ResourceAccessUser`
+`func NewResourceAccessUser(resourceId string, userId string, accessLevel ResourceAccessLevel, fullName string, email string, hasDirectAccess bool, numAccessPaths int32, ) *ResourceAccessUser`
 
 NewResourceAccessUser instantiates a new ResourceAccessUser object
 This constructor will assign default values to properties that have it defined,
@@ -151,17 +152,12 @@ and a boolean to check if the value has been set.
 
 SetExpirationDate sets ExpirationDate field to given value.
 
+### HasExpirationDate
 
-### SetExpirationDateNil
+`func (o *ResourceAccessUser) HasExpirationDate() bool`
 
-`func (o *ResourceAccessUser) SetExpirationDateNil(b bool)`
+HasExpirationDate returns a boolean if a field has been set.
 
- SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
-
-### UnsetExpirationDate
-`func (o *ResourceAccessUser) UnsetExpirationDate()`
-
-UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
 ### GetHasDirectAccess
 
 `func (o *ResourceAccessUser) GetHasDirectAccess() bool`
@@ -201,6 +197,31 @@ and a boolean to check if the value has been set.
 
 SetNumAccessPaths sets NumAccessPaths field to given value.
 
+
+### GetPropagationStatus
+
+`func (o *ResourceAccessUser) GetPropagationStatus() PropagationStatus`
+
+GetPropagationStatus returns the PropagationStatus field if non-nil, zero value otherwise.
+
+### GetPropagationStatusOk
+
+`func (o *ResourceAccessUser) GetPropagationStatusOk() (*PropagationStatus, bool)`
+
+GetPropagationStatusOk returns a tuple with the PropagationStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPropagationStatus
+
+`func (o *ResourceAccessUser) SetPropagationStatus(v PropagationStatus)`
+
+SetPropagationStatus sets PropagationStatus field to given value.
+
+### HasPropagationStatus
+
+`func (o *ResourceAccessUser) HasPropagationStatus() bool`
+
+HasPropagationStatus returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

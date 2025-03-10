@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**GroupId** | **string** | The id of the Azure AD Security group. | 
+**GroupId** | **string** | The id of the Microsoft Entra ID Security group. | 
 
 ## Methods
 

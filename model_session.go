@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -14,6 +14,8 @@ package opal
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Session type satisfies the MappedNullable interface at compile time
@@ -31,6 +33,8 @@ type Session struct {
 	// The day and time the user's access will expire.
 	ExpirationDate time.Time `json:"expiration_date"`
 }
+
+type _Session Session
 
 // NewSession instantiates a new Session object
 // This constructor will assign default values to properties that have it defined,
@@ -190,6 +194,47 @@ func (o Session) ToMap() (map[string]interface{}, error) {
 	toSerialize["access_level"] = o.AccessLevel
 	toSerialize["expiration_date"] = o.ExpirationDate
 	return toSerialize, nil
+}
+
+func (o *Session) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"connection_id",
+		"user_id",
+		"resource_id",
+		"access_level",
+		"expiration_date",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSession := _Session{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varSession)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Session(varSession)
+
+	return err
 }
 
 type NullableSession struct {

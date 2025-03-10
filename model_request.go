@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -14,6 +14,8 @@ package opal
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Request type satisfies the MappedNullable interface at compile time
@@ -30,25 +32,33 @@ type Request struct {
 	// The unique identifier of the user who created the request.
 	RequesterId string `json:"requester_id"`
 	// The unique identifier of the user who is the target of the request.
-	TargetUserId string `json:"target_user_id"`
+	TargetUserId *string `json:"target_user_id,omitempty"`
+	// The unique identifier of the group who is the target of the request.
+	TargetGroupId *string `json:"target_group_id,omitempty"`
+	// The status of the request.
 	Status RequestStatusEnum `json:"status"`
 	// The reason for the request.
 	Reason string `json:"reason"`
 	// The duration of the request in minutes.
 	DurationMinutes *int32 `json:"duration_minutes,omitempty"`
+	// The list of targets for the request.
+	RequestedItemsList []RequestedItem `json:"requested_items_list,omitempty"`
+	// The responses given to the custom fields associated to the request
+	CustomFieldsResponses []RequestCustomFieldResponse `json:"custom_fields_responses,omitempty"`
 }
+
+type _Request Request
 
 // NewRequest instantiates a new Request object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRequest(id string, createdAt time.Time, updatedAt time.Time, requesterId string, targetUserId string, status RequestStatusEnum, reason string) *Request {
+func NewRequest(id string, createdAt time.Time, updatedAt time.Time, requesterId string, status RequestStatusEnum, reason string) *Request {
 	this := Request{}
 	this.Id = id
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
 	this.RequesterId = requesterId
-	this.TargetUserId = targetUserId
 	this.Status = status
 	this.Reason = reason
 	return &this
@@ -158,28 +168,68 @@ func (o *Request) SetRequesterId(v string) {
 	o.RequesterId = v
 }
 
-// GetTargetUserId returns the TargetUserId field value
+// GetTargetUserId returns the TargetUserId field value if set, zero value otherwise.
 func (o *Request) GetTargetUserId() string {
-	if o == nil {
+	if o == nil || IsNil(o.TargetUserId) {
 		var ret string
 		return ret
 	}
-
-	return o.TargetUserId
+	return *o.TargetUserId
 }
 
-// GetTargetUserIdOk returns a tuple with the TargetUserId field value
+// GetTargetUserIdOk returns a tuple with the TargetUserId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Request) GetTargetUserIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TargetUserId) {
 		return nil, false
 	}
-	return &o.TargetUserId, true
+	return o.TargetUserId, true
 }
 
-// SetTargetUserId sets field value
+// HasTargetUserId returns a boolean if a field has been set.
+func (o *Request) HasTargetUserId() bool {
+	if o != nil && !IsNil(o.TargetUserId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetUserId gets a reference to the given string and assigns it to the TargetUserId field.
 func (o *Request) SetTargetUserId(v string) {
-	o.TargetUserId = v
+	o.TargetUserId = &v
+}
+
+// GetTargetGroupId returns the TargetGroupId field value if set, zero value otherwise.
+func (o *Request) GetTargetGroupId() string {
+	if o == nil || IsNil(o.TargetGroupId) {
+		var ret string
+		return ret
+	}
+	return *o.TargetGroupId
+}
+
+// GetTargetGroupIdOk returns a tuple with the TargetGroupId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Request) GetTargetGroupIdOk() (*string, bool) {
+	if o == nil || IsNil(o.TargetGroupId) {
+		return nil, false
+	}
+	return o.TargetGroupId, true
+}
+
+// HasTargetGroupId returns a boolean if a field has been set.
+func (o *Request) HasTargetGroupId() bool {
+	if o != nil && !IsNil(o.TargetGroupId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetGroupId gets a reference to the given string and assigns it to the TargetGroupId field.
+func (o *Request) SetTargetGroupId(v string) {
+	o.TargetGroupId = &v
 }
 
 // GetStatus returns the Status field value
@@ -262,6 +312,70 @@ func (o *Request) SetDurationMinutes(v int32) {
 	o.DurationMinutes = &v
 }
 
+// GetRequestedItemsList returns the RequestedItemsList field value if set, zero value otherwise.
+func (o *Request) GetRequestedItemsList() []RequestedItem {
+	if o == nil || IsNil(o.RequestedItemsList) {
+		var ret []RequestedItem
+		return ret
+	}
+	return o.RequestedItemsList
+}
+
+// GetRequestedItemsListOk returns a tuple with the RequestedItemsList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Request) GetRequestedItemsListOk() ([]RequestedItem, bool) {
+	if o == nil || IsNil(o.RequestedItemsList) {
+		return nil, false
+	}
+	return o.RequestedItemsList, true
+}
+
+// HasRequestedItemsList returns a boolean if a field has been set.
+func (o *Request) HasRequestedItemsList() bool {
+	if o != nil && !IsNil(o.RequestedItemsList) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestedItemsList gets a reference to the given []RequestedItem and assigns it to the RequestedItemsList field.
+func (o *Request) SetRequestedItemsList(v []RequestedItem) {
+	o.RequestedItemsList = v
+}
+
+// GetCustomFieldsResponses returns the CustomFieldsResponses field value if set, zero value otherwise.
+func (o *Request) GetCustomFieldsResponses() []RequestCustomFieldResponse {
+	if o == nil || IsNil(o.CustomFieldsResponses) {
+		var ret []RequestCustomFieldResponse
+		return ret
+	}
+	return o.CustomFieldsResponses
+}
+
+// GetCustomFieldsResponsesOk returns a tuple with the CustomFieldsResponses field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Request) GetCustomFieldsResponsesOk() ([]RequestCustomFieldResponse, bool) {
+	if o == nil || IsNil(o.CustomFieldsResponses) {
+		return nil, false
+	}
+	return o.CustomFieldsResponses, true
+}
+
+// HasCustomFieldsResponses returns a boolean if a field has been set.
+func (o *Request) HasCustomFieldsResponses() bool {
+	if o != nil && !IsNil(o.CustomFieldsResponses) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomFieldsResponses gets a reference to the given []RequestCustomFieldResponse and assigns it to the CustomFieldsResponses field.
+func (o *Request) SetCustomFieldsResponses(v []RequestCustomFieldResponse) {
+	o.CustomFieldsResponses = v
+}
+
 func (o Request) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -276,13 +390,66 @@ func (o Request) ToMap() (map[string]interface{}, error) {
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["updated_at"] = o.UpdatedAt
 	toSerialize["requester_id"] = o.RequesterId
-	toSerialize["target_user_id"] = o.TargetUserId
+	if !IsNil(o.TargetUserId) {
+		toSerialize["target_user_id"] = o.TargetUserId
+	}
+	if !IsNil(o.TargetGroupId) {
+		toSerialize["target_group_id"] = o.TargetGroupId
+	}
 	toSerialize["status"] = o.Status
 	toSerialize["reason"] = o.Reason
 	if !IsNil(o.DurationMinutes) {
 		toSerialize["duration_minutes"] = o.DurationMinutes
 	}
+	if !IsNil(o.RequestedItemsList) {
+		toSerialize["requested_items_list"] = o.RequestedItemsList
+	}
+	if !IsNil(o.CustomFieldsResponses) {
+		toSerialize["custom_fields_responses"] = o.CustomFieldsResponses
+	}
 	return toSerialize, nil
+}
+
+func (o *Request) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"created_at",
+		"updated_at",
+		"requester_id",
+		"status",
+		"reason",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRequest := _Request{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Request(varRequest)
+
+	return err
 }
 
 type NullableRequest struct {

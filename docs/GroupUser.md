@@ -9,13 +9,14 @@ Name | Type | Description | Notes
 **AccessLevel** | Pointer to [**GroupAccessLevel**](GroupAccessLevel.md) |  | [optional] 
 **FullName** | **string** | The user&#39;s full name. | 
 **Email** | **string** | The user&#39;s email. | 
-**ExpirationDate** | **NullableTime** | The day and time the user&#39;s access will expire. | 
+**ExpirationDate** | Pointer to **time.Time** | The day and time the user&#39;s access will expire. | [optional] 
+**PropagationStatus** | Pointer to [**PropagationStatus**](PropagationStatus.md) |  | [optional] 
 
 ## Methods
 
 ### NewGroupUser
 
-`func NewGroupUser(groupId string, userId string, fullName string, email string, expirationDate NullableTime, ) *GroupUser`
+`func NewGroupUser(groupId string, userId string, fullName string, email string, ) *GroupUser`
 
 NewGroupUser instantiates a new GroupUser object
 This constructor will assign default values to properties that have it defined,
@@ -154,17 +155,37 @@ and a boolean to check if the value has been set.
 
 SetExpirationDate sets ExpirationDate field to given value.
 
+### HasExpirationDate
 
-### SetExpirationDateNil
+`func (o *GroupUser) HasExpirationDate() bool`
 
-`func (o *GroupUser) SetExpirationDateNil(b bool)`
+HasExpirationDate returns a boolean if a field has been set.
 
- SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
+### GetPropagationStatus
 
-### UnsetExpirationDate
-`func (o *GroupUser) UnsetExpirationDate()`
+`func (o *GroupUser) GetPropagationStatus() PropagationStatus`
 
-UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
+GetPropagationStatus returns the PropagationStatus field if non-nil, zero value otherwise.
+
+### GetPropagationStatusOk
+
+`func (o *GroupUser) GetPropagationStatusOk() (*PropagationStatus, bool)`
+
+GetPropagationStatusOk returns a tuple with the PropagationStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPropagationStatus
+
+`func (o *GroupUser) SetPropagationStatus(v PropagationStatus)`
+
+SetPropagationStatus sets PropagationStatus field to given value.
+
+### HasPropagationStatus
+
+`func (o *GroupUser) HasPropagationStatus() bool`
+
+HasPropagationStatus returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

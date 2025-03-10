@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the group. | [optional] 
 **Description** | Pointer to **string** | A description of the group. | [optional] 
 **AdminOwnerId** | Pointer to **string** | The ID of the owner of the group. | [optional] 
+**GroupLeaderUserIds** | Pointer to **[]string** | A list of User IDs for the group leaders of the group | [optional] 
 **RemoteId** | Pointer to **string** | The ID of the remote. | [optional] 
 **RemoteName** | Pointer to **string** | The name of the remote. | [optional] 
 **GroupType** | Pointer to [**GroupTypeEnum**](GroupTypeEnum.md) |  | [optional] 
@@ -21,10 +22,15 @@ Name | Type | Description | Notes
 **AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this group. | [optional] 
 **RequestTemplateId** | Pointer to **string** | The ID of the associated request template. | [optional] 
 **ConfigurationTemplateId** | Pointer to **string** | The ID of the associated configuration template. | [optional] 
+**GroupBindingId** | Pointer to **string** | The ID of the associated group binding. | [optional] 
 **IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this group. | [optional] 
-**RequestConfigurationList** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | A list of request configurations for this group. | [optional] 
+**RequestConfigurations** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | A list of request configurations for this group. | [optional] 
+**RequestConfigurationList** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | A list of request configurations for this group. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **Metadata** | Pointer to **string** | JSON metadata about the remote group. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details. | [optional] 
 **RemoteInfo** | Pointer to [**GroupRemoteInfo**](GroupRemoteInfo.md) |  | [optional] 
+**CustomRequestNotification** | Pointer to **string** | Custom request notification sent to the requester when the request is approved. | [optional] 
+**RiskSensitivity** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) | The risk sensitivity level for the group. When an override is set, this field will match that. | [optional] [readonly] 
+**RiskSensitivityOverride** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) |  | [optional] 
 
 ## Methods
 
@@ -164,6 +170,31 @@ SetAdminOwnerId sets AdminOwnerId field to given value.
 `func (o *Group) HasAdminOwnerId() bool`
 
 HasAdminOwnerId returns a boolean if a field has been set.
+
+### GetGroupLeaderUserIds
+
+`func (o *Group) GetGroupLeaderUserIds() []string`
+
+GetGroupLeaderUserIds returns the GroupLeaderUserIds field if non-nil, zero value otherwise.
+
+### GetGroupLeaderUserIdsOk
+
+`func (o *Group) GetGroupLeaderUserIdsOk() (*[]string, bool)`
+
+GetGroupLeaderUserIdsOk returns a tuple with the GroupLeaderUserIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGroupLeaderUserIds
+
+`func (o *Group) SetGroupLeaderUserIds(v []string)`
+
+SetGroupLeaderUserIds sets GroupLeaderUserIds field to given value.
+
+### HasGroupLeaderUserIds
+
+`func (o *Group) HasGroupLeaderUserIds() bool`
+
+HasGroupLeaderUserIds returns a boolean if a field has been set.
 
 ### GetRemoteId
 
@@ -465,6 +496,31 @@ SetConfigurationTemplateId sets ConfigurationTemplateId field to given value.
 
 HasConfigurationTemplateId returns a boolean if a field has been set.
 
+### GetGroupBindingId
+
+`func (o *Group) GetGroupBindingId() string`
+
+GetGroupBindingId returns the GroupBindingId field if non-nil, zero value otherwise.
+
+### GetGroupBindingIdOk
+
+`func (o *Group) GetGroupBindingIdOk() (*string, bool)`
+
+GetGroupBindingIdOk returns a tuple with the GroupBindingId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGroupBindingId
+
+`func (o *Group) SetGroupBindingId(v string)`
+
+SetGroupBindingId sets GroupBindingId field to given value.
+
+### HasGroupBindingId
+
+`func (o *Group) HasGroupBindingId() bool`
+
+HasGroupBindingId returns a boolean if a field has been set.
+
 ### GetIsRequestable
 
 `func (o *Group) GetIsRequestable() bool`
@@ -489,6 +545,31 @@ SetIsRequestable sets IsRequestable field to given value.
 `func (o *Group) HasIsRequestable() bool`
 
 HasIsRequestable returns a boolean if a field has been set.
+
+### GetRequestConfigurations
+
+`func (o *Group) GetRequestConfigurations() []RequestConfiguration`
+
+GetRequestConfigurations returns the RequestConfigurations field if non-nil, zero value otherwise.
+
+### GetRequestConfigurationsOk
+
+`func (o *Group) GetRequestConfigurationsOk() (*[]RequestConfiguration, bool)`
+
+GetRequestConfigurationsOk returns a tuple with the RequestConfigurations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestConfigurations
+
+`func (o *Group) SetRequestConfigurations(v []RequestConfiguration)`
+
+SetRequestConfigurations sets RequestConfigurations field to given value.
+
+### HasRequestConfigurations
+
+`func (o *Group) HasRequestConfigurations() bool`
+
+HasRequestConfigurations returns a boolean if a field has been set.
 
 ### GetRequestConfigurationList
 
@@ -564,6 +645,81 @@ SetRemoteInfo sets RemoteInfo field to given value.
 `func (o *Group) HasRemoteInfo() bool`
 
 HasRemoteInfo returns a boolean if a field has been set.
+
+### GetCustomRequestNotification
+
+`func (o *Group) GetCustomRequestNotification() string`
+
+GetCustomRequestNotification returns the CustomRequestNotification field if non-nil, zero value otherwise.
+
+### GetCustomRequestNotificationOk
+
+`func (o *Group) GetCustomRequestNotificationOk() (*string, bool)`
+
+GetCustomRequestNotificationOk returns a tuple with the CustomRequestNotification field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomRequestNotification
+
+`func (o *Group) SetCustomRequestNotification(v string)`
+
+SetCustomRequestNotification sets CustomRequestNotification field to given value.
+
+### HasCustomRequestNotification
+
+`func (o *Group) HasCustomRequestNotification() bool`
+
+HasCustomRequestNotification returns a boolean if a field has been set.
+
+### GetRiskSensitivity
+
+`func (o *Group) GetRiskSensitivity() RiskSensitivityEnum`
+
+GetRiskSensitivity returns the RiskSensitivity field if non-nil, zero value otherwise.
+
+### GetRiskSensitivityOk
+
+`func (o *Group) GetRiskSensitivityOk() (*RiskSensitivityEnum, bool)`
+
+GetRiskSensitivityOk returns a tuple with the RiskSensitivity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRiskSensitivity
+
+`func (o *Group) SetRiskSensitivity(v RiskSensitivityEnum)`
+
+SetRiskSensitivity sets RiskSensitivity field to given value.
+
+### HasRiskSensitivity
+
+`func (o *Group) HasRiskSensitivity() bool`
+
+HasRiskSensitivity returns a boolean if a field has been set.
+
+### GetRiskSensitivityOverride
+
+`func (o *Group) GetRiskSensitivityOverride() RiskSensitivityEnum`
+
+GetRiskSensitivityOverride returns the RiskSensitivityOverride field if non-nil, zero value otherwise.
+
+### GetRiskSensitivityOverrideOk
+
+`func (o *Group) GetRiskSensitivityOverrideOk() (*RiskSensitivityEnum, bool)`
+
+GetRiskSensitivityOverrideOk returns a tuple with the RiskSensitivityOverride field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRiskSensitivityOverride
+
+`func (o *Group) SetRiskSensitivityOverride(v RiskSensitivityEnum)`
+
+SetRiskSensitivityOverride sets RiskSensitivityOverride field to given value.
+
+### HasRiskSensitivityOverride
+
+`func (o *Group) HasRiskSensitivityOverride() bool`
+
+HasRiskSensitivityOverride returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,8 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ReviewerStage type satisfies the MappedNullable interface at compile time
@@ -22,10 +24,14 @@ var _ MappedNullable = &ReviewerStage{}
 type ReviewerStage struct {
 	// Whether this reviewer stage should require manager approval.
 	RequireManagerApproval bool `json:"require_manager_approval"`
-	// The operator of the reviewer stage.
+	// Whether this reviewer stage should require admin approval.
+	RequireAdminApproval *bool `json:"require_admin_approval,omitempty"`
+	// The operator of the reviewer stage. Admin and manager approval are also treated as reviewers.
 	Operator string `json:"operator"`
 	OwnerIds []string `json:"owner_ids"`
 }
+
+type _ReviewerStage ReviewerStage
 
 // NewReviewerStage instantiates a new ReviewerStage object
 // This constructor will assign default values to properties that have it defined,
@@ -69,6 +75,38 @@ func (o *ReviewerStage) GetRequireManagerApprovalOk() (*bool, bool) {
 // SetRequireManagerApproval sets field value
 func (o *ReviewerStage) SetRequireManagerApproval(v bool) {
 	o.RequireManagerApproval = v
+}
+
+// GetRequireAdminApproval returns the RequireAdminApproval field value if set, zero value otherwise.
+func (o *ReviewerStage) GetRequireAdminApproval() bool {
+	if o == nil || IsNil(o.RequireAdminApproval) {
+		var ret bool
+		return ret
+	}
+	return *o.RequireAdminApproval
+}
+
+// GetRequireAdminApprovalOk returns a tuple with the RequireAdminApproval field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ReviewerStage) GetRequireAdminApprovalOk() (*bool, bool) {
+	if o == nil || IsNil(o.RequireAdminApproval) {
+		return nil, false
+	}
+	return o.RequireAdminApproval, true
+}
+
+// HasRequireAdminApproval returns a boolean if a field has been set.
+func (o *ReviewerStage) HasRequireAdminApproval() bool {
+	if o != nil && !IsNil(o.RequireAdminApproval) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequireAdminApproval gets a reference to the given bool and assigns it to the RequireAdminApproval field.
+func (o *ReviewerStage) SetRequireAdminApproval(v bool) {
+	o.RequireAdminApproval = &v
 }
 
 // GetOperator returns the Operator field value
@@ -130,9 +168,51 @@ func (o ReviewerStage) MarshalJSON() ([]byte, error) {
 func (o ReviewerStage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["require_manager_approval"] = o.RequireManagerApproval
+	if !IsNil(o.RequireAdminApproval) {
+		toSerialize["require_admin_approval"] = o.RequireAdminApproval
+	}
 	toSerialize["operator"] = o.Operator
 	toSerialize["owner_ids"] = o.OwnerIds
 	return toSerialize, nil
+}
+
+func (o *ReviewerStage) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"require_manager_approval",
+		"operator",
+		"owner_ids",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varReviewerStage := _ReviewerStage{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varReviewerStage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReviewerStage(varReviewerStage)
+
+	return err
 }
 
 type NullableReviewerStage struct {

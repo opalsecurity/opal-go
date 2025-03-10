@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -26,6 +26,7 @@ type ConfigurationTemplate struct {
 	Name *string `json:"name,omitempty"`
 	// The ID of the owner of the configuration template.
 	AdminOwnerId *string `json:"admin_owner_id,omitempty"`
+	// The visibility info of the configuration template.
 	Visibility *VisibilityInfo `json:"visibility,omitempty"`
 	// The IDs of the audit message channels linked to the configuration template.
 	LinkedAuditMessageChannelIds []string `json:"linked_audit_message_channel_ids,omitempty"`
@@ -39,6 +40,9 @@ type ConfigurationTemplate struct {
 	RequireMfaToApprove *bool `json:"require_mfa_to_approve,omitempty"`
 	// A bool representing whether or not to require MFA to connect to resources associated with this configuration template.
 	RequireMfaToConnect *bool `json:"require_mfa_to_connect,omitempty"`
+	TicketPropagation *TicketPropagationConfiguration `json:"ticket_propagation,omitempty"`
+	// Custom request notification sent upon request approval for this configuration template.
+	CustomRequestNotification *string `json:"custom_request_notification,omitempty"`
 }
 
 // NewConfigurationTemplate instantiates a new ConfigurationTemplate object
@@ -378,6 +382,70 @@ func (o *ConfigurationTemplate) SetRequireMfaToConnect(v bool) {
 	o.RequireMfaToConnect = &v
 }
 
+// GetTicketPropagation returns the TicketPropagation field value if set, zero value otherwise.
+func (o *ConfigurationTemplate) GetTicketPropagation() TicketPropagationConfiguration {
+	if o == nil || IsNil(o.TicketPropagation) {
+		var ret TicketPropagationConfiguration
+		return ret
+	}
+	return *o.TicketPropagation
+}
+
+// GetTicketPropagationOk returns a tuple with the TicketPropagation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationTemplate) GetTicketPropagationOk() (*TicketPropagationConfiguration, bool) {
+	if o == nil || IsNil(o.TicketPropagation) {
+		return nil, false
+	}
+	return o.TicketPropagation, true
+}
+
+// HasTicketPropagation returns a boolean if a field has been set.
+func (o *ConfigurationTemplate) HasTicketPropagation() bool {
+	if o != nil && !IsNil(o.TicketPropagation) {
+		return true
+	}
+
+	return false
+}
+
+// SetTicketPropagation gets a reference to the given TicketPropagationConfiguration and assigns it to the TicketPropagation field.
+func (o *ConfigurationTemplate) SetTicketPropagation(v TicketPropagationConfiguration) {
+	o.TicketPropagation = &v
+}
+
+// GetCustomRequestNotification returns the CustomRequestNotification field value if set, zero value otherwise.
+func (o *ConfigurationTemplate) GetCustomRequestNotification() string {
+	if o == nil || IsNil(o.CustomRequestNotification) {
+		var ret string
+		return ret
+	}
+	return *o.CustomRequestNotification
+}
+
+// GetCustomRequestNotificationOk returns a tuple with the CustomRequestNotification field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationTemplate) GetCustomRequestNotificationOk() (*string, bool) {
+	if o == nil || IsNil(o.CustomRequestNotification) {
+		return nil, false
+	}
+	return o.CustomRequestNotification, true
+}
+
+// HasCustomRequestNotification returns a boolean if a field has been set.
+func (o *ConfigurationTemplate) HasCustomRequestNotification() bool {
+	if o != nil && !IsNil(o.CustomRequestNotification) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomRequestNotification gets a reference to the given string and assigns it to the CustomRequestNotification field.
+func (o *ConfigurationTemplate) SetCustomRequestNotification(v string) {
+	o.CustomRequestNotification = &v
+}
+
 func (o ConfigurationTemplate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -417,6 +485,12 @@ func (o ConfigurationTemplate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.RequireMfaToConnect) {
 		toSerialize["require_mfa_to_connect"] = o.RequireMfaToConnect
+	}
+	if !IsNil(o.TicketPropagation) {
+		toSerialize["ticket_propagation"] = o.TicketPropagation
+	}
+	if !IsNil(o.CustomRequestNotification) {
+		toSerialize["custom_request_notification"] = o.CustomRequestNotification
 	}
 	return toSerialize, nil
 }

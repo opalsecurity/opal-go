@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,8 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the CreateConfigurationTemplateInfo type satisfies the MappedNullable interface at compile time
@@ -22,6 +24,7 @@ var _ MappedNullable = &CreateConfigurationTemplateInfo{}
 type CreateConfigurationTemplateInfo struct {
 	// The ID of the owner of the configuration template.
 	AdminOwnerId string `json:"admin_owner_id"`
+	// The visibility info of the configuration template.
 	Visibility VisibilityInfo `json:"visibility"`
 	// The IDs of the audit message channels linked to the configuration template.
 	LinkedAuditMessageChannelIds []string `json:"linked_audit_message_channel_ids,omitempty"`
@@ -35,8 +38,17 @@ type CreateConfigurationTemplateInfo struct {
 	RequireMfaToConnect bool `json:"require_mfa_to_connect"`
 	// The name of the configuration template.
 	Name string `json:"name"`
+	// The request configuration list of the configuration template. If not provided, the default request configuration will be used.
+	RequestConfigurations []RequestConfiguration `json:"request_configurations,omitempty"`
+	// The request configuration list of the configuration template. If not provided, the default request configuration will be used. Deprecated in favor of `request_configurations`.
+	// Deprecated
 	RequestConfigurationList *CreateRequestConfigurationInfoList `json:"request_configuration_list,omitempty"`
+	TicketPropagation *TicketPropagationConfiguration `json:"ticket_propagation,omitempty"`
+	// Custom request notification sent upon request approval for this configuration template.
+	CustomRequestNotification *string `json:"custom_request_notification,omitempty"`
 }
+
+type _CreateConfigurationTemplateInfo CreateConfigurationTemplateInfo
 
 // NewCreateConfigurationTemplateInfo instantiates a new CreateConfigurationTemplateInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -276,7 +288,40 @@ func (o *CreateConfigurationTemplateInfo) SetName(v string) {
 	o.Name = v
 }
 
+// GetRequestConfigurations returns the RequestConfigurations field value if set, zero value otherwise.
+func (o *CreateConfigurationTemplateInfo) GetRequestConfigurations() []RequestConfiguration {
+	if o == nil || IsNil(o.RequestConfigurations) {
+		var ret []RequestConfiguration
+		return ret
+	}
+	return o.RequestConfigurations
+}
+
+// GetRequestConfigurationsOk returns a tuple with the RequestConfigurations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateConfigurationTemplateInfo) GetRequestConfigurationsOk() ([]RequestConfiguration, bool) {
+	if o == nil || IsNil(o.RequestConfigurations) {
+		return nil, false
+	}
+	return o.RequestConfigurations, true
+}
+
+// HasRequestConfigurations returns a boolean if a field has been set.
+func (o *CreateConfigurationTemplateInfo) HasRequestConfigurations() bool {
+	if o != nil && !IsNil(o.RequestConfigurations) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestConfigurations gets a reference to the given []RequestConfiguration and assigns it to the RequestConfigurations field.
+func (o *CreateConfigurationTemplateInfo) SetRequestConfigurations(v []RequestConfiguration) {
+	o.RequestConfigurations = v
+}
+
 // GetRequestConfigurationList returns the RequestConfigurationList field value if set, zero value otherwise.
+// Deprecated
 func (o *CreateConfigurationTemplateInfo) GetRequestConfigurationList() CreateRequestConfigurationInfoList {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		var ret CreateRequestConfigurationInfoList
@@ -287,6 +332,7 @@ func (o *CreateConfigurationTemplateInfo) GetRequestConfigurationList() CreateRe
 
 // GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CreateConfigurationTemplateInfo) GetRequestConfigurationListOk() (*CreateRequestConfigurationInfoList, bool) {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		return nil, false
@@ -304,8 +350,73 @@ func (o *CreateConfigurationTemplateInfo) HasRequestConfigurationList() bool {
 }
 
 // SetRequestConfigurationList gets a reference to the given CreateRequestConfigurationInfoList and assigns it to the RequestConfigurationList field.
+// Deprecated
 func (o *CreateConfigurationTemplateInfo) SetRequestConfigurationList(v CreateRequestConfigurationInfoList) {
 	o.RequestConfigurationList = &v
+}
+
+// GetTicketPropagation returns the TicketPropagation field value if set, zero value otherwise.
+func (o *CreateConfigurationTemplateInfo) GetTicketPropagation() TicketPropagationConfiguration {
+	if o == nil || IsNil(o.TicketPropagation) {
+		var ret TicketPropagationConfiguration
+		return ret
+	}
+	return *o.TicketPropagation
+}
+
+// GetTicketPropagationOk returns a tuple with the TicketPropagation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateConfigurationTemplateInfo) GetTicketPropagationOk() (*TicketPropagationConfiguration, bool) {
+	if o == nil || IsNil(o.TicketPropagation) {
+		return nil, false
+	}
+	return o.TicketPropagation, true
+}
+
+// HasTicketPropagation returns a boolean if a field has been set.
+func (o *CreateConfigurationTemplateInfo) HasTicketPropagation() bool {
+	if o != nil && !IsNil(o.TicketPropagation) {
+		return true
+	}
+
+	return false
+}
+
+// SetTicketPropagation gets a reference to the given TicketPropagationConfiguration and assigns it to the TicketPropagation field.
+func (o *CreateConfigurationTemplateInfo) SetTicketPropagation(v TicketPropagationConfiguration) {
+	o.TicketPropagation = &v
+}
+
+// GetCustomRequestNotification returns the CustomRequestNotification field value if set, zero value otherwise.
+func (o *CreateConfigurationTemplateInfo) GetCustomRequestNotification() string {
+	if o == nil || IsNil(o.CustomRequestNotification) {
+		var ret string
+		return ret
+	}
+	return *o.CustomRequestNotification
+}
+
+// GetCustomRequestNotificationOk returns a tuple with the CustomRequestNotification field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateConfigurationTemplateInfo) GetCustomRequestNotificationOk() (*string, bool) {
+	if o == nil || IsNil(o.CustomRequestNotification) {
+		return nil, false
+	}
+	return o.CustomRequestNotification, true
+}
+
+// HasCustomRequestNotification returns a boolean if a field has been set.
+func (o *CreateConfigurationTemplateInfo) HasCustomRequestNotification() bool {
+	if o != nil && !IsNil(o.CustomRequestNotification) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomRequestNotification gets a reference to the given string and assigns it to the CustomRequestNotification field.
+func (o *CreateConfigurationTemplateInfo) SetCustomRequestNotification(v string) {
+	o.CustomRequestNotification = &v
 }
 
 func (o CreateConfigurationTemplateInfo) MarshalJSON() ([]byte, error) {
@@ -332,10 +443,60 @@ func (o CreateConfigurationTemplateInfo) ToMap() (map[string]interface{}, error)
 	toSerialize["require_mfa_to_approve"] = o.RequireMfaToApprove
 	toSerialize["require_mfa_to_connect"] = o.RequireMfaToConnect
 	toSerialize["name"] = o.Name
+	if !IsNil(o.RequestConfigurations) {
+		toSerialize["request_configurations"] = o.RequestConfigurations
+	}
 	if !IsNil(o.RequestConfigurationList) {
 		toSerialize["request_configuration_list"] = o.RequestConfigurationList
 	}
+	if !IsNil(o.TicketPropagation) {
+		toSerialize["ticket_propagation"] = o.TicketPropagation
+	}
+	if !IsNil(o.CustomRequestNotification) {
+		toSerialize["custom_request_notification"] = o.CustomRequestNotification
+	}
 	return toSerialize, nil
+}
+
+func (o *CreateConfigurationTemplateInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"admin_owner_id",
+		"visibility",
+		"require_mfa_to_approve",
+		"require_mfa_to_connect",
+		"name",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCreateConfigurationTemplateInfo := _CreateConfigurationTemplateInfo{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCreateConfigurationTemplateInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateConfigurationTemplateInfo(varCreateConfigurationTemplateInfo)
+
+	return err
 }
 
 type NullableCreateConfigurationTemplateInfo struct {

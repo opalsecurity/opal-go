@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,8 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the CreateGroupInfo type satisfies the MappedNullable interface at compile time
@@ -34,7 +36,12 @@ type CreateGroupInfo struct {
 	// Deprecated - use remote_info instead.  JSON metadata about the remote group. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details on how to specify this field. The required format is dependent on group_type and should have the following schema: <style type=\"text/css\"> code {max-height:300px !important} </style> ```json {   \"$schema\": \"http://json-schema.org/draft-04/schema#\",   \"title\": \"Group Metadata\",   \"properties\": {     \"ad_group\": {       \"properties\": {         \"object_guid\": {           \"type\": \"string\"         }       },       \"required\": [\"object_guid\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"Active Directory Group\"     },     \"duo_group\": {       \"properties\": {         \"group_id\": {           \"type\": \"string\"         }       },       \"required\": [\"group_id\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"Duo Group\"     },     \"git_hub_team\": {       \"properties\": {         \"org_name\": {           \"type\": \"string\"         },         \"team_slug\": {           \"type\": \"string\"         }       },       \"required\": [\"org_name\", \"team_slug\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"GitHub Team\"     },     \"google_groups_group\": {       \"properties\": {         \"group_id\": {           \"type\": \"string\"         }       },       \"required\": [\"group_id\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"Google Groups Group\"     },     \"ldap_group\": {       \"properties\": {         \"group_uid\": {           \"type\": \"string\"         }       },       \"required\": [\"group_uid\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"LDAP Group\"     },     \"okta_directory_group\": {       \"properties\": {         \"group_id\": {           \"type\": \"string\"         }       },       \"required\": [\"group_id\"],       \"additionalProperties\": false,       \"type\": \"object\",       \"title\": \"Okta Directory Group\"     }   },   \"additionalProperties\": false,   \"minProperties\": 1,   \"maxProperties\": 1,   \"type\": \"object\" } ```
 	// Deprecated
 	Metadata *string `json:"metadata,omitempty"`
+	// Custom request notification sent upon request approval.
+	CustomRequestNotification *string `json:"custom_request_notification,omitempty"`
+	RiskSensitivityOverride *RiskSensitivityEnum `json:"risk_sensitivity_override,omitempty"`
 }
+
+type _CreateGroupInfo CreateGroupInfo
 
 // NewCreateGroupInfo instantiates a new CreateGroupInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -262,6 +269,70 @@ func (o *CreateGroupInfo) SetMetadata(v string) {
 	o.Metadata = &v
 }
 
+// GetCustomRequestNotification returns the CustomRequestNotification field value if set, zero value otherwise.
+func (o *CreateGroupInfo) GetCustomRequestNotification() string {
+	if o == nil || IsNil(o.CustomRequestNotification) {
+		var ret string
+		return ret
+	}
+	return *o.CustomRequestNotification
+}
+
+// GetCustomRequestNotificationOk returns a tuple with the CustomRequestNotification field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateGroupInfo) GetCustomRequestNotificationOk() (*string, bool) {
+	if o == nil || IsNil(o.CustomRequestNotification) {
+		return nil, false
+	}
+	return o.CustomRequestNotification, true
+}
+
+// HasCustomRequestNotification returns a boolean if a field has been set.
+func (o *CreateGroupInfo) HasCustomRequestNotification() bool {
+	if o != nil && !IsNil(o.CustomRequestNotification) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomRequestNotification gets a reference to the given string and assigns it to the CustomRequestNotification field.
+func (o *CreateGroupInfo) SetCustomRequestNotification(v string) {
+	o.CustomRequestNotification = &v
+}
+
+// GetRiskSensitivityOverride returns the RiskSensitivityOverride field value if set, zero value otherwise.
+func (o *CreateGroupInfo) GetRiskSensitivityOverride() RiskSensitivityEnum {
+	if o == nil || IsNil(o.RiskSensitivityOverride) {
+		var ret RiskSensitivityEnum
+		return ret
+	}
+	return *o.RiskSensitivityOverride
+}
+
+// GetRiskSensitivityOverrideOk returns a tuple with the RiskSensitivityOverride field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateGroupInfo) GetRiskSensitivityOverrideOk() (*RiskSensitivityEnum, bool) {
+	if o == nil || IsNil(o.RiskSensitivityOverride) {
+		return nil, false
+	}
+	return o.RiskSensitivityOverride, true
+}
+
+// HasRiskSensitivityOverride returns a boolean if a field has been set.
+func (o *CreateGroupInfo) HasRiskSensitivityOverride() bool {
+	if o != nil && !IsNil(o.RiskSensitivityOverride) {
+		return true
+	}
+
+	return false
+}
+
+// SetRiskSensitivityOverride gets a reference to the given RiskSensitivityEnum and assigns it to the RiskSensitivityOverride field.
+func (o *CreateGroupInfo) SetRiskSensitivityOverride(v RiskSensitivityEnum) {
+	o.RiskSensitivityOverride = &v
+}
+
 func (o CreateGroupInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -287,7 +358,52 @@ func (o CreateGroupInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
+	if !IsNil(o.CustomRequestNotification) {
+		toSerialize["custom_request_notification"] = o.CustomRequestNotification
+	}
+	if !IsNil(o.RiskSensitivityOverride) {
+		toSerialize["risk_sensitivity_override"] = o.RiskSensitivityOverride
+	}
 	return toSerialize, nil
+}
+
+func (o *CreateGroupInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+		"group_type",
+		"app_id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCreateGroupInfo := _CreateGroupInfo{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCreateGroupInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateGroupInfo(varCreateGroupInfo)
+
+	return err
 }
 
 type NullableCreateGroupInfo struct {

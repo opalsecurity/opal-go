@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,8 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ResourceRemoteInfoOktaCustomRole type satisfies the MappedNullable interface at compile time
@@ -23,6 +25,8 @@ type ResourceRemoteInfoOktaCustomRole struct {
 	// The id of the custom role.
 	RoleId string `json:"role_id"`
 }
+
+type _ResourceRemoteInfoOktaCustomRole ResourceRemoteInfoOktaCustomRole
 
 // NewResourceRemoteInfoOktaCustomRole instantiates a new ResourceRemoteInfoOktaCustomRole object
 // This constructor will assign default values to properties that have it defined,
@@ -78,6 +82,43 @@ func (o ResourceRemoteInfoOktaCustomRole) ToMap() (map[string]interface{}, error
 	toSerialize := map[string]interface{}{}
 	toSerialize["role_id"] = o.RoleId
 	return toSerialize, nil
+}
+
+func (o *ResourceRemoteInfoOktaCustomRole) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"role_id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varResourceRemoteInfoOktaCustomRole := _ResourceRemoteInfoOktaCustomRole{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varResourceRemoteInfoOktaCustomRole)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ResourceRemoteInfoOktaCustomRole(varResourceRemoteInfoOktaCustomRole)
+
+	return err
 }
 
 type NullableResourceRemoteInfoOktaCustomRole struct {

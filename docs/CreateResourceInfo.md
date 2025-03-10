@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **RemoteInfo** | Pointer to [**ResourceRemoteInfo**](ResourceRemoteInfo.md) |  | [optional] 
 **RemoteResourceId** | Pointer to **string** | Deprecated - use remote_info instead. The ID of the resource on the remote system. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details on how to specify this field. | [optional] 
 **Metadata** | Pointer to **string** | Deprecated - use remote_info instead.  JSON metadata about the remote resource. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details on how to specify this field. The required format is dependent on resource_type and should have the following schema: &lt;style type&#x3D;\&quot;text/css\&quot;&gt; code {max-height:300px !important} &lt;/style&gt; &#x60;&#x60;&#x60;json {   \&quot;$schema\&quot;: \&quot;http://json-schema.org/draft-04/schema#\&quot;,   \&quot;title\&quot;: \&quot;Resource Metadata\&quot;,   \&quot;properties\&quot;: {     \&quot;aws_ec2_instance\&quot;: {       \&quot;properties\&quot;: {         \&quot;instance_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;region\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;instance_id\&quot;, \&quot;region\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;AWS EC2 Instance\&quot;     },     \&quot;aws_eks_cluster\&quot;: {       \&quot;properties\&quot;: {         \&quot;cluster_name\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;cluster_region\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;cluster_arn\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;cluster_name\&quot;, \&quot;cluster_region\&quot;, \&quot;cluster_arn\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;AWS EKS Cluster\&quot;     },     \&quot;aws_rds_instance\&quot;: {       \&quot;properties\&quot;: {         \&quot;instance_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;engine\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;region\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;resource_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;database_name\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [         \&quot;instance_id\&quot;,         \&quot;engine\&quot;,         \&quot;region\&quot;,         \&quot;resource_id\&quot;,         \&quot;database_name\&quot;       ],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;AWS RDS Instance\&quot;     },     \&quot;aws_role\&quot;: {       \&quot;properties\&quot;: {         \&quot;arn\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;name\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;arn\&quot;, \&quot;name\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;AWS Role\&quot;     },     \&quot;gcp_bucket\&quot;: {       \&quot;properties\&quot;: {         \&quot;bucket_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;bucket_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;GCP Bucket\&quot;     },     \&quot;gcp_compute_instance\&quot;: {       \&quot;properties\&quot;: {         \&quot;instance_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;project_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;zone\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;instance_id\&quot;, \&quot;project_id\&quot;, \&quot;zone\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;GCP Compute Instance\&quot;     },     \&quot;gcp_folder\&quot;: {       \&quot;properties\&quot;: {         \&quot;folder_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;folder_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;GCP Folder\&quot;     },     \&quot;gcp_gke_cluster\&quot;: {       \&quot;properties\&quot;: {         \&quot;cluster_name\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;cluster_name\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;GCP GKE Cluster\&quot;     },     \&quot;gcp_project\&quot;: {       \&quot;properties\&quot;: {         \&quot;project_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;project_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;GCP Project\&quot;     },     \&quot;gcp_sql_instance\&quot;: {       \&quot;properties\&quot;: {         \&quot;instance_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;project_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;instance_id\&quot;, \&quot;project_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;GCP SQL Instance\&quot;     },     \&quot;git_hub_repo\&quot;: {       \&quot;properties\&quot;: {         \&quot;org_name\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;repo_name\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;org_name\&quot;, \&quot;repo_name\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;GitHub Repo\&quot;     },     \&quot;okta_directory_app\&quot;: {       \&quot;properties\&quot;: {         \&quot;app_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;logo_url\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;app_id\&quot;, \&quot;logo_url\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Okta Directory App\&quot;     },     \&quot;okta_directory_role\&quot;: {       \&quot;properties\&quot;: {         \&quot;role_type\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;role_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;role_type\&quot;, \&quot;role_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Okta Directory Role\&quot;     },     \&quot;salesforce_profile\&quot;: {       \&quot;properties\&quot;: {         \&quot;user_license\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;user_license\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Salesforce Profile\&quot;     }   },   \&quot;additionalProperties\&quot;: false,   \&quot;minProperties\&quot;: 1,   \&quot;maxProperties\&quot;: 1,   \&quot;type\&quot;: \&quot;object\&quot; } &#x60;&#x60;&#x60; | [optional] 
+**CustomRequestNotification** | Pointer to **string** | Custom request notification sent upon request approval. | [optional] 
+**RiskSensitivityOverride** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) |  | [optional] 
 
 ## Methods
 
@@ -190,6 +192,56 @@ SetMetadata sets Metadata field to given value.
 `func (o *CreateResourceInfo) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
+
+### GetCustomRequestNotification
+
+`func (o *CreateResourceInfo) GetCustomRequestNotification() string`
+
+GetCustomRequestNotification returns the CustomRequestNotification field if non-nil, zero value otherwise.
+
+### GetCustomRequestNotificationOk
+
+`func (o *CreateResourceInfo) GetCustomRequestNotificationOk() (*string, bool)`
+
+GetCustomRequestNotificationOk returns a tuple with the CustomRequestNotification field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomRequestNotification
+
+`func (o *CreateResourceInfo) SetCustomRequestNotification(v string)`
+
+SetCustomRequestNotification sets CustomRequestNotification field to given value.
+
+### HasCustomRequestNotification
+
+`func (o *CreateResourceInfo) HasCustomRequestNotification() bool`
+
+HasCustomRequestNotification returns a boolean if a field has been set.
+
+### GetRiskSensitivityOverride
+
+`func (o *CreateResourceInfo) GetRiskSensitivityOverride() RiskSensitivityEnum`
+
+GetRiskSensitivityOverride returns the RiskSensitivityOverride field if non-nil, zero value otherwise.
+
+### GetRiskSensitivityOverrideOk
+
+`func (o *CreateResourceInfo) GetRiskSensitivityOverrideOk() (*RiskSensitivityEnum, bool)`
+
+GetRiskSensitivityOverrideOk returns a tuple with the RiskSensitivityOverride field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRiskSensitivityOverride
+
+`func (o *CreateResourceInfo) SetRiskSensitivityOverride(v RiskSensitivityEnum)`
+
+SetRiskSensitivityOverride sets RiskSensitivityOverride field to given value.
+
+### HasRiskSensitivityOverride
+
+`func (o *CreateResourceInfo) HasRiskSensitivityOverride() bool`
+
+HasRiskSensitivityOverride returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
