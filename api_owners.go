@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -21,12 +21,12 @@ import (
 )
 
 
-// OwnersApiService OwnersApi service
-type OwnersApiService service
+// OwnersAPIService OwnersAPI service
+type OwnersAPIService service
 
 type ApiCreateOwnerRequest struct {
 	ctx context.Context
-	ApiService *OwnersApiService
+	ApiService *OwnersAPIService
 	createOwnerInfo *CreateOwnerInfo
 }
 
@@ -47,7 +47,7 @@ Creates an owner.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateOwnerRequest
 */
-func (a *OwnersApiService) CreateOwner(ctx context.Context) ApiCreateOwnerRequest {
+func (a *OwnersAPIService) CreateOwner(ctx context.Context) ApiCreateOwnerRequest {
 	return ApiCreateOwnerRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -56,7 +56,7 @@ func (a *OwnersApiService) CreateOwner(ctx context.Context) ApiCreateOwnerReques
 
 // Execute executes the request
 //  @return Owner
-func (a *OwnersApiService) CreateOwnerExecute(r ApiCreateOwnerRequest) (*Owner, *http.Response, error) {
+func (a *OwnersAPIService) CreateOwnerExecute(r ApiCreateOwnerRequest) (*Owner, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -64,7 +64,7 @@ func (a *OwnersApiService) CreateOwnerExecute(r ApiCreateOwnerRequest) (*Owner, 
 		localVarReturnValue  *Owner
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OwnersApiService.CreateOwner")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OwnersAPIService.CreateOwner")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -136,7 +136,7 @@ func (a *OwnersApiService) CreateOwnerExecute(r ApiCreateOwnerRequest) (*Owner, 
 
 type ApiDeleteOwnerRequest struct {
 	ctx context.Context
-	ApiService *OwnersApiService
+	ApiService *OwnersAPIService
 	ownerId string
 }
 
@@ -153,7 +153,7 @@ Deletes an owner.
  @param ownerId The ID of the owner.
  @return ApiDeleteOwnerRequest
 */
-func (a *OwnersApiService) DeleteOwner(ctx context.Context, ownerId string) ApiDeleteOwnerRequest {
+func (a *OwnersAPIService) DeleteOwner(ctx context.Context, ownerId string) ApiDeleteOwnerRequest {
 	return ApiDeleteOwnerRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -162,14 +162,14 @@ func (a *OwnersApiService) DeleteOwner(ctx context.Context, ownerId string) ApiD
 }
 
 // Execute executes the request
-func (a *OwnersApiService) DeleteOwnerExecute(r ApiDeleteOwnerRequest) (*http.Response, error) {
+func (a *OwnersAPIService) DeleteOwnerExecute(r ApiDeleteOwnerRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OwnersApiService.DeleteOwner")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OwnersAPIService.DeleteOwner")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -228,7 +228,7 @@ func (a *OwnersApiService) DeleteOwnerExecute(r ApiDeleteOwnerRequest) (*http.Re
 
 type ApiGetOwnerRequest struct {
 	ctx context.Context
-	ApiService *OwnersApiService
+	ApiService *OwnersAPIService
 	ownerId string
 }
 
@@ -245,7 +245,7 @@ Returns an `Owner` object.
  @param ownerId The ID of the owner.
  @return ApiGetOwnerRequest
 */
-func (a *OwnersApiService) GetOwner(ctx context.Context, ownerId string) ApiGetOwnerRequest {
+func (a *OwnersAPIService) GetOwner(ctx context.Context, ownerId string) ApiGetOwnerRequest {
 	return ApiGetOwnerRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -255,7 +255,7 @@ func (a *OwnersApiService) GetOwner(ctx context.Context, ownerId string) ApiGetO
 
 // Execute executes the request
 //  @return Owner
-func (a *OwnersApiService) GetOwnerExecute(r ApiGetOwnerRequest) (*Owner, *http.Response, error) {
+func (a *OwnersAPIService) GetOwnerExecute(r ApiGetOwnerRequest) (*Owner, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -263,7 +263,7 @@ func (a *OwnersApiService) GetOwnerExecute(r ApiGetOwnerRequest) (*Owner, *http.
 		localVarReturnValue  *Owner
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OwnersApiService.GetOwner")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OwnersAPIService.GetOwner")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -331,7 +331,7 @@ func (a *OwnersApiService) GetOwnerExecute(r ApiGetOwnerRequest) (*Owner, *http.
 
 type ApiGetOwnerFromNameRequest struct {
 	ctx context.Context
-	ApiService *OwnersApiService
+	ApiService *OwnersAPIService
 	ownerName string
 }
 
@@ -348,7 +348,7 @@ Returns an `Owner` object. Does not support owners with `/` in their name, use /
  @param ownerName The name of the owner.
  @return ApiGetOwnerFromNameRequest
 */
-func (a *OwnersApiService) GetOwnerFromName(ctx context.Context, ownerName string) ApiGetOwnerFromNameRequest {
+func (a *OwnersAPIService) GetOwnerFromName(ctx context.Context, ownerName string) ApiGetOwnerFromNameRequest {
 	return ApiGetOwnerFromNameRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -358,7 +358,7 @@ func (a *OwnersApiService) GetOwnerFromName(ctx context.Context, ownerName strin
 
 // Execute executes the request
 //  @return Owner
-func (a *OwnersApiService) GetOwnerFromNameExecute(r ApiGetOwnerFromNameRequest) (*Owner, *http.Response, error) {
+func (a *OwnersAPIService) GetOwnerFromNameExecute(r ApiGetOwnerFromNameRequest) (*Owner, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -366,7 +366,7 @@ func (a *OwnersApiService) GetOwnerFromNameExecute(r ApiGetOwnerFromNameRequest)
 		localVarReturnValue  *Owner
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OwnersApiService.GetOwnerFromName")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OwnersAPIService.GetOwnerFromName")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -434,7 +434,7 @@ func (a *OwnersApiService) GetOwnerFromNameExecute(r ApiGetOwnerFromNameRequest)
 
 type ApiGetOwnerUsersRequest struct {
 	ctx context.Context
-	ApiService *OwnersApiService
+	ApiService *OwnersAPIService
 	ownerId string
 }
 
@@ -451,7 +451,7 @@ Gets the list of users for this owner, in escalation priority order if applicabl
  @param ownerId The ID of the owner.
  @return ApiGetOwnerUsersRequest
 */
-func (a *OwnersApiService) GetOwnerUsers(ctx context.Context, ownerId string) ApiGetOwnerUsersRequest {
+func (a *OwnersAPIService) GetOwnerUsers(ctx context.Context, ownerId string) ApiGetOwnerUsersRequest {
 	return ApiGetOwnerUsersRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -461,7 +461,7 @@ func (a *OwnersApiService) GetOwnerUsers(ctx context.Context, ownerId string) Ap
 
 // Execute executes the request
 //  @return UserList
-func (a *OwnersApiService) GetOwnerUsersExecute(r ApiGetOwnerUsersRequest) (*UserList, *http.Response, error) {
+func (a *OwnersAPIService) GetOwnerUsersExecute(r ApiGetOwnerUsersRequest) (*UserList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -469,7 +469,7 @@ func (a *OwnersApiService) GetOwnerUsersExecute(r ApiGetOwnerUsersRequest) (*Use
 		localVarReturnValue  *UserList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OwnersApiService.GetOwnerUsers")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OwnersAPIService.GetOwnerUsers")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -537,7 +537,7 @@ func (a *OwnersApiService) GetOwnerUsersExecute(r ApiGetOwnerUsersRequest) (*Use
 
 type ApiGetOwnersRequest struct {
 	ctx context.Context
-	ApiService *OwnersApiService
+	ApiService *OwnersAPIService
 	cursor *string
 	pageSize *int32
 	name *string
@@ -573,7 +573,7 @@ Returns a list of `Owner` objects.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetOwnersRequest
 */
-func (a *OwnersApiService) GetOwners(ctx context.Context) ApiGetOwnersRequest {
+func (a *OwnersAPIService) GetOwners(ctx context.Context) ApiGetOwnersRequest {
 	return ApiGetOwnersRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -582,7 +582,7 @@ func (a *OwnersApiService) GetOwners(ctx context.Context) ApiGetOwnersRequest {
 
 // Execute executes the request
 //  @return PaginatedOwnersList
-func (a *OwnersApiService) GetOwnersExecute(r ApiGetOwnersRequest) (*PaginatedOwnersList, *http.Response, error) {
+func (a *OwnersAPIService) GetOwnersExecute(r ApiGetOwnersRequest) (*PaginatedOwnersList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -590,7 +590,7 @@ func (a *OwnersApiService) GetOwnersExecute(r ApiGetOwnersRequest) (*PaginatedOw
 		localVarReturnValue  *PaginatedOwnersList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OwnersApiService.GetOwners")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OwnersAPIService.GetOwners")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -602,13 +602,13 @@ func (a *OwnersApiService) GetOwnersExecute(r ApiGetOwnersRequest) (*PaginatedOw
 	localVarFormParams := url.Values{}
 
 	if r.cursor != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", "")
 	}
 	if r.name != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -666,7 +666,7 @@ func (a *OwnersApiService) GetOwnersExecute(r ApiGetOwnersRequest) (*PaginatedOw
 
 type ApiSetOwnerUsersRequest struct {
 	ctx context.Context
-	ApiService *OwnersApiService
+	ApiService *OwnersAPIService
 	ownerId string
 	userIDList *UserIDList
 }
@@ -689,7 +689,7 @@ Sets the list of users for this owner. If escalation is enabled, the order of th
  @param ownerId The ID of the owner.
  @return ApiSetOwnerUsersRequest
 */
-func (a *OwnersApiService) SetOwnerUsers(ctx context.Context, ownerId string) ApiSetOwnerUsersRequest {
+func (a *OwnersAPIService) SetOwnerUsers(ctx context.Context, ownerId string) ApiSetOwnerUsersRequest {
 	return ApiSetOwnerUsersRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -699,7 +699,7 @@ func (a *OwnersApiService) SetOwnerUsers(ctx context.Context, ownerId string) Ap
 
 // Execute executes the request
 //  @return UserList
-func (a *OwnersApiService) SetOwnerUsersExecute(r ApiSetOwnerUsersRequest) (*UserList, *http.Response, error) {
+func (a *OwnersAPIService) SetOwnerUsersExecute(r ApiSetOwnerUsersRequest) (*UserList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -707,7 +707,7 @@ func (a *OwnersApiService) SetOwnerUsersExecute(r ApiSetOwnerUsersRequest) (*Use
 		localVarReturnValue  *UserList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OwnersApiService.SetOwnerUsers")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OwnersAPIService.SetOwnerUsers")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -780,7 +780,7 @@ func (a *OwnersApiService) SetOwnerUsersExecute(r ApiSetOwnerUsersRequest) (*Use
 
 type ApiUpdateOwnersRequest struct {
 	ctx context.Context
-	ApiService *OwnersApiService
+	ApiService *OwnersAPIService
 	updateOwnerInfoList *UpdateOwnerInfoList
 }
 
@@ -802,7 +802,7 @@ Bulk updates a list of owners.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiUpdateOwnersRequest
 */
-func (a *OwnersApiService) UpdateOwners(ctx context.Context) ApiUpdateOwnersRequest {
+func (a *OwnersAPIService) UpdateOwners(ctx context.Context) ApiUpdateOwnersRequest {
 	return ApiUpdateOwnersRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -811,7 +811,7 @@ func (a *OwnersApiService) UpdateOwners(ctx context.Context) ApiUpdateOwnersRequ
 
 // Execute executes the request
 //  @return UpdateOwnerInfoList
-func (a *OwnersApiService) UpdateOwnersExecute(r ApiUpdateOwnersRequest) (*UpdateOwnerInfoList, *http.Response, error) {
+func (a *OwnersAPIService) UpdateOwnersExecute(r ApiUpdateOwnersRequest) (*UpdateOwnerInfoList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -819,7 +819,7 @@ func (a *OwnersApiService) UpdateOwnersExecute(r ApiUpdateOwnersRequest) (*Updat
 		localVarReturnValue  *UpdateOwnerInfoList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OwnersApiService.UpdateOwners")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OwnersAPIService.UpdateOwners")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

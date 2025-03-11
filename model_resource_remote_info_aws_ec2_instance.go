@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,8 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ResourceRemoteInfoAwsEc2Instance type satisfies the MappedNullable interface at compile time
@@ -27,6 +29,8 @@ type ResourceRemoteInfoAwsEc2Instance struct {
 	// The id of the AWS account. Required for AWS Organizations.
 	AccountId *string `json:"account_id,omitempty"`
 }
+
+type _ResourceRemoteInfoAwsEc2Instance ResourceRemoteInfoAwsEc2Instance
 
 // NewResourceRemoteInfoAwsEc2Instance instantiates a new ResourceRemoteInfoAwsEc2Instance object
 // This constructor will assign default values to properties that have it defined,
@@ -143,6 +147,44 @@ func (o ResourceRemoteInfoAwsEc2Instance) ToMap() (map[string]interface{}, error
 		toSerialize["account_id"] = o.AccountId
 	}
 	return toSerialize, nil
+}
+
+func (o *ResourceRemoteInfoAwsEc2Instance) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"instance_id",
+		"region",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varResourceRemoteInfoAwsEc2Instance := _ResourceRemoteInfoAwsEc2Instance{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varResourceRemoteInfoAwsEc2Instance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ResourceRemoteInfoAwsEc2Instance(varResourceRemoteInfoAwsEc2Instance)
+
+	return err
 }
 
 type NullableResourceRemoteInfoAwsEc2Instance struct {

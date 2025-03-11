@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **FirstName** | **string** | The first name of the user. | 
 **LastName** | **string** | The last name of the user. | 
 **Position** | **string** | The user&#39;s position. | 
+**HrIdpStatus** | Pointer to [**UserHrIdpStatusEnum**](UserHrIdpStatusEnum.md) |  | [optional] 
 
 ## Methods
 
@@ -149,6 +150,31 @@ and a boolean to check if the value has been set.
 
 SetPosition sets Position field to given value.
 
+
+### GetHrIdpStatus
+
+`func (o *User) GetHrIdpStatus() UserHrIdpStatusEnum`
+
+GetHrIdpStatus returns the HrIdpStatus field if non-nil, zero value otherwise.
+
+### GetHrIdpStatusOk
+
+`func (o *User) GetHrIdpStatusOk() (*UserHrIdpStatusEnum, bool)`
+
+GetHrIdpStatusOk returns a tuple with the HrIdpStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHrIdpStatus
+
+`func (o *User) SetHrIdpStatus(v UserHrIdpStatusEnum)`
+
+SetHrIdpStatus sets HrIdpStatus field to given value.
+
+### HasHrIdpStatus
+
+`func (o *User) HasHrIdpStatus() bool`
+
+HasHrIdpStatus returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -14,6 +14,8 @@ package opal
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the UAR type satisfies the MappedNullable interface at compile time
@@ -36,6 +38,8 @@ type UAR struct {
 	SelfReviewAllowed bool `json:"self_review_allowed"`
 	UarScope *UARScope `json:"uar_scope,omitempty"`
 }
+
+type _UAR UAR
 
 // NewUAR instantiates a new UAR object
 // This constructor will assign default values to properties that have it defined,
@@ -282,6 +286,49 @@ func (o UAR) ToMap() (map[string]interface{}, error) {
 		toSerialize["uar_scope"] = o.UarScope
 	}
 	return toSerialize, nil
+}
+
+func (o *UAR) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"uar_id",
+		"name",
+		"reviewer_assignment_policy",
+		"send_reviewer_assignment_notification",
+		"deadline",
+		"time_zone",
+		"self_review_allowed",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varUAR := _UAR{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUAR)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UAR(varUAR)
+
+	return err
 }
 
 type NullableUAR struct {

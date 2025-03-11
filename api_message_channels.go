@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -21,12 +21,12 @@ import (
 )
 
 
-// MessageChannelsApiService MessageChannelsApi service
-type MessageChannelsApiService service
+// MessageChannelsAPIService MessageChannelsAPI service
+type MessageChannelsAPIService service
 
 type ApiCreateMessageChannelRequest struct {
 	ctx context.Context
-	ApiService *MessageChannelsApiService
+	ApiService *MessageChannelsAPIService
 	createMessageChannelInfo *CreateMessageChannelInfo
 }
 
@@ -48,7 +48,7 @@ Creates a `MessageChannel` objects.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateMessageChannelRequest
 */
-func (a *MessageChannelsApiService) CreateMessageChannel(ctx context.Context) ApiCreateMessageChannelRequest {
+func (a *MessageChannelsAPIService) CreateMessageChannel(ctx context.Context) ApiCreateMessageChannelRequest {
 	return ApiCreateMessageChannelRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -57,7 +57,7 @@ func (a *MessageChannelsApiService) CreateMessageChannel(ctx context.Context) Ap
 
 // Execute executes the request
 //  @return MessageChannel
-func (a *MessageChannelsApiService) CreateMessageChannelExecute(r ApiCreateMessageChannelRequest) (*MessageChannel, *http.Response, error) {
+func (a *MessageChannelsAPIService) CreateMessageChannelExecute(r ApiCreateMessageChannelRequest) (*MessageChannel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -65,7 +65,7 @@ func (a *MessageChannelsApiService) CreateMessageChannelExecute(r ApiCreateMessa
 		localVarReturnValue  *MessageChannel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MessageChannelsApiService.CreateMessageChannel")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MessageChannelsAPIService.CreateMessageChannel")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -137,7 +137,7 @@ func (a *MessageChannelsApiService) CreateMessageChannelExecute(r ApiCreateMessa
 
 type ApiGetMessageChannelRequest struct {
 	ctx context.Context
-	ApiService *MessageChannelsApiService
+	ApiService *MessageChannelsAPIService
 	messageChannelId string
 }
 
@@ -154,7 +154,7 @@ Gets a `MessageChannel` object.
  @param messageChannelId The ID of the message_channel.
  @return ApiGetMessageChannelRequest
 */
-func (a *MessageChannelsApiService) GetMessageChannel(ctx context.Context, messageChannelId string) ApiGetMessageChannelRequest {
+func (a *MessageChannelsAPIService) GetMessageChannel(ctx context.Context, messageChannelId string) ApiGetMessageChannelRequest {
 	return ApiGetMessageChannelRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -164,7 +164,7 @@ func (a *MessageChannelsApiService) GetMessageChannel(ctx context.Context, messa
 
 // Execute executes the request
 //  @return MessageChannel
-func (a *MessageChannelsApiService) GetMessageChannelExecute(r ApiGetMessageChannelRequest) (*MessageChannel, *http.Response, error) {
+func (a *MessageChannelsAPIService) GetMessageChannelExecute(r ApiGetMessageChannelRequest) (*MessageChannel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -172,7 +172,7 @@ func (a *MessageChannelsApiService) GetMessageChannelExecute(r ApiGetMessageChan
 		localVarReturnValue  *MessageChannel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MessageChannelsApiService.GetMessageChannel")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MessageChannelsAPIService.GetMessageChannel")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -240,7 +240,7 @@ func (a *MessageChannelsApiService) GetMessageChannelExecute(r ApiGetMessageChan
 
 type ApiGetMessageChannelsRequest struct {
 	ctx context.Context
-	ApiService *MessageChannelsApiService
+	ApiService *MessageChannelsAPIService
 }
 
 func (r ApiGetMessageChannelsRequest) Execute() (*MessageChannelList, *http.Response, error) {
@@ -255,7 +255,7 @@ Returns a list of `MessageChannel` objects.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetMessageChannelsRequest
 */
-func (a *MessageChannelsApiService) GetMessageChannels(ctx context.Context) ApiGetMessageChannelsRequest {
+func (a *MessageChannelsAPIService) GetMessageChannels(ctx context.Context) ApiGetMessageChannelsRequest {
 	return ApiGetMessageChannelsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -264,7 +264,7 @@ func (a *MessageChannelsApiService) GetMessageChannels(ctx context.Context) ApiG
 
 // Execute executes the request
 //  @return MessageChannelList
-func (a *MessageChannelsApiService) GetMessageChannelsExecute(r ApiGetMessageChannelsRequest) (*MessageChannelList, *http.Response, error) {
+func (a *MessageChannelsAPIService) GetMessageChannelsExecute(r ApiGetMessageChannelsRequest) (*MessageChannelList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -272,7 +272,7 @@ func (a *MessageChannelsApiService) GetMessageChannelsExecute(r ApiGetMessageCha
 		localVarReturnValue  *MessageChannelList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MessageChannelsApiService.GetMessageChannels")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MessageChannelsAPIService.GetMessageChannels")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

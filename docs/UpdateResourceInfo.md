@@ -8,19 +8,23 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the resource. | [optional] 
 **Description** | Pointer to **string** | A description of the resource. | [optional] 
 **AdminOwnerId** | Pointer to **string** | The ID of the owner of the resource. | [optional] 
-**MaxDuration** | Pointer to **int32** | The maximum duration for which the resource can be requested (in minutes). Use -1 to set to indefinite. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
-**RecommendedDuration** | Pointer to **int32** | The recommended duration for which the resource should be requested (in minutes). Will be the default value in a request. Use -1 to set to indefinite and 0 to unset. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
+**MaxDuration** | Pointer to **int32** | The maximum duration for which the resource can be requested (in minutes). Use -1 to set to indefinite. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
+**RecommendedDuration** | Pointer to **int32** | The recommended duration for which the resource should be requested (in minutes). Will be the default value in a request. Use -1 to set to indefinite and 0 to unset. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **RequireManagerApproval** | Pointer to **bool** | A bool representing whether or not access requests to the resource require manager approval. | [optional] 
-**RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the resource require an access ticket. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
+**RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the resource require an access ticket. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **FolderId** | Pointer to **string** | The ID of the folder that the resource is located in. | [optional] 
 **RequireMfaToApprove** | Pointer to **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this resource. | [optional] 
-**RequireMfaToRequest** | Pointer to **bool** | A bool representing whether or not to require MFA for requesting access to this resource. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
+**RequireMfaToRequest** | Pointer to **bool** | A bool representing whether or not to require MFA for requesting access to this resource. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **RequireMfaToConnect** | Pointer to **bool** | A bool representing whether or not to require MFA to connect to this resource. | [optional] 
-**AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this resource. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
+**AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this resource. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
+**TicketPropagation** | Pointer to [**TicketPropagationConfiguration**](TicketPropagationConfiguration.md) |  | [optional] 
+**CustomRequestNotification** | Pointer to **string** | Custom request notification sent upon request approval. | [optional] 
+**RiskSensitivityOverride** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) |  | [optional] 
 **ConfigurationTemplateId** | Pointer to **string** | The ID of the associated configuration template. | [optional] 
-**RequestTemplateId** | Pointer to **string** | The ID of the associated request template. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
-**IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this resource. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
-**RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) |  | [optional] 
+**RequestTemplateId** | Pointer to **string** | The ID of the associated request template. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
+**IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this resource. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
+**RequestConfigurations** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | A list of configurations for requests to this resource. If not provided, the default request configuration will be used. | [optional] 
+**RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) | A list of configurations for requests to this resource. If not provided, the default request configuration will be used. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 
 ## Methods
 
@@ -361,6 +365,81 @@ SetAutoApproval sets AutoApproval field to given value.
 
 HasAutoApproval returns a boolean if a field has been set.
 
+### GetTicketPropagation
+
+`func (o *UpdateResourceInfo) GetTicketPropagation() TicketPropagationConfiguration`
+
+GetTicketPropagation returns the TicketPropagation field if non-nil, zero value otherwise.
+
+### GetTicketPropagationOk
+
+`func (o *UpdateResourceInfo) GetTicketPropagationOk() (*TicketPropagationConfiguration, bool)`
+
+GetTicketPropagationOk returns a tuple with the TicketPropagation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTicketPropagation
+
+`func (o *UpdateResourceInfo) SetTicketPropagation(v TicketPropagationConfiguration)`
+
+SetTicketPropagation sets TicketPropagation field to given value.
+
+### HasTicketPropagation
+
+`func (o *UpdateResourceInfo) HasTicketPropagation() bool`
+
+HasTicketPropagation returns a boolean if a field has been set.
+
+### GetCustomRequestNotification
+
+`func (o *UpdateResourceInfo) GetCustomRequestNotification() string`
+
+GetCustomRequestNotification returns the CustomRequestNotification field if non-nil, zero value otherwise.
+
+### GetCustomRequestNotificationOk
+
+`func (o *UpdateResourceInfo) GetCustomRequestNotificationOk() (*string, bool)`
+
+GetCustomRequestNotificationOk returns a tuple with the CustomRequestNotification field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomRequestNotification
+
+`func (o *UpdateResourceInfo) SetCustomRequestNotification(v string)`
+
+SetCustomRequestNotification sets CustomRequestNotification field to given value.
+
+### HasCustomRequestNotification
+
+`func (o *UpdateResourceInfo) HasCustomRequestNotification() bool`
+
+HasCustomRequestNotification returns a boolean if a field has been set.
+
+### GetRiskSensitivityOverride
+
+`func (o *UpdateResourceInfo) GetRiskSensitivityOverride() RiskSensitivityEnum`
+
+GetRiskSensitivityOverride returns the RiskSensitivityOverride field if non-nil, zero value otherwise.
+
+### GetRiskSensitivityOverrideOk
+
+`func (o *UpdateResourceInfo) GetRiskSensitivityOverrideOk() (*RiskSensitivityEnum, bool)`
+
+GetRiskSensitivityOverrideOk returns a tuple with the RiskSensitivityOverride field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRiskSensitivityOverride
+
+`func (o *UpdateResourceInfo) SetRiskSensitivityOverride(v RiskSensitivityEnum)`
+
+SetRiskSensitivityOverride sets RiskSensitivityOverride field to given value.
+
+### HasRiskSensitivityOverride
+
+`func (o *UpdateResourceInfo) HasRiskSensitivityOverride() bool`
+
+HasRiskSensitivityOverride returns a boolean if a field has been set.
+
 ### GetConfigurationTemplateId
 
 `func (o *UpdateResourceInfo) GetConfigurationTemplateId() string`
@@ -435,6 +514,31 @@ SetIsRequestable sets IsRequestable field to given value.
 `func (o *UpdateResourceInfo) HasIsRequestable() bool`
 
 HasIsRequestable returns a boolean if a field has been set.
+
+### GetRequestConfigurations
+
+`func (o *UpdateResourceInfo) GetRequestConfigurations() []RequestConfiguration`
+
+GetRequestConfigurations returns the RequestConfigurations field if non-nil, zero value otherwise.
+
+### GetRequestConfigurationsOk
+
+`func (o *UpdateResourceInfo) GetRequestConfigurationsOk() (*[]RequestConfiguration, bool)`
+
+GetRequestConfigurationsOk returns a tuple with the RequestConfigurations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestConfigurations
+
+`func (o *UpdateResourceInfo) SetRequestConfigurations(v []RequestConfiguration)`
+
+SetRequestConfigurations sets RequestConfigurations field to given value.
+
+### HasRequestConfigurations
+
+`func (o *UpdateResourceInfo) HasRequestConfigurations() bool`
+
+HasRequestConfigurations returns a boolean if a field has been set.
 
 ### GetRequestConfigurationList
 

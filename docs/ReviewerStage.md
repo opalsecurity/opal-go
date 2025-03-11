@@ -5,7 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RequireManagerApproval** | **bool** | Whether this reviewer stage should require manager approval. | 
-**Operator** | **string** | The operator of the reviewer stage. | 
+**RequireAdminApproval** | Pointer to **bool** | Whether this reviewer stage should require admin approval. | [optional] 
+**Operator** | **string** | The operator of the reviewer stage. Admin and manager approval are also treated as reviewers. | 
 **OwnerIds** | **[]string** |  | 
 
 ## Methods
@@ -46,6 +47,31 @@ and a boolean to check if the value has been set.
 
 SetRequireManagerApproval sets RequireManagerApproval field to given value.
 
+
+### GetRequireAdminApproval
+
+`func (o *ReviewerStage) GetRequireAdminApproval() bool`
+
+GetRequireAdminApproval returns the RequireAdminApproval field if non-nil, zero value otherwise.
+
+### GetRequireAdminApprovalOk
+
+`func (o *ReviewerStage) GetRequireAdminApprovalOk() (*bool, bool)`
+
+GetRequireAdminApprovalOk returns a tuple with the RequireAdminApproval field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequireAdminApproval
+
+`func (o *ReviewerStage) SetRequireAdminApproval(v bool)`
+
+SetRequireAdminApproval sets RequireAdminApproval field to given value.
+
+### HasRequireAdminApproval
+
+`func (o *ReviewerStage) HasRequireAdminApproval() bool`
+
+HasRequireAdminApproval returns a boolean if a field has been set.
 
 ### GetOperator
 

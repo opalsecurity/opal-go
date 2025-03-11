@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -22,6 +22,8 @@ var _ MappedNullable = &Condition{}
 type Condition struct {
 	// The list of group IDs to match.
 	GroupIds []string `json:"group_ids,omitempty"`
+	// The list of role remote IDs to match.
+	RoleRemoteIds []string `json:"role_remote_ids,omitempty"`
 }
 
 // NewCondition instantiates a new Condition object
@@ -73,6 +75,38 @@ func (o *Condition) SetGroupIds(v []string) {
 	o.GroupIds = v
 }
 
+// GetRoleRemoteIds returns the RoleRemoteIds field value if set, zero value otherwise.
+func (o *Condition) GetRoleRemoteIds() []string {
+	if o == nil || IsNil(o.RoleRemoteIds) {
+		var ret []string
+		return ret
+	}
+	return o.RoleRemoteIds
+}
+
+// GetRoleRemoteIdsOk returns a tuple with the RoleRemoteIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Condition) GetRoleRemoteIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.RoleRemoteIds) {
+		return nil, false
+	}
+	return o.RoleRemoteIds, true
+}
+
+// HasRoleRemoteIds returns a boolean if a field has been set.
+func (o *Condition) HasRoleRemoteIds() bool {
+	if o != nil && !IsNil(o.RoleRemoteIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetRoleRemoteIds gets a reference to the given []string and assigns it to the RoleRemoteIds field.
+func (o *Condition) SetRoleRemoteIds(v []string) {
+	o.RoleRemoteIds = v
+}
+
 func (o Condition) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -85,6 +119,9 @@ func (o Condition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.GroupIds) {
 		toSerialize["group_ids"] = o.GroupIds
+	}
+	if !IsNil(o.RoleRemoteIds) {
+		toSerialize["role_remote_ids"] = o.RoleRemoteIds
 	}
 	return toSerialize, nil
 }

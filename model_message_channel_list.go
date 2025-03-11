@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,8 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the MessageChannelList type satisfies the MappedNullable interface at compile time
@@ -22,6 +24,8 @@ var _ MappedNullable = &MessageChannelList{}
 type MessageChannelList struct {
 	Channels []MessageChannel `json:"channels"`
 }
+
+type _MessageChannelList MessageChannelList
 
 // NewMessageChannelList instantiates a new MessageChannelList object
 // This constructor will assign default values to properties that have it defined,
@@ -77,6 +81,43 @@ func (o MessageChannelList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["channels"] = o.Channels
 	return toSerialize, nil
+}
+
+func (o *MessageChannelList) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"channels",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varMessageChannelList := _MessageChannelList{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varMessageChannelList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MessageChannelList(varMessageChannelList)
+
+	return err
 }
 
 type NullableMessageChannelList struct {

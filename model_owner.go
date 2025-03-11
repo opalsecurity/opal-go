@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,8 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Owner type satisfies the MappedNullable interface at compile time
@@ -28,9 +30,11 @@ type Owner struct {
 	Description *string `json:"description,omitempty"`
 	// The amount of time (in minutes) before the next reviewer is notified. Use 0 to remove escalation policy.
 	AccessRequestEscalationPeriod *int32 `json:"access_request_escalation_period,omitempty"`
-	ReviewerMessageChannelId NullableString `json:"reviewer_message_channel_id,omitempty"`
-	SourceGroupId NullableString `json:"source_group_id,omitempty"`
+	ReviewerMessageChannelId *string `json:"reviewer_message_channel_id,omitempty"`
+	SourceGroupId *string `json:"source_group_id,omitempty"`
 }
+
+type _Owner Owner
 
 // NewOwner instantiates a new Owner object
 // This constructor will assign default values to properties that have it defined,
@@ -170,88 +174,68 @@ func (o *Owner) SetAccessRequestEscalationPeriod(v int32) {
 	o.AccessRequestEscalationPeriod = &v
 }
 
-// GetReviewerMessageChannelId returns the ReviewerMessageChannelId field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetReviewerMessageChannelId returns the ReviewerMessageChannelId field value if set, zero value otherwise.
 func (o *Owner) GetReviewerMessageChannelId() string {
-	if o == nil || IsNil(o.ReviewerMessageChannelId.Get()) {
+	if o == nil || IsNil(o.ReviewerMessageChannelId) {
 		var ret string
 		return ret
 	}
-	return *o.ReviewerMessageChannelId.Get()
+	return *o.ReviewerMessageChannelId
 }
 
 // GetReviewerMessageChannelIdOk returns a tuple with the ReviewerMessageChannelId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Owner) GetReviewerMessageChannelIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ReviewerMessageChannelId) {
 		return nil, false
 	}
-	return o.ReviewerMessageChannelId.Get(), o.ReviewerMessageChannelId.IsSet()
+	return o.ReviewerMessageChannelId, true
 }
 
 // HasReviewerMessageChannelId returns a boolean if a field has been set.
 func (o *Owner) HasReviewerMessageChannelId() bool {
-	if o != nil && o.ReviewerMessageChannelId.IsSet() {
+	if o != nil && !IsNil(o.ReviewerMessageChannelId) {
 		return true
 	}
 
 	return false
 }
 
-// SetReviewerMessageChannelId gets a reference to the given NullableString and assigns it to the ReviewerMessageChannelId field.
+// SetReviewerMessageChannelId gets a reference to the given string and assigns it to the ReviewerMessageChannelId field.
 func (o *Owner) SetReviewerMessageChannelId(v string) {
-	o.ReviewerMessageChannelId.Set(&v)
-}
-// SetReviewerMessageChannelIdNil sets the value for ReviewerMessageChannelId to be an explicit nil
-func (o *Owner) SetReviewerMessageChannelIdNil() {
-	o.ReviewerMessageChannelId.Set(nil)
+	o.ReviewerMessageChannelId = &v
 }
 
-// UnsetReviewerMessageChannelId ensures that no value is present for ReviewerMessageChannelId, not even an explicit nil
-func (o *Owner) UnsetReviewerMessageChannelId() {
-	o.ReviewerMessageChannelId.Unset()
-}
-
-// GetSourceGroupId returns the SourceGroupId field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSourceGroupId returns the SourceGroupId field value if set, zero value otherwise.
 func (o *Owner) GetSourceGroupId() string {
-	if o == nil || IsNil(o.SourceGroupId.Get()) {
+	if o == nil || IsNil(o.SourceGroupId) {
 		var ret string
 		return ret
 	}
-	return *o.SourceGroupId.Get()
+	return *o.SourceGroupId
 }
 
 // GetSourceGroupIdOk returns a tuple with the SourceGroupId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Owner) GetSourceGroupIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SourceGroupId) {
 		return nil, false
 	}
-	return o.SourceGroupId.Get(), o.SourceGroupId.IsSet()
+	return o.SourceGroupId, true
 }
 
 // HasSourceGroupId returns a boolean if a field has been set.
 func (o *Owner) HasSourceGroupId() bool {
-	if o != nil && o.SourceGroupId.IsSet() {
+	if o != nil && !IsNil(o.SourceGroupId) {
 		return true
 	}
 
 	return false
 }
 
-// SetSourceGroupId gets a reference to the given NullableString and assigns it to the SourceGroupId field.
+// SetSourceGroupId gets a reference to the given string and assigns it to the SourceGroupId field.
 func (o *Owner) SetSourceGroupId(v string) {
-	o.SourceGroupId.Set(&v)
-}
-// SetSourceGroupIdNil sets the value for SourceGroupId to be an explicit nil
-func (o *Owner) SetSourceGroupIdNil() {
-	o.SourceGroupId.Set(nil)
-}
-
-// UnsetSourceGroupId ensures that no value is present for SourceGroupId, not even an explicit nil
-func (o *Owner) UnsetSourceGroupId() {
-	o.SourceGroupId.Unset()
+	o.SourceGroupId = &v
 }
 
 func (o Owner) MarshalJSON() ([]byte, error) {
@@ -274,13 +258,50 @@ func (o Owner) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AccessRequestEscalationPeriod) {
 		toSerialize["access_request_escalation_period"] = o.AccessRequestEscalationPeriod
 	}
-	if o.ReviewerMessageChannelId.IsSet() {
-		toSerialize["reviewer_message_channel_id"] = o.ReviewerMessageChannelId.Get()
+	if !IsNil(o.ReviewerMessageChannelId) {
+		toSerialize["reviewer_message_channel_id"] = o.ReviewerMessageChannelId
 	}
-	if o.SourceGroupId.IsSet() {
-		toSerialize["source_group_id"] = o.SourceGroupId.Get()
+	if !IsNil(o.SourceGroupId) {
+		toSerialize["source_group_id"] = o.SourceGroupId
 	}
 	return toSerialize, nil
+}
+
+func (o *Owner) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"owner_id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOwner := _Owner{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varOwner)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Owner(varOwner)
+
+	return err
 }
 
 type NullableOwner struct {

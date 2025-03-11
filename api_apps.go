@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -21,12 +21,12 @@ import (
 )
 
 
-// AppsApiService AppsApi service
-type AppsApiService service
+// AppsAPIService AppsAPI service
+type AppsAPIService service
 
 type ApiGetAppRequest struct {
 	ctx context.Context
-	ApiService *AppsApiService
+	ApiService *AppsAPIService
 	appId string
 }
 
@@ -43,7 +43,7 @@ Returns an `App` object.
  @param appId The ID of the app.
  @return ApiGetAppRequest
 */
-func (a *AppsApiService) GetApp(ctx context.Context, appId string) ApiGetAppRequest {
+func (a *AppsAPIService) GetApp(ctx context.Context, appId string) ApiGetAppRequest {
 	return ApiGetAppRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -53,7 +53,7 @@ func (a *AppsApiService) GetApp(ctx context.Context, appId string) ApiGetAppRequ
 
 // Execute executes the request
 //  @return App
-func (a *AppsApiService) GetAppExecute(r ApiGetAppRequest) (*App, *http.Response, error) {
+func (a *AppsAPIService) GetAppExecute(r ApiGetAppRequest) (*App, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -61,7 +61,7 @@ func (a *AppsApiService) GetAppExecute(r ApiGetAppRequest) (*App, *http.Response
 		localVarReturnValue  *App
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AppsApiService.GetApp")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AppsAPIService.GetApp")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -129,7 +129,7 @@ func (a *AppsApiService) GetAppExecute(r ApiGetAppRequest) (*App, *http.Response
 
 type ApiGetAppsRequest struct {
 	ctx context.Context
-	ApiService *AppsApiService
+	ApiService *AppsAPIService
 	appTypeFilter *[]AppTypeEnum
 	ownerFilter *string
 }
@@ -158,7 +158,7 @@ Returns a list of `App` objects.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAppsRequest
 */
-func (a *AppsApiService) GetApps(ctx context.Context) ApiGetAppsRequest {
+func (a *AppsAPIService) GetApps(ctx context.Context) ApiGetAppsRequest {
 	return ApiGetAppsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -167,7 +167,7 @@ func (a *AppsApiService) GetApps(ctx context.Context) ApiGetAppsRequest {
 
 // Execute executes the request
 //  @return AppsList
-func (a *AppsApiService) GetAppsExecute(r ApiGetAppsRequest) (*AppsList, *http.Response, error) {
+func (a *AppsAPIService) GetAppsExecute(r ApiGetAppsRequest) (*AppsList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -175,7 +175,7 @@ func (a *AppsApiService) GetAppsExecute(r ApiGetAppsRequest) (*AppsList, *http.R
 		localVarReturnValue  *AppsList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AppsApiService.GetApps")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AppsAPIService.GetApps")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -187,10 +187,139 @@ func (a *AppsApiService) GetAppsExecute(r ApiGetAppsRequest) (*AppsList, *http.R
 	localVarFormParams := url.Values{}
 
 	if r.appTypeFilter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "app_type_filter", r.appTypeFilter, "csv")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "app_type_filter", r.appTypeFilter, "form", "csv")
 	}
 	if r.ownerFilter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "owner_filter", r.ownerFilter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "owner_filter", r.ownerFilter, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetSyncErrorsRequest struct {
+	ctx context.Context
+	ApiService *AppsAPIService
+	appId *string
+	resourceId *string
+	groupId *string
+}
+
+// The ID of the app to list sync errors for.
+func (r ApiGetSyncErrorsRequest) AppId(appId string) ApiGetSyncErrorsRequest {
+	r.appId = &appId
+	return r
+}
+
+// The ID of the resource to list sync errors for.
+func (r ApiGetSyncErrorsRequest) ResourceId(resourceId string) ApiGetSyncErrorsRequest {
+	r.resourceId = &resourceId
+	return r
+}
+
+// The ID of the group to list sync errors for.
+func (r ApiGetSyncErrorsRequest) GroupId(groupId string) ApiGetSyncErrorsRequest {
+	r.groupId = &groupId
+	return r
+}
+
+func (r ApiGetSyncErrorsRequest) Execute() ([]SyncErrorList, *http.Response, error) {
+	return r.ApiService.GetSyncErrorsExecute(r)
+}
+
+/*
+GetSyncErrors Method for GetSyncErrors
+
+Returns a list of recent sync errors that have occurred since the last successful sync.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetSyncErrorsRequest
+*/
+func (a *AppsAPIService) GetSyncErrors(ctx context.Context) ApiGetSyncErrorsRequest {
+	return ApiGetSyncErrorsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return []SyncErrorList
+func (a *AppsAPIService) GetSyncErrorsExecute(r ApiGetSyncErrorsRequest) ([]SyncErrorList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []SyncErrorList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AppsAPIService.GetSyncErrors")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/sync_errors"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.appId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "app_id", r.appId, "form", "")
+	}
+	if r.resourceId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "resource_id", r.resourceId, "form", "")
+	}
+	if r.groupId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "group_id", r.groupId, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

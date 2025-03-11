@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -14,6 +14,8 @@ package opal
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ResourceUser type satisfies the MappedNullable interface at compile time
@@ -31,21 +33,22 @@ type ResourceUser struct {
 	// The user's email.
 	Email string `json:"email"`
 	// The day and time the user's access will expire.
-	ExpirationDate NullableTime `json:"expiration_date"`
+	ExpirationDate *time.Time `json:"expiration_date,omitempty"`
 }
+
+type _ResourceUser ResourceUser
 
 // NewResourceUser instantiates a new ResourceUser object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResourceUser(resourceId string, userId string, accessLevel ResourceAccessLevel, fullName string, email string, expirationDate NullableTime) *ResourceUser {
+func NewResourceUser(resourceId string, userId string, accessLevel ResourceAccessLevel, fullName string, email string) *ResourceUser {
 	this := ResourceUser{}
 	this.ResourceId = resourceId
 	this.UserId = userId
 	this.AccessLevel = accessLevel
 	this.FullName = fullName
 	this.Email = email
-	this.ExpirationDate = expirationDate
 	return &this
 }
 
@@ -177,30 +180,36 @@ func (o *ResourceUser) SetEmail(v string) {
 	o.Email = v
 }
 
-// GetExpirationDate returns the ExpirationDate field value
-// If the value is explicit nil, the zero value for time.Time will be returned
+// GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise.
 func (o *ResourceUser) GetExpirationDate() time.Time {
-	if o == nil || o.ExpirationDate.Get() == nil {
+	if o == nil || IsNil(o.ExpirationDate) {
 		var ret time.Time
 		return ret
 	}
-
-	return *o.ExpirationDate.Get()
+	return *o.ExpirationDate
 }
 
-// GetExpirationDateOk returns a tuple with the ExpirationDate field value
+// GetExpirationDateOk returns a tuple with the ExpirationDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceUser) GetExpirationDateOk() (*time.Time, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ExpirationDate) {
 		return nil, false
 	}
-	return o.ExpirationDate.Get(), o.ExpirationDate.IsSet()
+	return o.ExpirationDate, true
 }
 
-// SetExpirationDate sets field value
+// HasExpirationDate returns a boolean if a field has been set.
+func (o *ResourceUser) HasExpirationDate() bool {
+	if o != nil && !IsNil(o.ExpirationDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetExpirationDate gets a reference to the given time.Time and assigns it to the ExpirationDate field.
 func (o *ResourceUser) SetExpirationDate(v time.Time) {
-	o.ExpirationDate.Set(&v)
+	o.ExpirationDate = &v
 }
 
 func (o ResourceUser) MarshalJSON() ([]byte, error) {
@@ -218,8 +227,51 @@ func (o ResourceUser) ToMap() (map[string]interface{}, error) {
 	toSerialize["access_level"] = o.AccessLevel
 	toSerialize["full_name"] = o.FullName
 	toSerialize["email"] = o.Email
-	toSerialize["expiration_date"] = o.ExpirationDate.Get()
+	if !IsNil(o.ExpirationDate) {
+		toSerialize["expiration_date"] = o.ExpirationDate
+	}
 	return toSerialize, nil
+}
+
+func (o *ResourceUser) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"resource_id",
+		"user_id",
+		"access_level",
+		"full_name",
+		"email",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varResourceUser := _ResourceUser{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varResourceUser)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ResourceUser(varResourceUser)
+
+	return err
 }
 
 type NullableResourceUser struct {

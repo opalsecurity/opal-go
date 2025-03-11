@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,8 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the GroupResource type satisfies the MappedNullable interface at compile time
@@ -26,6 +28,8 @@ type GroupResource struct {
 	ResourceId string `json:"resource_id"`
 	AccessLevel ResourceAccessLevel `json:"access_level"`
 }
+
+type _GroupResource GroupResource
 
 // NewGroupResource instantiates a new GroupResource object
 // This constructor will assign default values to properties that have it defined,
@@ -133,6 +137,45 @@ func (o GroupResource) ToMap() (map[string]interface{}, error) {
 	toSerialize["resource_id"] = o.ResourceId
 	toSerialize["access_level"] = o.AccessLevel
 	return toSerialize, nil
+}
+
+func (o *GroupResource) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"group_id",
+		"resource_id",
+		"access_level",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGroupResource := _GroupResource{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varGroupResource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GroupResource(varGroupResource)
+
+	return err
 }
 
 type NullableGroupResource struct {

@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -20,12 +20,27 @@ var _ MappedNullable = &UARScope{}
 
 // UARScope If set, the access review will only contain resources and groups that match at least one of the filters in scope.
 type UARScope struct {
+	// Specifies what users can see during an Access Review
+	GroupVisibility *string `json:"group_visibility,omitempty"`
+	// The access review will only include the following users. If any users are selected, any entity filters will be applied to only the entities that the selected users have access to.
+	Users []string `json:"users,omitempty"`
+	// Specifies whether entities must match all (AND) or any (OR) of the filters.
+	FilterOperator *string `json:"filter_operator,omitempty"`
+	// This access review will include resources and groups with ids in the given strings.
+	Entities []string `json:"entities,omitempty"`
+	// This access review will include items in the specified applications
+	Apps []string `json:"apps,omitempty"`
+	// This access review will include resources and groups who are owned by one of the owners corresponding to the given IDs.
+	Admins []string `json:"admins,omitempty"`
+	// This access review will include items of the specified group types
+	GroupTypes []GroupTypeEnum `json:"group_types,omitempty"`
+	// This access review will include items of the specified resource types
+	ResourceTypes []ResourceTypeEnum `json:"resource_types,omitempty"`
+	IncludeGroupBindings *bool `json:"include_group_bindings,omitempty"`
 	// This access review will include resources and groups who are tagged with one of the given tags.
 	Tags []TagFilter `json:"tags,omitempty"`
 	// This access review will include resources and groups whose name contains one of the given strings.
 	Names []string `json:"names,omitempty"`
-	// This access review will include resources and groups who are owned by one of the owners corresponding to the given IDs.
-	Admins []string `json:"admins,omitempty"`
 }
 
 // NewUARScope instantiates a new UARScope object
@@ -43,6 +58,294 @@ func NewUARScope() *UARScope {
 func NewUARScopeWithDefaults() *UARScope {
 	this := UARScope{}
 	return &this
+}
+
+// GetGroupVisibility returns the GroupVisibility field value if set, zero value otherwise.
+func (o *UARScope) GetGroupVisibility() string {
+	if o == nil || IsNil(o.GroupVisibility) {
+		var ret string
+		return ret
+	}
+	return *o.GroupVisibility
+}
+
+// GetGroupVisibilityOk returns a tuple with the GroupVisibility field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UARScope) GetGroupVisibilityOk() (*string, bool) {
+	if o == nil || IsNil(o.GroupVisibility) {
+		return nil, false
+	}
+	return o.GroupVisibility, true
+}
+
+// HasGroupVisibility returns a boolean if a field has been set.
+func (o *UARScope) HasGroupVisibility() bool {
+	if o != nil && !IsNil(o.GroupVisibility) {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupVisibility gets a reference to the given string and assigns it to the GroupVisibility field.
+func (o *UARScope) SetGroupVisibility(v string) {
+	o.GroupVisibility = &v
+}
+
+// GetUsers returns the Users field value if set, zero value otherwise.
+func (o *UARScope) GetUsers() []string {
+	if o == nil || IsNil(o.Users) {
+		var ret []string
+		return ret
+	}
+	return o.Users
+}
+
+// GetUsersOk returns a tuple with the Users field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UARScope) GetUsersOk() ([]string, bool) {
+	if o == nil || IsNil(o.Users) {
+		return nil, false
+	}
+	return o.Users, true
+}
+
+// HasUsers returns a boolean if a field has been set.
+func (o *UARScope) HasUsers() bool {
+	if o != nil && !IsNil(o.Users) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsers gets a reference to the given []string and assigns it to the Users field.
+func (o *UARScope) SetUsers(v []string) {
+	o.Users = v
+}
+
+// GetFilterOperator returns the FilterOperator field value if set, zero value otherwise.
+func (o *UARScope) GetFilterOperator() string {
+	if o == nil || IsNil(o.FilterOperator) {
+		var ret string
+		return ret
+	}
+	return *o.FilterOperator
+}
+
+// GetFilterOperatorOk returns a tuple with the FilterOperator field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UARScope) GetFilterOperatorOk() (*string, bool) {
+	if o == nil || IsNil(o.FilterOperator) {
+		return nil, false
+	}
+	return o.FilterOperator, true
+}
+
+// HasFilterOperator returns a boolean if a field has been set.
+func (o *UARScope) HasFilterOperator() bool {
+	if o != nil && !IsNil(o.FilterOperator) {
+		return true
+	}
+
+	return false
+}
+
+// SetFilterOperator gets a reference to the given string and assigns it to the FilterOperator field.
+func (o *UARScope) SetFilterOperator(v string) {
+	o.FilterOperator = &v
+}
+
+// GetEntities returns the Entities field value if set, zero value otherwise.
+func (o *UARScope) GetEntities() []string {
+	if o == nil || IsNil(o.Entities) {
+		var ret []string
+		return ret
+	}
+	return o.Entities
+}
+
+// GetEntitiesOk returns a tuple with the Entities field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UARScope) GetEntitiesOk() ([]string, bool) {
+	if o == nil || IsNil(o.Entities) {
+		return nil, false
+	}
+	return o.Entities, true
+}
+
+// HasEntities returns a boolean if a field has been set.
+func (o *UARScope) HasEntities() bool {
+	if o != nil && !IsNil(o.Entities) {
+		return true
+	}
+
+	return false
+}
+
+// SetEntities gets a reference to the given []string and assigns it to the Entities field.
+func (o *UARScope) SetEntities(v []string) {
+	o.Entities = v
+}
+
+// GetApps returns the Apps field value if set, zero value otherwise.
+func (o *UARScope) GetApps() []string {
+	if o == nil || IsNil(o.Apps) {
+		var ret []string
+		return ret
+	}
+	return o.Apps
+}
+
+// GetAppsOk returns a tuple with the Apps field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UARScope) GetAppsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Apps) {
+		return nil, false
+	}
+	return o.Apps, true
+}
+
+// HasApps returns a boolean if a field has been set.
+func (o *UARScope) HasApps() bool {
+	if o != nil && !IsNil(o.Apps) {
+		return true
+	}
+
+	return false
+}
+
+// SetApps gets a reference to the given []string and assigns it to the Apps field.
+func (o *UARScope) SetApps(v []string) {
+	o.Apps = v
+}
+
+// GetAdmins returns the Admins field value if set, zero value otherwise.
+func (o *UARScope) GetAdmins() []string {
+	if o == nil || IsNil(o.Admins) {
+		var ret []string
+		return ret
+	}
+	return o.Admins
+}
+
+// GetAdminsOk returns a tuple with the Admins field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UARScope) GetAdminsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Admins) {
+		return nil, false
+	}
+	return o.Admins, true
+}
+
+// HasAdmins returns a boolean if a field has been set.
+func (o *UARScope) HasAdmins() bool {
+	if o != nil && !IsNil(o.Admins) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdmins gets a reference to the given []string and assigns it to the Admins field.
+func (o *UARScope) SetAdmins(v []string) {
+	o.Admins = v
+}
+
+// GetGroupTypes returns the GroupTypes field value if set, zero value otherwise.
+func (o *UARScope) GetGroupTypes() []GroupTypeEnum {
+	if o == nil || IsNil(o.GroupTypes) {
+		var ret []GroupTypeEnum
+		return ret
+	}
+	return o.GroupTypes
+}
+
+// GetGroupTypesOk returns a tuple with the GroupTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UARScope) GetGroupTypesOk() ([]GroupTypeEnum, bool) {
+	if o == nil || IsNil(o.GroupTypes) {
+		return nil, false
+	}
+	return o.GroupTypes, true
+}
+
+// HasGroupTypes returns a boolean if a field has been set.
+func (o *UARScope) HasGroupTypes() bool {
+	if o != nil && !IsNil(o.GroupTypes) {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupTypes gets a reference to the given []GroupTypeEnum and assigns it to the GroupTypes field.
+func (o *UARScope) SetGroupTypes(v []GroupTypeEnum) {
+	o.GroupTypes = v
+}
+
+// GetResourceTypes returns the ResourceTypes field value if set, zero value otherwise.
+func (o *UARScope) GetResourceTypes() []ResourceTypeEnum {
+	if o == nil || IsNil(o.ResourceTypes) {
+		var ret []ResourceTypeEnum
+		return ret
+	}
+	return o.ResourceTypes
+}
+
+// GetResourceTypesOk returns a tuple with the ResourceTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UARScope) GetResourceTypesOk() ([]ResourceTypeEnum, bool) {
+	if o == nil || IsNil(o.ResourceTypes) {
+		return nil, false
+	}
+	return o.ResourceTypes, true
+}
+
+// HasResourceTypes returns a boolean if a field has been set.
+func (o *UARScope) HasResourceTypes() bool {
+	if o != nil && !IsNil(o.ResourceTypes) {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceTypes gets a reference to the given []ResourceTypeEnum and assigns it to the ResourceTypes field.
+func (o *UARScope) SetResourceTypes(v []ResourceTypeEnum) {
+	o.ResourceTypes = v
+}
+
+// GetIncludeGroupBindings returns the IncludeGroupBindings field value if set, zero value otherwise.
+func (o *UARScope) GetIncludeGroupBindings() bool {
+	if o == nil || IsNil(o.IncludeGroupBindings) {
+		var ret bool
+		return ret
+	}
+	return *o.IncludeGroupBindings
+}
+
+// GetIncludeGroupBindingsOk returns a tuple with the IncludeGroupBindings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UARScope) GetIncludeGroupBindingsOk() (*bool, bool) {
+	if o == nil || IsNil(o.IncludeGroupBindings) {
+		return nil, false
+	}
+	return o.IncludeGroupBindings, true
+}
+
+// HasIncludeGroupBindings returns a boolean if a field has been set.
+func (o *UARScope) HasIncludeGroupBindings() bool {
+	if o != nil && !IsNil(o.IncludeGroupBindings) {
+		return true
+	}
+
+	return false
+}
+
+// SetIncludeGroupBindings gets a reference to the given bool and assigns it to the IncludeGroupBindings field.
+func (o *UARScope) SetIncludeGroupBindings(v bool) {
+	o.IncludeGroupBindings = &v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise.
@@ -109,38 +412,6 @@ func (o *UARScope) SetNames(v []string) {
 	o.Names = v
 }
 
-// GetAdmins returns the Admins field value if set, zero value otherwise.
-func (o *UARScope) GetAdmins() []string {
-	if o == nil || IsNil(o.Admins) {
-		var ret []string
-		return ret
-	}
-	return o.Admins
-}
-
-// GetAdminsOk returns a tuple with the Admins field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UARScope) GetAdminsOk() ([]string, bool) {
-	if o == nil || IsNil(o.Admins) {
-		return nil, false
-	}
-	return o.Admins, true
-}
-
-// HasAdmins returns a boolean if a field has been set.
-func (o *UARScope) HasAdmins() bool {
-	if o != nil && !IsNil(o.Admins) {
-		return true
-	}
-
-	return false
-}
-
-// SetAdmins gets a reference to the given []string and assigns it to the Admins field.
-func (o *UARScope) SetAdmins(v []string) {
-	o.Admins = v
-}
-
 func (o UARScope) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -151,14 +422,38 @@ func (o UARScope) MarshalJSON() ([]byte, error) {
 
 func (o UARScope) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.GroupVisibility) {
+		toSerialize["group_visibility"] = o.GroupVisibility
+	}
+	if !IsNil(o.Users) {
+		toSerialize["users"] = o.Users
+	}
+	if !IsNil(o.FilterOperator) {
+		toSerialize["filter_operator"] = o.FilterOperator
+	}
+	if !IsNil(o.Entities) {
+		toSerialize["entities"] = o.Entities
+	}
+	if !IsNil(o.Apps) {
+		toSerialize["apps"] = o.Apps
+	}
+	if !IsNil(o.Admins) {
+		toSerialize["admins"] = o.Admins
+	}
+	if !IsNil(o.GroupTypes) {
+		toSerialize["group_types"] = o.GroupTypes
+	}
+	if !IsNil(o.ResourceTypes) {
+		toSerialize["resource_types"] = o.ResourceTypes
+	}
+	if !IsNil(o.IncludeGroupBindings) {
+		toSerialize["include_group_bindings"] = o.IncludeGroupBindings
+	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
 	}
 	if !IsNil(o.Names) {
 		toSerialize["names"] = o.Names
-	}
-	if !IsNil(o.Admins) {
-		toSerialize["admins"] = o.Admins
 	}
 	return toSerialize, nil
 }

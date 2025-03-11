@@ -24,7 +24,12 @@ Name | Type | Description | Notes
 **IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this resource. | [optional] 
 **ParentResourceId** | Pointer to **string** | The ID of the parent resource. | [optional] 
 **ConfigurationTemplateId** | Pointer to **string** | The ID of the associated configuration template. | [optional] 
-**RequestConfigurationList** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | A list of configurations for requests to this resource. | [optional] 
+**RequestConfigurations** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | A list of configurations for requests to this resource. | [optional] 
+**RequestConfigurationList** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | A list of configurations for requests to this resource. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
+**TicketPropagation** | Pointer to [**TicketPropagationConfiguration**](TicketPropagationConfiguration.md) |  | [optional] 
+**CustomRequestNotification** | Pointer to **string** | Custom request notification sent upon request approval. | [optional] 
+**RiskSensitivity** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) | The risk sensitivity level for the resource. When an override is set, this field will match that. | [optional] [readonly] 
+**RiskSensitivityOverride** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) |  | [optional] 
 **Metadata** | Pointer to **string** | JSON metadata about the remote resource. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details. | [optional] 
 **RemoteInfo** | Pointer to [**ResourceRemoteInfo**](ResourceRemoteInfo.md) |  | [optional] 
 
@@ -542,6 +547,31 @@ SetConfigurationTemplateId sets ConfigurationTemplateId field to given value.
 
 HasConfigurationTemplateId returns a boolean if a field has been set.
 
+### GetRequestConfigurations
+
+`func (o *Resource) GetRequestConfigurations() []RequestConfiguration`
+
+GetRequestConfigurations returns the RequestConfigurations field if non-nil, zero value otherwise.
+
+### GetRequestConfigurationsOk
+
+`func (o *Resource) GetRequestConfigurationsOk() (*[]RequestConfiguration, bool)`
+
+GetRequestConfigurationsOk returns a tuple with the RequestConfigurations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestConfigurations
+
+`func (o *Resource) SetRequestConfigurations(v []RequestConfiguration)`
+
+SetRequestConfigurations sets RequestConfigurations field to given value.
+
+### HasRequestConfigurations
+
+`func (o *Resource) HasRequestConfigurations() bool`
+
+HasRequestConfigurations returns a boolean if a field has been set.
+
 ### GetRequestConfigurationList
 
 `func (o *Resource) GetRequestConfigurationList() []RequestConfiguration`
@@ -566,6 +596,106 @@ SetRequestConfigurationList sets RequestConfigurationList field to given value.
 `func (o *Resource) HasRequestConfigurationList() bool`
 
 HasRequestConfigurationList returns a boolean if a field has been set.
+
+### GetTicketPropagation
+
+`func (o *Resource) GetTicketPropagation() TicketPropagationConfiguration`
+
+GetTicketPropagation returns the TicketPropagation field if non-nil, zero value otherwise.
+
+### GetTicketPropagationOk
+
+`func (o *Resource) GetTicketPropagationOk() (*TicketPropagationConfiguration, bool)`
+
+GetTicketPropagationOk returns a tuple with the TicketPropagation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTicketPropagation
+
+`func (o *Resource) SetTicketPropagation(v TicketPropagationConfiguration)`
+
+SetTicketPropagation sets TicketPropagation field to given value.
+
+### HasTicketPropagation
+
+`func (o *Resource) HasTicketPropagation() bool`
+
+HasTicketPropagation returns a boolean if a field has been set.
+
+### GetCustomRequestNotification
+
+`func (o *Resource) GetCustomRequestNotification() string`
+
+GetCustomRequestNotification returns the CustomRequestNotification field if non-nil, zero value otherwise.
+
+### GetCustomRequestNotificationOk
+
+`func (o *Resource) GetCustomRequestNotificationOk() (*string, bool)`
+
+GetCustomRequestNotificationOk returns a tuple with the CustomRequestNotification field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomRequestNotification
+
+`func (o *Resource) SetCustomRequestNotification(v string)`
+
+SetCustomRequestNotification sets CustomRequestNotification field to given value.
+
+### HasCustomRequestNotification
+
+`func (o *Resource) HasCustomRequestNotification() bool`
+
+HasCustomRequestNotification returns a boolean if a field has been set.
+
+### GetRiskSensitivity
+
+`func (o *Resource) GetRiskSensitivity() RiskSensitivityEnum`
+
+GetRiskSensitivity returns the RiskSensitivity field if non-nil, zero value otherwise.
+
+### GetRiskSensitivityOk
+
+`func (o *Resource) GetRiskSensitivityOk() (*RiskSensitivityEnum, bool)`
+
+GetRiskSensitivityOk returns a tuple with the RiskSensitivity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRiskSensitivity
+
+`func (o *Resource) SetRiskSensitivity(v RiskSensitivityEnum)`
+
+SetRiskSensitivity sets RiskSensitivity field to given value.
+
+### HasRiskSensitivity
+
+`func (o *Resource) HasRiskSensitivity() bool`
+
+HasRiskSensitivity returns a boolean if a field has been set.
+
+### GetRiskSensitivityOverride
+
+`func (o *Resource) GetRiskSensitivityOverride() RiskSensitivityEnum`
+
+GetRiskSensitivityOverride returns the RiskSensitivityOverride field if non-nil, zero value otherwise.
+
+### GetRiskSensitivityOverrideOk
+
+`func (o *Resource) GetRiskSensitivityOverrideOk() (*RiskSensitivityEnum, bool)`
+
+GetRiskSensitivityOverrideOk returns a tuple with the RiskSensitivityOverride field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRiskSensitivityOverride
+
+`func (o *Resource) SetRiskSensitivityOverride(v RiskSensitivityEnum)`
+
+SetRiskSensitivityOverride sets RiskSensitivityOverride field to given value.
+
+### HasRiskSensitivityOverride
+
+`func (o *Resource) HasRiskSensitivityOverride() bool`
+
+HasRiskSensitivityOverride returns a boolean if a field has been set.
 
 ### GetMetadata
 

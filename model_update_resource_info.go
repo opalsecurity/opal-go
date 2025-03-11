@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,8 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the UpdateResourceInfo type satisfies the MappedNullable interface at compile time
@@ -28,16 +30,16 @@ type UpdateResourceInfo struct {
 	Description *string `json:"description,omitempty"`
 	// The ID of the owner of the resource.
 	AdminOwnerId *string `json:"admin_owner_id,omitempty"`
-	// The maximum duration for which the resource can be requested (in minutes). Use -1 to set to indefinite. Deprecated in favor of `request_configuration_list`.
+	// The maximum duration for which the resource can be requested (in minutes). Use -1 to set to indefinite. Deprecated in favor of `request_configurations`.
 	// Deprecated
 	MaxDuration *int32 `json:"max_duration,omitempty"`
-	// The recommended duration for which the resource should be requested (in minutes). Will be the default value in a request. Use -1 to set to indefinite and 0 to unset. Deprecated in favor of `request_configuration_list`.
+	// The recommended duration for which the resource should be requested (in minutes). Will be the default value in a request. Use -1 to set to indefinite and 0 to unset. Deprecated in favor of `request_configurations`.
 	// Deprecated
 	RecommendedDuration *int32 `json:"recommended_duration,omitempty"`
 	// A bool representing whether or not access requests to the resource require manager approval.
 	// Deprecated
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
-	// A bool representing whether or not access requests to the resource require an access ticket. Deprecated in favor of `request_configuration_list`.
+	// A bool representing whether or not access requests to the resource require an access ticket. Deprecated in favor of `request_configurations`.
 	// Deprecated
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
 	// The ID of the folder that the resource is located in.
@@ -45,24 +47,34 @@ type UpdateResourceInfo struct {
 	FolderId *string `json:"folder_id,omitempty"`
 	// A bool representing whether or not to require MFA for reviewers to approve requests for this resource.
 	RequireMfaToApprove *bool `json:"require_mfa_to_approve,omitempty"`
-	// A bool representing whether or not to require MFA for requesting access to this resource. Deprecated in favor of `request_configuration_list`.
+	// A bool representing whether or not to require MFA for requesting access to this resource. Deprecated in favor of `request_configurations`.
 	// Deprecated
 	RequireMfaToRequest *bool `json:"require_mfa_to_request,omitempty"`
 	// A bool representing whether or not to require MFA to connect to this resource.
 	RequireMfaToConnect *bool `json:"require_mfa_to_connect,omitempty"`
-	// A bool representing whether or not to automatically approve requests to this resource. Deprecated in favor of `request_configuration_list`.
+	// A bool representing whether or not to automatically approve requests to this resource. Deprecated in favor of `request_configurations`.
 	// Deprecated
 	AutoApproval *bool `json:"auto_approval,omitempty"`
+	TicketPropagation *TicketPropagationConfiguration `json:"ticket_propagation,omitempty"`
+	// Custom request notification sent upon request approval.
+	CustomRequestNotification *string `json:"custom_request_notification,omitempty"`
+	RiskSensitivityOverride *RiskSensitivityEnum `json:"risk_sensitivity_override,omitempty"`
 	// The ID of the associated configuration template.
 	ConfigurationTemplateId *string `json:"configuration_template_id,omitempty"`
-	// The ID of the associated request template. Deprecated in favor of `request_configuration_list`.
+	// The ID of the associated request template. Deprecated in favor of `request_configurations`.
 	// Deprecated
 	RequestTemplateId *string `json:"request_template_id,omitempty"`
-	// A bool representing whether or not to allow access requests to this resource. Deprecated in favor of `request_configuration_list`.
+	// A bool representing whether or not to allow access requests to this resource. Deprecated in favor of `request_configurations`.
 	// Deprecated
 	IsRequestable *bool `json:"is_requestable,omitempty"`
+	// A list of configurations for requests to this resource. If not provided, the default request configuration will be used.
+	RequestConfigurations []RequestConfiguration `json:"request_configurations,omitempty"`
+	// A list of configurations for requests to this resource. If not provided, the default request configuration will be used. Deprecated in favor of `request_configurations`.
+	// Deprecated
 	RequestConfigurationList *CreateRequestConfigurationInfoList `json:"request_configuration_list,omitempty"`
 }
+
+type _UpdateResourceInfo UpdateResourceInfo
 
 // NewUpdateResourceInfo instantiates a new UpdateResourceInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -511,6 +523,102 @@ func (o *UpdateResourceInfo) SetAutoApproval(v bool) {
 	o.AutoApproval = &v
 }
 
+// GetTicketPropagation returns the TicketPropagation field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetTicketPropagation() TicketPropagationConfiguration {
+	if o == nil || IsNil(o.TicketPropagation) {
+		var ret TicketPropagationConfiguration
+		return ret
+	}
+	return *o.TicketPropagation
+}
+
+// GetTicketPropagationOk returns a tuple with the TicketPropagation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceInfo) GetTicketPropagationOk() (*TicketPropagationConfiguration, bool) {
+	if o == nil || IsNil(o.TicketPropagation) {
+		return nil, false
+	}
+	return o.TicketPropagation, true
+}
+
+// HasTicketPropagation returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasTicketPropagation() bool {
+	if o != nil && !IsNil(o.TicketPropagation) {
+		return true
+	}
+
+	return false
+}
+
+// SetTicketPropagation gets a reference to the given TicketPropagationConfiguration and assigns it to the TicketPropagation field.
+func (o *UpdateResourceInfo) SetTicketPropagation(v TicketPropagationConfiguration) {
+	o.TicketPropagation = &v
+}
+
+// GetCustomRequestNotification returns the CustomRequestNotification field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetCustomRequestNotification() string {
+	if o == nil || IsNil(o.CustomRequestNotification) {
+		var ret string
+		return ret
+	}
+	return *o.CustomRequestNotification
+}
+
+// GetCustomRequestNotificationOk returns a tuple with the CustomRequestNotification field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceInfo) GetCustomRequestNotificationOk() (*string, bool) {
+	if o == nil || IsNil(o.CustomRequestNotification) {
+		return nil, false
+	}
+	return o.CustomRequestNotification, true
+}
+
+// HasCustomRequestNotification returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasCustomRequestNotification() bool {
+	if o != nil && !IsNil(o.CustomRequestNotification) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomRequestNotification gets a reference to the given string and assigns it to the CustomRequestNotification field.
+func (o *UpdateResourceInfo) SetCustomRequestNotification(v string) {
+	o.CustomRequestNotification = &v
+}
+
+// GetRiskSensitivityOverride returns the RiskSensitivityOverride field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetRiskSensitivityOverride() RiskSensitivityEnum {
+	if o == nil || IsNil(o.RiskSensitivityOverride) {
+		var ret RiskSensitivityEnum
+		return ret
+	}
+	return *o.RiskSensitivityOverride
+}
+
+// GetRiskSensitivityOverrideOk returns a tuple with the RiskSensitivityOverride field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceInfo) GetRiskSensitivityOverrideOk() (*RiskSensitivityEnum, bool) {
+	if o == nil || IsNil(o.RiskSensitivityOverride) {
+		return nil, false
+	}
+	return o.RiskSensitivityOverride, true
+}
+
+// HasRiskSensitivityOverride returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasRiskSensitivityOverride() bool {
+	if o != nil && !IsNil(o.RiskSensitivityOverride) {
+		return true
+	}
+
+	return false
+}
+
+// SetRiskSensitivityOverride gets a reference to the given RiskSensitivityEnum and assigns it to the RiskSensitivityOverride field.
+func (o *UpdateResourceInfo) SetRiskSensitivityOverride(v RiskSensitivityEnum) {
+	o.RiskSensitivityOverride = &v
+}
+
 // GetConfigurationTemplateId returns the ConfigurationTemplateId field value if set, zero value otherwise.
 func (o *UpdateResourceInfo) GetConfigurationTemplateId() string {
 	if o == nil || IsNil(o.ConfigurationTemplateId) {
@@ -613,7 +721,40 @@ func (o *UpdateResourceInfo) SetIsRequestable(v bool) {
 	o.IsRequestable = &v
 }
 
+// GetRequestConfigurations returns the RequestConfigurations field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetRequestConfigurations() []RequestConfiguration {
+	if o == nil || IsNil(o.RequestConfigurations) {
+		var ret []RequestConfiguration
+		return ret
+	}
+	return o.RequestConfigurations
+}
+
+// GetRequestConfigurationsOk returns a tuple with the RequestConfigurations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceInfo) GetRequestConfigurationsOk() ([]RequestConfiguration, bool) {
+	if o == nil || IsNil(o.RequestConfigurations) {
+		return nil, false
+	}
+	return o.RequestConfigurations, true
+}
+
+// HasRequestConfigurations returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasRequestConfigurations() bool {
+	if o != nil && !IsNil(o.RequestConfigurations) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestConfigurations gets a reference to the given []RequestConfiguration and assigns it to the RequestConfigurations field.
+func (o *UpdateResourceInfo) SetRequestConfigurations(v []RequestConfiguration) {
+	o.RequestConfigurations = v
+}
+
 // GetRequestConfigurationList returns the RequestConfigurationList field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateResourceInfo) GetRequestConfigurationList() CreateRequestConfigurationInfoList {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		var ret CreateRequestConfigurationInfoList
@@ -624,6 +765,7 @@ func (o *UpdateResourceInfo) GetRequestConfigurationList() CreateRequestConfigur
 
 // GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateResourceInfo) GetRequestConfigurationListOk() (*CreateRequestConfigurationInfoList, bool) {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		return nil, false
@@ -641,6 +783,7 @@ func (o *UpdateResourceInfo) HasRequestConfigurationList() bool {
 }
 
 // SetRequestConfigurationList gets a reference to the given CreateRequestConfigurationInfoList and assigns it to the RequestConfigurationList field.
+// Deprecated
 func (o *UpdateResourceInfo) SetRequestConfigurationList(v CreateRequestConfigurationInfoList) {
 	o.RequestConfigurationList = &v
 }
@@ -692,6 +835,15 @@ func (o UpdateResourceInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AutoApproval) {
 		toSerialize["auto_approval"] = o.AutoApproval
 	}
+	if !IsNil(o.TicketPropagation) {
+		toSerialize["ticket_propagation"] = o.TicketPropagation
+	}
+	if !IsNil(o.CustomRequestNotification) {
+		toSerialize["custom_request_notification"] = o.CustomRequestNotification
+	}
+	if !IsNil(o.RiskSensitivityOverride) {
+		toSerialize["risk_sensitivity_override"] = o.RiskSensitivityOverride
+	}
 	if !IsNil(o.ConfigurationTemplateId) {
 		toSerialize["configuration_template_id"] = o.ConfigurationTemplateId
 	}
@@ -701,10 +853,50 @@ func (o UpdateResourceInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsRequestable) {
 		toSerialize["is_requestable"] = o.IsRequestable
 	}
+	if !IsNil(o.RequestConfigurations) {
+		toSerialize["request_configurations"] = o.RequestConfigurations
+	}
 	if !IsNil(o.RequestConfigurationList) {
 		toSerialize["request_configuration_list"] = o.RequestConfigurationList
 	}
 	return toSerialize, nil
+}
+
+func (o *UpdateResourceInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"resource_id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varUpdateResourceInfo := _UpdateResourceInfo{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUpdateResourceInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateResourceInfo(varUpdateResourceInfo)
+
+	return err
 }
 
 type NullableUpdateResourceInfo struct {

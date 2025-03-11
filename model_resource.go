@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,8 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Resource type satisfies the MappedNullable interface at compile time
@@ -61,12 +63,22 @@ type Resource struct {
 	// The ID of the associated configuration template.
 	ConfigurationTemplateId *string `json:"configuration_template_id,omitempty"`
 	// A list of configurations for requests to this resource.
+	RequestConfigurations []RequestConfiguration `json:"request_configurations,omitempty"`
+	// A list of configurations for requests to this resource. Deprecated in favor of `request_configurations`.
 	RequestConfigurationList []RequestConfiguration `json:"request_configuration_list,omitempty"`
+	TicketPropagation *TicketPropagationConfiguration `json:"ticket_propagation,omitempty"`
+	// Custom request notification sent upon request approval.
+	CustomRequestNotification *string `json:"custom_request_notification,omitempty"`
+	// The risk sensitivity level for the resource. When an override is set, this field will match that.
+	RiskSensitivity *RiskSensitivityEnum `json:"risk_sensitivity,omitempty"`
+	RiskSensitivityOverride *RiskSensitivityEnum `json:"risk_sensitivity_override,omitempty"`
 	// JSON metadata about the remote resource. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details.
 	// Deprecated
 	Metadata *string `json:"metadata,omitempty"`
 	RemoteInfo *ResourceRemoteInfo `json:"remote_info,omitempty"`
 }
+
+type _Resource Resource
 
 // NewResource instantiates a new Resource object
 // This constructor will assign default values to properties that have it defined,
@@ -721,6 +733,38 @@ func (o *Resource) SetConfigurationTemplateId(v string) {
 	o.ConfigurationTemplateId = &v
 }
 
+// GetRequestConfigurations returns the RequestConfigurations field value if set, zero value otherwise.
+func (o *Resource) GetRequestConfigurations() []RequestConfiguration {
+	if o == nil || IsNil(o.RequestConfigurations) {
+		var ret []RequestConfiguration
+		return ret
+	}
+	return o.RequestConfigurations
+}
+
+// GetRequestConfigurationsOk returns a tuple with the RequestConfigurations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetRequestConfigurationsOk() ([]RequestConfiguration, bool) {
+	if o == nil || IsNil(o.RequestConfigurations) {
+		return nil, false
+	}
+	return o.RequestConfigurations, true
+}
+
+// HasRequestConfigurations returns a boolean if a field has been set.
+func (o *Resource) HasRequestConfigurations() bool {
+	if o != nil && !IsNil(o.RequestConfigurations) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestConfigurations gets a reference to the given []RequestConfiguration and assigns it to the RequestConfigurations field.
+func (o *Resource) SetRequestConfigurations(v []RequestConfiguration) {
+	o.RequestConfigurations = v
+}
+
 // GetRequestConfigurationList returns the RequestConfigurationList field value if set, zero value otherwise.
 func (o *Resource) GetRequestConfigurationList() []RequestConfiguration {
 	if o == nil || IsNil(o.RequestConfigurationList) {
@@ -751,6 +795,134 @@ func (o *Resource) HasRequestConfigurationList() bool {
 // SetRequestConfigurationList gets a reference to the given []RequestConfiguration and assigns it to the RequestConfigurationList field.
 func (o *Resource) SetRequestConfigurationList(v []RequestConfiguration) {
 	o.RequestConfigurationList = v
+}
+
+// GetTicketPropagation returns the TicketPropagation field value if set, zero value otherwise.
+func (o *Resource) GetTicketPropagation() TicketPropagationConfiguration {
+	if o == nil || IsNil(o.TicketPropagation) {
+		var ret TicketPropagationConfiguration
+		return ret
+	}
+	return *o.TicketPropagation
+}
+
+// GetTicketPropagationOk returns a tuple with the TicketPropagation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetTicketPropagationOk() (*TicketPropagationConfiguration, bool) {
+	if o == nil || IsNil(o.TicketPropagation) {
+		return nil, false
+	}
+	return o.TicketPropagation, true
+}
+
+// HasTicketPropagation returns a boolean if a field has been set.
+func (o *Resource) HasTicketPropagation() bool {
+	if o != nil && !IsNil(o.TicketPropagation) {
+		return true
+	}
+
+	return false
+}
+
+// SetTicketPropagation gets a reference to the given TicketPropagationConfiguration and assigns it to the TicketPropagation field.
+func (o *Resource) SetTicketPropagation(v TicketPropagationConfiguration) {
+	o.TicketPropagation = &v
+}
+
+// GetCustomRequestNotification returns the CustomRequestNotification field value if set, zero value otherwise.
+func (o *Resource) GetCustomRequestNotification() string {
+	if o == nil || IsNil(o.CustomRequestNotification) {
+		var ret string
+		return ret
+	}
+	return *o.CustomRequestNotification
+}
+
+// GetCustomRequestNotificationOk returns a tuple with the CustomRequestNotification field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetCustomRequestNotificationOk() (*string, bool) {
+	if o == nil || IsNil(o.CustomRequestNotification) {
+		return nil, false
+	}
+	return o.CustomRequestNotification, true
+}
+
+// HasCustomRequestNotification returns a boolean if a field has been set.
+func (o *Resource) HasCustomRequestNotification() bool {
+	if o != nil && !IsNil(o.CustomRequestNotification) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomRequestNotification gets a reference to the given string and assigns it to the CustomRequestNotification field.
+func (o *Resource) SetCustomRequestNotification(v string) {
+	o.CustomRequestNotification = &v
+}
+
+// GetRiskSensitivity returns the RiskSensitivity field value if set, zero value otherwise.
+func (o *Resource) GetRiskSensitivity() RiskSensitivityEnum {
+	if o == nil || IsNil(o.RiskSensitivity) {
+		var ret RiskSensitivityEnum
+		return ret
+	}
+	return *o.RiskSensitivity
+}
+
+// GetRiskSensitivityOk returns a tuple with the RiskSensitivity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetRiskSensitivityOk() (*RiskSensitivityEnum, bool) {
+	if o == nil || IsNil(o.RiskSensitivity) {
+		return nil, false
+	}
+	return o.RiskSensitivity, true
+}
+
+// HasRiskSensitivity returns a boolean if a field has been set.
+func (o *Resource) HasRiskSensitivity() bool {
+	if o != nil && !IsNil(o.RiskSensitivity) {
+		return true
+	}
+
+	return false
+}
+
+// SetRiskSensitivity gets a reference to the given RiskSensitivityEnum and assigns it to the RiskSensitivity field.
+func (o *Resource) SetRiskSensitivity(v RiskSensitivityEnum) {
+	o.RiskSensitivity = &v
+}
+
+// GetRiskSensitivityOverride returns the RiskSensitivityOverride field value if set, zero value otherwise.
+func (o *Resource) GetRiskSensitivityOverride() RiskSensitivityEnum {
+	if o == nil || IsNil(o.RiskSensitivityOverride) {
+		var ret RiskSensitivityEnum
+		return ret
+	}
+	return *o.RiskSensitivityOverride
+}
+
+// GetRiskSensitivityOverrideOk returns a tuple with the RiskSensitivityOverride field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetRiskSensitivityOverrideOk() (*RiskSensitivityEnum, bool) {
+	if o == nil || IsNil(o.RiskSensitivityOverride) {
+		return nil, false
+	}
+	return o.RiskSensitivityOverride, true
+}
+
+// HasRiskSensitivityOverride returns a boolean if a field has been set.
+func (o *Resource) HasRiskSensitivityOverride() bool {
+	if o != nil && !IsNil(o.RiskSensitivityOverride) {
+		return true
+	}
+
+	return false
+}
+
+// SetRiskSensitivityOverride gets a reference to the given RiskSensitivityEnum and assigns it to the RiskSensitivityOverride field.
+func (o *Resource) SetRiskSensitivityOverride(v RiskSensitivityEnum) {
+	o.RiskSensitivityOverride = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
@@ -888,8 +1060,23 @@ func (o Resource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConfigurationTemplateId) {
 		toSerialize["configuration_template_id"] = o.ConfigurationTemplateId
 	}
+	if !IsNil(o.RequestConfigurations) {
+		toSerialize["request_configurations"] = o.RequestConfigurations
+	}
 	if !IsNil(o.RequestConfigurationList) {
 		toSerialize["request_configuration_list"] = o.RequestConfigurationList
+	}
+	if !IsNil(o.TicketPropagation) {
+		toSerialize["ticket_propagation"] = o.TicketPropagation
+	}
+	if !IsNil(o.CustomRequestNotification) {
+		toSerialize["custom_request_notification"] = o.CustomRequestNotification
+	}
+	if !IsNil(o.RiskSensitivity) {
+		toSerialize["risk_sensitivity"] = o.RiskSensitivity
+	}
+	if !IsNil(o.RiskSensitivityOverride) {
+		toSerialize["risk_sensitivity_override"] = o.RiskSensitivityOverride
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
@@ -898,6 +1085,43 @@ func (o Resource) ToMap() (map[string]interface{}, error) {
 		toSerialize["remote_info"] = o.RemoteInfo
 	}
 	return toSerialize, nil
+}
+
+func (o *Resource) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"resource_id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varResource := _Resource{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varResource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Resource(varResource)
+
+	return err
 }
 
 type NullableResource struct {

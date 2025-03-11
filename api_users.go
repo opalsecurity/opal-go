@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -21,12 +21,12 @@ import (
 )
 
 
-// UsersApiService UsersApi service
-type UsersApiService service
+// UsersAPIService UsersAPI service
+type UsersAPIService service
 
 type ApiGetUserTagsRequest struct {
 	ctx context.Context
-	ApiService *UsersApiService
+	ApiService *UsersAPIService
 	userId string
 }
 
@@ -43,7 +43,7 @@ Returns all tags applied to the user.
  @param userId The ID of the user whose tags to return.
  @return ApiGetUserTagsRequest
 */
-func (a *UsersApiService) GetUserTags(ctx context.Context, userId string) ApiGetUserTagsRequest {
+func (a *UsersAPIService) GetUserTags(ctx context.Context, userId string) ApiGetUserTagsRequest {
 	return ApiGetUserTagsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -53,7 +53,7 @@ func (a *UsersApiService) GetUserTags(ctx context.Context, userId string) ApiGet
 
 // Execute executes the request
 //  @return TagsList
-func (a *UsersApiService) GetUserTagsExecute(r ApiGetUserTagsRequest) (*TagsList, *http.Response, error) {
+func (a *UsersAPIService) GetUserTagsExecute(r ApiGetUserTagsRequest) (*TagsList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -61,7 +61,7 @@ func (a *UsersApiService) GetUserTagsExecute(r ApiGetUserTagsRequest) (*TagsList
 		localVarReturnValue  *TagsList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.GetUserTags")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersAPIService.GetUserTags")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -129,7 +129,7 @@ func (a *UsersApiService) GetUserTagsExecute(r ApiGetUserTagsRequest) (*TagsList
 
 type ApiGetUsersRequest struct {
 	ctx context.Context
-	ApiService *UsersApiService
+	ApiService *UsersAPIService
 	cursor *string
 	pageSize *int32
 }
@@ -158,7 +158,7 @@ Returns a list of users for your organization.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetUsersRequest
 */
-func (a *UsersApiService) GetUsers(ctx context.Context) ApiGetUsersRequest {
+func (a *UsersAPIService) GetUsers(ctx context.Context) ApiGetUsersRequest {
 	return ApiGetUsersRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -167,7 +167,7 @@ func (a *UsersApiService) GetUsers(ctx context.Context) ApiGetUsersRequest {
 
 // Execute executes the request
 //  @return PaginatedUsersList
-func (a *UsersApiService) GetUsersExecute(r ApiGetUsersRequest) (*PaginatedUsersList, *http.Response, error) {
+func (a *UsersAPIService) GetUsersExecute(r ApiGetUsersRequest) (*PaginatedUsersList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -175,7 +175,7 @@ func (a *UsersApiService) GetUsersExecute(r ApiGetUsersRequest) (*PaginatedUsers
 		localVarReturnValue  *PaginatedUsersList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.GetUsers")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersAPIService.GetUsers")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -187,10 +187,10 @@ func (a *UsersApiService) GetUsersExecute(r ApiGetUsersRequest) (*PaginatedUsers
 	localVarFormParams := url.Values{}
 
 	if r.cursor != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -248,7 +248,7 @@ func (a *UsersApiService) GetUsersExecute(r ApiGetUsersRequest) (*PaginatedUsers
 
 type ApiUserRequest struct {
 	ctx context.Context
-	ApiService *UsersApiService
+	ApiService *UsersAPIService
 	userId *string
 	email *string
 }
@@ -277,7 +277,7 @@ Returns a `User` object.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiUserRequest
 */
-func (a *UsersApiService) User(ctx context.Context) ApiUserRequest {
+func (a *UsersAPIService) User(ctx context.Context) ApiUserRequest {
 	return ApiUserRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -286,7 +286,7 @@ func (a *UsersApiService) User(ctx context.Context) ApiUserRequest {
 
 // Execute executes the request
 //  @return User
-func (a *UsersApiService) UserExecute(r ApiUserRequest) (*User, *http.Response, error) {
+func (a *UsersAPIService) UserExecute(r ApiUserRequest) (*User, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -294,7 +294,7 @@ func (a *UsersApiService) UserExecute(r ApiUserRequest) (*User, *http.Response, 
 		localVarReturnValue  *User
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.User")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersAPIService.User")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -306,10 +306,10 @@ func (a *UsersApiService) UserExecute(r ApiUserRequest) (*User, *http.Response, 
 	localVarFormParams := url.Values{}
 
 	if r.userId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "user_id", r.userId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "user_id", r.userId, "form", "")
 	}
 	if r.email != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "email", r.email, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "email", r.email, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

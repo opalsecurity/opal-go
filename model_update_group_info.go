@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,8 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the UpdateGroupInfo type satisfies the MappedNullable interface at compile time
@@ -28,16 +30,16 @@ type UpdateGroupInfo struct {
 	Description *string `json:"description,omitempty"`
 	// The ID of the owner of the group.
 	AdminOwnerId *string `json:"admin_owner_id,omitempty"`
-	// The maximum duration for which the group can be requested (in minutes). Use -1 to set to indefinite. Deprecated in favor of `request_configuration_list`.
+	// The maximum duration for which the group can be requested (in minutes). Use -1 to set to indefinite. Deprecated in favor of `request_configurations`.
 	// Deprecated
 	MaxDuration *int32 `json:"max_duration,omitempty"`
-	// The recommended duration for which the group should be requested (in minutes). Will be the default value in a request. Use -1 to set to indefinite and 0 to unset. Deprecated in favor of `request_configuration_list`.
+	// The recommended duration for which the group should be requested (in minutes). Will be the default value in a request. Use -1 to set to indefinite and 0 to unset. Deprecated in favor of `request_configurations`.
 	// Deprecated
 	RecommendedDuration *int32 `json:"recommended_duration,omitempty"`
-	// A bool representing whether or not access requests to the group require manager approval. Deprecated in favor of `request_configuration_list`.
+	// A bool representing whether or not access requests to the group require manager approval. Deprecated in favor of `request_configurations`.
 	// Deprecated
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
-	// A bool representing whether or not access requests to the group require an access ticket. Deprecated in favor of `request_configuration_list`.
+	// A bool representing whether or not access requests to the group require an access ticket. Deprecated in favor of `request_configurations`.
 	// Deprecated
 	RequireSupportTicket *bool `json:"require_support_ticket,omitempty"`
 	// The ID of the folder that the group is located in.
@@ -45,22 +47,33 @@ type UpdateGroupInfo struct {
 	FolderId *string `json:"folder_id,omitempty"`
 	// A bool representing whether or not to require MFA for reviewers to approve requests for this group.
 	RequireMfaToApprove *bool `json:"require_mfa_to_approve,omitempty"`
-	// A bool representing whether or not to require MFA for requesting access to this group. Deprecated in favor of `request_configuration_list`.
+	// A bool representing whether or not to require MFA for requesting access to this group. Deprecated in favor of `request_configurations`.
 	// Deprecated
 	RequireMfaToRequest *bool `json:"require_mfa_to_request,omitempty"`
-	// A bool representing whether or not to automatically approve requests to this group. Deprecated in favor of `request_configuration_list`.
+	// A bool representing whether or not to automatically approve requests to this group. Deprecated in favor of `request_configurations`.
 	// Deprecated
 	AutoApproval *bool `json:"auto_approval,omitempty"`
 	// The ID of the associated configuration template.
 	ConfigurationTemplateId *string `json:"configuration_template_id,omitempty"`
-	// The ID of the associated request template. Deprecated in favor of `request_configuration_list`.
+	// The ID of the associated request template. Deprecated in favor of `request_configurations`.
 	// Deprecated
 	RequestTemplateId *string `json:"request_template_id,omitempty"`
-	// A bool representing whether or not to allow access requests to this group. Deprecated in favor of `request_configuration_list`.
+	// A bool representing whether or not to allow access requests to this group. Deprecated in favor of `request_configurations`.
 	// Deprecated
 	IsRequestable *bool `json:"is_requestable,omitempty"`
+	// A list of User IDs for the group leaders of the group
+	GroupLeaderUserIds []string `json:"group_leader_user_ids,omitempty"`
+	// The request configuration list of the configuration template. If not provided, the default request configuration will be used.
+	RequestConfigurations []RequestConfiguration `json:"request_configurations,omitempty"`
+	// The request configuration list of the configuration template. If not provided, the default request configuration will be used. Deprecated in favor of `request_configurations`.
+	// Deprecated
 	RequestConfigurationList *CreateRequestConfigurationInfoList `json:"request_configuration_list,omitempty"`
+	// Custom request notification sent to the requester when the request is approved.
+	CustomRequestNotification *string `json:"custom_request_notification,omitempty"`
+	RiskSensitivityOverride *RiskSensitivityEnum `json:"risk_sensitivity_override,omitempty"`
 }
+
+type _UpdateGroupInfo UpdateGroupInfo
 
 // NewUpdateGroupInfo instantiates a new UpdateGroupInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -579,7 +592,72 @@ func (o *UpdateGroupInfo) SetIsRequestable(v bool) {
 	o.IsRequestable = &v
 }
 
+// GetGroupLeaderUserIds returns the GroupLeaderUserIds field value if set, zero value otherwise.
+func (o *UpdateGroupInfo) GetGroupLeaderUserIds() []string {
+	if o == nil || IsNil(o.GroupLeaderUserIds) {
+		var ret []string
+		return ret
+	}
+	return o.GroupLeaderUserIds
+}
+
+// GetGroupLeaderUserIdsOk returns a tuple with the GroupLeaderUserIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateGroupInfo) GetGroupLeaderUserIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.GroupLeaderUserIds) {
+		return nil, false
+	}
+	return o.GroupLeaderUserIds, true
+}
+
+// HasGroupLeaderUserIds returns a boolean if a field has been set.
+func (o *UpdateGroupInfo) HasGroupLeaderUserIds() bool {
+	if o != nil && !IsNil(o.GroupLeaderUserIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupLeaderUserIds gets a reference to the given []string and assigns it to the GroupLeaderUserIds field.
+func (o *UpdateGroupInfo) SetGroupLeaderUserIds(v []string) {
+	o.GroupLeaderUserIds = v
+}
+
+// GetRequestConfigurations returns the RequestConfigurations field value if set, zero value otherwise.
+func (o *UpdateGroupInfo) GetRequestConfigurations() []RequestConfiguration {
+	if o == nil || IsNil(o.RequestConfigurations) {
+		var ret []RequestConfiguration
+		return ret
+	}
+	return o.RequestConfigurations
+}
+
+// GetRequestConfigurationsOk returns a tuple with the RequestConfigurations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateGroupInfo) GetRequestConfigurationsOk() ([]RequestConfiguration, bool) {
+	if o == nil || IsNil(o.RequestConfigurations) {
+		return nil, false
+	}
+	return o.RequestConfigurations, true
+}
+
+// HasRequestConfigurations returns a boolean if a field has been set.
+func (o *UpdateGroupInfo) HasRequestConfigurations() bool {
+	if o != nil && !IsNil(o.RequestConfigurations) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestConfigurations gets a reference to the given []RequestConfiguration and assigns it to the RequestConfigurations field.
+func (o *UpdateGroupInfo) SetRequestConfigurations(v []RequestConfiguration) {
+	o.RequestConfigurations = v
+}
+
 // GetRequestConfigurationList returns the RequestConfigurationList field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateGroupInfo) GetRequestConfigurationList() CreateRequestConfigurationInfoList {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		var ret CreateRequestConfigurationInfoList
@@ -590,6 +668,7 @@ func (o *UpdateGroupInfo) GetRequestConfigurationList() CreateRequestConfigurati
 
 // GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateGroupInfo) GetRequestConfigurationListOk() (*CreateRequestConfigurationInfoList, bool) {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		return nil, false
@@ -607,8 +686,73 @@ func (o *UpdateGroupInfo) HasRequestConfigurationList() bool {
 }
 
 // SetRequestConfigurationList gets a reference to the given CreateRequestConfigurationInfoList and assigns it to the RequestConfigurationList field.
+// Deprecated
 func (o *UpdateGroupInfo) SetRequestConfigurationList(v CreateRequestConfigurationInfoList) {
 	o.RequestConfigurationList = &v
+}
+
+// GetCustomRequestNotification returns the CustomRequestNotification field value if set, zero value otherwise.
+func (o *UpdateGroupInfo) GetCustomRequestNotification() string {
+	if o == nil || IsNil(o.CustomRequestNotification) {
+		var ret string
+		return ret
+	}
+	return *o.CustomRequestNotification
+}
+
+// GetCustomRequestNotificationOk returns a tuple with the CustomRequestNotification field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateGroupInfo) GetCustomRequestNotificationOk() (*string, bool) {
+	if o == nil || IsNil(o.CustomRequestNotification) {
+		return nil, false
+	}
+	return o.CustomRequestNotification, true
+}
+
+// HasCustomRequestNotification returns a boolean if a field has been set.
+func (o *UpdateGroupInfo) HasCustomRequestNotification() bool {
+	if o != nil && !IsNil(o.CustomRequestNotification) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomRequestNotification gets a reference to the given string and assigns it to the CustomRequestNotification field.
+func (o *UpdateGroupInfo) SetCustomRequestNotification(v string) {
+	o.CustomRequestNotification = &v
+}
+
+// GetRiskSensitivityOverride returns the RiskSensitivityOverride field value if set, zero value otherwise.
+func (o *UpdateGroupInfo) GetRiskSensitivityOverride() RiskSensitivityEnum {
+	if o == nil || IsNil(o.RiskSensitivityOverride) {
+		var ret RiskSensitivityEnum
+		return ret
+	}
+	return *o.RiskSensitivityOverride
+}
+
+// GetRiskSensitivityOverrideOk returns a tuple with the RiskSensitivityOverride field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateGroupInfo) GetRiskSensitivityOverrideOk() (*RiskSensitivityEnum, bool) {
+	if o == nil || IsNil(o.RiskSensitivityOverride) {
+		return nil, false
+	}
+	return o.RiskSensitivityOverride, true
+}
+
+// HasRiskSensitivityOverride returns a boolean if a field has been set.
+func (o *UpdateGroupInfo) HasRiskSensitivityOverride() bool {
+	if o != nil && !IsNil(o.RiskSensitivityOverride) {
+		return true
+	}
+
+	return false
+}
+
+// SetRiskSensitivityOverride gets a reference to the given RiskSensitivityEnum and assigns it to the RiskSensitivityOverride field.
+func (o *UpdateGroupInfo) SetRiskSensitivityOverride(v RiskSensitivityEnum) {
+	o.RiskSensitivityOverride = &v
 }
 
 func (o UpdateGroupInfo) MarshalJSON() ([]byte, error) {
@@ -664,10 +808,59 @@ func (o UpdateGroupInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsRequestable) {
 		toSerialize["is_requestable"] = o.IsRequestable
 	}
+	if !IsNil(o.GroupLeaderUserIds) {
+		toSerialize["group_leader_user_ids"] = o.GroupLeaderUserIds
+	}
+	if !IsNil(o.RequestConfigurations) {
+		toSerialize["request_configurations"] = o.RequestConfigurations
+	}
 	if !IsNil(o.RequestConfigurationList) {
 		toSerialize["request_configuration_list"] = o.RequestConfigurationList
 	}
+	if !IsNil(o.CustomRequestNotification) {
+		toSerialize["custom_request_notification"] = o.CustomRequestNotification
+	}
+	if !IsNil(o.RiskSensitivityOverride) {
+		toSerialize["risk_sensitivity_override"] = o.RiskSensitivityOverride
+	}
 	return toSerialize, nil
+}
+
+func (o *UpdateGroupInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"group_id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varUpdateGroupInfo := _UpdateGroupInfo{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUpdateGroupInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateGroupInfo(varUpdateGroupInfo)
+
+	return err
 }
 
 type NullableUpdateGroupInfo struct {

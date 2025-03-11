@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -21,12 +21,12 @@ import (
 )
 
 
-// UarsApiService UarsApi service
-type UarsApiService service
+// UarsAPIService UarsAPI service
+type UarsAPIService service
 
 type ApiCreateUarRequest struct {
 	ctx context.Context
-	ApiService *UarsApiService
+	ApiService *UarsAPIService
 	createUARInfo *CreateUARInfo
 }
 
@@ -48,7 +48,7 @@ Starts a User Access Review.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateUarRequest
 */
-func (a *UarsApiService) CreateUar(ctx context.Context) ApiCreateUarRequest {
+func (a *UarsAPIService) CreateUar(ctx context.Context) ApiCreateUarRequest {
 	return ApiCreateUarRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -57,7 +57,7 @@ func (a *UarsApiService) CreateUar(ctx context.Context) ApiCreateUarRequest {
 
 // Execute executes the request
 //  @return UAR
-func (a *UarsApiService) CreateUarExecute(r ApiCreateUarRequest) (*UAR, *http.Response, error) {
+func (a *UarsAPIService) CreateUarExecute(r ApiCreateUarRequest) (*UAR, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -65,7 +65,7 @@ func (a *UarsApiService) CreateUarExecute(r ApiCreateUarRequest) (*UAR, *http.Re
 		localVarReturnValue  *UAR
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UarsApiService.CreateUar")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UarsAPIService.CreateUar")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -137,7 +137,7 @@ func (a *UarsApiService) CreateUarExecute(r ApiCreateUarRequest) (*UAR, *http.Re
 
 type ApiGetUARsRequest struct {
 	ctx context.Context
-	ApiService *UarsApiService
+	ApiService *UarsAPIService
 	cursor *string
 	pageSize *int32
 }
@@ -166,7 +166,7 @@ Returns a list of `UAR` objects.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetUARsRequest
 */
-func (a *UarsApiService) GetUARs(ctx context.Context) ApiGetUARsRequest {
+func (a *UarsAPIService) GetUARs(ctx context.Context) ApiGetUARsRequest {
 	return ApiGetUARsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -175,7 +175,7 @@ func (a *UarsApiService) GetUARs(ctx context.Context) ApiGetUARsRequest {
 
 // Execute executes the request
 //  @return PaginatedUARsList
-func (a *UarsApiService) GetUARsExecute(r ApiGetUARsRequest) (*PaginatedUARsList, *http.Response, error) {
+func (a *UarsAPIService) GetUARsExecute(r ApiGetUARsRequest) (*PaginatedUARsList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -183,7 +183,7 @@ func (a *UarsApiService) GetUARsExecute(r ApiGetUARsRequest) (*PaginatedUARsList
 		localVarReturnValue  *PaginatedUARsList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UarsApiService.GetUARs")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UarsAPIService.GetUARs")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -195,10 +195,10 @@ func (a *UarsApiService) GetUARsExecute(r ApiGetUARsRequest) (*PaginatedUARsList
 	localVarFormParams := url.Values{}
 
 	if r.cursor != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -256,7 +256,7 @@ func (a *UarsApiService) GetUARsExecute(r ApiGetUARsRequest) (*PaginatedUARsList
 
 type ApiGetUarRequest struct {
 	ctx context.Context
-	ApiService *UarsApiService
+	ApiService *UarsAPIService
 	uarId string
 }
 
@@ -273,7 +273,7 @@ Retrieves a specific UAR.
  @param uarId The ID of the UAR.
  @return ApiGetUarRequest
 */
-func (a *UarsApiService) GetUar(ctx context.Context, uarId string) ApiGetUarRequest {
+func (a *UarsAPIService) GetUar(ctx context.Context, uarId string) ApiGetUarRequest {
 	return ApiGetUarRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -283,7 +283,7 @@ func (a *UarsApiService) GetUar(ctx context.Context, uarId string) ApiGetUarRequ
 
 // Execute executes the request
 //  @return UAR
-func (a *UarsApiService) GetUarExecute(r ApiGetUarRequest) (*UAR, *http.Response, error) {
+func (a *UarsAPIService) GetUarExecute(r ApiGetUarRequest) (*UAR, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -291,7 +291,7 @@ func (a *UarsApiService) GetUarExecute(r ApiGetUarRequest) (*UAR, *http.Response
 		localVarReturnValue  *UAR
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UarsApiService.GetUar")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UarsAPIService.GetUar")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

@@ -10,12 +10,16 @@ Name | Type | Description | Notes
 **AwsEc2Instance** | Pointer to [**ResourceRemoteInfoAwsEc2Instance**](ResourceRemoteInfoAwsEc2Instance.md) |  | [optional] 
 **AwsRdsInstance** | Pointer to [**ResourceRemoteInfoAwsRdsInstance**](ResourceRemoteInfoAwsRdsInstance.md) |  | [optional] 
 **AwsEksCluster** | Pointer to [**ResourceRemoteInfoAwsEksCluster**](ResourceRemoteInfoAwsEksCluster.md) |  | [optional] 
+**GcpOrganization** | Pointer to [**ResourceRemoteInfoGcpOrganization**](ResourceRemoteInfoGcpOrganization.md) |  | [optional] 
 **GcpBucket** | Pointer to [**ResourceRemoteInfoGcpBucket**](ResourceRemoteInfoGcpBucket.md) |  | [optional] 
 **GcpComputeInstance** | Pointer to [**ResourceRemoteInfoGcpComputeInstance**](ResourceRemoteInfoGcpComputeInstance.md) |  | [optional] 
+**GcpBigQueryDataset** | Pointer to [**ResourceRemoteInfoGcpBigQueryDataset**](ResourceRemoteInfoGcpBigQueryDataset.md) |  | [optional] 
+**GcpBigQueryTable** | Pointer to [**ResourceRemoteInfoGcpBigQueryTable**](ResourceRemoteInfoGcpBigQueryTable.md) |  | [optional] 
 **GcpFolder** | Pointer to [**ResourceRemoteInfoGcpFolder**](ResourceRemoteInfoGcpFolder.md) |  | [optional] 
 **GcpGkeCluster** | Pointer to [**ResourceRemoteInfoGcpGkeCluster**](ResourceRemoteInfoGcpGkeCluster.md) |  | [optional] 
 **GcpProject** | Pointer to [**ResourceRemoteInfoGcpProject**](ResourceRemoteInfoGcpProject.md) |  | [optional] 
 **GcpSqlInstance** | Pointer to [**ResourceRemoteInfoGcpSqlInstance**](ResourceRemoteInfoGcpSqlInstance.md) |  | [optional] 
+**GcpServiceAccount** | Pointer to [**ResourceRemoteInfoGcpServiceAccount**](ResourceRemoteInfoGcpServiceAccount.md) |  | [optional] 
 **GithubRepo** | Pointer to [**ResourceRemoteInfoGithubRepo**](ResourceRemoteInfoGithubRepo.md) |  | [optional] 
 **GitlabProject** | Pointer to [**ResourceRemoteInfoGitlabProject**](ResourceRemoteInfoGitlabProject.md) |  | [optional] 
 **OktaApp** | Pointer to [**ResourceRemoteInfoOktaApp**](ResourceRemoteInfoOktaApp.md) |  | [optional] 
@@ -196,6 +200,31 @@ SetAwsEksCluster sets AwsEksCluster field to given value.
 
 HasAwsEksCluster returns a boolean if a field has been set.
 
+### GetGcpOrganization
+
+`func (o *ResourceRemoteInfo) GetGcpOrganization() ResourceRemoteInfoGcpOrganization`
+
+GetGcpOrganization returns the GcpOrganization field if non-nil, zero value otherwise.
+
+### GetGcpOrganizationOk
+
+`func (o *ResourceRemoteInfo) GetGcpOrganizationOk() (*ResourceRemoteInfoGcpOrganization, bool)`
+
+GetGcpOrganizationOk returns a tuple with the GcpOrganization field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGcpOrganization
+
+`func (o *ResourceRemoteInfo) SetGcpOrganization(v ResourceRemoteInfoGcpOrganization)`
+
+SetGcpOrganization sets GcpOrganization field to given value.
+
+### HasGcpOrganization
+
+`func (o *ResourceRemoteInfo) HasGcpOrganization() bool`
+
+HasGcpOrganization returns a boolean if a field has been set.
+
 ### GetGcpBucket
 
 `func (o *ResourceRemoteInfo) GetGcpBucket() ResourceRemoteInfoGcpBucket`
@@ -245,6 +274,56 @@ SetGcpComputeInstance sets GcpComputeInstance field to given value.
 `func (o *ResourceRemoteInfo) HasGcpComputeInstance() bool`
 
 HasGcpComputeInstance returns a boolean if a field has been set.
+
+### GetGcpBigQueryDataset
+
+`func (o *ResourceRemoteInfo) GetGcpBigQueryDataset() ResourceRemoteInfoGcpBigQueryDataset`
+
+GetGcpBigQueryDataset returns the GcpBigQueryDataset field if non-nil, zero value otherwise.
+
+### GetGcpBigQueryDatasetOk
+
+`func (o *ResourceRemoteInfo) GetGcpBigQueryDatasetOk() (*ResourceRemoteInfoGcpBigQueryDataset, bool)`
+
+GetGcpBigQueryDatasetOk returns a tuple with the GcpBigQueryDataset field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGcpBigQueryDataset
+
+`func (o *ResourceRemoteInfo) SetGcpBigQueryDataset(v ResourceRemoteInfoGcpBigQueryDataset)`
+
+SetGcpBigQueryDataset sets GcpBigQueryDataset field to given value.
+
+### HasGcpBigQueryDataset
+
+`func (o *ResourceRemoteInfo) HasGcpBigQueryDataset() bool`
+
+HasGcpBigQueryDataset returns a boolean if a field has been set.
+
+### GetGcpBigQueryTable
+
+`func (o *ResourceRemoteInfo) GetGcpBigQueryTable() ResourceRemoteInfoGcpBigQueryTable`
+
+GetGcpBigQueryTable returns the GcpBigQueryTable field if non-nil, zero value otherwise.
+
+### GetGcpBigQueryTableOk
+
+`func (o *ResourceRemoteInfo) GetGcpBigQueryTableOk() (*ResourceRemoteInfoGcpBigQueryTable, bool)`
+
+GetGcpBigQueryTableOk returns a tuple with the GcpBigQueryTable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGcpBigQueryTable
+
+`func (o *ResourceRemoteInfo) SetGcpBigQueryTable(v ResourceRemoteInfoGcpBigQueryTable)`
+
+SetGcpBigQueryTable sets GcpBigQueryTable field to given value.
+
+### HasGcpBigQueryTable
+
+`func (o *ResourceRemoteInfo) HasGcpBigQueryTable() bool`
+
+HasGcpBigQueryTable returns a boolean if a field has been set.
 
 ### GetGcpFolder
 
@@ -345,6 +424,31 @@ SetGcpSqlInstance sets GcpSqlInstance field to given value.
 `func (o *ResourceRemoteInfo) HasGcpSqlInstance() bool`
 
 HasGcpSqlInstance returns a boolean if a field has been set.
+
+### GetGcpServiceAccount
+
+`func (o *ResourceRemoteInfo) GetGcpServiceAccount() ResourceRemoteInfoGcpServiceAccount`
+
+GetGcpServiceAccount returns the GcpServiceAccount field if non-nil, zero value otherwise.
+
+### GetGcpServiceAccountOk
+
+`func (o *ResourceRemoteInfo) GetGcpServiceAccountOk() (*ResourceRemoteInfoGcpServiceAccount, bool)`
+
+GetGcpServiceAccountOk returns a tuple with the GcpServiceAccount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGcpServiceAccount
+
+`func (o *ResourceRemoteInfo) SetGcpServiceAccount(v ResourceRemoteInfoGcpServiceAccount)`
+
+SetGcpServiceAccount sets GcpServiceAccount field to given value.
+
+### HasGcpServiceAccount
+
+`func (o *ResourceRemoteInfo) HasGcpServiceAccount() bool`
+
+HasGcpServiceAccount returns a boolean if a field has been set.
 
 ### GetGithubRepo
 

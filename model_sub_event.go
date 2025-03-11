@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,7 @@ package opal
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the SubEvent type satisfies the MappedNullable interface at compile time
@@ -88,16 +89,41 @@ func (o SubEvent) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *SubEvent) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SubEvent) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"sub_event_type",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varSubEvent := _SubEvent{}
 
-	if err = json.Unmarshal(bytes, &varSubEvent); err == nil {
-		*o = SubEvent(varSubEvent)
+	err = json.Unmarshal(data, &varSubEvent)
+
+	if err != nil {
+		return err
 	}
+
+	*o = SubEvent(varSubEvent)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "sub_event_type")
 		o.AdditionalProperties = additionalProperties
 	}

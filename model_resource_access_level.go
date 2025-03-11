@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,18 +13,22 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ResourceAccessLevel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ResourceAccessLevel{}
 
-// ResourceAccessLevel # Access Level Object ### Description The `ResourceAccessLevel` object is used to represent the level of access that a user has to a resource or a resource has to a group. The \"default\" access level is a `ResourceAccessLevel` object whose fields are all empty strings.  ### Usage Example View the `ResourceAccessLevel` of a resource/user or resource/group pair to see the level of access granted to the resource.
+// ResourceAccessLevel # Access Level Object ### Description The `AccessLevel` object is used to represent the level of access that a principal has. The \"default\" access level is a `AccessLevel` object whose fields are all empty strings.  ### Usage Example View the `AccessLevel` of a resource/user or resource/group pair to see the level of access granted to the resource.
 type ResourceAccessLevel struct {
 	// The human-readable name of the access level.
 	AccessLevelName string `json:"access_level_name"`
 	// The machine-readable identifier of the access level.
 	AccessLevelRemoteId string `json:"access_level_remote_id"`
 }
+
+type _ResourceAccessLevel ResourceAccessLevel
 
 // NewResourceAccessLevel instantiates a new ResourceAccessLevel object
 // This constructor will assign default values to properties that have it defined,
@@ -106,6 +110,44 @@ func (o ResourceAccessLevel) ToMap() (map[string]interface{}, error) {
 	toSerialize["access_level_name"] = o.AccessLevelName
 	toSerialize["access_level_remote_id"] = o.AccessLevelRemoteId
 	return toSerialize, nil
+}
+
+func (o *ResourceAccessLevel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"access_level_name",
+		"access_level_remote_id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varResourceAccessLevel := _ResourceAccessLevel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varResourceAccessLevel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ResourceAccessLevel(varResourceAccessLevel)
+
+	return err
 }
 
 type NullableResourceAccessLevel struct {

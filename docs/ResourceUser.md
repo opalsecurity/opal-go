@@ -9,13 +9,13 @@ Name | Type | Description | Notes
 **AccessLevel** | [**ResourceAccessLevel**](ResourceAccessLevel.md) |  | 
 **FullName** | **string** | The user&#39;s full name. | 
 **Email** | **string** | The user&#39;s email. | 
-**ExpirationDate** | **NullableTime** | The day and time the user&#39;s access will expire. | 
+**ExpirationDate** | Pointer to **time.Time** | The day and time the user&#39;s access will expire. | [optional] 
 
 ## Methods
 
 ### NewResourceUser
 
-`func NewResourceUser(resourceId string, userId string, accessLevel ResourceAccessLevel, fullName string, email string, expirationDate NullableTime, ) *ResourceUser`
+`func NewResourceUser(resourceId string, userId string, accessLevel ResourceAccessLevel, fullName string, email string, ) *ResourceUser`
 
 NewResourceUser instantiates a new ResourceUser object
 This constructor will assign default values to properties that have it defined,
@@ -149,17 +149,12 @@ and a boolean to check if the value has been set.
 
 SetExpirationDate sets ExpirationDate field to given value.
 
+### HasExpirationDate
 
-### SetExpirationDateNil
+`func (o *ResourceUser) HasExpirationDate() bool`
 
-`func (o *ResourceUser) SetExpirationDateNil(b bool)`
+HasExpirationDate returns a boolean if a field has been set.
 
- SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
-
-### UnsetExpirationDate
-`func (o *ResourceUser) UnsetExpirationDate()`
-
-UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

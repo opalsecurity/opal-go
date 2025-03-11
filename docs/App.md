@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Description** | **string** | A description of the app. | 
 **AdminOwnerId** | **string** | The ID of the owner of the app. | 
 **AppType** | [**AppTypeEnum**](AppTypeEnum.md) |  | 
+**Validations** | Pointer to [**[]AppValidation**](AppValidation.md) | Validation checks of an apps&#39; configuration and permissions. | [optional] 
 
 ## Methods
 
@@ -128,6 +129,31 @@ and a boolean to check if the value has been set.
 
 SetAppType sets AppType field to given value.
 
+
+### GetValidations
+
+`func (o *App) GetValidations() []AppValidation`
+
+GetValidations returns the Validations field if non-nil, zero value otherwise.
+
+### GetValidationsOk
+
+`func (o *App) GetValidationsOk() (*[]AppValidation, bool)`
+
+GetValidationsOk returns a tuple with the Validations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValidations
+
+`func (o *App) SetValidations(v []AppValidation)`
+
+SetValidations sets Validations field to given value.
+
+### HasValidations
+
+`func (o *App) HasValidations() bool`
+
+HasValidations returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

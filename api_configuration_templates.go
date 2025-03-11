@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -17,15 +17,16 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 
-// ConfigurationTemplatesApiService ConfigurationTemplatesApi service
-type ConfigurationTemplatesApiService service
+// ConfigurationTemplatesAPIService ConfigurationTemplatesAPI service
+type ConfigurationTemplatesAPIService service
 
 type ApiCreateConfigurationTemplateRequest struct {
 	ctx context.Context
-	ApiService *ConfigurationTemplatesApiService
+	ApiService *ConfigurationTemplatesAPIService
 	createConfigurationTemplateInfo *CreateConfigurationTemplateInfo
 }
 
@@ -46,7 +47,7 @@ Creates a configuration template.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateConfigurationTemplateRequest
 */
-func (a *ConfigurationTemplatesApiService) CreateConfigurationTemplate(ctx context.Context) ApiCreateConfigurationTemplateRequest {
+func (a *ConfigurationTemplatesAPIService) CreateConfigurationTemplate(ctx context.Context) ApiCreateConfigurationTemplateRequest {
 	return ApiCreateConfigurationTemplateRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -55,7 +56,7 @@ func (a *ConfigurationTemplatesApiService) CreateConfigurationTemplate(ctx conte
 
 // Execute executes the request
 //  @return ConfigurationTemplate
-func (a *ConfigurationTemplatesApiService) CreateConfigurationTemplateExecute(r ApiCreateConfigurationTemplateRequest) (*ConfigurationTemplate, *http.Response, error) {
+func (a *ConfigurationTemplatesAPIService) CreateConfigurationTemplateExecute(r ApiCreateConfigurationTemplateRequest) (*ConfigurationTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -63,7 +64,7 @@ func (a *ConfigurationTemplatesApiService) CreateConfigurationTemplateExecute(r 
 		localVarReturnValue  *ConfigurationTemplate
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigurationTemplatesApiService.CreateConfigurationTemplate")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigurationTemplatesAPIService.CreateConfigurationTemplate")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -133,9 +134,101 @@ func (a *ConfigurationTemplatesApiService) CreateConfigurationTemplateExecute(r 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiDeleteConfigurationTemplateRequest struct {
+	ctx context.Context
+	ApiService *ConfigurationTemplatesAPIService
+	configurationTemplateId string
+}
+
+func (r ApiDeleteConfigurationTemplateRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteConfigurationTemplateExecute(r)
+}
+
+/*
+DeleteConfigurationTemplate Method for DeleteConfigurationTemplate
+
+Deletes a configuration template.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param configurationTemplateId The ID of the configuration template.
+ @return ApiDeleteConfigurationTemplateRequest
+*/
+func (a *ConfigurationTemplatesAPIService) DeleteConfigurationTemplate(ctx context.Context, configurationTemplateId string) ApiDeleteConfigurationTemplateRequest {
+	return ApiDeleteConfigurationTemplateRequest{
+		ApiService: a,
+		ctx: ctx,
+		configurationTemplateId: configurationTemplateId,
+	}
+}
+
+// Execute executes the request
+func (a *ConfigurationTemplatesAPIService) DeleteConfigurationTemplateExecute(r ApiDeleteConfigurationTemplateRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigurationTemplatesAPIService.DeleteConfigurationTemplate")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/configuration-templates/{configuration_template_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"configuration_template_id"+"}", url.PathEscape(parameterValueToString(r.configurationTemplateId, "configurationTemplateId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type ApiGetConfigurationTemplatesRequest struct {
 	ctx context.Context
-	ApiService *ConfigurationTemplatesApiService
+	ApiService *ConfigurationTemplatesAPIService
 }
 
 func (r ApiGetConfigurationTemplatesRequest) Execute() (*PaginatedConfigurationTemplateList, *http.Response, error) {
@@ -150,7 +243,7 @@ Returns a list of `ConfigurationTemplate` objects.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetConfigurationTemplatesRequest
 */
-func (a *ConfigurationTemplatesApiService) GetConfigurationTemplates(ctx context.Context) ApiGetConfigurationTemplatesRequest {
+func (a *ConfigurationTemplatesAPIService) GetConfigurationTemplates(ctx context.Context) ApiGetConfigurationTemplatesRequest {
 	return ApiGetConfigurationTemplatesRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -159,7 +252,7 @@ func (a *ConfigurationTemplatesApiService) GetConfigurationTemplates(ctx context
 
 // Execute executes the request
 //  @return PaginatedConfigurationTemplateList
-func (a *ConfigurationTemplatesApiService) GetConfigurationTemplatesExecute(r ApiGetConfigurationTemplatesRequest) (*PaginatedConfigurationTemplateList, *http.Response, error) {
+func (a *ConfigurationTemplatesAPIService) GetConfigurationTemplatesExecute(r ApiGetConfigurationTemplatesRequest) (*PaginatedConfigurationTemplateList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -167,7 +260,7 @@ func (a *ConfigurationTemplatesApiService) GetConfigurationTemplatesExecute(r Ap
 		localVarReturnValue  *PaginatedConfigurationTemplateList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigurationTemplatesApiService.GetConfigurationTemplates")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigurationTemplatesAPIService.GetConfigurationTemplates")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -234,7 +327,7 @@ func (a *ConfigurationTemplatesApiService) GetConfigurationTemplatesExecute(r Ap
 
 type ApiUpdateConfigurationTemplateRequest struct {
 	ctx context.Context
-	ApiService *ConfigurationTemplatesApiService
+	ApiService *ConfigurationTemplatesAPIService
 	updateConfigurationTemplateInfo *UpdateConfigurationTemplateInfo
 }
 
@@ -256,7 +349,7 @@ Update a configuration template.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiUpdateConfigurationTemplateRequest
 */
-func (a *ConfigurationTemplatesApiService) UpdateConfigurationTemplate(ctx context.Context) ApiUpdateConfigurationTemplateRequest {
+func (a *ConfigurationTemplatesAPIService) UpdateConfigurationTemplate(ctx context.Context) ApiUpdateConfigurationTemplateRequest {
 	return ApiUpdateConfigurationTemplateRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -265,7 +358,7 @@ func (a *ConfigurationTemplatesApiService) UpdateConfigurationTemplate(ctx conte
 
 // Execute executes the request
 //  @return ConfigurationTemplate
-func (a *ConfigurationTemplatesApiService) UpdateConfigurationTemplateExecute(r ApiUpdateConfigurationTemplateRequest) (*ConfigurationTemplate, *http.Response, error) {
+func (a *ConfigurationTemplatesAPIService) UpdateConfigurationTemplateExecute(r ApiUpdateConfigurationTemplateRequest) (*ConfigurationTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -273,7 +366,7 @@ func (a *ConfigurationTemplatesApiService) UpdateConfigurationTemplateExecute(r 
 		localVarReturnValue  *ConfigurationTemplate
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigurationTemplatesApiService.UpdateConfigurationTemplate")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigurationTemplatesAPIService.UpdateConfigurationTemplate")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

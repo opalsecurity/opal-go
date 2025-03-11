@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -14,6 +14,8 @@ package opal
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ResourceAccessUser type satisfies the MappedNullable interface at compile time
@@ -31,25 +33,27 @@ type ResourceAccessUser struct {
 	// The user's email.
 	Email string `json:"email"`
 	// The day and time the user's access will expire.
-	ExpirationDate NullableTime `json:"expiration_date"`
+	ExpirationDate *time.Time `json:"expiration_date,omitempty"`
 	// The user has direct access to this resources (vs. indirectly, like through a group).
 	HasDirectAccess bool `json:"has_direct_access"`
 	// The number of ways in which the user has access through this resource (directly and indirectly).
 	NumAccessPaths int32 `json:"num_access_paths"`
+	PropagationStatus *PropagationStatus `json:"propagation_status,omitempty"`
 }
+
+type _ResourceAccessUser ResourceAccessUser
 
 // NewResourceAccessUser instantiates a new ResourceAccessUser object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResourceAccessUser(resourceId string, userId string, accessLevel ResourceAccessLevel, fullName string, email string, expirationDate NullableTime, hasDirectAccess bool, numAccessPaths int32) *ResourceAccessUser {
+func NewResourceAccessUser(resourceId string, userId string, accessLevel ResourceAccessLevel, fullName string, email string, hasDirectAccess bool, numAccessPaths int32) *ResourceAccessUser {
 	this := ResourceAccessUser{}
 	this.ResourceId = resourceId
 	this.UserId = userId
 	this.AccessLevel = accessLevel
 	this.FullName = fullName
 	this.Email = email
-	this.ExpirationDate = expirationDate
 	this.HasDirectAccess = hasDirectAccess
 	this.NumAccessPaths = numAccessPaths
 	return &this
@@ -183,30 +187,36 @@ func (o *ResourceAccessUser) SetEmail(v string) {
 	o.Email = v
 }
 
-// GetExpirationDate returns the ExpirationDate field value
-// If the value is explicit nil, the zero value for time.Time will be returned
+// GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise.
 func (o *ResourceAccessUser) GetExpirationDate() time.Time {
-	if o == nil || o.ExpirationDate.Get() == nil {
+	if o == nil || IsNil(o.ExpirationDate) {
 		var ret time.Time
 		return ret
 	}
-
-	return *o.ExpirationDate.Get()
+	return *o.ExpirationDate
 }
 
-// GetExpirationDateOk returns a tuple with the ExpirationDate field value
+// GetExpirationDateOk returns a tuple with the ExpirationDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceAccessUser) GetExpirationDateOk() (*time.Time, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ExpirationDate) {
 		return nil, false
 	}
-	return o.ExpirationDate.Get(), o.ExpirationDate.IsSet()
+	return o.ExpirationDate, true
 }
 
-// SetExpirationDate sets field value
+// HasExpirationDate returns a boolean if a field has been set.
+func (o *ResourceAccessUser) HasExpirationDate() bool {
+	if o != nil && !IsNil(o.ExpirationDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetExpirationDate gets a reference to the given time.Time and assigns it to the ExpirationDate field.
 func (o *ResourceAccessUser) SetExpirationDate(v time.Time) {
-	o.ExpirationDate.Set(&v)
+	o.ExpirationDate = &v
 }
 
 // GetHasDirectAccess returns the HasDirectAccess field value
@@ -257,6 +267,38 @@ func (o *ResourceAccessUser) SetNumAccessPaths(v int32) {
 	o.NumAccessPaths = v
 }
 
+// GetPropagationStatus returns the PropagationStatus field value if set, zero value otherwise.
+func (o *ResourceAccessUser) GetPropagationStatus() PropagationStatus {
+	if o == nil || IsNil(o.PropagationStatus) {
+		var ret PropagationStatus
+		return ret
+	}
+	return *o.PropagationStatus
+}
+
+// GetPropagationStatusOk returns a tuple with the PropagationStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceAccessUser) GetPropagationStatusOk() (*PropagationStatus, bool) {
+	if o == nil || IsNil(o.PropagationStatus) {
+		return nil, false
+	}
+	return o.PropagationStatus, true
+}
+
+// HasPropagationStatus returns a boolean if a field has been set.
+func (o *ResourceAccessUser) HasPropagationStatus() bool {
+	if o != nil && !IsNil(o.PropagationStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetPropagationStatus gets a reference to the given PropagationStatus and assigns it to the PropagationStatus field.
+func (o *ResourceAccessUser) SetPropagationStatus(v PropagationStatus) {
+	o.PropagationStatus = &v
+}
+
 func (o ResourceAccessUser) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -272,10 +314,58 @@ func (o ResourceAccessUser) ToMap() (map[string]interface{}, error) {
 	toSerialize["access_level"] = o.AccessLevel
 	toSerialize["full_name"] = o.FullName
 	toSerialize["email"] = o.Email
-	toSerialize["expiration_date"] = o.ExpirationDate.Get()
+	if !IsNil(o.ExpirationDate) {
+		toSerialize["expiration_date"] = o.ExpirationDate
+	}
 	toSerialize["has_direct_access"] = o.HasDirectAccess
 	toSerialize["num_access_paths"] = o.NumAccessPaths
+	if !IsNil(o.PropagationStatus) {
+		toSerialize["propagation_status"] = o.PropagationStatus
+	}
 	return toSerialize, nil
+}
+
+func (o *ResourceAccessUser) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"resource_id",
+		"user_id",
+		"access_level",
+		"full_name",
+		"email",
+		"has_direct_access",
+		"num_access_paths",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varResourceAccessUser := _ResourceAccessUser{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varResourceAccessUser)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ResourceAccessUser(varResourceAccessUser)
+
+	return err
 }
 
 type NullableResourceAccessUser struct {

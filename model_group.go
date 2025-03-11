@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,8 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Group type satisfies the MappedNullable interface at compile time
@@ -30,6 +32,8 @@ type Group struct {
 	Description *string `json:"description,omitempty"`
 	// The ID of the owner of the group.
 	AdminOwnerId *string `json:"admin_owner_id,omitempty"`
+	// A list of User IDs for the group leaders of the group
+	GroupLeaderUserIds []string `json:"group_leader_user_ids,omitempty"`
 	// The ID of the remote.
 	RemoteId *string `json:"remote_id,omitempty"`
 	// The name of the remote.
@@ -54,15 +58,26 @@ type Group struct {
 	RequestTemplateId *string `json:"request_template_id,omitempty"`
 	// The ID of the associated configuration template.
 	ConfigurationTemplateId *string `json:"configuration_template_id,omitempty"`
+	// The ID of the associated group binding.
+	GroupBindingId *string `json:"group_binding_id,omitempty"`
 	// A bool representing whether or not to allow access requests to this group.
 	IsRequestable *bool `json:"is_requestable,omitempty"`
 	// A list of request configurations for this group.
+	RequestConfigurations []RequestConfiguration `json:"request_configurations,omitempty"`
+	// A list of request configurations for this group. Deprecated in favor of `request_configurations`.
 	RequestConfigurationList []RequestConfiguration `json:"request_configuration_list,omitempty"`
 	// JSON metadata about the remote group. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details.
 	// Deprecated
 	Metadata *string `json:"metadata,omitempty"`
 	RemoteInfo *GroupRemoteInfo `json:"remote_info,omitempty"`
+	// Custom request notification sent to the requester when the request is approved.
+	CustomRequestNotification *string `json:"custom_request_notification,omitempty"`
+	// The risk sensitivity level for the group. When an override is set, this field will match that.
+	RiskSensitivity *RiskSensitivityEnum `json:"risk_sensitivity,omitempty"`
+	RiskSensitivityOverride *RiskSensitivityEnum `json:"risk_sensitivity_override,omitempty"`
 }
+
+type _Group Group
 
 // NewGroup instantiates a new Group object
 // This constructor will assign default values to properties that have it defined,
@@ -232,6 +247,38 @@ func (o *Group) HasAdminOwnerId() bool {
 // SetAdminOwnerId gets a reference to the given string and assigns it to the AdminOwnerId field.
 func (o *Group) SetAdminOwnerId(v string) {
 	o.AdminOwnerId = &v
+}
+
+// GetGroupLeaderUserIds returns the GroupLeaderUserIds field value if set, zero value otherwise.
+func (o *Group) GetGroupLeaderUserIds() []string {
+	if o == nil || IsNil(o.GroupLeaderUserIds) {
+		var ret []string
+		return ret
+	}
+	return o.GroupLeaderUserIds
+}
+
+// GetGroupLeaderUserIdsOk returns a tuple with the GroupLeaderUserIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetGroupLeaderUserIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.GroupLeaderUserIds) {
+		return nil, false
+	}
+	return o.GroupLeaderUserIds, true
+}
+
+// HasGroupLeaderUserIds returns a boolean if a field has been set.
+func (o *Group) HasGroupLeaderUserIds() bool {
+	if o != nil && !IsNil(o.GroupLeaderUserIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupLeaderUserIds gets a reference to the given []string and assigns it to the GroupLeaderUserIds field.
+func (o *Group) SetGroupLeaderUserIds(v []string) {
+	o.GroupLeaderUserIds = v
 }
 
 // GetRemoteId returns the RemoteId field value if set, zero value otherwise.
@@ -621,6 +668,38 @@ func (o *Group) SetConfigurationTemplateId(v string) {
 	o.ConfigurationTemplateId = &v
 }
 
+// GetGroupBindingId returns the GroupBindingId field value if set, zero value otherwise.
+func (o *Group) GetGroupBindingId() string {
+	if o == nil || IsNil(o.GroupBindingId) {
+		var ret string
+		return ret
+	}
+	return *o.GroupBindingId
+}
+
+// GetGroupBindingIdOk returns a tuple with the GroupBindingId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetGroupBindingIdOk() (*string, bool) {
+	if o == nil || IsNil(o.GroupBindingId) {
+		return nil, false
+	}
+	return o.GroupBindingId, true
+}
+
+// HasGroupBindingId returns a boolean if a field has been set.
+func (o *Group) HasGroupBindingId() bool {
+	if o != nil && !IsNil(o.GroupBindingId) {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupBindingId gets a reference to the given string and assigns it to the GroupBindingId field.
+func (o *Group) SetGroupBindingId(v string) {
+	o.GroupBindingId = &v
+}
+
 // GetIsRequestable returns the IsRequestable field value if set, zero value otherwise.
 func (o *Group) GetIsRequestable() bool {
 	if o == nil || IsNil(o.IsRequestable) {
@@ -651,6 +730,38 @@ func (o *Group) HasIsRequestable() bool {
 // SetIsRequestable gets a reference to the given bool and assigns it to the IsRequestable field.
 func (o *Group) SetIsRequestable(v bool) {
 	o.IsRequestable = &v
+}
+
+// GetRequestConfigurations returns the RequestConfigurations field value if set, zero value otherwise.
+func (o *Group) GetRequestConfigurations() []RequestConfiguration {
+	if o == nil || IsNil(o.RequestConfigurations) {
+		var ret []RequestConfiguration
+		return ret
+	}
+	return o.RequestConfigurations
+}
+
+// GetRequestConfigurationsOk returns a tuple with the RequestConfigurations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetRequestConfigurationsOk() ([]RequestConfiguration, bool) {
+	if o == nil || IsNil(o.RequestConfigurations) {
+		return nil, false
+	}
+	return o.RequestConfigurations, true
+}
+
+// HasRequestConfigurations returns a boolean if a field has been set.
+func (o *Group) HasRequestConfigurations() bool {
+	if o != nil && !IsNil(o.RequestConfigurations) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestConfigurations gets a reference to the given []RequestConfiguration and assigns it to the RequestConfigurations field.
+func (o *Group) SetRequestConfigurations(v []RequestConfiguration) {
+	o.RequestConfigurations = v
 }
 
 // GetRequestConfigurationList returns the RequestConfigurationList field value if set, zero value otherwise.
@@ -752,6 +863,102 @@ func (o *Group) SetRemoteInfo(v GroupRemoteInfo) {
 	o.RemoteInfo = &v
 }
 
+// GetCustomRequestNotification returns the CustomRequestNotification field value if set, zero value otherwise.
+func (o *Group) GetCustomRequestNotification() string {
+	if o == nil || IsNil(o.CustomRequestNotification) {
+		var ret string
+		return ret
+	}
+	return *o.CustomRequestNotification
+}
+
+// GetCustomRequestNotificationOk returns a tuple with the CustomRequestNotification field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetCustomRequestNotificationOk() (*string, bool) {
+	if o == nil || IsNil(o.CustomRequestNotification) {
+		return nil, false
+	}
+	return o.CustomRequestNotification, true
+}
+
+// HasCustomRequestNotification returns a boolean if a field has been set.
+func (o *Group) HasCustomRequestNotification() bool {
+	if o != nil && !IsNil(o.CustomRequestNotification) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomRequestNotification gets a reference to the given string and assigns it to the CustomRequestNotification field.
+func (o *Group) SetCustomRequestNotification(v string) {
+	o.CustomRequestNotification = &v
+}
+
+// GetRiskSensitivity returns the RiskSensitivity field value if set, zero value otherwise.
+func (o *Group) GetRiskSensitivity() RiskSensitivityEnum {
+	if o == nil || IsNil(o.RiskSensitivity) {
+		var ret RiskSensitivityEnum
+		return ret
+	}
+	return *o.RiskSensitivity
+}
+
+// GetRiskSensitivityOk returns a tuple with the RiskSensitivity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetRiskSensitivityOk() (*RiskSensitivityEnum, bool) {
+	if o == nil || IsNil(o.RiskSensitivity) {
+		return nil, false
+	}
+	return o.RiskSensitivity, true
+}
+
+// HasRiskSensitivity returns a boolean if a field has been set.
+func (o *Group) HasRiskSensitivity() bool {
+	if o != nil && !IsNil(o.RiskSensitivity) {
+		return true
+	}
+
+	return false
+}
+
+// SetRiskSensitivity gets a reference to the given RiskSensitivityEnum and assigns it to the RiskSensitivity field.
+func (o *Group) SetRiskSensitivity(v RiskSensitivityEnum) {
+	o.RiskSensitivity = &v
+}
+
+// GetRiskSensitivityOverride returns the RiskSensitivityOverride field value if set, zero value otherwise.
+func (o *Group) GetRiskSensitivityOverride() RiskSensitivityEnum {
+	if o == nil || IsNil(o.RiskSensitivityOverride) {
+		var ret RiskSensitivityEnum
+		return ret
+	}
+	return *o.RiskSensitivityOverride
+}
+
+// GetRiskSensitivityOverrideOk returns a tuple with the RiskSensitivityOverride field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetRiskSensitivityOverrideOk() (*RiskSensitivityEnum, bool) {
+	if o == nil || IsNil(o.RiskSensitivityOverride) {
+		return nil, false
+	}
+	return o.RiskSensitivityOverride, true
+}
+
+// HasRiskSensitivityOverride returns a boolean if a field has been set.
+func (o *Group) HasRiskSensitivityOverride() bool {
+	if o != nil && !IsNil(o.RiskSensitivityOverride) {
+		return true
+	}
+
+	return false
+}
+
+// SetRiskSensitivityOverride gets a reference to the given RiskSensitivityEnum and assigns it to the RiskSensitivityOverride field.
+func (o *Group) SetRiskSensitivityOverride(v RiskSensitivityEnum) {
+	o.RiskSensitivityOverride = &v
+}
+
 func (o Group) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -774,6 +981,9 @@ func (o Group) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.AdminOwnerId) {
 		toSerialize["admin_owner_id"] = o.AdminOwnerId
+	}
+	if !IsNil(o.GroupLeaderUserIds) {
+		toSerialize["group_leader_user_ids"] = o.GroupLeaderUserIds
 	}
 	if !IsNil(o.RemoteId) {
 		toSerialize["remote_id"] = o.RemoteId
@@ -811,8 +1021,14 @@ func (o Group) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConfigurationTemplateId) {
 		toSerialize["configuration_template_id"] = o.ConfigurationTemplateId
 	}
+	if !IsNil(o.GroupBindingId) {
+		toSerialize["group_binding_id"] = o.GroupBindingId
+	}
 	if !IsNil(o.IsRequestable) {
 		toSerialize["is_requestable"] = o.IsRequestable
+	}
+	if !IsNil(o.RequestConfigurations) {
+		toSerialize["request_configurations"] = o.RequestConfigurations
 	}
 	if !IsNil(o.RequestConfigurationList) {
 		toSerialize["request_configuration_list"] = o.RequestConfigurationList
@@ -823,7 +1039,53 @@ func (o Group) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RemoteInfo) {
 		toSerialize["remote_info"] = o.RemoteInfo
 	}
+	if !IsNil(o.CustomRequestNotification) {
+		toSerialize["custom_request_notification"] = o.CustomRequestNotification
+	}
+	if !IsNil(o.RiskSensitivity) {
+		toSerialize["risk_sensitivity"] = o.RiskSensitivity
+	}
+	if !IsNil(o.RiskSensitivityOverride) {
+		toSerialize["risk_sensitivity_override"] = o.RiskSensitivityOverride
+	}
 	return toSerialize, nil
+}
+
+func (o *Group) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"group_id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGroup := _Group{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varGroup)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Group(varGroup)
+
+	return err
 }
 
 type NullableGroup struct {

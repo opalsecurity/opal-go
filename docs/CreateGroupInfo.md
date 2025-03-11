@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **RemoteInfo** | Pointer to [**GroupRemoteInfo**](GroupRemoteInfo.md) |  | [optional] 
 **RemoteGroupId** | Pointer to **string** | Deprecated - use remote_info instead. The ID of the group on the remote system. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details on how to specify this field. | [optional] 
 **Metadata** | Pointer to **string** | Deprecated - use remote_info instead.  JSON metadata about the remote group. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details on how to specify this field. The required format is dependent on group_type and should have the following schema: &lt;style type&#x3D;\&quot;text/css\&quot;&gt; code {max-height:300px !important} &lt;/style&gt; &#x60;&#x60;&#x60;json {   \&quot;$schema\&quot;: \&quot;http://json-schema.org/draft-04/schema#\&quot;,   \&quot;title\&quot;: \&quot;Group Metadata\&quot;,   \&quot;properties\&quot;: {     \&quot;ad_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;object_guid\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;object_guid\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Active Directory Group\&quot;     },     \&quot;duo_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;group_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;group_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Duo Group\&quot;     },     \&quot;git_hub_team\&quot;: {       \&quot;properties\&quot;: {         \&quot;org_name\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;team_slug\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;org_name\&quot;, \&quot;team_slug\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;GitHub Team\&quot;     },     \&quot;google_groups_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;group_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;group_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Google Groups Group\&quot;     },     \&quot;ldap_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;group_uid\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;group_uid\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;LDAP Group\&quot;     },     \&quot;okta_directory_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;group_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;group_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Okta Directory Group\&quot;     }   },   \&quot;additionalProperties\&quot;: false,   \&quot;minProperties\&quot;: 1,   \&quot;maxProperties\&quot;: 1,   \&quot;type\&quot;: \&quot;object\&quot; } &#x60;&#x60;&#x60; | [optional] 
+**CustomRequestNotification** | Pointer to **string** | Custom request notification sent upon request approval. | [optional] 
+**RiskSensitivityOverride** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) |  | [optional] 
 
 ## Methods
 
@@ -190,6 +192,56 @@ SetMetadata sets Metadata field to given value.
 `func (o *CreateGroupInfo) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
+
+### GetCustomRequestNotification
+
+`func (o *CreateGroupInfo) GetCustomRequestNotification() string`
+
+GetCustomRequestNotification returns the CustomRequestNotification field if non-nil, zero value otherwise.
+
+### GetCustomRequestNotificationOk
+
+`func (o *CreateGroupInfo) GetCustomRequestNotificationOk() (*string, bool)`
+
+GetCustomRequestNotificationOk returns a tuple with the CustomRequestNotification field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomRequestNotification
+
+`func (o *CreateGroupInfo) SetCustomRequestNotification(v string)`
+
+SetCustomRequestNotification sets CustomRequestNotification field to given value.
+
+### HasCustomRequestNotification
+
+`func (o *CreateGroupInfo) HasCustomRequestNotification() bool`
+
+HasCustomRequestNotification returns a boolean if a field has been set.
+
+### GetRiskSensitivityOverride
+
+`func (o *CreateGroupInfo) GetRiskSensitivityOverride() RiskSensitivityEnum`
+
+GetRiskSensitivityOverride returns the RiskSensitivityOverride field if non-nil, zero value otherwise.
+
+### GetRiskSensitivityOverrideOk
+
+`func (o *CreateGroupInfo) GetRiskSensitivityOverrideOk() (*RiskSensitivityEnum, bool)`
+
+GetRiskSensitivityOverrideOk returns a tuple with the RiskSensitivityOverride field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRiskSensitivityOverride
+
+`func (o *CreateGroupInfo) SetRiskSensitivityOverride(v RiskSensitivityEnum)`
+
+SetRiskSensitivityOverride sets RiskSensitivityOverride field to given value.
+
+### HasRiskSensitivityOverride
+
+`func (o *CreateGroupInfo) HasRiskSensitivityOverride() bool`
+
+HasRiskSensitivityOverride returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -20,12 +20,12 @@ import (
 )
 
 
-// SessionsApiService SessionsApi service
-type SessionsApiService service
+// SessionsAPIService SessionsAPI service
+type SessionsAPIService service
 
 type ApiSessionsRequest struct {
 	ctx context.Context
-	ApiService *SessionsApiService
+	ApiService *SessionsAPIService
 	resourceId *string
 	userId *string
 }
@@ -54,7 +54,7 @@ Returns a list of `Session` objects.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSessionsRequest
 */
-func (a *SessionsApiService) Sessions(ctx context.Context) ApiSessionsRequest {
+func (a *SessionsAPIService) Sessions(ctx context.Context) ApiSessionsRequest {
 	return ApiSessionsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -63,7 +63,7 @@ func (a *SessionsApiService) Sessions(ctx context.Context) ApiSessionsRequest {
 
 // Execute executes the request
 //  @return SessionsList
-func (a *SessionsApiService) SessionsExecute(r ApiSessionsRequest) (*SessionsList, *http.Response, error) {
+func (a *SessionsAPIService) SessionsExecute(r ApiSessionsRequest) (*SessionsList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -71,7 +71,7 @@ func (a *SessionsApiService) SessionsExecute(r ApiSessionsRequest) (*SessionsLis
 		localVarReturnValue  *SessionsList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SessionsApiService.Sessions")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SessionsAPIService.Sessions")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -85,9 +85,9 @@ func (a *SessionsApiService) SessionsExecute(r ApiSessionsRequest) (*SessionsLis
 		return localVarReturnValue, nil, reportError("resourceId is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "resource_id", r.resourceId, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "resource_id", r.resourceId, "form", "")
 	if r.userId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "user_id", r.userId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "user_id", r.userId, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,8 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the UpdateConfigurationTemplateInfo type satisfies the MappedNullable interface at compile time
@@ -26,9 +28,14 @@ type UpdateConfigurationTemplateInfo struct {
 	Name *string `json:"name,omitempty"`
 	// The ID of the owner of the configuration template.
 	AdminOwnerId *string `json:"admin_owner_id,omitempty"`
+	// The visibility info of the configuration template.
 	Visibility *VisibilityInfo `json:"visibility,omitempty"`
 	// The IDs of the audit message channels linked to the configuration template.
 	LinkedAuditMessageChannelIds []string `json:"linked_audit_message_channel_ids,omitempty"`
+	// The request configuration list linked to the configuration template.
+	RequestConfigurations []RequestConfiguration `json:"request_configurations,omitempty"`
+	// The request configuration list linked to the configuration template. Deprecated in favor of `request_configurations`.
+	// Deprecated
 	RequestConfigurationList *CreateRequestConfigurationInfoList `json:"request_configuration_list,omitempty"`
 	// The IDs of the on-call schedules linked to the configuration template.
 	MemberOncallScheduleIds []string `json:"member_oncall_schedule_ids,omitempty"`
@@ -38,7 +45,12 @@ type UpdateConfigurationTemplateInfo struct {
 	RequireMfaToApprove *bool `json:"require_mfa_to_approve,omitempty"`
 	// A bool representing whether or not to require MFA to connect to resources associated with this configuration template.
 	RequireMfaToConnect *bool `json:"require_mfa_to_connect,omitempty"`
+	TicketPropagation *TicketPropagationConfiguration `json:"ticket_propagation,omitempty"`
+	// Custom request notification sent upon request approval for this configuration template.
+	CustomRequestNotification *string `json:"custom_request_notification,omitempty"`
 }
+
+type _UpdateConfigurationTemplateInfo UpdateConfigurationTemplateInfo
 
 // NewUpdateConfigurationTemplateInfo instantiates a new UpdateConfigurationTemplateInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -210,7 +222,40 @@ func (o *UpdateConfigurationTemplateInfo) SetLinkedAuditMessageChannelIds(v []st
 	o.LinkedAuditMessageChannelIds = v
 }
 
+// GetRequestConfigurations returns the RequestConfigurations field value if set, zero value otherwise.
+func (o *UpdateConfigurationTemplateInfo) GetRequestConfigurations() []RequestConfiguration {
+	if o == nil || IsNil(o.RequestConfigurations) {
+		var ret []RequestConfiguration
+		return ret
+	}
+	return o.RequestConfigurations
+}
+
+// GetRequestConfigurationsOk returns a tuple with the RequestConfigurations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateConfigurationTemplateInfo) GetRequestConfigurationsOk() ([]RequestConfiguration, bool) {
+	if o == nil || IsNil(o.RequestConfigurations) {
+		return nil, false
+	}
+	return o.RequestConfigurations, true
+}
+
+// HasRequestConfigurations returns a boolean if a field has been set.
+func (o *UpdateConfigurationTemplateInfo) HasRequestConfigurations() bool {
+	if o != nil && !IsNil(o.RequestConfigurations) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestConfigurations gets a reference to the given []RequestConfiguration and assigns it to the RequestConfigurations field.
+func (o *UpdateConfigurationTemplateInfo) SetRequestConfigurations(v []RequestConfiguration) {
+	o.RequestConfigurations = v
+}
+
 // GetRequestConfigurationList returns the RequestConfigurationList field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateConfigurationTemplateInfo) GetRequestConfigurationList() CreateRequestConfigurationInfoList {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		var ret CreateRequestConfigurationInfoList
@@ -221,6 +266,7 @@ func (o *UpdateConfigurationTemplateInfo) GetRequestConfigurationList() CreateRe
 
 // GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateConfigurationTemplateInfo) GetRequestConfigurationListOk() (*CreateRequestConfigurationInfoList, bool) {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		return nil, false
@@ -238,6 +284,7 @@ func (o *UpdateConfigurationTemplateInfo) HasRequestConfigurationList() bool {
 }
 
 // SetRequestConfigurationList gets a reference to the given CreateRequestConfigurationInfoList and assigns it to the RequestConfigurationList field.
+// Deprecated
 func (o *UpdateConfigurationTemplateInfo) SetRequestConfigurationList(v CreateRequestConfigurationInfoList) {
 	o.RequestConfigurationList = &v
 }
@@ -370,6 +417,70 @@ func (o *UpdateConfigurationTemplateInfo) SetRequireMfaToConnect(v bool) {
 	o.RequireMfaToConnect = &v
 }
 
+// GetTicketPropagation returns the TicketPropagation field value if set, zero value otherwise.
+func (o *UpdateConfigurationTemplateInfo) GetTicketPropagation() TicketPropagationConfiguration {
+	if o == nil || IsNil(o.TicketPropagation) {
+		var ret TicketPropagationConfiguration
+		return ret
+	}
+	return *o.TicketPropagation
+}
+
+// GetTicketPropagationOk returns a tuple with the TicketPropagation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateConfigurationTemplateInfo) GetTicketPropagationOk() (*TicketPropagationConfiguration, bool) {
+	if o == nil || IsNil(o.TicketPropagation) {
+		return nil, false
+	}
+	return o.TicketPropagation, true
+}
+
+// HasTicketPropagation returns a boolean if a field has been set.
+func (o *UpdateConfigurationTemplateInfo) HasTicketPropagation() bool {
+	if o != nil && !IsNil(o.TicketPropagation) {
+		return true
+	}
+
+	return false
+}
+
+// SetTicketPropagation gets a reference to the given TicketPropagationConfiguration and assigns it to the TicketPropagation field.
+func (o *UpdateConfigurationTemplateInfo) SetTicketPropagation(v TicketPropagationConfiguration) {
+	o.TicketPropagation = &v
+}
+
+// GetCustomRequestNotification returns the CustomRequestNotification field value if set, zero value otherwise.
+func (o *UpdateConfigurationTemplateInfo) GetCustomRequestNotification() string {
+	if o == nil || IsNil(o.CustomRequestNotification) {
+		var ret string
+		return ret
+	}
+	return *o.CustomRequestNotification
+}
+
+// GetCustomRequestNotificationOk returns a tuple with the CustomRequestNotification field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateConfigurationTemplateInfo) GetCustomRequestNotificationOk() (*string, bool) {
+	if o == nil || IsNil(o.CustomRequestNotification) {
+		return nil, false
+	}
+	return o.CustomRequestNotification, true
+}
+
+// HasCustomRequestNotification returns a boolean if a field has been set.
+func (o *UpdateConfigurationTemplateInfo) HasCustomRequestNotification() bool {
+	if o != nil && !IsNil(o.CustomRequestNotification) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomRequestNotification gets a reference to the given string and assigns it to the CustomRequestNotification field.
+func (o *UpdateConfigurationTemplateInfo) SetCustomRequestNotification(v string) {
+	o.CustomRequestNotification = &v
+}
+
 func (o UpdateConfigurationTemplateInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -393,6 +504,9 @@ func (o UpdateConfigurationTemplateInfo) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.LinkedAuditMessageChannelIds) {
 		toSerialize["linked_audit_message_channel_ids"] = o.LinkedAuditMessageChannelIds
 	}
+	if !IsNil(o.RequestConfigurations) {
+		toSerialize["request_configurations"] = o.RequestConfigurations
+	}
 	if !IsNil(o.RequestConfigurationList) {
 		toSerialize["request_configuration_list"] = o.RequestConfigurationList
 	}
@@ -408,7 +522,50 @@ func (o UpdateConfigurationTemplateInfo) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.RequireMfaToConnect) {
 		toSerialize["require_mfa_to_connect"] = o.RequireMfaToConnect
 	}
+	if !IsNil(o.TicketPropagation) {
+		toSerialize["ticket_propagation"] = o.TicketPropagation
+	}
+	if !IsNil(o.CustomRequestNotification) {
+		toSerialize["custom_request_notification"] = o.CustomRequestNotification
+	}
 	return toSerialize, nil
+}
+
+func (o *UpdateConfigurationTemplateInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"configuration_template_id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varUpdateConfigurationTemplateInfo := _UpdateConfigurationTemplateInfo{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUpdateConfigurationTemplateInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateConfigurationTemplateInfo(varUpdateConfigurationTemplateInfo)
+
+	return err
 }
 
 type NullableUpdateConfigurationTemplateInfo struct {

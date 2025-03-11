@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -14,6 +14,8 @@ package opal
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the CreateUARInfo type satisfies the MappedNullable interface at compile time
@@ -32,8 +34,12 @@ type CreateUARInfo struct {
 	TimeZone string `json:"time_zone"`
 	// A bool representing whether to present a warning when a user is the only reviewer for themself. Default is False.
 	SelfReviewAllowed bool `json:"self_review_allowed"`
+	ReminderSchedule []int32 `json:"reminder_schedule,omitempty"`
+	ReminderIncludeManager *bool `json:"reminder_include_manager,omitempty"`
 	UarScope *UARScope `json:"uar_scope,omitempty"`
 }
+
+type _CreateUARInfo CreateUARInfo
 
 // NewCreateUARInfo instantiates a new CreateUARInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -202,6 +208,70 @@ func (o *CreateUARInfo) SetSelfReviewAllowed(v bool) {
 	o.SelfReviewAllowed = v
 }
 
+// GetReminderSchedule returns the ReminderSchedule field value if set, zero value otherwise.
+func (o *CreateUARInfo) GetReminderSchedule() []int32 {
+	if o == nil || IsNil(o.ReminderSchedule) {
+		var ret []int32
+		return ret
+	}
+	return o.ReminderSchedule
+}
+
+// GetReminderScheduleOk returns a tuple with the ReminderSchedule field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateUARInfo) GetReminderScheduleOk() ([]int32, bool) {
+	if o == nil || IsNil(o.ReminderSchedule) {
+		return nil, false
+	}
+	return o.ReminderSchedule, true
+}
+
+// HasReminderSchedule returns a boolean if a field has been set.
+func (o *CreateUARInfo) HasReminderSchedule() bool {
+	if o != nil && !IsNil(o.ReminderSchedule) {
+		return true
+	}
+
+	return false
+}
+
+// SetReminderSchedule gets a reference to the given []int32 and assigns it to the ReminderSchedule field.
+func (o *CreateUARInfo) SetReminderSchedule(v []int32) {
+	o.ReminderSchedule = v
+}
+
+// GetReminderIncludeManager returns the ReminderIncludeManager field value if set, zero value otherwise.
+func (o *CreateUARInfo) GetReminderIncludeManager() bool {
+	if o == nil || IsNil(o.ReminderIncludeManager) {
+		var ret bool
+		return ret
+	}
+	return *o.ReminderIncludeManager
+}
+
+// GetReminderIncludeManagerOk returns a tuple with the ReminderIncludeManager field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateUARInfo) GetReminderIncludeManagerOk() (*bool, bool) {
+	if o == nil || IsNil(o.ReminderIncludeManager) {
+		return nil, false
+	}
+	return o.ReminderIncludeManager, true
+}
+
+// HasReminderIncludeManager returns a boolean if a field has been set.
+func (o *CreateUARInfo) HasReminderIncludeManager() bool {
+	if o != nil && !IsNil(o.ReminderIncludeManager) {
+		return true
+	}
+
+	return false
+}
+
+// SetReminderIncludeManager gets a reference to the given bool and assigns it to the ReminderIncludeManager field.
+func (o *CreateUARInfo) SetReminderIncludeManager(v bool) {
+	o.ReminderIncludeManager = &v
+}
+
 // GetUarScope returns the UarScope field value if set, zero value otherwise.
 func (o *CreateUARInfo) GetUarScope() UARScope {
 	if o == nil || IsNil(o.UarScope) {
@@ -250,10 +320,58 @@ func (o CreateUARInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize["deadline"] = o.Deadline
 	toSerialize["time_zone"] = o.TimeZone
 	toSerialize["self_review_allowed"] = o.SelfReviewAllowed
+	if !IsNil(o.ReminderSchedule) {
+		toSerialize["reminder_schedule"] = o.ReminderSchedule
+	}
+	if !IsNil(o.ReminderIncludeManager) {
+		toSerialize["reminder_include_manager"] = o.ReminderIncludeManager
+	}
 	if !IsNil(o.UarScope) {
 		toSerialize["uar_scope"] = o.UarScope
 	}
 	return toSerialize, nil
+}
+
+func (o *CreateUARInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+		"reviewer_assignment_policy",
+		"send_reviewer_assignment_notification",
+		"deadline",
+		"time_zone",
+		"self_review_allowed",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCreateUARInfo := _CreateUARInfo{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCreateUARInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateUARInfo(varCreateUARInfo)
+
+	return err
 }
 
 type NullableCreateUARInfo struct {

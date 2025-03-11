@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -21,12 +21,12 @@ import (
 )
 
 
-// OnCallSchedulesApiService OnCallSchedulesApi service
-type OnCallSchedulesApiService service
+// OnCallSchedulesAPIService OnCallSchedulesAPI service
+type OnCallSchedulesAPIService service
 
 type ApiCreateOnCallScheduleRequest struct {
 	ctx context.Context
-	ApiService *OnCallSchedulesApiService
+	ApiService *OnCallSchedulesAPIService
 	createOnCallScheduleInfo *CreateOnCallScheduleInfo
 }
 
@@ -48,7 +48,7 @@ Creates a `OnCallSchedule` objects.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateOnCallScheduleRequest
 */
-func (a *OnCallSchedulesApiService) CreateOnCallSchedule(ctx context.Context) ApiCreateOnCallScheduleRequest {
+func (a *OnCallSchedulesAPIService) CreateOnCallSchedule(ctx context.Context) ApiCreateOnCallScheduleRequest {
 	return ApiCreateOnCallScheduleRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -57,7 +57,7 @@ func (a *OnCallSchedulesApiService) CreateOnCallSchedule(ctx context.Context) Ap
 
 // Execute executes the request
 //  @return OnCallSchedule
-func (a *OnCallSchedulesApiService) CreateOnCallScheduleExecute(r ApiCreateOnCallScheduleRequest) (*OnCallSchedule, *http.Response, error) {
+func (a *OnCallSchedulesAPIService) CreateOnCallScheduleExecute(r ApiCreateOnCallScheduleRequest) (*OnCallSchedule, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -65,7 +65,7 @@ func (a *OnCallSchedulesApiService) CreateOnCallScheduleExecute(r ApiCreateOnCal
 		localVarReturnValue  *OnCallSchedule
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OnCallSchedulesApiService.CreateOnCallSchedule")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OnCallSchedulesAPIService.CreateOnCallSchedule")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -137,7 +137,7 @@ func (a *OnCallSchedulesApiService) CreateOnCallScheduleExecute(r ApiCreateOnCal
 
 type ApiGetOnCallScheduleRequest struct {
 	ctx context.Context
-	ApiService *OnCallSchedulesApiService
+	ApiService *OnCallSchedulesAPIService
 	onCallScheduleId string
 }
 
@@ -154,7 +154,7 @@ Gets a `OnCallSchedule` object.
  @param onCallScheduleId The ID of the on_call_schedule.
  @return ApiGetOnCallScheduleRequest
 */
-func (a *OnCallSchedulesApiService) GetOnCallSchedule(ctx context.Context, onCallScheduleId string) ApiGetOnCallScheduleRequest {
+func (a *OnCallSchedulesAPIService) GetOnCallSchedule(ctx context.Context, onCallScheduleId string) ApiGetOnCallScheduleRequest {
 	return ApiGetOnCallScheduleRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -164,7 +164,7 @@ func (a *OnCallSchedulesApiService) GetOnCallSchedule(ctx context.Context, onCal
 
 // Execute executes the request
 //  @return OnCallSchedule
-func (a *OnCallSchedulesApiService) GetOnCallScheduleExecute(r ApiGetOnCallScheduleRequest) (*OnCallSchedule, *http.Response, error) {
+func (a *OnCallSchedulesAPIService) GetOnCallScheduleExecute(r ApiGetOnCallScheduleRequest) (*OnCallSchedule, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -172,7 +172,7 @@ func (a *OnCallSchedulesApiService) GetOnCallScheduleExecute(r ApiGetOnCallSched
 		localVarReturnValue  *OnCallSchedule
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OnCallSchedulesApiService.GetOnCallSchedule")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OnCallSchedulesAPIService.GetOnCallSchedule")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -240,7 +240,7 @@ func (a *OnCallSchedulesApiService) GetOnCallScheduleExecute(r ApiGetOnCallSched
 
 type ApiGetOnCallSchedulesRequest struct {
 	ctx context.Context
-	ApiService *OnCallSchedulesApiService
+	ApiService *OnCallSchedulesAPIService
 }
 
 func (r ApiGetOnCallSchedulesRequest) Execute() (*OnCallScheduleList, *http.Response, error) {
@@ -255,7 +255,7 @@ Returns a list of `OnCallSchedule` objects.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetOnCallSchedulesRequest
 */
-func (a *OnCallSchedulesApiService) GetOnCallSchedules(ctx context.Context) ApiGetOnCallSchedulesRequest {
+func (a *OnCallSchedulesAPIService) GetOnCallSchedules(ctx context.Context) ApiGetOnCallSchedulesRequest {
 	return ApiGetOnCallSchedulesRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -264,7 +264,7 @@ func (a *OnCallSchedulesApiService) GetOnCallSchedules(ctx context.Context) ApiG
 
 // Execute executes the request
 //  @return OnCallScheduleList
-func (a *OnCallSchedulesApiService) GetOnCallSchedulesExecute(r ApiGetOnCallSchedulesRequest) (*OnCallScheduleList, *http.Response, error) {
+func (a *OnCallSchedulesAPIService) GetOnCallSchedulesExecute(r ApiGetOnCallSchedulesRequest) (*OnCallScheduleList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -272,7 +272,7 @@ func (a *OnCallSchedulesApiService) GetOnCallSchedulesExecute(r ApiGetOnCallSche
 		localVarReturnValue  *OnCallScheduleList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OnCallSchedulesApiService.GetOnCallSchedules")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OnCallSchedulesAPIService.GetOnCallSchedules")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

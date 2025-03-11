@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,16 +13,20 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the GroupRemoteInfoAzureAdSecurityGroup type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GroupRemoteInfoAzureAdSecurityGroup{}
 
-// GroupRemoteInfoAzureAdSecurityGroup Remote info for Azure AD Security group.
+// GroupRemoteInfoAzureAdSecurityGroup Remote info for Microsoft Entra ID Security group.
 type GroupRemoteInfoAzureAdSecurityGroup struct {
-	// The id of the Azure AD Security group.
+	// The id of the Microsoft Entra ID Security group.
 	GroupId string `json:"group_id"`
 }
+
+type _GroupRemoteInfoAzureAdSecurityGroup GroupRemoteInfoAzureAdSecurityGroup
 
 // NewGroupRemoteInfoAzureAdSecurityGroup instantiates a new GroupRemoteInfoAzureAdSecurityGroup object
 // This constructor will assign default values to properties that have it defined,
@@ -78,6 +82,43 @@ func (o GroupRemoteInfoAzureAdSecurityGroup) ToMap() (map[string]interface{}, er
 	toSerialize := map[string]interface{}{}
 	toSerialize["group_id"] = o.GroupId
 	return toSerialize, nil
+}
+
+func (o *GroupRemoteInfoAzureAdSecurityGroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"group_id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGroupRemoteInfoAzureAdSecurityGroup := _GroupRemoteInfoAzureAdSecurityGroup{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varGroupRemoteInfoAzureAdSecurityGroup)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GroupRemoteInfoAzureAdSecurityGroup(varGroupRemoteInfoAzureAdSecurityGroup)
+
+	return err
 }
 
 type NullableGroupRemoteInfoAzureAdSecurityGroup struct {

@@ -1,36 +1,37 @@
-# \GroupsApi
+# \GroupsAPI
 
 All URIs are relative to *https://api.opal.dev/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddGroupResource**](GroupsApi.md#AddGroupResource) | **Post** /groups/{group_id}/resources/{resource_id} | 
-[**AddGroupUser**](GroupsApi.md#AddGroupUser) | **Post** /groups/{group_id}/users/{user_id} | 
-[**CreateGroup**](GroupsApi.md#CreateGroup) | **Post** /groups | 
-[**DeleteGroup**](GroupsApi.md#DeleteGroup) | **Delete** /groups/{group_id} | 
-[**DeleteGroupUser**](GroupsApi.md#DeleteGroupUser) | **Delete** /groups/{group_id}/users/{user_id} | 
-[**GetGroupMessageChannels**](GroupsApi.md#GetGroupMessageChannels) | **Get** /groups/{group_id}/message-channels | 
-[**GetGroupOnCallSchedules**](GroupsApi.md#GetGroupOnCallSchedules) | **Get** /groups/{group_id}/on-call-schedules | 
-[**GetGroupResources**](GroupsApi.md#GetGroupResources) | **Get** /groups/{group_id}/resources | 
-[**GetGroupReviewerStages**](GroupsApi.md#GetGroupReviewerStages) | **Get** /groups/{group_id}/reviewer-stages | 
-[**GetGroupReviewers**](GroupsApi.md#GetGroupReviewers) | **Get** /groups/{group_id}/reviewers | 
-[**GetGroupTags**](GroupsApi.md#GetGroupTags) | **Get** /groups/{group_id}/tags | 
-[**GetGroupUsers**](GroupsApi.md#GetGroupUsers) | **Get** /groups/{group_id}/users | 
-[**GetGroupVisibility**](GroupsApi.md#GetGroupVisibility) | **Get** /groups/{group_id}/visibility | 
-[**GetGroups**](GroupsApi.md#GetGroups) | **Get** /groups | 
-[**SetGroupMessageChannels**](GroupsApi.md#SetGroupMessageChannels) | **Put** /groups/{group_id}/message-channels | 
-[**SetGroupOnCallSchedules**](GroupsApi.md#SetGroupOnCallSchedules) | **Put** /groups/{group_id}/on-call-schedules | 
-[**SetGroupResources**](GroupsApi.md#SetGroupResources) | **Put** /groups/{group_id}/resources | 
-[**SetGroupReviewerStages**](GroupsApi.md#SetGroupReviewerStages) | **Put** /groups/{group_id}/reviewer-stages | 
-[**SetGroupReviewers**](GroupsApi.md#SetGroupReviewers) | **Put** /groups/{group_id}/reviewers | 
-[**SetGroupVisibility**](GroupsApi.md#SetGroupVisibility) | **Put** /groups/{group_id}/visibility | 
-[**UpdateGroups**](GroupsApi.md#UpdateGroups) | **Put** /groups | 
+[**AddGroupResource**](GroupsAPI.md#AddGroupResource) | **Post** /groups/{group_id}/resources/{resource_id} | 
+[**AddGroupUser**](GroupsAPI.md#AddGroupUser) | **Post** /groups/{group_id}/users/{user_id} | 
+[**CreateGroup**](GroupsAPI.md#CreateGroup) | **Post** /groups | 
+[**DeleteGroup**](GroupsAPI.md#DeleteGroup) | **Delete** /groups/{group_id} | 
+[**DeleteGroupUser**](GroupsAPI.md#DeleteGroupUser) | **Delete** /groups/{group_id}/users/{user_id} | 
+[**GetGroup**](GroupsAPI.md#GetGroup) | **Get** /groups/{group_id} | 
+[**GetGroupMessageChannels**](GroupsAPI.md#GetGroupMessageChannels) | **Get** /groups/{group_id}/message-channels | 
+[**GetGroupOnCallSchedules**](GroupsAPI.md#GetGroupOnCallSchedules) | **Get** /groups/{group_id}/on-call-schedules | 
+[**GetGroupResources**](GroupsAPI.md#GetGroupResources) | **Get** /groups/{group_id}/resources | 
+[**GetGroupReviewerStages**](GroupsAPI.md#GetGroupReviewerStages) | **Get** /groups/{group_id}/reviewer-stages | 
+[**GetGroupReviewers**](GroupsAPI.md#GetGroupReviewers) | **Get** /groups/{group_id}/reviewers | 
+[**GetGroupTags**](GroupsAPI.md#GetGroupTags) | **Get** /groups/{group_id}/tags | 
+[**GetGroupUsers**](GroupsAPI.md#GetGroupUsers) | **Get** /groups/{group_id}/users | 
+[**GetGroupVisibility**](GroupsAPI.md#GetGroupVisibility) | **Get** /groups/{group_id}/visibility | 
+[**GetGroups**](GroupsAPI.md#GetGroups) | **Get** /groups | 
+[**SetGroupMessageChannels**](GroupsAPI.md#SetGroupMessageChannels) | **Put** /groups/{group_id}/message-channels | 
+[**SetGroupOnCallSchedules**](GroupsAPI.md#SetGroupOnCallSchedules) | **Put** /groups/{group_id}/on-call-schedules | 
+[**SetGroupResources**](GroupsAPI.md#SetGroupResources) | **Put** /groups/{group_id}/resources | 
+[**SetGroupReviewerStages**](GroupsAPI.md#SetGroupReviewerStages) | **Put** /groups/{group_id}/reviewer-stages | 
+[**SetGroupReviewers**](GroupsAPI.md#SetGroupReviewers) | **Put** /groups/{group_id}/reviewers | 
+[**SetGroupVisibility**](GroupsAPI.md#SetGroupVisibility) | **Put** /groups/{group_id}/visibility | 
+[**UpdateGroups**](GroupsAPI.md#UpdateGroups) | **Put** /groups | 
 
 
 
 ## AddGroupResource
 
-> GroupResource AddGroupResource(ctx, groupId, resourceId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
+> GroupResource AddGroupResource(ctx, groupId, resourceId).AccessLevelRemoteId(accessLevelRemoteId).AddGroupResourceRequest(addGroupResourceRequest).Execute()
 
 
 
@@ -42,26 +43,27 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
-    resourceId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the resource.
-    accessLevelRemoteId := "arn:aws:iam::590304332660:role/AdministratorAccess" // string | The remote ID of the access level to grant to this user. If omitted, the default access level remote ID value (empty string) is used. (optional)
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	resourceId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the resource.
+	accessLevelRemoteId := "arn:aws:iam::590304332660:role/AdministratorAccess" // string | The remote ID of the access level to grant to this user. If omitted, the default access level remote ID value (empty string) is used. (optional)
+	addGroupResourceRequest := *openapiclient.NewAddGroupResourceRequest() // AddGroupResourceRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.AddGroupResource(context.Background(), groupId, resourceId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.AddGroupResource``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AddGroupResource`: GroupResource
-    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.AddGroupResource`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.AddGroupResource(context.Background(), groupId, resourceId).AccessLevelRemoteId(accessLevelRemoteId).AddGroupResourceRequest(addGroupResourceRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.AddGroupResource``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AddGroupResource`: GroupResource
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.AddGroupResource`: %v\n", resp)
 }
 ```
 
@@ -84,6 +86,7 @@ Name | Type | Description  | Notes
 
 
  **accessLevelRemoteId** | **string** | The remote ID of the access level to grant to this user. If omitted, the default access level remote ID value (empty string) is used. | 
+ **addGroupResourceRequest** | [**AddGroupResourceRequest**](AddGroupResourceRequest.md) |  | 
 
 ### Return type
 
@@ -95,7 +98,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -105,7 +108,7 @@ Name | Type | Description  | Notes
 
 ## AddGroupUser
 
-> GroupUser AddGroupUser(ctx, groupId, userId).DurationMinutes(durationMinutes).AccessLevelRemoteId(accessLevelRemoteId).Execute()
+> GroupUser AddGroupUser(ctx, groupId, userId).DurationMinutes(durationMinutes).AccessLevelRemoteId(accessLevelRemoteId).AddGroupUserRequest(addGroupUserRequest).Execute()
 
 
 
@@ -117,27 +120,28 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
-    userId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of the user to add.
-    durationMinutes := int32(60) // int32 | The duration for which the group can be accessed (in minutes). Use 0 to set to indefinite.
-    accessLevelRemoteId := "arn:aws:iam::590304332660:role/AdministratorAccess" // string | The remote ID of the access level to grant to this user. If omitted, the default access level remote ID value (empty string) is used. (optional)
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	userId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of the user to add.
+	durationMinutes := int32(60) // int32 | The duration for which the group can be accessed (in minutes). Use 0 to set to indefinite. (optional)
+	accessLevelRemoteId := "arn:aws:iam::590304332660:role/AdministratorAccess" // string | The remote ID of the access level to grant to this user. If omitted, the default access level remote ID value (empty string) is used. (optional)
+	addGroupUserRequest := *openapiclient.NewAddGroupUserRequest(int32(60)) // AddGroupUserRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.AddGroupUser(context.Background(), groupId, userId).DurationMinutes(durationMinutes).AccessLevelRemoteId(accessLevelRemoteId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.AddGroupUser``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AddGroupUser`: GroupUser
-    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.AddGroupUser`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.AddGroupUser(context.Background(), groupId, userId).DurationMinutes(durationMinutes).AccessLevelRemoteId(accessLevelRemoteId).AddGroupUserRequest(addGroupUserRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.AddGroupUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AddGroupUser`: GroupUser
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.AddGroupUser`: %v\n", resp)
 }
 ```
 
@@ -161,6 +165,7 @@ Name | Type | Description  | Notes
 
  **durationMinutes** | **int32** | The duration for which the group can be accessed (in minutes). Use 0 to set to indefinite. | 
  **accessLevelRemoteId** | **string** | The remote ID of the access level to grant to this user. If omitted, the default access level remote ID value (empty string) is used. | 
+ **addGroupUserRequest** | [**AddGroupUserRequest**](AddGroupUserRequest.md) |  | 
 
 ### Return type
 
@@ -172,7 +177,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -194,24 +199,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    createGroupInfo := *openapiclient.NewCreateGroupInfo("mongo-db-prod", openapiclient.GroupTypeEnum("ACTIVE_DIRECTORY_GROUP"), "f454d283-ca87-4a8a-bdbb-df212eca5353") // CreateGroupInfo | 
+	createGroupInfo := *openapiclient.NewCreateGroupInfo("mongo-db-prod", openapiclient.GroupTypeEnum("ACTIVE_DIRECTORY_GROUP"), "f454d283-ca87-4a8a-bdbb-df212eca5353") // CreateGroupInfo | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.CreateGroup(context.Background()).CreateGroupInfo(createGroupInfo).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.CreateGroup``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateGroup`: Group
-    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.CreateGroup`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.CreateGroup(context.Background()).CreateGroupInfo(createGroupInfo).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.CreateGroup``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateGroup`: Group
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.CreateGroup`: %v\n", resp)
 }
 ```
 
@@ -260,22 +265,22 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.GroupsApi.DeleteGroup(context.Background(), groupId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.DeleteGroup``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.GroupsAPI.DeleteGroup(context.Background(), groupId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.DeleteGroup``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -328,23 +333,23 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
-    userId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of a user to remove from this group.
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	userId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of a user to remove from this group.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.GroupsApi.DeleteGroupUser(context.Background(), groupId, userId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.DeleteGroupUser``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.GroupsAPI.DeleteGroupUser(context.Background(), groupId, userId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.DeleteGroupUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -385,6 +390,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetGroup
+
+> Group GetGroup(ctx, groupId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	groupId := "32acc112-21ff-4669-91c2-21e27683eaa1" // string | The ID of the group.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.GetGroup(context.Background(), groupId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetGroup``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetGroup`: Group
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.GetGroup`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**groupId** | **string** | The ID of the group. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetGroupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**Group**](Group.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetGroupMessageChannels
 
 > MessageChannelList GetGroupMessageChannels(ctx, groupId).Execute()
@@ -399,24 +474,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.GetGroupMessageChannels(context.Background(), groupId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.GetGroupMessageChannels``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetGroupMessageChannels`: MessageChannelList
-    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.GetGroupMessageChannels`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.GetGroupMessageChannels(context.Background(), groupId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetGroupMessageChannels``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetGroupMessageChannels`: MessageChannelList
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.GetGroupMessageChannels`: %v\n", resp)
 }
 ```
 
@@ -469,24 +544,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.GetGroupOnCallSchedules(context.Background(), groupId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.GetGroupOnCallSchedules``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetGroupOnCallSchedules`: OnCallScheduleList
-    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.GetGroupOnCallSchedules`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.GetGroupOnCallSchedules(context.Background(), groupId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetGroupOnCallSchedules``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetGroupOnCallSchedules`: OnCallScheduleList
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.GetGroupOnCallSchedules`: %v\n", resp)
 }
 ```
 
@@ -539,24 +614,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.GetGroupResources(context.Background(), groupId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.GetGroupResources``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetGroupResources`: GroupResourceList
-    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.GetGroupResources`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.GetGroupResources(context.Background(), groupId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetGroupResources``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetGroupResources`: GroupResourceList
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.GetGroupResources`: %v\n", resp)
 }
 ```
 
@@ -609,24 +684,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.GetGroupReviewerStages(context.Background(), groupId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.GetGroupReviewerStages``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetGroupReviewerStages`: []ReviewerStage
-    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.GetGroupReviewerStages`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.GetGroupReviewerStages(context.Background(), groupId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetGroupReviewerStages``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetGroupReviewerStages`: []ReviewerStage
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.GetGroupReviewerStages`: %v\n", resp)
 }
 ```
 
@@ -679,24 +754,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.GetGroupReviewers(context.Background(), groupId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.GetGroupReviewers``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetGroupReviewers`: []string
-    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.GetGroupReviewers`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.GetGroupReviewers(context.Background(), groupId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetGroupReviewers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetGroupReviewers`: []string
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.GetGroupReviewers`: %v\n", resp)
 }
 ```
 
@@ -749,24 +824,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    groupId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the group whose tags to return.
+	groupId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the group whose tags to return.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.GetGroupTags(context.Background(), groupId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.GetGroupTags``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetGroupTags`: TagsList
-    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.GetGroupTags`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.GetGroupTags(context.Background(), groupId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetGroupTags``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetGroupTags`: TagsList
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.GetGroupTags`: %v\n", resp)
 }
 ```
 
@@ -819,24 +894,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.GetGroupUsers(context.Background(), groupId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.GetGroupUsers``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetGroupUsers`: GroupUserList
-    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.GetGroupUsers`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.GetGroupUsers(context.Background(), groupId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetGroupUsers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetGroupUsers`: GroupUserList
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.GetGroupUsers`: %v\n", resp)
 }
 ```
 
@@ -889,24 +964,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.GetGroupVisibility(context.Background(), groupId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.GetGroupVisibility``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetGroupVisibility`: VisibilityInfo
-    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.GetGroupVisibility`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.GetGroupVisibility(context.Background(), groupId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetGroupVisibility``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetGroupVisibility`: VisibilityInfo
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.GetGroupVisibility`: %v\n", resp)
 }
 ```
 
@@ -959,28 +1034,28 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
-    pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
-    groupTypeFilter := openapiclient.GroupTypeEnum("ACTIVE_DIRECTORY_GROUP") // GroupTypeEnum | The group type to filter by. (optional)
-    groupIds := []string{"1b978423-db0a-4037-a4cf-f79c60cb67b3"} // []string | The group ids to filter by. (optional)
-    groupName := "example-name" // string | Group name. (optional)
+	cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
+	pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
+	groupTypeFilter := openapiclient.GroupTypeEnum("ACTIVE_DIRECTORY_GROUP") // GroupTypeEnum | The group type to filter by. (optional)
+	groupIds := []string{"1b978423-db0a-4037-a4cf-f79c60cb67b3"} // []string | The group ids to filter by. (optional)
+	groupName := "example-name" // string | Group name. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.GetGroups(context.Background()).Cursor(cursor).PageSize(pageSize).GroupTypeFilter(groupTypeFilter).GroupIds(groupIds).GroupName(groupName).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.GetGroups``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetGroups`: PaginatedGroupsList
-    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.GetGroups`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.GetGroups(context.Background()).Cursor(cursor).PageSize(pageSize).GroupTypeFilter(groupTypeFilter).GroupIds(groupIds).GroupName(groupName).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetGroups``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetGroups`: PaginatedGroupsList
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.GetGroups`: %v\n", resp)
 }
 ```
 
@@ -1033,25 +1108,25 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
-    messageChannelIDList := *openapiclient.NewMessageChannelIDList([]string{"MessageChannelIds_example"}) // MessageChannelIDList | 
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	messageChannelIDList := *openapiclient.NewMessageChannelIDList([]string{"MessageChannelIds_example"}) // MessageChannelIDList | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.SetGroupMessageChannels(context.Background(), groupId).MessageChannelIDList(messageChannelIDList).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.SetGroupMessageChannels``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SetGroupMessageChannels`: []string
-    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.SetGroupMessageChannels`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.SetGroupMessageChannels(context.Background(), groupId).MessageChannelIDList(messageChannelIDList).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.SetGroupMessageChannels``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SetGroupMessageChannels`: []string
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.SetGroupMessageChannels`: %v\n", resp)
 }
 ```
 
@@ -1105,25 +1180,25 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
-    onCallScheduleIDList := *openapiclient.NewOnCallScheduleIDList([]string{"OnCallScheduleIds_example"}) // OnCallScheduleIDList | 
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	onCallScheduleIDList := *openapiclient.NewOnCallScheduleIDList([]string{"OnCallScheduleIds_example"}) // OnCallScheduleIDList | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.SetGroupOnCallSchedules(context.Background(), groupId).OnCallScheduleIDList(onCallScheduleIDList).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.SetGroupOnCallSchedules``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SetGroupOnCallSchedules`: []string
-    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.SetGroupOnCallSchedules`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.SetGroupOnCallSchedules(context.Background(), groupId).OnCallScheduleIDList(onCallScheduleIDList).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.SetGroupOnCallSchedules``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SetGroupOnCallSchedules`: []string
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.SetGroupOnCallSchedules`: %v\n", resp)
 }
 ```
 
@@ -1177,23 +1252,23 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
-    updateGroupResourcesInfo := *openapiclient.NewUpdateGroupResourcesInfo([]openapiclient.ResourceWithAccessLevel{*openapiclient.NewResourceWithAccessLevel("b5a5ca27-0ea3-4d86-9199-2126d57d1fbd")}) // UpdateGroupResourcesInfo | 
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	updateGroupResourcesInfo := *openapiclient.NewUpdateGroupResourcesInfo([]openapiclient.ResourceWithAccessLevel{*openapiclient.NewResourceWithAccessLevel("b5a5ca27-0ea3-4d86-9199-2126d57d1fbd")}) // UpdateGroupResourcesInfo | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.GroupsApi.SetGroupResources(context.Background(), groupId).UpdateGroupResourcesInfo(updateGroupResourcesInfo).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.SetGroupResources``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.GroupsAPI.SetGroupResources(context.Background(), groupId).UpdateGroupResourcesInfo(updateGroupResourcesInfo).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.SetGroupResources``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -1247,25 +1322,25 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
-    reviewerStageList := *openapiclient.NewReviewerStageList([]openapiclient.ReviewerStage{*openapiclient.NewReviewerStage(false, "AND", []string{"OwnerIds_example"})}) // ReviewerStageList | 
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	reviewerStageList := *openapiclient.NewReviewerStageList([]openapiclient.ReviewerStage{*openapiclient.NewReviewerStage(false, "AND", []string{"OwnerIds_example"})}) // ReviewerStageList | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.SetGroupReviewerStages(context.Background(), groupId).ReviewerStageList(reviewerStageList).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.SetGroupReviewerStages``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SetGroupReviewerStages`: []ReviewerStage
-    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.SetGroupReviewerStages`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.SetGroupReviewerStages(context.Background(), groupId).ReviewerStageList(reviewerStageList).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.SetGroupReviewerStages``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SetGroupReviewerStages`: []ReviewerStage
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.SetGroupReviewerStages`: %v\n", resp)
 }
 ```
 
@@ -1319,25 +1394,25 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
-    reviewerIDList := *openapiclient.NewReviewerIDList([]string{"ReviewerIds_example"}) // ReviewerIDList | 
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	reviewerIDList := *openapiclient.NewReviewerIDList([]string{"ReviewerIds_example"}) // ReviewerIDList | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.SetGroupReviewers(context.Background(), groupId).ReviewerIDList(reviewerIDList).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.SetGroupReviewers``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SetGroupReviewers`: []string
-    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.SetGroupReviewers`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.SetGroupReviewers(context.Background(), groupId).ReviewerIDList(reviewerIDList).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.SetGroupReviewers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SetGroupReviewers`: []string
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.SetGroupReviewers`: %v\n", resp)
 }
 ```
 
@@ -1391,25 +1466,25 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
-    visibilityInfo := *openapiclient.NewVisibilityInfo(openapiclient.VisibilityTypeEnum("GLOBAL")) // VisibilityInfo | 
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	visibilityInfo := *openapiclient.NewVisibilityInfo(openapiclient.VisibilityTypeEnum("GLOBAL")) // VisibilityInfo | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.SetGroupVisibility(context.Background(), groupId).VisibilityInfo(visibilityInfo).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.SetGroupVisibility``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SetGroupVisibility`: VisibilityInfo
-    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.SetGroupVisibility`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.SetGroupVisibility(context.Background(), groupId).VisibilityInfo(visibilityInfo).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.SetGroupVisibility``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SetGroupVisibility`: VisibilityInfo
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.SetGroupVisibility`: %v\n", resp)
 }
 ```
 
@@ -1463,24 +1538,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/opalsecurity/opal-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
 )
 
 func main() {
-    updateGroupInfoList := *openapiclient.NewUpdateGroupInfoList([]openapiclient.UpdateGroupInfo{*openapiclient.NewUpdateGroupInfo("f454d283-ca87-4a8a-bdbb-df212eca5353")}) // UpdateGroupInfoList | Groups to be updated
+	updateGroupInfoList := *openapiclient.NewUpdateGroupInfoList([]openapiclient.UpdateGroupInfo{*openapiclient.NewUpdateGroupInfo("f454d283-ca87-4a8a-bdbb-df212eca5353")}) // UpdateGroupInfoList | Groups to be updated
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.GroupsApi.UpdateGroups(context.Background()).UpdateGroupInfoList(updateGroupInfoList).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `GroupsApi.UpdateGroups``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateGroups`: UpdateGroupInfoList
-    fmt.Fprintf(os.Stdout, "Response from `GroupsApi.UpdateGroups`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.UpdateGroups(context.Background()).UpdateGroupInfoList(updateGroupInfoList).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.UpdateGroups``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateGroups`: UpdateGroupInfoList
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.UpdateGroups`: %v\n", resp)
 }
 ```
 

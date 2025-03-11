@@ -1,7 +1,7 @@
 /*
 Opal API
 
-Your Home For Developer Resources.
+The Opal API is a RESTful API that allows you to interact with the Opal Security platform programmatically.
 
 API version: 1.0
 Contact: hello@opal.dev
@@ -13,6 +13,8 @@ package opal
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the CreateOwnerInfo type satisfies the MappedNullable interface at compile time
@@ -33,6 +35,8 @@ type CreateOwnerInfo struct {
 	// Sync this owner's user list with a source group.
 	SourceGroupId *string `json:"source_group_id,omitempty"`
 }
+
+type _CreateOwnerInfo CreateOwnerInfo
 
 // NewCreateOwnerInfo instantiates a new CreateOwnerInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -254,6 +258,44 @@ func (o CreateOwnerInfo) ToMap() (map[string]interface{}, error) {
 		toSerialize["source_group_id"] = o.SourceGroupId
 	}
 	return toSerialize, nil
+}
+
+func (o *CreateOwnerInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+		"user_ids",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCreateOwnerInfo := _CreateOwnerInfo{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCreateOwnerInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateOwnerInfo(varCreateOwnerInfo)
+
+	return err
 }
 
 type NullableCreateOwnerInfo struct {

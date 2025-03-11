@@ -8,18 +8,22 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the group. | [optional] 
 **Description** | Pointer to **string** | A description of the group. | [optional] 
 **AdminOwnerId** | Pointer to **string** | The ID of the owner of the group. | [optional] 
-**MaxDuration** | Pointer to **int32** | The maximum duration for which the group can be requested (in minutes). Use -1 to set to indefinite. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
-**RecommendedDuration** | Pointer to **int32** | The recommended duration for which the group should be requested (in minutes). Will be the default value in a request. Use -1 to set to indefinite and 0 to unset. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
-**RequireManagerApproval** | Pointer to **bool** | A bool representing whether or not access requests to the group require manager approval. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
-**RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the group require an access ticket. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
+**MaxDuration** | Pointer to **int32** | The maximum duration for which the group can be requested (in minutes). Use -1 to set to indefinite. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
+**RecommendedDuration** | Pointer to **int32** | The recommended duration for which the group should be requested (in minutes). Will be the default value in a request. Use -1 to set to indefinite and 0 to unset. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
+**RequireManagerApproval** | Pointer to **bool** | A bool representing whether or not access requests to the group require manager approval. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
+**RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the group require an access ticket. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **FolderId** | Pointer to **string** | The ID of the folder that the group is located in. | [optional] 
 **RequireMfaToApprove** | Pointer to **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this group. | [optional] 
-**RequireMfaToRequest** | Pointer to **bool** | A bool representing whether or not to require MFA for requesting access to this group. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
-**AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this group. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
+**RequireMfaToRequest** | Pointer to **bool** | A bool representing whether or not to require MFA for requesting access to this group. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
+**AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this group. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **ConfigurationTemplateId** | Pointer to **string** | The ID of the associated configuration template. | [optional] 
-**RequestTemplateId** | Pointer to **string** | The ID of the associated request template. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
-**IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this group. Deprecated in favor of &#x60;request_configuration_list&#x60;. | [optional] 
-**RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) |  | [optional] 
+**RequestTemplateId** | Pointer to **string** | The ID of the associated request template. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
+**IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this group. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
+**GroupLeaderUserIds** | Pointer to **[]string** | A list of User IDs for the group leaders of the group | [optional] 
+**RequestConfigurations** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | The request configuration list of the configuration template. If not provided, the default request configuration will be used. | [optional] 
+**RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) | The request configuration list of the configuration template. If not provided, the default request configuration will be used. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
+**CustomRequestNotification** | Pointer to **string** | Custom request notification sent to the requester when the request is approved. | [optional] 
+**RiskSensitivityOverride** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) |  | [optional] 
 
 ## Methods
 
@@ -410,6 +414,56 @@ SetIsRequestable sets IsRequestable field to given value.
 
 HasIsRequestable returns a boolean if a field has been set.
 
+### GetGroupLeaderUserIds
+
+`func (o *UpdateGroupInfo) GetGroupLeaderUserIds() []string`
+
+GetGroupLeaderUserIds returns the GroupLeaderUserIds field if non-nil, zero value otherwise.
+
+### GetGroupLeaderUserIdsOk
+
+`func (o *UpdateGroupInfo) GetGroupLeaderUserIdsOk() (*[]string, bool)`
+
+GetGroupLeaderUserIdsOk returns a tuple with the GroupLeaderUserIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGroupLeaderUserIds
+
+`func (o *UpdateGroupInfo) SetGroupLeaderUserIds(v []string)`
+
+SetGroupLeaderUserIds sets GroupLeaderUserIds field to given value.
+
+### HasGroupLeaderUserIds
+
+`func (o *UpdateGroupInfo) HasGroupLeaderUserIds() bool`
+
+HasGroupLeaderUserIds returns a boolean if a field has been set.
+
+### GetRequestConfigurations
+
+`func (o *UpdateGroupInfo) GetRequestConfigurations() []RequestConfiguration`
+
+GetRequestConfigurations returns the RequestConfigurations field if non-nil, zero value otherwise.
+
+### GetRequestConfigurationsOk
+
+`func (o *UpdateGroupInfo) GetRequestConfigurationsOk() (*[]RequestConfiguration, bool)`
+
+GetRequestConfigurationsOk returns a tuple with the RequestConfigurations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestConfigurations
+
+`func (o *UpdateGroupInfo) SetRequestConfigurations(v []RequestConfiguration)`
+
+SetRequestConfigurations sets RequestConfigurations field to given value.
+
+### HasRequestConfigurations
+
+`func (o *UpdateGroupInfo) HasRequestConfigurations() bool`
+
+HasRequestConfigurations returns a boolean if a field has been set.
+
 ### GetRequestConfigurationList
 
 `func (o *UpdateGroupInfo) GetRequestConfigurationList() CreateRequestConfigurationInfoList`
@@ -434,6 +488,56 @@ SetRequestConfigurationList sets RequestConfigurationList field to given value.
 `func (o *UpdateGroupInfo) HasRequestConfigurationList() bool`
 
 HasRequestConfigurationList returns a boolean if a field has been set.
+
+### GetCustomRequestNotification
+
+`func (o *UpdateGroupInfo) GetCustomRequestNotification() string`
+
+GetCustomRequestNotification returns the CustomRequestNotification field if non-nil, zero value otherwise.
+
+### GetCustomRequestNotificationOk
+
+`func (o *UpdateGroupInfo) GetCustomRequestNotificationOk() (*string, bool)`
+
+GetCustomRequestNotificationOk returns a tuple with the CustomRequestNotification field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomRequestNotification
+
+`func (o *UpdateGroupInfo) SetCustomRequestNotification(v string)`
+
+SetCustomRequestNotification sets CustomRequestNotification field to given value.
+
+### HasCustomRequestNotification
+
+`func (o *UpdateGroupInfo) HasCustomRequestNotification() bool`
+
+HasCustomRequestNotification returns a boolean if a field has been set.
+
+### GetRiskSensitivityOverride
+
+`func (o *UpdateGroupInfo) GetRiskSensitivityOverride() RiskSensitivityEnum`
+
+GetRiskSensitivityOverride returns the RiskSensitivityOverride field if non-nil, zero value otherwise.
+
+### GetRiskSensitivityOverrideOk
+
+`func (o *UpdateGroupInfo) GetRiskSensitivityOverrideOk() (*RiskSensitivityEnum, bool)`
+
+GetRiskSensitivityOverrideOk returns a tuple with the RiskSensitivityOverride field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRiskSensitivityOverride
+
+`func (o *UpdateGroupInfo) SetRiskSensitivityOverride(v RiskSensitivityEnum)`
+
+SetRiskSensitivityOverride sets RiskSensitivityOverride field to given value.
+
+### HasRiskSensitivityOverride
+
+`func (o *UpdateGroupInfo) HasRiskSensitivityOverride() bool`
+
+HasRiskSensitivityOverride returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
