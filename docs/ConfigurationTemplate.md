@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ConfigurationTemplateId** | Pointer to **string** | The ID of the configuration template. | [optional] 
 **Name** | Pointer to **string** | The name of the configuration template. | [optional] 
 **AdminOwnerId** | Pointer to **string** | The ID of the owner of the configuration template. | [optional] 
-**Visibility** | Pointer to [**VisibilityInfo**](VisibilityInfo.md) | The visibility info of the configuration template. | [optional] 
+**Visibility** | Pointer to [**VisibilityInfo**](VisibilityInfo.md) |  | [optional] 
 **LinkedAuditMessageChannelIds** | Pointer to **[]string** | The IDs of the audit message channels linked to the configuration template. | [optional] 
 **RequestConfigurationId** | Pointer to **string** | The ID of the request configuration linked to the configuration template. | [optional] 
 **MemberOncallScheduleIds** | Pointer to **[]string** | The IDs of the on-call schedules linked to the configuration template. | [optional] 

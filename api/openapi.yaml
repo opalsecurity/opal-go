@@ -4219,7 +4219,7 @@ components:
       example: FAILED
       type: string
     SubEvent:
-      additionalProperties: true
+      additionalProperties: {}
       description: |-
         # Sub event Object
         ### Description
@@ -4237,7 +4237,6 @@ components:
         sub_event_type:
           description: The subevent type.
           example: USERS_CREATED
-          type: string
       required:
       - sub_event_type
     PaginatedEventList:
