@@ -4,21 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | The ID of the bundle. | 
+**BundleId** | Pointer to **string** | The ID of the bundle. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the bundle. | [optional] 
 **Description** | Pointer to **string** | The description of the bundle. | [optional] 
-**CreatedAt** | Pointer to **time.Time** | The creation timestamp of the bundle, in ISO 8601 format | [optional] 
-**UpdatedAt** | Pointer to **time.Time** | The last updated timestamp of the bundle, in ISO 8601 format | [optional] 
-**AdminOwnerId** | **string** | The ID of the owner of the bundle. | 
-**TotalNumItems** | Pointer to **int32** | The total number of items in the bundle. | [optional] 
-**TotalNumResources** | Pointer to **int32** | The total number of resources in the bundle. | [optional] 
-**TotalNumGroups** | Pointer to **int32** | The total number of groups in the bundle. | [optional] 
+**CreatedAt** | Pointer to **time.Time** | The creation timestamp of the bundle, in ISO 8601 format | [optional] [readonly] 
+**UpdatedAt** | Pointer to **time.Time** | The last updated timestamp of the bundle, in ISO 8601 format | [optional] [readonly] 
+**AdminOwnerId** | Pointer to **string** | The ID of the owner of the bundle. | [optional] 
+**TotalNumItems** | Pointer to **int32** | The total number of items in the bundle. | [optional] [readonly] 
+**TotalNumResources** | Pointer to **int32** | The total number of resources in the bundle. | [optional] [readonly] 
+**TotalNumGroups** | Pointer to **int32** | The total number of groups in the bundle. | [optional] [readonly] 
 
 ## Methods
 
 ### NewBundle
 
-`func NewBundle(id string, adminOwnerId string, ) *Bundle`
+`func NewBundle() *Bundle`
 
 NewBundle instantiates a new Bundle object
 This constructor will assign default values to properties that have it defined,
@@ -33,25 +33,30 @@ NewBundleWithDefaults instantiates a new Bundle object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetId
+### GetBundleId
 
-`func (o *Bundle) GetId() string`
+`func (o *Bundle) GetBundleId() string`
 
-GetId returns the Id field if non-nil, zero value otherwise.
+GetBundleId returns the BundleId field if non-nil, zero value otherwise.
 
-### GetIdOk
+### GetBundleIdOk
 
-`func (o *Bundle) GetIdOk() (*string, bool)`
+`func (o *Bundle) GetBundleIdOk() (*string, bool)`
 
-GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+GetBundleIdOk returns a tuple with the BundleId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetId
+### SetBundleId
 
-`func (o *Bundle) SetId(v string)`
+`func (o *Bundle) SetBundleId(v string)`
 
-SetId sets Id field to given value.
+SetBundleId sets BundleId field to given value.
 
+### HasBundleId
+
+`func (o *Bundle) HasBundleId() bool`
+
+HasBundleId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -172,6 +177,11 @@ and a boolean to check if the value has been set.
 
 SetAdminOwnerId sets AdminOwnerId field to given value.
 
+### HasAdminOwnerId
+
+`func (o *Bundle) HasAdminOwnerId() bool`
+
+HasAdminOwnerId returns a boolean if a field has been set.
 
 ### GetTotalNumItems
 

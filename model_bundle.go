@@ -14,8 +14,6 @@ package opal
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Bundle type satisfies the MappedNullable interface at compile time
@@ -24,7 +22,7 @@ var _ MappedNullable = &Bundle{}
 // Bundle struct for Bundle
 type Bundle struct {
 	// The ID of the bundle.
-	Id string `json:"id"`
+	BundleId *string `json:"bundle_id,omitempty"`
 	// The name of the bundle.
 	Name *string `json:"name,omitempty"`
 	// The description of the bundle.
@@ -34,7 +32,7 @@ type Bundle struct {
 	// The last updated timestamp of the bundle, in ISO 8601 format
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	// The ID of the owner of the bundle.
-	AdminOwnerId string `json:"admin_owner_id"`
+	AdminOwnerId *string `json:"admin_owner_id,omitempty"`
 	// The total number of items in the bundle.
 	TotalNumItems *int32 `json:"total_num_items,omitempty"`
 	// The total number of resources in the bundle.
@@ -43,16 +41,12 @@ type Bundle struct {
 	TotalNumGroups *int32 `json:"total_num_groups,omitempty"`
 }
 
-type _Bundle Bundle
-
 // NewBundle instantiates a new Bundle object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBundle(id string, adminOwnerId string) *Bundle {
+func NewBundle() *Bundle {
 	this := Bundle{}
-	this.Id = id
-	this.AdminOwnerId = adminOwnerId
 	return &this
 }
 
@@ -64,28 +58,36 @@ func NewBundleWithDefaults() *Bundle {
 	return &this
 }
 
-// GetId returns the Id field value
-func (o *Bundle) GetId() string {
-	if o == nil {
+// GetBundleId returns the BundleId field value if set, zero value otherwise.
+func (o *Bundle) GetBundleId() string {
+	if o == nil || IsNil(o.BundleId) {
 		var ret string
 		return ret
 	}
-
-	return o.Id
+	return *o.BundleId
 }
 
-// GetIdOk returns a tuple with the Id field value
+// GetBundleIdOk returns a tuple with the BundleId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Bundle) GetIdOk() (*string, bool) {
-	if o == nil {
+func (o *Bundle) GetBundleIdOk() (*string, bool) {
+	if o == nil || IsNil(o.BundleId) {
 		return nil, false
 	}
-	return &o.Id, true
+	return o.BundleId, true
 }
 
-// SetId sets field value
-func (o *Bundle) SetId(v string) {
-	o.Id = v
+// HasBundleId returns a boolean if a field has been set.
+func (o *Bundle) HasBundleId() bool {
+	if o != nil && !IsNil(o.BundleId) {
+		return true
+	}
+
+	return false
+}
+
+// SetBundleId gets a reference to the given string and assigns it to the BundleId field.
+func (o *Bundle) SetBundleId(v string) {
+	o.BundleId = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -216,28 +218,36 @@ func (o *Bundle) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
-// GetAdminOwnerId returns the AdminOwnerId field value
+// GetAdminOwnerId returns the AdminOwnerId field value if set, zero value otherwise.
 func (o *Bundle) GetAdminOwnerId() string {
-	if o == nil {
+	if o == nil || IsNil(o.AdminOwnerId) {
 		var ret string
 		return ret
 	}
-
-	return o.AdminOwnerId
+	return *o.AdminOwnerId
 }
 
-// GetAdminOwnerIdOk returns a tuple with the AdminOwnerId field value
+// GetAdminOwnerIdOk returns a tuple with the AdminOwnerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Bundle) GetAdminOwnerIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.AdminOwnerId) {
 		return nil, false
 	}
-	return &o.AdminOwnerId, true
+	return o.AdminOwnerId, true
 }
 
-// SetAdminOwnerId sets field value
+// HasAdminOwnerId returns a boolean if a field has been set.
+func (o *Bundle) HasAdminOwnerId() bool {
+	if o != nil && !IsNil(o.AdminOwnerId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdminOwnerId gets a reference to the given string and assigns it to the AdminOwnerId field.
 func (o *Bundle) SetAdminOwnerId(v string) {
-	o.AdminOwnerId = v
+	o.AdminOwnerId = &v
 }
 
 // GetTotalNumItems returns the TotalNumItems field value if set, zero value otherwise.
@@ -346,7 +356,9 @@ func (o Bundle) MarshalJSON() ([]byte, error) {
 
 func (o Bundle) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
+	if !IsNil(o.BundleId) {
+		toSerialize["bundle_id"] = o.BundleId
+	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -359,7 +371,9 @@ func (o Bundle) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updated_at"] = o.UpdatedAt
 	}
-	toSerialize["admin_owner_id"] = o.AdminOwnerId
+	if !IsNil(o.AdminOwnerId) {
+		toSerialize["admin_owner_id"] = o.AdminOwnerId
+	}
 	if !IsNil(o.TotalNumItems) {
 		toSerialize["total_num_items"] = o.TotalNumItems
 	}
@@ -370,44 +384,6 @@ func (o Bundle) ToMap() (map[string]interface{}, error) {
 		toSerialize["total_num_groups"] = o.TotalNumGroups
 	}
 	return toSerialize, nil
-}
-
-func (o *Bundle) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"id",
-		"admin_owner_id",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varBundle := _Bundle{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBundle)
-
-	if err != nil {
-		return err
-	}
-
-	*o = Bundle(varBundle)
-
-	return err
 }
 
 type NullableBundle struct {

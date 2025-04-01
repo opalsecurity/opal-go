@@ -24,6 +24,7 @@ Method | HTTP request | Description
 [**SetResourceReviewerStages**](ResourcesAPI.md#SetResourceReviewerStages) | **Put** /resources/{resource_id}/reviewer-stages | 
 [**SetResourceReviewers**](ResourcesAPI.md#SetResourceReviewers) | **Put** /resources/{resource_id}/reviewers | 
 [**SetResourceVisibility**](ResourcesAPI.md#SetResourceVisibility) | **Put** /resources/{resource_id}/visibility | 
+[**UpdateResourceUser**](ResourcesAPI.md#UpdateResourceUser) | **Put** /resources/{resource_id}/users/{user_id} | 
 [**UpdateResources**](ResourcesAPI.md#UpdateResources) | **Put** /resources | 
 
 
@@ -1454,6 +1455,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**VisibilityInfo**](VisibilityInfo.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateResourceUser
+
+> ResourceUser UpdateResourceUser(ctx, resourceId, userId).UpdateResourceUserRequest(updateResourceUserRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the resource.
+	userId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of the user whose access is being updated.
+	updateResourceUserRequest := *openapiclient.NewUpdateResourceUserRequest(int32(120)) // UpdateResourceUserRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.UpdateResourceUser(context.Background(), resourceId, userId).UpdateResourceUserRequest(updateResourceUserRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.UpdateResourceUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateResourceUser`: ResourceUser
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.UpdateResourceUser`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+**userId** | **string** | The ID of the user whose access is being updated. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateResourceUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **updateResourceUserRequest** | [**UpdateResourceUserRequest**](UpdateResourceUserRequest.md) |  | 
+
+### Return type
+
+[**ResourceUser**](ResourceUser.md)
 
 ### Authorization
 
