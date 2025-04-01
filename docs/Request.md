@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **RequesterId** | **string** | The unique identifier of the user who created the request. | 
 **TargetUserId** | Pointer to **string** | The unique identifier of the user who is the target of the request. | [optional] 
 **TargetGroupId** | Pointer to **string** | The unique identifier of the group who is the target of the request. | [optional] 
-**Status** | [**RequestStatusEnum**](RequestStatusEnum.md) | The status of the request. | 
+**Status** | [**RequestStatusEnum**](RequestStatusEnum.md) |  | 
 **Reason** | **string** | The reason for the request. | 
 **DurationMinutes** | Pointer to **int32** | The duration of the request in minutes. | [optional] 
 **RequestedItemsList** | Pointer to [**[]RequestedItem**](RequestedItem.md) | The list of targets for the request. | [optional] 

@@ -13,8 +13,8 @@ package opal
 
 import (
 	"encoding/json"
-	"gopkg.in/validator.v2"
 	"fmt"
+	"gopkg.in/validator.v2"
 )
 
 // RequestCustomFieldResponseFieldValue - struct for RequestCustomFieldResponseFieldValue
@@ -113,6 +113,20 @@ func (obj *RequestCustomFieldResponseFieldValue) GetActualInstance() (interface{
 
 	if obj.String != nil {
 		return obj.String
+	}
+
+	// all schemas are nil
+	return nil
+}
+
+// Get the actual instance value
+func (obj RequestCustomFieldResponseFieldValue) GetActualInstanceValue() (interface{}) {
+	if obj.Bool != nil {
+		return *obj.Bool
+	}
+
+	if obj.String != nil {
+		return *obj.String
 	}
 
 	// all schemas are nil

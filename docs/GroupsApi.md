@@ -4,12 +4,15 @@ All URIs are relative to *https://api.opal.dev/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**AddGroupContainingGroup**](GroupsAPI.md#AddGroupContainingGroup) | **Post** /groups/{group_id}/containing-groups | 
 [**AddGroupResource**](GroupsAPI.md#AddGroupResource) | **Post** /groups/{group_id}/resources/{resource_id} | 
 [**AddGroupUser**](GroupsAPI.md#AddGroupUser) | **Post** /groups/{group_id}/users/{user_id} | 
 [**CreateGroup**](GroupsAPI.md#CreateGroup) | **Post** /groups | 
 [**DeleteGroup**](GroupsAPI.md#DeleteGroup) | **Delete** /groups/{group_id} | 
 [**DeleteGroupUser**](GroupsAPI.md#DeleteGroupUser) | **Delete** /groups/{group_id}/users/{user_id} | 
 [**GetGroup**](GroupsAPI.md#GetGroup) | **Get** /groups/{group_id} | 
+[**GetGroupContainingGroup**](GroupsAPI.md#GetGroupContainingGroup) | **Get** /groups/{group_id}/containing-groups/{containing_group_id} | 
+[**GetGroupContainingGroups**](GroupsAPI.md#GetGroupContainingGroups) | **Get** /groups/{group_id}/containing-groups | 
 [**GetGroupMessageChannels**](GroupsAPI.md#GetGroupMessageChannels) | **Get** /groups/{group_id}/message-channels | 
 [**GetGroupOnCallSchedules**](GroupsAPI.md#GetGroupOnCallSchedules) | **Get** /groups/{group_id}/on-call-schedules | 
 [**GetGroupResources**](GroupsAPI.md#GetGroupResources) | **Get** /groups/{group_id}/resources | 
@@ -19,6 +22,7 @@ Method | HTTP request | Description
 [**GetGroupUsers**](GroupsAPI.md#GetGroupUsers) | **Get** /groups/{group_id}/users | 
 [**GetGroupVisibility**](GroupsAPI.md#GetGroupVisibility) | **Get** /groups/{group_id}/visibility | 
 [**GetGroups**](GroupsAPI.md#GetGroups) | **Get** /groups | 
+[**RemoveGroupContainingGroup**](GroupsAPI.md#RemoveGroupContainingGroup) | **Delete** /groups/{group_id}/containing-groups/{containing_group_id} | 
 [**SetGroupMessageChannels**](GroupsAPI.md#SetGroupMessageChannels) | **Put** /groups/{group_id}/message-channels | 
 [**SetGroupOnCallSchedules**](GroupsAPI.md#SetGroupOnCallSchedules) | **Put** /groups/{group_id}/on-call-schedules | 
 [**SetGroupResources**](GroupsAPI.md#SetGroupResources) | **Put** /groups/{group_id}/resources | 
@@ -27,6 +31,78 @@ Method | HTTP request | Description
 [**SetGroupVisibility**](GroupsAPI.md#SetGroupVisibility) | **Put** /groups/{group_id}/visibility | 
 [**UpdateGroups**](GroupsAPI.md#UpdateGroups) | **Put** /groups | 
 
+
+
+## AddGroupContainingGroup
+
+> GroupContainingGroup AddGroupContainingGroup(ctx, groupId).GroupContainingGroup(groupContainingGroup).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	groupContainingGroup := *openapiclient.NewGroupContainingGroup("f454d283-ca87-4a8a-bdbb-df212eca5353") // GroupContainingGroup | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.AddGroupContainingGroup(context.Background(), groupId).GroupContainingGroup(groupContainingGroup).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.AddGroupContainingGroup``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AddGroupContainingGroup`: GroupContainingGroup
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.AddGroupContainingGroup`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**groupId** | **string** | The ID of the group. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAddGroupContainingGroupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **groupContainingGroup** | [**GroupContainingGroup**](GroupContainingGroup.md) |  | 
+
+### Return type
+
+[**GroupContainingGroup**](GroupContainingGroup.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## AddGroupResource
@@ -445,6 +521,149 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Group**](Group.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetGroupContainingGroup
+
+> GroupContainingGroup GetGroupContainingGroup(ctx, groupId, containingGroupId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	containingGroupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the containing group.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.GetGroupContainingGroup(context.Background(), groupId, containingGroupId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetGroupContainingGroup``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetGroupContainingGroup`: GroupContainingGroup
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.GetGroupContainingGroup`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**groupId** | **string** | The ID of the group. | 
+**containingGroupId** | **string** | The ID of the containing group. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetGroupContainingGroupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**GroupContainingGroup**](GroupContainingGroup.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetGroupContainingGroups
+
+> GroupContainingGroupList GetGroupContainingGroups(ctx, groupId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.GetGroupContainingGroups(context.Background(), groupId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetGroupContainingGroups``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetGroupContainingGroups`: GroupContainingGroupList
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.GetGroupContainingGroups`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**groupId** | **string** | The ID of the group. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetGroupContainingGroupsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**GroupContainingGroupList**](GroupContainingGroupList.md)
 
 ### Authorization
 
@@ -1088,6 +1307,77 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RemoveGroupContainingGroup
+
+> RemoveGroupContainingGroup(ctx, groupId, containingGroupId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	containingGroupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the containing group.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.GroupsAPI.RemoveGroupContainingGroup(context.Background(), groupId, containingGroupId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.RemoveGroupContainingGroup``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**groupId** | **string** | The ID of the group. | 
+**containingGroupId** | **string** | The ID of the containing group. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRemoveGroupContainingGroupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

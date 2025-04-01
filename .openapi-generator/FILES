@@ -1,8 +1,9 @@
 .gitignore
 README.md
 api/openapi.yaml
+api_access_rules.go
 api_apps.go
-api_coming_soon.go
+api_bundles.go
 api_configuration_templates.go
 api_events.go
 api_group_bindings.go
@@ -22,6 +23,10 @@ client.go
 configuration.go
 docs/Access.md
 docs/AccessList.md
+docs/AccessRuleCondition.md
+docs/AccessRulesAPI.md
+docs/AddBundleGroupRequest.md
+docs/AddBundleResourceRequest.md
 docs/AddGroupResourceRequest.md
 docs/AddGroupUserRequest.md
 docs/AddResourceNhiRequest.md
@@ -36,8 +41,9 @@ docs/AppsList.md
 docs/AwsPermissionSetMetadata.md
 docs/AwsPermissionSetMetadataAwsPermissionSet.md
 docs/Bundle.md
-docs/BundlesVisibilityTypeEnum.md
-docs/ComingSoonAPI.md
+docs/BundleGroup.md
+docs/BundleResource.md
+docs/BundlesAPI.md
 docs/Condition.md
 docs/ConfigurationTemplate.md
 docs/ConfigurationTemplatesAPI.md
@@ -67,6 +73,8 @@ docs/GroupAccessLevel.md
 docs/GroupBinding.md
 docs/GroupBindingGroup.md
 docs/GroupBindingsAPI.md
+docs/GroupContainingGroup.md
+docs/GroupContainingGroupList.md
 docs/GroupRemoteInfo.md
 docs/GroupRemoteInfoActiveDirectoryGroup.md
 docs/GroupRemoteInfoAzureAdMicrosoft365Group.md
@@ -82,6 +90,7 @@ docs/GroupResourceList.md
 docs/GroupTypeEnum.md
 docs/GroupUser.md
 docs/GroupUserList.md
+docs/GroupWithAccessLevel.md
 docs/GroupsAPI.md
 docs/IdpGroupMapping.md
 docs/IdpGroupMappingList.md
@@ -99,7 +108,9 @@ docs/OnCallScheduleProviderEnum.md
 docs/OnCallSchedulesAPI.md
 docs/Owner.md
 docs/OwnersAPI.md
+docs/PaginatedBundleGroupList.md
 docs/PaginatedBundleList.md
+docs/PaginatedBundleResourceList.md
 docs/PaginatedConfigurationTemplateList.md
 docs/PaginatedEventList.md
 docs/PaginatedGroupBindingsList.md
@@ -162,6 +173,9 @@ docs/ReviewerIDList.md
 docs/ReviewerStage.md
 docs/ReviewerStageList.md
 docs/RiskSensitivityEnum.md
+docs/RuleClauses.md
+docs/RuleConjunction.md
+docs/RuleDisjunction.md
 docs/Session.md
 docs/SessionsAPI.md
 docs/SessionsList.md
@@ -170,6 +184,7 @@ docs/SyncError.md
 docs/SyncErrorList.md
 docs/Tag.md
 docs/TagFilter.md
+docs/TagSelector.md
 docs/TagsAPI.md
 docs/TagsList.md
 docs/TicketPropagationConfiguration.md
@@ -190,6 +205,7 @@ docs/UpdateOwnerInfo.md
 docs/UpdateOwnerInfoList.md
 docs/UpdateResourceInfo.md
 docs/UpdateResourceInfoList.md
+docs/UpdateResourceUserRequest.md
 docs/User.md
 docs/UserHrIdpStatusEnum.md
 docs/UserIDList.md
@@ -201,6 +217,9 @@ go.mod
 go.sum
 model_access.go
 model_access_list.go
+model_access_rule_condition.go
+model_add_bundle_group_request.go
+model_add_bundle_resource_request.go
 model_add_group_resource_request.go
 model_add_group_user_request.go
 model_add_resource_nhi_request.go
@@ -214,7 +233,8 @@ model_apps_list.go
 model_aws_permission_set_metadata.go
 model_aws_permission_set_metadata_aws_permission_set.go
 model_bundle.go
-model_bundles_visibility_type_enum.go
+model_bundle_group.go
+model_bundle_resource.go
 model_condition.go
 model_configuration_template.go
 model_create_bundle_info.go
@@ -241,6 +261,8 @@ model_group.go
 model_group_access_level.go
 model_group_binding.go
 model_group_binding_group.go
+model_group_containing_group.go
+model_group_containing_group_list.go
 model_group_remote_info.go
 model_group_remote_info_active_directory_group.go
 model_group_remote_info_azure_ad_microsoft_365_group.go
@@ -256,6 +278,7 @@ model_group_resource_list.go
 model_group_type_enum.go
 model_group_user.go
 model_group_user_list.go
+model_group_with_access_level.go
 model_idp_group_mapping.go
 model_idp_group_mapping_list.go
 model_message_channel.go
@@ -267,7 +290,9 @@ model_on_call_schedule_id_list.go
 model_on_call_schedule_list.go
 model_on_call_schedule_provider_enum.go
 model_owner.go
+model_paginated_bundle_group_list.go
 model_paginated_bundle_list.go
+model_paginated_bundle_resource_list.go
 model_paginated_configuration_template_list.go
 model_paginated_event_list.go
 model_paginated_group_bindings_list.go
@@ -328,6 +353,9 @@ model_reviewer_id_list.go
 model_reviewer_stage.go
 model_reviewer_stage_list.go
 model_risk_sensitivity_enum.go
+model_rule_clauses.go
+model_rule_conjunction.go
+model_rule_disjunction.go
 model_session.go
 model_sessions_list.go
 model_sub_event.go
@@ -335,6 +363,7 @@ model_sync_error.go
 model_sync_error_list.go
 model_tag.go
 model_tag_filter.go
+model_tag_selector.go
 model_tags_list.go
 model_ticket_propagation_configuration.go
 model_ticketing_provider_enum.go
@@ -353,6 +382,7 @@ model_update_owner_info.go
 model_update_owner_info_list.go
 model_update_resource_info.go
 model_update_resource_info_list.go
+model_update_resource_user_request.go
 model_user.go
 model_user_hr_idp_status_enum.go
 model_user_id_list.go

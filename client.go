@@ -50,9 +50,11 @@ type APIClient struct {
 
 	// API Services
 
+	AccessRulesAPI *AccessRulesAPIService
+
 	AppsAPI *AppsAPIService
 
-	ComingSoonAPI *ComingSoonAPIService
+	BundlesAPI *BundlesAPIService
 
 	ConfigurationTemplatesAPI *ConfigurationTemplatesAPIService
 
@@ -101,8 +103,9 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
+	c.AccessRulesAPI = (*AccessRulesAPIService)(&c.common)
 	c.AppsAPI = (*AppsAPIService)(&c.common)
-	c.ComingSoonAPI = (*ComingSoonAPIService)(&c.common)
+	c.BundlesAPI = (*BundlesAPIService)(&c.common)
 	c.ConfigurationTemplatesAPI = (*ConfigurationTemplatesAPIService)(&c.common)
 	c.EventsAPI = (*EventsAPIService)(&c.common)
 	c.GroupBindingsAPI = (*GroupBindingsAPIService)(&c.common)
@@ -176,6 +179,10 @@ func typeCheckParameter(obj interface{}, expected string, name string) error {
 
 func parameterValueToString( obj interface{}, key string ) string {
 	if reflect.TypeOf(obj).Kind() != reflect.Ptr {
+		if actualObj, ok := obj.(interface{ GetActualInstanceValue() interface{} }); ok {
+			return fmt.Sprintf("%v", actualObj.GetActualInstanceValue())
+		}
+
 		return fmt.Sprintf("%v", obj)
 	}
 	var param,ok = obj.(MappedNullable)
