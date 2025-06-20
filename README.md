@@ -79,6 +79,7 @@ All URIs are relative to *https://api.opal.dev/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AccessRulesAPI* | [**CreateAccessRule**](docs/AccessRulesAPI.md#createaccessrule) | **Post** /access-rules | 
 *AccessRulesAPI* | [**GetAccessRule**](docs/AccessRulesAPI.md#getaccessrule) | **Get** /access-rules/{access_rule_id} | 
 *AccessRulesAPI* | [**UpdateAccessRule**](docs/AccessRulesAPI.md#updateaccessrule) | **Put** /access-rules/{access_rule_id} | 
 *AppsAPI* | [**GetApp**](docs/AppsAPI.md#getapp) | **Get** /apps/{app_id} | 
@@ -132,6 +133,7 @@ Class | Method | HTTP request | Description
 *GroupsAPI* | [**SetGroupReviewerStages**](docs/GroupsAPI.md#setgroupreviewerstages) | **Put** /groups/{group_id}/reviewer-stages | 
 *GroupsAPI* | [**SetGroupReviewers**](docs/GroupsAPI.md#setgroupreviewers) | **Put** /groups/{group_id}/reviewers | 
 *GroupsAPI* | [**SetGroupVisibility**](docs/GroupsAPI.md#setgroupvisibility) | **Put** /groups/{group_id}/visibility | 
+*GroupsAPI* | [**UpdateGroupUser**](docs/GroupsAPI.md#updategroupuser) | **Put** /groups/{group_id}/users/{user_id} | 
 *GroupsAPI* | [**UpdateGroups**](docs/GroupsAPI.md#updategroups) | **Put** /groups | 
 *IdpGroupMappingsAPI* | [**DeleteIdpGroupMappings**](docs/IdpGroupMappingsAPI.md#deleteidpgroupmappings) | **Delete** /idp-group-mappings/{app_resource_id}/{group_id}/ | 
 *IdpGroupMappingsAPI* | [**GetIdpGroupMappings**](docs/IdpGroupMappingsAPI.md#getidpgroupmappings) | **Get** /idp-group-mappings/{app_resource_id} | 
@@ -151,8 +153,10 @@ Class | Method | HTTP request | Description
 *OwnersAPI* | [**GetOwners**](docs/OwnersAPI.md#getowners) | **Get** /owners | 
 *OwnersAPI* | [**SetOwnerUsers**](docs/OwnersAPI.md#setownerusers) | **Put** /owners/{owner_id}/users | 
 *OwnersAPI* | [**UpdateOwners**](docs/OwnersAPI.md#updateowners) | **Put** /owners | 
+*RequestsAPI* | [**ApproveRequest**](docs/RequestsAPI.md#approverequest) | **Post** /requests/{id}/approve | 
 *RequestsAPI* | [**CreateRequest**](docs/RequestsAPI.md#createrequest) | **Post** /requests | 
 *RequestsAPI* | [**GetRequests**](docs/RequestsAPI.md#getrequests) | **Get** /requests | 
+*RequestsAPI* | [**GetRequestsRelay**](docs/RequestsAPI.md#getrequestsrelay) | **Get** /requests/relay | 
 *ResourcesAPI* | [**AddResourceNhi**](docs/ResourcesAPI.md#addresourcenhi) | **Post** /resources/{resource_id}/non-human-identities/{non_human_identity_id} | 
 *ResourcesAPI* | [**AddResourceUser**](docs/ResourcesAPI.md#addresourceuser) | **Post** /resources/{resource_id}/users/{user_id} | 
 *ResourcesAPI* | [**CreateResource**](docs/ResourcesAPI.md#createresource) | **Post** /resources | 
@@ -165,6 +169,7 @@ Class | Method | HTTP request | Description
 *ResourcesAPI* | [**GetResourceReviewerStages**](docs/ResourcesAPI.md#getresourcereviewerstages) | **Get** /resources/{resource_id}/reviewer-stages | 
 *ResourcesAPI* | [**GetResourceReviewers**](docs/ResourcesAPI.md#getresourcereviewers) | **Get** /resources/{resource_id}/reviewers | 
 *ResourcesAPI* | [**GetResourceTags**](docs/ResourcesAPI.md#getresourcetags) | **Get** /resources/{resource_id}/tags | 
+*ResourcesAPI* | [**GetResourceUser**](docs/ResourcesAPI.md#getresourceuser) | **Get** /resources/{resource_id}/users/{user_id} | 
 *ResourcesAPI* | [**GetResourceUsers**](docs/ResourcesAPI.md#getresourceusers) | **Get** /resources/{resource_id}/users | 
 *ResourcesAPI* | [**GetResourceVisibility**](docs/ResourcesAPI.md#getresourcevisibility) | **Get** /resources/{resource_id}/visibility | 
 *ResourcesAPI* | [**GetResources**](docs/ResourcesAPI.md#getresources) | **Get** /resources | 
@@ -199,7 +204,7 @@ Class | Method | HTTP request | Description
 
  - [Access](docs/Access.md)
  - [AccessList](docs/AccessList.md)
- - [AccessRuleCondition](docs/AccessRuleCondition.md)
+ - [AccessRule](docs/AccessRule.md)
  - [AddBundleGroupRequest](docs/AddBundleGroupRequest.md)
  - [AddBundleResourceRequest](docs/AddBundleResourceRequest.md)
  - [AddGroupResourceRequest](docs/AddGroupResourceRequest.md)
@@ -211,6 +216,8 @@ Class | Method | HTTP request | Description
  - [AppValidation](docs/AppValidation.md)
  - [AppValidationSeverityEnum](docs/AppValidationSeverityEnum.md)
  - [AppValidationStatusEnum](docs/AppValidationStatusEnum.md)
+ - [ApproveRequest200Response](docs/ApproveRequest200Response.md)
+ - [ApproveRequestRequest](docs/ApproveRequestRequest.md)
  - [AppsList](docs/AppsList.md)
  - [AwsPermissionSetMetadata](docs/AwsPermissionSetMetadata.md)
  - [AwsPermissionSetMetadataAwsPermissionSet](docs/AwsPermissionSetMetadataAwsPermissionSet.md)
@@ -239,6 +246,7 @@ Class | Method | HTTP request | Description
  - [CreateUARInfo](docs/CreateUARInfo.md)
  - [EntityTypeEnum](docs/EntityTypeEnum.md)
  - [Event](docs/Event.md)
+ - [GetResourceUser200Response](docs/GetResourceUser200Response.md)
  - [Group](docs/Group.md)
  - [GroupAccessLevel](docs/GroupAccessLevel.md)
  - [GroupBinding](docs/GroupBinding.md)
@@ -255,6 +263,7 @@ Class | Method | HTTP request | Description
  - [GroupRemoteInfoGoogleGroup](docs/GroupRemoteInfoGoogleGroup.md)
  - [GroupRemoteInfoLdapGroup](docs/GroupRemoteInfoLdapGroup.md)
  - [GroupRemoteInfoOktaGroup](docs/GroupRemoteInfoOktaGroup.md)
+ - [GroupRemoteInfoSnowflakeRole](docs/GroupRemoteInfoSnowflakeRole.md)
  - [GroupResource](docs/GroupResource.md)
  - [GroupResourceList](docs/GroupResourceList.md)
  - [GroupTypeEnum](docs/GroupTypeEnum.md)
@@ -272,6 +281,8 @@ Class | Method | HTTP request | Description
  - [OnCallScheduleList](docs/OnCallScheduleList.md)
  - [OnCallScheduleProviderEnum](docs/OnCallScheduleProviderEnum.md)
  - [Owner](docs/Owner.md)
+ - [PageInfo](docs/PageInfo.md)
+ - [PaginatedAssignedRequestList](docs/PaginatedAssignedRequestList.md)
  - [PaginatedBundleGroupList](docs/PaginatedBundleGroupList.md)
  - [PaginatedBundleList](docs/PaginatedBundleList.md)
  - [PaginatedBundleResourceList](docs/PaginatedBundleResourceList.md)
@@ -288,9 +299,14 @@ Class | Method | HTTP request | Description
  - [PropagationStatusEnum](docs/PropagationStatusEnum.md)
  - [Request](docs/Request.md)
  - [RequestConfiguration](docs/RequestConfiguration.md)
+ - [RequestConnection](docs/RequestConnection.md)
  - [RequestCustomFieldResponse](docs/RequestCustomFieldResponse.md)
  - [RequestCustomFieldResponseFieldValue](docs/RequestCustomFieldResponseFieldValue.md)
+ - [RequestEdge](docs/RequestEdge.md)
+ - [RequestItemStages](docs/RequestItemStages.md)
  - [RequestList](docs/RequestList.md)
+ - [RequestReviewer](docs/RequestReviewer.md)
+ - [RequestStage](docs/RequestStage.md)
  - [RequestStatusEnum](docs/RequestStatusEnum.md)
  - [RequestTemplateCustomFieldTypeEnum](docs/RequestTemplateCustomFieldTypeEnum.md)
  - [RequestedItem](docs/RequestedItem.md)
@@ -304,8 +320,10 @@ Class | Method | HTTP request | Description
  - [ResourceRemoteInfoAwsEc2Instance](docs/ResourceRemoteInfoAwsEc2Instance.md)
  - [ResourceRemoteInfoAwsEksCluster](docs/ResourceRemoteInfoAwsEksCluster.md)
  - [ResourceRemoteInfoAwsIamRole](docs/ResourceRemoteInfoAwsIamRole.md)
+ - [ResourceRemoteInfoAwsOrganizationalUnit](docs/ResourceRemoteInfoAwsOrganizationalUnit.md)
  - [ResourceRemoteInfoAwsPermissionSet](docs/ResourceRemoteInfoAwsPermissionSet.md)
  - [ResourceRemoteInfoAwsRdsInstance](docs/ResourceRemoteInfoAwsRdsInstance.md)
+ - [ResourceRemoteInfoCustomConnector](docs/ResourceRemoteInfoCustomConnector.md)
  - [ResourceRemoteInfoGcpBigQueryDataset](docs/ResourceRemoteInfoGcpBigQueryDataset.md)
  - [ResourceRemoteInfoGcpBigQueryTable](docs/ResourceRemoteInfoGcpBigQueryTable.md)
  - [ResourceRemoteInfoGcpBucket](docs/ResourceRemoteInfoGcpBucket.md)
@@ -331,6 +349,7 @@ Class | Method | HTTP request | Description
  - [ResourceUserAccessStatus](docs/ResourceUserAccessStatus.md)
  - [ResourceUserAccessStatusEnum](docs/ResourceUserAccessStatusEnum.md)
  - [ResourceWithAccessLevel](docs/ResourceWithAccessLevel.md)
+ - [ReviewStageOperator](docs/ReviewStageOperator.md)
  - [ReviewerIDList](docs/ReviewerIDList.md)
  - [ReviewerStage](docs/ReviewerStage.md)
  - [ReviewerStageList](docs/ReviewerStageList.md)
@@ -352,12 +371,14 @@ Class | Method | HTTP request | Description
  - [UAR](docs/UAR.md)
  - [UARReviewerAssignmentPolicyEnum](docs/UARReviewerAssignmentPolicyEnum.md)
  - [UARScope](docs/UARScope.md)
+ - [UpdateAccessRuleInfo](docs/UpdateAccessRuleInfo.md)
  - [UpdateConfigurationTemplateInfo](docs/UpdateConfigurationTemplateInfo.md)
  - [UpdateGroupBindingInfo](docs/UpdateGroupBindingInfo.md)
  - [UpdateGroupBindingInfoList](docs/UpdateGroupBindingInfoList.md)
  - [UpdateGroupInfo](docs/UpdateGroupInfo.md)
  - [UpdateGroupInfoList](docs/UpdateGroupInfoList.md)
  - [UpdateGroupResourcesInfo](docs/UpdateGroupResourcesInfo.md)
+ - [UpdateGroupUserRequest](docs/UpdateGroupUserRequest.md)
  - [UpdateIdpGroupMappingsRequest](docs/UpdateIdpGroupMappingsRequest.md)
  - [UpdateIdpGroupMappingsRequestMappingsInner](docs/UpdateIdpGroupMappingsRequestMappingsInner.md)
  - [UpdateOwnerInfo](docs/UpdateOwnerInfo.md)

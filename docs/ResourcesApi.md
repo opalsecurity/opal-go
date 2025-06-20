@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**GetResourceReviewerStages**](ResourcesAPI.md#GetResourceReviewerStages) | **Get** /resources/{resource_id}/reviewer-stages | 
 [**GetResourceReviewers**](ResourcesAPI.md#GetResourceReviewers) | **Get** /resources/{resource_id}/reviewers | 
 [**GetResourceTags**](ResourcesAPI.md#GetResourceTags) | **Get** /resources/{resource_id}/tags | 
+[**GetResourceUser**](ResourcesAPI.md#GetResourceUser) | **Get** /resources/{resource_id}/users/{user_id} | 
 [**GetResourceUsers**](ResourcesAPI.md#GetResourceUsers) | **Get** /resources/{resource_id}/users | 
 [**GetResourceVisibility**](ResourcesAPI.md#GetResourceVisibility) | **Get** /resources/{resource_id}/visibility | 
 [**GetResources**](ResourcesAPI.md#GetResources) | **Get** /resources | 
@@ -885,6 +886,81 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetResourceUser
+
+> GetResourceUser200Response GetResourceUser(ctx, resourceId, userId).Cursor(cursor).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "32acc112-21ff-4669-91c2-21e27683eaa1" // string | The ID of the resource.
+	userId := "29827fb8-f2dd-4e80-9576-28e31e9934ac" // string | The ID of the user.
+	cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.GetResourceUser(context.Background(), resourceId, userId).Cursor(cursor).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetResourceUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetResourceUser`: GetResourceUser200Response
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.GetResourceUser`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+**userId** | **string** | The ID of the user. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetResourceUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **cursor** | **string** | The pagination cursor value. | 
+
+### Return type
+
+[**GetResourceUser200Response**](GetResourceUser200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetResourceUsers
 
 > ResourceAccessUserList GetResourceUsers(ctx, resourceId).Limit(limit).Execute()
@@ -1029,7 +1105,7 @@ Name | Type | Description  | Notes
 
 ## GetResources
 
-> PaginatedResourcesList GetResources(ctx).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).Execute()
+> PaginatedResourcesList GetResources(ctx).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).AncestorResourceId(ancestorResourceId).Execute()
 
 
 
@@ -1054,10 +1130,11 @@ func main() {
 	resourceIds := []string{"1b978423-db0a-4037-a4cf-f79c60cb67b3"} // []string | The resource ids to filter by. (optional)
 	resourceName := "example-name" // string | Resource name. (optional)
 	parentResourceId := "["4baf8423-db0a-4037-a4cf-f79c60cb67a5"]" // string | The parent resource id to filter by. (optional)
+	ancestorResourceId := "["4baf8423-db0a-4037-a4cf-f79c60cb67a5"]" // string | The ancestor resource id to filter by. Returns all resources that are descendants of the specified resource. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ResourcesAPI.GetResources(context.Background()).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).Execute()
+	resp, r, err := apiClient.ResourcesAPI.GetResources(context.Background()).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).AncestorResourceId(ancestorResourceId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetResources``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1084,6 +1161,7 @@ Name | Type | Description  | Notes
  **resourceIds** | **[]string** | The resource ids to filter by. | 
  **resourceName** | **string** | Resource name. | 
  **parentResourceId** | **string** | The parent resource id to filter by. | 
+ **ancestorResourceId** | **string** | The ancestor resource id to filter by. Returns all resources that are descendants of the specified resource. | 
 
 ### Return type
 

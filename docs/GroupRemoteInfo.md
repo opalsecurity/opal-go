@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **DuoGroup** | Pointer to [**GroupRemoteInfoDuoGroup**](GroupRemoteInfoDuoGroup.md) |  | [optional] 
 **AzureAdSecurityGroup** | Pointer to [**GroupRemoteInfoAzureAdSecurityGroup**](GroupRemoteInfoAzureAdSecurityGroup.md) |  | [optional] 
 **AzureAdMicrosoft365Group** | Pointer to [**GroupRemoteInfoAzureAdMicrosoft365Group**](GroupRemoteInfoAzureAdMicrosoft365Group.md) |  | [optional] 
+**SnowflakeRole** | Pointer to [**GroupRemoteInfoSnowflakeRole**](GroupRemoteInfoSnowflakeRole.md) |  | [optional] 
 
 ## Methods
 
@@ -257,6 +258,31 @@ SetAzureAdMicrosoft365Group sets AzureAdMicrosoft365Group field to given value.
 `func (o *GroupRemoteInfo) HasAzureAdMicrosoft365Group() bool`
 
 HasAzureAdMicrosoft365Group returns a boolean if a field has been set.
+
+### GetSnowflakeRole
+
+`func (o *GroupRemoteInfo) GetSnowflakeRole() GroupRemoteInfoSnowflakeRole`
+
+GetSnowflakeRole returns the SnowflakeRole field if non-nil, zero value otherwise.
+
+### GetSnowflakeRoleOk
+
+`func (o *GroupRemoteInfo) GetSnowflakeRoleOk() (*GroupRemoteInfoSnowflakeRole, bool)`
+
+GetSnowflakeRoleOk returns a tuple with the SnowflakeRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSnowflakeRole
+
+`func (o *GroupRemoteInfo) SetSnowflakeRole(v GroupRemoteInfoSnowflakeRole)`
+
+SetSnowflakeRole sets SnowflakeRole field to given value.
+
+### HasSnowflakeRole
+
+`func (o *GroupRemoteInfo) HasSnowflakeRole() bool`
+
+HasSnowflakeRole returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

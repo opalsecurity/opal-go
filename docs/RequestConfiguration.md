@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Condition** | Pointer to [**Condition**](Condition.md) |  | [optional] 
+**Condition** | Pointer to [**Condition**](Condition.md) | The condition for the request configuration. | [optional] 
 **AllowRequests** | **bool** | A bool representing whether or not to allow requests for this resource. | 
 **AutoApproval** | **bool** | A bool representing whether or not to automatically approve requests for this resource. | 
 **RequireMfaToRequest** | **bool** | A bool representing whether or not to require MFA for requesting access to this resource. | 

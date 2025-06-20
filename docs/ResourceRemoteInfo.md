@@ -4,12 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AwsOrganizationalUnit** | Pointer to [**ResourceRemoteInfoAwsOrganizationalUnit**](ResourceRemoteInfoAwsOrganizationalUnit.md) |  | [optional] 
 **AwsAccount** | Pointer to [**ResourceRemoteInfoAwsAccount**](ResourceRemoteInfoAwsAccount.md) |  | [optional] 
 **AwsPermissionSet** | Pointer to [**ResourceRemoteInfoAwsPermissionSet**](ResourceRemoteInfoAwsPermissionSet.md) |  | [optional] 
 **AwsIamRole** | Pointer to [**ResourceRemoteInfoAwsIamRole**](ResourceRemoteInfoAwsIamRole.md) |  | [optional] 
 **AwsEc2Instance** | Pointer to [**ResourceRemoteInfoAwsEc2Instance**](ResourceRemoteInfoAwsEc2Instance.md) |  | [optional] 
 **AwsRdsInstance** | Pointer to [**ResourceRemoteInfoAwsRdsInstance**](ResourceRemoteInfoAwsRdsInstance.md) |  | [optional] 
 **AwsEksCluster** | Pointer to [**ResourceRemoteInfoAwsEksCluster**](ResourceRemoteInfoAwsEksCluster.md) |  | [optional] 
+**CustomConnector** | Pointer to [**ResourceRemoteInfoCustomConnector**](ResourceRemoteInfoCustomConnector.md) |  | [optional] 
 **GcpOrganization** | Pointer to [**ResourceRemoteInfoGcpOrganization**](ResourceRemoteInfoGcpOrganization.md) |  | [optional] 
 **GcpBucket** | Pointer to [**ResourceRemoteInfoGcpBucket**](ResourceRemoteInfoGcpBucket.md) |  | [optional] 
 **GcpComputeInstance** | Pointer to [**ResourceRemoteInfoGcpComputeInstance**](ResourceRemoteInfoGcpComputeInstance.md) |  | [optional] 
@@ -49,6 +51,31 @@ will change when the set of required properties is changed
 NewResourceRemoteInfoWithDefaults instantiates a new ResourceRemoteInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAwsOrganizationalUnit
+
+`func (o *ResourceRemoteInfo) GetAwsOrganizationalUnit() ResourceRemoteInfoAwsOrganizationalUnit`
+
+GetAwsOrganizationalUnit returns the AwsOrganizationalUnit field if non-nil, zero value otherwise.
+
+### GetAwsOrganizationalUnitOk
+
+`func (o *ResourceRemoteInfo) GetAwsOrganizationalUnitOk() (*ResourceRemoteInfoAwsOrganizationalUnit, bool)`
+
+GetAwsOrganizationalUnitOk returns a tuple with the AwsOrganizationalUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAwsOrganizationalUnit
+
+`func (o *ResourceRemoteInfo) SetAwsOrganizationalUnit(v ResourceRemoteInfoAwsOrganizationalUnit)`
+
+SetAwsOrganizationalUnit sets AwsOrganizationalUnit field to given value.
+
+### HasAwsOrganizationalUnit
+
+`func (o *ResourceRemoteInfo) HasAwsOrganizationalUnit() bool`
+
+HasAwsOrganizationalUnit returns a boolean if a field has been set.
 
 ### GetAwsAccount
 
@@ -199,6 +226,31 @@ SetAwsEksCluster sets AwsEksCluster field to given value.
 `func (o *ResourceRemoteInfo) HasAwsEksCluster() bool`
 
 HasAwsEksCluster returns a boolean if a field has been set.
+
+### GetCustomConnector
+
+`func (o *ResourceRemoteInfo) GetCustomConnector() ResourceRemoteInfoCustomConnector`
+
+GetCustomConnector returns the CustomConnector field if non-nil, zero value otherwise.
+
+### GetCustomConnectorOk
+
+`func (o *ResourceRemoteInfo) GetCustomConnectorOk() (*ResourceRemoteInfoCustomConnector, bool)`
+
+GetCustomConnectorOk returns a tuple with the CustomConnector field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomConnector
+
+`func (o *ResourceRemoteInfo) SetCustomConnector(v ResourceRemoteInfoCustomConnector)`
+
+SetCustomConnector sets CustomConnector field to given value.
+
+### HasCustomConnector
+
+`func (o *ResourceRemoteInfo) HasCustomConnector() bool`
+
+HasCustomConnector returns a boolean if a field has been set.
 
 ### GetGcpOrganization
 

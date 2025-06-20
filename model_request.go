@@ -35,6 +35,7 @@ type Request struct {
 	TargetUserId *string `json:"target_user_id,omitempty"`
 	// The unique identifier of the group who is the target of the request.
 	TargetGroupId *string `json:"target_group_id,omitempty"`
+	// The status of the request.
 	Status RequestStatusEnum `json:"status"`
 	// The reason for the request.
 	Reason string `json:"reason"`
@@ -44,6 +45,8 @@ type Request struct {
 	RequestedItemsList []RequestedItem `json:"requested_items_list,omitempty"`
 	// The responses given to the custom fields associated to the request
 	CustomFieldsResponses []RequestCustomFieldResponse `json:"custom_fields_responses,omitempty"`
+	// The stages configuration for this request
+	Stages *RequestItemStages `json:"stages,omitempty"`
 }
 
 type _Request Request
@@ -375,6 +378,38 @@ func (o *Request) SetCustomFieldsResponses(v []RequestCustomFieldResponse) {
 	o.CustomFieldsResponses = v
 }
 
+// GetStages returns the Stages field value if set, zero value otherwise.
+func (o *Request) GetStages() RequestItemStages {
+	if o == nil || IsNil(o.Stages) {
+		var ret RequestItemStages
+		return ret
+	}
+	return *o.Stages
+}
+
+// GetStagesOk returns a tuple with the Stages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Request) GetStagesOk() (*RequestItemStages, bool) {
+	if o == nil || IsNil(o.Stages) {
+		return nil, false
+	}
+	return o.Stages, true
+}
+
+// HasStages returns a boolean if a field has been set.
+func (o *Request) HasStages() bool {
+	if o != nil && !IsNil(o.Stages) {
+		return true
+	}
+
+	return false
+}
+
+// SetStages gets a reference to the given RequestItemStages and assigns it to the Stages field.
+func (o *Request) SetStages(v RequestItemStages) {
+	o.Stages = &v
+}
+
 func (o Request) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -405,6 +440,9 @@ func (o Request) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.CustomFieldsResponses) {
 		toSerialize["custom_fields_responses"] = o.CustomFieldsResponses
+	}
+	if !IsNil(o.Stages) {
+		toSerialize["stages"] = o.Stages
 	}
 	return toSerialize, nil
 }

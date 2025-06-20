@@ -4,9 +4,83 @@ All URIs are relative to *https://api.opal.dev/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**ApproveRequest**](RequestsAPI.md#ApproveRequest) | **Post** /requests/{id}/approve | 
 [**CreateRequest**](RequestsAPI.md#CreateRequest) | **Post** /requests | 
 [**GetRequests**](RequestsAPI.md#GetRequests) | **Get** /requests | 
+[**GetRequestsRelay**](RequestsAPI.md#GetRequestsRelay) | **Get** /requests/relay | 
 
+
+
+## ApproveRequest
+
+> ApproveRequest200Response ApproveRequest(ctx, id).ApproveRequestRequest(approveRequestRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The ID of the request to approve
+	approveRequestRequest := *openapiclient.NewApproveRequestRequest("REGULAR") // ApproveRequestRequest | Approval parameters
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RequestsAPI.ApproveRequest(context.Background(), id).ApproveRequestRequest(approveRequestRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RequestsAPI.ApproveRequest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ApproveRequest`: ApproveRequest200Response
+	fmt.Fprintf(os.Stdout, "Response from `RequestsAPI.ApproveRequest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | The ID of the request to approve | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiApproveRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **approveRequestRequest** | [**ApproveRequestRequest**](ApproveRequestRequest.md) | Approval parameters | 
+
+### Return type
+
+[**ApproveRequest200Response**](ApproveRequest200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## CreateRequest
@@ -77,7 +151,7 @@ Name | Type | Description  | Notes
 
 ## GetRequests
 
-> RequestList GetRequests(ctx).Cursor(cursor).PageSize(pageSize).ShowPendingOnly(showPendingOnly).Execute()
+> RequestList GetRequests(ctx).StartDateFilter(startDateFilter).EndDateFilter(endDateFilter).Cursor(cursor).PageSize(pageSize).ShowPendingOnly(showPendingOnly).Execute()
 
 
 
@@ -96,13 +170,15 @@ import (
 )
 
 func main() {
+	startDateFilter := "2021-11-01" // string | A start date filter for the events. (optional)
+	endDateFilter := "2021-11-12" // string | An end date filter for the events. (optional)
 	cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
 	pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
 	showPendingOnly := true // bool | Boolean toggle for if it should only show pending requests. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RequestsAPI.GetRequests(context.Background()).Cursor(cursor).PageSize(pageSize).ShowPendingOnly(showPendingOnly).Execute()
+	resp, r, err := apiClient.RequestsAPI.GetRequests(context.Background()).StartDateFilter(startDateFilter).EndDateFilter(endDateFilter).Cursor(cursor).PageSize(pageSize).ShowPendingOnly(showPendingOnly).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RequestsAPI.GetRequests``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -123,6 +199,8 @@ Other parameters are passed through a pointer to a apiGetRequestsRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **startDateFilter** | **string** | A start date filter for the events. | 
+ **endDateFilter** | **string** | An end date filter for the events. | 
  **cursor** | **string** | The pagination cursor value. | 
  **pageSize** | **int32** | Number of results to return per page. Default is 200. | 
  **showPendingOnly** | **bool** | Boolean toggle for if it should only show pending requests. | 
@@ -130,6 +208,84 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RequestList**](RequestList.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetRequestsRelay
+
+> RequestConnection GetRequestsRelay(ctx).First(first).After(after).Last(last).Before(before).Status(status).To(to).From(from).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	first := int32(10) // int32 | Number of results to return after the cursor. Use either first/after or last/before, not both. (optional)
+	after := "Y3Vyc29yOnYyOpK5MjAyMS0wMS0wN1QwNzo0MToyNy4xMTlaFjYwZmM2YmJlZjk4YzE1N2ZhNjFhYjk4Nw==" // string | Cursor to fetch results after. Used with 'first' for forward pagination. (optional)
+	last := int32(10) // int32 | Number of results to return before the cursor. Use either first/after or last/before, not both. (optional)
+	before := "Y3Vyc29yOnYyOpK5MjAyMS0wMS0wN1QwNzo0MToyNy4xMTlaFjYwZmM2YmJlZjk4YzE1N2ZhNjFhYjk4Nw==" // string | Cursor to fetch results before. Used with 'last' for backward pagination. (optional)
+	status := openapiclient.RequestStatusEnum("PENDING") // RequestStatusEnum | Filter requests by their status. (optional)
+	to := "37cb7e41-12ba-46da-92ff-030abe0450b1" // string | Filter requests assigned to a specific user ID. (optional)
+	from := "37cb7e41-12ba-46da-92ff-030abe0450b1" // string | Filter requests made by a specific user ID. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RequestsAPI.GetRequestsRelay(context.Background()).First(first).After(after).Last(last).Before(before).Status(status).To(to).From(from).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RequestsAPI.GetRequestsRelay``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRequestsRelay`: RequestConnection
+	fmt.Fprintf(os.Stdout, "Response from `RequestsAPI.GetRequestsRelay`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRequestsRelayRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **first** | **int32** | Number of results to return after the cursor. Use either first/after or last/before, not both. | 
+ **after** | **string** | Cursor to fetch results after. Used with &#39;first&#39; for forward pagination. | 
+ **last** | **int32** | Number of results to return before the cursor. Use either first/after or last/before, not both. | 
+ **before** | **string** | Cursor to fetch results before. Used with &#39;last&#39; for backward pagination. | 
+ **status** | [**RequestStatusEnum**](RequestStatusEnum.md) | Filter requests by their status. | 
+ **to** | **string** | Filter requests assigned to a specific user ID. | 
+ **from** | **string** | Filter requests made by a specific user ID. | 
+
+### Return type
+
+[**RequestConnection**](RequestConnection.md)
 
 ### Authorization
 

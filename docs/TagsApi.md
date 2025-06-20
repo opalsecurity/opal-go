@@ -162,7 +162,7 @@ Name | Type | Description  | Notes
 
 ## AddUserTag
 
-> AddUserTag(ctx, tagId, userId).Execute()
+> AddUserTag(ctx, tagId, userId).Body(body).Execute()
 
 
 
@@ -183,10 +183,11 @@ import (
 func main() {
 	tagId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the tag to apply.
 	userId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the user to apply the tag to.
+	body := map[string]interface{}{ ... } // map[string]interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.TagsAPI.AddUserTag(context.Background(), tagId, userId).Execute()
+	r, err := apiClient.TagsAPI.AddUserTag(context.Background(), tagId, userId).Body(body).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TagsAPI.AddUserTag``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -212,6 +213,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **body** | **map[string]interface{}** |  | 
 
 ### Return type
 
@@ -223,7 +225,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

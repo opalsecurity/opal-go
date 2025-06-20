@@ -443,6 +443,15 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: The remote ID of the access level to remove.
+        example: arn:aws:iam::590304332660:role/AdministratorAccess
+        explode: true
+        in: query
+        name: access_level_remote_id
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           description: Group was successfully removed from the bundle.
@@ -592,8 +601,8 @@ paths:
             summary: Example with date
             value: 2021-11-01
           withDatetime:
-            summary: Example with date and time
-            value: 2021-11-01 12:00:00
+            summary: Example with date and time in ISO 8601 datetime format.
+            value: 2025-01-01T00:00:00Z
         explode: true
         in: query
         name: start_date_filter
@@ -607,8 +616,8 @@ paths:
             summary: Example with date
             value: 2021-11-12
           withDatetime:
-            summary: Example with date and time
-            value: 2021-11-12 12:00:00
+            summary: Example with date and time in ISO 8601 datetime format.
+            value: 2025-01-01T00:00:00Z
         explode: true
         in: query
         name: end_date_filter
@@ -1531,6 +1540,47 @@ paths:
       - BearerAuth: []
       tags:
       - groups
+    put:
+      description: Updates a user's access level or duration in this group.
+      operationId: update_group_user
+      parameters:
+      - description: The ID of the group.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The ID of the user whose access is being updated.
+        example: f92aa855-cea9-4814-b9d8-f2a60d3e4a06
+        explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update_group_user_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupUser'
+          description: The GroupUser was successfully updated.
+      security:
+      - BearerAuth: []
+      tags:
+      - groups
   /group-bindings:
     get:
       description: Returns a list of `GroupBinding` objects.
@@ -1964,6 +2014,36 @@ paths:
         by the admin.
       operationId: getRequests
       parameters:
+      - description: A start date filter for the events.
+        examples:
+          withDate:
+            summary: Example with date
+            value: 2021-11-01
+          withDatetime:
+            summary: Example with date and time in ISO 8601 datetime format.
+            value: 2025-01-01T00:00:00Z
+        explode: true
+        in: query
+        name: start_date_filter
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: An end date filter for the events.
+        examples:
+          withDate:
+            summary: Example with date
+            value: 2021-11-12
+          withDatetime:
+            summary: Example with date and time in ISO 8601 datetime format.
+            value: 2025-01-01T00:00:00Z
+        explode: true
+        in: query
+        name: end_date_filter
+        required: false
+        schema:
+          type: string
+        style: form
       - description: The pagination cursor value.
         example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
         explode: true
@@ -2019,6 +2099,127 @@ paths:
               schema:
                 $ref: '#/components/schemas/createRequest_200_response'
           description: The resulting request.
+      security:
+      - BearerAuth: []
+      tags:
+      - requests
+  /requests/relay:
+    get:
+      description: Returns a paginated list of requests using Relay-style cursor pagination.
+      operationId: getRequestsRelay
+      parameters:
+      - description: "Number of results to return after the cursor. Use either first/after\
+          \ or last/before, not both."
+        example: 10
+        explode: true
+        in: query
+        name: first
+        required: false
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: Cursor to fetch results after. Used with 'first' for forward
+          pagination.
+        example: Y3Vyc29yOnYyOpK5MjAyMS0wMS0wN1QwNzo0MToyNy4xMTlaFjYwZmM2YmJlZjk4YzE1N2ZhNjFhYjk4Nw==
+        explode: true
+        in: query
+        name: after
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Number of results to return before the cursor. Use either first/after\
+          \ or last/before, not both."
+        example: 10
+        explode: true
+        in: query
+        name: last
+        required: false
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: Cursor to fetch results before. Used with 'last' for backward
+          pagination.
+        example: Y3Vyc29yOnYyOpK5MjAyMS0wMS0wN1QwNzo0MToyNy4xMTlaFjYwZmM2YmJlZjk4YzE1N2ZhNjFhYjk4Nw==
+        explode: true
+        in: query
+        name: before
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter requests by their status.
+        example: PENDING
+        explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          $ref: '#/components/schemas/RequestStatusEnum'
+        style: form
+      - description: Filter requests assigned to a specific user ID.
+        example: 37cb7e41-12ba-46da-92ff-030abe0450b1
+        explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: Filter requests made by a specific user ID.
+        example: 37cb7e41-12ba-46da-92ff-030abe0450b1
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestConnection'
+          description: A paginated list of requests using Relay-style cursor pagination.
+      security:
+      - BearerAuth: []
+      tags:
+      - requests
+  /requests/{id}/approve:
+    post:
+      description: Approve an access request
+      operationId: approveRequest
+      parameters:
+      - description: The ID of the request to approve
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/approveRequest_request'
+        description: Approval parameters
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/approveRequest_200_response'
+          description: Request successfully approved
       security:
       - BearerAuth: []
       tags:
@@ -2086,6 +2287,18 @@ paths:
         explode: false
         in: query
         name: parent_resource_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: The ancestor resource id to filter by. Returns all resources
+          that are descendants of the specified resource.
+        example:
+        - 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: query
+        name: ancestor_resource_id
         required: false
         schema:
           format: uuid
@@ -2672,6 +2885,52 @@ paths:
       - BearerAuth: []
       tags:
       - resources
+    get:
+      description: Returns information about a specific user's access to a resource.
+      operationId: getResourceUser
+      parameters:
+      - description: The ID of the resource.
+        example: 32acc112-21ff-4669-91c2-21e27683eaa1
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The ID of the user.
+        example: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+        explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The pagination cursor value.
+        example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getResourceUser_200_response'
+          description: List of ResourceUser records for the user's access to the resource.
+        "404":
+          description: Resource or user not found.
+      security:
+      - BearerAuth: []
+      tags:
+      - resources
     post:
       description: Adds a user to this resource.
       operationId: add_resource_user
@@ -2779,6 +3038,7 @@ paths:
       - resources
   /resource-user-access-status/{resource_id}/{user_id}:
     get:
+      deprecated: true
       description: Get user's access status to a resource.
       operationId: resource_user_access_status_retrieve
       parameters:
@@ -3001,6 +3261,27 @@ paths:
       - BearerAuth: []
       tags:
       - users
+  /access-rules:
+    post:
+      description: Creates a new access rule config for the given group_id.
+      operationId: create_access_rule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAccessRuleInfo'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessRule'
+          description: The created access rule config for the group.
+      security:
+      - BearerAuth: []
+      tags:
+      - access-rules
   /access-rules/{access_rule_id}:
     get:
       description: Returns a list of access rule config given the group_id of the
@@ -3022,7 +3303,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccessRuleCondition'
+                $ref: '#/components/schemas/AccessRule'
           description: The access rules for the group.
       security:
       - BearerAuth: []
@@ -3046,14 +3327,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AccessRuleCondition'
+              $ref: '#/components/schemas/UpdateAccessRuleInfo'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccessRuleCondition'
+                $ref: '#/components/schemas/AccessRule'
           description: The updated access rule config for the group.
       security:
       - BearerAuth: []
@@ -3285,6 +3566,12 @@ paths:
           format: uuid
           type: string
         style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        required: false
       responses:
         "200":
           description: Tag applied to user successfully.
@@ -3676,6 +3963,172 @@ paths:
       - apps
 components:
   schemas:
+    PaginatedAssignedRequestList:
+      properties:
+        requests:
+          items:
+            $ref: '#/components/schemas/Request'
+          type: array
+        cursor:
+          description: The cursor to continue pagination
+          type: string
+      required:
+      - cursor
+      - requests
+    PageInfo:
+      example:
+        hasNextPage: true
+        hasPreviousPage: true
+        endCursor: endCursor
+        startCursor: startCursor
+      properties:
+        hasNextPage:
+          description: Whether there are more items after the end cursor
+          type: boolean
+        endCursor:
+          description: The cursor to continue pagination forwards
+          type: string
+        hasPreviousPage:
+          description: Whether there are more items before the start cursor
+          type: boolean
+        startCursor:
+          description: The cursor to continue pagination backwards
+          type: string
+      required:
+      - endCursor
+      - hasNextPage
+      - hasPreviousPage
+      - startCursor
+    RequestEdge:
+      example:
+        cursor: cursor
+        node:
+          id: 7c86c85d-0651-43e2-a748-d69d658418e8
+          created_at: 2021-01-06T20:00:00Z
+          updated_at: 2021-01-06T20:00:00Z
+          requester_id: c86c85d-0651-43e2-a748-d69d658418e8
+          target_user_id: r86c85d-0651-43e2-a748-d69d658418e8
+          target_group_id: r86c85d-0651-43e2-a748-d69d658418e8
+          status: pending
+          reason: I need this resource.
+          duration_minutes: 1440
+          request_comments:
+          - id: 7c86c85d-0651-43e2-a748-d69d658418e8
+            created_at: 2021-01-06T20:00:00Z
+            updated_at: 2021-01-06T20:00:00Z
+            request_id: 4c86c85d-0651-43e2-a748-d69d658418e8
+            user_id: c86c85d-0651-43e2-a748-d69d658418e8
+            comment: This is a comment.
+          stages:
+            requestedRoleName: Admin
+            requestedItemName: AWS Production Account
+            stages:
+            - stage: 1
+              operator: AND
+              reviewers:
+              - id: 7c86c85d-0651-43e2-a748-d69d658418e8
+                status: PENDING
+            - stage: 2
+              operator: OR
+              reviewers:
+              - id: 8d86c85d-0651-43e2-a748-d69d658418e9
+                status: APPROVED
+      properties:
+        node:
+          $ref: '#/components/schemas/Request'
+        cursor:
+          description: The cursor for this request edge
+          type: string
+      required:
+      - cursor
+      - node
+    RequestConnection:
+      example:
+        edges:
+        - cursor: cursor
+          node:
+            id: 7c86c85d-0651-43e2-a748-d69d658418e8
+            created_at: 2021-01-06T20:00:00Z
+            updated_at: 2021-01-06T20:00:00Z
+            requester_id: c86c85d-0651-43e2-a748-d69d658418e8
+            target_user_id: r86c85d-0651-43e2-a748-d69d658418e8
+            target_group_id: r86c85d-0651-43e2-a748-d69d658418e8
+            status: pending
+            reason: I need this resource.
+            duration_minutes: 1440
+            request_comments:
+            - id: 7c86c85d-0651-43e2-a748-d69d658418e8
+              created_at: 2021-01-06T20:00:00Z
+              updated_at: 2021-01-06T20:00:00Z
+              request_id: 4c86c85d-0651-43e2-a748-d69d658418e8
+              user_id: c86c85d-0651-43e2-a748-d69d658418e8
+              comment: This is a comment.
+            stages:
+              requestedRoleName: Admin
+              requestedItemName: AWS Production Account
+              stages:
+              - stage: 1
+                operator: AND
+                reviewers:
+                - id: 7c86c85d-0651-43e2-a748-d69d658418e8
+                  status: PENDING
+              - stage: 2
+                operator: OR
+                reviewers:
+                - id: 8d86c85d-0651-43e2-a748-d69d658418e9
+                  status: APPROVED
+        - cursor: cursor
+          node:
+            id: 7c86c85d-0651-43e2-a748-d69d658418e8
+            created_at: 2021-01-06T20:00:00Z
+            updated_at: 2021-01-06T20:00:00Z
+            requester_id: c86c85d-0651-43e2-a748-d69d658418e8
+            target_user_id: r86c85d-0651-43e2-a748-d69d658418e8
+            target_group_id: r86c85d-0651-43e2-a748-d69d658418e8
+            status: pending
+            reason: I need this resource.
+            duration_minutes: 1440
+            request_comments:
+            - id: 7c86c85d-0651-43e2-a748-d69d658418e8
+              created_at: 2021-01-06T20:00:00Z
+              updated_at: 2021-01-06T20:00:00Z
+              request_id: 4c86c85d-0651-43e2-a748-d69d658418e8
+              user_id: c86c85d-0651-43e2-a748-d69d658418e8
+              comment: This is a comment.
+            stages:
+              requestedRoleName: Admin
+              requestedItemName: AWS Production Account
+              stages:
+              - stage: 1
+                operator: AND
+                reviewers:
+                - id: 7c86c85d-0651-43e2-a748-d69d658418e8
+                  status: PENDING
+              - stage: 2
+                operator: OR
+                reviewers:
+                - id: 8d86c85d-0651-43e2-a748-d69d658418e9
+                  status: APPROVED
+        pageInfo:
+          hasNextPage: true
+          hasPreviousPage: true
+          endCursor: endCursor
+          startCursor: startCursor
+        totalCount: 0
+      properties:
+        edges:
+          items:
+            $ref: '#/components/schemas/RequestEdge'
+          type: array
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        totalCount:
+          description: The total number of items available
+          type: integer
+      required:
+      - edges
+      - pageInfo
+      - totalCount
     UARScope:
       description: "If set, the access review will only contain resources and groups\
         \ that match at least one of the filters in scope."
@@ -4219,7 +4672,7 @@ components:
       example: FAILED
       type: string
     SubEvent:
-      additionalProperties: {}
+      additionalProperties: true
       description: |-
         # Sub event Object
         ### Description
@@ -4237,6 +4690,7 @@ components:
         sub_event_type:
           description: The subevent type.
           example: USERS_CREATED
+          type: string
       required:
       - sub_event_type
     PaginatedEventList:
@@ -4828,7 +5282,7 @@ components:
       properties:
         group_id:
           description: The ID of the group.
-          example: f454d283-ca87-4a8a-bdbb-df212eca5353
+          example: f454d283-ca87-4a87-bdbb-df212eca5353
           format: uuid
           type: string
         resource_id:
@@ -5177,7 +5631,7 @@ components:
         ### Description
         The `UpdateGroupInfo` object is used as an input to the UpdateGroup API.
       example:
-        group_id: f454d283-ca87-4a8a-bdbb-df212eca5353
+        group_id: f454d283-ca87-4a87-bdbb-df212eca5353
         description: This group represents Active Directory group "Payments Production
           Admin". We use this AD group to facilitate staging deployments and qualifying
           new releases.
@@ -5189,7 +5643,7 @@ components:
       properties:
         group_id:
           description: The ID of the group.
-          example: f454d283-ca87-4a8a-bdbb-df212eca5353
+          example: f454d283-ca87-4a87-bdbb-df212eca5353
           format: uuid
           type: string
         name:
@@ -5335,6 +5789,7 @@ components:
       - AWS_RDS_MYSQL_INSTANCE
       - AWS_ACCOUNT
       - AWS_SSO_PERMISSION_SET
+      - AWS_ORGANIZATIONAL_UNIT
       - AZURE_MANAGEMENT_GROUP
       - AZURE_RESOURCE_GROUP
       - AZURE_SUBSCRIPTION
@@ -5363,6 +5818,7 @@ components:
       - GCP_BIG_QUERY_TABLE
       - GCP_SERVICE_ACCOUNT
       - GIT_HUB_REPO
+      - GIT_HUB_ORG_ROLE
       - GIT_LAB_PROJECT
       - GOOGLE_WORKSPACE_ROLE
       - MONGO_INSTANCE
@@ -5800,10 +6256,14 @@ components:
           $ref: '#/components/schemas/GroupRemoteInfo_azure_ad_security_group'
         azure_ad_microsoft_365_group:
           $ref: '#/components/schemas/GroupRemoteInfo_azure_ad_microsoft_365_group'
+        snowflake_role:
+          $ref: '#/components/schemas/GroupRemoteInfo_snowflake_role'
     ResourceRemoteInfo:
       description: Information that defines the remote resource. This replaces the
         deprecated remote_id and metadata fields.
       properties:
+        aws_organizational_unit:
+          $ref: '#/components/schemas/ResourceRemoteInfo_aws_organizational_unit'
         aws_account:
           $ref: '#/components/schemas/ResourceRemoteInfo_aws_account'
         aws_permission_set:
@@ -5816,6 +6276,8 @@ components:
           $ref: '#/components/schemas/ResourceRemoteInfo_aws_rds_instance'
         aws_eks_cluster:
           $ref: '#/components/schemas/ResourceRemoteInfo_aws_eks_cluster'
+        custom_connector:
+          $ref: '#/components/schemas/ResourceRemoteInfo_custom_connector'
         gcp_organization:
           $ref: '#/components/schemas/ResourceRemoteInfo_gcp_organization'
         gcp_bucket:
@@ -6387,10 +6849,10 @@ components:
         ### Usage Example
         Returned from the `GET Requests` endpoint.
       enum:
-      - pending
-      - approved
-      - denied
-      - canceled
+      - PENDING
+      - APPROVED
+      - DENIED
+      - CANCELED
       type: string
     Request:
       description: |-
@@ -6417,6 +6879,20 @@ components:
           request_id: 4c86c85d-0651-43e2-a748-d69d658418e8
           user_id: c86c85d-0651-43e2-a748-d69d658418e8
           comment: This is a comment.
+        stages:
+          requestedRoleName: Admin
+          requestedItemName: AWS Production Account
+          stages:
+          - stage: 1
+            operator: AND
+            reviewers:
+            - id: 7c86c85d-0651-43e2-a748-d69d658418e8
+              status: PENDING
+          - stage: 2
+            operator: OR
+            reviewers:
+            - id: 8d86c85d-0651-43e2-a748-d69d658418e9
+              status: APPROVED
       properties:
         id:
           description: The unique identifier of the request.
@@ -6471,6 +6947,8 @@ components:
           items:
             $ref: '#/components/schemas/RequestCustomFieldResponse'
           type: array
+        stages:
+          $ref: '#/components/schemas/RequestItemStages'
       required:
       - created_at
       - id
@@ -6478,6 +6956,63 @@ components:
       - requester_id
       - status
       - updated_at
+    RequestItemStages:
+      description: The stages configuration for a request item
+      properties:
+        requestedRoleName:
+          description: The name of the requested role
+          type: string
+        requestedItemName:
+          description: The name of the requested item
+          type: string
+        stages:
+          description: The stages of review for this request
+          items:
+            $ref: '#/components/schemas/RequestStage'
+          type: array
+      required:
+      - requestedItemName
+      - stages
+    RequestStage:
+      description: A stage in the request review process
+      properties:
+        stage:
+          description: The stage number
+          type: integer
+        operator:
+          $ref: '#/components/schemas/ReviewStageOperator'
+        reviewers:
+          description: The reviewers for this stage
+          items:
+            $ref: '#/components/schemas/RequestReviewer'
+          type: array
+      required:
+      - operator
+      - reviewers
+      - stage
+    ReviewStageOperator:
+      description: The operator to apply to reviewers in a stage
+      enum:
+      - AND
+      - OR
+      type: string
+    RequestReviewer:
+      description: A reviewer in a request stage
+      properties:
+        id:
+          description: The unique identifier of the reviewer
+          format: uuid
+          type: string
+        status:
+          description: The status of this reviewer's review
+          enum:
+          - PENDING
+          - APPROVED
+          - REJECTED
+          type: string
+      required:
+      - id
+      - status
     RequestedItem:
       description: |-
         # Requested Item Object
@@ -6593,6 +7128,10 @@ components:
         require_manager_approval: false
         require_support_ticket: false
         parent_resource_id: f454d283-ca67-4a8a-bdbb-df212eca5345
+        ancestor_resource_ids:
+        - f454d283-ca67-4a8a-bdbb-df212eca5345
+        descendant_resource_ids:
+        - f454d283-ca67-4a8a-bdbb-df212eca5345
       properties:
         resource_id:
           description: The ID of the resource.
@@ -6731,6 +7270,24 @@ components:
           type: string
         remote_info:
           $ref: '#/components/schemas/ResourceRemoteInfo'
+        ancestor_resource_ids:
+          description: List of resource IDs that are ancestors of this resource.
+          example:
+          - f454d283-ca67-4a8a-bdbb-df212eca5345
+          - f454d283-ca67-4a8a-bdbb-df212eca5346
+          items:
+            format: uuid
+            type: string
+          type: array
+        descendant_resource_ids:
+          description: List of resource IDs that are descendants of this resource.
+          example:
+          - f454d283-ca67-4a8a-bdbb-df212eca5347
+          - f454d283-ca67-4a8a-bdbb-df212eca5348
+          items:
+            format: uuid
+            type: string
+          type: array
       required:
       - resource_id
     AwsPermissionSetMetadata:
@@ -7207,11 +7764,83 @@ components:
       required:
       - group_id
       - group_type
-    AccessRuleCondition:
+    UpdateAccessRuleInfo:
       description: |-
-        # Access Rule Config Object
+        # UpdateAccessRuleInfo Object
         ### Description
-        The `AccessRuleConfig` object is used to represent an access rule configuration.
+        The `UpdateAccessRuleInfo` object is used as an input to the UpdateAccessRule and CreateAccessRule API.
+      example:
+        ruleClauses:
+          unless:
+            clauses:
+            - selectors:
+              - connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                value: value
+                key: key
+              - connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                value: value
+                key: key
+            - selectors:
+              - connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                value: value
+                key: key
+              - connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                value: value
+                key: key
+          when:
+            clauses:
+            - selectors:
+              - connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                value: value
+                key: key
+              - connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                value: value
+                key: key
+            - selectors:
+              - connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                value: value
+                key: key
+              - connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                value: value
+                key: key
+        name: Platform Engineering
+        description: This access rule represents all platform engineers in the company.
+        admin_owner_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+        status: ACTIVE
+      properties:
+        name:
+          description: The name of the access rule.
+          example: Platform Engineering
+          type: string
+        description:
+          description: A description of the group.
+          example: This access rule represents all platform engineers in the company.
+          type: string
+        admin_owner_id:
+          description: The ID of the owner of the group.
+          example: 7c86c85d-0651-43e2-a748-d69d658418e8
+          format: uuid
+          type: string
+        status:
+          description: The status of the access rule.
+          enum:
+          - ACTIVE
+          - PAUSED
+          example: ACTIVE
+          type: string
+        ruleClauses:
+          $ref: '#/components/schemas/RuleClauses'
+      required:
+      - admin_owner_id
+      - description
+      - name
+      - ruleClauses
+      - status
+    AccessRule:
+      description: |-
+        # Access Rule Object
+        ### Description
+        The `AccessRule` object is used to represent an access rule configuration.
 
         ### Usage Example
         Get access rule configurations from the `GET Access Rule Configs` endpoint.
@@ -7249,8 +7878,30 @@ components:
               - connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 value: value
                 key: key
+        name: Platform Engineering
+        description: This access rule represents all platform engineers in the company.
+        admin_owner_id: 7c86c85d-0651-43e2-a748-d69d658418e8
+        access_rule_id: 7c86c85d-0651-43e2-a748-d69d658418e8
         status: ACTIVE
       properties:
+        access_rule_id:
+          description: The ID (group ID) of the access rule.
+          example: 7c86c85d-0651-43e2-a748-d69d658418e8
+          format: uuid
+          type: string
+        name:
+          description: The name of the access rule.
+          example: Platform Engineering
+          type: string
+        description:
+          description: A description of the group.
+          example: This access rule represents all platform engineers in the company.
+          type: string
+        admin_owner_id:
+          description: The ID of the owner of the group.
+          example: 7c86c85d-0651-43e2-a748-d69d658418e8
+          format: uuid
+          type: string
         status:
           description: The status of the access rule.
           enum:
@@ -7261,6 +7912,10 @@ components:
         ruleClauses:
           $ref: '#/components/schemas/RuleClauses'
       required:
+      - access_rule_id
+      - admin_owner_id
+      - description
+      - name
       - ruleClauses
       - status
     RuleClauses:
@@ -7342,7 +7997,6 @@ components:
         selectors:
           items:
             $ref: '#/components/schemas/TagSelector'
-          minItems: 1
           type: array
       required:
       - selectors
@@ -7877,7 +8531,7 @@ components:
             template.
           example:
           - 37cb7e41-12ba-46da-92ff-030abe0450b1
-          - 37cb7e41-12ba-46da-92ff-030abe0450b2
+          - 7c86c85d-0651-43e2-a748-d69d658418e8
           items:
             format: uuid
             type: string
@@ -8346,6 +9000,8 @@ components:
       example:
         group_id: a381e7a3-e5e0-4c48-b1d6-4ccb4c191bc1
         bundle_id: a381e7a3-e5e0-4c48-b1d6-4ccb4c191bc1
+        access_level_remote_id: arn:aws:iam::490306337630:role/SupportUser
+        access_level_name: Read
       properties:
         bundle_id:
           description: The ID of the bundle containing the group.
@@ -8358,6 +9014,14 @@ components:
           example: a381e7a3-e5e0-4c48-b1d6-4ccb4c191bc1
           format: uuid
           readOnly: true
+          type: string
+        access_level_name:
+          description: The access level of the group within a bundle.
+          example: Read
+          type: string
+        access_level_remote_id:
+          description: The remote ID of the access level of the group within a bundle.
+          example: arn:aws:iam::490306337630:role/SupportUser
           type: string
     PaginatedBundleGroupList:
       example:
@@ -8418,6 +9082,17 @@ components:
           example: 72e75a6f-7183-48c5-94ff-6013f213314b
           format: uuid
           type: string
+        access_level_remote_id:
+          description: "The remote ID of the access level to grant to this user. Required\
+            \ if the group being added requires an access level. If omitted, the default\
+            \ access level remote ID value (empty string) is used."
+          example: arn:aws:iam::590304332660:role/AdministratorAccess
+          type: string
+        access_level_name:
+          description: "The name of the access level to grant to this user. If omitted,\
+            \ the default access level name value (empty string) is used."
+          example: AdministratorAccess
+          type: string
       required:
       - group_id
     add_group_resource_request:
@@ -8438,6 +9113,23 @@ components:
           maximum: 525960
           minimum: 0
           type: integer
+    update_group_user_request:
+      example:
+        duration_minutes: 60
+        access_level_remote_id: arn:aws:iam::590304332660:role/AdministratorAccess
+      properties:
+        duration_minutes:
+          description: The updated duration for which the group can be accessed (in
+            minutes). Use 0 for indefinite.
+          example: 120
+          maximum: 525960
+          type: integer
+        access_level_remote_id:
+          description: The updated remote ID of the access level granted to this user.
+          example: arn:aws:iam::590304332660:role/ReadOnlyAccess
+          type: string
+      required:
+      - duration_minutes
     add_group_user_request:
       example:
         duration_minutes: 60
@@ -8481,6 +9173,63 @@ components:
           example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
           format: uuid
           type: string
+    approveRequest_request:
+      properties:
+        level:
+          description: The decision level for the approval
+          enum:
+          - REGULAR
+          - ADMIN
+          example: REGULAR
+          type: string
+        comment:
+          description: Optional comment for the approval
+          example: Approved after security review
+          type: string
+      required:
+      - level
+    approveRequest_200_response:
+      example:
+        request:
+          id: 7c86c85d-0651-43e2-a748-d69d658418e8
+          created_at: 2021-01-06T20:00:00Z
+          updated_at: 2021-01-06T20:00:00Z
+          requester_id: c86c85d-0651-43e2-a748-d69d658418e8
+          target_user_id: r86c85d-0651-43e2-a748-d69d658418e8
+          target_group_id: r86c85d-0651-43e2-a748-d69d658418e8
+          status: pending
+          reason: I need this resource.
+          duration_minutes: 1440
+          request_comments:
+          - id: 7c86c85d-0651-43e2-a748-d69d658418e8
+            created_at: 2021-01-06T20:00:00Z
+            updated_at: 2021-01-06T20:00:00Z
+            request_id: 4c86c85d-0651-43e2-a748-d69d658418e8
+            user_id: c86c85d-0651-43e2-a748-d69d658418e8
+            comment: This is a comment.
+          stages:
+            requestedRoleName: Admin
+            requestedItemName: AWS Production Account
+            stages:
+            - stage: 1
+              operator: AND
+              reviewers:
+              - id: 7c86c85d-0651-43e2-a748-d69d658418e8
+                status: PENDING
+            - stage: 2
+              operator: OR
+              reviewers:
+              - id: 8d86c85d-0651-43e2-a748-d69d658418e9
+                status: APPROVED
+        taskId: c6f85bfb-3fe7-4936-a68d-7a5e1e3d0f6a
+      properties:
+        request:
+          $ref: '#/components/schemas/Request'
+        taskId:
+          description: ID of the task created for propagating access
+          example: c6f85bfb-3fe7-4936-a68d-7a5e1e3d0f6a
+          format: uuid
+          type: string
     add_resource_nhi_request:
       example:
         duration_minutes: 60
@@ -8499,6 +9248,36 @@ components:
           type: string
       required:
       - duration_minutes
+    getResourceUser_200_response:
+      example:
+        cursor: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        data:
+        - full_name: Jake Barnes
+          user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+          resource_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          expiration_date: 2022-01-23T04:56:07Z
+          email: jake@company.dev
+        - full_name: Jake Barnes
+          user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+          resource_id: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+          expiration_date: 2022-01-23T04:56:07Z
+          email: jake@company.dev
+        total_count: 120
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ResourceUser'
+          type: array
+        cursor:
+          description: Pagination cursor for the next page of results
+          example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+          type: string
+        total_count:
+          description: Total number of results
+          example: 120
+          type: integer
+      required:
+      - data
     update_resource_user_request:
       example:
         duration_minutes: 60
@@ -8621,12 +9400,39 @@ components:
           type: string
       required:
       - group_id
+    GroupRemoteInfo_snowflake_role:
+      description: Remote info for Snowflake role.
+      properties:
+        role_id:
+          description: The id of the Snowflake role.
+          example: 01fa7402-01d8-103b-8deb-5f3a0ab7884
+          type: string
+      required:
+      - role_id
+    ResourceRemoteInfo_aws_organizational_unit:
+      description: Remote info for AWS organizational unit.
+      properties:
+        parent_id:
+          description: The id of the parent organizational unit.
+          example: ou-1234
+          type: string
+        organizational_unit_id:
+          description: The id of the AWS organizational unit that is being created.
+          example: ou-1234
+          type: string
+      required:
+      - organizational_unit_id
     ResourceRemoteInfo_aws_account:
       description: Remote info for AWS account.
       properties:
         account_id:
           description: The id of the AWS account.
           example: 234234234234
+          type: string
+        organizational_unit_id:
+          description: The id of the AWS organizational unit. Required only if customer
+            has OUs enabled.
+          example: ou-1234
           type: string
       required:
       - account_id
@@ -8711,6 +9517,21 @@ components:
           type: string
       required:
       - arn
+    ResourceRemoteInfo_custom_connector:
+      description: Remote info for a custom connector resource.
+      properties:
+        remote_resource_id:
+          description: The id of the resource in the end system
+          example: 01fa7402-01d8-103b-8deb-5f3a0ab7884
+          type: string
+        can_have_usage_events:
+          description: A bool representing whether or not the resource can have usage
+            data.
+          example: false
+          type: boolean
+      required:
+      - can_have_usage_events
+      - remote_resource_id
     ResourceRemoteInfo_gcp_organization:
       description: Remote info for GCP organization.
       properties:

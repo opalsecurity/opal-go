@@ -22,7 +22,7 @@ var _ MappedNullable = &SubEvent{}
 // SubEvent # Sub event Object ### Description The `SubEvent` object is used to represent a subevent.  ### Usage Example Fetch from the `LIST Events` endpoint.
 type SubEvent struct {
 	// The subevent type.
-	SubEventType interface{} `json:"sub_event_type"`
+	SubEventType string `json:"sub_event_type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,7 +32,7 @@ type _SubEvent SubEvent
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSubEvent(subEventType interface{}) *SubEvent {
+func NewSubEvent(subEventType string) *SubEvent {
 	this := SubEvent{}
 	this.SubEventType = subEventType
 	return &this
@@ -47,10 +47,9 @@ func NewSubEventWithDefaults() *SubEvent {
 }
 
 // GetSubEventType returns the SubEventType field value
-// If the value is explicit nil, the zero value for interface{} will be returned
-func (o *SubEvent) GetSubEventType() interface{} {
+func (o *SubEvent) GetSubEventType() string {
 	if o == nil {
-		var ret interface{}
+		var ret string
 		return ret
 	}
 
@@ -59,16 +58,15 @@ func (o *SubEvent) GetSubEventType() interface{} {
 
 // GetSubEventTypeOk returns a tuple with the SubEventType field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SubEvent) GetSubEventTypeOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.SubEventType) {
+func (o *SubEvent) GetSubEventTypeOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
 	return &o.SubEventType, true
 }
 
 // SetSubEventType sets field value
-func (o *SubEvent) SetSubEventType(v interface{}) {
+func (o *SubEvent) SetSubEventType(v string) {
 	o.SubEventType = v
 }
 
@@ -82,9 +80,7 @@ func (o SubEvent) MarshalJSON() ([]byte, error) {
 
 func (o SubEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.SubEventType != nil {
-		toSerialize["sub_event_type"] = o.SubEventType
-	}
+	toSerialize["sub_event_type"] = o.SubEventType
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value

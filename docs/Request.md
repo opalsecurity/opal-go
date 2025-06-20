@@ -10,11 +10,12 @@ Name | Type | Description | Notes
 **RequesterId** | **string** | The unique identifier of the user who created the request. | 
 **TargetUserId** | Pointer to **string** | The unique identifier of the user who is the target of the request. | [optional] 
 **TargetGroupId** | Pointer to **string** | The unique identifier of the group who is the target of the request. | [optional] 
-**Status** | [**RequestStatusEnum**](RequestStatusEnum.md) |  | 
+**Status** | [**RequestStatusEnum**](RequestStatusEnum.md) | The status of the request. | 
 **Reason** | **string** | The reason for the request. | 
 **DurationMinutes** | Pointer to **int32** | The duration of the request in minutes. | [optional] 
 **RequestedItemsList** | Pointer to [**[]RequestedItem**](RequestedItem.md) | The list of targets for the request. | [optional] 
 **CustomFieldsResponses** | Pointer to [**[]RequestCustomFieldResponse**](RequestCustomFieldResponse.md) | The responses given to the custom fields associated to the request | [optional] 
+**Stages** | Pointer to [**RequestItemStages**](RequestItemStages.md) | The stages configuration for this request | [optional] 
 
 ## Methods
 
@@ -279,6 +280,31 @@ SetCustomFieldsResponses sets CustomFieldsResponses field to given value.
 `func (o *Request) HasCustomFieldsResponses() bool`
 
 HasCustomFieldsResponses returns a boolean if a field has been set.
+
+### GetStages
+
+`func (o *Request) GetStages() RequestItemStages`
+
+GetStages returns the Stages field if non-nil, zero value otherwise.
+
+### GetStagesOk
+
+`func (o *Request) GetStagesOk() (*RequestItemStages, bool)`
+
+GetStagesOk returns a tuple with the Stages field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStages
+
+`func (o *Request) SetStages(v RequestItemStages)`
+
+SetStages sets Stages field to given value.
+
+### HasStages
+
+`func (o *Request) HasStages() bool`
+
+HasStages returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

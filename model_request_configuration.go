@@ -22,6 +22,7 @@ var _ MappedNullable = &RequestConfiguration{}
 
 // RequestConfiguration # Request Configuration Object ### Description The `RequestConfiguration` object is used to represent a request configuration.  ### Usage Example Returned from the `GET Request Configurations` endpoint.
 type RequestConfiguration struct {
+	// The condition for the request configuration.
 	Condition *Condition `json:"condition,omitempty"`
 	// A bool representing whether or not to allow requests for this resource.
 	AllowRequests bool `json:"allow_requests"`

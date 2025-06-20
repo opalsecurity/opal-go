@@ -658,7 +658,7 @@ Name | Type | Description  | Notes
 
 ## RemoveBundleGroup
 
-> RemoveBundleGroup(ctx, bundleId, groupId).Execute()
+> RemoveBundleGroup(ctx, bundleId, groupId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
 
 
 
@@ -679,10 +679,11 @@ import (
 func main() {
 	bundleId := "32acc112-21ff-4669-91c2-21e27683eaa1" // string | The ID of the bundle.
 	groupId := "72e75a6f-7183-48c5-94ff-6013f213314b" // string | The ID of the group to remove.
+	accessLevelRemoteId := "arn:aws:iam::590304332660:role/AdministratorAccess" // string | The remote ID of the access level to remove. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.BundlesAPI.RemoveBundleGroup(context.Background(), bundleId, groupId).Execute()
+	r, err := apiClient.BundlesAPI.RemoveBundleGroup(context.Background(), bundleId, groupId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BundlesAPI.RemoveBundleGroup``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -708,6 +709,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **accessLevelRemoteId** | **string** | The remote ID of the access level to remove. | 
 
 ### Return type
 

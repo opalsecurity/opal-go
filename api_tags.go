@@ -221,6 +221,12 @@ type ApiAddUserTagRequest struct {
 	ApiService *TagsAPIService
 	tagId string
 	userId string
+	body *map[string]interface{}
+}
+
+func (r ApiAddUserTagRequest) Body(body map[string]interface{}) ApiAddUserTagRequest {
+	r.body = &body
+	return r
 }
 
 func (r ApiAddUserTagRequest) Execute() (*http.Response, error) {
@@ -268,7 +274,7 @@ func (a *TagsAPIService) AddUserTagExecute(r ApiAddUserTagRequest) (*http.Respon
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -284,6 +290,8 @@ func (a *TagsAPIService) AddUserTagExecute(r ApiAddUserTagRequest) (*http.Respon
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.body
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err

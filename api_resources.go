@@ -1318,6 +1318,123 @@ func (a *ResourcesAPIService) GetResourceTagsExecute(r ApiGetResourceTagsRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetResourceUserRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	resourceId string
+	userId string
+	cursor *string
+}
+
+// The pagination cursor value.
+func (r ApiGetResourceUserRequest) Cursor(cursor string) ApiGetResourceUserRequest {
+	r.cursor = &cursor
+	return r
+}
+
+func (r ApiGetResourceUserRequest) Execute() (*GetResourceUser200Response, *http.Response, error) {
+	return r.ApiService.GetResourceUserExecute(r)
+}
+
+/*
+GetResourceUser Method for GetResourceUser
+
+Returns information about a specific user's access to a resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param resourceId The ID of the resource.
+ @param userId The ID of the user.
+ @return ApiGetResourceUserRequest
+*/
+func (a *ResourcesAPIService) GetResourceUser(ctx context.Context, resourceId string, userId string) ApiGetResourceUserRequest {
+	return ApiGetResourceUserRequest{
+		ApiService: a,
+		ctx: ctx,
+		resourceId: resourceId,
+		userId: userId,
+	}
+}
+
+// Execute executes the request
+//  @return GetResourceUser200Response
+func (a *ResourcesAPIService) GetResourceUserExecute(r ApiGetResourceUserRequest) (*GetResourceUser200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetResourceUser200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.GetResourceUser")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/{resource_id}/users/{user_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"user_id"+"}", url.PathEscape(parameterValueToString(r.userId, "userId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetResourceUsersRequest struct {
 	ctx context.Context
 	ApiService *ResourcesAPIService
@@ -1543,6 +1660,7 @@ type ApiGetResourcesRequest struct {
 	resourceIds *[]string
 	resourceName *string
 	parentResourceId *string
+	ancestorResourceId *string
 }
 
 // The pagination cursor value.
@@ -1578,6 +1696,12 @@ func (r ApiGetResourcesRequest) ResourceName(resourceName string) ApiGetResource
 // The parent resource id to filter by.
 func (r ApiGetResourcesRequest) ParentResourceId(parentResourceId string) ApiGetResourcesRequest {
 	r.parentResourceId = &parentResourceId
+	return r
+}
+
+// The ancestor resource id to filter by. Returns all resources that are descendants of the specified resource.
+func (r ApiGetResourcesRequest) AncestorResourceId(ancestorResourceId string) ApiGetResourcesRequest {
+	r.ancestorResourceId = &ancestorResourceId
 	return r
 }
 
@@ -1638,6 +1762,9 @@ func (a *ResourcesAPIService) GetResourcesExecute(r ApiGetResourcesRequest) (*Pa
 	}
 	if r.parentResourceId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "parent_resource_id", r.parentResourceId, "form", "")
+	}
+	if r.ancestorResourceId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "ancestor_resource_id", r.ancestorResourceId, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1734,6 +1861,8 @@ Get user's access status to a resource.
  @param resourceId The ID of the resource.
  @param userId The ID of the user.
  @return ApiResourceUserAccessStatusRetrieveRequest
+
+Deprecated
 */
 func (a *ResourcesAPIService) ResourceUserAccessStatusRetrieve(ctx context.Context, resourceId string, userId string) ApiResourceUserAccessStatusRetrieveRequest {
 	return ApiResourceUserAccessStatusRetrieveRequest{
@@ -1746,6 +1875,7 @@ func (a *ResourcesAPIService) ResourceUserAccessStatusRetrieve(ctx context.Conte
 
 // Execute executes the request
 //  @return ResourceUserAccessStatus
+// Deprecated
 func (a *ResourcesAPIService) ResourceUserAccessStatusRetrieveExecute(r ApiResourceUserAccessStatusRetrieveRequest) (*ResourceUserAccessStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet

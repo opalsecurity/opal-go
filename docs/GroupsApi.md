@@ -29,6 +29,7 @@ Method | HTTP request | Description
 [**SetGroupReviewerStages**](GroupsAPI.md#SetGroupReviewerStages) | **Put** /groups/{group_id}/reviewer-stages | 
 [**SetGroupReviewers**](GroupsAPI.md#SetGroupReviewers) | **Put** /groups/{group_id}/reviewers | 
 [**SetGroupVisibility**](GroupsAPI.md#SetGroupVisibility) | **Put** /groups/{group_id}/visibility | 
+[**UpdateGroupUser**](GroupsAPI.md#UpdateGroupUser) | **Put** /groups/{group_id}/users/{user_id} | 
 [**UpdateGroups**](GroupsAPI.md#UpdateGroups) | **Put** /groups | 
 
 
@@ -1814,6 +1815,81 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## UpdateGroupUser
+
+> GroupUser UpdateGroupUser(ctx, groupId, userId).UpdateGroupUserRequest(updateGroupUserRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	userId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of the user whose access is being updated.
+	updateGroupUserRequest := *openapiclient.NewUpdateGroupUserRequest(int32(120)) // UpdateGroupUserRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.UpdateGroupUser(context.Background(), groupId, userId).UpdateGroupUserRequest(updateGroupUserRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.UpdateGroupUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateGroupUser`: GroupUser
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.UpdateGroupUser`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**groupId** | **string** | The ID of the group. | 
+**userId** | **string** | The ID of the user whose access is being updated. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateGroupUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **updateGroupUserRequest** | [**UpdateGroupUserRequest**](UpdateGroupUserRequest.md) |  | 
+
+### Return type
+
+[**GroupUser**](GroupUser.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateGroups
 
 > UpdateGroupInfoList UpdateGroups(ctx).UpdateGroupInfoList(updateGroupInfoList).Execute()
@@ -1835,7 +1911,7 @@ import (
 )
 
 func main() {
-	updateGroupInfoList := *openapiclient.NewUpdateGroupInfoList([]openapiclient.UpdateGroupInfo{*openapiclient.NewUpdateGroupInfo("f454d283-ca87-4a8a-bdbb-df212eca5353")}) // UpdateGroupInfoList | Groups to be updated
+	updateGroupInfoList := *openapiclient.NewUpdateGroupInfoList([]openapiclient.UpdateGroupInfo{*openapiclient.NewUpdateGroupInfo("f454d283-ca87-4a87-bdbb-df212eca5353")}) // UpdateGroupInfoList | Groups to be updated
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
