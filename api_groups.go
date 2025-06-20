@@ -2766,6 +2766,124 @@ func (a *GroupsAPIService) SetGroupVisibilityExecute(r ApiSetGroupVisibilityRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiUpdateGroupUserRequest struct {
+	ctx context.Context
+	ApiService *GroupsAPIService
+	groupId string
+	userId string
+	updateGroupUserRequest *UpdateGroupUserRequest
+}
+
+func (r ApiUpdateGroupUserRequest) UpdateGroupUserRequest(updateGroupUserRequest UpdateGroupUserRequest) ApiUpdateGroupUserRequest {
+	r.updateGroupUserRequest = &updateGroupUserRequest
+	return r
+}
+
+func (r ApiUpdateGroupUserRequest) Execute() (*GroupUser, *http.Response, error) {
+	return r.ApiService.UpdateGroupUserExecute(r)
+}
+
+/*
+UpdateGroupUser Method for UpdateGroupUser
+
+Updates a user's access level or duration in this group.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param groupId The ID of the group.
+ @param userId The ID of the user whose access is being updated.
+ @return ApiUpdateGroupUserRequest
+*/
+func (a *GroupsAPIService) UpdateGroupUser(ctx context.Context, groupId string, userId string) ApiUpdateGroupUserRequest {
+	return ApiUpdateGroupUserRequest{
+		ApiService: a,
+		ctx: ctx,
+		groupId: groupId,
+		userId: userId,
+	}
+}
+
+// Execute executes the request
+//  @return GroupUser
+func (a *GroupsAPIService) UpdateGroupUserExecute(r ApiUpdateGroupUserRequest) (*GroupUser, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GroupUser
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GroupsAPIService.UpdateGroupUser")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/groups/{group_id}/users/{user_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterValueToString(r.groupId, "groupId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"user_id"+"}", url.PathEscape(parameterValueToString(r.userId, "userId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.updateGroupUserRequest == nil {
+		return localVarReturnValue, nil, reportError("updateGroupUserRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.updateGroupUserRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiUpdateGroupsRequest struct {
 	ctx context.Context
 	ApiService *GroupsAPIService

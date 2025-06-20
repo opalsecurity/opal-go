@@ -32,6 +32,8 @@ Name | Type | Description | Notes
 **RiskSensitivityOverride** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) |  | [optional] 
 **Metadata** | Pointer to **string** | JSON metadata about the remote resource. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details. | [optional] 
 **RemoteInfo** | Pointer to [**ResourceRemoteInfo**](ResourceRemoteInfo.md) |  | [optional] 
+**AncestorResourceIds** | Pointer to **[]string** | List of resource IDs that are ancestors of this resource. | [optional] 
+**DescendantResourceIds** | Pointer to **[]string** | List of resource IDs that are descendants of this resource. | [optional] 
 
 ## Methods
 
@@ -746,6 +748,56 @@ SetRemoteInfo sets RemoteInfo field to given value.
 `func (o *Resource) HasRemoteInfo() bool`
 
 HasRemoteInfo returns a boolean if a field has been set.
+
+### GetAncestorResourceIds
+
+`func (o *Resource) GetAncestorResourceIds() []string`
+
+GetAncestorResourceIds returns the AncestorResourceIds field if non-nil, zero value otherwise.
+
+### GetAncestorResourceIdsOk
+
+`func (o *Resource) GetAncestorResourceIdsOk() (*[]string, bool)`
+
+GetAncestorResourceIdsOk returns a tuple with the AncestorResourceIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAncestorResourceIds
+
+`func (o *Resource) SetAncestorResourceIds(v []string)`
+
+SetAncestorResourceIds sets AncestorResourceIds field to given value.
+
+### HasAncestorResourceIds
+
+`func (o *Resource) HasAncestorResourceIds() bool`
+
+HasAncestorResourceIds returns a boolean if a field has been set.
+
+### GetDescendantResourceIds
+
+`func (o *Resource) GetDescendantResourceIds() []string`
+
+GetDescendantResourceIds returns the DescendantResourceIds field if non-nil, zero value otherwise.
+
+### GetDescendantResourceIdsOk
+
+`func (o *Resource) GetDescendantResourceIdsOk() (*[]string, bool)`
+
+GetDescendantResourceIdsOk returns a tuple with the DescendantResourceIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescendantResourceIds
+
+`func (o *Resource) SetDescendantResourceIds(v []string)`
+
+SetDescendantResourceIds sets DescendantResourceIds field to given value.
+
+### HasDescendantResourceIds
+
+`func (o *Resource) HasDescendantResourceIds() bool`
+
+HasDescendantResourceIds returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

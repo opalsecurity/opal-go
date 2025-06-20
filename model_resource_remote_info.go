@@ -20,12 +20,14 @@ var _ MappedNullable = &ResourceRemoteInfo{}
 
 // ResourceRemoteInfo Information that defines the remote resource. This replaces the deprecated remote_id and metadata fields.
 type ResourceRemoteInfo struct {
+	AwsOrganizationalUnit *ResourceRemoteInfoAwsOrganizationalUnit `json:"aws_organizational_unit,omitempty"`
 	AwsAccount *ResourceRemoteInfoAwsAccount `json:"aws_account,omitempty"`
 	AwsPermissionSet *ResourceRemoteInfoAwsPermissionSet `json:"aws_permission_set,omitempty"`
 	AwsIamRole *ResourceRemoteInfoAwsIamRole `json:"aws_iam_role,omitempty"`
 	AwsEc2Instance *ResourceRemoteInfoAwsEc2Instance `json:"aws_ec2_instance,omitempty"`
 	AwsRdsInstance *ResourceRemoteInfoAwsRdsInstance `json:"aws_rds_instance,omitempty"`
 	AwsEksCluster *ResourceRemoteInfoAwsEksCluster `json:"aws_eks_cluster,omitempty"`
+	CustomConnector *ResourceRemoteInfoCustomConnector `json:"custom_connector,omitempty"`
 	GcpOrganization *ResourceRemoteInfoGcpOrganization `json:"gcp_organization,omitempty"`
 	GcpBucket *ResourceRemoteInfoGcpBucket `json:"gcp_bucket,omitempty"`
 	GcpComputeInstance *ResourceRemoteInfoGcpComputeInstance `json:"gcp_compute_instance,omitempty"`
@@ -63,6 +65,38 @@ func NewResourceRemoteInfo() *ResourceRemoteInfo {
 func NewResourceRemoteInfoWithDefaults() *ResourceRemoteInfo {
 	this := ResourceRemoteInfo{}
 	return &this
+}
+
+// GetAwsOrganizationalUnit returns the AwsOrganizationalUnit field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAwsOrganizationalUnit() ResourceRemoteInfoAwsOrganizationalUnit {
+	if o == nil || IsNil(o.AwsOrganizationalUnit) {
+		var ret ResourceRemoteInfoAwsOrganizationalUnit
+		return ret
+	}
+	return *o.AwsOrganizationalUnit
+}
+
+// GetAwsOrganizationalUnitOk returns a tuple with the AwsOrganizationalUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAwsOrganizationalUnitOk() (*ResourceRemoteInfoAwsOrganizationalUnit, bool) {
+	if o == nil || IsNil(o.AwsOrganizationalUnit) {
+		return nil, false
+	}
+	return o.AwsOrganizationalUnit, true
+}
+
+// HasAwsOrganizationalUnit returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAwsOrganizationalUnit() bool {
+	if o != nil && !IsNil(o.AwsOrganizationalUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetAwsOrganizationalUnit gets a reference to the given ResourceRemoteInfoAwsOrganizationalUnit and assigns it to the AwsOrganizationalUnit field.
+func (o *ResourceRemoteInfo) SetAwsOrganizationalUnit(v ResourceRemoteInfoAwsOrganizationalUnit) {
+	o.AwsOrganizationalUnit = &v
 }
 
 // GetAwsAccount returns the AwsAccount field value if set, zero value otherwise.
@@ -255,6 +289,38 @@ func (o *ResourceRemoteInfo) HasAwsEksCluster() bool {
 // SetAwsEksCluster gets a reference to the given ResourceRemoteInfoAwsEksCluster and assigns it to the AwsEksCluster field.
 func (o *ResourceRemoteInfo) SetAwsEksCluster(v ResourceRemoteInfoAwsEksCluster) {
 	o.AwsEksCluster = &v
+}
+
+// GetCustomConnector returns the CustomConnector field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetCustomConnector() ResourceRemoteInfoCustomConnector {
+	if o == nil || IsNil(o.CustomConnector) {
+		var ret ResourceRemoteInfoCustomConnector
+		return ret
+	}
+	return *o.CustomConnector
+}
+
+// GetCustomConnectorOk returns a tuple with the CustomConnector field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetCustomConnectorOk() (*ResourceRemoteInfoCustomConnector, bool) {
+	if o == nil || IsNil(o.CustomConnector) {
+		return nil, false
+	}
+	return o.CustomConnector, true
+}
+
+// HasCustomConnector returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasCustomConnector() bool {
+	if o != nil && !IsNil(o.CustomConnector) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomConnector gets a reference to the given ResourceRemoteInfoCustomConnector and assigns it to the CustomConnector field.
+func (o *ResourceRemoteInfo) SetCustomConnector(v ResourceRemoteInfoCustomConnector) {
+	o.CustomConnector = &v
 }
 
 // GetGcpOrganization returns the GcpOrganization field value if set, zero value otherwise.
@@ -907,6 +973,9 @@ func (o ResourceRemoteInfo) MarshalJSON() ([]byte, error) {
 
 func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AwsOrganizationalUnit) {
+		toSerialize["aws_organizational_unit"] = o.AwsOrganizationalUnit
+	}
 	if !IsNil(o.AwsAccount) {
 		toSerialize["aws_account"] = o.AwsAccount
 	}
@@ -924,6 +993,9 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.AwsEksCluster) {
 		toSerialize["aws_eks_cluster"] = o.AwsEksCluster
+	}
+	if !IsNil(o.CustomConnector) {
+		toSerialize["custom_connector"] = o.CustomConnector
 	}
 	if !IsNil(o.GcpOrganization) {
 		toSerialize["gcp_organization"] = o.GcpOrganization

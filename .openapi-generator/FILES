@@ -23,7 +23,7 @@ client.go
 configuration.go
 docs/Access.md
 docs/AccessList.md
-docs/AccessRuleCondition.md
+docs/AccessRule.md
 docs/AccessRulesAPI.md
 docs/AddBundleGroupRequest.md
 docs/AddBundleResourceRequest.md
@@ -36,6 +36,8 @@ docs/AppTypeEnum.md
 docs/AppValidation.md
 docs/AppValidationSeverityEnum.md
 docs/AppValidationStatusEnum.md
+docs/ApproveRequest200Response.md
+docs/ApproveRequestRequest.md
 docs/AppsAPI.md
 docs/AppsList.md
 docs/AwsPermissionSetMetadata.md
@@ -68,6 +70,7 @@ docs/CreateUARInfo.md
 docs/EntityTypeEnum.md
 docs/Event.md
 docs/EventsAPI.md
+docs/GetResourceUser200Response.md
 docs/Group.md
 docs/GroupAccessLevel.md
 docs/GroupBinding.md
@@ -85,6 +88,7 @@ docs/GroupRemoteInfoGitlabGroup.md
 docs/GroupRemoteInfoGoogleGroup.md
 docs/GroupRemoteInfoLdapGroup.md
 docs/GroupRemoteInfoOktaGroup.md
+docs/GroupRemoteInfoSnowflakeRole.md
 docs/GroupResource.md
 docs/GroupResourceList.md
 docs/GroupTypeEnum.md
@@ -108,6 +112,8 @@ docs/OnCallScheduleProviderEnum.md
 docs/OnCallSchedulesAPI.md
 docs/Owner.md
 docs/OwnersAPI.md
+docs/PageInfo.md
+docs/PaginatedAssignedRequestList.md
 docs/PaginatedBundleGroupList.md
 docs/PaginatedBundleList.md
 docs/PaginatedBundleResourceList.md
@@ -124,9 +130,14 @@ docs/PropagationStatus.md
 docs/PropagationStatusEnum.md
 docs/Request.md
 docs/RequestConfiguration.md
+docs/RequestConnection.md
 docs/RequestCustomFieldResponse.md
 docs/RequestCustomFieldResponseFieldValue.md
+docs/RequestEdge.md
+docs/RequestItemStages.md
 docs/RequestList.md
+docs/RequestReviewer.md
+docs/RequestStage.md
 docs/RequestStatusEnum.md
 docs/RequestTemplateCustomFieldTypeEnum.md
 docs/RequestedItem.md
@@ -141,8 +152,10 @@ docs/ResourceRemoteInfoAwsAccount.md
 docs/ResourceRemoteInfoAwsEc2Instance.md
 docs/ResourceRemoteInfoAwsEksCluster.md
 docs/ResourceRemoteInfoAwsIamRole.md
+docs/ResourceRemoteInfoAwsOrganizationalUnit.md
 docs/ResourceRemoteInfoAwsPermissionSet.md
 docs/ResourceRemoteInfoAwsRdsInstance.md
+docs/ResourceRemoteInfoCustomConnector.md
 docs/ResourceRemoteInfoGcpBigQueryDataset.md
 docs/ResourceRemoteInfoGcpBigQueryTable.md
 docs/ResourceRemoteInfoGcpBucket.md
@@ -169,6 +182,7 @@ docs/ResourceUserAccessStatus.md
 docs/ResourceUserAccessStatusEnum.md
 docs/ResourceWithAccessLevel.md
 docs/ResourcesAPI.md
+docs/ReviewStageOperator.md
 docs/ReviewerIDList.md
 docs/ReviewerStage.md
 docs/ReviewerStageList.md
@@ -193,12 +207,14 @@ docs/UAR.md
 docs/UARReviewerAssignmentPolicyEnum.md
 docs/UARScope.md
 docs/UarsAPI.md
+docs/UpdateAccessRuleInfo.md
 docs/UpdateConfigurationTemplateInfo.md
 docs/UpdateGroupBindingInfo.md
 docs/UpdateGroupBindingInfoList.md
 docs/UpdateGroupInfo.md
 docs/UpdateGroupInfoList.md
 docs/UpdateGroupResourcesInfo.md
+docs/UpdateGroupUserRequest.md
 docs/UpdateIdpGroupMappingsRequest.md
 docs/UpdateIdpGroupMappingsRequestMappingsInner.md
 docs/UpdateOwnerInfo.md
@@ -217,7 +233,7 @@ go.mod
 go.sum
 model_access.go
 model_access_list.go
-model_access_rule_condition.go
+model_access_rule.go
 model_add_bundle_group_request.go
 model_add_bundle_resource_request.go
 model_add_group_resource_request.go
@@ -229,6 +245,8 @@ model_app_type_enum.go
 model_app_validation.go
 model_app_validation_severity_enum.go
 model_app_validation_status_enum.go
+model_approve_request_200_response.go
+model_approve_request_request.go
 model_apps_list.go
 model_aws_permission_set_metadata.go
 model_aws_permission_set_metadata_aws_permission_set.go
@@ -257,6 +275,7 @@ model_create_tag_info.go
 model_create_uar_info.go
 model_entity_type_enum.go
 model_event.go
+model_get_resource_user_200_response.go
 model_group.go
 model_group_access_level.go
 model_group_binding.go
@@ -273,6 +292,7 @@ model_group_remote_info_gitlab_group.go
 model_group_remote_info_google_group.go
 model_group_remote_info_ldap_group.go
 model_group_remote_info_okta_group.go
+model_group_remote_info_snowflake_role.go
 model_group_resource.go
 model_group_resource_list.go
 model_group_type_enum.go
@@ -290,6 +310,8 @@ model_on_call_schedule_id_list.go
 model_on_call_schedule_list.go
 model_on_call_schedule_provider_enum.go
 model_owner.go
+model_page_info.go
+model_paginated_assigned_request_list.go
 model_paginated_bundle_group_list.go
 model_paginated_bundle_list.go
 model_paginated_bundle_resource_list.go
@@ -306,9 +328,14 @@ model_propagation_status.go
 model_propagation_status_enum.go
 model_request.go
 model_request_configuration.go
+model_request_connection.go
 model_request_custom_field_response.go
 model_request_custom_field_response_field_value.go
+model_request_edge.go
+model_request_item_stages.go
 model_request_list.go
+model_request_reviewer.go
+model_request_stage.go
 model_request_status_enum.go
 model_request_template_custom_field_type_enum.go
 model_requested_item.go
@@ -322,8 +349,10 @@ model_resource_remote_info_aws_account.go
 model_resource_remote_info_aws_ec2_instance.go
 model_resource_remote_info_aws_eks_cluster.go
 model_resource_remote_info_aws_iam_role.go
+model_resource_remote_info_aws_organizational_unit.go
 model_resource_remote_info_aws_permission_set.go
 model_resource_remote_info_aws_rds_instance.go
+model_resource_remote_info_custom_connector.go
 model_resource_remote_info_gcp_big_query_dataset.go
 model_resource_remote_info_gcp_big_query_table.go
 model_resource_remote_info_gcp_bucket.go
@@ -349,6 +378,7 @@ model_resource_user.go
 model_resource_user_access_status.go
 model_resource_user_access_status_enum.go
 model_resource_with_access_level.go
+model_review_stage_operator.go
 model_reviewer_id_list.go
 model_reviewer_stage.go
 model_reviewer_stage_list.go
@@ -370,12 +400,14 @@ model_ticketing_provider_enum.go
 model_uar.go
 model_uar_reviewer_assignment_policy_enum.go
 model_uar_scope.go
+model_update_access_rule_info.go
 model_update_configuration_template_info.go
 model_update_group_binding_info.go
 model_update_group_binding_info_list.go
 model_update_group_info.go
 model_update_group_info_list.go
 model_update_group_resources_info.go
+model_update_group_user_request.go
 model_update_idp_group_mappings_request.go
 model_update_idp_group_mappings_request_mappings_inner.go
 model_update_owner_info.go

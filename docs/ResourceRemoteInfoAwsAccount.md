@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccountId** | **string** | The id of the AWS account. | 
+**OrganizationalUnitId** | Pointer to **string** | The id of the AWS organizational unit. Required only if customer has OUs enabled. | [optional] 
 
 ## Methods
 
@@ -44,6 +45,31 @@ and a boolean to check if the value has been set.
 
 SetAccountId sets AccountId field to given value.
 
+
+### GetOrganizationalUnitId
+
+`func (o *ResourceRemoteInfoAwsAccount) GetOrganizationalUnitId() string`
+
+GetOrganizationalUnitId returns the OrganizationalUnitId field if non-nil, zero value otherwise.
+
+### GetOrganizationalUnitIdOk
+
+`func (o *ResourceRemoteInfoAwsAccount) GetOrganizationalUnitIdOk() (*string, bool)`
+
+GetOrganizationalUnitIdOk returns a tuple with the OrganizationalUnitId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrganizationalUnitId
+
+`func (o *ResourceRemoteInfoAwsAccount) SetOrganizationalUnitId(v string)`
+
+SetOrganizationalUnitId sets OrganizationalUnitId field to given value.
+
+### HasOrganizationalUnitId
+
+`func (o *ResourceRemoteInfoAwsAccount) HasOrganizationalUnitId() bool`
+
+HasOrganizationalUnitId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
