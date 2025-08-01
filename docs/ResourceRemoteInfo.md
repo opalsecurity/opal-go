@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **GcpProject** | Pointer to [**ResourceRemoteInfoGcpProject**](ResourceRemoteInfoGcpProject.md) |  | [optional] 
 **GcpSqlInstance** | Pointer to [**ResourceRemoteInfoGcpSqlInstance**](ResourceRemoteInfoGcpSqlInstance.md) |  | [optional] 
 **GcpServiceAccount** | Pointer to [**ResourceRemoteInfoGcpServiceAccount**](ResourceRemoteInfoGcpServiceAccount.md) |  | [optional] 
+**GoogleWorkspaceRole** | Pointer to [**ResourceRemoteInfoGoogleWorkspaceRole**](ResourceRemoteInfoGoogleWorkspaceRole.md) |  | [optional] 
 **GithubRepo** | Pointer to [**ResourceRemoteInfoGithubRepo**](ResourceRemoteInfoGithubRepo.md) |  | [optional] 
 **GitlabProject** | Pointer to [**ResourceRemoteInfoGitlabProject**](ResourceRemoteInfoGitlabProject.md) |  | [optional] 
 **OktaApp** | Pointer to [**ResourceRemoteInfoOktaApp**](ResourceRemoteInfoOktaApp.md) |  | [optional] 
@@ -501,6 +502,31 @@ SetGcpServiceAccount sets GcpServiceAccount field to given value.
 `func (o *ResourceRemoteInfo) HasGcpServiceAccount() bool`
 
 HasGcpServiceAccount returns a boolean if a field has been set.
+
+### GetGoogleWorkspaceRole
+
+`func (o *ResourceRemoteInfo) GetGoogleWorkspaceRole() ResourceRemoteInfoGoogleWorkspaceRole`
+
+GetGoogleWorkspaceRole returns the GoogleWorkspaceRole field if non-nil, zero value otherwise.
+
+### GetGoogleWorkspaceRoleOk
+
+`func (o *ResourceRemoteInfo) GetGoogleWorkspaceRoleOk() (*ResourceRemoteInfoGoogleWorkspaceRole, bool)`
+
+GetGoogleWorkspaceRoleOk returns a tuple with the GoogleWorkspaceRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGoogleWorkspaceRole
+
+`func (o *ResourceRemoteInfo) SetGoogleWorkspaceRole(v ResourceRemoteInfoGoogleWorkspaceRole)`
+
+SetGoogleWorkspaceRole sets GoogleWorkspaceRole field to given value.
+
+### HasGoogleWorkspaceRole
+
+`func (o *ResourceRemoteInfo) HasGoogleWorkspaceRole() bool`
+
+HasGoogleWorkspaceRole returns a boolean if a field has been set.
 
 ### GetGithubRepo
 

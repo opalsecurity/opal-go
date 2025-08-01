@@ -38,6 +38,7 @@ type ResourceRemoteInfo struct {
 	GcpProject *ResourceRemoteInfoGcpProject `json:"gcp_project,omitempty"`
 	GcpSqlInstance *ResourceRemoteInfoGcpSqlInstance `json:"gcp_sql_instance,omitempty"`
 	GcpServiceAccount *ResourceRemoteInfoGcpServiceAccount `json:"gcp_service_account,omitempty"`
+	GoogleWorkspaceRole *ResourceRemoteInfoGoogleWorkspaceRole `json:"google_workspace_role,omitempty"`
 	GithubRepo *ResourceRemoteInfoGithubRepo `json:"github_repo,omitempty"`
 	GitlabProject *ResourceRemoteInfoGitlabProject `json:"gitlab_project,omitempty"`
 	OktaApp *ResourceRemoteInfoOktaApp `json:"okta_app,omitempty"`
@@ -643,6 +644,38 @@ func (o *ResourceRemoteInfo) SetGcpServiceAccount(v ResourceRemoteInfoGcpService
 	o.GcpServiceAccount = &v
 }
 
+// GetGoogleWorkspaceRole returns the GoogleWorkspaceRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetGoogleWorkspaceRole() ResourceRemoteInfoGoogleWorkspaceRole {
+	if o == nil || IsNil(o.GoogleWorkspaceRole) {
+		var ret ResourceRemoteInfoGoogleWorkspaceRole
+		return ret
+	}
+	return *o.GoogleWorkspaceRole
+}
+
+// GetGoogleWorkspaceRoleOk returns a tuple with the GoogleWorkspaceRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetGoogleWorkspaceRoleOk() (*ResourceRemoteInfoGoogleWorkspaceRole, bool) {
+	if o == nil || IsNil(o.GoogleWorkspaceRole) {
+		return nil, false
+	}
+	return o.GoogleWorkspaceRole, true
+}
+
+// HasGoogleWorkspaceRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasGoogleWorkspaceRole() bool {
+	if o != nil && !IsNil(o.GoogleWorkspaceRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetGoogleWorkspaceRole gets a reference to the given ResourceRemoteInfoGoogleWorkspaceRole and assigns it to the GoogleWorkspaceRole field.
+func (o *ResourceRemoteInfo) SetGoogleWorkspaceRole(v ResourceRemoteInfoGoogleWorkspaceRole) {
+	o.GoogleWorkspaceRole = &v
+}
+
 // GetGithubRepo returns the GithubRepo field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetGithubRepo() ResourceRemoteInfoGithubRepo {
 	if o == nil || IsNil(o.GithubRepo) {
@@ -1026,6 +1059,9 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.GcpServiceAccount) {
 		toSerialize["gcp_service_account"] = o.GcpServiceAccount
+	}
+	if !IsNil(o.GoogleWorkspaceRole) {
+		toSerialize["google_workspace_role"] = o.GoogleWorkspaceRole
 	}
 	if !IsNil(o.GithubRepo) {
 		toSerialize["github_repo"] = o.GithubRepo

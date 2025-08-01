@@ -75,6 +75,8 @@ type Group struct {
 	// The risk sensitivity level for the group. When an override is set, this field will match that.
 	RiskSensitivity *RiskSensitivityEnum `json:"risk_sensitivity,omitempty"`
 	RiskSensitivityOverride *RiskSensitivityEnum `json:"risk_sensitivity_override,omitempty"`
+	// Information about the last successful sync of this group.
+	LastSuccessfulSync *SyncTask `json:"last_successful_sync,omitempty"`
 }
 
 type _Group Group
@@ -959,6 +961,38 @@ func (o *Group) SetRiskSensitivityOverride(v RiskSensitivityEnum) {
 	o.RiskSensitivityOverride = &v
 }
 
+// GetLastSuccessfulSync returns the LastSuccessfulSync field value if set, zero value otherwise.
+func (o *Group) GetLastSuccessfulSync() SyncTask {
+	if o == nil || IsNil(o.LastSuccessfulSync) {
+		var ret SyncTask
+		return ret
+	}
+	return *o.LastSuccessfulSync
+}
+
+// GetLastSuccessfulSyncOk returns a tuple with the LastSuccessfulSync field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Group) GetLastSuccessfulSyncOk() (*SyncTask, bool) {
+	if o == nil || IsNil(o.LastSuccessfulSync) {
+		return nil, false
+	}
+	return o.LastSuccessfulSync, true
+}
+
+// HasLastSuccessfulSync returns a boolean if a field has been set.
+func (o *Group) HasLastSuccessfulSync() bool {
+	if o != nil && !IsNil(o.LastSuccessfulSync) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastSuccessfulSync gets a reference to the given SyncTask and assigns it to the LastSuccessfulSync field.
+func (o *Group) SetLastSuccessfulSync(v SyncTask) {
+	o.LastSuccessfulSync = &v
+}
+
 func (o Group) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -1047,6 +1081,9 @@ func (o Group) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.RiskSensitivityOverride) {
 		toSerialize["risk_sensitivity_override"] = o.RiskSensitivityOverride
+	}
+	if !IsNil(o.LastSuccessfulSync) {
+		toSerialize["last_successful_sync"] = o.LastSuccessfulSync
 	}
 	return toSerialize, nil
 }

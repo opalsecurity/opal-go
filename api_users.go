@@ -18,11 +18,185 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
 
 
 // UsersAPIService UsersAPI service
 type UsersAPIService service
+
+type ApiGetRemoteUsersRequest struct {
+	ctx context.Context
+	ApiService *UsersAPIService
+	thirdPartyProvider *[]ThirdPartyProviderEnum
+	userId *[]string
+	remoteId *[]string
+	cursor *string
+	pageSize *int32
+}
+
+// Filter remote users by their third party provider.
+func (r ApiGetRemoteUsersRequest) ThirdPartyProvider(thirdPartyProvider []ThirdPartyProviderEnum) ApiGetRemoteUsersRequest {
+	r.thirdPartyProvider = &thirdPartyProvider
+	return r
+}
+
+// Filter remote users by their user ID.
+func (r ApiGetRemoteUsersRequest) UserId(userId []string) ApiGetRemoteUsersRequest {
+	r.userId = &userId
+	return r
+}
+
+// Filter remote users by their remote ID.
+func (r ApiGetRemoteUsersRequest) RemoteId(remoteId []string) ApiGetRemoteUsersRequest {
+	r.remoteId = &remoteId
+	return r
+}
+
+// The pagination cursor value.
+func (r ApiGetRemoteUsersRequest) Cursor(cursor string) ApiGetRemoteUsersRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Number of results to return per page. Default is 200.
+func (r ApiGetRemoteUsersRequest) PageSize(pageSize int32) ApiGetRemoteUsersRequest {
+	r.pageSize = &pageSize
+	return r
+}
+
+func (r ApiGetRemoteUsersRequest) Execute() (*PaginatedRemoteUsersList, *http.Response, error) {
+	return r.ApiService.GetRemoteUsersExecute(r)
+}
+
+/*
+GetRemoteUsers Method for GetRemoteUsers
+
+Returns a list of remote users for your organization.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetRemoteUsersRequest
+*/
+func (a *UsersAPIService) GetRemoteUsers(ctx context.Context) ApiGetRemoteUsersRequest {
+	return ApiGetRemoteUsersRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return PaginatedRemoteUsersList
+func (a *UsersAPIService) GetRemoteUsersExecute(r ApiGetRemoteUsersRequest) (*PaginatedRemoteUsersList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PaginatedRemoteUsersList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersAPIService.GetRemoteUsers")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/users/remote_users"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.thirdPartyProvider != nil {
+		t := *r.thirdPartyProvider
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "third_party_provider", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "third_party_provider", t, "form", "multi")
+		}
+	}
+	if r.userId != nil {
+		t := *r.userId
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "user_id", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "user_id", t, "form", "multi")
+		}
+	}
+	if r.remoteId != nil {
+		t := *r.remoteId
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "remote_id", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "remote_id", t, "form", "multi")
+		}
+	}
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.pageSize != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
 
 type ApiGetUserTagsRequest struct {
 	ctx context.Context

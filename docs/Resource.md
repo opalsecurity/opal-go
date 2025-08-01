@@ -34,6 +34,7 @@ Name | Type | Description | Notes
 **RemoteInfo** | Pointer to [**ResourceRemoteInfo**](ResourceRemoteInfo.md) |  | [optional] 
 **AncestorResourceIds** | Pointer to **[]string** | List of resource IDs that are ancestors of this resource. | [optional] 
 **DescendantResourceIds** | Pointer to **[]string** | List of resource IDs that are descendants of this resource. | [optional] 
+**LastSuccessfulSync** | Pointer to [**SyncTask**](SyncTask.md) | Information about the last successful sync of this resource. | [optional] [readonly] 
 
 ## Methods
 
@@ -798,6 +799,31 @@ SetDescendantResourceIds sets DescendantResourceIds field to given value.
 `func (o *Resource) HasDescendantResourceIds() bool`
 
 HasDescendantResourceIds returns a boolean if a field has been set.
+
+### GetLastSuccessfulSync
+
+`func (o *Resource) GetLastSuccessfulSync() SyncTask`
+
+GetLastSuccessfulSync returns the LastSuccessfulSync field if non-nil, zero value otherwise.
+
+### GetLastSuccessfulSyncOk
+
+`func (o *Resource) GetLastSuccessfulSyncOk() (*SyncTask, bool)`
+
+GetLastSuccessfulSyncOk returns a tuple with the LastSuccessfulSync field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastSuccessfulSync
+
+`func (o *Resource) SetLastSuccessfulSync(v SyncTask)`
+
+SetLastSuccessfulSync sets LastSuccessfulSync field to given value.
+
+### HasLastSuccessfulSync
+
+`func (o *Resource) HasLastSuccessfulSync() bool`
+
+HasLastSuccessfulSync returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -11,6 +11,45 @@ info:
 servers:
 - description: Production
   url: https://api.opal.dev/v1
+tags:
+- description: Operations related to access rules
+  name: access-rules
+- description: Operations related to apps
+  name: apps
+- description: Operations related to bundles
+  name: bundles
+- description: Operations related to configuration templates
+  name: configuration-templates
+- description: Operations related to events
+  name: events
+- description: Operations related to groups
+  name: groups
+- description: Operations related to group bindings
+  name: group-bindings
+- description: Operations related to IDP group mappings
+  name: idp-group-mappings
+- description: Operations related to message channels
+  name: message-channels
+- description: Operations related to non-human identities
+  name: non-human-identities
+- description: Operations related to on-call schedules
+  name: on-call-schedules
+- description: Operations related to owners
+  name: owners
+- description: Operations related to requests
+  name: requests
+- description: Operations related to resources
+  name: resources
+- description: Operations related to scoped role permissions
+  name: scoped-role-permissions
+- description: Operations related to sessions
+  name: sessions
+- description: Operations related to tags
+  name: tags
+- description: Operations related to UARs
+  name: uars
+- description: Operations related to users
+  name: users
 paths:
   /apps:
     get:
@@ -1469,6 +1508,17 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: "The remote ID of the access level for which this user has direct\
+          \ access. If omitted, the default access level remote ID value (empty string)\
+          \ is assumed."
+        example: 30
+        explode: true
+        in: query
+        name: access_level_remote_id
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           description: This user's access was successfully removed from this group.
@@ -2044,6 +2094,26 @@ paths:
         schema:
           type: string
         style: form
+      - description: Filter requests by their requester ID.
+        example: 37cb7e41-12ba-46da-92ff-030abe0450b1
+        explode: true
+        in: query
+        name: requester_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: Filter requests by their target user ID.
+        example: 37cb7e41-12ba-46da-92ff-030abe0450b1
+        explode: true
+        in: query
+        name: target_user_id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
       - description: The pagination cursor value.
         example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
         explode: true
@@ -2105,6 +2175,7 @@ paths:
       - requests
   /requests/relay:
     get:
+      deprecated: true
       description: Returns a paginated list of requests using Relay-style cursor pagination.
       operationId: getRequestsRelay
       parameters:
@@ -2188,6 +2259,32 @@ paths:
               schema:
                 $ref: '#/components/schemas/RequestConnection'
           description: A paginated list of requests using Relay-style cursor pagination.
+      security:
+      - BearerAuth: []
+      tags:
+      - requests
+  /requests/{id}:
+    get:
+      description: Returns a request by ID.
+      operationId: getRequest
+      parameters:
+      - description: The ID of the request.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Request'
+          description: The requested request object.
       security:
       - BearerAuth: []
       tags:
@@ -3129,6 +3226,65 @@ paths:
       - BearerAuth: []
       tags:
       - resources
+  /resources/{resource_id}/scoped-role-permissions:
+    get:
+      description: Returns all the scoped role permissions that apply to the given
+        resource. Only OPAL_SCOPED_ROLE resource type supports this field.
+      operationId: get_resource_scoped_role_permissions
+      parameters:
+      - description: The ID of the resource whose scoped role permissions belong to.
+        example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScopedRolePermissionList'
+          description: The role permissions that this Opal Scoped Role has.
+      security:
+      - BearerAuth: []
+      tags:
+      - scoped-role-permissions
+    put:
+      description: Sets all the scoped role permissions on an OPAL_SCOPED_ROLE resource.
+      operationId: set_resource_scoped_role_permissions
+      parameters:
+      - description: The ID of the resource whose scoped role permissions belong to.
+          Must be of OPAL_SCOPED_ROLE resource type.
+        example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
+        explode: false
+        in: path
+        name: resource_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScopedRolePermissionList'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScopedRolePermissionList'
+          description: The role permissions that this Opal Scoped Role has.
+      security:
+      - BearerAuth: []
+      tags:
+      - scoped-role-permissions
   /sessions:
     get:
       description: Returns a list of `Session` objects.
@@ -3230,6 +3386,78 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedUsersList'
+          description: One page worth users in your organization.
+      security:
+      - BearerAuth: []
+      tags:
+      - users
+  /users/remote_users:
+    get:
+      description: Returns a list of remote users for your organization.
+      operationId: getRemoteUsers
+      parameters:
+      - description: Filter remote users by their third party provider.
+        example:
+        - GIT_HUB
+        explode: true
+        in: query
+        name: third_party_provider
+        required: false
+        schema:
+          items:
+            $ref: '#/components/schemas/ThirdPartyProviderEnum'
+          type: array
+        style: form
+      - description: Filter remote users by their user ID.
+        example:
+        - 32acc112-21ff-4669-91c2-21e27683eaa1
+        explode: true
+        in: query
+        name: user_id
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+        style: form
+      - description: Filter remote users by their remote ID.
+        example:
+        - 1234567890
+        explode: true
+        in: query
+        name: remote_id
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The pagination cursor value.
+        example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Number of results to return per page. Default is 200.
+        example: 200
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          maximum: 1000
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedRemoteUsersList'
           description: One page worth users in your organization.
       security:
       - BearerAuth: []
@@ -5133,6 +5361,60 @@ components:
           type: array
       required:
       - results
+    PaginatedRemoteUsersList:
+      example:
+        next: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        previous: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
+        results:
+        - user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+          remote_id: 1234567890
+          third_party_provider: GIT_LAB
+        - user_id: 29827fb8-f2dd-4e80-9576-238979927392
+          remote_id: remoteid123
+          third_party_provider: GIT_HUB
+      properties:
+        next:
+          description: The cursor with which to continue pagination if additional
+            result pages exist.
+          example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+          type: string
+          nullable: true
+        previous:
+          description: The cursor used to obtain the current result page.
+          example: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
+          type: string
+          nullable: true
+        results:
+          items:
+            $ref: '#/components/schemas/RemoteUser'
+          type: array
+      required:
+      - results
+    RemoteUser:
+      description: |-
+        # RemoteUser Object
+        ### Description
+        The `RemoteUser` object is used to represent a remote user.
+      example:
+        user_id: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+        remote_id: 1234567890
+        third_party_provider: GIT_HUB
+      properties:
+        user_id:
+          description: The ID of the user.
+          example: 29827fb8-f2dd-4e80-9576-28e31e9934ac
+          format: uuid
+          type: string
+        remote_id:
+          description: The ID of the remote user.
+          example: 1234567890
+          type: string
+        third_party_provider:
+          $ref: '#/components/schemas/ThirdPartyProviderEnum'
+      required:
+      - remote_id
+      - third_party_provider
+      - user_id
     User:
       description: |-
         # User Object
@@ -5229,6 +5511,23 @@ components:
       - DELETED
       - NOT_FOUND
       example: ACTIVE
+      type: string
+    ThirdPartyProviderEnum:
+      description: The third party provider of the remote user.
+      enum:
+      - AUTH0
+      - SLACK
+      - GOOGLE_CHAT
+      - JIRA
+      - LINEAR
+      - SERVICE_NOW
+      - PAGER_DUTY
+      - OPSGENIE
+      - GIT_HUB
+      - GIT_LAB
+      - GIT_LAB_CONNECTION
+      - TELEPORT
+      example: GIT_HUB
       type: string
     PaginatedGroupsList:
       example:
@@ -5468,6 +5767,8 @@ components:
         risk_sensitivity_override:
           allOf:
           - $ref: '#/components/schemas/RiskSensitivityEnum'
+        last_successful_sync:
+          $ref: '#/components/schemas/SyncTask'
       required:
       - group_id
     GroupUserList:
@@ -5848,6 +6149,41 @@ components:
       - GLOBAL
       - LIMITED
       example: GLOBAL
+      type: string
+    RolePermissionNameEnum:
+      description: The name of the role permission.
+      enum:
+      - READ
+      - READ_ASSIGNMENTS
+      - CREATE
+      - IMPORT
+      - EXPORT
+      - SYNC
+      - DELETE
+      - READ_SETTINGS
+      - EDIT_TAGS
+      - EDIT_SETTINGS
+      - EDIT_SYNC_SETTINGS
+      - EDIT_ASSIGNMENTS
+      - EDIT_REQUEST_CONFIGURATIONS
+      - EDIT_EVENT_STREAM
+      - ASSIGN_UAR_REVIEWERS
+      - SEND_REMINDERS
+      - STOP
+      - REQUEST_ON_BEHALF
+      - RESET_MFA
+      example: READ
+      type: string
+    RolePermissionTargetTypeEnum:
+      description: The type of the target for the role permission.
+      enum:
+      - RESOURCE
+      - CONNECTION
+      - GROUP
+      - BUNDLE
+      - USER
+      - ACCESS_REVIEW
+      example: RESOURCE
       type: string
     UpdateGroupResourcesInfo:
       example:
@@ -6258,6 +6594,10 @@ components:
           $ref: '#/components/schemas/GroupRemoteInfo_azure_ad_microsoft_365_group'
         snowflake_role:
           $ref: '#/components/schemas/GroupRemoteInfo_snowflake_role'
+        okta_group_rule:
+          $ref: '#/components/schemas/GroupRemoteInfo_okta_group_rule'
+        workday_user_security_group:
+          $ref: '#/components/schemas/GroupRemoteInfo_workday_user_security_group'
     ResourceRemoteInfo:
       description: Information that defines the remote resource. This replaces the
         deprecated remote_id and metadata fields.
@@ -6298,6 +6638,8 @@ components:
           $ref: '#/components/schemas/ResourceRemoteInfo_gcp_sql_instance'
         gcp_service_account:
           $ref: '#/components/schemas/ResourceRemoteInfo_gcp_service_account'
+        google_workspace_role:
+          $ref: '#/components/schemas/ResourceRemoteInfo_google_workspace_role'
         github_repo:
           $ref: '#/components/schemas/ResourceRemoteInfo_github_repo'
         gitlab_project:
@@ -7050,6 +7392,14 @@ components:
           description: The name of the target.
           example: Engineering Team
           type: string
+        remote_id:
+          description: The ID of the target on the remote system.
+          example: arn:aws:iam::490306337630:role/SupportUser
+          type: string
+        remote_name:
+          description: The name of the target on the remote system.
+          example: SupportUser
+          type: string
     RequestCustomFieldResponse:
       properties:
         field_name:
@@ -7288,6 +7638,8 @@ components:
             format: uuid
             type: string
           type: array
+        last_successful_sync:
+          $ref: '#/components/schemas/SyncTask'
       required:
       - resource_id
     AwsPermissionSetMetadata:
@@ -9055,6 +9407,63 @@ components:
           type: array
       required:
       - bundle_groups
+    ScopedRolePermissionList:
+      example:
+        permissions:
+        - target_ids:
+          - a381e7a3-e5e0-4c48-b1d6-4ccb4c191bc1
+          - 8294e9c9-deb6-48e9-9c99-da2a1e04a87f
+          target_type: RESOURCE
+          permission_name: READ
+      properties:
+        permissions:
+          items:
+            $ref: '#/components/schemas/ScopedRolePermission'
+          type: array
+      required:
+      - permissions
+    ScopedRolePermission:
+      properties:
+        target_ids:
+          description: "The IDs of the entities that this permission applies to. If\
+            \ empty of missing, the permission will have untargeted scope."
+          example:
+          - a381e7a3-e5e0-4c48-b1d6-4ccb4c191bc1
+          - 8294e9c9-deb6-48e9-9c99-da2a1e04a87f
+          items:
+            format: uuid
+            type: string
+          type: array
+        target_type:
+          $ref: '#/components/schemas/RolePermissionTargetTypeEnum'
+        permission_name:
+          $ref: '#/components/schemas/RolePermissionNameEnum'
+        allow_all:
+          type: boolean
+      required:
+      - allow_all
+      - permission_name
+      - target_type
+    SyncTask:
+      description: "Represents a sync task that has been completed, either successfully\
+        \ or with errors."
+      example:
+        id: 7c86c85d-0651-43e2-a748-d69d658418e8
+        completed_at: 2023-10-01T12:00:00Z
+      properties:
+        id:
+          description: The ID of the sync task.
+          example: 7c86c85d-0651-43e2-a748-d69d658418e8
+          format: uuid
+          type: string
+        completed_at:
+          description: The time when the sync task was completed.
+          example: 2023-10-01T12:00:00Z
+          format: date-time
+          type: string
+      required:
+      - completed_at
+      - id
     addBundleResource_request:
       properties:
         resource_id:
@@ -9409,6 +9818,24 @@ components:
           type: string
       required:
       - role_id
+    GroupRemoteInfo_okta_group_rule:
+      description: Remote info for Okta Directory group rule.
+      properties:
+        rule_id:
+          description: The id of the Okta group rule.
+          example: 0pr3f7zMZZHPgUoWO0g4
+          type: string
+      required:
+      - rule_id
+    GroupRemoteInfo_workday_user_security_group:
+      description: Remote info for Workday User Security group.
+      properties:
+        group_id:
+          description: The id of the Workday User Security group.
+          example: 123abc456def
+          type: string
+      required:
+      - group_id
     ResourceRemoteInfo_aws_organizational_unit:
       description: Remote info for AWS organizational unit.
       properties:
@@ -9662,6 +10089,15 @@ components:
       - email
       - project_id
       - service_account_id
+    ResourceRemoteInfo_google_workspace_role:
+      description: Remote info for GCP workspace role.
+      properties:
+        role_id:
+          description: The id of the role.
+          example: google-workspace-role:01234567890123456
+          type: string
+      required:
+      - role_id
     ResourceRemoteInfo_github_repo:
       description: Remote info for GitHub repository.
       properties:

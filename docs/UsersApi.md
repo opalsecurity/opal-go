@@ -4,10 +4,85 @@ All URIs are relative to *https://api.opal.dev/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**GetRemoteUsers**](UsersAPI.md#GetRemoteUsers) | **Get** /users/remote_users | 
 [**GetUserTags**](UsersAPI.md#GetUserTags) | **Get** /users/{user_id}/tags | 
 [**GetUsers**](UsersAPI.md#GetUsers) | **Get** /users | 
 [**User**](UsersAPI.md#User) | **Get** /user | 
 
+
+
+## GetRemoteUsers
+
+> PaginatedRemoteUsersList GetRemoteUsers(ctx).ThirdPartyProvider(thirdPartyProvider).UserId(userId).RemoteId(remoteId).Cursor(cursor).PageSize(pageSize).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	thirdPartyProvider := []openapiclient.ThirdPartyProviderEnum{openapiclient.ThirdPartyProviderEnum("AUTH0")} // []ThirdPartyProviderEnum | Filter remote users by their third party provider. (optional)
+	userId := []string{"Inner_example"} // []string | Filter remote users by their user ID. (optional)
+	remoteId := []string{"Inner_example"} // []string | Filter remote users by their remote ID. (optional)
+	cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
+	pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UsersAPI.GetRemoteUsers(context.Background()).ThirdPartyProvider(thirdPartyProvider).UserId(userId).RemoteId(remoteId).Cursor(cursor).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.GetRemoteUsers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRemoteUsers`: PaginatedRemoteUsersList
+	fmt.Fprintf(os.Stdout, "Response from `UsersAPI.GetRemoteUsers`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRemoteUsersRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **thirdPartyProvider** | [**[]ThirdPartyProviderEnum**](ThirdPartyProviderEnum.md) | Filter remote users by their third party provider. | 
+ **userId** | **[]string** | Filter remote users by their user ID. | 
+ **remoteId** | **[]string** | Filter remote users by their remote ID. | 
+ **cursor** | **string** | The pagination cursor value. | 
+ **pageSize** | **int32** | Number of results to return per page. Default is 200. | 
+
+### Return type
+
+[**PaginatedRemoteUsersList**](PaginatedRemoteUsersList.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## GetUserTags

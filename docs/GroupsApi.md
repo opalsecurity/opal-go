@@ -398,7 +398,7 @@ Name | Type | Description  | Notes
 
 ## DeleteGroupUser
 
-> DeleteGroupUser(ctx, groupId, userId).Execute()
+> DeleteGroupUser(ctx, groupId, userId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
 
 
 
@@ -419,10 +419,11 @@ import (
 func main() {
 	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
 	userId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of a user to remove from this group.
+	accessLevelRemoteId := "30" // string | The remote ID of the access level for which this user has direct access. If omitted, the default access level remote ID value (empty string) is assumed. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.GroupsAPI.DeleteGroupUser(context.Background(), groupId, userId).Execute()
+	r, err := apiClient.GroupsAPI.DeleteGroupUser(context.Background(), groupId, userId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.DeleteGroupUser``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -448,6 +449,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **accessLevelRemoteId** | **string** | The remote ID of the access level for which this user has direct access. If omitted, the default access level remote ID value (empty string) is assumed. | 
 
 ### Return type
 

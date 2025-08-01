@@ -608,6 +608,13 @@ type ApiDeleteGroupUserRequest struct {
 	ApiService *GroupsAPIService
 	groupId string
 	userId string
+	accessLevelRemoteId *string
+}
+
+// The remote ID of the access level for which this user has direct access. If omitted, the default access level remote ID value (empty string) is assumed.
+func (r ApiDeleteGroupUserRequest) AccessLevelRemoteId(accessLevelRemoteId string) ApiDeleteGroupUserRequest {
+	r.accessLevelRemoteId = &accessLevelRemoteId
+	return r
 }
 
 func (r ApiDeleteGroupUserRequest) Execute() (*http.Response, error) {
@@ -654,6 +661,9 @@ func (a *GroupsAPIService) DeleteGroupUserExecute(r ApiDeleteGroupUserRequest) (
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.accessLevelRemoteId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "access_level_remote_id", r.accessLevelRemoteId, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
