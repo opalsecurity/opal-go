@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **CustomRequestNotification** | Pointer to **string** | Custom request notification sent to the requester when the request is approved. | [optional] 
 **RiskSensitivity** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) | The risk sensitivity level for the group. When an override is set, this field will match that. | [optional] [readonly] 
 **RiskSensitivityOverride** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) |  | [optional] 
+**LastSuccessfulSync** | Pointer to [**SyncTask**](SyncTask.md) | Information about the last successful sync of this group. | [optional] [readonly] 
 
 ## Methods
 
@@ -720,6 +721,31 @@ SetRiskSensitivityOverride sets RiskSensitivityOverride field to given value.
 `func (o *Group) HasRiskSensitivityOverride() bool`
 
 HasRiskSensitivityOverride returns a boolean if a field has been set.
+
+### GetLastSuccessfulSync
+
+`func (o *Group) GetLastSuccessfulSync() SyncTask`
+
+GetLastSuccessfulSync returns the LastSuccessfulSync field if non-nil, zero value otherwise.
+
+### GetLastSuccessfulSyncOk
+
+`func (o *Group) GetLastSuccessfulSyncOk() (*SyncTask, bool)`
+
+GetLastSuccessfulSyncOk returns a tuple with the LastSuccessfulSync field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastSuccessfulSync
+
+`func (o *Group) SetLastSuccessfulSync(v SyncTask)`
+
+SetLastSuccessfulSync sets LastSuccessfulSync field to given value.
+
+### HasLastSuccessfulSync
+
+`func (o *Group) HasLastSuccessfulSync() bool`
+
+HasLastSuccessfulSync returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

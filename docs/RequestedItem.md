@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **AccessLevelName** | Pointer to **string** | The name of the access level requested. | [optional] 
 **AccessLevelRemoteId** | Pointer to **string** | The ID of the access level requested on the remote system. | [optional] 
 **Name** | Pointer to **string** | The name of the target. | [optional] 
+**RemoteId** | Pointer to **string** | The ID of the target on the remote system. | [optional] 
+**RemoteName** | Pointer to **string** | The name of the target on the remote system. | [optional] 
 
 ## Methods
 
@@ -153,6 +155,56 @@ SetName sets Name field to given value.
 `func (o *RequestedItem) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetRemoteId
+
+`func (o *RequestedItem) GetRemoteId() string`
+
+GetRemoteId returns the RemoteId field if non-nil, zero value otherwise.
+
+### GetRemoteIdOk
+
+`func (o *RequestedItem) GetRemoteIdOk() (*string, bool)`
+
+GetRemoteIdOk returns a tuple with the RemoteId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemoteId
+
+`func (o *RequestedItem) SetRemoteId(v string)`
+
+SetRemoteId sets RemoteId field to given value.
+
+### HasRemoteId
+
+`func (o *RequestedItem) HasRemoteId() bool`
+
+HasRemoteId returns a boolean if a field has been set.
+
+### GetRemoteName
+
+`func (o *RequestedItem) GetRemoteName() string`
+
+GetRemoteName returns the RemoteName field if non-nil, zero value otherwise.
+
+### GetRemoteNameOk
+
+`func (o *RequestedItem) GetRemoteNameOk() (*string, bool)`
+
+GetRemoteNameOk returns a tuple with the RemoteName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemoteName
+
+`func (o *RequestedItem) SetRemoteName(v string)`
+
+SetRemoteName sets RemoteName field to given value.
+
+### HasRemoteName
+
+`func (o *RequestedItem) HasRemoteName() bool`
+
+HasRemoteName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

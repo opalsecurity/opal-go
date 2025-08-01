@@ -30,6 +30,8 @@ type GroupRemoteInfo struct {
 	AzureAdSecurityGroup *GroupRemoteInfoAzureAdSecurityGroup `json:"azure_ad_security_group,omitempty"`
 	AzureAdMicrosoft365Group *GroupRemoteInfoAzureAdMicrosoft365Group `json:"azure_ad_microsoft_365_group,omitempty"`
 	SnowflakeRole *GroupRemoteInfoSnowflakeRole `json:"snowflake_role,omitempty"`
+	OktaGroupRule *GroupRemoteInfoOktaGroupRule `json:"okta_group_rule,omitempty"`
+	WorkdayUserSecurityGroup *GroupRemoteInfoWorkdayUserSecurityGroup `json:"workday_user_security_group,omitempty"`
 }
 
 // NewGroupRemoteInfo instantiates a new GroupRemoteInfo object
@@ -369,6 +371,70 @@ func (o *GroupRemoteInfo) SetSnowflakeRole(v GroupRemoteInfoSnowflakeRole) {
 	o.SnowflakeRole = &v
 }
 
+// GetOktaGroupRule returns the OktaGroupRule field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetOktaGroupRule() GroupRemoteInfoOktaGroupRule {
+	if o == nil || IsNil(o.OktaGroupRule) {
+		var ret GroupRemoteInfoOktaGroupRule
+		return ret
+	}
+	return *o.OktaGroupRule
+}
+
+// GetOktaGroupRuleOk returns a tuple with the OktaGroupRule field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetOktaGroupRuleOk() (*GroupRemoteInfoOktaGroupRule, bool) {
+	if o == nil || IsNil(o.OktaGroupRule) {
+		return nil, false
+	}
+	return o.OktaGroupRule, true
+}
+
+// HasOktaGroupRule returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasOktaGroupRule() bool {
+	if o != nil && !IsNil(o.OktaGroupRule) {
+		return true
+	}
+
+	return false
+}
+
+// SetOktaGroupRule gets a reference to the given GroupRemoteInfoOktaGroupRule and assigns it to the OktaGroupRule field.
+func (o *GroupRemoteInfo) SetOktaGroupRule(v GroupRemoteInfoOktaGroupRule) {
+	o.OktaGroupRule = &v
+}
+
+// GetWorkdayUserSecurityGroup returns the WorkdayUserSecurityGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetWorkdayUserSecurityGroup() GroupRemoteInfoWorkdayUserSecurityGroup {
+	if o == nil || IsNil(o.WorkdayUserSecurityGroup) {
+		var ret GroupRemoteInfoWorkdayUserSecurityGroup
+		return ret
+	}
+	return *o.WorkdayUserSecurityGroup
+}
+
+// GetWorkdayUserSecurityGroupOk returns a tuple with the WorkdayUserSecurityGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetWorkdayUserSecurityGroupOk() (*GroupRemoteInfoWorkdayUserSecurityGroup, bool) {
+	if o == nil || IsNil(o.WorkdayUserSecurityGroup) {
+		return nil, false
+	}
+	return o.WorkdayUserSecurityGroup, true
+}
+
+// HasWorkdayUserSecurityGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasWorkdayUserSecurityGroup() bool {
+	if o != nil && !IsNil(o.WorkdayUserSecurityGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetWorkdayUserSecurityGroup gets a reference to the given GroupRemoteInfoWorkdayUserSecurityGroup and assigns it to the WorkdayUserSecurityGroup field.
+func (o *GroupRemoteInfo) SetWorkdayUserSecurityGroup(v GroupRemoteInfoWorkdayUserSecurityGroup) {
+	o.WorkdayUserSecurityGroup = &v
+}
+
 func (o GroupRemoteInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -408,6 +474,12 @@ func (o GroupRemoteInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SnowflakeRole) {
 		toSerialize["snowflake_role"] = o.SnowflakeRole
+	}
+	if !IsNil(o.OktaGroupRule) {
+		toSerialize["okta_group_rule"] = o.OktaGroupRule
+	}
+	if !IsNil(o.WorkdayUserSecurityGroup) {
+		toSerialize["workday_user_security_group"] = o.WorkdayUserSecurityGroup
 	}
 	return toSerialize, nil
 }

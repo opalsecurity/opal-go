@@ -80,6 +80,8 @@ type Resource struct {
 	AncestorResourceIds []string `json:"ancestor_resource_ids,omitempty"`
 	// List of resource IDs that are descendants of this resource.
 	DescendantResourceIds []string `json:"descendant_resource_ids,omitempty"`
+	// Information about the last successful sync of this resource.
+	LastSuccessfulSync *SyncTask `json:"last_successful_sync,omitempty"`
 }
 
 type _Resource Resource
@@ -1060,6 +1062,38 @@ func (o *Resource) SetDescendantResourceIds(v []string) {
 	o.DescendantResourceIds = v
 }
 
+// GetLastSuccessfulSync returns the LastSuccessfulSync field value if set, zero value otherwise.
+func (o *Resource) GetLastSuccessfulSync() SyncTask {
+	if o == nil || IsNil(o.LastSuccessfulSync) {
+		var ret SyncTask
+		return ret
+	}
+	return *o.LastSuccessfulSync
+}
+
+// GetLastSuccessfulSyncOk returns a tuple with the LastSuccessfulSync field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetLastSuccessfulSyncOk() (*SyncTask, bool) {
+	if o == nil || IsNil(o.LastSuccessfulSync) {
+		return nil, false
+	}
+	return o.LastSuccessfulSync, true
+}
+
+// HasLastSuccessfulSync returns a boolean if a field has been set.
+func (o *Resource) HasLastSuccessfulSync() bool {
+	if o != nil && !IsNil(o.LastSuccessfulSync) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastSuccessfulSync gets a reference to the given SyncTask and assigns it to the LastSuccessfulSync field.
+func (o *Resource) SetLastSuccessfulSync(v SyncTask) {
+	o.LastSuccessfulSync = &v
+}
+
 func (o Resource) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -1157,6 +1191,9 @@ func (o Resource) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.DescendantResourceIds) {
 		toSerialize["descendant_resource_ids"] = o.DescendantResourceIds
+	}
+	if !IsNil(o.LastSuccessfulSync) {
+		toSerialize["last_successful_sync"] = o.LastSuccessfulSync
 	}
 	return toSerialize, nil
 }

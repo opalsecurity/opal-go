@@ -155,6 +155,7 @@ Class | Method | HTTP request | Description
 *OwnersAPI* | [**UpdateOwners**](docs/OwnersAPI.md#updateowners) | **Put** /owners | 
 *RequestsAPI* | [**ApproveRequest**](docs/RequestsAPI.md#approverequest) | **Post** /requests/{id}/approve | 
 *RequestsAPI* | [**CreateRequest**](docs/RequestsAPI.md#createrequest) | **Post** /requests | 
+*RequestsAPI* | [**GetRequest**](docs/RequestsAPI.md#getrequest) | **Get** /requests/{id} | 
 *RequestsAPI* | [**GetRequests**](docs/RequestsAPI.md#getrequests) | **Get** /requests | 
 *RequestsAPI* | [**GetRequestsRelay**](docs/RequestsAPI.md#getrequestsrelay) | **Get** /requests/relay | 
 *ResourcesAPI* | [**AddResourceNhi**](docs/ResourcesAPI.md#addresourcenhi) | **Post** /resources/{resource_id}/non-human-identities/{non_human_identity_id} | 
@@ -180,6 +181,8 @@ Class | Method | HTTP request | Description
 *ResourcesAPI* | [**SetResourceVisibility**](docs/ResourcesAPI.md#setresourcevisibility) | **Put** /resources/{resource_id}/visibility | 
 *ResourcesAPI* | [**UpdateResourceUser**](docs/ResourcesAPI.md#updateresourceuser) | **Put** /resources/{resource_id}/users/{user_id} | 
 *ResourcesAPI* | [**UpdateResources**](docs/ResourcesAPI.md#updateresources) | **Put** /resources | 
+*ScopedRolePermissionsAPI* | [**GetResourceScopedRolePermissions**](docs/ScopedRolePermissionsAPI.md#getresourcescopedrolepermissions) | **Get** /resources/{resource_id}/scoped-role-permissions | 
+*ScopedRolePermissionsAPI* | [**SetResourceScopedRolePermissions**](docs/ScopedRolePermissionsAPI.md#setresourcescopedrolepermissions) | **Put** /resources/{resource_id}/scoped-role-permissions | 
 *SessionsAPI* | [**Sessions**](docs/SessionsAPI.md#sessions) | **Get** /sessions | 
 *TagsAPI* | [**AddGroupTag**](docs/TagsAPI.md#addgrouptag) | **Post** /tags/{tag_id}/groups/{group_id} | 
 *TagsAPI* | [**AddResourceTag**](docs/TagsAPI.md#addresourcetag) | **Post** /tags/{tag_id}/resources/{resource_id} | 
@@ -195,6 +198,7 @@ Class | Method | HTTP request | Description
 *UarsAPI* | [**CreateUar**](docs/UarsAPI.md#createuar) | **Post** /uar | 
 *UarsAPI* | [**GetUARs**](docs/UarsAPI.md#getuars) | **Get** /uars | 
 *UarsAPI* | [**GetUar**](docs/UarsAPI.md#getuar) | **Get** /uar/{uar_id} | 
+*UsersAPI* | [**GetRemoteUsers**](docs/UsersAPI.md#getremoteusers) | **Get** /users/remote_users | 
 *UsersAPI* | [**GetUserTags**](docs/UsersAPI.md#getusertags) | **Get** /users/{user_id}/tags | 
 *UsersAPI* | [**GetUsers**](docs/UsersAPI.md#getusers) | **Get** /users | 
 *UsersAPI* | [**User**](docs/UsersAPI.md#user) | **Get** /user | 
@@ -263,7 +267,9 @@ Class | Method | HTTP request | Description
  - [GroupRemoteInfoGoogleGroup](docs/GroupRemoteInfoGoogleGroup.md)
  - [GroupRemoteInfoLdapGroup](docs/GroupRemoteInfoLdapGroup.md)
  - [GroupRemoteInfoOktaGroup](docs/GroupRemoteInfoOktaGroup.md)
+ - [GroupRemoteInfoOktaGroupRule](docs/GroupRemoteInfoOktaGroupRule.md)
  - [GroupRemoteInfoSnowflakeRole](docs/GroupRemoteInfoSnowflakeRole.md)
+ - [GroupRemoteInfoWorkdayUserSecurityGroup](docs/GroupRemoteInfoWorkdayUserSecurityGroup.md)
  - [GroupResource](docs/GroupResource.md)
  - [GroupResourceList](docs/GroupResourceList.md)
  - [GroupTypeEnum](docs/GroupTypeEnum.md)
@@ -291,12 +297,14 @@ Class | Method | HTTP request | Description
  - [PaginatedGroupBindingsList](docs/PaginatedGroupBindingsList.md)
  - [PaginatedGroupsList](docs/PaginatedGroupsList.md)
  - [PaginatedOwnersList](docs/PaginatedOwnersList.md)
+ - [PaginatedRemoteUsersList](docs/PaginatedRemoteUsersList.md)
  - [PaginatedResourcesList](docs/PaginatedResourcesList.md)
  - [PaginatedTagsList](docs/PaginatedTagsList.md)
  - [PaginatedUARsList](docs/PaginatedUARsList.md)
  - [PaginatedUsersList](docs/PaginatedUsersList.md)
  - [PropagationStatus](docs/PropagationStatus.md)
  - [PropagationStatusEnum](docs/PropagationStatusEnum.md)
+ - [RemoteUser](docs/RemoteUser.md)
  - [Request](docs/Request.md)
  - [RequestConfiguration](docs/RequestConfiguration.md)
  - [RequestConnection](docs/RequestConnection.md)
@@ -336,6 +344,7 @@ Class | Method | HTTP request | Description
  - [ResourceRemoteInfoGcpSqlInstance](docs/ResourceRemoteInfoGcpSqlInstance.md)
  - [ResourceRemoteInfoGithubRepo](docs/ResourceRemoteInfoGithubRepo.md)
  - [ResourceRemoteInfoGitlabProject](docs/ResourceRemoteInfoGitlabProject.md)
+ - [ResourceRemoteInfoGoogleWorkspaceRole](docs/ResourceRemoteInfoGoogleWorkspaceRole.md)
  - [ResourceRemoteInfoOktaApp](docs/ResourceRemoteInfoOktaApp.md)
  - [ResourceRemoteInfoOktaCustomRole](docs/ResourceRemoteInfoOktaCustomRole.md)
  - [ResourceRemoteInfoOktaStandardRole](docs/ResourceRemoteInfoOktaStandardRole.md)
@@ -354,18 +363,24 @@ Class | Method | HTTP request | Description
  - [ReviewerStage](docs/ReviewerStage.md)
  - [ReviewerStageList](docs/ReviewerStageList.md)
  - [RiskSensitivityEnum](docs/RiskSensitivityEnum.md)
+ - [RolePermissionNameEnum](docs/RolePermissionNameEnum.md)
+ - [RolePermissionTargetTypeEnum](docs/RolePermissionTargetTypeEnum.md)
  - [RuleClauses](docs/RuleClauses.md)
  - [RuleConjunction](docs/RuleConjunction.md)
  - [RuleDisjunction](docs/RuleDisjunction.md)
+ - [ScopedRolePermission](docs/ScopedRolePermission.md)
+ - [ScopedRolePermissionList](docs/ScopedRolePermissionList.md)
  - [Session](docs/Session.md)
  - [SessionsList](docs/SessionsList.md)
  - [SubEvent](docs/SubEvent.md)
  - [SyncError](docs/SyncError.md)
  - [SyncErrorList](docs/SyncErrorList.md)
+ - [SyncTask](docs/SyncTask.md)
  - [Tag](docs/Tag.md)
  - [TagFilter](docs/TagFilter.md)
  - [TagSelector](docs/TagSelector.md)
  - [TagsList](docs/TagsList.md)
+ - [ThirdPartyProviderEnum](docs/ThirdPartyProviderEnum.md)
  - [TicketPropagationConfiguration](docs/TicketPropagationConfiguration.md)
  - [TicketingProviderEnum](docs/TicketingProviderEnum.md)
  - [UAR](docs/UAR.md)

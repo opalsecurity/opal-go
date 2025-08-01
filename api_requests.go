@@ -250,11 +250,116 @@ func (a *RequestsAPIService) CreateRequestExecute(r ApiCreateRequestRequest) (*C
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetRequestRequest struct {
+	ctx context.Context
+	ApiService *RequestsAPIService
+	id string
+}
+
+func (r ApiGetRequestRequest) Execute() (*Request, *http.Response, error) {
+	return r.ApiService.GetRequestExecute(r)
+}
+
+/*
+GetRequest Method for GetRequest
+
+Returns a request by ID.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The ID of the request.
+ @return ApiGetRequestRequest
+*/
+func (a *RequestsAPIService) GetRequest(ctx context.Context, id string) ApiGetRequestRequest {
+	return ApiGetRequestRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return Request
+func (a *RequestsAPIService) GetRequestExecute(r ApiGetRequestRequest) (*Request, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Request
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RequestsAPIService.GetRequest")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/requests/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetRequestsRequest struct {
 	ctx context.Context
 	ApiService *RequestsAPIService
 	startDateFilter *string
 	endDateFilter *string
+	requesterId *string
+	targetUserId *string
 	cursor *string
 	pageSize *int32
 	showPendingOnly *bool
@@ -269,6 +374,18 @@ func (r ApiGetRequestsRequest) StartDateFilter(startDateFilter string) ApiGetReq
 // An end date filter for the events.
 func (r ApiGetRequestsRequest) EndDateFilter(endDateFilter string) ApiGetRequestsRequest {
 	r.endDateFilter = &endDateFilter
+	return r
+}
+
+// Filter requests by their requester ID.
+func (r ApiGetRequestsRequest) RequesterId(requesterId string) ApiGetRequestsRequest {
+	r.requesterId = &requesterId
+	return r
+}
+
+// Filter requests by their target user ID.
+func (r ApiGetRequestsRequest) TargetUserId(targetUserId string) ApiGetRequestsRequest {
+	r.targetUserId = &targetUserId
 	return r
 }
 
@@ -335,6 +452,12 @@ func (a *RequestsAPIService) GetRequestsExecute(r ApiGetRequestsRequest) (*Reque
 	}
 	if r.endDateFilter != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "end_date_filter", r.endDateFilter, "form", "")
+	}
+	if r.requesterId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "requester_id", r.requesterId, "form", "")
+	}
+	if r.targetUserId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "target_user_id", r.targetUserId, "form", "")
 	}
 	if r.cursor != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
@@ -464,6 +587,8 @@ Returns a paginated list of requests using Relay-style cursor pagination.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetRequestsRelayRequest
+
+Deprecated
 */
 func (a *RequestsAPIService) GetRequestsRelay(ctx context.Context) ApiGetRequestsRelayRequest {
 	return ApiGetRequestsRelayRequest{
@@ -474,6 +599,7 @@ func (a *RequestsAPIService) GetRequestsRelay(ctx context.Context) ApiGetRequest
 
 // Execute executes the request
 //  @return RequestConnection
+// Deprecated
 func (a *RequestsAPIService) GetRequestsRelayExecute(r ApiGetRequestsRelayRequest) (*RequestConnection, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
