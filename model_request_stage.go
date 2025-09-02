@@ -24,7 +24,6 @@ var _ MappedNullable = &RequestStage{}
 type RequestStage struct {
 	// The stage number
 	Stage int32 `json:"stage"`
-	// The operator to apply to reviewers in this stage
 	Operator ReviewStageOperator `json:"operator"`
 	// The reviewers for this stage
 	Reviewers []RequestReviewer `json:"reviewers"`

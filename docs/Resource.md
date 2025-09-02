@@ -34,7 +34,7 @@ Name | Type | Description | Notes
 **RemoteInfo** | Pointer to [**ResourceRemoteInfo**](ResourceRemoteInfo.md) |  | [optional] 
 **AncestorResourceIds** | Pointer to **[]string** | List of resource IDs that are ancestors of this resource. | [optional] 
 **DescendantResourceIds** | Pointer to **[]string** | List of resource IDs that are descendants of this resource. | [optional] 
-**LastSuccessfulSync** | Pointer to [**SyncTask**](SyncTask.md) | Information about the last successful sync of this resource. | [optional] [readonly] 
+**LastSuccessfulSync** | Pointer to [**SyncTask**](SyncTask.md) |  | [optional] 
 
 ## Methods
 

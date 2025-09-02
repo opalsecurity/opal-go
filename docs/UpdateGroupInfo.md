@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this group. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **GroupLeaderUserIds** | Pointer to **[]string** | A list of User IDs for the group leaders of the group | [optional] 
 **RequestConfigurations** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | The request configuration list of the configuration template. If not provided, the default request configuration will be used. | [optional] 
-**RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) | The request configuration list of the configuration template. If not provided, the default request configuration will be used. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
+**RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) |  | [optional] 
 **CustomRequestNotification** | Pointer to **string** | Custom request notification sent to the requester when the request is approved. | [optional] 
 **RiskSensitivityOverride** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) |  | [optional] 
 
