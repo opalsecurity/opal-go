@@ -77,7 +77,6 @@ type Group struct {
 	// The risk sensitivity level for the group. When an override is set, this field will match that.
 	RiskSensitivity *RiskSensitivityEnum `json:"risk_sensitivity,omitempty"`
 	RiskSensitivityOverride *RiskSensitivityEnum `json:"risk_sensitivity_override,omitempty"`
-	// Information about the last successful sync of this group.
 	LastSuccessfulSync *SyncTask `json:"last_successful_sync,omitempty"`
 }
 

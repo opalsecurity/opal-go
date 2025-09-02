@@ -34,7 +34,7 @@ import (
 
 func main() {
 	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The ID of the request to approve
-	approveRequestRequest := *openapiclient.NewApproveRequestRequest("REGULAR") // ApproveRequestRequest | Approval parameters
+	approveRequestRequest := *openapiclient.NewApproveRequestRequest(openapiclient.RequestApprovalEnum("REGULAR")) // ApproveRequestRequest | Approval parameters
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

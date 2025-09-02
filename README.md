@@ -170,7 +170,6 @@ Class | Method | HTTP request | Description
 *ResourcesAPI* | [**GetResourceNhis**](docs/ResourcesAPI.md#getresourcenhis) | **Get** /resources/{resource_id}/non-human-identities | 
 *ResourcesAPI* | [**GetResourceReviewerStages**](docs/ResourcesAPI.md#getresourcereviewerstages) | **Get** /resources/{resource_id}/reviewer-stages | 
 *ResourcesAPI* | [**GetResourceReviewers**](docs/ResourcesAPI.md#getresourcereviewers) | **Get** /resources/{resource_id}/reviewers | 
-*ResourcesAPI* | [**GetResourceScopedRolePermissions**](docs/ResourcesAPI.md#getresourcescopedrolepermissions) | **Get** /resources/{resource_id}/scoped-role-permissions | 
 *ResourcesAPI* | [**GetResourceTags**](docs/ResourcesAPI.md#getresourcetags) | **Get** /resources/{resource_id}/tags | 
 *ResourcesAPI* | [**GetResourceUser**](docs/ResourcesAPI.md#getresourceuser) | **Get** /resources/{resource_id}/users/{user_id} | 
 *ResourcesAPI* | [**GetResourceUsers**](docs/ResourcesAPI.md#getresourceusers) | **Get** /resources/{resource_id}/users | 
@@ -181,7 +180,6 @@ Class | Method | HTTP request | Description
 *ResourcesAPI* | [**SetResourceMessageChannels**](docs/ResourcesAPI.md#setresourcemessagechannels) | **Put** /resources/{resource_id}/message-channels | 
 *ResourcesAPI* | [**SetResourceReviewerStages**](docs/ResourcesAPI.md#setresourcereviewerstages) | **Put** /resources/{resource_id}/reviewer-stages | 
 *ResourcesAPI* | [**SetResourceReviewers**](docs/ResourcesAPI.md#setresourcereviewers) | **Put** /resources/{resource_id}/reviewers | 
-*ResourcesAPI* | [**SetResourceScopedRolePermissions**](docs/ResourcesAPI.md#setresourcescopedrolepermissions) | **Put** /resources/{resource_id}/scoped-role-permissions | 
 *ResourcesAPI* | [**SetResourceVisibility**](docs/ResourcesAPI.md#setresourcevisibility) | **Put** /resources/{resource_id}/visibility | 
 *ResourcesAPI* | [**UpdateResourceUser**](docs/ResourcesAPI.md#updateresourceuser) | **Put** /resources/{resource_id}/users/{user_id} | 
 *ResourcesAPI* | [**UpdateResources**](docs/ResourcesAPI.md#updateresources) | **Put** /resources | 

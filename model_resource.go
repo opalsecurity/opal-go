@@ -82,7 +82,6 @@ type Resource struct {
 	AncestorResourceIds []string `json:"ancestor_resource_ids,omitempty"`
 	// List of resource IDs that are descendants of this resource.
 	DescendantResourceIds []string `json:"descendant_resource_ids,omitempty"`
-	// Information about the last successful sync of this resource.
 	LastSuccessfulSync *SyncTask `json:"last_successful_sync,omitempty"`
 }
 

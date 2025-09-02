@@ -3308,7 +3308,6 @@ paths:
       security:
       - BearerAuth: []
       tags:
-      - resources
       - scoped-role-permissions
     put:
       description: Sets all the scoped role permissions on an OPAL_SCOPED_ROLE resource.
@@ -3341,7 +3340,6 @@ paths:
       security:
       - BearerAuth: []
       tags:
-      - resources
       - scoped-role-permissions
   /resources/users/{user_id}:
     get:
@@ -5011,7 +5009,7 @@ components:
       example: FAILED
       type: string
     SubEvent:
-      additionalProperties: true
+      additionalProperties: {}
       description: |-
         # Sub event Object
         ### Description
@@ -5029,7 +5027,6 @@ components:
         sub_event_type:
           description: The subevent type.
           example: USERS_CREATED
-          type: string
       required:
       - sub_event_type
     PaginatedEventList:
