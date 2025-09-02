@@ -66,7 +66,7 @@ paths:
         required: false
         schema:
           items:
-            $ref: '#/components/schemas/AppTypeEnum'
+            $ref: "#/components/schemas/AppTypeEnum"
           type: array
         style: form
       - description: An owner ID to filter by.
@@ -84,7 +84,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AppsList'
+                $ref: "#/components/schemas/AppsList"
           description: A list of apps for your organization.
       security:
       - BearerAuth: []
@@ -110,7 +110,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/App'
+                $ref: "#/components/schemas/App"
           description: The requested `App`.
       security:
       - BearerAuth: []
@@ -155,7 +155,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedBundleList'
+                $ref: "#/components/schemas/PaginatedBundleList"
           description: A list of bundles for your organization.
       security:
       - BearerAuth: []
@@ -168,14 +168,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateBundleInfo'
+              $ref: "#/components/schemas/CreateBundleInfo"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Bundle'
+                $ref: "#/components/schemas/Bundle"
           description: The bundle successfully created.
       security:
       - BearerAuth: []
@@ -222,7 +222,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Bundle'
+                $ref: "#/components/schemas/Bundle"
           description: The requested `Bundle`.
       security:
       - BearerAuth: []
@@ -246,14 +246,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Bundle'
+              $ref: "#/components/schemas/Bundle"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Bundle'
+                $ref: "#/components/schemas/Bundle"
           description: The bundle was successfully updated.
         "204":
           description: No changes detected (no-op)
@@ -301,7 +301,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedBundleResourceList'
+                $ref: "#/components/schemas/PaginatedBundleResourceList"
           description: A list of resources for the bundle.
       security:
       - BearerAuth: []
@@ -325,14 +325,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/addBundleResource_request'
+              $ref: "#/components/schemas/addBundleResource_request"
         required: false
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BundleResource'
+                $ref: "#/components/schemas/BundleResource"
           description: Resource was successfully added to the bundle.
       security:
       - BearerAuth: []
@@ -420,7 +420,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedBundleGroupList'
+                $ref: "#/components/schemas/PaginatedBundleGroupList"
           description: A list of groups for the bundle.
       security:
       - BearerAuth: []
@@ -444,14 +444,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/addBundleGroup_request'
+              $ref: "#/components/schemas/addBundleGroup_request"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BundleGroup'
+                $ref: "#/components/schemas/BundleGroup"
           description: Group was successfully added to the bundle.
       security:
       - BearerAuth: []
@@ -518,7 +518,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VisibilityInfo'
+                $ref: "#/components/schemas/VisibilityInfo"
           description: The visibility details of a bundle.
       security:
       - BearerAuth: []
@@ -542,7 +542,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VisibilityInfo'
+              $ref: "#/components/schemas/VisibilityInfo"
         required: true
       responses:
         "200":
@@ -560,7 +560,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedConfigurationTemplateList'
+                $ref: "#/components/schemas/PaginatedConfigurationTemplateList"
           description: One page worth of configuration templates for your organization.
       security:
       - BearerAuth: []
@@ -573,14 +573,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateConfigurationTemplateInfo'
+              $ref: "#/components/schemas/CreateConfigurationTemplateInfo"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConfigurationTemplate'
+                $ref: "#/components/schemas/ConfigurationTemplate"
           description: The configuration template just created.
       security:
       - BearerAuth: []
@@ -593,7 +593,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateConfigurationTemplateInfo'
+              $ref: "#/components/schemas/UpdateConfigurationTemplateInfo"
         description: Configuration template to be updated
         required: true
       responses:
@@ -601,7 +601,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConfigurationTemplate'
+                $ref: "#/components/schemas/ConfigurationTemplate"
           description: The configuration template just updated.
       security:
       - BearerAuth: []
@@ -727,7 +727,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedEventList'
+                $ref: "#/components/schemas/PaginatedEventList"
           description: One page worth of events with the appropriate filters applied.
       security:
       - BearerAuth: []
@@ -764,7 +764,7 @@ paths:
         name: group_type_filter
         required: false
         schema:
-          $ref: '#/components/schemas/GroupTypeEnum'
+          $ref: "#/components/schemas/GroupTypeEnum"
         style: form
       - description: The group ids to filter by.
         example:
@@ -795,7 +795,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedGroupsList'
+                $ref: "#/components/schemas/PaginatedGroupsList"
           description: One page worth groups associated with your organization.
       security:
       - BearerAuth: []
@@ -808,14 +808,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateGroupInfo'
+              $ref: "#/components/schemas/CreateGroupInfo"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Group'
+                $ref: "#/components/schemas/Group"
           description: The group just created.
       security:
       - BearerAuth: []
@@ -828,7 +828,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateGroupInfoList'
+              $ref: "#/components/schemas/UpdateGroupInfoList"
         description: Groups to be updated
         required: true
       responses:
@@ -836,7 +836,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UpdateGroupInfoList'
+                $ref: "#/components/schemas/UpdateGroupInfoList"
           description: The resulting updated group infos.
       security:
       - BearerAuth: []
@@ -883,7 +883,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Group'
+                $ref: "#/components/schemas/Group"
           description: The requested `Group`.
       security:
       - BearerAuth: []
@@ -910,7 +910,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MessageChannelList'
+                $ref: "#/components/schemas/MessageChannelList"
           description: The audit and reviewer message channels attached to the group.
       security:
       - BearerAuth: []
@@ -934,7 +934,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MessageChannelIDList'
+              $ref: "#/components/schemas/MessageChannelIDList"
         required: true
       responses:
         "200":
@@ -971,7 +971,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OnCallScheduleList'
+                $ref: "#/components/schemas/OnCallScheduleList"
           description: The on call schedules attached to the group.
       security:
       - BearerAuth: []
@@ -995,7 +995,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OnCallScheduleIDList'
+              $ref: "#/components/schemas/OnCallScheduleIDList"
         required: true
       responses:
         "200":
@@ -1032,7 +1032,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GroupResourceList'
+                $ref: "#/components/schemas/GroupResourceList"
           description: The resources that the group gives access to.
       security:
       - BearerAuth: []
@@ -1056,7 +1056,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateGroupResourcesInfo'
+              $ref: "#/components/schemas/UpdateGroupResourcesInfo"
         required: true
       responses:
         "200":
@@ -1085,7 +1085,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GroupContainingGroupList'
+                $ref: "#/components/schemas/GroupContainingGroupList"
           description: The resources that the group gives access to.
       security:
       - BearerAuth: []
@@ -1109,14 +1109,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GroupContainingGroup'
+              $ref: "#/components/schemas/GroupContainingGroup"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GroupContainingGroup'
+                $ref: "#/components/schemas/GroupContainingGroup"
           description: The created `GroupContainingGroup` object.
       security:
       - BearerAuth: []
@@ -1183,7 +1183,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GroupContainingGroup'
+                $ref: "#/components/schemas/GroupContainingGroup"
           description: The created `GroupContainingGroup` object.
       security:
       - BearerAuth: []
@@ -1229,14 +1229,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/add_group_resource_request'
+              $ref: "#/components/schemas/add_group_resource_request"
         required: false
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GroupResource'
+                $ref: "#/components/schemas/GroupResource"
           description: The created `GroupResource` object.
       security:
       - BearerAuth: []
@@ -1262,7 +1262,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VisibilityInfo'
+                $ref: "#/components/schemas/VisibilityInfo"
           description: The visibility info of this group.
       security:
       - BearerAuth: []
@@ -1286,14 +1286,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VisibilityInfo'
+              $ref: "#/components/schemas/VisibilityInfo"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VisibilityInfo'
+                $ref: "#/components/schemas/VisibilityInfo"
           description: The visibility info of this group.
       security:
       - BearerAuth: []
@@ -1349,7 +1349,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReviewerIDList'
+              $ref: "#/components/schemas/ReviewerIDList"
         required: true
       responses:
         "200":
@@ -1389,7 +1389,7 @@ paths:
               schema:
                 description: A list of reviewer stages.
                 items:
-                  $ref: '#/components/schemas/ReviewerStage'
+                  $ref: "#/components/schemas/ReviewerStage"
                 type: array
           description: The reviewer stages for this group.
       security:
@@ -1415,7 +1415,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReviewerStageList'
+              $ref: "#/components/schemas/ReviewerStageList"
         required: true
       responses:
         "200":
@@ -1424,7 +1424,7 @@ paths:
               schema:
                 description: A list of reviewer stages.
                 items:
-                  $ref: '#/components/schemas/ReviewerStage'
+                  $ref: "#/components/schemas/ReviewerStage"
                 type: array
           description: The updated reviewer stages for this group.
       security:
@@ -1451,7 +1451,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TagsList'
+                $ref: "#/components/schemas/TagsList"
           description: The tags applied to the group.
       security:
       - BearerAuth: []
@@ -1477,7 +1477,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GroupUserList'
+                $ref: "#/components/schemas/GroupUserList"
           description: List of users with access to this group.
       security:
       - BearerAuth: []
@@ -1577,14 +1577,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/add_group_user_request'
+              $ref: "#/components/schemas/add_group_user_request"
         required: false
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GroupUser'
+                $ref: "#/components/schemas/GroupUser"
           description: The GroupUser that was created.
       security:
       - BearerAuth: []
@@ -1618,14 +1618,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/update_group_user_request'
+              $ref: "#/components/schemas/update_group_user_request"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GroupUser'
+                $ref: "#/components/schemas/GroupUser"
           description: The GroupUser was successfully updated.
       security:
       - BearerAuth: []
@@ -1660,7 +1660,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedGroupBindingsList'
+                $ref: "#/components/schemas/PaginatedGroupBindingsList"
           description: One page worth of group bindings for your organization.
       security:
       - BearerAuth: []
@@ -1673,14 +1673,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateGroupBindingInfo'
+              $ref: "#/components/schemas/CreateGroupBindingInfo"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GroupBinding'
+                $ref: "#/components/schemas/GroupBinding"
           description: The group binding just created.
       security:
       - BearerAuth: []
@@ -1693,7 +1693,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateGroupBindingInfoList'
+              $ref: "#/components/schemas/UpdateGroupBindingInfoList"
         description: Group bindings to be updated
         required: true
       responses:
@@ -1744,7 +1744,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GroupBinding'
+                $ref: "#/components/schemas/GroupBinding"
           description: The requested `GroupBinding`.
       security:
       - BearerAuth: []
@@ -1771,7 +1771,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IdpGroupMappingList'
+                $ref: "#/components/schemas/IdpGroupMappingList"
           description: The configured set of available `IdpGroupMapping` objects for
             an Okta app.
       security:
@@ -1797,7 +1797,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateIdpGroupMappings_request'
+              $ref: "#/components/schemas/updateIdpGroupMappings_request"
         required: true
       responses:
         "200":
@@ -1835,6 +1835,52 @@ paths:
       responses:
         "200":
           description: The IDP group mapping was successfully deleted.
+      security:
+      - BearerAuth: []
+      tags:
+      - idp-group-mappings
+    post:
+      description: |
+        Creates or updates an individual `IdpGroupMapping` object (upsert operation).
+
+        **Behavior:**
+        - If the mapping doesn't exist, it will be created with the provided values
+        - If the mapping exists, only the fields provided in the request will be updated
+      operationId: createIdpGroupMapping
+      parameters:
+      - description: The ID of the Okta app.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: app_resource_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The ID of the group.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: group_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createIdpGroupMapping_request"
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IdpGroupMapping"
+          description: The IDP group mapping was successfully created or updated.
       security:
       - BearerAuth: []
       tags:
@@ -1877,7 +1923,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedOwnersList'
+                $ref: "#/components/schemas/PaginatedOwnersList"
           description: One page worth of owners in your organization.
       security:
       - BearerAuth: []
@@ -1890,14 +1936,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateOwnerInfo'
+              $ref: "#/components/schemas/CreateOwnerInfo"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Owner'
+                $ref: "#/components/schemas/Owner"
           description: The owner just created.
       security:
       - BearerAuth: []
@@ -1910,7 +1956,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateOwnerInfoList'
+              $ref: "#/components/schemas/UpdateOwnerInfoList"
         description: Owners to be updated
         required: true
       responses:
@@ -1918,7 +1964,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UpdateOwnerInfoList'
+                $ref: "#/components/schemas/UpdateOwnerInfoList"
           description: The resulting updated owner infos.
       security:
       - BearerAuth: []
@@ -1965,7 +2011,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Owner'
+                $ref: "#/components/schemas/Owner"
           description: The owner object associated with the passed-in ID.
       security:
       - BearerAuth: []
@@ -1991,7 +2037,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Owner'
+                $ref: "#/components/schemas/Owner"
           description: The owner object associated with the passed-in name.
       security:
       - BearerAuth: []
@@ -2018,7 +2064,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserList'
+                $ref: "#/components/schemas/UserList"
           description: The users for this owner.
       security:
       - BearerAuth: []
@@ -2045,14 +2091,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserIDList'
+              $ref: "#/components/schemas/UserIDList"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserList'
+                $ref: "#/components/schemas/UserList"
           description: The updated users for the owner.
       security:
       - BearerAuth: []
@@ -2146,7 +2192,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RequestList'
+                $ref: "#/components/schemas/RequestList"
           description: The list of requests.
       security:
       - BearerAuth: []
@@ -2159,7 +2205,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateRequestInfo'
+              $ref: "#/components/schemas/CreateRequestInfo"
         description: Resources to be updated
         required: true
       responses:
@@ -2167,7 +2213,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/createRequest_200_response'
+                $ref: "#/components/schemas/createRequest_200_response"
           description: The resulting request.
       security:
       - BearerAuth: []
@@ -2230,7 +2276,7 @@ paths:
         name: status
         required: false
         schema:
-          $ref: '#/components/schemas/RequestStatusEnum'
+          $ref: "#/components/schemas/RequestStatusEnum"
         style: form
       - description: Filter requests assigned to a specific user ID.
         example: 37cb7e41-12ba-46da-92ff-030abe0450b1
@@ -2257,7 +2303,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RequestConnection'
+                $ref: "#/components/schemas/RequestConnection"
           description: A paginated list of requests using Relay-style cursor pagination.
       security:
       - BearerAuth: []
@@ -2283,7 +2329,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Request'
+                $ref: "#/components/schemas/Request"
           description: The requested request object.
       security:
       - BearerAuth: []
@@ -2307,7 +2353,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/approveRequest_request'
+              $ref: "#/components/schemas/approveRequest_request"
         description: Approval parameters
         required: true
       responses:
@@ -2315,7 +2361,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/approveRequest_200_response'
+                $ref: "#/components/schemas/approveRequest_200_response"
           description: Request successfully approved
       security:
       - BearerAuth: []
@@ -2345,14 +2391,14 @@ paths:
           maximum: 1000
           type: integer
         style: form
-      - description: The resource type to filter by.
+      - description: The resource type to filter by. Required when remote_id is provided.
         example: AWS_IAM_ROLE
         explode: true
         in: query
         name: resource_type_filter
         required: false
         schema:
-          $ref: '#/components/schemas/ResourceTypeEnum'
+          $ref: "#/components/schemas/ResourceTypeEnum"
         style: form
       - description: The resource ids to filter by.
         example:
@@ -2401,12 +2447,22 @@ paths:
           format: uuid
           type: string
         style: form
+      - description: Filter resources by their remote id. This will return all resources
+          that have a remote id that matches the provided remote id. Note that this
+          requires resource_type_filter to be provided.
+        explode: true
+        in: query
+        name: remote_id
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedResourcesList'
+                $ref: "#/components/schemas/PaginatedResourcesList"
           description: One page worth resources associated with your organization.
       security:
       - BearerAuth: []
@@ -2420,14 +2476,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateResourceInfo'
+              $ref: "#/components/schemas/CreateResourceInfo"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Resource'
+                $ref: "#/components/schemas/Resource"
           description: The resource just created.
       security:
       - BearerAuth: []
@@ -2440,7 +2496,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateResourceInfoList'
+              $ref: "#/components/schemas/UpdateResourceInfoList"
         description: Resources to be updated
         required: true
       responses:
@@ -2448,7 +2504,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UpdateResourceInfoList'
+                $ref: "#/components/schemas/UpdateResourceInfoList"
           description: The resulting updated resource infos.
       security:
       - BearerAuth: []
@@ -2495,7 +2551,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Resource'
+                $ref: "#/components/schemas/Resource"
           description: The requested resource.
       security:
       - BearerAuth: []
@@ -2521,7 +2577,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MessageChannelList'
+                $ref: "#/components/schemas/MessageChannelList"
           description: The audit message channels attached to the resource.
       security:
       - BearerAuth: []
@@ -2545,7 +2601,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MessageChannelIDList'
+              $ref: "#/components/schemas/MessageChannelIDList"
         required: true
       responses:
         "200":
@@ -2582,7 +2638,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VisibilityInfo'
+                $ref: "#/components/schemas/VisibilityInfo"
           description: The visibility info of this resource.
       security:
       - BearerAuth: []
@@ -2606,14 +2662,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VisibilityInfo'
+              $ref: "#/components/schemas/VisibilityInfo"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VisibilityInfo'
+                $ref: "#/components/schemas/VisibilityInfo"
           description: The visibility info of this resource.
       security:
       - BearerAuth: []
@@ -2667,7 +2723,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReviewerIDList'
+              $ref: "#/components/schemas/ReviewerIDList"
         required: true
       responses:
         "200":
@@ -2706,7 +2762,7 @@ paths:
               schema:
                 description: A list of reviewer stages.
                 items:
-                  $ref: '#/components/schemas/ReviewerStage'
+                  $ref: "#/components/schemas/ReviewerStage"
                 type: array
           description: The reviewer stages for this resource.
       security:
@@ -2731,7 +2787,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReviewerStageList'
+              $ref: "#/components/schemas/ReviewerStageList"
         required: true
       responses:
         "200":
@@ -2740,7 +2796,7 @@ paths:
               schema:
                 description: A list of reviewer stages.
                 items:
-                  $ref: '#/components/schemas/ReviewerStage'
+                  $ref: "#/components/schemas/ReviewerStage"
                 type: array
           description: The updated reviewer stages for this resource.
       security:
@@ -2776,7 +2832,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedResourcesList'
+                $ref: "#/components/schemas/PaginatedResourcesList"
           description: One page worth non-human identities in your organization.
       security:
       - BearerAuth: []
@@ -2811,7 +2867,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccessList'
+                $ref: "#/components/schemas/AccessList"
           description: List of non-human identities with access to this resource.
       security:
       - BearerAuth: []
@@ -2846,7 +2902,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceAccessUserList'
+                $ref: "#/components/schemas/ResourceAccessUserList"
           description: List of users with access to this resource.
       security:
       - BearerAuth: []
@@ -2925,14 +2981,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/add_resource_nhi_request'
+              $ref: "#/components/schemas/add_resource_nhi_request"
         required: false
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNHI'
+                $ref: "#/components/schemas/ResourceNHI"
           description: Details about the access that the non-human identity was granted
             to the resource.
       security:
@@ -3020,7 +3076,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getResourceUser_200_response'
+                $ref: "#/components/schemas/getResourceUser_200_response"
           description: List of ResourceUser records for the user's access to the resource.
         "404":
           description: Resource or user not found.
@@ -3079,14 +3135,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/add_resource_user_request'
+              $ref: "#/components/schemas/add_resource_user_request"
         required: false
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceUser'
+                $ref: "#/components/schemas/ResourceUser"
           description: The ResourceUser that was created.
       security:
       - BearerAuth: []
@@ -3120,14 +3176,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/update_resource_user_request'
+              $ref: "#/components/schemas/update_resource_user_request"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceUser'
+                $ref: "#/components/schemas/ResourceUser"
           description: The ResourceUser was successfully updated.
       security:
       - BearerAuth: []
@@ -3194,7 +3250,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceUserAccessStatus'
+                $ref: "#/components/schemas/ResourceUserAccessStatus"
           description: The access status reflecting the user's access to the resource.
       security:
       - BearerAuth: []
@@ -3220,7 +3276,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TagsList'
+                $ref: "#/components/schemas/TagsList"
           description: The tags applied to the resource.
       security:
       - BearerAuth: []
@@ -3247,11 +3303,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ScopedRolePermissionList'
+                $ref: "#/components/schemas/ScopedRolePermissionList"
           description: The role permissions that this Opal Scoped Role has.
       security:
       - BearerAuth: []
       tags:
+      - resources
       - scoped-role-permissions
     put:
       description: Sets all the scoped role permissions on an OPAL_SCOPED_ROLE resource.
@@ -3272,19 +3329,73 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ScopedRolePermissionList'
+              $ref: "#/components/schemas/ScopedRolePermissionList"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ScopedRolePermissionList'
+                $ref: "#/components/schemas/ScopedRolePermissionList"
           description: The role permissions that this Opal Scoped Role has.
       security:
       - BearerAuth: []
       tags:
+      - resources
       - scoped-role-permissions
+  /resources/users/{user_id}:
+    get:
+      description: Gets the list of resources for this user.
+      operationId: get_user_resources
+      parameters:
+      - description: The ID of the user.
+        example: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
+        explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Limit the number of results returned.
+        example: 200
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: The pagination cursor value.
+        example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Include user's access to unmanaged resources.
+        example: false
+        explode: true
+        in: query
+        name: include_unmanaged
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceAccessUserList"
+          description: List of resources user has access to.
+      security:
+      - BearerAuth: []
+      tags:
+      - resources
   /sessions:
     get:
       description: Returns a list of `Session` objects.
@@ -3314,7 +3425,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SessionsList'
+                $ref: "#/components/schemas/SessionsList"
           description: The sessions associated with a resource.
       security:
       - BearerAuth: []
@@ -3350,7 +3461,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
           description: The user object associated with the passed-in email or ID.
       security:
       - BearerAuth: []
@@ -3385,7 +3496,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedUsersList'
+                $ref: "#/components/schemas/PaginatedUsersList"
           description: One page worth users in your organization.
       security:
       - BearerAuth: []
@@ -3405,7 +3516,7 @@ paths:
         required: false
         schema:
           items:
-            $ref: '#/components/schemas/ThirdPartyProviderEnum'
+            $ref: "#/components/schemas/ThirdPartyProviderEnum"
           type: array
         style: form
       - description: Filter remote users by their user ID.
@@ -3457,7 +3568,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedRemoteUsersList'
+                $ref: "#/components/schemas/PaginatedRemoteUsersList"
           description: One page worth users in your organization.
       security:
       - BearerAuth: []
@@ -3483,7 +3594,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TagsList'
+                $ref: "#/components/schemas/TagsList"
           description: The tags applied to the user.
       security:
       - BearerAuth: []
@@ -3497,14 +3608,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateAccessRuleInfo'
+              $ref: "#/components/schemas/UpdateAccessRuleInfo"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccessRule'
+                $ref: "#/components/schemas/AccessRule"
           description: The created access rule config for the group.
       security:
       - BearerAuth: []
@@ -3531,7 +3642,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccessRule'
+                $ref: "#/components/schemas/AccessRule"
           description: The access rules for the group.
       security:
       - BearerAuth: []
@@ -3555,14 +3666,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateAccessRuleInfo'
+              $ref: "#/components/schemas/UpdateAccessRuleInfo"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccessRule'
+                $ref: "#/components/schemas/AccessRule"
           description: The updated access rule config for the group.
       security:
       - BearerAuth: []
@@ -3611,7 +3722,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Tag'
+                $ref: "#/components/schemas/Tag"
           description: The tag requested.
       security:
       - BearerAuth: []
@@ -3645,7 +3756,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Tag'
+                $ref: "#/components/schemas/Tag"
           description: The tag requested.
       security:
       - BearerAuth: []
@@ -3690,14 +3801,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateTagInfo'
+              $ref: "#/components/schemas/CreateTagInfo"
         required: false
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Tag'
+                $ref: "#/components/schemas/Tag"
           description: The tag that was created.
       security:
       - BearerAuth: []
@@ -3732,7 +3843,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedTagsList'
+                $ref: "#/components/schemas/PaginatedTagsList"
           description: A list of tags created by your organization.
       security:
       - BearerAuth: []
@@ -3942,7 +4053,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MessageChannelList'
+                $ref: "#/components/schemas/MessageChannelList"
           description: A list of message channels for your organization.
       security:
       - BearerAuth: []
@@ -3955,7 +4066,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateMessageChannelInfo'
+              $ref: "#/components/schemas/CreateMessageChannelInfo"
         description: The `MessageChannel` object to be created.
         required: true
       responses:
@@ -3963,7 +4074,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MessageChannel'
+                $ref: "#/components/schemas/MessageChannel"
           description: The message channel that was created.
       security:
       - BearerAuth: []
@@ -3989,7 +4100,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MessageChannel'
+                $ref: "#/components/schemas/MessageChannel"
           description: The requested message channel.
       security:
       - BearerAuth: []
@@ -4004,7 +4115,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OnCallScheduleList'
+                $ref: "#/components/schemas/OnCallScheduleList"
           description: A list of on call schedules for your organization.
       security:
       - BearerAuth: []
@@ -4017,7 +4128,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateOnCallScheduleInfo'
+              $ref: "#/components/schemas/CreateOnCallScheduleInfo"
         description: The `OnCallSchedule` object to be created.
         required: true
       responses:
@@ -4025,7 +4136,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OnCallSchedule'
+                $ref: "#/components/schemas/OnCallSchedule"
           description: The on call schedule that was created.
       security:
       - BearerAuth: []
@@ -4051,7 +4162,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OnCallSchedule'
+                $ref: "#/components/schemas/OnCallSchedule"
           description: The requested on call schedule.
       security:
       - BearerAuth: []
@@ -4086,7 +4197,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedUARsList'
+                $ref: "#/components/schemas/PaginatedUARsList"
           description: A list of UARs for your organization.
       security:
       - BearerAuth: []
@@ -4100,7 +4211,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateUARInfo'
+              $ref: "#/components/schemas/CreateUARInfo"
         description: The settings of the UAR.
         required: true
       responses:
@@ -4108,7 +4219,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UAR'
+                $ref: "#/components/schemas/UAR"
           description: The UAR that was started.
       security:
       - BearerAuth: []
@@ -4134,7 +4245,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UAR'
+                $ref: "#/components/schemas/UAR"
           description: The UAR that was requested.
       security:
       - BearerAuth: []
@@ -4182,7 +4293,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/SyncErrorList'
+                  $ref: "#/components/schemas/SyncErrorList"
                 type: array
           description: A list of sync errors.
       security:
@@ -4195,7 +4306,7 @@ components:
       properties:
         requests:
           items:
-            $ref: '#/components/schemas/Request'
+            $ref: "#/components/schemas/Request"
           type: array
         cursor:
           description: The cursor to continue pagination
@@ -4263,7 +4374,7 @@ components:
                 status: APPROVED
       properties:
         node:
-          $ref: '#/components/schemas/Request'
+          $ref: "#/components/schemas/Request"
         cursor:
           description: The cursor for this request edge
           type: string
@@ -4346,10 +4457,10 @@ components:
       properties:
         edges:
           items:
-            $ref: '#/components/schemas/RequestEdge'
+            $ref: "#/components/schemas/RequestEdge"
           type: array
         pageInfo:
-          $ref: '#/components/schemas/PageInfo'
+          $ref: "#/components/schemas/PageInfo"
         totalCount:
           description: The total number of items available
           type: integer
@@ -4435,13 +4546,13 @@ components:
           description: This access review will include items of the specified group
             types
           items:
-            $ref: '#/components/schemas/GroupTypeEnum'
+            $ref: "#/components/schemas/GroupTypeEnum"
           type: array
         resource_types:
           description: This access review will include items of the specified resource
             types
           items:
-            $ref: '#/components/schemas/ResourceTypeEnum'
+            $ref: "#/components/schemas/ResourceTypeEnum"
           type: array
         include_group_bindings:
           example: false
@@ -4450,7 +4561,7 @@ components:
           description: This access review will include resources and groups who are
             tagged with one of the given tags.
           items:
-            $ref: '#/components/schemas/TagFilter'
+            $ref: "#/components/schemas/TagFilter"
           type: array
         names:
           description: This access review will include resources and groups whose
@@ -4511,7 +4622,7 @@ components:
           nullable: true
         results:
           items:
-            $ref: '#/components/schemas/UAR'
+            $ref: "#/components/schemas/UAR"
           type: array
       required:
       - results
@@ -4545,7 +4656,7 @@ components:
           example: Monthly UAR (July)
           type: string
         reviewer_assignment_policy:
-          $ref: '#/components/schemas/UARReviewerAssignmentPolicyEnum'
+          $ref: "#/components/schemas/UARReviewerAssignmentPolicyEnum"
         send_reviewer_assignment_notification:
           description: A bool representing whether to send a notification to reviewers
             when they're assigned a new review. Default is False.
@@ -4568,7 +4679,7 @@ components:
           example: false
           type: boolean
         uar_scope:
-          $ref: '#/components/schemas/UARScope'
+          $ref: "#/components/schemas/UARScope"
       required:
       - deadline
       - name
@@ -4608,7 +4719,7 @@ components:
           example: Monthly UAR (July)
           type: string
         reviewer_assignment_policy:
-          $ref: '#/components/schemas/UARReviewerAssignmentPolicyEnum'
+          $ref: "#/components/schemas/UARReviewerAssignmentPolicyEnum"
         send_reviewer_assignment_notification:
           description: A bool representing whether to send a notification to reviewers
             when they're assigned a new review. Default is False.
@@ -4638,7 +4749,7 @@ components:
           example: false
           type: boolean
         uar_scope:
-          $ref: '#/components/schemas/UARScope'
+          $ref: "#/components/schemas/UARScope"
       required:
       - deadline
       - name
@@ -4688,7 +4799,7 @@ components:
       properties:
         apps:
           items:
-            $ref: '#/components/schemas/App'
+            $ref: "#/components/schemas/App"
           type: array
       required:
       - apps
@@ -4726,11 +4837,11 @@ components:
           format: uuid
           type: string
         app_type:
-          $ref: '#/components/schemas/AppTypeEnum'
+          $ref: "#/components/schemas/AppTypeEnum"
         validations:
           description: Validation checks of an apps' configuration and permissions.
           items:
-            $ref: '#/components/schemas/AppValidation'
+            $ref: "#/components/schemas/AppValidation"
           type: array
       required:
       - admin_owner_id
@@ -4826,7 +4937,7 @@ components:
           type: string
         sub_events:
           items:
-            $ref: '#/components/schemas/SubEvent'
+            $ref: "#/components/schemas/SubEvent"
           type: array
       required:
       - actor_name
@@ -4869,9 +4980,9 @@ components:
             role assignments.
           type: string
         severity:
-          $ref: '#/components/schemas/AppValidationSeverityEnum'
+          $ref: "#/components/schemas/AppValidationSeverityEnum"
         status:
-          $ref: '#/components/schemas/AppValidationStatusEnum'
+          $ref: "#/components/schemas/AppValidationStatusEnum"
         updated_at:
           description: The date and time the app validation was last run.
           example: 2021-01-06T20:00:00Z
@@ -4948,7 +5059,7 @@ components:
           nullable: true
         results:
           items:
-            $ref: '#/components/schemas/Event'
+            $ref: "#/components/schemas/Event"
           type: array
     ResourceAccessUserList:
       example:
@@ -4968,9 +5079,20 @@ components:
           has_direct_access: true
           num_access_paths: 3
       properties:
+        next:
+          description: The cursor with which to continue pagination if additional
+            result pages exist.
+          example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+          type: string
+          nullable: true
+        previous:
+          description: The cursor used to obtain the current result page.
+          example: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
+          type: string
+          nullable: true
         results:
           items:
-            $ref: '#/components/schemas/ResourceAccessUser'
+            $ref: "#/components/schemas/ResourceAccessUser"
           type: array
     ResourceAccessLevel:
       description: |-
@@ -5021,9 +5143,9 @@ components:
           format: uuid
           type: string
         access_level:
-          $ref: '#/components/schemas/ResourceAccessLevel'
+          $ref: "#/components/schemas/ResourceAccessLevel"
         status:
-          $ref: '#/components/schemas/ResourceUserAccessStatusEnum'
+          $ref: "#/components/schemas/ResourceUserAccessStatusEnum"
         expiration_date:
           description: The day and time the user's access will expire.
           example: 2022-01-23T04:56:07Z
@@ -5065,7 +5187,7 @@ components:
           format: uuid
           type: string
         access_level:
-          $ref: '#/components/schemas/ResourceAccessLevel'
+          $ref: "#/components/schemas/ResourceAccessLevel"
         full_name:
           description: The user's full name.
           example: Jake Barnes
@@ -5112,7 +5234,7 @@ components:
           format: uuid
           type: string
         access_level:
-          $ref: '#/components/schemas/ResourceAccessLevel'
+          $ref: "#/components/schemas/ResourceAccessLevel"
         full_name:
           description: The user's full name.
           example: Jake Barnes
@@ -5139,7 +5261,7 @@ components:
           format: int32
           type: integer
         propagation_status:
-          $ref: '#/components/schemas/PropagationStatus'
+          $ref: "#/components/schemas/PropagationStatus"
       required:
       - access_level
       - email
@@ -5168,7 +5290,7 @@ components:
       properties:
         results:
           items:
-            $ref: '#/components/schemas/Access'
+            $ref: "#/components/schemas/Access"
           type: array
     Access:
       description: |-
@@ -5193,16 +5315,16 @@ components:
           format: uuid
           type: string
         principal_type:
-          $ref: '#/components/schemas/EntityTypeEnum'
+          $ref: "#/components/schemas/EntityTypeEnum"
         entity_id:
           description: The ID of the entity being accessed.
           example: 1b978423-db0a-4037-a4cf-f79c60cb67b3
           format: uuid
           type: string
         entity_type:
-          $ref: '#/components/schemas/EntityTypeEnum'
+          $ref: "#/components/schemas/EntityTypeEnum"
         access_level:
-          $ref: '#/components/schemas/ResourceAccessLevel'
+          $ref: "#/components/schemas/ResourceAccessLevel"
         expiration_date:
           description: The day and time the principal's access will expire.
           example: 2022-01-23T04:56:07Z
@@ -5248,7 +5370,7 @@ components:
           format: uuid
           type: string
         access_level:
-          $ref: '#/components/schemas/ResourceAccessLevel'
+          $ref: "#/components/schemas/ResourceAccessLevel"
         expiration_date:
           description: The day and time the non-human identity's access will expire.
           example: 2022-01-23T04:56:07Z
@@ -5285,7 +5407,7 @@ components:
           nullable: true
         results:
           items:
-            $ref: '#/components/schemas/Session'
+            $ref: "#/components/schemas/Session"
           type: array
     Session:
       description: |-
@@ -5317,7 +5439,7 @@ components:
           format: uuid
           type: string
         access_level:
-          $ref: '#/components/schemas/ResourceAccessLevel'
+          $ref: "#/components/schemas/ResourceAccessLevel"
         expiration_date:
           description: The day and time the user's access will expire.
           example: 2022-01-23T04:56:07Z
@@ -5357,7 +5479,7 @@ components:
           nullable: true
         results:
           items:
-            $ref: '#/components/schemas/User'
+            $ref: "#/components/schemas/User"
           type: array
       required:
       - results
@@ -5386,7 +5508,7 @@ components:
           nullable: true
         results:
           items:
-            $ref: '#/components/schemas/RemoteUser'
+            $ref: "#/components/schemas/RemoteUser"
           type: array
       required:
       - results
@@ -5410,7 +5532,7 @@ components:
           example: 1234567890
           type: string
         third_party_provider:
-          $ref: '#/components/schemas/ThirdPartyProviderEnum'
+          $ref: "#/components/schemas/ThirdPartyProviderEnum"
       required:
       - remote_id
       - third_party_provider
@@ -5457,7 +5579,7 @@ components:
           example: Senior Engineer
           type: string
         hr_idp_status:
-          $ref: '#/components/schemas/UserHrIdpStatusEnum'
+          $ref: "#/components/schemas/UserHrIdpStatusEnum"
       required:
       - email
       - first_name
@@ -5484,7 +5606,7 @@ components:
       properties:
         users:
           items:
-            $ref: '#/components/schemas/User'
+            $ref: "#/components/schemas/User"
           type: array
       required:
       - users
@@ -5565,7 +5687,7 @@ components:
           nullable: true
         results:
           items:
-            $ref: '#/components/schemas/Group'
+            $ref: "#/components/schemas/Group"
           type: array
       required:
       - results
@@ -5590,7 +5712,7 @@ components:
           format: uuid
           type: string
         access_level:
-          $ref: '#/components/schemas/ResourceAccessLevel'
+          $ref: "#/components/schemas/ResourceAccessLevel"
       required:
       - access_level
       - group_id
@@ -5671,7 +5793,7 @@ components:
           example: Finance team
           type: string
         group_type:
-          $ref: '#/components/schemas/GroupTypeEnum'
+          $ref: "#/components/schemas/GroupTypeEnum"
         max_duration:
           description: The maximum duration for which the group can be requested (in
             minutes).
@@ -5680,6 +5802,12 @@ components:
         recommended_duration:
           description: The recommended duration for which the group should be requested
             (in minutes). -1 represents an indefinite duration.
+          example: 120
+          type: integer
+        extensions_duration_in_minutes:
+          description: "The duration for which access can be extended (in minutes).\
+            \ Set to 0 to disable extensions. When > 0, extensions are enabled for\
+            \ the specified duration."
           example: 120
           type: integer
         require_manager_approval:
@@ -5732,14 +5860,14 @@ components:
           description: A list of request configurations for this group.
           example: []
           items:
-            $ref: '#/components/schemas/RequestConfiguration'
+            $ref: "#/components/schemas/RequestConfiguration"
           type: array
         request_configuration_list:
           description: A list of request configurations for this group. Deprecated
             in favor of `request_configurations`.
           example: []
           items:
-            $ref: '#/components/schemas/RequestConfiguration'
+            $ref: "#/components/schemas/RequestConfiguration"
           type: array
         metadata:
           deprecated: true
@@ -5750,7 +5878,7 @@ components:
             \ } }"
           type: string
         remote_info:
-          $ref: '#/components/schemas/GroupRemoteInfo'
+          $ref: "#/components/schemas/GroupRemoteInfo"
         custom_request_notification:
           description: Custom request notification sent to the requester when the
             request is approved.
@@ -5760,15 +5888,15 @@ components:
           nullable: true
         risk_sensitivity:
           allOf:
-          - $ref: '#/components/schemas/RiskSensitivityEnum'
+          - $ref: "#/components/schemas/RiskSensitivityEnum"
           description: "The risk sensitivity level for the group. When an override\
             \ is set, this field will match that."
           readOnly: true
         risk_sensitivity_override:
           allOf:
-          - $ref: '#/components/schemas/RiskSensitivityEnum'
+          - $ref: "#/components/schemas/RiskSensitivityEnum"
         last_successful_sync:
-          $ref: '#/components/schemas/SyncTask'
+          $ref: "#/components/schemas/SyncTask"
       required:
       - group_id
     GroupUserList:
@@ -5787,7 +5915,7 @@ components:
       properties:
         results:
           items:
-            $ref: '#/components/schemas/GroupUser'
+            $ref: "#/components/schemas/GroupUser"
           type: array
     GroupAccessLevel:
       description: |-
@@ -5839,7 +5967,7 @@ components:
           format: uuid
           type: string
         access_level:
-          $ref: '#/components/schemas/GroupAccessLevel'
+          $ref: "#/components/schemas/GroupAccessLevel"
         full_name:
           description: The user's full name.
           example: Jake Barnes
@@ -5855,7 +5983,7 @@ components:
           type: string
           nullable: true
         propagation_status:
-          $ref: '#/components/schemas/PropagationStatus'
+          $ref: "#/components/schemas/PropagationStatus"
       required:
       - email
       - full_name
@@ -5866,7 +5994,7 @@ components:
         \ system. If this is null, the access was synced from the remote system."
       properties:
         status:
-          $ref: '#/components/schemas/PropagationStatusEnum'
+          $ref: "#/components/schemas/PropagationStatusEnum"
       required:
       - status
     PropagationStatusEnum:
@@ -5922,7 +6050,7 @@ components:
         groups:
           description: A list of groups with information to update.
           items:
-            $ref: '#/components/schemas/UpdateGroupInfo'
+            $ref: "#/components/schemas/UpdateGroupInfo"
           type: array
       required:
       - groups
@@ -6034,14 +6162,18 @@ components:
             format: uuid
             type: string
           type: array
+        extensions_duration_in_minutes:
+          description: The duration for which access can be extended (in minutes).
+          example: 120
+          type: integer
         request_configurations:
           description: "The request configuration list of the configuration template.\
             \ If not provided, the default request configuration will be used."
           items:
-            $ref: '#/components/schemas/RequestConfiguration'
+            $ref: "#/components/schemas/RequestConfiguration"
           type: array
         request_configuration_list:
-          $ref: '#/components/schemas/CreateRequestConfigurationInfoList'
+          $ref: "#/components/schemas/CreateRequestConfigurationInfoList"
         custom_request_notification:
           description: Custom request notification sent to the requester when the
             request is approved.
@@ -6051,7 +6183,7 @@ components:
           nullable: true
         risk_sensitivity_override:
           allOf:
-          - $ref: '#/components/schemas/RiskSensitivityEnum'
+          - $ref: "#/components/schemas/RiskSensitivityEnum"
       required:
       - group_id
     GroupTypeEnum:
@@ -6141,6 +6273,7 @@ components:
       - MARIADB_INSTANCE
       - POSTGRES_INSTANCE
       - TELEPORT_ROLE
+      - ILEVEL_ADVANCED_ROLE
       example: AWS_IAM_ROLE
       type: string
     VisibilityTypeEnum:
@@ -6195,7 +6328,7 @@ components:
       properties:
         resources:
           items:
-            $ref: '#/components/schemas/ResourceWithAccessLevel'
+            $ref: "#/components/schemas/ResourceWithAccessLevel"
           type: array
       required:
       - resources
@@ -6235,7 +6368,7 @@ components:
       properties:
         mappings:
           items:
-            $ref: '#/components/schemas/IdpGroupMapping'
+            $ref: "#/components/schemas/IdpGroupMapping"
           type: array
       required:
       - mappings
@@ -6285,7 +6418,7 @@ components:
       properties:
         group_resources:
           items:
-            $ref: '#/components/schemas/GroupResource'
+            $ref: "#/components/schemas/GroupResource"
           type: array
       required:
       - group_resources
@@ -6297,7 +6430,7 @@ components:
       properties:
         containing_groups:
           items:
-            $ref: '#/components/schemas/GroupContainingGroup'
+            $ref: "#/components/schemas/GroupContainingGroup"
           type: array
       required:
       - containing_groups
@@ -6317,7 +6450,7 @@ components:
       properties:
         channels:
           items:
-            $ref: '#/components/schemas/MessageChannel'
+            $ref: "#/components/schemas/MessageChannel"
           type: array
       required:
       - channels
@@ -6335,7 +6468,7 @@ components:
       properties:
         on_call_schedules:
           items:
-            $ref: '#/components/schemas/OnCallSchedule'
+            $ref: "#/components/schemas/OnCallSchedule"
           type: array
       required:
       - on_call_schedules
@@ -6348,7 +6481,7 @@ components:
         - 1520617d-e72a-47f5-a84c-693817ab48ad2
       properties:
         visibility:
-          $ref: '#/components/schemas/VisibilityTypeEnum'
+          $ref: "#/components/schemas/VisibilityTypeEnum"
         visibility_group_ids:
           items:
             format: uuid
@@ -6412,7 +6545,7 @@ components:
         stages:
           description: A list of reviewer stages.
           items:
-            $ref: '#/components/schemas/ReviewerStage'
+            $ref: "#/components/schemas/ReviewerStage"
           type: array
       required:
       - stages
@@ -6469,7 +6602,7 @@ components:
           format: uuid
           type: string
         third_party_provider:
-          $ref: '#/components/schemas/MessageChannelProviderEnum'
+          $ref: "#/components/schemas/MessageChannelProviderEnum"
         remote_id:
           description: The remote ID of the message channel
           example: C03FJR97276
@@ -6494,7 +6627,7 @@ components:
         remote_id: C03FJR97276
       properties:
         third_party_provider:
-          $ref: '#/components/schemas/MessageChannelProviderEnum'
+          $ref: "#/components/schemas/MessageChannelProviderEnum"
         remote_id:
           description: The remote ID of the message channel
           example: C03FJR97276
@@ -6528,7 +6661,7 @@ components:
           format: uuid
           type: string
         third_party_provider:
-          $ref: '#/components/schemas/OnCallScheduleProviderEnum'
+          $ref: "#/components/schemas/OnCallScheduleProviderEnum"
         remote_id:
           description: The remote ID of the on call schedule
           example: P7OWH2R
@@ -6547,7 +6680,7 @@ components:
         remote_id: PNZNINN
       properties:
         third_party_provider:
-          $ref: '#/components/schemas/OnCallScheduleProviderEnum'
+          $ref: "#/components/schemas/OnCallScheduleProviderEnum"
         remote_id:
           description: The remote ID of the on call schedule
           example: PNZNINN
@@ -6575,91 +6708,93 @@ components:
         remote_id and metadata fields.
       properties:
         active_directory_group:
-          $ref: '#/components/schemas/GroupRemoteInfo_active_directory_group'
+          $ref: "#/components/schemas/GroupRemoteInfo_active_directory_group"
         github_team:
-          $ref: '#/components/schemas/GroupRemoteInfo_github_team'
+          $ref: "#/components/schemas/GroupRemoteInfo_github_team"
         gitlab_group:
-          $ref: '#/components/schemas/GroupRemoteInfo_gitlab_group'
+          $ref: "#/components/schemas/GroupRemoteInfo_gitlab_group"
         google_group:
-          $ref: '#/components/schemas/GroupRemoteInfo_google_group'
+          $ref: "#/components/schemas/GroupRemoteInfo_google_group"
         ldap_group:
-          $ref: '#/components/schemas/GroupRemoteInfo_ldap_group'
+          $ref: "#/components/schemas/GroupRemoteInfo_ldap_group"
         okta_group:
-          $ref: '#/components/schemas/GroupRemoteInfo_okta_group'
+          $ref: "#/components/schemas/GroupRemoteInfo_okta_group"
         duo_group:
-          $ref: '#/components/schemas/GroupRemoteInfo_duo_group'
+          $ref: "#/components/schemas/GroupRemoteInfo_duo_group"
         azure_ad_security_group:
-          $ref: '#/components/schemas/GroupRemoteInfo_azure_ad_security_group'
+          $ref: "#/components/schemas/GroupRemoteInfo_azure_ad_security_group"
         azure_ad_microsoft_365_group:
-          $ref: '#/components/schemas/GroupRemoteInfo_azure_ad_microsoft_365_group'
+          $ref: "#/components/schemas/GroupRemoteInfo_azure_ad_microsoft_365_group"
         snowflake_role:
-          $ref: '#/components/schemas/GroupRemoteInfo_snowflake_role'
+          $ref: "#/components/schemas/GroupRemoteInfo_snowflake_role"
         okta_group_rule:
-          $ref: '#/components/schemas/GroupRemoteInfo_okta_group_rule'
+          $ref: "#/components/schemas/GroupRemoteInfo_okta_group_rule"
         workday_user_security_group:
-          $ref: '#/components/schemas/GroupRemoteInfo_workday_user_security_group'
+          $ref: "#/components/schemas/GroupRemoteInfo_workday_user_security_group"
     ResourceRemoteInfo:
       description: Information that defines the remote resource. This replaces the
         deprecated remote_id and metadata fields.
       properties:
         aws_organizational_unit:
-          $ref: '#/components/schemas/ResourceRemoteInfo_aws_organizational_unit'
+          $ref: "#/components/schemas/ResourceRemoteInfo_aws_organizational_unit"
         aws_account:
-          $ref: '#/components/schemas/ResourceRemoteInfo_aws_account'
+          $ref: "#/components/schemas/ResourceRemoteInfo_aws_account"
         aws_permission_set:
-          $ref: '#/components/schemas/ResourceRemoteInfo_aws_permission_set'
+          $ref: "#/components/schemas/ResourceRemoteInfo_aws_permission_set"
         aws_iam_role:
-          $ref: '#/components/schemas/ResourceRemoteInfo_aws_iam_role'
+          $ref: "#/components/schemas/ResourceRemoteInfo_aws_iam_role"
         aws_ec2_instance:
-          $ref: '#/components/schemas/ResourceRemoteInfo_aws_ec2_instance'
+          $ref: "#/components/schemas/ResourceRemoteInfo_aws_ec2_instance"
         aws_rds_instance:
-          $ref: '#/components/schemas/ResourceRemoteInfo_aws_rds_instance'
+          $ref: "#/components/schemas/ResourceRemoteInfo_aws_rds_instance"
         aws_eks_cluster:
-          $ref: '#/components/schemas/ResourceRemoteInfo_aws_eks_cluster'
+          $ref: "#/components/schemas/ResourceRemoteInfo_aws_eks_cluster"
         custom_connector:
-          $ref: '#/components/schemas/ResourceRemoteInfo_custom_connector'
+          $ref: "#/components/schemas/ResourceRemoteInfo_custom_connector"
         gcp_organization:
-          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_organization'
+          $ref: "#/components/schemas/ResourceRemoteInfo_gcp_organization"
         gcp_bucket:
-          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_bucket'
+          $ref: "#/components/schemas/ResourceRemoteInfo_gcp_bucket"
         gcp_compute_instance:
-          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_compute_instance'
+          $ref: "#/components/schemas/ResourceRemoteInfo_gcp_compute_instance"
         gcp_big_query_dataset:
-          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_big_query_dataset'
+          $ref: "#/components/schemas/ResourceRemoteInfo_gcp_big_query_dataset"
         gcp_big_query_table:
-          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_big_query_table'
+          $ref: "#/components/schemas/ResourceRemoteInfo_gcp_big_query_table"
         gcp_folder:
-          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_folder'
+          $ref: "#/components/schemas/ResourceRemoteInfo_gcp_folder"
         gcp_gke_cluster:
-          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_gke_cluster'
+          $ref: "#/components/schemas/ResourceRemoteInfo_gcp_gke_cluster"
         gcp_project:
-          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_project'
+          $ref: "#/components/schemas/ResourceRemoteInfo_gcp_project"
         gcp_sql_instance:
-          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_sql_instance'
+          $ref: "#/components/schemas/ResourceRemoteInfo_gcp_sql_instance"
         gcp_service_account:
-          $ref: '#/components/schemas/ResourceRemoteInfo_gcp_service_account'
+          $ref: "#/components/schemas/ResourceRemoteInfo_gcp_service_account"
         google_workspace_role:
-          $ref: '#/components/schemas/ResourceRemoteInfo_google_workspace_role'
+          $ref: "#/components/schemas/ResourceRemoteInfo_google_workspace_role"
         github_repo:
-          $ref: '#/components/schemas/ResourceRemoteInfo_github_repo'
+          $ref: "#/components/schemas/ResourceRemoteInfo_github_repo"
+        github_org_role:
+          $ref: "#/components/schemas/ResourceRemoteInfo_github_org_role"
         gitlab_project:
-          $ref: '#/components/schemas/ResourceRemoteInfo_gitlab_project'
+          $ref: "#/components/schemas/ResourceRemoteInfo_gitlab_project"
         okta_app:
-          $ref: '#/components/schemas/ResourceRemoteInfo_okta_app'
+          $ref: "#/components/schemas/ResourceRemoteInfo_okta_app"
         okta_standard_role:
-          $ref: '#/components/schemas/ResourceRemoteInfo_okta_standard_role'
+          $ref: "#/components/schemas/ResourceRemoteInfo_okta_standard_role"
         okta_custom_role:
-          $ref: '#/components/schemas/ResourceRemoteInfo_okta_custom_role'
+          $ref: "#/components/schemas/ResourceRemoteInfo_okta_custom_role"
         pagerduty_role:
-          $ref: '#/components/schemas/ResourceRemoteInfo_pagerduty_role'
+          $ref: "#/components/schemas/ResourceRemoteInfo_pagerduty_role"
         salesforce_permission_set:
-          $ref: '#/components/schemas/ResourceRemoteInfo_salesforce_permission_set'
+          $ref: "#/components/schemas/ResourceRemoteInfo_salesforce_permission_set"
         salesforce_profile:
-          $ref: '#/components/schemas/ResourceRemoteInfo_salesforce_profile'
+          $ref: "#/components/schemas/ResourceRemoteInfo_salesforce_profile"
         salesforce_role:
-          $ref: '#/components/schemas/ResourceRemoteInfo_salesforce_role'
+          $ref: "#/components/schemas/ResourceRemoteInfo_salesforce_role"
         teleport_role:
-          $ref: '#/components/schemas/ResourceRemoteInfo_teleport_role'
+          $ref: "#/components/schemas/ResourceRemoteInfo_teleport_role"
     RiskSensitivityEnum:
       description: Indicates the level of potential impact misuse or unauthorized
         access may incur.
@@ -6703,14 +6838,14 @@ components:
           example: Engineering team Okta role.
           type: string
         resource_type:
-          $ref: '#/components/schemas/ResourceTypeEnum'
+          $ref: "#/components/schemas/ResourceTypeEnum"
         app_id:
           description: The ID of the app for the resource.
           example: f454d283-ca87-4a8a-bdbb-df212eca5353
           format: uuid
           type: string
         remote_info:
-          $ref: '#/components/schemas/ResourceRemoteInfo'
+          $ref: "#/components/schemas/ResourceRemoteInfo"
         remote_resource_id:
           deprecated: true
           description: "Deprecated - use remote_info instead. The ID of the resource\
@@ -6960,7 +7095,7 @@ components:
           nullable: true
         risk_sensitivity_override:
           allOf:
-          - $ref: '#/components/schemas/RiskSensitivityEnum'
+          - $ref: "#/components/schemas/RiskSensitivityEnum"
       required:
       - app_id
       - name
@@ -7019,14 +7154,14 @@ components:
           example: Engineering team Okta group.
           type: string
         group_type:
-          $ref: '#/components/schemas/GroupTypeEnum'
+          $ref: "#/components/schemas/GroupTypeEnum"
         app_id:
           description: The ID of the app for the group.
           example: f454d283-ca87-4a8a-bdbb-df212eca5353
           format: uuid
           type: string
         remote_info:
-          $ref: '#/components/schemas/GroupRemoteInfo'
+          $ref: "#/components/schemas/GroupRemoteInfo"
         remote_group_id:
           deprecated: true
           description: "Deprecated - use remote_info instead. The ID of the group\
@@ -7137,7 +7272,7 @@ components:
           nullable: true
         risk_sensitivity_override:
           allOf:
-          - $ref: '#/components/schemas/RiskSensitivityEnum'
+          - $ref: "#/components/schemas/RiskSensitivityEnum"
       required:
       - app_id
       - group_type
@@ -7178,7 +7313,7 @@ components:
           nullable: true
         results:
           items:
-            $ref: '#/components/schemas/Resource'
+            $ref: "#/components/schemas/Resource"
           type: array
       required:
       - results
@@ -7269,7 +7404,7 @@ components:
           format: uuid
           type: string
         status:
-          $ref: '#/components/schemas/RequestStatusEnum'
+          $ref: "#/components/schemas/RequestStatusEnum"
         reason:
           description: The reason for the request.
           example: I need access to the AWS account.
@@ -7281,16 +7416,16 @@ components:
         requested_items_list:
           description: The list of targets for the request.
           items:
-            $ref: '#/components/schemas/RequestedItem'
+            $ref: "#/components/schemas/RequestedItem"
           type: array
         custom_fields_responses:
           description: The responses given to the custom fields associated to the
             request
           items:
-            $ref: '#/components/schemas/RequestCustomFieldResponse'
+            $ref: "#/components/schemas/RequestCustomFieldResponse"
           type: array
         stages:
-          $ref: '#/components/schemas/RequestItemStages'
+          $ref: "#/components/schemas/RequestItemStages"
       required:
       - created_at
       - id
@@ -7310,7 +7445,7 @@ components:
         stages:
           description: The stages of review for this request
           items:
-            $ref: '#/components/schemas/RequestStage'
+            $ref: "#/components/schemas/RequestStage"
           type: array
       required:
       - requestedItemName
@@ -7322,11 +7457,11 @@ components:
           description: The stage number
           type: integer
         operator:
-          $ref: '#/components/schemas/ReviewStageOperator'
+          $ref: "#/components/schemas/ReviewStageOperator"
         reviewers:
           description: The reviewers for this stage
           items:
-            $ref: '#/components/schemas/RequestReviewer'
+            $ref: "#/components/schemas/RequestReviewer"
           type: array
       required:
       - operator
@@ -7405,9 +7540,9 @@ components:
         field_name:
           type: string
         field_type:
-          $ref: '#/components/schemas/RequestTemplateCustomFieldTypeEnum'
+          $ref: "#/components/schemas/RequestTemplateCustomFieldTypeEnum"
         field_value:
-          $ref: '#/components/schemas/RequestCustomFieldResponse_field_value'
+          $ref: "#/components/schemas/RequestCustomFieldResponse_field_value"
       required:
       - field_name
       - field_type
@@ -7452,7 +7587,7 @@ components:
         requests:
           description: The list of requests.
           items:
-            $ref: '#/components/schemas/Request'
+            $ref: "#/components/schemas/Request"
           type: array
         cursor:
           description: The cursor to use in the next request to get the next page
@@ -7515,7 +7650,7 @@ components:
           example: repo-name
           type: string
         resource_type:
-          $ref: '#/components/schemas/ResourceTypeEnum'
+          $ref: "#/components/schemas/ResourceTypeEnum"
         max_duration:
           description: The maximum duration for which the resource can be requested
             (in minutes).
@@ -7524,6 +7659,12 @@ components:
         recommended_duration:
           description: The recommended duration for which the resource should be requested
             (in minutes). -1 represents an indefinite duration.
+          example: 120
+          type: integer
+        extensions_duration_in_minutes:
+          description: "The duration for which access can be extended (in minutes).\
+            \ Set to 0 to disable extensions. When > 0, extensions are enabled for\
+            \ the specified duration."
           example: 120
           type: integer
         require_manager_approval:
@@ -7580,16 +7721,16 @@ components:
         request_configurations:
           description: A list of configurations for requests to this resource.
           items:
-            $ref: '#/components/schemas/RequestConfiguration'
+            $ref: "#/components/schemas/RequestConfiguration"
           type: array
         request_configuration_list:
           description: A list of configurations for requests to this resource. Deprecated
             in favor of `request_configurations`.
           items:
-            $ref: '#/components/schemas/RequestConfiguration'
+            $ref: "#/components/schemas/RequestConfiguration"
           type: array
         ticket_propagation:
-          $ref: '#/components/schemas/TicketPropagationConfiguration'
+          $ref: "#/components/schemas/TicketPropagationConfiguration"
         custom_request_notification:
           description: Custom request notification sent upon request approval.
           maxLength: 800
@@ -7597,13 +7738,13 @@ components:
           nullable: true
         risk_sensitivity:
           allOf:
-          - $ref: '#/components/schemas/RiskSensitivityEnum'
+          - $ref: "#/components/schemas/RiskSensitivityEnum"
           description: "The risk sensitivity level for the resource. When an override\
             \ is set, this field will match that."
           readOnly: true
         risk_sensitivity_override:
           allOf:
-          - $ref: '#/components/schemas/RiskSensitivityEnum'
+          - $ref: "#/components/schemas/RiskSensitivityEnum"
         metadata:
           deprecated: true
           description: "JSON metadata about the remote resource. Only set for items\
@@ -7619,7 +7760,7 @@ components:
             }
           type: string
         remote_info:
-          $ref: '#/components/schemas/ResourceRemoteInfo'
+          $ref: "#/components/schemas/ResourceRemoteInfo"
         ancestor_resource_ids:
           description: List of resource IDs that are ancestors of this resource.
           example:
@@ -7639,14 +7780,14 @@ components:
             type: string
           type: array
         last_successful_sync:
-          $ref: '#/components/schemas/SyncTask'
+          $ref: "#/components/schemas/SyncTask"
       required:
       - resource_id
     AwsPermissionSetMetadata:
       description: Metadata for AWS Identity Center permission set.
       properties:
         aws_permission_set:
-          $ref: '#/components/schemas/AwsPermissionSetMetadata_aws_permission_set'
+          $ref: "#/components/schemas/AwsPermissionSetMetadata_aws_permission_set"
       required:
       - aws_permission_set
     UpdateResourceInfoList:
@@ -7670,7 +7811,7 @@ components:
         resources:
           description: A list of resources with information to update.
           items:
-            $ref: '#/components/schemas/UpdateResourceInfo'
+            $ref: "#/components/schemas/UpdateResourceInfo"
           type: array
       required:
       - resources
@@ -7760,7 +7901,7 @@ components:
           example: false
           type: boolean
         ticket_propagation:
-          $ref: '#/components/schemas/TicketPropagationConfiguration'
+          $ref: "#/components/schemas/TicketPropagationConfiguration"
         custom_request_notification:
           description: Custom request notification sent upon request approval.
           example: Check your email to register your account.
@@ -7769,7 +7910,7 @@ components:
           nullable: true
         risk_sensitivity_override:
           allOf:
-          - $ref: '#/components/schemas/RiskSensitivityEnum'
+          - $ref: "#/components/schemas/RiskSensitivityEnum"
         configuration_template_id:
           description: The ID of the associated configuration template.
           example: 06851574-e50d-40ca-8c78-f72ae6ab4304
@@ -7788,14 +7929,18 @@ components:
             to this resource. Deprecated in favor of `request_configurations`.
           example: false
           type: boolean
+        extensions_duration_in_minutes:
+          description: The duration for which access can be extended (in minutes).
+          example: 120
+          type: integer
         request_configurations:
           description: "A list of configurations for requests to this resource. If\
             \ not provided, the default request configuration will be used."
           items:
-            $ref: '#/components/schemas/RequestConfiguration'
+            $ref: "#/components/schemas/RequestConfiguration"
           type: array
         request_configuration_list:
-          $ref: '#/components/schemas/CreateRequestConfigurationInfoList'
+          $ref: "#/components/schemas/CreateRequestConfigurationInfoList"
       required:
       - resource_id
     PaginatedTagsList:
@@ -7831,7 +7976,7 @@ components:
           nullable: true
         results:
           items:
-            $ref: '#/components/schemas/Tag'
+            $ref: "#/components/schemas/Tag"
           type: array
       required:
       - results
@@ -7855,7 +8000,7 @@ components:
       properties:
         tags:
           items:
-            $ref: '#/components/schemas/Tag'
+            $ref: "#/components/schemas/Tag"
           type: array
       required:
       - tags
@@ -7964,7 +8109,7 @@ components:
           nullable: true
         results:
           items:
-            $ref: '#/components/schemas/GroupBinding'
+            $ref: "#/components/schemas/GroupBinding"
           type: array
       required:
       - results
@@ -7987,7 +8132,7 @@ components:
         groups:
           description: The list of groups.
           items:
-            $ref: '#/components/schemas/CreateGroupBindingInfo_groups_inner'
+            $ref: "#/components/schemas/CreateGroupBindingInfo_groups_inner"
           type: array
       required:
       - groups
@@ -8009,7 +8154,7 @@ components:
         group_bindings:
           description: A list of group bindings with information to update.
           items:
-            $ref: '#/components/schemas/UpdateGroupBindingInfo'
+            $ref: "#/components/schemas/UpdateGroupBindingInfo"
           type: array
       required:
       - group_bindings
@@ -8038,7 +8183,7 @@ components:
         groups:
           description: The list of groups.
           items:
-            $ref: '#/components/schemas/CreateGroupBindingInfo_groups_inner'
+            $ref: "#/components/schemas/CreateGroupBindingInfo_groups_inner"
           type: array
       required:
       - group_binding_id
@@ -8086,7 +8231,7 @@ components:
         groups:
           description: The list of groups.
           items:
-            $ref: '#/components/schemas/GroupBindingGroup'
+            $ref: "#/components/schemas/GroupBindingGroup"
           type: array
       required:
       - created_at
@@ -8112,7 +8257,7 @@ components:
           format: uuid
           type: string
         group_type:
-          $ref: '#/components/schemas/GroupTypeEnum'
+          $ref: "#/components/schemas/GroupTypeEnum"
       required:
       - group_id
       - group_type
@@ -8181,7 +8326,7 @@ components:
           example: ACTIVE
           type: string
         ruleClauses:
-          $ref: '#/components/schemas/RuleClauses'
+          $ref: "#/components/schemas/RuleClauses"
       required:
       - admin_owner_id
       - description
@@ -8262,7 +8407,7 @@ components:
           example: ACTIVE
           type: string
         ruleClauses:
-          $ref: '#/components/schemas/RuleClauses'
+          $ref: "#/components/schemas/RuleClauses"
       required:
       - access_rule_id
       - admin_owner_id
@@ -8306,9 +8451,9 @@ components:
               key: key
       properties:
         when:
-          $ref: '#/components/schemas/RuleConjunction'
+          $ref: "#/components/schemas/RuleConjunction"
         unless:
-          $ref: '#/components/schemas/RuleConjunction'
+          $ref: "#/components/schemas/RuleConjunction"
       required:
       - when
     RuleConjunction:
@@ -8331,7 +8476,7 @@ components:
       properties:
         clauses:
           items:
-            $ref: '#/components/schemas/RuleDisjunction'
+            $ref: "#/components/schemas/RuleDisjunction"
           minItems: 1
           type: array
       required:
@@ -8348,7 +8493,7 @@ components:
       properties:
         selectors:
           items:
-            $ref: '#/components/schemas/TagSelector'
+            $ref: "#/components/schemas/TagSelector"
           type: array
       required:
       - selectors
@@ -8396,7 +8541,7 @@ components:
           nullable: true
         results:
           items:
-            $ref: '#/components/schemas/Owner'
+            $ref: "#/components/schemas/Owner"
           type: array
       required:
       - results
@@ -8504,7 +8649,7 @@ components:
         owners:
           description: A list of owners with information to update.
           items:
-            $ref: '#/components/schemas/UpdateOwnerInfo'
+            $ref: "#/components/schemas/UpdateOwnerInfo"
           type: array
       required:
       - owners
@@ -8607,7 +8752,7 @@ components:
         priority: 1
       properties:
         condition:
-          $ref: '#/components/schemas/Condition'
+          $ref: "#/components/schemas/Condition"
         allow_requests:
           description: A bool representing whether or not to allow requests for this
             resource.
@@ -8638,6 +8783,12 @@ components:
             require an access ticket.
           example: false
           type: boolean
+        extensions_duration_in_minutes:
+          description: "The duration for which access can be extended (in minutes).\
+            \ Set to 0 to disable extensions. When > 0, extensions are enabled for\
+            \ the specified duration."
+          example: 120
+          type: integer
         request_template_id:
           description: The ID of the associated request template.
           example: 06851574-e50d-40ca-8c78-f72ae6ab4304
@@ -8646,7 +8797,7 @@ components:
         reviewer_stages:
           description: The list of reviewer stages for the request configuration.
           items:
-            $ref: '#/components/schemas/ReviewerStage'
+            $ref: "#/components/schemas/ReviewerStage"
           type: array
         priority:
           description: The priority of the request configuration.
@@ -8717,7 +8868,7 @@ components:
         request_configurations:
           description: A list of request configurations to create.
           items:
-            $ref: '#/components/schemas/RequestConfiguration'
+            $ref: "#/components/schemas/RequestConfiguration"
           type: array
       required:
       - request_configurations
@@ -8752,7 +8903,7 @@ components:
           format: uuid
           type: string
         visibility:
-          $ref: '#/components/schemas/VisibilityInfo'
+          $ref: "#/components/schemas/VisibilityInfo"
         linked_audit_message_channel_ids:
           description: The IDs of the audit message channels linked to the configuration
             template.
@@ -8801,12 +8952,12 @@ components:
           description: "The request configuration list of the configuration template.\
             \ If not provided, the default request configuration will be used."
           items:
-            $ref: '#/components/schemas/RequestConfiguration'
+            $ref: "#/components/schemas/RequestConfiguration"
           type: array
         request_configuration_list:
-          $ref: '#/components/schemas/CreateRequestConfigurationInfoList'
+          $ref: "#/components/schemas/CreateRequestConfigurationInfoList"
         ticket_propagation:
-          $ref: '#/components/schemas/TicketPropagationConfiguration'
+          $ref: "#/components/schemas/TicketPropagationConfiguration"
         custom_request_notification:
           description: Custom request notification sent upon request approval for
             this configuration template.
@@ -8861,7 +9012,7 @@ components:
           format: uuid
           type: string
         visibility:
-          $ref: '#/components/schemas/VisibilityInfo'
+          $ref: "#/components/schemas/VisibilityInfo"
         linked_audit_message_channel_ids:
           description: The IDs of the audit message channels linked to the configuration
             template.
@@ -8909,7 +9060,7 @@ components:
           example: false
           type: boolean
         ticket_propagation:
-          $ref: '#/components/schemas/TicketPropagationConfiguration'
+          $ref: "#/components/schemas/TicketPropagationConfiguration"
         custom_request_notification:
           description: Custom request notification sent upon request approval for
             this configuration template.
@@ -8926,7 +9077,7 @@ components:
         enabled_on_revocation:
           type: boolean
         ticket_provider:
-          $ref: '#/components/schemas/TicketingProviderEnum'
+          $ref: "#/components/schemas/TicketingProviderEnum"
         ticket_project_id:
           type: string
       required:
@@ -8973,7 +9124,7 @@ components:
           format: uuid
           type: string
         visibility:
-          $ref: '#/components/schemas/VisibilityInfo'
+          $ref: "#/components/schemas/VisibilityInfo"
         linked_audit_message_channel_ids:
           description: The IDs of the audit message channels linked to the configuration
             template.
@@ -8988,10 +9139,10 @@ components:
           description: The request configuration list linked to the configuration
             template.
           items:
-            $ref: '#/components/schemas/RequestConfiguration'
+            $ref: "#/components/schemas/RequestConfiguration"
           type: array
         request_configuration_list:
-          $ref: '#/components/schemas/CreateRequestConfigurationInfoList'
+          $ref: "#/components/schemas/CreateRequestConfigurationInfoList"
         member_oncall_schedule_ids:
           description: The IDs of the on-call schedules linked to the configuration
             template.
@@ -9023,7 +9174,7 @@ components:
           example: false
           type: boolean
         ticket_propagation:
-          $ref: '#/components/schemas/TicketPropagationConfiguration'
+          $ref: "#/components/schemas/TicketPropagationConfiguration"
         custom_request_notification:
           description: Custom request notification sent upon request approval for
             this configuration template.
@@ -9061,7 +9212,7 @@ components:
       properties:
         results:
           items:
-            $ref: '#/components/schemas/ConfigurationTemplate'
+            $ref: "#/components/schemas/ConfigurationTemplate"
           type: array
     CreateRequestInfo:
       description: All the information needed for creating a request
@@ -9099,11 +9250,11 @@ components:
       properties:
         resources:
           items:
-            $ref: '#/components/schemas/CreateRequestInfo_resources_inner'
+            $ref: "#/components/schemas/CreateRequestInfo_resources_inner"
           type: array
         groups:
           items:
-            $ref: '#/components/schemas/CreateRequestInfo_groups_inner'
+            $ref: "#/components/schemas/CreateRequestInfo_groups_inner"
           type: array
         target_user_id:
           description: The ID of the user to be granted access. Should not be specified
@@ -9120,7 +9271,7 @@ components:
         reason:
           type: string
         support_ticket:
-          $ref: '#/components/schemas/CreateRequestInfo_support_ticket'
+          $ref: "#/components/schemas/CreateRequestInfo_support_ticket"
         duration_minutes:
           description: The duration of the request in minutes. -1 represents an indefinite
             duration
@@ -9128,7 +9279,7 @@ components:
           type: integer
         custom_metadata:
           items:
-            $ref: '#/components/schemas/CreateRequestInfo_custom_metadata_inner'
+            $ref: "#/components/schemas/CreateRequestInfo_custom_metadata_inner"
           type: array
       required:
       - duration_minutes
@@ -9149,7 +9300,7 @@ components:
       properties:
         sync_errors:
           items:
-            $ref: '#/components/schemas/SyncError'
+            $ref: "#/components/schemas/SyncError"
           type: array
       required:
       - sync_errors
@@ -9284,7 +9435,7 @@ components:
           type: integer
         bundles:
           items:
-            $ref: '#/components/schemas/Bundle'
+            $ref: "#/components/schemas/Bundle"
           type: array
       required:
       - bundles
@@ -9344,7 +9495,7 @@ components:
           type: integer
         bundle_resources:
           items:
-            $ref: '#/components/schemas/BundleResource'
+            $ref: "#/components/schemas/BundleResource"
           type: array
       required:
       - bundle_resources
@@ -9403,7 +9554,7 @@ components:
           type: integer
         bundle_groups:
           items:
-            $ref: '#/components/schemas/BundleGroup'
+            $ref: "#/components/schemas/BundleGroup"
           type: array
       required:
       - bundle_groups
@@ -9418,7 +9569,7 @@ components:
       properties:
         permissions:
           items:
-            $ref: '#/components/schemas/ScopedRolePermission'
+            $ref: "#/components/schemas/ScopedRolePermission"
           type: array
       required:
       - permissions
@@ -9435,9 +9586,9 @@ components:
             type: string
           type: array
         target_type:
-          $ref: '#/components/schemas/RolePermissionTargetTypeEnum'
+          $ref: "#/components/schemas/RolePermissionTargetTypeEnum"
         permission_name:
-          $ref: '#/components/schemas/RolePermissionNameEnum'
+          $ref: "#/components/schemas/RolePermissionNameEnum"
         allow_all:
           type: boolean
       required:
@@ -9464,6 +9615,13 @@ components:
       required:
       - completed_at
       - id
+    RequestApprovalEnum:
+      description: The decision level for the approval
+      enum:
+      - REGULAR
+      - ADMIN
+      example: REGULAR
+      type: string
     addBundleResource_request:
       properties:
         resource_id:
@@ -9570,10 +9728,24 @@ components:
       properties:
         mappings:
           items:
-            $ref: '#/components/schemas/updateIdpGroupMappings_request_mappings_inner'
+            $ref: "#/components/schemas/updateIdpGroupMappings_request_mappings_inner"
           type: array
       required:
       - mappings
+    createIdpGroupMapping_request:
+      properties:
+        alias:
+          description: Optional alias for the group mapping
+          type: string
+          nullable: true
+        hidden_from_end_user:
+          description: |
+            Whether this mapping should be hidden from end users.
+            - **New mappings**: If not provided, defaults to `false`
+            - **Existing mappings**: If not provided, existing value is preserved (no change)
+            - **Explicit values**: If provided, value is updated to the specified boolean
+          type: boolean
+          nullable: true
     createRequest_200_response:
       example:
         id: 4baf8423-db0a-4037-a4cf-f79c60cb67a5
@@ -9585,12 +9757,7 @@ components:
     approveRequest_request:
       properties:
         level:
-          description: The decision level for the approval
-          enum:
-          - REGULAR
-          - ADMIN
-          example: REGULAR
-          type: string
+          $ref: "#/components/schemas/RequestApprovalEnum"
         comment:
           description: Optional comment for the approval
           example: Approved after security review
@@ -9630,15 +9797,9 @@ components:
               reviewers:
               - id: 8d86c85d-0651-43e2-a748-d69d658418e9
                 status: APPROVED
-        taskId: c6f85bfb-3fe7-4936-a68d-7a5e1e3d0f6a
       properties:
         request:
-          $ref: '#/components/schemas/Request'
-        taskId:
-          description: ID of the task created for propagating access
-          example: c6f85bfb-3fe7-4936-a68d-7a5e1e3d0f6a
-          format: uuid
-          type: string
+          $ref: "#/components/schemas/Request"
     add_resource_nhi_request:
       example:
         duration_minutes: 60
@@ -9675,7 +9836,7 @@ components:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/ResourceUser'
+            $ref: "#/components/schemas/ResourceUser"
           type: array
         cursor:
           description: Pagination cursor for the next page of results
@@ -10112,6 +10273,15 @@ components:
           type: string
       required:
       - repo_name
+    ResourceRemoteInfo_github_org_role:
+      description: Remote info for GitHub organization role.
+      properties:
+        role_id:
+          description: The id of the role.
+          example: 112233
+          type: string
+      required:
+      - role_id
     ResourceRemoteInfo_gitlab_project:
       description: Remote info for Gitlab project.
       properties:
@@ -10276,7 +10446,7 @@ components:
         url: url
       properties:
         ticketing_provider:
-          $ref: '#/components/schemas/TicketingProviderEnum'
+          $ref: "#/components/schemas/TicketingProviderEnum"
         remote_id:
           type: string
         identifier:
@@ -10297,7 +10467,7 @@ components:
         name:
           type: string
         type:
-          $ref: '#/components/schemas/RequestTemplateCustomFieldTypeEnum'
+          $ref: "#/components/schemas/RequestTemplateCustomFieldTypeEnum"
         value:
           type: string
       required:

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **MaxDurationMinutes** | Pointer to **int32** | The maximum duration for which the resource can be requested (in minutes). | [optional] 
 **RecommendedDurationMinutes** | Pointer to **int32** | The recommended duration for which the resource should be requested (in minutes). -1 represents an indefinite duration. | [optional] 
 **RequireSupportTicket** | **bool** | A bool representing whether or not access requests to the resource require an access ticket. | 
+**ExtensionsDurationInMinutes** | Pointer to **int32** | The duration for which access can be extended (in minutes). Set to 0 to disable extensions. When &gt; 0, extensions are enabled for the specified duration. | [optional] 
 **RequestTemplateId** | Pointer to **string** | The ID of the associated request template. | [optional] 
 **ReviewerStages** | Pointer to [**[]ReviewerStage**](ReviewerStage.md) | The list of reviewer stages for the request configuration. | [optional] 
 **Priority** | **int32** | The priority of the request configuration. | 
@@ -188,6 +189,31 @@ and a boolean to check if the value has been set.
 
 SetRequireSupportTicket sets RequireSupportTicket field to given value.
 
+
+### GetExtensionsDurationInMinutes
+
+`func (o *RequestConfiguration) GetExtensionsDurationInMinutes() int32`
+
+GetExtensionsDurationInMinutes returns the ExtensionsDurationInMinutes field if non-nil, zero value otherwise.
+
+### GetExtensionsDurationInMinutesOk
+
+`func (o *RequestConfiguration) GetExtensionsDurationInMinutesOk() (*int32, bool)`
+
+GetExtensionsDurationInMinutesOk returns a tuple with the ExtensionsDurationInMinutes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExtensionsDurationInMinutes
+
+`func (o *RequestConfiguration) SetExtensionsDurationInMinutes(v int32)`
+
+SetExtensionsDurationInMinutes sets ExtensionsDurationInMinutes field to given value.
+
+### HasExtensionsDurationInMinutes
+
+`func (o *RequestConfiguration) HasExtensionsDurationInMinutes() bool`
+
+HasExtensionsDurationInMinutes returns a boolean if a field has been set.
 
 ### GetRequestTemplateId
 

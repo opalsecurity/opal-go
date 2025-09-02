@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **GcpServiceAccount** | Pointer to [**ResourceRemoteInfoGcpServiceAccount**](ResourceRemoteInfoGcpServiceAccount.md) |  | [optional] 
 **GoogleWorkspaceRole** | Pointer to [**ResourceRemoteInfoGoogleWorkspaceRole**](ResourceRemoteInfoGoogleWorkspaceRole.md) |  | [optional] 
 **GithubRepo** | Pointer to [**ResourceRemoteInfoGithubRepo**](ResourceRemoteInfoGithubRepo.md) |  | [optional] 
+**GithubOrgRole** | Pointer to [**ResourceRemoteInfoGithubOrgRole**](ResourceRemoteInfoGithubOrgRole.md) |  | [optional] 
 **GitlabProject** | Pointer to [**ResourceRemoteInfoGitlabProject**](ResourceRemoteInfoGitlabProject.md) |  | [optional] 
 **OktaApp** | Pointer to [**ResourceRemoteInfoOktaApp**](ResourceRemoteInfoOktaApp.md) |  | [optional] 
 **OktaStandardRole** | Pointer to [**ResourceRemoteInfoOktaStandardRole**](ResourceRemoteInfoOktaStandardRole.md) |  | [optional] 
@@ -552,6 +553,31 @@ SetGithubRepo sets GithubRepo field to given value.
 `func (o *ResourceRemoteInfo) HasGithubRepo() bool`
 
 HasGithubRepo returns a boolean if a field has been set.
+
+### GetGithubOrgRole
+
+`func (o *ResourceRemoteInfo) GetGithubOrgRole() ResourceRemoteInfoGithubOrgRole`
+
+GetGithubOrgRole returns the GithubOrgRole field if non-nil, zero value otherwise.
+
+### GetGithubOrgRoleOk
+
+`func (o *ResourceRemoteInfo) GetGithubOrgRoleOk() (*ResourceRemoteInfoGithubOrgRole, bool)`
+
+GetGithubOrgRoleOk returns a tuple with the GithubOrgRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGithubOrgRole
+
+`func (o *ResourceRemoteInfo) SetGithubOrgRole(v ResourceRemoteInfoGithubOrgRole)`
+
+SetGithubOrgRole sets GithubOrgRole field to given value.
+
+### HasGithubOrgRole
+
+`func (o *ResourceRemoteInfo) HasGithubOrgRole() bool`
+
+HasGithubOrgRole returns a boolean if a field has been set.
 
 ### GetGitlabProject
 
