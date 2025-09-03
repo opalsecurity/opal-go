@@ -81,6 +81,7 @@ const (
 	RESOURCETYPEENUM_MARIADB_INSTANCE ResourceTypeEnum = "MARIADB_INSTANCE"
 	RESOURCETYPEENUM_POSTGRES_INSTANCE ResourceTypeEnum = "POSTGRES_INSTANCE"
 	RESOURCETYPEENUM_TELEPORT_ROLE ResourceTypeEnum = "TELEPORT_ROLE"
+	RESOURCETYPEENUM_ILEVEL_ADVANCED_ROLE ResourceTypeEnum = "ILEVEL_ADVANCED_ROLE"
 )
 
 // All allowed values of ResourceTypeEnum enum
@@ -145,6 +146,7 @@ var AllowedResourceTypeEnumEnumValues = []ResourceTypeEnum{
 	"MARIADB_INSTANCE",
 	"POSTGRES_INSTANCE",
 	"TELEPORT_ROLE",
+	"ILEVEL_ADVANCED_ROLE",
 }
 
 func (v *ResourceTypeEnum) UnmarshalJSON(src []byte) error {

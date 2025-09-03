@@ -41,6 +41,8 @@ type Resource struct {
 	MaxDuration *int32 `json:"max_duration,omitempty"`
 	// The recommended duration for which the resource should be requested (in minutes). -1 represents an indefinite duration.
 	RecommendedDuration *int32 `json:"recommended_duration,omitempty"`
+	// The duration for which access can be extended (in minutes). Set to 0 to disable extensions. When > 0, extensions are enabled for the specified duration.
+	ExtensionsDurationInMinutes *int32 `json:"extensions_duration_in_minutes,omitempty"`
 	// A bool representing whether or not access requests to the resource require manager approval.
 	// Deprecated
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
@@ -80,6 +82,7 @@ type Resource struct {
 	AncestorResourceIds []string `json:"ancestor_resource_ids,omitempty"`
 	// List of resource IDs that are descendants of this resource.
 	DescendantResourceIds []string `json:"descendant_resource_ids,omitempty"`
+	// Information about the last successful sync of this resource.
 	LastSuccessfulSync *SyncTask `json:"last_successful_sync,omitempty"`
 }
 
@@ -413,6 +416,38 @@ func (o *Resource) HasRecommendedDuration() bool {
 // SetRecommendedDuration gets a reference to the given int32 and assigns it to the RecommendedDuration field.
 func (o *Resource) SetRecommendedDuration(v int32) {
 	o.RecommendedDuration = &v
+}
+
+// GetExtensionsDurationInMinutes returns the ExtensionsDurationInMinutes field value if set, zero value otherwise.
+func (o *Resource) GetExtensionsDurationInMinutes() int32 {
+	if o == nil || IsNil(o.ExtensionsDurationInMinutes) {
+		var ret int32
+		return ret
+	}
+	return *o.ExtensionsDurationInMinutes
+}
+
+// GetExtensionsDurationInMinutesOk returns a tuple with the ExtensionsDurationInMinutes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetExtensionsDurationInMinutesOk() (*int32, bool) {
+	if o == nil || IsNil(o.ExtensionsDurationInMinutes) {
+		return nil, false
+	}
+	return o.ExtensionsDurationInMinutes, true
+}
+
+// HasExtensionsDurationInMinutes returns a boolean if a field has been set.
+func (o *Resource) HasExtensionsDurationInMinutes() bool {
+	if o != nil && !IsNil(o.ExtensionsDurationInMinutes) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtensionsDurationInMinutes gets a reference to the given int32 and assigns it to the ExtensionsDurationInMinutes field.
+func (o *Resource) SetExtensionsDurationInMinutes(v int32) {
+	o.ExtensionsDurationInMinutes = &v
 }
 
 // GetRequireManagerApproval returns the RequireManagerApproval field value if set, zero value otherwise.
@@ -1130,6 +1165,9 @@ func (o Resource) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.RecommendedDuration) {
 		toSerialize["recommended_duration"] = o.RecommendedDuration
+	}
+	if !IsNil(o.ExtensionsDurationInMinutes) {
+		toSerialize["extensions_duration_in_minutes"] = o.ExtensionsDurationInMinutes
 	}
 	if !IsNil(o.RequireManagerApproval) {
 		toSerialize["require_manager_approval"] = o.RequireManagerApproval
