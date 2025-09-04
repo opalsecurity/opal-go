@@ -35,6 +35,7 @@ type Request struct {
 	TargetUserId *string `json:"target_user_id,omitempty"`
 	// The unique identifier of the group who is the target of the request.
 	TargetGroupId *string `json:"target_group_id,omitempty"`
+	// The status of the request.
 	Status RequestStatusEnum `json:"status"`
 	// The reason for the request.
 	Reason string `json:"reason"`
@@ -44,6 +45,7 @@ type Request struct {
 	RequestedItemsList []RequestedItem `json:"requested_items_list,omitempty"`
 	// The responses given to the custom fields associated to the request
 	CustomFieldsResponses []RequestCustomFieldResponse `json:"custom_fields_responses,omitempty"`
+	// The stages configuration for this request
 	Stages *RequestItemStages `json:"stages,omitempty"`
 }
 
