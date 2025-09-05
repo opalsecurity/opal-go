@@ -78,8 +78,6 @@ type APIClient struct {
 
 	ResourcesAPI *ResourcesAPIService
 
-	ScopedRolePermissionsAPI *ScopedRolePermissionsAPIService
-
 	SessionsAPI *SessionsAPIService
 
 	TagsAPI *TagsAPIService
@@ -119,7 +117,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.OwnersAPI = (*OwnersAPIService)(&c.common)
 	c.RequestsAPI = (*RequestsAPIService)(&c.common)
 	c.ResourcesAPI = (*ResourcesAPIService)(&c.common)
-	c.ScopedRolePermissionsAPI = (*ScopedRolePermissionsAPIService)(&c.common)
 	c.SessionsAPI = (*SessionsAPIService)(&c.common)
 	c.TagsAPI = (*TagsAPIService)(&c.common)
 	c.UarsAPI = (*UarsAPIService)(&c.common)
