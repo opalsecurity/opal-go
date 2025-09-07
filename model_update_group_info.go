@@ -63,8 +63,12 @@ type UpdateGroupInfo struct {
 	IsRequestable *bool `json:"is_requestable,omitempty"`
 	// A list of User IDs for the group leaders of the group
 	GroupLeaderUserIds []string `json:"group_leader_user_ids,omitempty"`
+	// The duration for which access can be extended (in minutes).
+	ExtensionsDurationInMinutes *int32 `json:"extensions_duration_in_minutes,omitempty"`
 	// The request configuration list of the configuration template. If not provided, the default request configuration will be used.
 	RequestConfigurations []RequestConfiguration `json:"request_configurations,omitempty"`
+	// The request configuration list of the configuration template. If not provided, the default request configuration will be used. Deprecated in favor of `request_configurations`.
+	// Deprecated
 	RequestConfigurationList *CreateRequestConfigurationInfoList `json:"request_configuration_list,omitempty"`
 	// Custom request notification sent to the requester when the request is approved.
 	CustomRequestNotification *string `json:"custom_request_notification,omitempty"`
@@ -622,6 +626,38 @@ func (o *UpdateGroupInfo) SetGroupLeaderUserIds(v []string) {
 	o.GroupLeaderUserIds = v
 }
 
+// GetExtensionsDurationInMinutes returns the ExtensionsDurationInMinutes field value if set, zero value otherwise.
+func (o *UpdateGroupInfo) GetExtensionsDurationInMinutes() int32 {
+	if o == nil || IsNil(o.ExtensionsDurationInMinutes) {
+		var ret int32
+		return ret
+	}
+	return *o.ExtensionsDurationInMinutes
+}
+
+// GetExtensionsDurationInMinutesOk returns a tuple with the ExtensionsDurationInMinutes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateGroupInfo) GetExtensionsDurationInMinutesOk() (*int32, bool) {
+	if o == nil || IsNil(o.ExtensionsDurationInMinutes) {
+		return nil, false
+	}
+	return o.ExtensionsDurationInMinutes, true
+}
+
+// HasExtensionsDurationInMinutes returns a boolean if a field has been set.
+func (o *UpdateGroupInfo) HasExtensionsDurationInMinutes() bool {
+	if o != nil && !IsNil(o.ExtensionsDurationInMinutes) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtensionsDurationInMinutes gets a reference to the given int32 and assigns it to the ExtensionsDurationInMinutes field.
+func (o *UpdateGroupInfo) SetExtensionsDurationInMinutes(v int32) {
+	o.ExtensionsDurationInMinutes = &v
+}
+
 // GetRequestConfigurations returns the RequestConfigurations field value if set, zero value otherwise.
 func (o *UpdateGroupInfo) GetRequestConfigurations() []RequestConfiguration {
 	if o == nil || IsNil(o.RequestConfigurations) {
@@ -655,6 +691,7 @@ func (o *UpdateGroupInfo) SetRequestConfigurations(v []RequestConfiguration) {
 }
 
 // GetRequestConfigurationList returns the RequestConfigurationList field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateGroupInfo) GetRequestConfigurationList() CreateRequestConfigurationInfoList {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		var ret CreateRequestConfigurationInfoList
@@ -665,6 +702,7 @@ func (o *UpdateGroupInfo) GetRequestConfigurationList() CreateRequestConfigurati
 
 // GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateGroupInfo) GetRequestConfigurationListOk() (*CreateRequestConfigurationInfoList, bool) {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		return nil, false
@@ -682,6 +720,7 @@ func (o *UpdateGroupInfo) HasRequestConfigurationList() bool {
 }
 
 // SetRequestConfigurationList gets a reference to the given CreateRequestConfigurationInfoList and assigns it to the RequestConfigurationList field.
+// Deprecated
 func (o *UpdateGroupInfo) SetRequestConfigurationList(v CreateRequestConfigurationInfoList) {
 	o.RequestConfigurationList = &v
 }
@@ -805,6 +844,9 @@ func (o UpdateGroupInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.GroupLeaderUserIds) {
 		toSerialize["group_leader_user_ids"] = o.GroupLeaderUserIds
+	}
+	if !IsNil(o.ExtensionsDurationInMinutes) {
+		toSerialize["extensions_duration_in_minutes"] = o.ExtensionsDurationInMinutes
 	}
 	if !IsNil(o.RequestConfigurations) {
 		toSerialize["request_configurations"] = o.RequestConfigurations

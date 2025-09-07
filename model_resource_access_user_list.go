@@ -20,6 +20,10 @@ var _ MappedNullable = &ResourceAccessUserList{}
 
 // ResourceAccessUserList struct for ResourceAccessUserList
 type ResourceAccessUserList struct {
+	// The cursor with which to continue pagination if additional result pages exist.
+	Next *string `json:"next,omitempty"`
+	// The cursor used to obtain the current result page.
+	Previous *string `json:"previous,omitempty"`
 	Results []ResourceAccessUser `json:"results,omitempty"`
 }
 
@@ -38,6 +42,70 @@ func NewResourceAccessUserList() *ResourceAccessUserList {
 func NewResourceAccessUserListWithDefaults() *ResourceAccessUserList {
 	this := ResourceAccessUserList{}
 	return &this
+}
+
+// GetNext returns the Next field value if set, zero value otherwise.
+func (o *ResourceAccessUserList) GetNext() string {
+	if o == nil || IsNil(o.Next) {
+		var ret string
+		return ret
+	}
+	return *o.Next
+}
+
+// GetNextOk returns a tuple with the Next field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceAccessUserList) GetNextOk() (*string, bool) {
+	if o == nil || IsNil(o.Next) {
+		return nil, false
+	}
+	return o.Next, true
+}
+
+// HasNext returns a boolean if a field has been set.
+func (o *ResourceAccessUserList) HasNext() bool {
+	if o != nil && !IsNil(o.Next) {
+		return true
+	}
+
+	return false
+}
+
+// SetNext gets a reference to the given string and assigns it to the Next field.
+func (o *ResourceAccessUserList) SetNext(v string) {
+	o.Next = &v
+}
+
+// GetPrevious returns the Previous field value if set, zero value otherwise.
+func (o *ResourceAccessUserList) GetPrevious() string {
+	if o == nil || IsNil(o.Previous) {
+		var ret string
+		return ret
+	}
+	return *o.Previous
+}
+
+// GetPreviousOk returns a tuple with the Previous field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceAccessUserList) GetPreviousOk() (*string, bool) {
+	if o == nil || IsNil(o.Previous) {
+		return nil, false
+	}
+	return o.Previous, true
+}
+
+// HasPrevious returns a boolean if a field has been set.
+func (o *ResourceAccessUserList) HasPrevious() bool {
+	if o != nil && !IsNil(o.Previous) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrevious gets a reference to the given string and assigns it to the Previous field.
+func (o *ResourceAccessUserList) SetPrevious(v string) {
+	o.Previous = &v
 }
 
 // GetResults returns the Results field value if set, zero value otherwise.
@@ -82,6 +150,12 @@ func (o ResourceAccessUserList) MarshalJSON() ([]byte, error) {
 
 func (o ResourceAccessUserList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Next) {
+		toSerialize["next"] = o.Next
+	}
+	if !IsNil(o.Previous) {
+		toSerialize["previous"] = o.Previous
+	}
 	if !IsNil(o.Results) {
 		toSerialize["results"] = o.Results
 	}
