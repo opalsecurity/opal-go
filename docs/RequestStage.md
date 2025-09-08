@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Stage** | **int32** | The stage number | 
-**Operator** | [**ReviewStageOperator**](ReviewStageOperator.md) |  | 
+**Operator** | [**ReviewStageOperator**](ReviewStageOperator.md) | The operator to apply to reviewers in this stage | 
 **Reviewers** | [**[]RequestReviewer**](RequestReviewer.md) | The reviewers for this stage | 
 
 ## Methods
