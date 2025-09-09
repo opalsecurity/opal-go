@@ -1215,6 +1215,109 @@ func (a *ResourcesAPIService) GetResourceReviewersExecute(r ApiGetResourceReview
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetResourceScopedRolePermissionsRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	resourceId string
+}
+
+func (r ApiGetResourceScopedRolePermissionsRequest) Execute() (*ScopedRolePermissionList, *http.Response, error) {
+	return r.ApiService.GetResourceScopedRolePermissionsExecute(r)
+}
+
+/*
+GetResourceScopedRolePermissions Method for GetResourceScopedRolePermissions
+
+Returns all the scoped role permissions that apply to the given resource. Only OPAL_SCOPED_ROLE resource type supports this field.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param resourceId The ID of the resource whose scoped role permissions belong to.
+ @return ApiGetResourceScopedRolePermissionsRequest
+*/
+func (a *ResourcesAPIService) GetResourceScopedRolePermissions(ctx context.Context, resourceId string) ApiGetResourceScopedRolePermissionsRequest {
+	return ApiGetResourceScopedRolePermissionsRequest{
+		ApiService: a,
+		ctx: ctx,
+		resourceId: resourceId,
+	}
+}
+
+// Execute executes the request
+//  @return ScopedRolePermissionList
+func (a *ResourcesAPIService) GetResourceScopedRolePermissionsExecute(r ApiGetResourceScopedRolePermissionsRequest) (*ScopedRolePermissionList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ScopedRolePermissionList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.GetResourceScopedRolePermissions")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/{resource_id}/scoped-role-permissions"
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetResourceTagsRequest struct {
 	ctx context.Context
 	ApiService *ResourcesAPIService
@@ -1661,6 +1764,7 @@ type ApiGetResourcesRequest struct {
 	resourceName *string
 	parentResourceId *string
 	ancestorResourceId *string
+	remoteId *string
 }
 
 // The pagination cursor value.
@@ -1675,7 +1779,7 @@ func (r ApiGetResourcesRequest) PageSize(pageSize int32) ApiGetResourcesRequest 
 	return r
 }
 
-// The resource type to filter by.
+// The resource type to filter by. Required when remote_id is provided.
 func (r ApiGetResourcesRequest) ResourceTypeFilter(resourceTypeFilter ResourceTypeEnum) ApiGetResourcesRequest {
 	r.resourceTypeFilter = &resourceTypeFilter
 	return r
@@ -1702,6 +1806,12 @@ func (r ApiGetResourcesRequest) ParentResourceId(parentResourceId string) ApiGet
 // The ancestor resource id to filter by. Returns all resources that are descendants of the specified resource.
 func (r ApiGetResourcesRequest) AncestorResourceId(ancestorResourceId string) ApiGetResourcesRequest {
 	r.ancestorResourceId = &ancestorResourceId
+	return r
+}
+
+// Filter resources by their remote id. This will return all resources that have a remote id that matches the provided remote id. Note that this requires resource_type_filter to be provided.
+func (r ApiGetResourcesRequest) RemoteId(remoteId string) ApiGetResourcesRequest {
+	r.remoteId = &remoteId
 	return r
 }
 
@@ -1765,6 +1875,142 @@ func (a *ResourcesAPIService) GetResourcesExecute(r ApiGetResourcesRequest) (*Pa
 	}
 	if r.ancestorResourceId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ancestor_resource_id", r.ancestorResourceId, "form", "")
+	}
+	if r.remoteId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "remote_id", r.remoteId, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetUserResourcesRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	userId string
+	limit *int32
+	cursor *string
+	includeUnmanaged *bool
+}
+
+// Limit the number of results returned.
+func (r ApiGetUserResourcesRequest) Limit(limit int32) ApiGetUserResourcesRequest {
+	r.limit = &limit
+	return r
+}
+
+// The pagination cursor value.
+func (r ApiGetUserResourcesRequest) Cursor(cursor string) ApiGetUserResourcesRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Include user&#39;s access to unmanaged resources.
+func (r ApiGetUserResourcesRequest) IncludeUnmanaged(includeUnmanaged bool) ApiGetUserResourcesRequest {
+	r.includeUnmanaged = &includeUnmanaged
+	return r
+}
+
+func (r ApiGetUserResourcesRequest) Execute() (*ResourceAccessUserList, *http.Response, error) {
+	return r.ApiService.GetUserResourcesExecute(r)
+}
+
+/*
+GetUserResources Method for GetUserResources
+
+Gets the list of resources for this user.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param userId The ID of the user.
+ @return ApiGetUserResourcesRequest
+*/
+func (a *ResourcesAPIService) GetUserResources(ctx context.Context, userId string) ApiGetUserResourcesRequest {
+	return ApiGetUserResourcesRequest{
+		ApiService: a,
+		ctx: ctx,
+		userId: userId,
+	}
+}
+
+// Execute executes the request
+//  @return ResourceAccessUserList
+func (a *ResourcesAPIService) GetUserResourcesExecute(r ApiGetUserResourcesRequest) (*ResourceAccessUserList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResourceAccessUserList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.GetUserResources")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/users/{user_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"user_id"+"}", url.PathEscape(parameterValueToString(r.userId, "userId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.includeUnmanaged != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "include_unmanaged", r.includeUnmanaged, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2265,6 +2511,120 @@ func (a *ResourcesAPIService) SetResourceReviewersExecute(r ApiSetResourceReview
 	}
 	// body params
 	localVarPostBody = r.reviewerIDList
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiSetResourceScopedRolePermissionsRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	resourceId string
+	scopedRolePermissionList *ScopedRolePermissionList
+}
+
+func (r ApiSetResourceScopedRolePermissionsRequest) ScopedRolePermissionList(scopedRolePermissionList ScopedRolePermissionList) ApiSetResourceScopedRolePermissionsRequest {
+	r.scopedRolePermissionList = &scopedRolePermissionList
+	return r
+}
+
+func (r ApiSetResourceScopedRolePermissionsRequest) Execute() (*ScopedRolePermissionList, *http.Response, error) {
+	return r.ApiService.SetResourceScopedRolePermissionsExecute(r)
+}
+
+/*
+SetResourceScopedRolePermissions Method for SetResourceScopedRolePermissions
+
+Sets all the scoped role permissions on an OPAL_SCOPED_ROLE resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param resourceId The ID of the resource whose scoped role permissions belong to. Must be of OPAL_SCOPED_ROLE resource type.
+ @return ApiSetResourceScopedRolePermissionsRequest
+*/
+func (a *ResourcesAPIService) SetResourceScopedRolePermissions(ctx context.Context, resourceId string) ApiSetResourceScopedRolePermissionsRequest {
+	return ApiSetResourceScopedRolePermissionsRequest{
+		ApiService: a,
+		ctx: ctx,
+		resourceId: resourceId,
+	}
+}
+
+// Execute executes the request
+//  @return ScopedRolePermissionList
+func (a *ResourcesAPIService) SetResourceScopedRolePermissionsExecute(r ApiSetResourceScopedRolePermissionsRequest) (*ScopedRolePermissionList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ScopedRolePermissionList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.SetResourceScopedRolePermissions")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/{resource_id}/scoped-role-permissions"
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.scopedRolePermissionList == nil {
+		return localVarReturnValue, nil, reportError("scopedRolePermissionList is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.scopedRolePermissionList
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
