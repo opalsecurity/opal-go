@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **UserId** | **string** | The ID of the user. | 
 **RemoteId** | **string** | The ID of the remote user. | 
-**ThirdPartyProvider** | [**ThirdPartyProviderEnum**](ThirdPartyProviderEnum.md) |  | 
+**ThirdPartyProvider** | [**ThirdPartyProviderEnum**](ThirdPartyProviderEnum.md) | The third party provider of the remote user. | 
 
 ## Methods
 
