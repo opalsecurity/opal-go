@@ -21,8 +21,6 @@ var _ MappedNullable = &ApproveRequest200Response{}
 // ApproveRequest200Response struct for ApproveRequest200Response
 type ApproveRequest200Response struct {
 	Request *Request `json:"request,omitempty"`
-	// ID of the task created for propagating access
-	TaskId *string `json:"taskId,omitempty"`
 }
 
 // NewApproveRequest200Response instantiates a new ApproveRequest200Response object
@@ -74,38 +72,6 @@ func (o *ApproveRequest200Response) SetRequest(v Request) {
 	o.Request = &v
 }
 
-// GetTaskId returns the TaskId field value if set, zero value otherwise.
-func (o *ApproveRequest200Response) GetTaskId() string {
-	if o == nil || IsNil(o.TaskId) {
-		var ret string
-		return ret
-	}
-	return *o.TaskId
-}
-
-// GetTaskIdOk returns a tuple with the TaskId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ApproveRequest200Response) GetTaskIdOk() (*string, bool) {
-	if o == nil || IsNil(o.TaskId) {
-		return nil, false
-	}
-	return o.TaskId, true
-}
-
-// HasTaskId returns a boolean if a field has been set.
-func (o *ApproveRequest200Response) HasTaskId() bool {
-	if o != nil && !IsNil(o.TaskId) {
-		return true
-	}
-
-	return false
-}
-
-// SetTaskId gets a reference to the given string and assigns it to the TaskId field.
-func (o *ApproveRequest200Response) SetTaskId(v string) {
-	o.TaskId = &v
-}
-
 func (o ApproveRequest200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -118,9 +84,6 @@ func (o ApproveRequest200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Request) {
 		toSerialize["request"] = o.Request
-	}
-	if !IsNil(o.TaskId) {
-		toSerialize["taskId"] = o.TaskId
 	}
 	return toSerialize, nil
 }
