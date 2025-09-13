@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **ResourceType** | Pointer to [**ResourceTypeEnum**](ResourceTypeEnum.md) |  | [optional] 
 **MaxDuration** | Pointer to **int32** | The maximum duration for which the resource can be requested (in minutes). | [optional] 
 **RecommendedDuration** | Pointer to **int32** | The recommended duration for which the resource should be requested (in minutes). -1 represents an indefinite duration. | [optional] 
+**ExtensionsDurationInMinutes** | Pointer to **int32** | The duration for which access can be extended (in minutes). Set to 0 to disable extensions. When &gt; 0, extensions are enabled for the specified duration. | [optional] 
 **RequireManagerApproval** | Pointer to **bool** | A bool representing whether or not access requests to the resource require manager approval. | [optional] 
 **RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the resource require an access ticket. | [optional] 
 **RequireMfaToApprove** | Pointer to **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this resource. | [optional] 
@@ -34,7 +35,7 @@ Name | Type | Description | Notes
 **RemoteInfo** | Pointer to [**ResourceRemoteInfo**](ResourceRemoteInfo.md) |  | [optional] 
 **AncestorResourceIds** | Pointer to **[]string** | List of resource IDs that are ancestors of this resource. | [optional] 
 **DescendantResourceIds** | Pointer to **[]string** | List of resource IDs that are descendants of this resource. | [optional] 
-**LastSuccessfulSync** | Pointer to [**SyncTask**](SyncTask.md) |  | [optional] 
+**LastSuccessfulSync** | Pointer to [**SyncTask**](SyncTask.md) | Information about the last successful sync of this resource. | [optional] [readonly] 
 
 ## Methods
 
@@ -299,6 +300,31 @@ SetRecommendedDuration sets RecommendedDuration field to given value.
 `func (o *Resource) HasRecommendedDuration() bool`
 
 HasRecommendedDuration returns a boolean if a field has been set.
+
+### GetExtensionsDurationInMinutes
+
+`func (o *Resource) GetExtensionsDurationInMinutes() int32`
+
+GetExtensionsDurationInMinutes returns the ExtensionsDurationInMinutes field if non-nil, zero value otherwise.
+
+### GetExtensionsDurationInMinutesOk
+
+`func (o *Resource) GetExtensionsDurationInMinutesOk() (*int32, bool)`
+
+GetExtensionsDurationInMinutesOk returns a tuple with the ExtensionsDurationInMinutes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExtensionsDurationInMinutes
+
+`func (o *Resource) SetExtensionsDurationInMinutes(v int32)`
+
+SetExtensionsDurationInMinutes sets ExtensionsDurationInMinutes field to given value.
+
+### HasExtensionsDurationInMinutes
+
+`func (o *Resource) HasExtensionsDurationInMinutes() bool`
+
+HasExtensionsDurationInMinutes returns a boolean if a field has been set.
 
 ### GetRequireManagerApproval
 
