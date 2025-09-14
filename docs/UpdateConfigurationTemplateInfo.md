@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **ConfigurationTemplateId** | **string** | The ID of the configuration template. | 
 **Name** | Pointer to **string** | The name of the configuration template. | [optional] 
 **AdminOwnerId** | Pointer to **string** | The ID of the owner of the configuration template. | [optional] 
-**Visibility** | Pointer to [**VisibilityInfo**](VisibilityInfo.md) |  | [optional] 
+**Visibility** | Pointer to [**VisibilityInfo**](VisibilityInfo.md) | The visibility info of the configuration template. | [optional] 
 **LinkedAuditMessageChannelIds** | Pointer to **[]string** | The IDs of the audit message channels linked to the configuration template. | [optional] 
 **RequestConfigurations** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | The request configuration list linked to the configuration template. | [optional] 
-**RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) |  | [optional] 
+**RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) | The request configuration list linked to the configuration template. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **MemberOncallScheduleIds** | Pointer to **[]string** | The IDs of the on-call schedules linked to the configuration template. | [optional] 
 **BreakGlassUserIds** | Pointer to **[]string** | The IDs of the break glass users linked to the configuration template. | [optional] 
 **RequireMfaToApprove** | Pointer to **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this configuration template. | [optional] 

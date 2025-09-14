@@ -5,6 +5,7 @@ api_access_rules.go
 api_apps.go
 api_bundles.go
 api_configuration_templates.go
+api_delegations.go
 api_events.go
 api_group_bindings.go
 api_groups.go
@@ -15,7 +16,6 @@ api_on_call_schedules.go
 api_owners.go
 api_requests.go
 api_resources.go
-api_scoped_role_permissions.go
 api_sessions.go
 api_tags.go
 api_uars.go
@@ -52,13 +52,16 @@ docs/ConfigurationTemplate.md
 docs/ConfigurationTemplatesAPI.md
 docs/CreateBundleInfo.md
 docs/CreateConfigurationTemplateInfo.md
+docs/CreateDelegationRequest.md
 docs/CreateGroupBindingInfo.md
 docs/CreateGroupBindingInfoGroupsInner.md
 docs/CreateGroupInfo.md
+docs/CreateIdpGroupMappingRequest.md
 docs/CreateMessageChannelInfo.md
 docs/CreateOnCallScheduleInfo.md
 docs/CreateOwnerInfo.md
 docs/CreateRequest200Response.md
+docs/CreateRequestCommentRequest.md
 docs/CreateRequestConfigurationInfoList.md
 docs/CreateRequestInfo.md
 docs/CreateRequestInfoCustomMetadataInner.md
@@ -68,6 +71,9 @@ docs/CreateRequestInfoSupportTicket.md
 docs/CreateResourceInfo.md
 docs/CreateTagInfo.md
 docs/CreateUARInfo.md
+docs/Delegation.md
+docs/DelegationsAPI.md
+docs/DenyRequestRequest.md
 docs/EntityTypeEnum.md
 docs/Event.md
 docs/EventsAPI.md
@@ -121,6 +127,7 @@ docs/PaginatedBundleGroupList.md
 docs/PaginatedBundleList.md
 docs/PaginatedBundleResourceList.md
 docs/PaginatedConfigurationTemplateList.md
+docs/PaginatedDelegationsList.md
 docs/PaginatedEventList.md
 docs/PaginatedGroupBindingsList.md
 docs/PaginatedGroupsList.md
@@ -134,6 +141,9 @@ docs/PropagationStatus.md
 docs/PropagationStatusEnum.md
 docs/RemoteUser.md
 docs/Request.md
+docs/RequestApprovalEnum.md
+docs/RequestComment.md
+docs/RequestCommentList.md
 docs/RequestConfiguration.md
 docs/RequestConnection.md
 docs/RequestCustomFieldResponse.md
@@ -142,6 +152,7 @@ docs/RequestEdge.md
 docs/RequestItemStages.md
 docs/RequestList.md
 docs/RequestReviewer.md
+docs/RequestReviewerStages.md
 docs/RequestStage.md
 docs/RequestStatusEnum.md
 docs/RequestTemplateCustomFieldTypeEnum.md
@@ -161,6 +172,7 @@ docs/ResourceRemoteInfoAwsOrganizationalUnit.md
 docs/ResourceRemoteInfoAwsPermissionSet.md
 docs/ResourceRemoteInfoAwsRdsInstance.md
 docs/ResourceRemoteInfoCustomConnector.md
+docs/ResourceRemoteInfoDatastaxAstraRole.md
 docs/ResourceRemoteInfoGcpBigQueryDataset.md
 docs/ResourceRemoteInfoGcpBigQueryTable.md
 docs/ResourceRemoteInfoGcpBucket.md
@@ -171,6 +183,7 @@ docs/ResourceRemoteInfoGcpOrganization.md
 docs/ResourceRemoteInfoGcpProject.md
 docs/ResourceRemoteInfoGcpServiceAccount.md
 docs/ResourceRemoteInfoGcpSqlInstance.md
+docs/ResourceRemoteInfoGithubOrgRole.md
 docs/ResourceRemoteInfoGithubRepo.md
 docs/ResourceRemoteInfoGitlabProject.md
 docs/ResourceRemoteInfoGoogleWorkspaceRole.md
@@ -200,7 +213,6 @@ docs/RuleConjunction.md
 docs/RuleDisjunction.md
 docs/ScopedRolePermission.md
 docs/ScopedRolePermissionList.md
-docs/ScopedRolePermissionsAPI.md
 docs/Session.md
 docs/SessionsAPI.md
 docs/SessionsList.md
@@ -270,13 +282,16 @@ model_condition.go
 model_configuration_template.go
 model_create_bundle_info.go
 model_create_configuration_template_info.go
+model_create_delegation_request.go
 model_create_group_binding_info.go
 model_create_group_binding_info_groups_inner.go
 model_create_group_info.go
+model_create_idp_group_mapping_request.go
 model_create_message_channel_info.go
 model_create_on_call_schedule_info.go
 model_create_owner_info.go
 model_create_request_200_response.go
+model_create_request_comment_request.go
 model_create_request_configuration_info_list.go
 model_create_request_info.go
 model_create_request_info_custom_metadata_inner.go
@@ -286,6 +301,8 @@ model_create_request_info_support_ticket.go
 model_create_resource_info.go
 model_create_tag_info.go
 model_create_uar_info.go
+model_delegation.go
+model_deny_request_request.go
 model_entity_type_enum.go
 model_event.go
 model_get_resource_user_200_response.go
@@ -331,6 +348,7 @@ model_paginated_bundle_group_list.go
 model_paginated_bundle_list.go
 model_paginated_bundle_resource_list.go
 model_paginated_configuration_template_list.go
+model_paginated_delegations_list.go
 model_paginated_event_list.go
 model_paginated_group_bindings_list.go
 model_paginated_groups_list.go
@@ -344,6 +362,9 @@ model_propagation_status.go
 model_propagation_status_enum.go
 model_remote_user.go
 model_request.go
+model_request_approval_enum.go
+model_request_comment.go
+model_request_comment_list.go
 model_request_configuration.go
 model_request_connection.go
 model_request_custom_field_response.go
@@ -352,6 +373,7 @@ model_request_edge.go
 model_request_item_stages.go
 model_request_list.go
 model_request_reviewer.go
+model_request_reviewer_stages.go
 model_request_stage.go
 model_request_status_enum.go
 model_request_template_custom_field_type_enum.go
@@ -370,6 +392,7 @@ model_resource_remote_info_aws_organizational_unit.go
 model_resource_remote_info_aws_permission_set.go
 model_resource_remote_info_aws_rds_instance.go
 model_resource_remote_info_custom_connector.go
+model_resource_remote_info_datastax_astra_role.go
 model_resource_remote_info_gcp_big_query_dataset.go
 model_resource_remote_info_gcp_big_query_table.go
 model_resource_remote_info_gcp_bucket.go
@@ -380,6 +403,7 @@ model_resource_remote_info_gcp_organization.go
 model_resource_remote_info_gcp_project.go
 model_resource_remote_info_gcp_service_account.go
 model_resource_remote_info_gcp_sql_instance.go
+model_resource_remote_info_github_org_role.go
 model_resource_remote_info_github_repo.go
 model_resource_remote_info_gitlab_project.go
 model_resource_remote_info_google_workspace_role.go
