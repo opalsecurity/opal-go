@@ -35,6 +35,7 @@ type Request struct {
 	TargetUserId *string `json:"target_user_id,omitempty"`
 	// The unique identifier of the group who is the target of the request.
 	TargetGroupId *string `json:"target_group_id,omitempty"`
+	// The status of the request.
 	Status RequestStatusEnum `json:"status"`
 	// The reason for the request.
 	Reason string `json:"reason"`
@@ -44,7 +45,11 @@ type Request struct {
 	RequestedItemsList []RequestedItem `json:"requested_items_list,omitempty"`
 	// The responses given to the custom fields associated to the request
 	CustomFieldsResponses []RequestCustomFieldResponse `json:"custom_fields_responses,omitempty"`
+	// The stages configuration for this request
+	// Deprecated
 	Stages *RequestItemStages `json:"stages,omitempty"`
+	// The configured reviewer stages for every item in this request
+	ReviewerStages []RequestReviewerStages `json:"reviewer_stages,omitempty"`
 }
 
 type _Request Request
@@ -377,6 +382,7 @@ func (o *Request) SetCustomFieldsResponses(v []RequestCustomFieldResponse) {
 }
 
 // GetStages returns the Stages field value if set, zero value otherwise.
+// Deprecated
 func (o *Request) GetStages() RequestItemStages {
 	if o == nil || IsNil(o.Stages) {
 		var ret RequestItemStages
@@ -387,6 +393,7 @@ func (o *Request) GetStages() RequestItemStages {
 
 // GetStagesOk returns a tuple with the Stages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Request) GetStagesOk() (*RequestItemStages, bool) {
 	if o == nil || IsNil(o.Stages) {
 		return nil, false
@@ -404,8 +411,41 @@ func (o *Request) HasStages() bool {
 }
 
 // SetStages gets a reference to the given RequestItemStages and assigns it to the Stages field.
+// Deprecated
 func (o *Request) SetStages(v RequestItemStages) {
 	o.Stages = &v
+}
+
+// GetReviewerStages returns the ReviewerStages field value if set, zero value otherwise.
+func (o *Request) GetReviewerStages() []RequestReviewerStages {
+	if o == nil || IsNil(o.ReviewerStages) {
+		var ret []RequestReviewerStages
+		return ret
+	}
+	return o.ReviewerStages
+}
+
+// GetReviewerStagesOk returns a tuple with the ReviewerStages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Request) GetReviewerStagesOk() ([]RequestReviewerStages, bool) {
+	if o == nil || IsNil(o.ReviewerStages) {
+		return nil, false
+	}
+	return o.ReviewerStages, true
+}
+
+// HasReviewerStages returns a boolean if a field has been set.
+func (o *Request) HasReviewerStages() bool {
+	if o != nil && !IsNil(o.ReviewerStages) {
+		return true
+	}
+
+	return false
+}
+
+// SetReviewerStages gets a reference to the given []RequestReviewerStages and assigns it to the ReviewerStages field.
+func (o *Request) SetReviewerStages(v []RequestReviewerStages) {
+	o.ReviewerStages = v
 }
 
 func (o Request) MarshalJSON() ([]byte, error) {
@@ -441,6 +481,9 @@ func (o Request) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Stages) {
 		toSerialize["stages"] = o.Stages
+	}
+	if !IsNil(o.ReviewerStages) {
+		toSerialize["reviewer_stages"] = o.ReviewerStages
 	}
 	return toSerialize, nil
 }

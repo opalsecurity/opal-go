@@ -21,6 +21,10 @@ var _ MappedNullable = &GroupUserList{}
 // GroupUserList struct for GroupUserList
 type GroupUserList struct {
 	Results []GroupUser `json:"results,omitempty"`
+	// The cursor with which to continue pagination if additional result pages exist.
+	Next *string `json:"next,omitempty"`
+	// The cursor used to obtain the current result page.
+	Previous *string `json:"previous,omitempty"`
 }
 
 // NewGroupUserList instantiates a new GroupUserList object
@@ -72,6 +76,70 @@ func (o *GroupUserList) SetResults(v []GroupUser) {
 	o.Results = v
 }
 
+// GetNext returns the Next field value if set, zero value otherwise.
+func (o *GroupUserList) GetNext() string {
+	if o == nil || IsNil(o.Next) {
+		var ret string
+		return ret
+	}
+	return *o.Next
+}
+
+// GetNextOk returns a tuple with the Next field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupUserList) GetNextOk() (*string, bool) {
+	if o == nil || IsNil(o.Next) {
+		return nil, false
+	}
+	return o.Next, true
+}
+
+// HasNext returns a boolean if a field has been set.
+func (o *GroupUserList) HasNext() bool {
+	if o != nil && !IsNil(o.Next) {
+		return true
+	}
+
+	return false
+}
+
+// SetNext gets a reference to the given string and assigns it to the Next field.
+func (o *GroupUserList) SetNext(v string) {
+	o.Next = &v
+}
+
+// GetPrevious returns the Previous field value if set, zero value otherwise.
+func (o *GroupUserList) GetPrevious() string {
+	if o == nil || IsNil(o.Previous) {
+		var ret string
+		return ret
+	}
+	return *o.Previous
+}
+
+// GetPreviousOk returns a tuple with the Previous field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupUserList) GetPreviousOk() (*string, bool) {
+	if o == nil || IsNil(o.Previous) {
+		return nil, false
+	}
+	return o.Previous, true
+}
+
+// HasPrevious returns a boolean if a field has been set.
+func (o *GroupUserList) HasPrevious() bool {
+	if o != nil && !IsNil(o.Previous) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrevious gets a reference to the given string and assigns it to the Previous field.
+func (o *GroupUserList) SetPrevious(v string) {
+	o.Previous = &v
+}
+
 func (o GroupUserList) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -84,6 +152,12 @@ func (o GroupUserList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Results) {
 		toSerialize["results"] = o.Results
+	}
+	if !IsNil(o.Next) {
+		toSerialize["next"] = o.Next
+	}
+	if !IsNil(o.Previous) {
+		toSerialize["previous"] = o.Previous
 	}
 	return toSerialize, nil
 }

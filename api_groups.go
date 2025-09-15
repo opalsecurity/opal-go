@@ -1650,6 +1650,20 @@ type ApiGetGroupUsersRequest struct {
 	ctx context.Context
 	ApiService *GroupsAPIService
 	groupId string
+	cursor *string
+	pageSize *int32
+}
+
+// The pagination cursor value.
+func (r ApiGetGroupUsersRequest) Cursor(cursor string) ApiGetGroupUsersRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Number of results to return per page. Default is 200.
+func (r ApiGetGroupUsersRequest) PageSize(pageSize int32) ApiGetGroupUsersRequest {
+	r.pageSize = &pageSize
+	return r
 }
 
 func (r ApiGetGroupUsersRequest) Execute() (*GroupUserList, *http.Response, error) {
@@ -1695,6 +1709,12 @@ func (a *GroupsAPIService) GetGroupUsersExecute(r ApiGetGroupUsersRequest) (*Gro
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.pageSize != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1946,6 +1966,129 @@ func (a *GroupsAPIService) GetGroupsExecute(r ApiGetGroupsRequest) (*PaginatedGr
 	}
 	if r.groupName != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "group_name", r.groupName, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetUserGroupsRequest struct {
+	ctx context.Context
+	ApiService *GroupsAPIService
+	userId string
+	cursor *string
+	pageSize *int32
+}
+
+// The pagination cursor value.
+func (r ApiGetUserGroupsRequest) Cursor(cursor string) ApiGetUserGroupsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Number of results to return per page. Default is 200.
+func (r ApiGetUserGroupsRequest) PageSize(pageSize int32) ApiGetUserGroupsRequest {
+	r.pageSize = &pageSize
+	return r
+}
+
+func (r ApiGetUserGroupsRequest) Execute() (*GroupUserList, *http.Response, error) {
+	return r.ApiService.GetUserGroupsExecute(r)
+}
+
+/*
+GetUserGroups Method for GetUserGroups
+
+Returns all groups that the user is a member of.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param userId The ID of the user whose groups to return.
+ @return ApiGetUserGroupsRequest
+*/
+func (a *GroupsAPIService) GetUserGroups(ctx context.Context, userId string) ApiGetUserGroupsRequest {
+	return ApiGetUserGroupsRequest{
+		ApiService: a,
+		ctx: ctx,
+		userId: userId,
+	}
+}
+
+// Execute executes the request
+//  @return GroupUserList
+func (a *GroupsAPIService) GetUserGroupsExecute(r ApiGetUserGroupsRequest) (*GroupUserList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GroupUserList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GroupsAPIService.GetUserGroups")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/groups/users/{user_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"user_id"+"}", url.PathEscape(parameterValueToString(r.userId, "userId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.pageSize != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

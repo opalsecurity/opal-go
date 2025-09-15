@@ -58,6 +58,8 @@ type APIClient struct {
 
 	ConfigurationTemplatesAPI *ConfigurationTemplatesAPIService
 
+	DelegationsAPI *DelegationsAPIService
+
 	EventsAPI *EventsAPIService
 
 	GroupBindingsAPI *GroupBindingsAPIService
@@ -77,8 +79,6 @@ type APIClient struct {
 	RequestsAPI *RequestsAPIService
 
 	ResourcesAPI *ResourcesAPIService
-
-	ScopedRolePermissionsAPI *ScopedRolePermissionsAPIService
 
 	SessionsAPI *SessionsAPIService
 
@@ -109,6 +109,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AppsAPI = (*AppsAPIService)(&c.common)
 	c.BundlesAPI = (*BundlesAPIService)(&c.common)
 	c.ConfigurationTemplatesAPI = (*ConfigurationTemplatesAPIService)(&c.common)
+	c.DelegationsAPI = (*DelegationsAPIService)(&c.common)
 	c.EventsAPI = (*EventsAPIService)(&c.common)
 	c.GroupBindingsAPI = (*GroupBindingsAPIService)(&c.common)
 	c.GroupsAPI = (*GroupsAPIService)(&c.common)
@@ -119,7 +120,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.OwnersAPI = (*OwnersAPIService)(&c.common)
 	c.RequestsAPI = (*RequestsAPIService)(&c.common)
 	c.ResourcesAPI = (*ResourcesAPIService)(&c.common)
-	c.ScopedRolePermissionsAPI = (*ScopedRolePermissionsAPIService)(&c.common)
 	c.SessionsAPI = (*SessionsAPIService)(&c.common)
 	c.TagsAPI = (*TagsAPIService)(&c.common)
 	c.UarsAPI = (*UarsAPIService)(&c.common)
