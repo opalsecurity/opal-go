@@ -24,6 +24,8 @@ var _ MappedNullable = &RequestReviewer{}
 type RequestReviewer struct {
 	// The unique identifier of the reviewer
 	Id string `json:"id"`
+	// The user's full name.
+	FullName *string `json:"full_name,omitempty"`
 	// The status of this reviewer's review
 	Status string `json:"status"`
 }
@@ -73,6 +75,38 @@ func (o *RequestReviewer) SetId(v string) {
 	o.Id = v
 }
 
+// GetFullName returns the FullName field value if set, zero value otherwise.
+func (o *RequestReviewer) GetFullName() string {
+	if o == nil || IsNil(o.FullName) {
+		var ret string
+		return ret
+	}
+	return *o.FullName
+}
+
+// GetFullNameOk returns a tuple with the FullName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RequestReviewer) GetFullNameOk() (*string, bool) {
+	if o == nil || IsNil(o.FullName) {
+		return nil, false
+	}
+	return o.FullName, true
+}
+
+// HasFullName returns a boolean if a field has been set.
+func (o *RequestReviewer) HasFullName() bool {
+	if o != nil && !IsNil(o.FullName) {
+		return true
+	}
+
+	return false
+}
+
+// SetFullName gets a reference to the given string and assigns it to the FullName field.
+func (o *RequestReviewer) SetFullName(v string) {
+	o.FullName = &v
+}
+
 // GetStatus returns the Status field value
 func (o *RequestReviewer) GetStatus() string {
 	if o == nil {
@@ -108,6 +142,9 @@ func (o RequestReviewer) MarshalJSON() ([]byte, error) {
 func (o RequestReviewer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
+	if !IsNil(o.FullName) {
+		toSerialize["full_name"] = o.FullName
+	}
 	toSerialize["status"] = o.Status
 	return toSerialize, nil
 }

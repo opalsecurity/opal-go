@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Level** | **string** | The decision level for the approval | 
+**Level** | [**RequestApprovalEnum**](RequestApprovalEnum.md) |  | 
 **Comment** | Pointer to **string** | Optional comment for the approval | [optional] 
 
 ## Methods
 
 ### NewApproveRequestRequest
 
-`func NewApproveRequestRequest(level string, ) *ApproveRequestRequest`
+`func NewApproveRequestRequest(level RequestApprovalEnum, ) *ApproveRequestRequest`
 
 NewApproveRequestRequest instantiates a new ApproveRequestRequest object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetLevel
 
-`func (o *ApproveRequestRequest) GetLevel() string`
+`func (o *ApproveRequestRequest) GetLevel() RequestApprovalEnum`
 
 GetLevel returns the Level field if non-nil, zero value otherwise.
 
 ### GetLevelOk
 
-`func (o *ApproveRequestRequest) GetLevelOk() (*string, bool)`
+`func (o *ApproveRequestRequest) GetLevelOk() (*RequestApprovalEnum, bool)`
 
 GetLevelOk returns a tuple with the Level field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLevel
 
-`func (o *ApproveRequestRequest) SetLevel(v string)`
+`func (o *ApproveRequestRequest) SetLevel(v RequestApprovalEnum)`
 
 SetLevel sets Level field to given value.
 

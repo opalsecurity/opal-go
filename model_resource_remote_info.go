@@ -40,6 +40,7 @@ type ResourceRemoteInfo struct {
 	GcpServiceAccount *ResourceRemoteInfoGcpServiceAccount `json:"gcp_service_account,omitempty"`
 	GoogleWorkspaceRole *ResourceRemoteInfoGoogleWorkspaceRole `json:"google_workspace_role,omitempty"`
 	GithubRepo *ResourceRemoteInfoGithubRepo `json:"github_repo,omitempty"`
+	GithubOrgRole *ResourceRemoteInfoGithubOrgRole `json:"github_org_role,omitempty"`
 	GitlabProject *ResourceRemoteInfoGitlabProject `json:"gitlab_project,omitempty"`
 	OktaApp *ResourceRemoteInfoOktaApp `json:"okta_app,omitempty"`
 	OktaStandardRole *ResourceRemoteInfoOktaStandardRole `json:"okta_standard_role,omitempty"`
@@ -49,6 +50,7 @@ type ResourceRemoteInfo struct {
 	SalesforceProfile *ResourceRemoteInfoSalesforceProfile `json:"salesforce_profile,omitempty"`
 	SalesforceRole *ResourceRemoteInfoSalesforceRole `json:"salesforce_role,omitempty"`
 	TeleportRole *ResourceRemoteInfoTeleportRole `json:"teleport_role,omitempty"`
+	DatastaxAstraRole *ResourceRemoteInfoDatastaxAstraRole `json:"datastax_astra_role,omitempty"`
 }
 
 // NewResourceRemoteInfo instantiates a new ResourceRemoteInfo object
@@ -708,6 +710,38 @@ func (o *ResourceRemoteInfo) SetGithubRepo(v ResourceRemoteInfoGithubRepo) {
 	o.GithubRepo = &v
 }
 
+// GetGithubOrgRole returns the GithubOrgRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetGithubOrgRole() ResourceRemoteInfoGithubOrgRole {
+	if o == nil || IsNil(o.GithubOrgRole) {
+		var ret ResourceRemoteInfoGithubOrgRole
+		return ret
+	}
+	return *o.GithubOrgRole
+}
+
+// GetGithubOrgRoleOk returns a tuple with the GithubOrgRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetGithubOrgRoleOk() (*ResourceRemoteInfoGithubOrgRole, bool) {
+	if o == nil || IsNil(o.GithubOrgRole) {
+		return nil, false
+	}
+	return o.GithubOrgRole, true
+}
+
+// HasGithubOrgRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasGithubOrgRole() bool {
+	if o != nil && !IsNil(o.GithubOrgRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetGithubOrgRole gets a reference to the given ResourceRemoteInfoGithubOrgRole and assigns it to the GithubOrgRole field.
+func (o *ResourceRemoteInfo) SetGithubOrgRole(v ResourceRemoteInfoGithubOrgRole) {
+	o.GithubOrgRole = &v
+}
+
 // GetGitlabProject returns the GitlabProject field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetGitlabProject() ResourceRemoteInfoGitlabProject {
 	if o == nil || IsNil(o.GitlabProject) {
@@ -996,6 +1030,38 @@ func (o *ResourceRemoteInfo) SetTeleportRole(v ResourceRemoteInfoTeleportRole) {
 	o.TeleportRole = &v
 }
 
+// GetDatastaxAstraRole returns the DatastaxAstraRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetDatastaxAstraRole() ResourceRemoteInfoDatastaxAstraRole {
+	if o == nil || IsNil(o.DatastaxAstraRole) {
+		var ret ResourceRemoteInfoDatastaxAstraRole
+		return ret
+	}
+	return *o.DatastaxAstraRole
+}
+
+// GetDatastaxAstraRoleOk returns a tuple with the DatastaxAstraRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetDatastaxAstraRoleOk() (*ResourceRemoteInfoDatastaxAstraRole, bool) {
+	if o == nil || IsNil(o.DatastaxAstraRole) {
+		return nil, false
+	}
+	return o.DatastaxAstraRole, true
+}
+
+// HasDatastaxAstraRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasDatastaxAstraRole() bool {
+	if o != nil && !IsNil(o.DatastaxAstraRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetDatastaxAstraRole gets a reference to the given ResourceRemoteInfoDatastaxAstraRole and assigns it to the DatastaxAstraRole field.
+func (o *ResourceRemoteInfo) SetDatastaxAstraRole(v ResourceRemoteInfoDatastaxAstraRole) {
+	o.DatastaxAstraRole = &v
+}
+
 func (o ResourceRemoteInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -1066,6 +1132,9 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GithubRepo) {
 		toSerialize["github_repo"] = o.GithubRepo
 	}
+	if !IsNil(o.GithubOrgRole) {
+		toSerialize["github_org_role"] = o.GithubOrgRole
+	}
 	if !IsNil(o.GitlabProject) {
 		toSerialize["gitlab_project"] = o.GitlabProject
 	}
@@ -1092,6 +1161,9 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.TeleportRole) {
 		toSerialize["teleport_role"] = o.TeleportRole
+	}
+	if !IsNil(o.DatastaxAstraRole) {
+		toSerialize["datastax_astra_role"] = o.DatastaxAstraRole
 	}
 	return toSerialize, nil
 }
