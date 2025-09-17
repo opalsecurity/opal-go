@@ -8,11 +8,11 @@ Method | HTTP request | Description
 [**AddBundleResource**](BundlesAPI.md#AddBundleResource) | **Post** /bundles/{bundle_id}/resources | 
 [**CreateBundle**](BundlesAPI.md#CreateBundle) | **Post** /bundles | 
 [**DeleteBundle**](BundlesAPI.md#DeleteBundle) | **Delete** /bundles/{bundle_id} | 
-[**GetBundle**](BundlesAPI.md#GetBundle) | **Get** /bundles/{bundle_id} | 
+[**GetBundle**](BundlesAPI.md#GetBundle) | **Get** /bundles/{bundle_id} | Get bundle by ID
 [**GetBundleGroups**](BundlesAPI.md#GetBundleGroups) | **Get** /bundles/{bundle_id}/groups | 
 [**GetBundleResources**](BundlesAPI.md#GetBundleResources) | **Get** /bundles/{bundle_id}/resources | 
 [**GetBundleVisibility**](BundlesAPI.md#GetBundleVisibility) | **Get** /bundles/{bundle_id}/visibility | 
-[**GetBundles**](BundlesAPI.md#GetBundles) | **Get** /bundles | 
+[**GetBundles**](BundlesAPI.md#GetBundles) | **Get** /bundles | Get bundles
 [**RemoveBundleGroup**](BundlesAPI.md#RemoveBundleGroup) | **Delete** /bundles/{bundle_id}/groups/{group_id} | 
 [**RemoveBundleResource**](BundlesAPI.md#RemoveBundleResource) | **Delete** /bundles/{bundle_id}/resources/{resource_id} | 
 [**SetBundleVisibility**](BundlesAPI.md#SetBundleVisibility) | **Put** /bundles/{bundle_id}/visibility | 
@@ -302,7 +302,7 @@ Name | Type | Description  | Notes
 
 > Bundle GetBundle(ctx, bundleId).Execute()
 
-
+Get bundle by ID
 
 
 
@@ -590,7 +590,7 @@ Name | Type | Description  | Notes
 
 > PaginatedBundleList GetBundles(ctx).PageSize(pageSize).Cursor(cursor).Contains(contains).Execute()
 
-
+Get bundles
 
 
 

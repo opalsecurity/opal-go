@@ -237,7 +237,7 @@ func (r ApiGetOwnerRequest) Execute() (*Owner, *http.Response, error) {
 }
 
 /*
-GetOwner Method for GetOwner
+GetOwner Get owner by ID
 
 Returns an `Owner` object.
 
@@ -566,7 +566,7 @@ func (r ApiGetOwnersRequest) Execute() (*PaginatedOwnersList, *http.Response, er
 }
 
 /*
-GetOwners Method for GetOwners
+GetOwners Get owners
 
 Returns a list of `Owner` objects.
 

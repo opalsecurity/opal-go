@@ -22,8 +22,7 @@ var _ MappedNullable = &ApproveRequestRequest{}
 
 // ApproveRequestRequest struct for ApproveRequestRequest
 type ApproveRequestRequest struct {
-	// The decision level for the approval
-	Level string `json:"level"`
+	Level RequestApprovalEnum `json:"level"`
 	// Optional comment for the approval
 	Comment *string `json:"comment,omitempty"`
 }
@@ -34,7 +33,7 @@ type _ApproveRequestRequest ApproveRequestRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewApproveRequestRequest(level string) *ApproveRequestRequest {
+func NewApproveRequestRequest(level RequestApprovalEnum) *ApproveRequestRequest {
 	this := ApproveRequestRequest{}
 	this.Level = level
 	return &this
@@ -49,9 +48,9 @@ func NewApproveRequestRequestWithDefaults() *ApproveRequestRequest {
 }
 
 // GetLevel returns the Level field value
-func (o *ApproveRequestRequest) GetLevel() string {
+func (o *ApproveRequestRequest) GetLevel() RequestApprovalEnum {
 	if o == nil {
-		var ret string
+		var ret RequestApprovalEnum
 		return ret
 	}
 
@@ -60,7 +59,7 @@ func (o *ApproveRequestRequest) GetLevel() string {
 
 // GetLevelOk returns a tuple with the Level field value
 // and a boolean to check if the value has been set.
-func (o *ApproveRequestRequest) GetLevelOk() (*string, bool) {
+func (o *ApproveRequestRequest) GetLevelOk() (*RequestApprovalEnum, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,7 +67,7 @@ func (o *ApproveRequestRequest) GetLevelOk() (*string, bool) {
 }
 
 // SetLevel sets field value
-func (o *ApproveRequestRequest) SetLevel(v string) {
+func (o *ApproveRequestRequest) SetLevel(v RequestApprovalEnum) {
 	o.Level = v
 }
 

@@ -462,7 +462,7 @@ func (r ApiGetBundleRequest) Execute() (*Bundle, *http.Response, error) {
 }
 
 /*
-GetBundle Method for GetBundle
+GetBundle Get bundle by ID
 
 Returns a `Bundle` object.
 
@@ -934,7 +934,7 @@ func (r ApiGetBundlesRequest) Execute() (*PaginatedBundleList, *http.Response, e
 }
 
 /*
-GetBundles Method for GetBundles
+GetBundles Get bundles
 
 Returns a list of `Bundle` objects.
 

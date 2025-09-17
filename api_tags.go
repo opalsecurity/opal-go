@@ -683,7 +683,7 @@ func (r ApiGetTagByIDRequest) Execute() (*Tag, *http.Response, error) {
 }
 
 /*
-GetTagByID Method for GetTagByID
+GetTagByID Get tag by ID
 
 UNSTABLE. May be removed at any time. Gets a tag with the given id.
 
@@ -799,7 +799,7 @@ func (r ApiGetTagsRequest) Execute() (*PaginatedTagsList, *http.Response, error)
 }
 
 /*
-GetTags Method for GetTags
+GetTags Get tags
 
 Returns a list of tags created by your organization.
 
