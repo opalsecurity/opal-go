@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | The unique identifier of the reviewer | 
+**FullName** | Pointer to **string** | The user&#39;s full name. | [optional] 
 **Status** | **string** | The status of this reviewer&#39;s review | 
 
 ## Methods
@@ -45,6 +46,31 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
+
+### GetFullName
+
+`func (o *RequestReviewer) GetFullName() string`
+
+GetFullName returns the FullName field if non-nil, zero value otherwise.
+
+### GetFullNameOk
+
+`func (o *RequestReviewer) GetFullNameOk() (*string, bool)`
+
+GetFullNameOk returns a tuple with the FullName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFullName
+
+`func (o *RequestReviewer) SetFullName(v string)`
+
+SetFullName sets FullName field to given value.
+
+### HasFullName
+
+`func (o *RequestReviewer) HasFullName() bool`
+
+HasFullName returns a boolean if a field has been set.
 
 ### GetStatus
 
