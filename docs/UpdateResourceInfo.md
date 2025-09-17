@@ -23,8 +23,9 @@ Name | Type | Description | Notes
 **ConfigurationTemplateId** | Pointer to **string** | The ID of the associated configuration template. | [optional] 
 **RequestTemplateId** | Pointer to **string** | The ID of the associated request template. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this resource. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
+**ExtensionsDurationInMinutes** | Pointer to **int32** | The duration for which access can be extended (in minutes). Deprecated, set the extension duration in the request_configuration you want it to apply to. | [optional] 
 **RequestConfigurations** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | A list of configurations for requests to this resource. If not provided, the default request configuration will be used. | [optional] 
-**RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) |  | [optional] 
+**RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) | A list of configurations for requests to this resource. If not provided, the default request configuration will be used. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 
 ## Methods
 
@@ -514,6 +515,31 @@ SetIsRequestable sets IsRequestable field to given value.
 `func (o *UpdateResourceInfo) HasIsRequestable() bool`
 
 HasIsRequestable returns a boolean if a field has been set.
+
+### GetExtensionsDurationInMinutes
+
+`func (o *UpdateResourceInfo) GetExtensionsDurationInMinutes() int32`
+
+GetExtensionsDurationInMinutes returns the ExtensionsDurationInMinutes field if non-nil, zero value otherwise.
+
+### GetExtensionsDurationInMinutesOk
+
+`func (o *UpdateResourceInfo) GetExtensionsDurationInMinutesOk() (*int32, bool)`
+
+GetExtensionsDurationInMinutesOk returns a tuple with the ExtensionsDurationInMinutes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExtensionsDurationInMinutes
+
+`func (o *UpdateResourceInfo) SetExtensionsDurationInMinutes(v int32)`
+
+SetExtensionsDurationInMinutes sets ExtensionsDurationInMinutes field to given value.
+
+### HasExtensionsDurationInMinutes
+
+`func (o *UpdateResourceInfo) HasExtensionsDurationInMinutes() bool`
+
+HasExtensionsDurationInMinutes returns a boolean if a field has been set.
 
 ### GetRequestConfigurations
 

@@ -22,6 +22,8 @@ var _ MappedNullable = &IdpGroupMapping{}
 
 // IdpGroupMapping Information about a group mapping.
 type IdpGroupMapping struct {
+	// The ID of the app resource.
+	AppResourceId *string `json:"app_resource_id,omitempty"`
 	// The ID of the group.
 	GroupId string `json:"group_id"`
 	// The alias of the group.
@@ -49,6 +51,38 @@ func NewIdpGroupMapping(groupId string, hiddenFromEndUser bool) *IdpGroupMapping
 func NewIdpGroupMappingWithDefaults() *IdpGroupMapping {
 	this := IdpGroupMapping{}
 	return &this
+}
+
+// GetAppResourceId returns the AppResourceId field value if set, zero value otherwise.
+func (o *IdpGroupMapping) GetAppResourceId() string {
+	if o == nil || IsNil(o.AppResourceId) {
+		var ret string
+		return ret
+	}
+	return *o.AppResourceId
+}
+
+// GetAppResourceIdOk returns a tuple with the AppResourceId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IdpGroupMapping) GetAppResourceIdOk() (*string, bool) {
+	if o == nil || IsNil(o.AppResourceId) {
+		return nil, false
+	}
+	return o.AppResourceId, true
+}
+
+// HasAppResourceId returns a boolean if a field has been set.
+func (o *IdpGroupMapping) HasAppResourceId() bool {
+	if o != nil && !IsNil(o.AppResourceId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAppResourceId gets a reference to the given string and assigns it to the AppResourceId field.
+func (o *IdpGroupMapping) SetAppResourceId(v string) {
+	o.AppResourceId = &v
 }
 
 // GetGroupId returns the GroupId field value
@@ -141,6 +175,9 @@ func (o IdpGroupMapping) MarshalJSON() ([]byte, error) {
 
 func (o IdpGroupMapping) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AppResourceId) {
+		toSerialize["app_resource_id"] = o.AppResourceId
+	}
 	toSerialize["group_id"] = o.GroupId
 	if !IsNil(o.Alias) {
 		toSerialize["alias"] = o.Alias

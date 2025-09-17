@@ -146,7 +146,7 @@ func (r ApiGetMessageChannelRequest) Execute() (*MessageChannel, *http.Response,
 }
 
 /*
-GetMessageChannel Method for GetMessageChannel
+GetMessageChannel Get message channel by ID
 
 Gets a `MessageChannel` object.
 
@@ -248,7 +248,7 @@ func (r ApiGetMessageChannelsRequest) Execute() (*MessageChannelList, *http.Resp
 }
 
 /*
-GetMessageChannels Method for GetMessageChannels
+GetMessageChannels Get message channels
 
 Returns a list of `MessageChannel` objects.
 
