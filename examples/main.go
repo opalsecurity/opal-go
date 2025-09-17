@@ -14,7 +14,7 @@ func main() {
 	// Uncomment the following lines to set a specific server URL
 	// configuration.Servers = opal.ServerConfigurations{
 	// 	{
-	// 		URL: "https://https://api.opal.com/v1",
+	// 		URL: "https://api.opal.com/v1",
 	// 	},
 	// }
 

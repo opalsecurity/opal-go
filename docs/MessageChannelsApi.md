@@ -5,8 +5,8 @@ All URIs are relative to *https://api.opal.dev/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateMessageChannel**](MessageChannelsAPI.md#CreateMessageChannel) | **Post** /message-channels | 
-[**GetMessageChannel**](MessageChannelsAPI.md#GetMessageChannel) | **Get** /message-channels/{message_channel_id} | 
-[**GetMessageChannels**](MessageChannelsAPI.md#GetMessageChannels) | **Get** /message-channels | 
+[**GetMessageChannel**](MessageChannelsAPI.md#GetMessageChannel) | **Get** /message-channels/{message_channel_id} | Get message channel by ID
+[**GetMessageChannels**](MessageChannelsAPI.md#GetMessageChannels) | **Get** /message-channels | Get message channels
 
 
 
@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 > MessageChannel GetMessageChannel(ctx, messageChannelId).Execute()
 
-
+Get message channel by ID
 
 
 
@@ -150,7 +150,7 @@ Name | Type | Description  | Notes
 
 > MessageChannelList GetMessageChannels(ctx).Execute()
 
-
+Get message channels
 
 
 

@@ -6,9 +6,12 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ApproveRequest**](RequestsAPI.md#ApproveRequest) | **Post** /requests/{id}/approve | 
 [**CreateRequest**](RequestsAPI.md#CreateRequest) | **Post** /requests | 
-[**GetRequest**](RequestsAPI.md#GetRequest) | **Get** /requests/{id} | 
-[**GetRequests**](RequestsAPI.md#GetRequests) | **Get** /requests | 
-[**GetRequestsRelay**](RequestsAPI.md#GetRequestsRelay) | **Get** /requests/relay | 
+[**CreateRequestComment**](RequestsAPI.md#CreateRequestComment) | **Post** /requests/{id}/comments | 
+[**DenyRequest**](RequestsAPI.md#DenyRequest) | **Post** /requests/{id}/deny | 
+[**GetRequest**](RequestsAPI.md#GetRequest) | **Get** /requests/{id} | Get request by ID
+[**GetRequestComments**](RequestsAPI.md#GetRequestComments) | **Get** /requests/{id}/comments | 
+[**GetRequests**](RequestsAPI.md#GetRequests) | **Get** /requests | Get requests
+[**GetRequestsRelay**](RequestsAPI.md#GetRequestsRelay) | **Get** /requests/relay | Get requests via Relay
 
 
 
@@ -34,7 +37,7 @@ import (
 
 func main() {
 	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The ID of the request to approve
-	approveRequestRequest := *openapiclient.NewApproveRequestRequest("REGULAR") // ApproveRequestRequest | Approval parameters
+	approveRequestRequest := *openapiclient.NewApproveRequestRequest(openapiclient.RequestApprovalEnum("REGULAR")) // ApproveRequestRequest | Approval parameters
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -150,11 +153,155 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateRequestComment
+
+> ApproveRequest200Response CreateRequestComment(ctx, id).CreateRequestCommentRequest(createRequestCommentRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The ID of the request to comment on
+	createRequestCommentRequest := *openapiclient.NewCreateRequestCommentRequest("Comment_example") // CreateRequestCommentRequest | Comment parameters
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RequestsAPI.CreateRequestComment(context.Background(), id).CreateRequestCommentRequest(createRequestCommentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RequestsAPI.CreateRequestComment``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateRequestComment`: ApproveRequest200Response
+	fmt.Fprintf(os.Stdout, "Response from `RequestsAPI.CreateRequestComment`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | The ID of the request to comment on | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateRequestCommentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **createRequestCommentRequest** | [**CreateRequestCommentRequest**](CreateRequestCommentRequest.md) | Comment parameters | 
+
+### Return type
+
+[**ApproveRequest200Response**](ApproveRequest200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DenyRequest
+
+> ApproveRequest200Response DenyRequest(ctx, id).DenyRequestRequest(denyRequestRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The ID of the request to deny
+	denyRequestRequest := *openapiclient.NewDenyRequestRequest("Denied due to insufficient justification") // DenyRequestRequest | Denial parameters
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RequestsAPI.DenyRequest(context.Background(), id).DenyRequestRequest(denyRequestRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RequestsAPI.DenyRequest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DenyRequest`: ApproveRequest200Response
+	fmt.Fprintf(os.Stdout, "Response from `RequestsAPI.DenyRequest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | The ID of the request to deny | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDenyRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **denyRequestRequest** | [**DenyRequestRequest**](DenyRequestRequest.md) | Denial parameters | 
+
+### Return type
+
+[**ApproveRequest200Response**](ApproveRequest200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetRequest
 
 > Request GetRequest(ctx, id).Execute()
 
-
+Get request by ID
 
 
 
@@ -220,11 +367,81 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetRequestComments
+
+> RequestCommentList GetRequestComments(ctx, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The ID of the request to get comments for
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RequestsAPI.GetRequestComments(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RequestsAPI.GetRequestComments``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRequestComments`: RequestCommentList
+	fmt.Fprintf(os.Stdout, "Response from `RequestsAPI.GetRequestComments`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | The ID of the request to get comments for | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRequestCommentsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**RequestCommentList**](RequestCommentList.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetRequests
 
 > RequestList GetRequests(ctx).StartDateFilter(startDateFilter).EndDateFilter(endDateFilter).RequesterId(requesterId).TargetUserId(targetUserId).Cursor(cursor).PageSize(pageSize).ShowPendingOnly(showPendingOnly).Execute()
 
-
+Get requests
 
 
 
@@ -302,7 +519,7 @@ Name | Type | Description  | Notes
 
 > RequestConnection GetRequestsRelay(ctx).First(first).After(after).Last(last).Before(before).Status(status).To(to).From(from).Execute()
 
-
+Get requests via Relay
 
 
 

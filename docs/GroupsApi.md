@@ -10,9 +10,9 @@ Method | HTTP request | Description
 [**CreateGroup**](GroupsAPI.md#CreateGroup) | **Post** /groups | 
 [**DeleteGroup**](GroupsAPI.md#DeleteGroup) | **Delete** /groups/{group_id} | 
 [**DeleteGroupUser**](GroupsAPI.md#DeleteGroupUser) | **Delete** /groups/{group_id}/users/{user_id} | 
-[**GetGroup**](GroupsAPI.md#GetGroup) | **Get** /groups/{group_id} | 
-[**GetGroupContainingGroup**](GroupsAPI.md#GetGroupContainingGroup) | **Get** /groups/{group_id}/containing-groups/{containing_group_id} | 
-[**GetGroupContainingGroups**](GroupsAPI.md#GetGroupContainingGroups) | **Get** /groups/{group_id}/containing-groups | 
+[**GetGroup**](GroupsAPI.md#GetGroup) | **Get** /groups/{group_id} | Get group by ID
+[**GetGroupContainingGroup**](GroupsAPI.md#GetGroupContainingGroup) | **Get** /groups/{group_id}/containing-groups/{containing_group_id} | Get nested group by ID
+[**GetGroupContainingGroups**](GroupsAPI.md#GetGroupContainingGroups) | **Get** /groups/{group_id}/containing-groups | Get nested groups
 [**GetGroupMessageChannels**](GroupsAPI.md#GetGroupMessageChannels) | **Get** /groups/{group_id}/message-channels | 
 [**GetGroupOnCallSchedules**](GroupsAPI.md#GetGroupOnCallSchedules) | **Get** /groups/{group_id}/on-call-schedules | 
 [**GetGroupResources**](GroupsAPI.md#GetGroupResources) | **Get** /groups/{group_id}/resources | 
@@ -21,7 +21,8 @@ Method | HTTP request | Description
 [**GetGroupTags**](GroupsAPI.md#GetGroupTags) | **Get** /groups/{group_id}/tags | 
 [**GetGroupUsers**](GroupsAPI.md#GetGroupUsers) | **Get** /groups/{group_id}/users | 
 [**GetGroupVisibility**](GroupsAPI.md#GetGroupVisibility) | **Get** /groups/{group_id}/visibility | 
-[**GetGroups**](GroupsAPI.md#GetGroups) | **Get** /groups | 
+[**GetGroups**](GroupsAPI.md#GetGroups) | **Get** /groups | Get groups
+[**GetUserGroups**](GroupsAPI.md#GetUserGroups) | **Get** /groups/users/{user_id} | 
 [**RemoveGroupContainingGroup**](GroupsAPI.md#RemoveGroupContainingGroup) | **Delete** /groups/{group_id}/containing-groups/{containing_group_id} | 
 [**SetGroupMessageChannels**](GroupsAPI.md#SetGroupMessageChannels) | **Put** /groups/{group_id}/message-channels | 
 [**SetGroupOnCallSchedules**](GroupsAPI.md#SetGroupOnCallSchedules) | **Put** /groups/{group_id}/on-call-schedules | 
@@ -473,7 +474,7 @@ Name | Type | Description  | Notes
 
 > Group GetGroup(ctx, groupId).Execute()
 
-
+Get group by ID
 
 
 
@@ -543,7 +544,7 @@ Name | Type | Description  | Notes
 
 > GroupContainingGroup GetGroupContainingGroup(ctx, groupId, containingGroupId).Execute()
 
-
+Get nested group by ID
 
 
 
@@ -616,7 +617,7 @@ Name | Type | Description  | Notes
 
 > GroupContainingGroupList GetGroupContainingGroups(ctx, groupId).Execute()
 
-
+Get nested groups
 
 
 
@@ -1104,7 +1105,7 @@ Name | Type | Description  | Notes
 
 ## GetGroupUsers
 
-> GroupUserList GetGroupUsers(ctx, groupId).Execute()
+> GroupUserList GetGroupUsers(ctx, groupId).Cursor(cursor).PageSize(pageSize).Execute()
 
 
 
@@ -1124,10 +1125,12 @@ import (
 
 func main() {
 	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
+	pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.GroupsAPI.GetGroupUsers(context.Background(), groupId).Execute()
+	resp, r, err := apiClient.GroupsAPI.GetGroupUsers(context.Background(), groupId).Cursor(cursor).PageSize(pageSize).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetGroupUsers``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1153,6 +1156,8 @@ Other parameters are passed through a pointer to a apiGetGroupUsersRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **cursor** | **string** | The pagination cursor value. | 
+ **pageSize** | **int32** | Number of results to return per page. Default is 200. | 
 
 ### Return type
 
@@ -1246,7 +1251,7 @@ Name | Type | Description  | Notes
 
 > PaginatedGroupsList GetGroups(ctx).Cursor(cursor).PageSize(pageSize).GroupTypeFilter(groupTypeFilter).GroupIds(groupIds).GroupName(groupName).Execute()
 
-
+Get groups
 
 
 
@@ -1301,6 +1306,80 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PaginatedGroupsList**](PaginatedGroupsList.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUserGroups
+
+> GroupUserList GetUserGroups(ctx, userId).Cursor(cursor).PageSize(pageSize).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	userId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the user whose groups to return.
+	cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
+	pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.GetUserGroups(context.Background(), userId).Cursor(cursor).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetUserGroups``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUserGroups`: GroupUserList
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.GetUserGroups`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** | The ID of the user whose groups to return. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUserGroupsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **cursor** | **string** | The pagination cursor value. | 
+ **pageSize** | **int32** | Number of results to return per page. Default is 200. | 
+
+### Return type
+
+[**GroupUserList**](GroupUserList.md)
 
 ### Authorization
 

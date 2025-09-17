@@ -10,20 +10,23 @@ Method | HTTP request | Description
 [**DeleteResource**](ResourcesAPI.md#DeleteResource) | **Delete** /resources/{resource_id} | 
 [**DeleteResourceNhi**](ResourcesAPI.md#DeleteResourceNhi) | **Delete** /resources/{resource_id}/non-human-identities/{non_human_identity_id} | 
 [**DeleteResourceUser**](ResourcesAPI.md#DeleteResourceUser) | **Delete** /resources/{resource_id}/users/{user_id} | 
-[**GetResource**](ResourcesAPI.md#GetResource) | **Get** /resources/{resource_id} | 
+[**GetResource**](ResourcesAPI.md#GetResource) | **Get** /resources/{resource_id} | Get resource by ID
 [**GetResourceMessageChannels**](ResourcesAPI.md#GetResourceMessageChannels) | **Get** /resources/{resource_id}/message-channels | 
 [**GetResourceNhis**](ResourcesAPI.md#GetResourceNhis) | **Get** /resources/{resource_id}/non-human-identities | 
 [**GetResourceReviewerStages**](ResourcesAPI.md#GetResourceReviewerStages) | **Get** /resources/{resource_id}/reviewer-stages | 
 [**GetResourceReviewers**](ResourcesAPI.md#GetResourceReviewers) | **Get** /resources/{resource_id}/reviewers | 
+[**GetResourceScopedRolePermissions**](ResourcesAPI.md#GetResourceScopedRolePermissions) | **Get** /resources/{resource_id}/scoped-role-permissions | 
 [**GetResourceTags**](ResourcesAPI.md#GetResourceTags) | **Get** /resources/{resource_id}/tags | 
-[**GetResourceUser**](ResourcesAPI.md#GetResourceUser) | **Get** /resources/{resource_id}/users/{user_id} | 
-[**GetResourceUsers**](ResourcesAPI.md#GetResourceUsers) | **Get** /resources/{resource_id}/users | 
+[**GetResourceUser**](ResourcesAPI.md#GetResourceUser) | **Get** /resources/{resource_id}/users/{user_id} | Get resource user
+[**GetResourceUsers**](ResourcesAPI.md#GetResourceUsers) | **Get** /resources/{resource_id}/users | Get resource users
 [**GetResourceVisibility**](ResourcesAPI.md#GetResourceVisibility) | **Get** /resources/{resource_id}/visibility | 
-[**GetResources**](ResourcesAPI.md#GetResources) | **Get** /resources | 
+[**GetResources**](ResourcesAPI.md#GetResources) | **Get** /resources | Get resources
+[**GetUserResources**](ResourcesAPI.md#GetUserResources) | **Get** /resources/users/{user_id} | 
 [**ResourceUserAccessStatusRetrieve**](ResourcesAPI.md#ResourceUserAccessStatusRetrieve) | **Get** /resource-user-access-status/{resource_id}/{user_id} | 
 [**SetResourceMessageChannels**](ResourcesAPI.md#SetResourceMessageChannels) | **Put** /resources/{resource_id}/message-channels | 
 [**SetResourceReviewerStages**](ResourcesAPI.md#SetResourceReviewerStages) | **Put** /resources/{resource_id}/reviewer-stages | 
 [**SetResourceReviewers**](ResourcesAPI.md#SetResourceReviewers) | **Put** /resources/{resource_id}/reviewers | 
+[**SetResourceScopedRolePermissions**](ResourcesAPI.md#SetResourceScopedRolePermissions) | **Put** /resources/{resource_id}/scoped-role-permissions | 
 [**SetResourceVisibility**](ResourcesAPI.md#SetResourceVisibility) | **Put** /resources/{resource_id}/visibility | 
 [**UpdateResourceUser**](ResourcesAPI.md#UpdateResourceUser) | **Put** /resources/{resource_id}/users/{user_id} | 
 [**UpdateResources**](ResourcesAPI.md#UpdateResources) | **Put** /resources | 
@@ -468,7 +471,7 @@ Name | Type | Description  | Notes
 
 > Resource GetResource(ctx, resourceId).Execute()
 
-
+Get resource by ID
 
 
 
@@ -816,6 +819,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetResourceScopedRolePermissions
+
+> ScopedRolePermissionList GetResourceScopedRolePermissions(ctx, resourceId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the resource whose scoped role permissions belong to.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.GetResourceScopedRolePermissions(context.Background(), resourceId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetResourceScopedRolePermissions``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetResourceScopedRolePermissions`: ScopedRolePermissionList
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.GetResourceScopedRolePermissions`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource whose scoped role permissions belong to. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetResourceScopedRolePermissionsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ScopedRolePermissionList**](ScopedRolePermissionList.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetResourceTags
 
 > TagsList GetResourceTags(ctx, resourceId).Execute()
@@ -890,7 +963,7 @@ Name | Type | Description  | Notes
 
 > GetResourceUser200Response GetResourceUser(ctx, resourceId, userId).Cursor(cursor).Execute()
 
-
+Get resource user
 
 
 
@@ -965,7 +1038,7 @@ Name | Type | Description  | Notes
 
 > ResourceAccessUserList GetResourceUsers(ctx, resourceId).Limit(limit).Execute()
 
-
+Get resource users
 
 
 
@@ -1105,9 +1178,9 @@ Name | Type | Description  | Notes
 
 ## GetResources
 
-> PaginatedResourcesList GetResources(ctx).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).AncestorResourceId(ancestorResourceId).Execute()
+> PaginatedResourcesList GetResources(ctx).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).AncestorResourceId(ancestorResourceId).RemoteId(remoteId).Execute()
 
-
+Get resources
 
 
 
@@ -1126,15 +1199,16 @@ import (
 func main() {
 	cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
 	pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
-	resourceTypeFilter := openapiclient.ResourceTypeEnum("AWS_IAM_ROLE") // ResourceTypeEnum | The resource type to filter by. (optional)
+	resourceTypeFilter := openapiclient.ResourceTypeEnum("AWS_IAM_ROLE") // ResourceTypeEnum | The resource type to filter by. Required when remote_id is provided. (optional)
 	resourceIds := []string{"1b978423-db0a-4037-a4cf-f79c60cb67b3"} // []string | The resource ids to filter by. (optional)
 	resourceName := "example-name" // string | Resource name. (optional)
 	parentResourceId := "["4baf8423-db0a-4037-a4cf-f79c60cb67a5"]" // string | The parent resource id to filter by. (optional)
 	ancestorResourceId := "["4baf8423-db0a-4037-a4cf-f79c60cb67a5"]" // string | The ancestor resource id to filter by. Returns all resources that are descendants of the specified resource. (optional)
+	remoteId := "remoteId_example" // string | Filter resources by their remote id. This will return all resources that have a remote id that matches the provided remote id. Note that this requires resource_type_filter to be provided. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ResourcesAPI.GetResources(context.Background()).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).AncestorResourceId(ancestorResourceId).Execute()
+	resp, r, err := apiClient.ResourcesAPI.GetResources(context.Background()).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).AncestorResourceId(ancestorResourceId).RemoteId(remoteId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetResources``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1157,15 +1231,92 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **string** | The pagination cursor value. | 
  **pageSize** | **int32** | Number of results to return per page. Default is 200. | 
- **resourceTypeFilter** | [**ResourceTypeEnum**](ResourceTypeEnum.md) | The resource type to filter by. | 
+ **resourceTypeFilter** | [**ResourceTypeEnum**](ResourceTypeEnum.md) | The resource type to filter by. Required when remote_id is provided. | 
  **resourceIds** | **[]string** | The resource ids to filter by. | 
  **resourceName** | **string** | Resource name. | 
  **parentResourceId** | **string** | The parent resource id to filter by. | 
  **ancestorResourceId** | **string** | The ancestor resource id to filter by. Returns all resources that are descendants of the specified resource. | 
+ **remoteId** | **string** | Filter resources by their remote id. This will return all resources that have a remote id that matches the provided remote id. Note that this requires resource_type_filter to be provided. | 
 
 ### Return type
 
 [**PaginatedResourcesList**](PaginatedResourcesList.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUserResources
+
+> ResourceAccessUserList GetUserResources(ctx, userId).Limit(limit).Cursor(cursor).IncludeUnmanaged(includeUnmanaged).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	userId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the user.
+	limit := int32(200) // int32 | Limit the number of results returned. (optional)
+	cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
+	includeUnmanaged := false // bool | Include user's access to unmanaged resources. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.GetUserResources(context.Background(), userId).Limit(limit).Cursor(cursor).IncludeUnmanaged(includeUnmanaged).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetUserResources``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUserResources`: ResourceAccessUserList
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.GetUserResources`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** | The ID of the user. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUserResourcesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **limit** | **int32** | Limit the number of results returned. | 
+ **cursor** | **string** | The pagination cursor value. | 
+ **includeUnmanaged** | **bool** | Include user&#39;s access to unmanaged resources. | 
+
+### Return type
+
+[**ResourceAccessUserList**](ResourceAccessUserList.md)
 
 ### Authorization
 
@@ -1461,6 +1612,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 **[]string**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SetResourceScopedRolePermissions
+
+> ScopedRolePermissionList SetResourceScopedRolePermissions(ctx, resourceId).ScopedRolePermissionList(scopedRolePermissionList).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the resource whose scoped role permissions belong to. Must be of OPAL_SCOPED_ROLE resource type.
+	scopedRolePermissionList := *openapiclient.NewScopedRolePermissionList([]openapiclient.ScopedRolePermission{*openapiclient.NewScopedRolePermission(openapiclient.RolePermissionTargetTypeEnum("RESOURCE"), openapiclient.RolePermissionNameEnum("READ"), false)}) // ScopedRolePermissionList | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.SetResourceScopedRolePermissions(context.Background(), resourceId).ScopedRolePermissionList(scopedRolePermissionList).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.SetResourceScopedRolePermissions``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SetResourceScopedRolePermissions`: ScopedRolePermissionList
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.SetResourceScopedRolePermissions`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource whose scoped role permissions belong to. Must be of OPAL_SCOPED_ROLE resource type. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSetResourceScopedRolePermissionsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **scopedRolePermissionList** | [**ScopedRolePermissionList**](ScopedRolePermissionList.md) |  | 
+
+### Return type
+
+[**ScopedRolePermissionList**](ScopedRolePermissionList.md)
 
 ### Authorization
 

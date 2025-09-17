@@ -10,8 +10,8 @@ Method | HTTP request | Description
 [**CreateTag**](TagsAPI.md#CreateTag) | **Post** /tag | 
 [**DeleteTagByID**](TagsAPI.md#DeleteTagByID) | **Delete** /tag/{tag_id} | 
 [**GetTag**](TagsAPI.md#GetTag) | **Get** /tag | 
-[**GetTagByID**](TagsAPI.md#GetTagByID) | **Get** /tag/{tag_id} | 
-[**GetTags**](TagsAPI.md#GetTags) | **Get** /tags | 
+[**GetTagByID**](TagsAPI.md#GetTagByID) | **Get** /tag/{tag_id} | Get tag by ID
+[**GetTags**](TagsAPI.md#GetTags) | **Get** /tags | Get tags
 [**RemoveGroupTag**](TagsAPI.md#RemoveGroupTag) | **Delete** /tags/{tag_id}/groups/{group_id} | 
 [**RemoveResourceTag**](TagsAPI.md#RemoveResourceTag) | **Delete** /tags/{tag_id}/resources/{resource_id} | 
 [**RemoveUserTag**](TagsAPI.md#RemoveUserTag) | **Delete** /tags/{tag_id}/users/{user_id} | 
@@ -445,7 +445,7 @@ Name | Type | Description  | Notes
 
 > Tag GetTagByID(ctx, tagId).Execute()
 
-
+Get tag by ID
 
 
 
@@ -515,7 +515,7 @@ Name | Type | Description  | Notes
 
 > PaginatedTagsList GetTags(ctx).Cursor(cursor).PageSize(pageSize).Execute()
 
-
+Get tags
 
 
 
