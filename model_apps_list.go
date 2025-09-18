@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &AppsList{}
 // AppsList A list of apps.
 type AppsList struct {
 	Apps []App `json:"apps"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AppsList AppsList
@@ -80,6 +80,11 @@ func (o AppsList) MarshalJSON() ([]byte, error) {
 func (o AppsList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["apps"] = o.Apps
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *AppsList) UnmarshalJSON(data []byte) (err error) {
 
 	varAppsList := _AppsList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAppsList)
+	err = json.Unmarshal(data, &varAppsList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AppsList(varAppsList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "apps")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

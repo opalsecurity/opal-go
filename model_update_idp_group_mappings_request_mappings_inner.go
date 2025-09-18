@@ -23,7 +23,10 @@ type UpdateIdpGroupMappingsRequestMappingsInner struct {
 	GroupId *string `json:"group_id,omitempty"`
 	Alias *string `json:"alias,omitempty"`
 	HiddenFromEndUser *bool `json:"hidden_from_end_user,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateIdpGroupMappingsRequestMappingsInner UpdateIdpGroupMappingsRequestMappingsInner
 
 // NewUpdateIdpGroupMappingsRequestMappingsInner instantiates a new UpdateIdpGroupMappingsRequestMappingsInner object
 // This constructor will assign default values to properties that have it defined,
@@ -157,7 +160,35 @@ func (o UpdateIdpGroupMappingsRequestMappingsInner) ToMap() (map[string]interfac
 	if !IsNil(o.HiddenFromEndUser) {
 		toSerialize["hidden_from_end_user"] = o.HiddenFromEndUser
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateIdpGroupMappingsRequestMappingsInner) UnmarshalJSON(data []byte) (err error) {
+	varUpdateIdpGroupMappingsRequestMappingsInner := _UpdateIdpGroupMappingsRequestMappingsInner{}
+
+	err = json.Unmarshal(data, &varUpdateIdpGroupMappingsRequestMappingsInner)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateIdpGroupMappingsRequestMappingsInner(varUpdateIdpGroupMappingsRequestMappingsInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "group_id")
+		delete(additionalProperties, "alias")
+		delete(additionalProperties, "hidden_from_end_user")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateIdpGroupMappingsRequestMappingsInner struct {

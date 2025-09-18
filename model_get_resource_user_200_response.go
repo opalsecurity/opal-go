@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type GetResourceUser200Response struct {
 	Cursor *string `json:"cursor,omitempty"`
 	// Total number of results
 	TotalCount *int32 `json:"total_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetResourceUser200Response GetResourceUser200Response
@@ -154,6 +154,11 @@ func (o GetResourceUser200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TotalCount) {
 		toSerialize["total_count"] = o.TotalCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *GetResourceUser200Response) UnmarshalJSON(data []byte) (err error) {
 
 	varGetResourceUser200Response := _GetResourceUser200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetResourceUser200Response)
+	err = json.Unmarshal(data, &varGetResourceUser200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetResourceUser200Response(varGetResourceUser200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "cursor")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

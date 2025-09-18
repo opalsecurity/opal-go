@@ -25,7 +25,10 @@ type PaginatedEventList struct {
 	// The cursor used to obtain the current result page.
 	Previous *string `json:"previous,omitempty"`
 	Results []Event `json:"results,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PaginatedEventList PaginatedEventList
 
 // NewPaginatedEventList instantiates a new PaginatedEventList object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o PaginatedEventList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Results) {
 		toSerialize["results"] = o.Results
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PaginatedEventList) UnmarshalJSON(data []byte) (err error) {
+	varPaginatedEventList := _PaginatedEventList{}
+
+	err = json.Unmarshal(data, &varPaginatedEventList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PaginatedEventList(varPaginatedEventList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next")
+		delete(additionalProperties, "previous")
+		delete(additionalProperties, "results")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePaginatedEventList struct {

@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &DenyRequestRequest{}
 type DenyRequestRequest struct {
 	// Comment for the denial
 	Comment string `json:"comment"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DenyRequestRequest DenyRequestRequest
@@ -81,6 +81,11 @@ func (o DenyRequestRequest) MarshalJSON() ([]byte, error) {
 func (o DenyRequestRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["comment"] = o.Comment
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *DenyRequestRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varDenyRequestRequest := _DenyRequestRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDenyRequestRequest)
+	err = json.Unmarshal(data, &varDenyRequestRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DenyRequestRequest(varDenyRequestRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "comment")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

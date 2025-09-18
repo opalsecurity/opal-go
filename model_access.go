@@ -14,7 +14,6 @@ package opal
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -36,6 +35,7 @@ type Access struct {
 	HasDirectAccess bool `json:"has_direct_access"`
 	// The number of ways in which the principal has access to this entity (directly and inherited).
 	NumAccessPaths int32 `json:"num_access_paths"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Access Access
@@ -293,6 +293,11 @@ func (o Access) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["has_direct_access"] = o.HasDirectAccess
 	toSerialize["num_access_paths"] = o.NumAccessPaths
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -325,15 +330,27 @@ func (o *Access) UnmarshalJSON(data []byte) (err error) {
 
 	varAccess := _Access{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAccess)
+	err = json.Unmarshal(data, &varAccess)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Access(varAccess)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "principal_id")
+		delete(additionalProperties, "principal_type")
+		delete(additionalProperties, "entity_id")
+		delete(additionalProperties, "entity_type")
+		delete(additionalProperties, "access_level")
+		delete(additionalProperties, "expiration_date")
+		delete(additionalProperties, "has_direct_access")
+		delete(additionalProperties, "num_access_paths")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

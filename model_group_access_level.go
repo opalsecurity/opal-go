@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type GroupAccessLevel struct {
 	AccessLevelName string `json:"access_level_name"`
 	// The machine-readable identifier of the access level.
 	AccessLevelRemoteId string `json:"access_level_remote_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GroupAccessLevel GroupAccessLevel
@@ -109,6 +109,11 @@ func (o GroupAccessLevel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["access_level_name"] = o.AccessLevelName
 	toSerialize["access_level_remote_id"] = o.AccessLevelRemoteId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -137,15 +142,21 @@ func (o *GroupAccessLevel) UnmarshalJSON(data []byte) (err error) {
 
 	varGroupAccessLevel := _GroupAccessLevel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGroupAccessLevel)
+	err = json.Unmarshal(data, &varGroupAccessLevel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GroupAccessLevel(varGroupAccessLevel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "access_level_name")
+		delete(additionalProperties, "access_level_remote_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

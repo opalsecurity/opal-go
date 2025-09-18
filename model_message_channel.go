@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type MessageChannel struct {
 	Name *string `json:"name,omitempty"`
 	// A bool representing whether or not the message channel is private.
 	IsPrivate *bool `json:"is_private,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MessageChannel MessageChannel
@@ -228,6 +228,11 @@ func (o MessageChannel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsPrivate) {
 		toSerialize["is_private"] = o.IsPrivate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -255,15 +260,24 @@ func (o *MessageChannel) UnmarshalJSON(data []byte) (err error) {
 
 	varMessageChannel := _MessageChannel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMessageChannel)
+	err = json.Unmarshal(data, &varMessageChannel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MessageChannel(varMessageChannel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "message_channel_id")
+		delete(additionalProperties, "third_party_provider")
+		delete(additionalProperties, "remote_id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "is_private")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

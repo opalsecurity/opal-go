@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type GroupRemoteInfoGithubTeam struct {
 	TeamId *string `json:"team_id,omitempty"`
 	// The slug of the GitHub team.
 	TeamSlug string `json:"team_slug"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GroupRemoteInfoGithubTeam GroupRemoteInfoGithubTeam
@@ -122,6 +122,11 @@ func (o GroupRemoteInfoGithubTeam) ToMap() (map[string]interface{}, error) {
 		toSerialize["team_id"] = o.TeamId
 	}
 	toSerialize["team_slug"] = o.TeamSlug
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -149,15 +154,21 @@ func (o *GroupRemoteInfoGithubTeam) UnmarshalJSON(data []byte) (err error) {
 
 	varGroupRemoteInfoGithubTeam := _GroupRemoteInfoGithubTeam{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGroupRemoteInfoGithubTeam)
+	err = json.Unmarshal(data, &varGroupRemoteInfoGithubTeam)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GroupRemoteInfoGithubTeam(varGroupRemoteInfoGithubTeam)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "team_id")
+		delete(additionalProperties, "team_slug")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

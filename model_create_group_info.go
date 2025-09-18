@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -39,6 +38,7 @@ type CreateGroupInfo struct {
 	// Custom request notification sent upon request approval.
 	CustomRequestNotification *string `json:"custom_request_notification,omitempty"`
 	RiskSensitivityOverride *RiskSensitivityEnum `json:"risk_sensitivity_override,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateGroupInfo CreateGroupInfo
@@ -364,6 +364,11 @@ func (o CreateGroupInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RiskSensitivityOverride) {
 		toSerialize["risk_sensitivity_override"] = o.RiskSensitivityOverride
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -393,15 +398,28 @@ func (o *CreateGroupInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateGroupInfo := _CreateGroupInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateGroupInfo)
+	err = json.Unmarshal(data, &varCreateGroupInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateGroupInfo(varCreateGroupInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "group_type")
+		delete(additionalProperties, "app_id")
+		delete(additionalProperties, "remote_info")
+		delete(additionalProperties, "remote_group_id")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "custom_request_notification")
+		delete(additionalProperties, "risk_sensitivity_override")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

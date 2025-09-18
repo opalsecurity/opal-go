@@ -14,7 +14,6 @@ package opal
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type CreateDelegationRequest struct {
 	EndTime time.Time `json:"end_time"`
 	// The reason for the delegation.
 	Reason string `json:"reason"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateDelegationRequest CreateDelegationRequest
@@ -194,6 +194,11 @@ func (o CreateDelegationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["start_time"] = o.StartTime
 	toSerialize["end_time"] = o.EndTime
 	toSerialize["reason"] = o.Reason
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -225,15 +230,24 @@ func (o *CreateDelegationRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateDelegationRequest := _CreateDelegationRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateDelegationRequest)
+	err = json.Unmarshal(data, &varCreateDelegationRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateDelegationRequest(varCreateDelegationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "delegator_user_id")
+		delete(additionalProperties, "delegate_user_id")
+		delete(additionalProperties, "start_time")
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "reason")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

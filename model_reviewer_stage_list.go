@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &ReviewerStageList{}
 type ReviewerStageList struct {
 	// A list of reviewer stages.
 	Stages []ReviewerStage `json:"stages"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReviewerStageList ReviewerStageList
@@ -81,6 +81,11 @@ func (o ReviewerStageList) MarshalJSON() ([]byte, error) {
 func (o ReviewerStageList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["stages"] = o.Stages
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *ReviewerStageList) UnmarshalJSON(data []byte) (err error) {
 
 	varReviewerStageList := _ReviewerStageList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReviewerStageList)
+	err = json.Unmarshal(data, &varReviewerStageList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReviewerStageList(varReviewerStageList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "stages")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

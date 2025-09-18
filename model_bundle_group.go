@@ -28,7 +28,10 @@ type BundleGroup struct {
 	AccessLevelName *string `json:"access_level_name,omitempty"`
 	// The remote ID of the access level of the group within a bundle.
 	AccessLevelRemoteId *string `json:"access_level_remote_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BundleGroup BundleGroup
 
 // NewBundleGroup instantiates a new BundleGroup object
 // This constructor will assign default values to properties that have it defined,
@@ -197,7 +200,36 @@ func (o BundleGroup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AccessLevelRemoteId) {
 		toSerialize["access_level_remote_id"] = o.AccessLevelRemoteId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BundleGroup) UnmarshalJSON(data []byte) (err error) {
+	varBundleGroup := _BundleGroup{}
+
+	err = json.Unmarshal(data, &varBundleGroup)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BundleGroup(varBundleGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "bundle_id")
+		delete(additionalProperties, "group_id")
+		delete(additionalProperties, "access_level_name")
+		delete(additionalProperties, "access_level_remote_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBundleGroup struct {

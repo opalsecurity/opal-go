@@ -27,7 +27,10 @@ type OnCallSchedule struct {
 	RemoteId *string `json:"remote_id,omitempty"`
 	// The name of the on call schedule.
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OnCallSchedule OnCallSchedule
 
 // NewOnCallSchedule instantiates a new OnCallSchedule object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o OnCallSchedule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OnCallSchedule) UnmarshalJSON(data []byte) (err error) {
+	varOnCallSchedule := _OnCallSchedule{}
+
+	err = json.Unmarshal(data, &varOnCallSchedule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OnCallSchedule(varOnCallSchedule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "on_call_schedule_id")
+		delete(additionalProperties, "third_party_provider")
+		delete(additionalProperties, "remote_id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOnCallSchedule struct {

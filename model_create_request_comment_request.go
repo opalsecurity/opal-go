@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &CreateRequestCommentRequest{}
 type CreateRequestCommentRequest struct {
 	// comment
 	Comment string `json:"comment"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateRequestCommentRequest CreateRequestCommentRequest
@@ -81,6 +81,11 @@ func (o CreateRequestCommentRequest) MarshalJSON() ([]byte, error) {
 func (o CreateRequestCommentRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["comment"] = o.Comment
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *CreateRequestCommentRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateRequestCommentRequest := _CreateRequestCommentRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateRequestCommentRequest)
+	err = json.Unmarshal(data, &varCreateRequestCommentRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateRequestCommentRequest(varCreateRequestCommentRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "comment")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

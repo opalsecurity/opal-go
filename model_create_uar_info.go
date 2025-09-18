@@ -14,7 +14,6 @@ package opal
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -37,6 +36,7 @@ type CreateUARInfo struct {
 	ReminderSchedule []int32 `json:"reminder_schedule,omitempty"`
 	ReminderIncludeManager *bool `json:"reminder_include_manager,omitempty"`
 	UarScope *UARScope `json:"uar_scope,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateUARInfo CreateUARInfo
@@ -329,6 +329,11 @@ func (o CreateUARInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UarScope) {
 		toSerialize["uar_scope"] = o.UarScope
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -361,15 +366,28 @@ func (o *CreateUARInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateUARInfo := _CreateUARInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateUARInfo)
+	err = json.Unmarshal(data, &varCreateUARInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateUARInfo(varCreateUARInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "reviewer_assignment_policy")
+		delete(additionalProperties, "send_reviewer_assignment_notification")
+		delete(additionalProperties, "deadline")
+		delete(additionalProperties, "time_zone")
+		delete(additionalProperties, "self_review_allowed")
+		delete(additionalProperties, "reminder_schedule")
+		delete(additionalProperties, "reminder_include_manager")
+		delete(additionalProperties, "uar_scope")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

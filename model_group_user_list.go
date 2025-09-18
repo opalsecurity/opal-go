@@ -25,7 +25,10 @@ type GroupUserList struct {
 	Next *string `json:"next,omitempty"`
 	// The cursor used to obtain the current result page.
 	Previous *string `json:"previous,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GroupUserList GroupUserList
 
 // NewGroupUserList instantiates a new GroupUserList object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GroupUserList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Previous) {
 		toSerialize["previous"] = o.Previous
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GroupUserList) UnmarshalJSON(data []byte) (err error) {
+	varGroupUserList := _GroupUserList{}
+
+	err = json.Unmarshal(data, &varGroupUserList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GroupUserList(varGroupUserList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "results")
+		delete(additionalProperties, "next")
+		delete(additionalProperties, "previous")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGroupUserList struct {

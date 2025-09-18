@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &VisibilityInfo{}
 type VisibilityInfo struct {
 	Visibility VisibilityTypeEnum `json:"visibility"`
 	VisibilityGroupIds []string `json:"visibility_group_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _VisibilityInfo VisibilityInfo
@@ -116,6 +116,11 @@ func (o VisibilityInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VisibilityGroupIds) {
 		toSerialize["visibility_group_ids"] = o.VisibilityGroupIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -143,15 +148,21 @@ func (o *VisibilityInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varVisibilityInfo := _VisibilityInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varVisibilityInfo)
+	err = json.Unmarshal(data, &varVisibilityInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = VisibilityInfo(varVisibilityInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "visibility")
+		delete(additionalProperties, "visibility_group_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

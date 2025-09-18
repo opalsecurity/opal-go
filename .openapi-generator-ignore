@@ -1,4 +1,6 @@
 .travis.yml
 test/
 git_push.sh
-
+go.mod
+api/
+.gitignore

@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &CreateRequestConfigurationInfoList{}
 type CreateRequestConfigurationInfoList struct {
 	// A list of request configurations to create.
 	RequestConfigurations []RequestConfiguration `json:"request_configurations"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateRequestConfigurationInfoList CreateRequestConfigurationInfoList
@@ -81,6 +81,11 @@ func (o CreateRequestConfigurationInfoList) MarshalJSON() ([]byte, error) {
 func (o CreateRequestConfigurationInfoList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["request_configurations"] = o.RequestConfigurations
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *CreateRequestConfigurationInfoList) UnmarshalJSON(data []byte) (err err
 
 	varCreateRequestConfigurationInfoList := _CreateRequestConfigurationInfoList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateRequestConfigurationInfoList)
+	err = json.Unmarshal(data, &varCreateRequestConfigurationInfoList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateRequestConfigurationInfoList(varCreateRequestConfigurationInfoList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "request_configurations")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -14,7 +14,6 @@ package opal
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -32,6 +31,7 @@ type Session struct {
 	AccessLevel ResourceAccessLevel `json:"access_level"`
 	// The day and time the user's access will expire.
 	ExpirationDate time.Time `json:"expiration_date"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Session Session
@@ -193,6 +193,11 @@ func (o Session) ToMap() (map[string]interface{}, error) {
 	toSerialize["resource_id"] = o.ResourceId
 	toSerialize["access_level"] = o.AccessLevel
 	toSerialize["expiration_date"] = o.ExpirationDate
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -224,15 +229,24 @@ func (o *Session) UnmarshalJSON(data []byte) (err error) {
 
 	varSession := _Session{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSession)
+	err = json.Unmarshal(data, &varSession)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Session(varSession)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "connection_id")
+		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "resource_id")
+		delete(additionalProperties, "access_level")
+		delete(additionalProperties, "expiration_date")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

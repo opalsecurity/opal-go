@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type RequestConnection struct {
 	PageInfo PageInfo `json:"pageInfo"`
 	// The total number of items available
 	TotalCount int32 `json:"totalCount"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RequestConnection RequestConnection
@@ -135,6 +135,11 @@ func (o RequestConnection) ToMap() (map[string]interface{}, error) {
 	toSerialize["edges"] = o.Edges
 	toSerialize["pageInfo"] = o.PageInfo
 	toSerialize["totalCount"] = o.TotalCount
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -164,15 +169,22 @@ func (o *RequestConnection) UnmarshalJSON(data []byte) (err error) {
 
 	varRequestConnection := _RequestConnection{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRequestConnection)
+	err = json.Unmarshal(data, &varRequestConnection)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RequestConnection(varRequestConnection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "edges")
+		delete(additionalProperties, "pageInfo")
+		delete(additionalProperties, "totalCount")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

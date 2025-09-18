@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type AwsPermissionSetMetadataAwsPermissionSet struct {
 	Arn string `json:"arn"`
 	// The ID of an AWS account to which this permission set is provisioned.
 	AccountId string `json:"account_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AwsPermissionSetMetadataAwsPermissionSet AwsPermissionSetMetadataAwsPermissionSet
@@ -109,6 +109,11 @@ func (o AwsPermissionSetMetadataAwsPermissionSet) ToMap() (map[string]interface{
 	toSerialize := map[string]interface{}{}
 	toSerialize["arn"] = o.Arn
 	toSerialize["account_id"] = o.AccountId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -137,15 +142,21 @@ func (o *AwsPermissionSetMetadataAwsPermissionSet) UnmarshalJSON(data []byte) (e
 
 	varAwsPermissionSetMetadataAwsPermissionSet := _AwsPermissionSetMetadataAwsPermissionSet{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAwsPermissionSetMetadataAwsPermissionSet)
+	err = json.Unmarshal(data, &varAwsPermissionSetMetadataAwsPermissionSet)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AwsPermissionSetMetadataAwsPermissionSet(varAwsPermissionSetMetadataAwsPermissionSet)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "arn")
+		delete(additionalProperties, "account_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type CreateRequestInfoSupportTicket struct {
 	RemoteId string `json:"remote_id"`
 	Identifier string `json:"identifier"`
 	Url string `json:"url"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateRequestInfoSupportTicket CreateRequestInfoSupportTicket
@@ -161,6 +161,11 @@ func (o CreateRequestInfoSupportTicket) ToMap() (map[string]interface{}, error) 
 	toSerialize["remote_id"] = o.RemoteId
 	toSerialize["identifier"] = o.Identifier
 	toSerialize["url"] = o.Url
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -191,15 +196,23 @@ func (o *CreateRequestInfoSupportTicket) UnmarshalJSON(data []byte) (err error) 
 
 	varCreateRequestInfoSupportTicket := _CreateRequestInfoSupportTicket{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateRequestInfoSupportTicket)
+	err = json.Unmarshal(data, &varCreateRequestInfoSupportTicket)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateRequestInfoSupportTicket(varCreateRequestInfoSupportTicket)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ticketing_provider")
+		delete(additionalProperties, "remote_id")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

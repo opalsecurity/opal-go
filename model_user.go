@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -35,6 +34,7 @@ type User struct {
 	// The user's position.
 	Position string `json:"position"`
 	HrIdpStatus *UserHrIdpStatusEnum `json:"hr_idp_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _User User
@@ -257,6 +257,11 @@ func (o User) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HrIdpStatus) {
 		toSerialize["hr_idp_status"] = o.HrIdpStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -289,15 +294,26 @@ func (o *User) UnmarshalJSON(data []byte) (err error) {
 
 	varUser := _User{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUser)
+	err = json.Unmarshal(data, &varUser)
 
 	if err != nil {
 		return err
 	}
 
 	*o = User(varUser)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "full_name")
+		delete(additionalProperties, "first_name")
+		delete(additionalProperties, "last_name")
+		delete(additionalProperties, "position")
+		delete(additionalProperties, "hr_idp_status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

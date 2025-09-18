@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type CreateRequestInfoGroupsInner struct {
 	AccessLevelRemoteId *string `json:"access_level_remote_id,omitempty"`
 	// The ID of the access level requested on the remote system.
 	AccessLevelName *string `json:"access_level_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateRequestInfoGroupsInner CreateRequestInfoGroupsInner
@@ -155,6 +155,11 @@ func (o CreateRequestInfoGroupsInner) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AccessLevelName) {
 		toSerialize["access_level_name"] = o.AccessLevelName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -182,15 +187,22 @@ func (o *CreateRequestInfoGroupsInner) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateRequestInfoGroupsInner := _CreateRequestInfoGroupsInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateRequestInfoGroupsInner)
+	err = json.Unmarshal(data, &varCreateRequestInfoGroupsInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateRequestInfoGroupsInner(varCreateRequestInfoGroupsInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "access_level_remote_id")
+		delete(additionalProperties, "access_level_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

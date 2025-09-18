@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type ResourceRemoteInfoGithubRepo struct {
 	RepoId *string `json:"repo_id,omitempty"`
 	// The name of the repository.
 	RepoName string `json:"repo_name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceRemoteInfoGithubRepo ResourceRemoteInfoGithubRepo
@@ -122,6 +122,11 @@ func (o ResourceRemoteInfoGithubRepo) ToMap() (map[string]interface{}, error) {
 		toSerialize["repo_id"] = o.RepoId
 	}
 	toSerialize["repo_name"] = o.RepoName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -149,15 +154,21 @@ func (o *ResourceRemoteInfoGithubRepo) UnmarshalJSON(data []byte) (err error) {
 
 	varResourceRemoteInfoGithubRepo := _ResourceRemoteInfoGithubRepo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceRemoteInfoGithubRepo)
+	err = json.Unmarshal(data, &varResourceRemoteInfoGithubRepo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceRemoteInfoGithubRepo(varResourceRemoteInfoGithubRepo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "repo_id")
+		delete(additionalProperties, "repo_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

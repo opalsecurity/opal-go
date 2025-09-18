@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type ResourceRemoteInfoAwsPermissionSet struct {
 	Arn string `json:"arn"`
 	// The ID of an AWS account to which this permission set is provisioned.
 	AccountId string `json:"account_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceRemoteInfoAwsPermissionSet ResourceRemoteInfoAwsPermissionSet
@@ -109,6 +109,11 @@ func (o ResourceRemoteInfoAwsPermissionSet) ToMap() (map[string]interface{}, err
 	toSerialize := map[string]interface{}{}
 	toSerialize["arn"] = o.Arn
 	toSerialize["account_id"] = o.AccountId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -137,15 +142,21 @@ func (o *ResourceRemoteInfoAwsPermissionSet) UnmarshalJSON(data []byte) (err err
 
 	varResourceRemoteInfoAwsPermissionSet := _ResourceRemoteInfoAwsPermissionSet{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceRemoteInfoAwsPermissionSet)
+	err = json.Unmarshal(data, &varResourceRemoteInfoAwsPermissionSet)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceRemoteInfoAwsPermissionSet(varResourceRemoteInfoAwsPermissionSet)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "arn")
+		delete(additionalProperties, "account_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

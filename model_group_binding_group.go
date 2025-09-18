@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type GroupBindingGroup struct {
 	// The ID of the group.
 	GroupId string `json:"group_id"`
 	GroupType GroupTypeEnum `json:"group_type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GroupBindingGroup GroupBindingGroup
@@ -108,6 +108,11 @@ func (o GroupBindingGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["group_id"] = o.GroupId
 	toSerialize["group_type"] = o.GroupType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *GroupBindingGroup) UnmarshalJSON(data []byte) (err error) {
 
 	varGroupBindingGroup := _GroupBindingGroup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGroupBindingGroup)
+	err = json.Unmarshal(data, &varGroupBindingGroup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GroupBindingGroup(varGroupBindingGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "group_id")
+		delete(additionalProperties, "group_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

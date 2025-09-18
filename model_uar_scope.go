@@ -41,7 +41,10 @@ type UARScope struct {
 	Tags []TagFilter `json:"tags,omitempty"`
 	// This access review will include resources and groups whose name contains one of the given strings.
 	Names []string `json:"names,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UARScope UARScope
 
 // NewUARScope instantiates a new UARScope object
 // This constructor will assign default values to properties that have it defined,
@@ -455,7 +458,43 @@ func (o UARScope) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Names) {
 		toSerialize["names"] = o.Names
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UARScope) UnmarshalJSON(data []byte) (err error) {
+	varUARScope := _UARScope{}
+
+	err = json.Unmarshal(data, &varUARScope)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UARScope(varUARScope)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "group_visibility")
+		delete(additionalProperties, "users")
+		delete(additionalProperties, "filter_operator")
+		delete(additionalProperties, "entities")
+		delete(additionalProperties, "apps")
+		delete(additionalProperties, "admins")
+		delete(additionalProperties, "group_types")
+		delete(additionalProperties, "resource_types")
+		delete(additionalProperties, "include_group_bindings")
+		delete(additionalProperties, "tags")
+		delete(additionalProperties, "names")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUARScope struct {

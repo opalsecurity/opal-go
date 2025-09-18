@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateOnCallScheduleInfo struct {
 	ThirdPartyProvider OnCallScheduleProviderEnum `json:"third_party_provider"`
 	// The remote ID of the on call schedule
 	RemoteId string `json:"remote_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateOnCallScheduleInfo CreateOnCallScheduleInfo
@@ -108,6 +108,11 @@ func (o CreateOnCallScheduleInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["third_party_provider"] = o.ThirdPartyProvider
 	toSerialize["remote_id"] = o.RemoteId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *CreateOnCallScheduleInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateOnCallScheduleInfo := _CreateOnCallScheduleInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateOnCallScheduleInfo)
+	err = json.Unmarshal(data, &varCreateOnCallScheduleInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateOnCallScheduleInfo(varCreateOnCallScheduleInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "third_party_provider")
+		delete(additionalProperties, "remote_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
