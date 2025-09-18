@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,8 +25,8 @@ type RemoteUser struct {
 	UserId string `json:"user_id"`
 	// The ID of the remote user.
 	RemoteId string `json:"remote_id"`
-	// The third party provider of the remote user.
 	ThirdPartyProvider ThirdPartyProviderEnum `json:"third_party_provider"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RemoteUser RemoteUser
@@ -137,6 +136,11 @@ func (o RemoteUser) ToMap() (map[string]interface{}, error) {
 	toSerialize["user_id"] = o.UserId
 	toSerialize["remote_id"] = o.RemoteId
 	toSerialize["third_party_provider"] = o.ThirdPartyProvider
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -166,15 +170,22 @@ func (o *RemoteUser) UnmarshalJSON(data []byte) (err error) {
 
 	varRemoteUser := _RemoteUser{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRemoteUser)
+	err = json.Unmarshal(data, &varRemoteUser)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RemoteUser(varRemoteUser)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "remote_id")
+		delete(additionalProperties, "third_party_provider")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

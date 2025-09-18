@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type RequestEdge struct {
 	Node Request `json:"node"`
 	// The cursor for this request edge
 	Cursor string `json:"cursor"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RequestEdge RequestEdge
@@ -108,6 +108,11 @@ func (o RequestEdge) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["node"] = o.Node
 	toSerialize["cursor"] = o.Cursor
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *RequestEdge) UnmarshalJSON(data []byte) (err error) {
 
 	varRequestEdge := _RequestEdge{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRequestEdge)
+	err = json.Unmarshal(data, &varRequestEdge)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RequestEdge(varRequestEdge)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "node")
+		delete(additionalProperties, "cursor")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

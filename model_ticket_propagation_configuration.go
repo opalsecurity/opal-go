@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type TicketPropagationConfiguration struct {
 	EnabledOnRevocation bool `json:"enabled_on_revocation"`
 	TicketProvider *TicketingProviderEnum `json:"ticket_provider,omitempty"`
 	TicketProjectId *string `json:"ticket_project_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TicketPropagationConfiguration TicketPropagationConfiguration
@@ -179,6 +179,11 @@ func (o TicketPropagationConfiguration) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.TicketProjectId) {
 		toSerialize["ticket_project_id"] = o.TicketProjectId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -207,15 +212,23 @@ func (o *TicketPropagationConfiguration) UnmarshalJSON(data []byte) (err error) 
 
 	varTicketPropagationConfiguration := _TicketPropagationConfiguration{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTicketPropagationConfiguration)
+	err = json.Unmarshal(data, &varTicketPropagationConfiguration)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TicketPropagationConfiguration(varTicketPropagationConfiguration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enabled_on_grant")
+		delete(additionalProperties, "enabled_on_revocation")
+		delete(additionalProperties, "ticket_provider")
+		delete(additionalProperties, "ticket_project_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

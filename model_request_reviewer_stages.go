@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -32,6 +31,7 @@ type RequestReviewerStages struct {
 	ItemId string `json:"item_id"`
 	// The stages of review for this request
 	Stages []RequestStage `json:"stages"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RequestReviewerStages RequestReviewerStages
@@ -211,6 +211,11 @@ func (o RequestReviewerStages) ToMap() (map[string]interface{}, error) {
 	toSerialize["item_name"] = o.ItemName
 	toSerialize["item_id"] = o.ItemId
 	toSerialize["stages"] = o.Stages
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -240,15 +245,24 @@ func (o *RequestReviewerStages) UnmarshalJSON(data []byte) (err error) {
 
 	varRequestReviewerStages := _RequestReviewerStages{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRequestReviewerStages)
+	err = json.Unmarshal(data, &varRequestReviewerStages)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RequestReviewerStages(varRequestReviewerStages)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "access_level_name")
+		delete(additionalProperties, "access_level_remote_id")
+		delete(additionalProperties, "item_name")
+		delete(additionalProperties, "item_id")
+		delete(additionalProperties, "stages")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

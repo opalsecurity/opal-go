@@ -14,7 +14,6 @@ package opal
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -35,6 +34,7 @@ type RequestComment struct {
 	UserEmail *string `json:"user_email,omitempty"`
 	// The content of the comment.
 	Comment string `json:"comment"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RequestComment RequestComment
@@ -240,6 +240,11 @@ func (o RequestComment) ToMap() (map[string]interface{}, error) {
 		toSerialize["user_email"] = o.UserEmail
 	}
 	toSerialize["comment"] = o.Comment
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -270,15 +275,25 @@ func (o *RequestComment) UnmarshalJSON(data []byte) (err error) {
 
 	varRequestComment := _RequestComment{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRequestComment)
+	err = json.Unmarshal(data, &varRequestComment)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RequestComment(varRequestComment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "user_full_name")
+		delete(additionalProperties, "user_email")
+		delete(additionalProperties, "comment")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

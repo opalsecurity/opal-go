@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &ResourceRemoteInfoSalesforcePermissionSet{}
 type ResourceRemoteInfoSalesforcePermissionSet struct {
 	// The id of the permission set.
 	PermissionSetId string `json:"permission_set_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceRemoteInfoSalesforcePermissionSet ResourceRemoteInfoSalesforcePermissionSet
@@ -81,6 +81,11 @@ func (o ResourceRemoteInfoSalesforcePermissionSet) MarshalJSON() ([]byte, error)
 func (o ResourceRemoteInfoSalesforcePermissionSet) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["permission_set_id"] = o.PermissionSetId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *ResourceRemoteInfoSalesforcePermissionSet) UnmarshalJSON(data []byte) (
 
 	varResourceRemoteInfoSalesforcePermissionSet := _ResourceRemoteInfoSalesforcePermissionSet{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceRemoteInfoSalesforcePermissionSet)
+	err = json.Unmarshal(data, &varResourceRemoteInfoSalesforcePermissionSet)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceRemoteInfoSalesforcePermissionSet(varResourceRemoteInfoSalesforcePermissionSet)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "permission_set_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

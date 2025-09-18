@@ -28,7 +28,10 @@ type PaginatedDelegationsList struct {
 	Previous *string `json:"previous,omitempty"`
 	// The total number of items in the result set.
 	TotalCount *int32 `json:"total_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PaginatedDelegationsList PaginatedDelegationsList
 
 // NewPaginatedDelegationsList instantiates a new PaginatedDelegationsList object
 // This constructor will assign default values to properties that have it defined,
@@ -197,7 +200,36 @@ func (o PaginatedDelegationsList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TotalCount) {
 		toSerialize["total_count"] = o.TotalCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PaginatedDelegationsList) UnmarshalJSON(data []byte) (err error) {
+	varPaginatedDelegationsList := _PaginatedDelegationsList{}
+
+	err = json.Unmarshal(data, &varPaginatedDelegationsList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PaginatedDelegationsList(varPaginatedDelegationsList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "results")
+		delete(additionalProperties, "next")
+		delete(additionalProperties, "previous")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePaginatedDelegationsList struct {

@@ -26,7 +26,10 @@ type CreateRequestInfoResourcesInner struct {
 	AccessLevelRemoteId *string `json:"access_level_remote_id,omitempty"`
 	// The ID of the access level requested on the remote system.
 	AccessLevelName *string `json:"access_level_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateRequestInfoResourcesInner CreateRequestInfoResourcesInner
 
 // NewCreateRequestInfoResourcesInner instantiates a new CreateRequestInfoResourcesInner object
 // This constructor will assign default values to properties that have it defined,
@@ -160,7 +163,35 @@ func (o CreateRequestInfoResourcesInner) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.AccessLevelName) {
 		toSerialize["access_level_name"] = o.AccessLevelName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateRequestInfoResourcesInner) UnmarshalJSON(data []byte) (err error) {
+	varCreateRequestInfoResourcesInner := _CreateRequestInfoResourcesInner{}
+
+	err = json.Unmarshal(data, &varCreateRequestInfoResourcesInner)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateRequestInfoResourcesInner(varCreateRequestInfoResourcesInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "access_level_remote_id")
+		delete(additionalProperties, "access_level_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateRequestInfoResourcesInner struct {

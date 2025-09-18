@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type ResourceRemoteInfoAwsOrganizationalUnit struct {
 	ParentId *string `json:"parent_id,omitempty"`
 	// The id of the AWS organizational unit that is being created.
 	OrganizationalUnitId string `json:"organizational_unit_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceRemoteInfoAwsOrganizationalUnit ResourceRemoteInfoAwsOrganizationalUnit
@@ -118,6 +118,11 @@ func (o ResourceRemoteInfoAwsOrganizationalUnit) ToMap() (map[string]interface{}
 		toSerialize["parent_id"] = o.ParentId
 	}
 	toSerialize["organizational_unit_id"] = o.OrganizationalUnitId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -145,15 +150,21 @@ func (o *ResourceRemoteInfoAwsOrganizationalUnit) UnmarshalJSON(data []byte) (er
 
 	varResourceRemoteInfoAwsOrganizationalUnit := _ResourceRemoteInfoAwsOrganizationalUnit{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceRemoteInfoAwsOrganizationalUnit)
+	err = json.Unmarshal(data, &varResourceRemoteInfoAwsOrganizationalUnit)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceRemoteInfoAwsOrganizationalUnit(varResourceRemoteInfoAwsOrganizationalUnit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "parent_id")
+		delete(additionalProperties, "organizational_unit_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

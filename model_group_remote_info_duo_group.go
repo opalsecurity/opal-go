@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &GroupRemoteInfoDuoGroup{}
 type GroupRemoteInfoDuoGroup struct {
 	// The id of the Duo Security group.
 	GroupId string `json:"group_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GroupRemoteInfoDuoGroup GroupRemoteInfoDuoGroup
@@ -81,6 +81,11 @@ func (o GroupRemoteInfoDuoGroup) MarshalJSON() ([]byte, error) {
 func (o GroupRemoteInfoDuoGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["group_id"] = o.GroupId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *GroupRemoteInfoDuoGroup) UnmarshalJSON(data []byte) (err error) {
 
 	varGroupRemoteInfoDuoGroup := _GroupRemoteInfoDuoGroup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGroupRemoteInfoDuoGroup)
+	err = json.Unmarshal(data, &varGroupRemoteInfoDuoGroup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GroupRemoteInfoDuoGroup(varGroupRemoteInfoDuoGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "group_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

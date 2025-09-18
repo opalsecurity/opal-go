@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &UpdateGroupResourcesInfo{}
 // UpdateGroupResourcesInfo struct for UpdateGroupResourcesInfo
 type UpdateGroupResourcesInfo struct {
 	Resources []ResourceWithAccessLevel `json:"resources"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateGroupResourcesInfo UpdateGroupResourcesInfo
@@ -80,6 +80,11 @@ func (o UpdateGroupResourcesInfo) MarshalJSON() ([]byte, error) {
 func (o UpdateGroupResourcesInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["resources"] = o.Resources
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *UpdateGroupResourcesInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdateGroupResourcesInfo := _UpdateGroupResourcesInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateGroupResourcesInfo)
+	err = json.Unmarshal(data, &varUpdateGroupResourcesInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateGroupResourcesInfo(varUpdateGroupResourcesInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "resources")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

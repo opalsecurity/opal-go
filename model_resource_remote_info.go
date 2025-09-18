@@ -52,7 +52,10 @@ type ResourceRemoteInfo struct {
 	TeleportRole *ResourceRemoteInfoTeleportRole `json:"teleport_role,omitempty"`
 	DatastaxAstraRole *ResourceRemoteInfoDatastaxAstraRole `json:"datastax_astra_role,omitempty"`
 	CoupaRole *ResourceRemoteInfoCoupaRole `json:"coupa_role,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ResourceRemoteInfo ResourceRemoteInfo
 
 // NewResourceRemoteInfo instantiates a new ResourceRemoteInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -1201,7 +1204,64 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CoupaRole) {
 		toSerialize["coupa_role"] = o.CoupaRole
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ResourceRemoteInfo) UnmarshalJSON(data []byte) (err error) {
+	varResourceRemoteInfo := _ResourceRemoteInfo{}
+
+	err = json.Unmarshal(data, &varResourceRemoteInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ResourceRemoteInfo(varResourceRemoteInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aws_organizational_unit")
+		delete(additionalProperties, "aws_account")
+		delete(additionalProperties, "aws_permission_set")
+		delete(additionalProperties, "aws_iam_role")
+		delete(additionalProperties, "aws_ec2_instance")
+		delete(additionalProperties, "aws_rds_instance")
+		delete(additionalProperties, "aws_eks_cluster")
+		delete(additionalProperties, "custom_connector")
+		delete(additionalProperties, "gcp_organization")
+		delete(additionalProperties, "gcp_bucket")
+		delete(additionalProperties, "gcp_compute_instance")
+		delete(additionalProperties, "gcp_big_query_dataset")
+		delete(additionalProperties, "gcp_big_query_table")
+		delete(additionalProperties, "gcp_folder")
+		delete(additionalProperties, "gcp_gke_cluster")
+		delete(additionalProperties, "gcp_project")
+		delete(additionalProperties, "gcp_sql_instance")
+		delete(additionalProperties, "gcp_service_account")
+		delete(additionalProperties, "google_workspace_role")
+		delete(additionalProperties, "github_repo")
+		delete(additionalProperties, "github_org_role")
+		delete(additionalProperties, "gitlab_project")
+		delete(additionalProperties, "okta_app")
+		delete(additionalProperties, "okta_standard_role")
+		delete(additionalProperties, "okta_custom_role")
+		delete(additionalProperties, "pagerduty_role")
+		delete(additionalProperties, "salesforce_permission_set")
+		delete(additionalProperties, "salesforce_profile")
+		delete(additionalProperties, "salesforce_role")
+		delete(additionalProperties, "teleport_role")
+		delete(additionalProperties, "datastax_astra_role")
+		delete(additionalProperties, "coupa_role")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableResourceRemoteInfo struct {

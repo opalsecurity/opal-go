@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type CreateBundleInfo struct {
 	Description *string `json:"description,omitempty"`
 	// The ID of the bundle's admin owner.
 	AdminOwnerId string `json:"admin_owner_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateBundleInfo CreateBundleInfo
@@ -146,6 +146,11 @@ func (o CreateBundleInfo) ToMap() (map[string]interface{}, error) {
 		toSerialize["description"] = o.Description
 	}
 	toSerialize["admin_owner_id"] = o.AdminOwnerId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -174,15 +179,22 @@ func (o *CreateBundleInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateBundleInfo := _CreateBundleInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateBundleInfo)
+	err = json.Unmarshal(data, &varCreateBundleInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateBundleInfo(varCreateBundleInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "admin_owner_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

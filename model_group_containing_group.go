@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &GroupContainingGroup{}
 type GroupContainingGroup struct {
 	// The groupID of the containing group.
 	ContainingGroupId string `json:"containing_group_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GroupContainingGroup GroupContainingGroup
@@ -81,6 +81,11 @@ func (o GroupContainingGroup) MarshalJSON() ([]byte, error) {
 func (o GroupContainingGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["containing_group_id"] = o.ContainingGroupId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *GroupContainingGroup) UnmarshalJSON(data []byte) (err error) {
 
 	varGroupContainingGroup := _GroupContainingGroup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGroupContainingGroup)
+	err = json.Unmarshal(data, &varGroupContainingGroup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GroupContainingGroup(varGroupContainingGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "containing_group_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

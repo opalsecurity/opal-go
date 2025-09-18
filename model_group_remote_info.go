@@ -32,7 +32,10 @@ type GroupRemoteInfo struct {
 	SnowflakeRole *GroupRemoteInfoSnowflakeRole `json:"snowflake_role,omitempty"`
 	OktaGroupRule *GroupRemoteInfoOktaGroupRule `json:"okta_group_rule,omitempty"`
 	WorkdayUserSecurityGroup *GroupRemoteInfoWorkdayUserSecurityGroup `json:"workday_user_security_group,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GroupRemoteInfo GroupRemoteInfo
 
 // NewGroupRemoteInfo instantiates a new GroupRemoteInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -481,7 +484,44 @@ func (o GroupRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WorkdayUserSecurityGroup) {
 		toSerialize["workday_user_security_group"] = o.WorkdayUserSecurityGroup
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GroupRemoteInfo) UnmarshalJSON(data []byte) (err error) {
+	varGroupRemoteInfo := _GroupRemoteInfo{}
+
+	err = json.Unmarshal(data, &varGroupRemoteInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GroupRemoteInfo(varGroupRemoteInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "active_directory_group")
+		delete(additionalProperties, "github_team")
+		delete(additionalProperties, "gitlab_group")
+		delete(additionalProperties, "google_group")
+		delete(additionalProperties, "ldap_group")
+		delete(additionalProperties, "okta_group")
+		delete(additionalProperties, "duo_group")
+		delete(additionalProperties, "azure_ad_security_group")
+		delete(additionalProperties, "azure_ad_microsoft_365_group")
+		delete(additionalProperties, "snowflake_role")
+		delete(additionalProperties, "okta_group_rule")
+		delete(additionalProperties, "workday_user_security_group")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGroupRemoteInfo struct {

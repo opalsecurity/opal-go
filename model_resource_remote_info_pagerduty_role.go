@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &ResourceRemoteInfoPagerdutyRole{}
 type ResourceRemoteInfoPagerdutyRole struct {
 	// The name of the role.
 	RoleName string `json:"role_name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceRemoteInfoPagerdutyRole ResourceRemoteInfoPagerdutyRole
@@ -81,6 +81,11 @@ func (o ResourceRemoteInfoPagerdutyRole) MarshalJSON() ([]byte, error) {
 func (o ResourceRemoteInfoPagerdutyRole) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["role_name"] = o.RoleName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *ResourceRemoteInfoPagerdutyRole) UnmarshalJSON(data []byte) (err error)
 
 	varResourceRemoteInfoPagerdutyRole := _ResourceRemoteInfoPagerdutyRole{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceRemoteInfoPagerdutyRole)
+	err = json.Unmarshal(data, &varResourceRemoteInfoPagerdutyRole)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceRemoteInfoPagerdutyRole(varResourceRemoteInfoPagerdutyRole)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "role_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

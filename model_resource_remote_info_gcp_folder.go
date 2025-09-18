@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &ResourceRemoteInfoGcpFolder{}
 type ResourceRemoteInfoGcpFolder struct {
 	// The id of the folder.
 	FolderId string `json:"folder_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceRemoteInfoGcpFolder ResourceRemoteInfoGcpFolder
@@ -81,6 +81,11 @@ func (o ResourceRemoteInfoGcpFolder) MarshalJSON() ([]byte, error) {
 func (o ResourceRemoteInfoGcpFolder) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["folder_id"] = o.FolderId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *ResourceRemoteInfoGcpFolder) UnmarshalJSON(data []byte) (err error) {
 
 	varResourceRemoteInfoGcpFolder := _ResourceRemoteInfoGcpFolder{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceRemoteInfoGcpFolder)
+	err = json.Unmarshal(data, &varResourceRemoteInfoGcpFolder)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceRemoteInfoGcpFolder(varResourceRemoteInfoGcpFolder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "folder_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

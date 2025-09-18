@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -34,6 +33,7 @@ type UpdateOwnerInfo struct {
 	ReviewerMessageChannelId *string `json:"reviewer_message_channel_id,omitempty"`
 	// Sync this owner's user list with a source group. Use \"\" to remove an existing source group.
 	SourceGroupId *string `json:"source_group_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateOwnerInfo UpdateOwnerInfo
@@ -266,6 +266,11 @@ func (o UpdateOwnerInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SourceGroupId) {
 		toSerialize["source_group_id"] = o.SourceGroupId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -293,15 +298,25 @@ func (o *UpdateOwnerInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdateOwnerInfo := _UpdateOwnerInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateOwnerInfo)
+	err = json.Unmarshal(data, &varUpdateOwnerInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateOwnerInfo(varUpdateOwnerInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "owner_id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "access_request_escalation_period")
+		delete(additionalProperties, "reviewer_message_channel_id")
+		delete(additionalProperties, "source_group_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

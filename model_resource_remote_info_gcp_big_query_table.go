@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type ResourceRemoteInfoGcpBigQueryTable struct {
 	DatasetId string `json:"dataset_id"`
 	// The id of the table.
 	TableId string `json:"table_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceRemoteInfoGcpBigQueryTable ResourceRemoteInfoGcpBigQueryTable
@@ -137,6 +137,11 @@ func (o ResourceRemoteInfoGcpBigQueryTable) ToMap() (map[string]interface{}, err
 	toSerialize["project_id"] = o.ProjectId
 	toSerialize["dataset_id"] = o.DatasetId
 	toSerialize["table_id"] = o.TableId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -166,15 +171,22 @@ func (o *ResourceRemoteInfoGcpBigQueryTable) UnmarshalJSON(data []byte) (err err
 
 	varResourceRemoteInfoGcpBigQueryTable := _ResourceRemoteInfoGcpBigQueryTable{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceRemoteInfoGcpBigQueryTable)
+	err = json.Unmarshal(data, &varResourceRemoteInfoGcpBigQueryTable)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceRemoteInfoGcpBigQueryTable(varResourceRemoteInfoGcpBigQueryTable)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "project_id")
+		delete(additionalProperties, "dataset_id")
+		delete(additionalProperties, "table_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

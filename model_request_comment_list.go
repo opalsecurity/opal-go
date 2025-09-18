@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &RequestCommentList{}
 // RequestCommentList A paginated list of request comments
 type RequestCommentList struct {
 	Comments []RequestComment `json:"comments"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RequestCommentList RequestCommentList
@@ -80,6 +80,11 @@ func (o RequestCommentList) MarshalJSON() ([]byte, error) {
 func (o RequestCommentList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["comments"] = o.Comments
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *RequestCommentList) UnmarshalJSON(data []byte) (err error) {
 
 	varRequestCommentList := _RequestCommentList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRequestCommentList)
+	err = json.Unmarshal(data, &varRequestCommentList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RequestCommentList(varRequestCommentList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "comments")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

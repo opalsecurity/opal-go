@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type ReviewerStage struct {
 	// The operator of the reviewer stage. Admin and manager approval are also treated as reviewers.
 	Operator string `json:"operator"`
 	OwnerIds []string `json:"owner_ids"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReviewerStage ReviewerStage
@@ -173,6 +173,11 @@ func (o ReviewerStage) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["operator"] = o.Operator
 	toSerialize["owner_ids"] = o.OwnerIds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -202,15 +207,23 @@ func (o *ReviewerStage) UnmarshalJSON(data []byte) (err error) {
 
 	varReviewerStage := _ReviewerStage{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReviewerStage)
+	err = json.Unmarshal(data, &varReviewerStage)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReviewerStage(varReviewerStage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "require_manager_approval")
+		delete(additionalProperties, "require_admin_approval")
+		delete(additionalProperties, "operator")
+		delete(additionalProperties, "owner_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &CreateGroupBindingInfoGroupsInner{}
 type CreateGroupBindingInfoGroupsInner struct {
 	// The ID of the group.
 	GroupId string `json:"group_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateGroupBindingInfoGroupsInner CreateGroupBindingInfoGroupsInner
@@ -81,6 +81,11 @@ func (o CreateGroupBindingInfoGroupsInner) MarshalJSON() ([]byte, error) {
 func (o CreateGroupBindingInfoGroupsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["group_id"] = o.GroupId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *CreateGroupBindingInfoGroupsInner) UnmarshalJSON(data []byte) (err erro
 
 	varCreateGroupBindingInfoGroupsInner := _CreateGroupBindingInfoGroupsInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateGroupBindingInfoGroupsInner)
+	err = json.Unmarshal(data, &varCreateGroupBindingInfoGroupsInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateGroupBindingInfoGroupsInner(varCreateGroupBindingInfoGroupsInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "group_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

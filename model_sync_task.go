@@ -14,7 +14,6 @@ package opal
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type SyncTask struct {
 	Id string `json:"id"`
 	// The time when the sync task was completed.
 	CompletedAt time.Time `json:"completed_at"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SyncTask SyncTask
@@ -110,6 +110,11 @@ func (o SyncTask) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["completed_at"] = o.CompletedAt
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -138,15 +143,21 @@ func (o *SyncTask) UnmarshalJSON(data []byte) (err error) {
 
 	varSyncTask := _SyncTask{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSyncTask)
+	err = json.Unmarshal(data, &varSyncTask)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SyncTask(varSyncTask)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "completed_at")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

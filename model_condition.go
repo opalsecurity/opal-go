@@ -24,7 +24,10 @@ type Condition struct {
 	GroupIds []string `json:"group_ids,omitempty"`
 	// The list of role remote IDs to match.
 	RoleRemoteIds []string `json:"role_remote_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Condition Condition
 
 // NewCondition instantiates a new Condition object
 // This constructor will assign default values to properties that have it defined,
@@ -123,7 +126,34 @@ func (o Condition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RoleRemoteIds) {
 		toSerialize["role_remote_ids"] = o.RoleRemoteIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Condition) UnmarshalJSON(data []byte) (err error) {
+	varCondition := _Condition{}
+
+	err = json.Unmarshal(data, &varCondition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Condition(varCondition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "group_ids")
+		delete(additionalProperties, "role_remote_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCondition struct {

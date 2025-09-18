@@ -14,7 +14,6 @@ package opal
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -41,6 +40,7 @@ type Event struct {
 	// The preview of the API token used to create the event.
 	ApiTokenPreview *string `json:"api_token_preview,omitempty"`
 	SubEvents []SubEvent `json:"sub_events,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Event Event
@@ -381,6 +381,11 @@ func (o Event) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SubEvents) {
 		toSerialize["sub_events"] = o.SubEvents
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -412,15 +417,29 @@ func (o *Event) UnmarshalJSON(data []byte) (err error) {
 
 	varEvent := _Event{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEvent)
+	err = json.Unmarshal(data, &varEvent)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Event(varEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "event_id")
+		delete(additionalProperties, "actor_user_id")
+		delete(additionalProperties, "actor_name")
+		delete(additionalProperties, "actor_email")
+		delete(additionalProperties, "event_type")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "actor_ip_address")
+		delete(additionalProperties, "api_token_name")
+		delete(additionalProperties, "api_token_preview")
+		delete(additionalProperties, "sub_events")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

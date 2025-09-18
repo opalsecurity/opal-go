@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &TagsList{}
 // TagsList struct for TagsList
 type TagsList struct {
 	Tags []Tag `json:"tags"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TagsList TagsList
@@ -80,6 +80,11 @@ func (o TagsList) MarshalJSON() ([]byte, error) {
 func (o TagsList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["tags"] = o.Tags
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *TagsList) UnmarshalJSON(data []byte) (err error) {
 
 	varTagsList := _TagsList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTagsList)
+	err = json.Unmarshal(data, &varTagsList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TagsList(varTagsList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tags")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

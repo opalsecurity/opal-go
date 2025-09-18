@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type UpdateResourceUserRequest struct {
 	DurationMinutes int32 `json:"duration_minutes"`
 	// The updated remote ID of the access level granted to this user.
 	AccessLevelRemoteId *string `json:"access_level_remote_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateResourceUserRequest UpdateResourceUserRequest
@@ -118,6 +118,11 @@ func (o UpdateResourceUserRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AccessLevelRemoteId) {
 		toSerialize["access_level_remote_id"] = o.AccessLevelRemoteId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -145,15 +150,21 @@ func (o *UpdateResourceUserRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdateResourceUserRequest := _UpdateResourceUserRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateResourceUserRequest)
+	err = json.Unmarshal(data, &varUpdateResourceUserRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateResourceUserRequest(varUpdateResourceUserRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "duration_minutes")
+		delete(additionalProperties, "access_level_remote_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

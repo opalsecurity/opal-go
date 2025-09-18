@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &ResourceRemoteInfoOktaApp{}
 type ResourceRemoteInfoOktaApp struct {
 	// The id of the app.
 	AppId string `json:"app_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceRemoteInfoOktaApp ResourceRemoteInfoOktaApp
@@ -81,6 +81,11 @@ func (o ResourceRemoteInfoOktaApp) MarshalJSON() ([]byte, error) {
 func (o ResourceRemoteInfoOktaApp) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["app_id"] = o.AppId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *ResourceRemoteInfoOktaApp) UnmarshalJSON(data []byte) (err error) {
 
 	varResourceRemoteInfoOktaApp := _ResourceRemoteInfoOktaApp{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceRemoteInfoOktaApp)
+	err = json.Unmarshal(data, &varResourceRemoteInfoOktaApp)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceRemoteInfoOktaApp(varResourceRemoteInfoOktaApp)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "app_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

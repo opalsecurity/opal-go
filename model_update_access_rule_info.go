@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type UpdateAccessRuleInfo struct {
 	// The status of the access rule.
 	Status string `json:"status"`
 	RuleClauses RuleClauses `json:"ruleClauses"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateAccessRuleInfo UpdateAccessRuleInfo
@@ -192,6 +192,11 @@ func (o UpdateAccessRuleInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize["admin_owner_id"] = o.AdminOwnerId
 	toSerialize["status"] = o.Status
 	toSerialize["ruleClauses"] = o.RuleClauses
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -223,15 +228,24 @@ func (o *UpdateAccessRuleInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdateAccessRuleInfo := _UpdateAccessRuleInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateAccessRuleInfo)
+	err = json.Unmarshal(data, &varUpdateAccessRuleInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateAccessRuleInfo(varUpdateAccessRuleInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "admin_owner_id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "ruleClauses")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

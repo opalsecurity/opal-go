@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -77,8 +76,8 @@ type Group struct {
 	// The risk sensitivity level for the group. When an override is set, this field will match that.
 	RiskSensitivity *RiskSensitivityEnum `json:"risk_sensitivity,omitempty"`
 	RiskSensitivityOverride *RiskSensitivityEnum `json:"risk_sensitivity_override,omitempty"`
-	// Information about the last successful sync of this group.
 	LastSuccessfulSync *SyncTask `json:"last_successful_sync,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Group Group
@@ -1122,6 +1121,11 @@ func (o Group) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LastSuccessfulSync) {
 		toSerialize["last_successful_sync"] = o.LastSuccessfulSync
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1149,15 +1153,48 @@ func (o *Group) UnmarshalJSON(data []byte) (err error) {
 
 	varGroup := _Group{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGroup)
+	err = json.Unmarshal(data, &varGroup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Group(varGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "group_id")
+		delete(additionalProperties, "app_id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "admin_owner_id")
+		delete(additionalProperties, "group_leader_user_ids")
+		delete(additionalProperties, "remote_id")
+		delete(additionalProperties, "remote_name")
+		delete(additionalProperties, "group_type")
+		delete(additionalProperties, "max_duration")
+		delete(additionalProperties, "recommended_duration")
+		delete(additionalProperties, "extensions_duration_in_minutes")
+		delete(additionalProperties, "require_manager_approval")
+		delete(additionalProperties, "require_support_ticket")
+		delete(additionalProperties, "require_mfa_to_approve")
+		delete(additionalProperties, "require_mfa_to_request")
+		delete(additionalProperties, "auto_approval")
+		delete(additionalProperties, "request_template_id")
+		delete(additionalProperties, "configuration_template_id")
+		delete(additionalProperties, "group_binding_id")
+		delete(additionalProperties, "is_requestable")
+		delete(additionalProperties, "request_configurations")
+		delete(additionalProperties, "request_configuration_list")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "remote_info")
+		delete(additionalProperties, "custom_request_notification")
+		delete(additionalProperties, "risk_sensitivity")
+		delete(additionalProperties, "risk_sensitivity_override")
+		delete(additionalProperties, "last_successful_sync")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

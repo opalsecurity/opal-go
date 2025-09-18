@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -82,8 +81,8 @@ type Resource struct {
 	AncestorResourceIds []string `json:"ancestor_resource_ids,omitempty"`
 	// List of resource IDs that are descendants of this resource.
 	DescendantResourceIds []string `json:"descendant_resource_ids,omitempty"`
-	// Information about the last successful sync of this resource.
 	LastSuccessfulSync *SyncTask `json:"last_successful_sync,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Resource Resource
@@ -1232,6 +1231,11 @@ func (o Resource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LastSuccessfulSync) {
 		toSerialize["last_successful_sync"] = o.LastSuccessfulSync
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1259,15 +1263,51 @@ func (o *Resource) UnmarshalJSON(data []byte) (err error) {
 
 	varResource := _Resource{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResource)
+	err = json.Unmarshal(data, &varResource)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Resource(varResource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "resource_id")
+		delete(additionalProperties, "app_id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "admin_owner_id")
+		delete(additionalProperties, "remote_resource_id")
+		delete(additionalProperties, "remote_resource_name")
+		delete(additionalProperties, "resource_type")
+		delete(additionalProperties, "max_duration")
+		delete(additionalProperties, "recommended_duration")
+		delete(additionalProperties, "extensions_duration_in_minutes")
+		delete(additionalProperties, "require_manager_approval")
+		delete(additionalProperties, "require_support_ticket")
+		delete(additionalProperties, "require_mfa_to_approve")
+		delete(additionalProperties, "require_mfa_to_request")
+		delete(additionalProperties, "require_mfa_to_connect")
+		delete(additionalProperties, "auto_approval")
+		delete(additionalProperties, "request_template_id")
+		delete(additionalProperties, "is_requestable")
+		delete(additionalProperties, "parent_resource_id")
+		delete(additionalProperties, "configuration_template_id")
+		delete(additionalProperties, "request_configurations")
+		delete(additionalProperties, "request_configuration_list")
+		delete(additionalProperties, "ticket_propagation")
+		delete(additionalProperties, "custom_request_notification")
+		delete(additionalProperties, "risk_sensitivity")
+		delete(additionalProperties, "risk_sensitivity_override")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "remote_info")
+		delete(additionalProperties, "ancestor_resource_ids")
+		delete(additionalProperties, "descendant_resource_ids")
+		delete(additionalProperties, "last_successful_sync")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

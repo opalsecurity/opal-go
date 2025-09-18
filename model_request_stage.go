@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,10 +23,10 @@ var _ MappedNullable = &RequestStage{}
 type RequestStage struct {
 	// The stage number
 	Stage int32 `json:"stage"`
-	// The operator to apply to reviewers in this stage
 	Operator ReviewStageOperator `json:"operator"`
 	// The reviewers for this stage
 	Reviewers []RequestReviewer `json:"reviewers"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RequestStage RequestStage
@@ -137,6 +136,11 @@ func (o RequestStage) ToMap() (map[string]interface{}, error) {
 	toSerialize["stage"] = o.Stage
 	toSerialize["operator"] = o.Operator
 	toSerialize["reviewers"] = o.Reviewers
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -166,15 +170,22 @@ func (o *RequestStage) UnmarshalJSON(data []byte) (err error) {
 
 	varRequestStage := _RequestStage{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRequestStage)
+	err = json.Unmarshal(data, &varRequestStage)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RequestStage(varRequestStage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "stage")
+		delete(additionalProperties, "operator")
+		delete(additionalProperties, "reviewers")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

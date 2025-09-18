@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type PaginatedRemoteUsersList struct {
 	// The cursor used to obtain the current result page.
 	Previous *string `json:"previous,omitempty"`
 	Results []RemoteUser `json:"results"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PaginatedRemoteUsersList PaginatedRemoteUsersList
@@ -154,6 +154,11 @@ func (o PaginatedRemoteUsersList) ToMap() (map[string]interface{}, error) {
 		toSerialize["previous"] = o.Previous
 	}
 	toSerialize["results"] = o.Results
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *PaginatedRemoteUsersList) UnmarshalJSON(data []byte) (err error) {
 
 	varPaginatedRemoteUsersList := _PaginatedRemoteUsersList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPaginatedRemoteUsersList)
+	err = json.Unmarshal(data, &varPaginatedRemoteUsersList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PaginatedRemoteUsersList(varPaginatedRemoteUsersList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next")
+		delete(additionalProperties, "previous")
+		delete(additionalProperties, "results")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

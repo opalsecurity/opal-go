@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type RequestCustomFieldResponse struct {
 	FieldName string `json:"field_name"`
 	FieldType RequestTemplateCustomFieldTypeEnum `json:"field_type"`
 	FieldValue RequestCustomFieldResponseFieldValue `json:"field_value"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RequestCustomFieldResponse RequestCustomFieldResponse
@@ -134,6 +134,11 @@ func (o RequestCustomFieldResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["field_name"] = o.FieldName
 	toSerialize["field_type"] = o.FieldType
 	toSerialize["field_value"] = o.FieldValue
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -163,15 +168,22 @@ func (o *RequestCustomFieldResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varRequestCustomFieldResponse := _RequestCustomFieldResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRequestCustomFieldResponse)
+	err = json.Unmarshal(data, &varRequestCustomFieldResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RequestCustomFieldResponse(varRequestCustomFieldResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "field_name")
+		delete(additionalProperties, "field_type")
+		delete(additionalProperties, "field_value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

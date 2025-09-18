@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateRequestInfoCustomMetadataInner struct {
 	Name string `json:"name"`
 	Type RequestTemplateCustomFieldTypeEnum `json:"type"`
 	Value string `json:"value"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateRequestInfoCustomMetadataInner CreateRequestInfoCustomMetadataInner
@@ -134,6 +134,11 @@ func (o CreateRequestInfoCustomMetadataInner) ToMap() (map[string]interface{}, e
 	toSerialize["name"] = o.Name
 	toSerialize["type"] = o.Type
 	toSerialize["value"] = o.Value
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -163,15 +168,22 @@ func (o *CreateRequestInfoCustomMetadataInner) UnmarshalJSON(data []byte) (err e
 
 	varCreateRequestInfoCustomMetadataInner := _CreateRequestInfoCustomMetadataInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateRequestInfoCustomMetadataInner)
+	err = json.Unmarshal(data, &varCreateRequestInfoCustomMetadataInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateRequestInfoCustomMetadataInner(varCreateRequestInfoCustomMetadataInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

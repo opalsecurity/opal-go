@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type UpdateGroupBindingInfo struct {
 	SourceGroupId string `json:"source_group_id"`
 	// The list of groups.
 	Groups []CreateGroupBindingInfoGroupsInner `json:"groups"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateGroupBindingInfo UpdateGroupBindingInfo
@@ -137,6 +137,11 @@ func (o UpdateGroupBindingInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize["group_binding_id"] = o.GroupBindingId
 	toSerialize["source_group_id"] = o.SourceGroupId
 	toSerialize["groups"] = o.Groups
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -166,15 +171,22 @@ func (o *UpdateGroupBindingInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdateGroupBindingInfo := _UpdateGroupBindingInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateGroupBindingInfo)
+	err = json.Unmarshal(data, &varUpdateGroupBindingInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateGroupBindingInfo(varUpdateGroupBindingInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "group_binding_id")
+		delete(additionalProperties, "source_group_id")
+		delete(additionalProperties, "groups")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

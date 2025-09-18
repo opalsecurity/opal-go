@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -72,9 +71,8 @@ type UpdateResourceInfo struct {
 	ExtensionsDurationInMinutes *int32 `json:"extensions_duration_in_minutes,omitempty"`
 	// A list of configurations for requests to this resource. If not provided, the default request configuration will be used.
 	RequestConfigurations []RequestConfiguration `json:"request_configurations,omitempty"`
-	// A list of configurations for requests to this resource. If not provided, the default request configuration will be used. Deprecated in favor of `request_configurations`.
-	// Deprecated
 	RequestConfigurationList *CreateRequestConfigurationInfoList `json:"request_configuration_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateResourceInfo UpdateResourceInfo
@@ -792,7 +790,6 @@ func (o *UpdateResourceInfo) SetRequestConfigurations(v []RequestConfiguration) 
 }
 
 // GetRequestConfigurationList returns the RequestConfigurationList field value if set, zero value otherwise.
-// Deprecated
 func (o *UpdateResourceInfo) GetRequestConfigurationList() CreateRequestConfigurationInfoList {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		var ret CreateRequestConfigurationInfoList
@@ -803,7 +800,6 @@ func (o *UpdateResourceInfo) GetRequestConfigurationList() CreateRequestConfigur
 
 // GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *UpdateResourceInfo) GetRequestConfigurationListOk() (*CreateRequestConfigurationInfoList, bool) {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		return nil, false
@@ -821,7 +817,6 @@ func (o *UpdateResourceInfo) HasRequestConfigurationList() bool {
 }
 
 // SetRequestConfigurationList gets a reference to the given CreateRequestConfigurationInfoList and assigns it to the RequestConfigurationList field.
-// Deprecated
 func (o *UpdateResourceInfo) SetRequestConfigurationList(v CreateRequestConfigurationInfoList) {
 	o.RequestConfigurationList = &v
 }
@@ -900,6 +895,11 @@ func (o UpdateResourceInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RequestConfigurationList) {
 		toSerialize["request_configuration_list"] = o.RequestConfigurationList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -927,15 +927,41 @@ func (o *UpdateResourceInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdateResourceInfo := _UpdateResourceInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateResourceInfo)
+	err = json.Unmarshal(data, &varUpdateResourceInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateResourceInfo(varUpdateResourceInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "resource_id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "admin_owner_id")
+		delete(additionalProperties, "max_duration")
+		delete(additionalProperties, "recommended_duration")
+		delete(additionalProperties, "require_manager_approval")
+		delete(additionalProperties, "require_support_ticket")
+		delete(additionalProperties, "folder_id")
+		delete(additionalProperties, "require_mfa_to_approve")
+		delete(additionalProperties, "require_mfa_to_request")
+		delete(additionalProperties, "require_mfa_to_connect")
+		delete(additionalProperties, "auto_approval")
+		delete(additionalProperties, "ticket_propagation")
+		delete(additionalProperties, "custom_request_notification")
+		delete(additionalProperties, "risk_sensitivity_override")
+		delete(additionalProperties, "configuration_template_id")
+		delete(additionalProperties, "request_template_id")
+		delete(additionalProperties, "is_requestable")
+		delete(additionalProperties, "extensions_duration_in_minutes")
+		delete(additionalProperties, "request_configurations")
+		delete(additionalProperties, "request_configuration_list")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
