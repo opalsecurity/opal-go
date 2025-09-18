@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &GroupResourceList{}
 // GroupResourceList struct for GroupResourceList
 type GroupResourceList struct {
 	GroupResources []GroupResource `json:"group_resources"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GroupResourceList GroupResourceList
@@ -80,6 +80,11 @@ func (o GroupResourceList) MarshalJSON() ([]byte, error) {
 func (o GroupResourceList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["group_resources"] = o.GroupResources
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *GroupResourceList) UnmarshalJSON(data []byte) (err error) {
 
 	varGroupResourceList := _GroupResourceList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGroupResourceList)
+	err = json.Unmarshal(data, &varGroupResourceList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GroupResourceList(varGroupResourceList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "group_resources")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

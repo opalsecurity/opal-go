@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type TagSelector struct {
 	Key string `json:"key"`
 	Value string `json:"value"`
 	ConnectionId string `json:"connection_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TagSelector TagSelector
@@ -134,6 +134,11 @@ func (o TagSelector) ToMap() (map[string]interface{}, error) {
 	toSerialize["key"] = o.Key
 	toSerialize["value"] = o.Value
 	toSerialize["connection_id"] = o.ConnectionId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -163,15 +168,22 @@ func (o *TagSelector) UnmarshalJSON(data []byte) (err error) {
 
 	varTagSelector := _TagSelector{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTagSelector)
+	err = json.Unmarshal(data, &varTagSelector)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TagSelector(varTagSelector)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "connection_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -24,7 +24,10 @@ type RequestList struct {
 	Requests []Request `json:"requests,omitempty"`
 	// The cursor to use in the next request to get the next page of results.
 	Cursor *string `json:"cursor,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RequestList RequestList
 
 // NewRequestList instantiates a new RequestList object
 // This constructor will assign default values to properties that have it defined,
@@ -123,7 +126,34 @@ func (o RequestList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Cursor) {
 		toSerialize["cursor"] = o.Cursor
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RequestList) UnmarshalJSON(data []byte) (err error) {
+	varRequestList := _RequestList{}
+
+	err = json.Unmarshal(data, &varRequestList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RequestList(varRequestList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "requests")
+		delete(additionalProperties, "cursor")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRequestList struct {

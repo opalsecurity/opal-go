@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &GroupRemoteInfoAzureAdSecurityGroup{}
 type GroupRemoteInfoAzureAdSecurityGroup struct {
 	// The id of the Microsoft Entra ID Security group.
 	GroupId string `json:"group_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GroupRemoteInfoAzureAdSecurityGroup GroupRemoteInfoAzureAdSecurityGroup
@@ -81,6 +81,11 @@ func (o GroupRemoteInfoAzureAdSecurityGroup) MarshalJSON() ([]byte, error) {
 func (o GroupRemoteInfoAzureAdSecurityGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["group_id"] = o.GroupId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *GroupRemoteInfoAzureAdSecurityGroup) UnmarshalJSON(data []byte) (err er
 
 	varGroupRemoteInfoAzureAdSecurityGroup := _GroupRemoteInfoAzureAdSecurityGroup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGroupRemoteInfoAzureAdSecurityGroup)
+	err = json.Unmarshal(data, &varGroupRemoteInfoAzureAdSecurityGroup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GroupRemoteInfoAzureAdSecurityGroup(varGroupRemoteInfoAzureAdSecurityGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "group_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

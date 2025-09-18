@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &GroupRemoteInfoOktaGroup{}
 type GroupRemoteInfoOktaGroup struct {
 	// The id of the Okta Directory group.
 	GroupId string `json:"group_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GroupRemoteInfoOktaGroup GroupRemoteInfoOktaGroup
@@ -81,6 +81,11 @@ func (o GroupRemoteInfoOktaGroup) MarshalJSON() ([]byte, error) {
 func (o GroupRemoteInfoOktaGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["group_id"] = o.GroupId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *GroupRemoteInfoOktaGroup) UnmarshalJSON(data []byte) (err error) {
 
 	varGroupRemoteInfoOktaGroup := _GroupRemoteInfoOktaGroup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGroupRemoteInfoOktaGroup)
+	err = json.Unmarshal(data, &varGroupRemoteInfoOktaGroup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GroupRemoteInfoOktaGroup(varGroupRemoteInfoOktaGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "group_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

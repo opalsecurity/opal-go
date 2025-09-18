@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateMessageChannelInfo struct {
 	ThirdPartyProvider MessageChannelProviderEnum `json:"third_party_provider"`
 	// The remote ID of the message channel
 	RemoteId string `json:"remote_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateMessageChannelInfo CreateMessageChannelInfo
@@ -108,6 +108,11 @@ func (o CreateMessageChannelInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["third_party_provider"] = o.ThirdPartyProvider
 	toSerialize["remote_id"] = o.RemoteId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *CreateMessageChannelInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateMessageChannelInfo := _CreateMessageChannelInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateMessageChannelInfo)
+	err = json.Unmarshal(data, &varCreateMessageChannelInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateMessageChannelInfo(varCreateMessageChannelInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "third_party_provider")
+		delete(additionalProperties, "remote_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

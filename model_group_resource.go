@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type GroupResource struct {
 	// The ID of the resource.
 	ResourceId string `json:"resource_id"`
 	AccessLevel ResourceAccessLevel `json:"access_level"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GroupResource GroupResource
@@ -136,6 +136,11 @@ func (o GroupResource) ToMap() (map[string]interface{}, error) {
 	toSerialize["group_id"] = o.GroupId
 	toSerialize["resource_id"] = o.ResourceId
 	toSerialize["access_level"] = o.AccessLevel
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +170,22 @@ func (o *GroupResource) UnmarshalJSON(data []byte) (err error) {
 
 	varGroupResource := _GroupResource{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGroupResource)
+	err = json.Unmarshal(data, &varGroupResource)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GroupResource(varGroupResource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "group_id")
+		delete(additionalProperties, "resource_id")
+		delete(additionalProperties, "access_level")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

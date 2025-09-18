@@ -21,7 +21,10 @@ var _ MappedNullable = &PaginatedConfigurationTemplateList{}
 // PaginatedConfigurationTemplateList # PaginatedConfigurationTemplateList Object ### Description The `PaginatedConfigurationTemplateList` object is used to store a list of configuration templates.  ### Usage Example Returned from the `GET Configuration Templates` endpoint.
 type PaginatedConfigurationTemplateList struct {
 	Results []ConfigurationTemplate `json:"results,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PaginatedConfigurationTemplateList PaginatedConfigurationTemplateList
 
 // NewPaginatedConfigurationTemplateList instantiates a new PaginatedConfigurationTemplateList object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o PaginatedConfigurationTemplateList) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Results) {
 		toSerialize["results"] = o.Results
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PaginatedConfigurationTemplateList) UnmarshalJSON(data []byte) (err error) {
+	varPaginatedConfigurationTemplateList := _PaginatedConfigurationTemplateList{}
+
+	err = json.Unmarshal(data, &varPaginatedConfigurationTemplateList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PaginatedConfigurationTemplateList(varPaginatedConfigurationTemplateList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "results")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePaginatedConfigurationTemplateList struct {

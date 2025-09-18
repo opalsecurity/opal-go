@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type PaginatedOwnersList struct {
 	// The cursor used to obtain the current result page.
 	Previous *string `json:"previous,omitempty"`
 	Results []Owner `json:"results"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PaginatedOwnersList PaginatedOwnersList
@@ -154,6 +154,11 @@ func (o PaginatedOwnersList) ToMap() (map[string]interface{}, error) {
 		toSerialize["previous"] = o.Previous
 	}
 	toSerialize["results"] = o.Results
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *PaginatedOwnersList) UnmarshalJSON(data []byte) (err error) {
 
 	varPaginatedOwnersList := _PaginatedOwnersList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPaginatedOwnersList)
+	err = json.Unmarshal(data, &varPaginatedOwnersList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PaginatedOwnersList(varPaginatedOwnersList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next")
+		delete(additionalProperties, "previous")
+		delete(additionalProperties, "results")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &RuleConjunction{}
 // RuleConjunction struct for RuleConjunction
 type RuleConjunction struct {
 	Clauses []RuleDisjunction `json:"clauses"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RuleConjunction RuleConjunction
@@ -80,6 +80,11 @@ func (o RuleConjunction) MarshalJSON() ([]byte, error) {
 func (o RuleConjunction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["clauses"] = o.Clauses
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *RuleConjunction) UnmarshalJSON(data []byte) (err error) {
 
 	varRuleConjunction := _RuleConjunction{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRuleConjunction)
+	err = json.Unmarshal(data, &varRuleConjunction)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RuleConjunction(varRuleConjunction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "clauses")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

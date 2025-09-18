@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type RequestReviewer struct {
 	FullName *string `json:"full_name,omitempty"`
 	// The status of this reviewer's review
 	Status string `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RequestReviewer RequestReviewer
@@ -146,6 +146,11 @@ func (o RequestReviewer) ToMap() (map[string]interface{}, error) {
 		toSerialize["full_name"] = o.FullName
 	}
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -174,15 +179,22 @@ func (o *RequestReviewer) UnmarshalJSON(data []byte) (err error) {
 
 	varRequestReviewer := _RequestReviewer{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRequestReviewer)
+	err = json.Unmarshal(data, &varRequestReviewer)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RequestReviewer(varRequestReviewer)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "full_name")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

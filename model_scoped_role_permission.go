@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type ScopedRolePermission struct {
 	TargetType RolePermissionTargetTypeEnum `json:"target_type"`
 	PermissionName RolePermissionNameEnum `json:"permission_name"`
 	AllowAll bool `json:"allow_all"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ScopedRolePermission ScopedRolePermission
@@ -171,6 +171,11 @@ func (o ScopedRolePermission) ToMap() (map[string]interface{}, error) {
 	toSerialize["target_type"] = o.TargetType
 	toSerialize["permission_name"] = o.PermissionName
 	toSerialize["allow_all"] = o.AllowAll
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -200,15 +205,23 @@ func (o *ScopedRolePermission) UnmarshalJSON(data []byte) (err error) {
 
 	varScopedRolePermission := _ScopedRolePermission{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varScopedRolePermission)
+	err = json.Unmarshal(data, &varScopedRolePermission)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ScopedRolePermission(varScopedRolePermission)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "target_ids")
+		delete(additionalProperties, "target_type")
+		delete(additionalProperties, "permission_name")
+		delete(additionalProperties, "allow_all")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

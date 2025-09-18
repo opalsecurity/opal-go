@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type IdpGroupMapping struct {
 	Alias *string `json:"alias,omitempty"`
 	// A bool representing whether or not the group is hidden from the end user.
 	HiddenFromEndUser bool `json:"hidden_from_end_user"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IdpGroupMapping IdpGroupMapping
@@ -183,6 +183,11 @@ func (o IdpGroupMapping) ToMap() (map[string]interface{}, error) {
 		toSerialize["alias"] = o.Alias
 	}
 	toSerialize["hidden_from_end_user"] = o.HiddenFromEndUser
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -211,15 +216,23 @@ func (o *IdpGroupMapping) UnmarshalJSON(data []byte) (err error) {
 
 	varIdpGroupMapping := _IdpGroupMapping{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varIdpGroupMapping)
+	err = json.Unmarshal(data, &varIdpGroupMapping)
 
 	if err != nil {
 		return err
 	}
 
 	*o = IdpGroupMapping(varIdpGroupMapping)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "app_resource_id")
+		delete(additionalProperties, "group_id")
+		delete(additionalProperties, "alias")
+		delete(additionalProperties, "hidden_from_end_user")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

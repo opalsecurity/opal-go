@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &ResourceRemoteInfoOktaStandardRole{}
 type ResourceRemoteInfoOktaStandardRole struct {
 	// The type of the standard role.
 	RoleType string `json:"role_type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceRemoteInfoOktaStandardRole ResourceRemoteInfoOktaStandardRole
@@ -81,6 +81,11 @@ func (o ResourceRemoteInfoOktaStandardRole) MarshalJSON() ([]byte, error) {
 func (o ResourceRemoteInfoOktaStandardRole) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["role_type"] = o.RoleType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *ResourceRemoteInfoOktaStandardRole) UnmarshalJSON(data []byte) (err err
 
 	varResourceRemoteInfoOktaStandardRole := _ResourceRemoteInfoOktaStandardRole{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceRemoteInfoOktaStandardRole)
+	err = json.Unmarshal(data, &varResourceRemoteInfoOktaStandardRole)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceRemoteInfoOktaStandardRole(varResourceRemoteInfoOktaStandardRole)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "role_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

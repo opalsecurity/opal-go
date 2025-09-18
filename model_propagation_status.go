@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &PropagationStatus{}
 // PropagationStatus The state of whether the push action was propagated to the remote system. If this is null, the access was synced from the remote system.
 type PropagationStatus struct {
 	Status PropagationStatusEnum `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PropagationStatus PropagationStatus
@@ -80,6 +80,11 @@ func (o PropagationStatus) MarshalJSON() ([]byte, error) {
 func (o PropagationStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *PropagationStatus) UnmarshalJSON(data []byte) (err error) {
 
 	varPropagationStatus := _PropagationStatus{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPropagationStatus)
+	err = json.Unmarshal(data, &varPropagationStatus)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PropagationStatus(varPropagationStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

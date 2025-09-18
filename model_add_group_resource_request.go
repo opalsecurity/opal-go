@@ -24,7 +24,10 @@ type AddGroupResourceRequest struct {
 	AccessLevelRemoteId *string `json:"access_level_remote_id,omitempty"`
 	// The duration for which the resource can be accessed (in minutes). Use 0 to set to indefinite.
 	DurationMinutes *int32 `json:"duration_minutes,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AddGroupResourceRequest AddGroupResourceRequest
 
 // NewAddGroupResourceRequest instantiates a new AddGroupResourceRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -123,7 +126,34 @@ func (o AddGroupResourceRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DurationMinutes) {
 		toSerialize["duration_minutes"] = o.DurationMinutes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AddGroupResourceRequest) UnmarshalJSON(data []byte) (err error) {
+	varAddGroupResourceRequest := _AddGroupResourceRequest{}
+
+	err = json.Unmarshal(data, &varAddGroupResourceRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AddGroupResourceRequest(varAddGroupResourceRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "access_level_remote_id")
+		delete(additionalProperties, "duration_minutes")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAddGroupResourceRequest struct {

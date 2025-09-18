@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type ResourceRemoteInfoGcpComputeInstance struct {
 	ProjectId string `json:"project_id"`
 	// The zone the instance is in.
 	Zone string `json:"zone"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceRemoteInfoGcpComputeInstance ResourceRemoteInfoGcpComputeInstance
@@ -137,6 +137,11 @@ func (o ResourceRemoteInfoGcpComputeInstance) ToMap() (map[string]interface{}, e
 	toSerialize["instance_id"] = o.InstanceId
 	toSerialize["project_id"] = o.ProjectId
 	toSerialize["zone"] = o.Zone
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -166,15 +171,22 @@ func (o *ResourceRemoteInfoGcpComputeInstance) UnmarshalJSON(data []byte) (err e
 
 	varResourceRemoteInfoGcpComputeInstance := _ResourceRemoteInfoGcpComputeInstance{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceRemoteInfoGcpComputeInstance)
+	err = json.Unmarshal(data, &varResourceRemoteInfoGcpComputeInstance)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceRemoteInfoGcpComputeInstance(varResourceRemoteInfoGcpComputeInstance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "instance_id")
+		delete(additionalProperties, "project_id")
+		delete(additionalProperties, "zone")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

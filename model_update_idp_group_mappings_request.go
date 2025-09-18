@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &UpdateIdpGroupMappingsRequest{}
 // UpdateIdpGroupMappingsRequest struct for UpdateIdpGroupMappingsRequest
 type UpdateIdpGroupMappingsRequest struct {
 	Mappings []UpdateIdpGroupMappingsRequestMappingsInner `json:"mappings"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateIdpGroupMappingsRequest UpdateIdpGroupMappingsRequest
@@ -80,6 +80,11 @@ func (o UpdateIdpGroupMappingsRequest) MarshalJSON() ([]byte, error) {
 func (o UpdateIdpGroupMappingsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["mappings"] = o.Mappings
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *UpdateIdpGroupMappingsRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdateIdpGroupMappingsRequest := _UpdateIdpGroupMappingsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateIdpGroupMappingsRequest)
+	err = json.Unmarshal(data, &varUpdateIdpGroupMappingsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateIdpGroupMappingsRequest(varUpdateIdpGroupMappingsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "mappings")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

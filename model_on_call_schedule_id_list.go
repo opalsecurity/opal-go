@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &OnCallScheduleIDList{}
 // OnCallScheduleIDList A list of on call schedule Opal UUIDs. To get the matching remote IDs, use the /on-call-schedules endpoints.
 type OnCallScheduleIDList struct {
 	OnCallScheduleIds []string `json:"on_call_schedule_ids"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OnCallScheduleIDList OnCallScheduleIDList
@@ -80,6 +80,11 @@ func (o OnCallScheduleIDList) MarshalJSON() ([]byte, error) {
 func (o OnCallScheduleIDList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["on_call_schedule_ids"] = o.OnCallScheduleIds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *OnCallScheduleIDList) UnmarshalJSON(data []byte) (err error) {
 
 	varOnCallScheduleIDList := _OnCallScheduleIDList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOnCallScheduleIDList)
+	err = json.Unmarshal(data, &varOnCallScheduleIDList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OnCallScheduleIDList(varOnCallScheduleIDList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "on_call_schedule_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

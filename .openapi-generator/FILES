@@ -1,6 +1,4 @@
-.gitignore
 README.md
-api/openapi.yaml
 api_access_rules.go
 api_apps.go
 api_bundles.go
@@ -255,7 +253,6 @@ docs/UserList.md
 docs/UsersAPI.md
 docs/VisibilityInfo.md
 docs/VisibilityTypeEnum.md
-go.mod
 go.sum
 model_access.go
 model_access_list.go

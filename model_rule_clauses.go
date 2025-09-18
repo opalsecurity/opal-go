@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &RuleClauses{}
 type RuleClauses struct {
 	When RuleConjunction `json:"when"`
 	Unless *RuleConjunction `json:"unless,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RuleClauses RuleClauses
@@ -116,6 +116,11 @@ func (o RuleClauses) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Unless) {
 		toSerialize["unless"] = o.Unless
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -143,15 +148,21 @@ func (o *RuleClauses) UnmarshalJSON(data []byte) (err error) {
 
 	varRuleClauses := _RuleClauses{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRuleClauses)
+	err = json.Unmarshal(data, &varRuleClauses)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RuleClauses(varRuleClauses)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "when")
+		delete(additionalProperties, "unless")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

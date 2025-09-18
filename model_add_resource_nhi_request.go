@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type AddResourceNhiRequest struct {
 	DurationMinutes int32 `json:"duration_minutes"`
 	// The remote ID of the access level to grant. If omitted, the default access level remote ID value (empty string) is used.
 	AccessLevelRemoteId *string `json:"access_level_remote_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AddResourceNhiRequest AddResourceNhiRequest
@@ -118,6 +118,11 @@ func (o AddResourceNhiRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AccessLevelRemoteId) {
 		toSerialize["access_level_remote_id"] = o.AccessLevelRemoteId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -145,15 +150,21 @@ func (o *AddResourceNhiRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varAddResourceNhiRequest := _AddResourceNhiRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAddResourceNhiRequest)
+	err = json.Unmarshal(data, &varAddResourceNhiRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AddResourceNhiRequest(varAddResourceNhiRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "duration_minutes")
+		delete(additionalProperties, "access_level_remote_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

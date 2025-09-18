@@ -14,7 +14,6 @@ package opal
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type ResourceNHI struct {
 	AccessLevel *ResourceAccessLevel `json:"access_level,omitempty"`
 	// The day and time the non-human identity's access will expire.
 	ExpirationDate *time.Time `json:"expiration_date,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceNHI ResourceNHI
@@ -183,6 +183,11 @@ func (o ResourceNHI) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExpirationDate) {
 		toSerialize["expiration_date"] = o.ExpirationDate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -211,15 +216,23 @@ func (o *ResourceNHI) UnmarshalJSON(data []byte) (err error) {
 
 	varResourceNHI := _ResourceNHI{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceNHI)
+	err = json.Unmarshal(data, &varResourceNHI)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceNHI(varResourceNHI)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "resource_id")
+		delete(additionalProperties, "non_human_identity_id")
+		delete(additionalProperties, "access_level")
+		delete(additionalProperties, "expiration_date")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

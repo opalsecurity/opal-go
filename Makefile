@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
-OPENAPI_GEN=openapi-generator generate -i api/openapi.yaml -g go -o . -c config.json
-OPENAPI_GEN_CI=openapi-generator-cli generate --enable-post-process-file -i api/openapi.yaml -g go -o . -c config.json
+OPENAPI_GEN=openapi-generator generate --additional-properties=disallowAdditionalPropertiesIfNotPresent=false -i api/openapi.yaml -g go -o . -c config.json
+OPENAPI_GEN_CI=openapi-generator-cli generate --additional-properties=disallowAdditionalPropertiesIfNotPresent=false --enable-post-process-file -i api/openapi.yaml -g go -o . -c config.json
 PULL_REMOTE_OPENAPI=curl https://app.opal.dev/openapi.yaml > api/openapi.yaml
 CLEAN=bash clean.sh
 CLEAN_CI=CI=true bash clean.sh

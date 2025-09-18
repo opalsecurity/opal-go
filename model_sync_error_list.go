@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &SyncErrorList{}
 // SyncErrorList struct for SyncErrorList
 type SyncErrorList struct {
 	SyncErrors []SyncError `json:"sync_errors"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SyncErrorList SyncErrorList
@@ -80,6 +80,11 @@ func (o SyncErrorList) MarshalJSON() ([]byte, error) {
 func (o SyncErrorList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["sync_errors"] = o.SyncErrors
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *SyncErrorList) UnmarshalJSON(data []byte) (err error) {
 
 	varSyncErrorList := _SyncErrorList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSyncErrorList)
+	err = json.Unmarshal(data, &varSyncErrorList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SyncErrorList(varSyncErrorList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sync_errors")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

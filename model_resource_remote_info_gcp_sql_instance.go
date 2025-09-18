@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type ResourceRemoteInfoGcpSqlInstance struct {
 	InstanceId string `json:"instance_id"`
 	// The id of the project the instance is in.
 	ProjectId string `json:"project_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceRemoteInfoGcpSqlInstance ResourceRemoteInfoGcpSqlInstance
@@ -109,6 +109,11 @@ func (o ResourceRemoteInfoGcpSqlInstance) ToMap() (map[string]interface{}, error
 	toSerialize := map[string]interface{}{}
 	toSerialize["instance_id"] = o.InstanceId
 	toSerialize["project_id"] = o.ProjectId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -137,15 +142,21 @@ func (o *ResourceRemoteInfoGcpSqlInstance) UnmarshalJSON(data []byte) (err error
 
 	varResourceRemoteInfoGcpSqlInstance := _ResourceRemoteInfoGcpSqlInstance{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceRemoteInfoGcpSqlInstance)
+	err = json.Unmarshal(data, &varResourceRemoteInfoGcpSqlInstance)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceRemoteInfoGcpSqlInstance(varResourceRemoteInfoGcpSqlInstance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "instance_id")
+		delete(additionalProperties, "project_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

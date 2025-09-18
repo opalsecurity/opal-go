@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type ResourceRemoteInfoGcpServiceAccount struct {
 	ServiceAccountId string `json:"service_account_id"`
 	// The id of the project the service account is in.
 	ProjectId string `json:"project_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceRemoteInfoGcpServiceAccount ResourceRemoteInfoGcpServiceAccount
@@ -137,6 +137,11 @@ func (o ResourceRemoteInfoGcpServiceAccount) ToMap() (map[string]interface{}, er
 	toSerialize["email"] = o.Email
 	toSerialize["service_account_id"] = o.ServiceAccountId
 	toSerialize["project_id"] = o.ProjectId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -166,15 +171,22 @@ func (o *ResourceRemoteInfoGcpServiceAccount) UnmarshalJSON(data []byte) (err er
 
 	varResourceRemoteInfoGcpServiceAccount := _ResourceRemoteInfoGcpServiceAccount{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceRemoteInfoGcpServiceAccount)
+	err = json.Unmarshal(data, &varResourceRemoteInfoGcpServiceAccount)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceRemoteInfoGcpServiceAccount(varResourceRemoteInfoGcpServiceAccount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "service_account_id")
+		delete(additionalProperties, "project_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

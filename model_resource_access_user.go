@@ -14,7 +14,6 @@ package opal
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -39,6 +38,7 @@ type ResourceAccessUser struct {
 	// The number of ways in which the user has access through this resource (directly and indirectly).
 	NumAccessPaths int32 `json:"num_access_paths"`
 	PropagationStatus *PropagationStatus `json:"propagation_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceAccessUser ResourceAccessUser
@@ -322,6 +322,11 @@ func (o ResourceAccessUser) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PropagationStatus) {
 		toSerialize["propagation_status"] = o.PropagationStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -355,15 +360,28 @@ func (o *ResourceAccessUser) UnmarshalJSON(data []byte) (err error) {
 
 	varResourceAccessUser := _ResourceAccessUser{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceAccessUser)
+	err = json.Unmarshal(data, &varResourceAccessUser)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceAccessUser(varResourceAccessUser)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "resource_id")
+		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "access_level")
+		delete(additionalProperties, "full_name")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "expiration_date")
+		delete(additionalProperties, "has_direct_access")
+		delete(additionalProperties, "num_access_paths")
+		delete(additionalProperties, "propagation_status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

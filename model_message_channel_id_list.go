@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &MessageChannelIDList{}
 // MessageChannelIDList A list of message channel IDs.
 type MessageChannelIDList struct {
 	MessageChannelIds []string `json:"message_channel_ids"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MessageChannelIDList MessageChannelIDList
@@ -80,6 +80,11 @@ func (o MessageChannelIDList) MarshalJSON() ([]byte, error) {
 func (o MessageChannelIDList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["message_channel_ids"] = o.MessageChannelIds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *MessageChannelIDList) UnmarshalJSON(data []byte) (err error) {
 
 	varMessageChannelIDList := _MessageChannelIDList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMessageChannelIDList)
+	err = json.Unmarshal(data, &varMessageChannelIDList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MessageChannelIDList(varMessageChannelIDList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "message_channel_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

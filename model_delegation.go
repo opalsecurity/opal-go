@@ -14,7 +14,6 @@ package opal
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -39,6 +38,7 @@ type Delegation struct {
 	CreatedAt time.Time `json:"created_at"`
 	// The last updated time of the delegation.
 	UpdatedAt time.Time `json:"updated_at"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Delegation Delegation
@@ -278,6 +278,11 @@ func (o Delegation) ToMap() (map[string]interface{}, error) {
 	toSerialize["reason"] = o.Reason
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["updated_at"] = o.UpdatedAt
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -312,15 +317,27 @@ func (o *Delegation) UnmarshalJSON(data []byte) (err error) {
 
 	varDelegation := _Delegation{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDelegation)
+	err = json.Unmarshal(data, &varDelegation)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Delegation(varDelegation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "delegator_user_id")
+		delete(additionalProperties, "delegate_user_id")
+		delete(additionalProperties, "start_time")
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "reason")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

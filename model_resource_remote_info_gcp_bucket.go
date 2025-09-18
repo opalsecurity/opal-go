@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &ResourceRemoteInfoGcpBucket{}
 type ResourceRemoteInfoGcpBucket struct {
 	// The id of the bucket.
 	BucketId string `json:"bucket_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceRemoteInfoGcpBucket ResourceRemoteInfoGcpBucket
@@ -81,6 +81,11 @@ func (o ResourceRemoteInfoGcpBucket) MarshalJSON() ([]byte, error) {
 func (o ResourceRemoteInfoGcpBucket) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["bucket_id"] = o.BucketId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *ResourceRemoteInfoGcpBucket) UnmarshalJSON(data []byte) (err error) {
 
 	varResourceRemoteInfoGcpBucket := _ResourceRemoteInfoGcpBucket{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceRemoteInfoGcpBucket)
+	err = json.Unmarshal(data, &varResourceRemoteInfoGcpBucket)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceRemoteInfoGcpBucket(varResourceRemoteInfoGcpBucket)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "bucket_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

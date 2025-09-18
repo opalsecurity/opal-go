@@ -25,7 +25,10 @@ type ResourceAccessUserList struct {
 	// The cursor used to obtain the current result page.
 	Previous *string `json:"previous,omitempty"`
 	Results []ResourceAccessUser `json:"results,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ResourceAccessUserList ResourceAccessUserList
 
 // NewResourceAccessUserList instantiates a new ResourceAccessUserList object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o ResourceAccessUserList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Results) {
 		toSerialize["results"] = o.Results
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ResourceAccessUserList) UnmarshalJSON(data []byte) (err error) {
+	varResourceAccessUserList := _ResourceAccessUserList{}
+
+	err = json.Unmarshal(data, &varResourceAccessUserList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ResourceAccessUserList(varResourceAccessUserList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next")
+		delete(additionalProperties, "previous")
+		delete(additionalProperties, "results")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableResourceAccessUserList struct {

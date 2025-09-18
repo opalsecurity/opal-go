@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -34,6 +33,7 @@ type CreateOwnerInfo struct {
 	ReviewerMessageChannelId *string `json:"reviewer_message_channel_id,omitempty"`
 	// Sync this owner's user list with a source group.
 	SourceGroupId *string `json:"source_group_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateOwnerInfo CreateOwnerInfo
@@ -257,6 +257,11 @@ func (o CreateOwnerInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SourceGroupId) {
 		toSerialize["source_group_id"] = o.SourceGroupId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -285,15 +290,25 @@ func (o *CreateOwnerInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateOwnerInfo := _CreateOwnerInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateOwnerInfo)
+	err = json.Unmarshal(data, &varCreateOwnerInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateOwnerInfo(varCreateOwnerInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "access_request_escalation_period")
+		delete(additionalProperties, "user_ids")
+		delete(additionalProperties, "reviewer_message_channel_id")
+		delete(additionalProperties, "source_group_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

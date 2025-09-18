@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type RequestItemStages struct {
 	RequestedItemName string `json:"requestedItemName"`
 	// The stages of review for this request
 	Stages []RequestStage `json:"stages"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RequestItemStages RequestItemStages
@@ -146,6 +146,11 @@ func (o RequestItemStages) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["requestedItemName"] = o.RequestedItemName
 	toSerialize["stages"] = o.Stages
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -174,15 +179,22 @@ func (o *RequestItemStages) UnmarshalJSON(data []byte) (err error) {
 
 	varRequestItemStages := _RequestItemStages{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRequestItemStages)
+	err = json.Unmarshal(data, &varRequestItemStages)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RequestItemStages(varRequestItemStages)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "requestedRoleName")
+		delete(additionalProperties, "requestedItemName")
+		delete(additionalProperties, "stages")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
