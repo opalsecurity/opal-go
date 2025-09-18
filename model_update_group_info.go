@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -68,12 +67,11 @@ type UpdateGroupInfo struct {
 	ExtensionsDurationInMinutes *int32 `json:"extensions_duration_in_minutes,omitempty"`
 	// The request configuration list of the configuration template. If not provided, the default request configuration will be used.
 	RequestConfigurations []RequestConfiguration `json:"request_configurations,omitempty"`
-	// The request configuration list of the configuration template. If not provided, the default request configuration will be used. Deprecated in favor of `request_configurations`.
-	// Deprecated
 	RequestConfigurationList *CreateRequestConfigurationInfoList `json:"request_configuration_list,omitempty"`
 	// Custom request notification sent to the requester when the request is approved.
 	CustomRequestNotification *string `json:"custom_request_notification,omitempty"`
 	RiskSensitivityOverride *RiskSensitivityEnum `json:"risk_sensitivity_override,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateGroupInfo UpdateGroupInfo
@@ -695,7 +693,6 @@ func (o *UpdateGroupInfo) SetRequestConfigurations(v []RequestConfiguration) {
 }
 
 // GetRequestConfigurationList returns the RequestConfigurationList field value if set, zero value otherwise.
-// Deprecated
 func (o *UpdateGroupInfo) GetRequestConfigurationList() CreateRequestConfigurationInfoList {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		var ret CreateRequestConfigurationInfoList
@@ -706,7 +703,6 @@ func (o *UpdateGroupInfo) GetRequestConfigurationList() CreateRequestConfigurati
 
 // GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *UpdateGroupInfo) GetRequestConfigurationListOk() (*CreateRequestConfigurationInfoList, bool) {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		return nil, false
@@ -724,7 +720,6 @@ func (o *UpdateGroupInfo) HasRequestConfigurationList() bool {
 }
 
 // SetRequestConfigurationList gets a reference to the given CreateRequestConfigurationInfoList and assigns it to the RequestConfigurationList field.
-// Deprecated
 func (o *UpdateGroupInfo) SetRequestConfigurationList(v CreateRequestConfigurationInfoList) {
 	o.RequestConfigurationList = &v
 }
@@ -864,6 +859,11 @@ func (o UpdateGroupInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RiskSensitivityOverride) {
 		toSerialize["risk_sensitivity_override"] = o.RiskSensitivityOverride
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -891,15 +891,40 @@ func (o *UpdateGroupInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdateGroupInfo := _UpdateGroupInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateGroupInfo)
+	err = json.Unmarshal(data, &varUpdateGroupInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateGroupInfo(varUpdateGroupInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "group_id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "admin_owner_id")
+		delete(additionalProperties, "max_duration")
+		delete(additionalProperties, "recommended_duration")
+		delete(additionalProperties, "require_manager_approval")
+		delete(additionalProperties, "require_support_ticket")
+		delete(additionalProperties, "folder_id")
+		delete(additionalProperties, "require_mfa_to_approve")
+		delete(additionalProperties, "require_mfa_to_request")
+		delete(additionalProperties, "auto_approval")
+		delete(additionalProperties, "configuration_template_id")
+		delete(additionalProperties, "request_template_id")
+		delete(additionalProperties, "is_requestable")
+		delete(additionalProperties, "group_leader_user_ids")
+		delete(additionalProperties, "extensions_duration_in_minutes")
+		delete(additionalProperties, "request_configurations")
+		delete(additionalProperties, "request_configuration_list")
+		delete(additionalProperties, "custom_request_notification")
+		delete(additionalProperties, "risk_sensitivity_override")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

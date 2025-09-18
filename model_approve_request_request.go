@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ApproveRequestRequest struct {
 	Level RequestApprovalEnum `json:"level"`
 	// Optional comment for the approval
 	Comment *string `json:"comment,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ApproveRequestRequest ApproveRequestRequest
@@ -117,6 +117,11 @@ func (o ApproveRequestRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Comment) {
 		toSerialize["comment"] = o.Comment
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *ApproveRequestRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varApproveRequestRequest := _ApproveRequestRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varApproveRequestRequest)
+	err = json.Unmarshal(data, &varApproveRequestRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ApproveRequestRequest(varApproveRequestRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "level")
+		delete(additionalProperties, "comment")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

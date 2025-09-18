@@ -14,7 +14,6 @@ package opal
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -35,7 +34,6 @@ type Request struct {
 	TargetUserId *string `json:"target_user_id,omitempty"`
 	// The unique identifier of the group who is the target of the request.
 	TargetGroupId *string `json:"target_group_id,omitempty"`
-	// The status of the request.
 	Status RequestStatusEnum `json:"status"`
 	// The reason for the request.
 	Reason string `json:"reason"`
@@ -45,11 +43,11 @@ type Request struct {
 	RequestedItemsList []RequestedItem `json:"requested_items_list,omitempty"`
 	// The responses given to the custom fields associated to the request
 	CustomFieldsResponses []RequestCustomFieldResponse `json:"custom_fields_responses,omitempty"`
-	// The stages configuration for this request
 	// Deprecated
 	Stages *RequestItemStages `json:"stages,omitempty"`
 	// The configured reviewer stages for every item in this request
 	ReviewerStages []RequestReviewerStages `json:"reviewer_stages,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Request Request
@@ -485,6 +483,11 @@ func (o Request) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReviewerStages) {
 		toSerialize["reviewer_stages"] = o.ReviewerStages
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -517,15 +520,32 @@ func (o *Request) UnmarshalJSON(data []byte) (err error) {
 
 	varRequest := _Request{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRequest)
+	err = json.Unmarshal(data, &varRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Request(varRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "requester_id")
+		delete(additionalProperties, "target_user_id")
+		delete(additionalProperties, "target_group_id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "reason")
+		delete(additionalProperties, "duration_minutes")
+		delete(additionalProperties, "requested_items_list")
+		delete(additionalProperties, "custom_fields_responses")
+		delete(additionalProperties, "stages")
+		delete(additionalProperties, "reviewer_stages")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

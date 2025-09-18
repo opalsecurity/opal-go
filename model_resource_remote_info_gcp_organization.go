@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &ResourceRemoteInfoGcpOrganization{}
 type ResourceRemoteInfoGcpOrganization struct {
 	// The id of the organization.
 	OrganizationId string `json:"organization_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceRemoteInfoGcpOrganization ResourceRemoteInfoGcpOrganization
@@ -81,6 +81,11 @@ func (o ResourceRemoteInfoGcpOrganization) MarshalJSON() ([]byte, error) {
 func (o ResourceRemoteInfoGcpOrganization) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["organization_id"] = o.OrganizationId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *ResourceRemoteInfoGcpOrganization) UnmarshalJSON(data []byte) (err erro
 
 	varResourceRemoteInfoGcpOrganization := _ResourceRemoteInfoGcpOrganization{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceRemoteInfoGcpOrganization)
+	err = json.Unmarshal(data, &varResourceRemoteInfoGcpOrganization)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceRemoteInfoGcpOrganization(varResourceRemoteInfoGcpOrganization)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "organization_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

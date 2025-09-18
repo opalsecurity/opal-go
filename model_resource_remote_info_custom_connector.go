@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type ResourceRemoteInfoCustomConnector struct {
 	RemoteResourceId string `json:"remote_resource_id"`
 	// A bool representing whether or not the resource can have usage data.
 	CanHaveUsageEvents bool `json:"can_have_usage_events"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceRemoteInfoCustomConnector ResourceRemoteInfoCustomConnector
@@ -109,6 +109,11 @@ func (o ResourceRemoteInfoCustomConnector) ToMap() (map[string]interface{}, erro
 	toSerialize := map[string]interface{}{}
 	toSerialize["remote_resource_id"] = o.RemoteResourceId
 	toSerialize["can_have_usage_events"] = o.CanHaveUsageEvents
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -137,15 +142,21 @@ func (o *ResourceRemoteInfoCustomConnector) UnmarshalJSON(data []byte) (err erro
 
 	varResourceRemoteInfoCustomConnector := _ResourceRemoteInfoCustomConnector{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceRemoteInfoCustomConnector)
+	err = json.Unmarshal(data, &varResourceRemoteInfoCustomConnector)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceRemoteInfoCustomConnector(varResourceRemoteInfoCustomConnector)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "remote_resource_id")
+		delete(additionalProperties, "can_have_usage_events")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

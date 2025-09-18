@@ -14,7 +14,6 @@ package opal
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -35,6 +34,7 @@ type Tag struct {
 	Key *string `json:"key,omitempty"`
 	// The value of the tag.
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Tag Tag
@@ -267,6 +267,11 @@ func (o Tag) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -294,15 +299,25 @@ func (o *Tag) UnmarshalJSON(data []byte) (err error) {
 
 	varTag := _Tag{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTag)
+	err = json.Unmarshal(data, &varTag)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Tag(varTag)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tag_id")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "user_creator_id")
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

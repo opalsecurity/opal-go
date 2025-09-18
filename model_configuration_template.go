@@ -26,7 +26,6 @@ type ConfigurationTemplate struct {
 	Name *string `json:"name,omitempty"`
 	// The ID of the owner of the configuration template.
 	AdminOwnerId *string `json:"admin_owner_id,omitempty"`
-	// The visibility info of the configuration template.
 	Visibility *VisibilityInfo `json:"visibility,omitempty"`
 	// The IDs of the audit message channels linked to the configuration template.
 	LinkedAuditMessageChannelIds []string `json:"linked_audit_message_channel_ids,omitempty"`
@@ -43,7 +42,10 @@ type ConfigurationTemplate struct {
 	TicketPropagation *TicketPropagationConfiguration `json:"ticket_propagation,omitempty"`
 	// Custom request notification sent upon request approval for this configuration template.
 	CustomRequestNotification *string `json:"custom_request_notification,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConfigurationTemplate ConfigurationTemplate
 
 // NewConfigurationTemplate instantiates a new ConfigurationTemplate object
 // This constructor will assign default values to properties that have it defined,
@@ -492,7 +494,44 @@ func (o ConfigurationTemplate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomRequestNotification) {
 		toSerialize["custom_request_notification"] = o.CustomRequestNotification
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConfigurationTemplate) UnmarshalJSON(data []byte) (err error) {
+	varConfigurationTemplate := _ConfigurationTemplate{}
+
+	err = json.Unmarshal(data, &varConfigurationTemplate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfigurationTemplate(varConfigurationTemplate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "configuration_template_id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "admin_owner_id")
+		delete(additionalProperties, "visibility")
+		delete(additionalProperties, "linked_audit_message_channel_ids")
+		delete(additionalProperties, "request_configuration_id")
+		delete(additionalProperties, "member_oncall_schedule_ids")
+		delete(additionalProperties, "break_glass_user_ids")
+		delete(additionalProperties, "require_mfa_to_approve")
+		delete(additionalProperties, "require_mfa_to_connect")
+		delete(additionalProperties, "ticket_propagation")
+		delete(additionalProperties, "custom_request_notification")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConfigurationTemplate struct {

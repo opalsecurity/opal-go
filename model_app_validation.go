@@ -14,7 +14,6 @@ package opal
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -34,6 +33,7 @@ type AppValidation struct {
 	Status AppValidationStatusEnum `json:"status"`
 	// The date and time the app validation was last run.
 	UpdatedAt time.Time `json:"updated_at"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AppValidation AppValidation
@@ -269,6 +269,11 @@ func (o AppValidation) ToMap() (map[string]interface{}, error) {
 	toSerialize["severity"] = o.Severity
 	toSerialize["status"] = o.Status
 	toSerialize["updated_at"] = o.UpdatedAt
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -300,15 +305,26 @@ func (o *AppValidation) UnmarshalJSON(data []byte) (err error) {
 
 	varAppValidation := _AppValidation{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAppValidation)
+	err = json.Unmarshal(data, &varAppValidation)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AppValidation(varAppValidation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "usage_reason")
+		delete(additionalProperties, "details")
+		delete(additionalProperties, "severity")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "updated_at")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

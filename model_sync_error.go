@@ -14,7 +14,6 @@ package opal
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type SyncError struct {
 	ErrorMessage string `json:"error_message"`
 	// The ID of the app that the error occured for.
 	AppId *string `json:"app_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SyncError SyncError
@@ -175,6 +175,11 @@ func (o SyncError) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AppId) {
 		toSerialize["app_id"] = o.AppId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -204,15 +209,23 @@ func (o *SyncError) UnmarshalJSON(data []byte) (err error) {
 
 	varSyncError := _SyncError{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSyncError)
+	err = json.Unmarshal(data, &varSyncError)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SyncError(varSyncError)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "first_seen")
+		delete(additionalProperties, "last_seen")
+		delete(additionalProperties, "error_message")
+		delete(additionalProperties, "app_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

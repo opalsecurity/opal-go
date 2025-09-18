@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type TagFilter struct {
 	Key string `json:"key"`
 	// The value of the tag.
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TagFilter TagFilter
@@ -118,6 +118,11 @@ func (o TagFilter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -145,15 +150,21 @@ func (o *TagFilter) UnmarshalJSON(data []byte) (err error) {
 
 	varTagFilter := _TagFilter{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTagFilter)
+	err = json.Unmarshal(data, &varTagFilter)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TagFilter(varTagFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

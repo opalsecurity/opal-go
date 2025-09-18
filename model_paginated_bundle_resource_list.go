@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type PaginatedBundleResourceList struct {
 	// The total number of items in the result set.
 	TotalCount *int32 `json:"total_count,omitempty"`
 	BundleResources []BundleResource `json:"bundle_resources"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PaginatedBundleResourceList PaginatedBundleResourceList
@@ -191,6 +191,11 @@ func (o PaginatedBundleResourceList) ToMap() (map[string]interface{}, error) {
 		toSerialize["total_count"] = o.TotalCount
 	}
 	toSerialize["bundle_resources"] = o.BundleResources
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -218,15 +223,23 @@ func (o *PaginatedBundleResourceList) UnmarshalJSON(data []byte) (err error) {
 
 	varPaginatedBundleResourceList := _PaginatedBundleResourceList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPaginatedBundleResourceList)
+	err = json.Unmarshal(data, &varPaginatedBundleResourceList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PaginatedBundleResourceList(varPaginatedBundleResourceList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "previous")
+		delete(additionalProperties, "next")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "bundle_resources")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

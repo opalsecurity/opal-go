@@ -14,7 +14,6 @@ package opal
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -35,6 +34,7 @@ type GroupUser struct {
 	// The day and time the user's access will expire.
 	ExpirationDate *time.Time `json:"expiration_date,omitempty"`
 	PropagationStatus *PropagationStatus `json:"propagation_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GroupUser GroupUser
@@ -275,6 +275,11 @@ func (o GroupUser) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PropagationStatus) {
 		toSerialize["propagation_status"] = o.PropagationStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -305,15 +310,26 @@ func (o *GroupUser) UnmarshalJSON(data []byte) (err error) {
 
 	varGroupUser := _GroupUser{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGroupUser)
+	err = json.Unmarshal(data, &varGroupUser)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GroupUser(varGroupUser)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "group_id")
+		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "access_level")
+		delete(additionalProperties, "full_name")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "expiration_date")
+		delete(additionalProperties, "propagation_status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &OnCallScheduleList{}
 // OnCallScheduleList struct for OnCallScheduleList
 type OnCallScheduleList struct {
 	OnCallSchedules []OnCallSchedule `json:"on_call_schedules"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OnCallScheduleList OnCallScheduleList
@@ -80,6 +80,11 @@ func (o OnCallScheduleList) MarshalJSON() ([]byte, error) {
 func (o OnCallScheduleList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["on_call_schedules"] = o.OnCallSchedules
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *OnCallScheduleList) UnmarshalJSON(data []byte) (err error) {
 
 	varOnCallScheduleList := _OnCallScheduleList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOnCallScheduleList)
+	err = json.Unmarshal(data, &varOnCallScheduleList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OnCallScheduleList(varOnCallScheduleList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "on_call_schedules")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

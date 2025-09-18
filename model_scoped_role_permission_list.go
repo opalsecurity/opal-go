@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &ScopedRolePermissionList{}
 // ScopedRolePermissionList struct for ScopedRolePermissionList
 type ScopedRolePermissionList struct {
 	Permissions []ScopedRolePermission `json:"permissions"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ScopedRolePermissionList ScopedRolePermissionList
@@ -80,6 +80,11 @@ func (o ScopedRolePermissionList) MarshalJSON() ([]byte, error) {
 func (o ScopedRolePermissionList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["permissions"] = o.Permissions
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *ScopedRolePermissionList) UnmarshalJSON(data []byte) (err error) {
 
 	varScopedRolePermissionList := _ScopedRolePermissionList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varScopedRolePermissionList)
+	err = json.Unmarshal(data, &varScopedRolePermissionList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ScopedRolePermissionList(varScopedRolePermissionList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "permissions")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -14,7 +14,6 @@ package opal
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -37,6 +36,7 @@ type UAR struct {
 	// A bool representing whether to present a warning when a user is the only reviewer for themself. Default is False.
 	SelfReviewAllowed bool `json:"self_review_allowed"`
 	UarScope *UARScope `json:"uar_scope,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UAR UAR
@@ -285,6 +285,11 @@ func (o UAR) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UarScope) {
 		toSerialize["uar_scope"] = o.UarScope
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -318,15 +323,27 @@ func (o *UAR) UnmarshalJSON(data []byte) (err error) {
 
 	varUAR := _UAR{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUAR)
+	err = json.Unmarshal(data, &varUAR)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UAR(varUAR)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "uar_id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "reviewer_assignment_policy")
+		delete(additionalProperties, "send_reviewer_assignment_notification")
+		delete(additionalProperties, "deadline")
+		delete(additionalProperties, "time_zone")
+		delete(additionalProperties, "self_review_allowed")
+		delete(additionalProperties, "uar_scope")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

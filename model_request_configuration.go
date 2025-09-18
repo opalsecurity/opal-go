@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,7 +21,6 @@ var _ MappedNullable = &RequestConfiguration{}
 
 // RequestConfiguration # Request Configuration Object ### Description The `RequestConfiguration` object is used to represent a request configuration.  ### Usage Example Returned from the `GET Request Configurations` endpoint.
 type RequestConfiguration struct {
-	// The condition for the request configuration.
 	Condition *Condition `json:"condition,omitempty"`
 	// A bool representing whether or not to allow requests for this resource.
 	AllowRequests bool `json:"allow_requests"`
@@ -44,6 +42,7 @@ type RequestConfiguration struct {
 	ReviewerStages []ReviewerStage `json:"reviewer_stages,omitempty"`
 	// The priority of the request configuration.
 	Priority int32 `json:"priority"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RequestConfiguration RequestConfiguration
@@ -415,6 +414,11 @@ func (o RequestConfiguration) ToMap() (map[string]interface{}, error) {
 		toSerialize["reviewer_stages"] = o.ReviewerStages
 	}
 	toSerialize["priority"] = o.Priority
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -446,15 +450,30 @@ func (o *RequestConfiguration) UnmarshalJSON(data []byte) (err error) {
 
 	varRequestConfiguration := _RequestConfiguration{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRequestConfiguration)
+	err = json.Unmarshal(data, &varRequestConfiguration)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RequestConfiguration(varRequestConfiguration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "condition")
+		delete(additionalProperties, "allow_requests")
+		delete(additionalProperties, "auto_approval")
+		delete(additionalProperties, "require_mfa_to_request")
+		delete(additionalProperties, "max_duration_minutes")
+		delete(additionalProperties, "recommended_duration_minutes")
+		delete(additionalProperties, "require_support_ticket")
+		delete(additionalProperties, "extensions_duration_in_minutes")
+		delete(additionalProperties, "request_template_id")
+		delete(additionalProperties, "reviewer_stages")
+		delete(additionalProperties, "priority")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

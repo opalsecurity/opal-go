@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type AddBundleResourceRequest struct {
 	AccessLevelRemoteId *string `json:"access_level_remote_id,omitempty"`
 	// The name of the access level to grant to this user. If omitted, the default access level name value (empty string) is used.
 	AccessLevelName *string `json:"access_level_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AddBundleResourceRequest AddBundleResourceRequest
@@ -155,6 +155,11 @@ func (o AddBundleResourceRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AccessLevelName) {
 		toSerialize["access_level_name"] = o.AccessLevelName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -182,15 +187,22 @@ func (o *AddBundleResourceRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varAddBundleResourceRequest := _AddBundleResourceRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAddBundleResourceRequest)
+	err = json.Unmarshal(data, &varAddBundleResourceRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AddBundleResourceRequest(varAddBundleResourceRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "resource_id")
+		delete(additionalProperties, "access_level_remote_id")
+		delete(additionalProperties, "access_level_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

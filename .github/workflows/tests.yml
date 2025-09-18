@@ -1,0 +1,20 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  test-suite:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.24
+
+    - name: Check for duplicate filenames
+      run: bash ./tests/check-duplicate-filenames.sh
+
+    - name: Test package installation
+      run: bash ./tests/can-install.sh $(git rev-parse HEAD)

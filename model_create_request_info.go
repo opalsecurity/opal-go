@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type CreateRequestInfo struct {
 	// The duration of the request in minutes. -1 represents an indefinite duration
 	DurationMinutes int32 `json:"duration_minutes"`
 	CustomMetadata []CreateRequestInfoCustomMetadataInner `json:"custom_metadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateRequestInfo CreateRequestInfo
@@ -308,6 +308,11 @@ func (o CreateRequestInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomMetadata) {
 		toSerialize["custom_metadata"] = o.CustomMetadata
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -338,15 +343,27 @@ func (o *CreateRequestInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateRequestInfo := _CreateRequestInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateRequestInfo)
+	err = json.Unmarshal(data, &varCreateRequestInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateRequestInfo(varCreateRequestInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "resources")
+		delete(additionalProperties, "groups")
+		delete(additionalProperties, "target_user_id")
+		delete(additionalProperties, "target_group_id")
+		delete(additionalProperties, "reason")
+		delete(additionalProperties, "support_ticket")
+		delete(additionalProperties, "duration_minutes")
+		delete(additionalProperties, "custom_metadata")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

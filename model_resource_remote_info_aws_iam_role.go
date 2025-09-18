@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type ResourceRemoteInfoAwsIamRole struct {
 	Arn string `json:"arn"`
 	// The id of the AWS account. Required for AWS Organizations.
 	AccountId *string `json:"account_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceRemoteInfoAwsIamRole ResourceRemoteInfoAwsIamRole
@@ -118,6 +118,11 @@ func (o ResourceRemoteInfoAwsIamRole) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AccountId) {
 		toSerialize["account_id"] = o.AccountId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -145,15 +150,21 @@ func (o *ResourceRemoteInfoAwsIamRole) UnmarshalJSON(data []byte) (err error) {
 
 	varResourceRemoteInfoAwsIamRole := _ResourceRemoteInfoAwsIamRole{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceRemoteInfoAwsIamRole)
+	err = json.Unmarshal(data, &varResourceRemoteInfoAwsIamRole)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceRemoteInfoAwsIamRole(varResourceRemoteInfoAwsIamRole)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "arn")
+		delete(additionalProperties, "account_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

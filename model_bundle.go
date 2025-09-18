@@ -39,7 +39,10 @@ type Bundle struct {
 	TotalNumResources *int32 `json:"total_num_resources,omitempty"`
 	// The total number of groups in the bundle.
 	TotalNumGroups *int32 `json:"total_num_groups,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Bundle Bundle
 
 // NewBundle instantiates a new Bundle object
 // This constructor will assign default values to properties that have it defined,
@@ -383,7 +386,41 @@ func (o Bundle) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TotalNumGroups) {
 		toSerialize["total_num_groups"] = o.TotalNumGroups
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Bundle) UnmarshalJSON(data []byte) (err error) {
+	varBundle := _Bundle{}
+
+	err = json.Unmarshal(data, &varBundle)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Bundle(varBundle)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "bundle_id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "admin_owner_id")
+		delete(additionalProperties, "total_num_items")
+		delete(additionalProperties, "total_num_resources")
+		delete(additionalProperties, "total_num_groups")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBundle struct {

@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &ResourceRemoteInfoGcpGkeCluster{}
 type ResourceRemoteInfoGcpGkeCluster struct {
 	// The name of the GKE cluster.
 	ClusterName string `json:"cluster_name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceRemoteInfoGcpGkeCluster ResourceRemoteInfoGcpGkeCluster
@@ -81,6 +81,11 @@ func (o ResourceRemoteInfoGcpGkeCluster) MarshalJSON() ([]byte, error) {
 func (o ResourceRemoteInfoGcpGkeCluster) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["cluster_name"] = o.ClusterName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *ResourceRemoteInfoGcpGkeCluster) UnmarshalJSON(data []byte) (err error)
 
 	varResourceRemoteInfoGcpGkeCluster := _ResourceRemoteInfoGcpGkeCluster{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceRemoteInfoGcpGkeCluster)
+	err = json.Unmarshal(data, &varResourceRemoteInfoGcpGkeCluster)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceRemoteInfoGcpGkeCluster(varResourceRemoteInfoGcpGkeCluster)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cluster_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

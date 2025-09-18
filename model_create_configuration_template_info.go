@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,7 +23,6 @@ var _ MappedNullable = &CreateConfigurationTemplateInfo{}
 type CreateConfigurationTemplateInfo struct {
 	// The ID of the owner of the configuration template.
 	AdminOwnerId string `json:"admin_owner_id"`
-	// The visibility info of the configuration template.
 	Visibility VisibilityInfo `json:"visibility"`
 	// The IDs of the audit message channels linked to the configuration template.
 	LinkedAuditMessageChannelIds []string `json:"linked_audit_message_channel_ids,omitempty"`
@@ -40,12 +38,11 @@ type CreateConfigurationTemplateInfo struct {
 	Name string `json:"name"`
 	// The request configuration list of the configuration template. If not provided, the default request configuration will be used.
 	RequestConfigurations []RequestConfiguration `json:"request_configurations,omitempty"`
-	// The request configuration list of the configuration template. If not provided, the default request configuration will be used. Deprecated in favor of `request_configurations`.
-	// Deprecated
 	RequestConfigurationList *CreateRequestConfigurationInfoList `json:"request_configuration_list,omitempty"`
 	TicketPropagation *TicketPropagationConfiguration `json:"ticket_propagation,omitempty"`
 	// Custom request notification sent upon request approval for this configuration template.
 	CustomRequestNotification *string `json:"custom_request_notification,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateConfigurationTemplateInfo CreateConfigurationTemplateInfo
@@ -321,7 +318,6 @@ func (o *CreateConfigurationTemplateInfo) SetRequestConfigurations(v []RequestCo
 }
 
 // GetRequestConfigurationList returns the RequestConfigurationList field value if set, zero value otherwise.
-// Deprecated
 func (o *CreateConfigurationTemplateInfo) GetRequestConfigurationList() CreateRequestConfigurationInfoList {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		var ret CreateRequestConfigurationInfoList
@@ -332,7 +328,6 @@ func (o *CreateConfigurationTemplateInfo) GetRequestConfigurationList() CreateRe
 
 // GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *CreateConfigurationTemplateInfo) GetRequestConfigurationListOk() (*CreateRequestConfigurationInfoList, bool) {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		return nil, false
@@ -350,7 +345,6 @@ func (o *CreateConfigurationTemplateInfo) HasRequestConfigurationList() bool {
 }
 
 // SetRequestConfigurationList gets a reference to the given CreateRequestConfigurationInfoList and assigns it to the RequestConfigurationList field.
-// Deprecated
 func (o *CreateConfigurationTemplateInfo) SetRequestConfigurationList(v CreateRequestConfigurationInfoList) {
 	o.RequestConfigurationList = &v
 }
@@ -455,6 +449,11 @@ func (o CreateConfigurationTemplateInfo) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.CustomRequestNotification) {
 		toSerialize["custom_request_notification"] = o.CustomRequestNotification
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -486,15 +485,31 @@ func (o *CreateConfigurationTemplateInfo) UnmarshalJSON(data []byte) (err error)
 
 	varCreateConfigurationTemplateInfo := _CreateConfigurationTemplateInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateConfigurationTemplateInfo)
+	err = json.Unmarshal(data, &varCreateConfigurationTemplateInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateConfigurationTemplateInfo(varCreateConfigurationTemplateInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "admin_owner_id")
+		delete(additionalProperties, "visibility")
+		delete(additionalProperties, "linked_audit_message_channel_ids")
+		delete(additionalProperties, "member_oncall_schedule_ids")
+		delete(additionalProperties, "break_glass_user_ids")
+		delete(additionalProperties, "require_mfa_to_approve")
+		delete(additionalProperties, "require_mfa_to_connect")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "request_configurations")
+		delete(additionalProperties, "request_configuration_list")
+		delete(additionalProperties, "ticket_propagation")
+		delete(additionalProperties, "custom_request_notification")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

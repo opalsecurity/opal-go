@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &GroupRemoteInfoGitlabGroup{}
 type GroupRemoteInfoGitlabGroup struct {
 	// The id of the Gitlab group.
 	GroupId string `json:"group_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GroupRemoteInfoGitlabGroup GroupRemoteInfoGitlabGroup
@@ -81,6 +81,11 @@ func (o GroupRemoteInfoGitlabGroup) MarshalJSON() ([]byte, error) {
 func (o GroupRemoteInfoGitlabGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["group_id"] = o.GroupId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *GroupRemoteInfoGitlabGroup) UnmarshalJSON(data []byte) (err error) {
 
 	varGroupRemoteInfoGitlabGroup := _GroupRemoteInfoGitlabGroup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGroupRemoteInfoGitlabGroup)
+	err = json.Unmarshal(data, &varGroupRemoteInfoGitlabGroup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GroupRemoteInfoGitlabGroup(varGroupRemoteInfoGitlabGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "group_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

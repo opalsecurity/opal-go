@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -32,6 +31,7 @@ type Owner struct {
 	AccessRequestEscalationPeriod *int32 `json:"access_request_escalation_period,omitempty"`
 	ReviewerMessageChannelId *string `json:"reviewer_message_channel_id,omitempty"`
 	SourceGroupId *string `json:"source_group_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Owner Owner
@@ -264,6 +264,11 @@ func (o Owner) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SourceGroupId) {
 		toSerialize["source_group_id"] = o.SourceGroupId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -291,15 +296,25 @@ func (o *Owner) UnmarshalJSON(data []byte) (err error) {
 
 	varOwner := _Owner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOwner)
+	err = json.Unmarshal(data, &varOwner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Owner(varOwner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "owner_id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "access_request_escalation_period")
+		delete(additionalProperties, "reviewer_message_channel_id")
+		delete(additionalProperties, "source_group_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

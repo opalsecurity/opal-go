@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &GroupRemoteInfoSnowflakeRole{}
 type GroupRemoteInfoSnowflakeRole struct {
 	// The id of the Snowflake role.
 	RoleId string `json:"role_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GroupRemoteInfoSnowflakeRole GroupRemoteInfoSnowflakeRole
@@ -81,6 +81,11 @@ func (o GroupRemoteInfoSnowflakeRole) MarshalJSON() ([]byte, error) {
 func (o GroupRemoteInfoSnowflakeRole) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["role_id"] = o.RoleId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *GroupRemoteInfoSnowflakeRole) UnmarshalJSON(data []byte) (err error) {
 
 	varGroupRemoteInfoSnowflakeRole := _GroupRemoteInfoSnowflakeRole{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGroupRemoteInfoSnowflakeRole)
+	err = json.Unmarshal(data, &varGroupRemoteInfoSnowflakeRole)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GroupRemoteInfoSnowflakeRole(varGroupRemoteInfoSnowflakeRole)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "role_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

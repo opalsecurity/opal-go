@@ -21,7 +21,10 @@ var _ MappedNullable = &CreateRequest200Response{}
 // CreateRequest200Response struct for CreateRequest200Response
 type CreateRequest200Response struct {
 	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateRequest200Response CreateRequest200Response
 
 // NewCreateRequest200Response instantiates a new CreateRequest200Response object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CreateRequest200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateRequest200Response) UnmarshalJSON(data []byte) (err error) {
+	varCreateRequest200Response := _CreateRequest200Response{}
+
+	err = json.Unmarshal(data, &varCreateRequest200Response)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateRequest200Response(varCreateRequest200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateRequest200Response struct {

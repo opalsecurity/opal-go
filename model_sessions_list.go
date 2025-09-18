@@ -25,7 +25,10 @@ type SessionsList struct {
 	// The cursor used to obtain the current result page.
 	Previous *string `json:"previous,omitempty"`
 	Results []Session `json:"results,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SessionsList SessionsList
 
 // NewSessionsList instantiates a new SessionsList object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SessionsList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Results) {
 		toSerialize["results"] = o.Results
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SessionsList) UnmarshalJSON(data []byte) (err error) {
+	varSessionsList := _SessionsList{}
+
+	err = json.Unmarshal(data, &varSessionsList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SessionsList(varSessionsList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next")
+		delete(additionalProperties, "previous")
+		delete(additionalProperties, "results")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSessionsList struct {

@@ -34,7 +34,10 @@ type RequestedItem struct {
 	RemoteId *string `json:"remote_id,omitempty"`
 	// The name of the target on the remote system.
 	RemoteName *string `json:"remote_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RequestedItem RequestedItem
 
 // NewRequestedItem instantiates a new RequestedItem object
 // This constructor will assign default values to properties that have it defined,
@@ -308,7 +311,39 @@ func (o RequestedItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RemoteName) {
 		toSerialize["remote_name"] = o.RemoteName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RequestedItem) UnmarshalJSON(data []byte) (err error) {
+	varRequestedItem := _RequestedItem{}
+
+	err = json.Unmarshal(data, &varRequestedItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RequestedItem(varRequestedItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "resource_id")
+		delete(additionalProperties, "group_id")
+		delete(additionalProperties, "access_level_name")
+		delete(additionalProperties, "access_level_remote_id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "remote_id")
+		delete(additionalProperties, "remote_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRequestedItem struct {

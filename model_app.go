@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type App struct {
 	AppType AppTypeEnum `json:"app_type"`
 	// Validation checks of an apps' configuration and permissions.
 	Validations []AppValidation `json:"validations,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _App App
@@ -229,6 +229,11 @@ func (o App) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Validations) {
 		toSerialize["validations"] = o.Validations
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -260,15 +265,25 @@ func (o *App) UnmarshalJSON(data []byte) (err error) {
 
 	varApp := _App{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varApp)
+	err = json.Unmarshal(data, &varApp)
 
 	if err != nil {
 		return err
 	}
 
 	*o = App(varApp)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "app_id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "admin_owner_id")
+		delete(additionalProperties, "app_type")
+		delete(additionalProperties, "validations")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

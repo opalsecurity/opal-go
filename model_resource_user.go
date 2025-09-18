@@ -14,7 +14,6 @@ package opal
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -34,6 +33,7 @@ type ResourceUser struct {
 	Email string `json:"email"`
 	// The day and time the user's access will expire.
 	ExpirationDate *time.Time `json:"expiration_date,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceUser ResourceUser
@@ -230,6 +230,11 @@ func (o ResourceUser) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExpirationDate) {
 		toSerialize["expiration_date"] = o.ExpirationDate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -261,15 +266,25 @@ func (o *ResourceUser) UnmarshalJSON(data []byte) (err error) {
 
 	varResourceUser := _ResourceUser{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceUser)
+	err = json.Unmarshal(data, &varResourceUser)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceUser(varResourceUser)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "resource_id")
+		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "access_level")
+		delete(additionalProperties, "full_name")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "expiration_date")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

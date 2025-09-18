@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &UserList{}
 // UserList A list of users.
 type UserList struct {
 	Users []User `json:"users"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UserList UserList
@@ -80,6 +80,11 @@ func (o UserList) MarshalJSON() ([]byte, error) {
 func (o UserList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["users"] = o.Users
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *UserList) UnmarshalJSON(data []byte) (err error) {
 
 	varUserList := _UserList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUserList)
+	err = json.Unmarshal(data, &varUserList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UserList(varUserList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "users")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

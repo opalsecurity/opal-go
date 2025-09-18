@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type ResourceRemoteInfoSalesforceProfile struct {
 	ProfileId string `json:"profile_id"`
 	// The id of the user license.
 	UserLicenseId string `json:"user_license_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceRemoteInfoSalesforceProfile ResourceRemoteInfoSalesforceProfile
@@ -109,6 +109,11 @@ func (o ResourceRemoteInfoSalesforceProfile) ToMap() (map[string]interface{}, er
 	toSerialize := map[string]interface{}{}
 	toSerialize["profile_id"] = o.ProfileId
 	toSerialize["user_license_id"] = o.UserLicenseId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -137,15 +142,21 @@ func (o *ResourceRemoteInfoSalesforceProfile) UnmarshalJSON(data []byte) (err er
 
 	varResourceRemoteInfoSalesforceProfile := _ResourceRemoteInfoSalesforceProfile{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceRemoteInfoSalesforceProfile)
+	err = json.Unmarshal(data, &varResourceRemoteInfoSalesforceProfile)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceRemoteInfoSalesforceProfile(varResourceRemoteInfoSalesforceProfile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "profile_id")
+		delete(additionalProperties, "user_license_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

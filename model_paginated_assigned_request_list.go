@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type PaginatedAssignedRequestList struct {
 	Requests []Request `json:"requests"`
 	// The cursor to continue pagination
 	Cursor string `json:"cursor"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PaginatedAssignedRequestList PaginatedAssignedRequestList
@@ -108,6 +108,11 @@ func (o PaginatedAssignedRequestList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["requests"] = o.Requests
 	toSerialize["cursor"] = o.Cursor
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *PaginatedAssignedRequestList) UnmarshalJSON(data []byte) (err error) {
 
 	varPaginatedAssignedRequestList := _PaginatedAssignedRequestList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPaginatedAssignedRequestList)
+	err = json.Unmarshal(data, &varPaginatedAssignedRequestList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PaginatedAssignedRequestList(varPaginatedAssignedRequestList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "requests")
+		delete(additionalProperties, "cursor")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

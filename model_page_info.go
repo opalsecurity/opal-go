@@ -13,7 +13,6 @@ package opal
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type PageInfo struct {
 	HasPreviousPage bool `json:"hasPreviousPage"`
 	// The cursor to continue pagination backwards
 	StartCursor string `json:"startCursor"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PageInfo PageInfo
@@ -165,6 +165,11 @@ func (o PageInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize["endCursor"] = o.EndCursor
 	toSerialize["hasPreviousPage"] = o.HasPreviousPage
 	toSerialize["startCursor"] = o.StartCursor
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -195,15 +200,23 @@ func (o *PageInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varPageInfo := _PageInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPageInfo)
+	err = json.Unmarshal(data, &varPageInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PageInfo(varPageInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "hasNextPage")
+		delete(additionalProperties, "endCursor")
+		delete(additionalProperties, "hasPreviousPage")
+		delete(additionalProperties, "startCursor")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

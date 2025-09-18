@@ -24,7 +24,10 @@ type CreateIdpGroupMappingRequest struct {
 	Alias *string `json:"alias,omitempty"`
 	// Whether this mapping should be hidden from end users. - **New mappings**: If not provided, defaults to `false` - **Existing mappings**: If not provided, existing value is preserved (no change) - **Explicit values**: If provided, value is updated to the specified boolean 
 	HiddenFromEndUser *bool `json:"hidden_from_end_user,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateIdpGroupMappingRequest CreateIdpGroupMappingRequest
 
 // NewCreateIdpGroupMappingRequest instantiates a new CreateIdpGroupMappingRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -123,7 +126,34 @@ func (o CreateIdpGroupMappingRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HiddenFromEndUser) {
 		toSerialize["hidden_from_end_user"] = o.HiddenFromEndUser
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateIdpGroupMappingRequest) UnmarshalJSON(data []byte) (err error) {
+	varCreateIdpGroupMappingRequest := _CreateIdpGroupMappingRequest{}
+
+	err = json.Unmarshal(data, &varCreateIdpGroupMappingRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateIdpGroupMappingRequest(varCreateIdpGroupMappingRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alias")
+		delete(additionalProperties, "hidden_from_end_user")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateIdpGroupMappingRequest struct {
