@@ -237,7 +237,7 @@ func (r ApiGetDelegationRequest) Execute() (*Delegation, *http.Response, error) 
 }
 
 /*
-GetDelegation Method for GetDelegation
+GetDelegation Get delegation by ID
 
 Returns a specific delegation by its ID.
 
@@ -367,7 +367,7 @@ func (r ApiGetDelegationsRequest) Execute() (*PaginatedDelegationsList, *http.Re
 }
 
 /*
-GetDelegations Method for GetDelegations
+GetDelegations Get delegations
 
 Returns a list of request reviewer delegations configured for your organization.
 
