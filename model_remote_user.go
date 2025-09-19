@@ -25,6 +25,7 @@ type RemoteUser struct {
 	UserId string `json:"user_id"`
 	// The ID of the remote user.
 	RemoteId string `json:"remote_id"`
+	// The third party provider of the remote user.
 	ThirdPartyProvider ThirdPartyProviderEnum `json:"third_party_provider"`
 	AdditionalProperties map[string]interface{}
 }
