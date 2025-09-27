@@ -84,6 +84,7 @@ const (
 	RESOURCETYPEENUM_ILEVEL_ADVANCED_ROLE ResourceTypeEnum = "ILEVEL_ADVANCED_ROLE"
 	RESOURCETYPEENUM_DATASTAX_ASTRA_ROLE ResourceTypeEnum = "DATASTAX_ASTRA_ROLE"
 	RESOURCETYPEENUM_COUPA_ROLE ResourceTypeEnum = "COUPA_ROLE"
+	RESOURCETYPEENUM_CURSOR_ORGANIZATION ResourceTypeEnum = "CURSOR_ORGANIZATION"
 )
 
 // All allowed values of ResourceTypeEnum enum
@@ -151,6 +152,7 @@ var AllowedResourceTypeEnumEnumValues = []ResourceTypeEnum{
 	"ILEVEL_ADVANCED_ROLE",
 	"DATASTAX_ASTRA_ROLE",
 	"COUPA_ROLE",
+	"CURSOR_ORGANIZATION",
 }
 
 func (v *ResourceTypeEnum) UnmarshalJSON(src []byte) error {
