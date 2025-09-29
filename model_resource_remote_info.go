@@ -52,6 +52,7 @@ type ResourceRemoteInfo struct {
 	TeleportRole *ResourceRemoteInfoTeleportRole `json:"teleport_role,omitempty"`
 	DatastaxAstraRole *ResourceRemoteInfoDatastaxAstraRole `json:"datastax_astra_role,omitempty"`
 	CoupaRole *ResourceRemoteInfoCoupaRole `json:"coupa_role,omitempty"`
+	CursorOrganization *ResourceRemoteInfoCursorOrganization `json:"cursor_organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -1098,6 +1099,38 @@ func (o *ResourceRemoteInfo) SetCoupaRole(v ResourceRemoteInfoCoupaRole) {
 	o.CoupaRole = &v
 }
 
+// GetCursorOrganization returns the CursorOrganization field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetCursorOrganization() ResourceRemoteInfoCursorOrganization {
+	if o == nil || IsNil(o.CursorOrganization) {
+		var ret ResourceRemoteInfoCursorOrganization
+		return ret
+	}
+	return *o.CursorOrganization
+}
+
+// GetCursorOrganizationOk returns a tuple with the CursorOrganization field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetCursorOrganizationOk() (*ResourceRemoteInfoCursorOrganization, bool) {
+	if o == nil || IsNil(o.CursorOrganization) {
+		return nil, false
+	}
+	return o.CursorOrganization, true
+}
+
+// HasCursorOrganization returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasCursorOrganization() bool {
+	if o != nil && !IsNil(o.CursorOrganization) {
+		return true
+	}
+
+	return false
+}
+
+// SetCursorOrganization gets a reference to the given ResourceRemoteInfoCursorOrganization and assigns it to the CursorOrganization field.
+func (o *ResourceRemoteInfo) SetCursorOrganization(v ResourceRemoteInfoCursorOrganization) {
+	o.CursorOrganization = &v
+}
+
 func (o ResourceRemoteInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -1204,6 +1237,9 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CoupaRole) {
 		toSerialize["coupa_role"] = o.CoupaRole
 	}
+	if !IsNil(o.CursorOrganization) {
+		toSerialize["cursor_organization"] = o.CursorOrganization
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1258,6 +1294,7 @@ func (o *ResourceRemoteInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "teleport_role")
 		delete(additionalProperties, "datastax_astra_role")
 		delete(additionalProperties, "coupa_role")
+		delete(additionalProperties, "cursor_organization")
 		o.AdditionalProperties = additionalProperties
 	}
 
