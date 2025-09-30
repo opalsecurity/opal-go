@@ -129,6 +129,8 @@
 
 * `COUPA_ROLE` (value: `"COUPA_ROLE"`)
 
+* `CURSOR_ORGANIZATION` (value: `"CURSOR_ORGANIZATION"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
