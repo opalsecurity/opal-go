@@ -35,7 +35,7 @@ func (r ApiGetAppRequest) Execute() (*App, *http.Response, error) {
 }
 
 /*
-GetApp Method for GetApp
+GetApp Get app by ID
 
 Returns an `App` object.
 
@@ -151,7 +151,7 @@ func (r ApiGetAppsRequest) Execute() (*AppsList, *http.Response, error) {
 }
 
 /*
-GetApps Method for GetApps
+GetApps Get apps
 
 Returns a list of `App` objects.
 
