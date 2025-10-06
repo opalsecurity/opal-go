@@ -82,8 +82,8 @@ Class | Method | HTTP request | Description
 *AccessRulesAPI* | [**CreateAccessRule**](docs/AccessRulesAPI.md#createaccessrule) | **Post** /access-rules | 
 *AccessRulesAPI* | [**GetAccessRule**](docs/AccessRulesAPI.md#getaccessrule) | **Get** /access-rules/{access_rule_id} | 
 *AccessRulesAPI* | [**UpdateAccessRule**](docs/AccessRulesAPI.md#updateaccessrule) | **Put** /access-rules/{access_rule_id} | 
-*AppsAPI* | [**GetApp**](docs/AppsAPI.md#getapp) | **Get** /apps/{app_id} | 
-*AppsAPI* | [**GetApps**](docs/AppsAPI.md#getapps) | **Get** /apps | 
+*AppsAPI* | [**GetApp**](docs/AppsAPI.md#getapp) | **Get** /apps/{app_id} | Get app by ID
+*AppsAPI* | [**GetApps**](docs/AppsAPI.md#getapps) | **Get** /apps | Get apps
 *AppsAPI* | [**GetSyncErrors**](docs/AppsAPI.md#getsyncerrors) | **Get** /sync_errors | 
 *BundlesAPI* | [**AddBundleGroup**](docs/BundlesAPI.md#addbundlegroup) | **Post** /bundles/{bundle_id}/groups | 
 *BundlesAPI* | [**AddBundleResource**](docs/BundlesAPI.md#addbundleresource) | **Post** /bundles/{bundle_id}/resources | 
@@ -104,8 +104,8 @@ Class | Method | HTTP request | Description
 *ConfigurationTemplatesAPI* | [**UpdateConfigurationTemplate**](docs/ConfigurationTemplatesAPI.md#updateconfigurationtemplate) | **Put** /configuration-templates | 
 *DelegationsAPI* | [**CreateDelegation**](docs/DelegationsAPI.md#createdelegation) | **Post** /delegations | 
 *DelegationsAPI* | [**DeleteDelegation**](docs/DelegationsAPI.md#deletedelegation) | **Delete** /delegations/{delegation_id} | 
-*DelegationsAPI* | [**GetDelegation**](docs/DelegationsAPI.md#getdelegation) | **Get** /delegations/{delegation_id} | 
-*DelegationsAPI* | [**GetDelegations**](docs/DelegationsAPI.md#getdelegations) | **Get** /delegations | 
+*DelegationsAPI* | [**GetDelegation**](docs/DelegationsAPI.md#getdelegation) | **Get** /delegations/{delegation_id} | Get delegation by ID
+*DelegationsAPI* | [**GetDelegations**](docs/DelegationsAPI.md#getdelegations) | **Get** /delegations | Get delegations
 *EventsAPI* | [**Events**](docs/EventsAPI.md#events) | **Get** /events | 
 *GroupBindingsAPI* | [**CreateGroupBinding**](docs/GroupBindingsAPI.md#creategroupbinding) | **Post** /group-bindings | 
 *GroupBindingsAPI* | [**DeleteGroupBinding**](docs/GroupBindingsAPI.md#deletegroupbinding) | **Delete** /group-bindings/{group_binding_id} | 
@@ -345,6 +345,7 @@ Class | Method | HTTP request | Description
  - [ResourceAccessUserList](docs/ResourceAccessUserList.md)
  - [ResourceNHI](docs/ResourceNHI.md)
  - [ResourceRemoteInfo](docs/ResourceRemoteInfo.md)
+ - [ResourceRemoteInfoAnthropicWorkspace](docs/ResourceRemoteInfoAnthropicWorkspace.md)
  - [ResourceRemoteInfoAwsAccount](docs/ResourceRemoteInfoAwsAccount.md)
  - [ResourceRemoteInfoAwsEc2Instance](docs/ResourceRemoteInfoAwsEc2Instance.md)
  - [ResourceRemoteInfoAwsEksCluster](docs/ResourceRemoteInfoAwsEksCluster.md)
@@ -353,6 +354,7 @@ Class | Method | HTTP request | Description
  - [ResourceRemoteInfoAwsPermissionSet](docs/ResourceRemoteInfoAwsPermissionSet.md)
  - [ResourceRemoteInfoAwsRdsInstance](docs/ResourceRemoteInfoAwsRdsInstance.md)
  - [ResourceRemoteInfoCoupaRole](docs/ResourceRemoteInfoCoupaRole.md)
+ - [ResourceRemoteInfoCursorOrganization](docs/ResourceRemoteInfoCursorOrganization.md)
  - [ResourceRemoteInfoCustomConnector](docs/ResourceRemoteInfoCustomConnector.md)
  - [ResourceRemoteInfoDatastaxAstraRole](docs/ResourceRemoteInfoDatastaxAstraRole.md)
  - [ResourceRemoteInfoGcpBigQueryDataset](docs/ResourceRemoteInfoGcpBigQueryDataset.md)
@@ -365,6 +367,7 @@ Class | Method | HTTP request | Description
  - [ResourceRemoteInfoGcpProject](docs/ResourceRemoteInfoGcpProject.md)
  - [ResourceRemoteInfoGcpServiceAccount](docs/ResourceRemoteInfoGcpServiceAccount.md)
  - [ResourceRemoteInfoGcpSqlInstance](docs/ResourceRemoteInfoGcpSqlInstance.md)
+ - [ResourceRemoteInfoGithubOrg](docs/ResourceRemoteInfoGithubOrg.md)
  - [ResourceRemoteInfoGithubOrgRole](docs/ResourceRemoteInfoGithubOrgRole.md)
  - [ResourceRemoteInfoGithubRepo](docs/ResourceRemoteInfoGithubRepo.md)
  - [ResourceRemoteInfoGitlabProject](docs/ResourceRemoteInfoGitlabProject.md)
@@ -372,6 +375,8 @@ Class | Method | HTTP request | Description
  - [ResourceRemoteInfoOktaApp](docs/ResourceRemoteInfoOktaApp.md)
  - [ResourceRemoteInfoOktaCustomRole](docs/ResourceRemoteInfoOktaCustomRole.md)
  - [ResourceRemoteInfoOktaStandardRole](docs/ResourceRemoteInfoOktaStandardRole.md)
+ - [ResourceRemoteInfoOpenaiPlatformProject](docs/ResourceRemoteInfoOpenaiPlatformProject.md)
+ - [ResourceRemoteInfoOpenaiPlatformServiceAccount](docs/ResourceRemoteInfoOpenaiPlatformServiceAccount.md)
  - [ResourceRemoteInfoPagerdutyRole](docs/ResourceRemoteInfoPagerdutyRole.md)
  - [ResourceRemoteInfoSalesforcePermissionSet](docs/ResourceRemoteInfoSalesforcePermissionSet.md)
  - [ResourceRemoteInfoSalesforceProfile](docs/ResourceRemoteInfoSalesforceProfile.md)
