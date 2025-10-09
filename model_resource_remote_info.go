@@ -41,6 +41,7 @@ type ResourceRemoteInfo struct {
 	GoogleWorkspaceRole *ResourceRemoteInfoGoogleWorkspaceRole `json:"google_workspace_role,omitempty"`
 	GithubRepo *ResourceRemoteInfoGithubRepo `json:"github_repo,omitempty"`
 	GithubOrgRole *ResourceRemoteInfoGithubOrgRole `json:"github_org_role,omitempty"`
+	GithubOrg *ResourceRemoteInfoGithubOrg `json:"github_org,omitempty"`
 	GitlabProject *ResourceRemoteInfoGitlabProject `json:"gitlab_project,omitempty"`
 	OktaApp *ResourceRemoteInfoOktaApp `json:"okta_app,omitempty"`
 	OktaStandardRole *ResourceRemoteInfoOktaStandardRole `json:"okta_standard_role,omitempty"`
@@ -52,6 +53,10 @@ type ResourceRemoteInfo struct {
 	TeleportRole *ResourceRemoteInfoTeleportRole `json:"teleport_role,omitempty"`
 	DatastaxAstraRole *ResourceRemoteInfoDatastaxAstraRole `json:"datastax_astra_role,omitempty"`
 	CoupaRole *ResourceRemoteInfoCoupaRole `json:"coupa_role,omitempty"`
+	CursorOrganization *ResourceRemoteInfoCursorOrganization `json:"cursor_organization,omitempty"`
+	OpenaiPlatformProject *ResourceRemoteInfoOpenaiPlatformProject `json:"openai_platform_project,omitempty"`
+	OpenaiPlatformServiceAccount *ResourceRemoteInfoOpenaiPlatformServiceAccount `json:"openai_platform_service_account,omitempty"`
+	AnthropicWorkspace *ResourceRemoteInfoAnthropicWorkspace `json:"anthropic_workspace,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -746,6 +751,38 @@ func (o *ResourceRemoteInfo) SetGithubOrgRole(v ResourceRemoteInfoGithubOrgRole)
 	o.GithubOrgRole = &v
 }
 
+// GetGithubOrg returns the GithubOrg field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetGithubOrg() ResourceRemoteInfoGithubOrg {
+	if o == nil || IsNil(o.GithubOrg) {
+		var ret ResourceRemoteInfoGithubOrg
+		return ret
+	}
+	return *o.GithubOrg
+}
+
+// GetGithubOrgOk returns a tuple with the GithubOrg field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetGithubOrgOk() (*ResourceRemoteInfoGithubOrg, bool) {
+	if o == nil || IsNil(o.GithubOrg) {
+		return nil, false
+	}
+	return o.GithubOrg, true
+}
+
+// HasGithubOrg returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasGithubOrg() bool {
+	if o != nil && !IsNil(o.GithubOrg) {
+		return true
+	}
+
+	return false
+}
+
+// SetGithubOrg gets a reference to the given ResourceRemoteInfoGithubOrg and assigns it to the GithubOrg field.
+func (o *ResourceRemoteInfo) SetGithubOrg(v ResourceRemoteInfoGithubOrg) {
+	o.GithubOrg = &v
+}
+
 // GetGitlabProject returns the GitlabProject field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetGitlabProject() ResourceRemoteInfoGitlabProject {
 	if o == nil || IsNil(o.GitlabProject) {
@@ -1098,6 +1135,134 @@ func (o *ResourceRemoteInfo) SetCoupaRole(v ResourceRemoteInfoCoupaRole) {
 	o.CoupaRole = &v
 }
 
+// GetCursorOrganization returns the CursorOrganization field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetCursorOrganization() ResourceRemoteInfoCursorOrganization {
+	if o == nil || IsNil(o.CursorOrganization) {
+		var ret ResourceRemoteInfoCursorOrganization
+		return ret
+	}
+	return *o.CursorOrganization
+}
+
+// GetCursorOrganizationOk returns a tuple with the CursorOrganization field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetCursorOrganizationOk() (*ResourceRemoteInfoCursorOrganization, bool) {
+	if o == nil || IsNil(o.CursorOrganization) {
+		return nil, false
+	}
+	return o.CursorOrganization, true
+}
+
+// HasCursorOrganization returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasCursorOrganization() bool {
+	if o != nil && !IsNil(o.CursorOrganization) {
+		return true
+	}
+
+	return false
+}
+
+// SetCursorOrganization gets a reference to the given ResourceRemoteInfoCursorOrganization and assigns it to the CursorOrganization field.
+func (o *ResourceRemoteInfo) SetCursorOrganization(v ResourceRemoteInfoCursorOrganization) {
+	o.CursorOrganization = &v
+}
+
+// GetOpenaiPlatformProject returns the OpenaiPlatformProject field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetOpenaiPlatformProject() ResourceRemoteInfoOpenaiPlatformProject {
+	if o == nil || IsNil(o.OpenaiPlatformProject) {
+		var ret ResourceRemoteInfoOpenaiPlatformProject
+		return ret
+	}
+	return *o.OpenaiPlatformProject
+}
+
+// GetOpenaiPlatformProjectOk returns a tuple with the OpenaiPlatformProject field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetOpenaiPlatformProjectOk() (*ResourceRemoteInfoOpenaiPlatformProject, bool) {
+	if o == nil || IsNil(o.OpenaiPlatformProject) {
+		return nil, false
+	}
+	return o.OpenaiPlatformProject, true
+}
+
+// HasOpenaiPlatformProject returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasOpenaiPlatformProject() bool {
+	if o != nil && !IsNil(o.OpenaiPlatformProject) {
+		return true
+	}
+
+	return false
+}
+
+// SetOpenaiPlatformProject gets a reference to the given ResourceRemoteInfoOpenaiPlatformProject and assigns it to the OpenaiPlatformProject field.
+func (o *ResourceRemoteInfo) SetOpenaiPlatformProject(v ResourceRemoteInfoOpenaiPlatformProject) {
+	o.OpenaiPlatformProject = &v
+}
+
+// GetOpenaiPlatformServiceAccount returns the OpenaiPlatformServiceAccount field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetOpenaiPlatformServiceAccount() ResourceRemoteInfoOpenaiPlatformServiceAccount {
+	if o == nil || IsNil(o.OpenaiPlatformServiceAccount) {
+		var ret ResourceRemoteInfoOpenaiPlatformServiceAccount
+		return ret
+	}
+	return *o.OpenaiPlatformServiceAccount
+}
+
+// GetOpenaiPlatformServiceAccountOk returns a tuple with the OpenaiPlatformServiceAccount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetOpenaiPlatformServiceAccountOk() (*ResourceRemoteInfoOpenaiPlatformServiceAccount, bool) {
+	if o == nil || IsNil(o.OpenaiPlatformServiceAccount) {
+		return nil, false
+	}
+	return o.OpenaiPlatformServiceAccount, true
+}
+
+// HasOpenaiPlatformServiceAccount returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasOpenaiPlatformServiceAccount() bool {
+	if o != nil && !IsNil(o.OpenaiPlatformServiceAccount) {
+		return true
+	}
+
+	return false
+}
+
+// SetOpenaiPlatformServiceAccount gets a reference to the given ResourceRemoteInfoOpenaiPlatformServiceAccount and assigns it to the OpenaiPlatformServiceAccount field.
+func (o *ResourceRemoteInfo) SetOpenaiPlatformServiceAccount(v ResourceRemoteInfoOpenaiPlatformServiceAccount) {
+	o.OpenaiPlatformServiceAccount = &v
+}
+
+// GetAnthropicWorkspace returns the AnthropicWorkspace field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAnthropicWorkspace() ResourceRemoteInfoAnthropicWorkspace {
+	if o == nil || IsNil(o.AnthropicWorkspace) {
+		var ret ResourceRemoteInfoAnthropicWorkspace
+		return ret
+	}
+	return *o.AnthropicWorkspace
+}
+
+// GetAnthropicWorkspaceOk returns a tuple with the AnthropicWorkspace field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAnthropicWorkspaceOk() (*ResourceRemoteInfoAnthropicWorkspace, bool) {
+	if o == nil || IsNil(o.AnthropicWorkspace) {
+		return nil, false
+	}
+	return o.AnthropicWorkspace, true
+}
+
+// HasAnthropicWorkspace returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAnthropicWorkspace() bool {
+	if o != nil && !IsNil(o.AnthropicWorkspace) {
+		return true
+	}
+
+	return false
+}
+
+// SetAnthropicWorkspace gets a reference to the given ResourceRemoteInfoAnthropicWorkspace and assigns it to the AnthropicWorkspace field.
+func (o *ResourceRemoteInfo) SetAnthropicWorkspace(v ResourceRemoteInfoAnthropicWorkspace) {
+	o.AnthropicWorkspace = &v
+}
+
 func (o ResourceRemoteInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -1171,6 +1336,9 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GithubOrgRole) {
 		toSerialize["github_org_role"] = o.GithubOrgRole
 	}
+	if !IsNil(o.GithubOrg) {
+		toSerialize["github_org"] = o.GithubOrg
+	}
 	if !IsNil(o.GitlabProject) {
 		toSerialize["gitlab_project"] = o.GitlabProject
 	}
@@ -1203,6 +1371,18 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.CoupaRole) {
 		toSerialize["coupa_role"] = o.CoupaRole
+	}
+	if !IsNil(o.CursorOrganization) {
+		toSerialize["cursor_organization"] = o.CursorOrganization
+	}
+	if !IsNil(o.OpenaiPlatformProject) {
+		toSerialize["openai_platform_project"] = o.OpenaiPlatformProject
+	}
+	if !IsNil(o.OpenaiPlatformServiceAccount) {
+		toSerialize["openai_platform_service_account"] = o.OpenaiPlatformServiceAccount
+	}
+	if !IsNil(o.AnthropicWorkspace) {
+		toSerialize["anthropic_workspace"] = o.AnthropicWorkspace
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -1247,6 +1427,7 @@ func (o *ResourceRemoteInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "google_workspace_role")
 		delete(additionalProperties, "github_repo")
 		delete(additionalProperties, "github_org_role")
+		delete(additionalProperties, "github_org")
 		delete(additionalProperties, "gitlab_project")
 		delete(additionalProperties, "okta_app")
 		delete(additionalProperties, "okta_standard_role")
@@ -1258,6 +1439,10 @@ func (o *ResourceRemoteInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "teleport_role")
 		delete(additionalProperties, "datastax_astra_role")
 		delete(additionalProperties, "coupa_role")
+		delete(additionalProperties, "cursor_organization")
+		delete(additionalProperties, "openai_platform_project")
+		delete(additionalProperties, "openai_platform_service_account")
+		delete(additionalProperties, "anthropic_workspace")
 		o.AdditionalProperties = additionalProperties
 	}
 
