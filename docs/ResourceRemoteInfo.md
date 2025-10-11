@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **GoogleWorkspaceRole** | Pointer to [**ResourceRemoteInfoGoogleWorkspaceRole**](ResourceRemoteInfoGoogleWorkspaceRole.md) |  | [optional] 
 **GithubRepo** | Pointer to [**ResourceRemoteInfoGithubRepo**](ResourceRemoteInfoGithubRepo.md) |  | [optional] 
 **GithubOrgRole** | Pointer to [**ResourceRemoteInfoGithubOrgRole**](ResourceRemoteInfoGithubOrgRole.md) |  | [optional] 
+**GithubOrg** | Pointer to [**ResourceRemoteInfoGithubOrg**](ResourceRemoteInfoGithubOrg.md) |  | [optional] 
 **GitlabProject** | Pointer to [**ResourceRemoteInfoGitlabProject**](ResourceRemoteInfoGitlabProject.md) |  | [optional] 
 **OktaApp** | Pointer to [**ResourceRemoteInfoOktaApp**](ResourceRemoteInfoOktaApp.md) |  | [optional] 
 **OktaStandardRole** | Pointer to [**ResourceRemoteInfoOktaStandardRole**](ResourceRemoteInfoOktaStandardRole.md) |  | [optional] 
@@ -36,6 +37,10 @@ Name | Type | Description | Notes
 **TeleportRole** | Pointer to [**ResourceRemoteInfoTeleportRole**](ResourceRemoteInfoTeleportRole.md) |  | [optional] 
 **DatastaxAstraRole** | Pointer to [**ResourceRemoteInfoDatastaxAstraRole**](ResourceRemoteInfoDatastaxAstraRole.md) |  | [optional] 
 **CoupaRole** | Pointer to [**ResourceRemoteInfoCoupaRole**](ResourceRemoteInfoCoupaRole.md) |  | [optional] 
+**CursorOrganization** | Pointer to [**ResourceRemoteInfoCursorOrganization**](ResourceRemoteInfoCursorOrganization.md) |  | [optional] 
+**OpenaiPlatformProject** | Pointer to [**ResourceRemoteInfoOpenaiPlatformProject**](ResourceRemoteInfoOpenaiPlatformProject.md) |  | [optional] 
+**OpenaiPlatformServiceAccount** | Pointer to [**ResourceRemoteInfoOpenaiPlatformServiceAccount**](ResourceRemoteInfoOpenaiPlatformServiceAccount.md) |  | [optional] 
+**AnthropicWorkspace** | Pointer to [**ResourceRemoteInfoAnthropicWorkspace**](ResourceRemoteInfoAnthropicWorkspace.md) |  | [optional] 
 
 ## Methods
 
@@ -581,6 +586,31 @@ SetGithubOrgRole sets GithubOrgRole field to given value.
 
 HasGithubOrgRole returns a boolean if a field has been set.
 
+### GetGithubOrg
+
+`func (o *ResourceRemoteInfo) GetGithubOrg() ResourceRemoteInfoGithubOrg`
+
+GetGithubOrg returns the GithubOrg field if non-nil, zero value otherwise.
+
+### GetGithubOrgOk
+
+`func (o *ResourceRemoteInfo) GetGithubOrgOk() (*ResourceRemoteInfoGithubOrg, bool)`
+
+GetGithubOrgOk returns a tuple with the GithubOrg field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGithubOrg
+
+`func (o *ResourceRemoteInfo) SetGithubOrg(v ResourceRemoteInfoGithubOrg)`
+
+SetGithubOrg sets GithubOrg field to given value.
+
+### HasGithubOrg
+
+`func (o *ResourceRemoteInfo) HasGithubOrg() bool`
+
+HasGithubOrg returns a boolean if a field has been set.
+
 ### GetGitlabProject
 
 `func (o *ResourceRemoteInfo) GetGitlabProject() ResourceRemoteInfoGitlabProject`
@@ -855,6 +885,106 @@ SetCoupaRole sets CoupaRole field to given value.
 `func (o *ResourceRemoteInfo) HasCoupaRole() bool`
 
 HasCoupaRole returns a boolean if a field has been set.
+
+### GetCursorOrganization
+
+`func (o *ResourceRemoteInfo) GetCursorOrganization() ResourceRemoteInfoCursorOrganization`
+
+GetCursorOrganization returns the CursorOrganization field if non-nil, zero value otherwise.
+
+### GetCursorOrganizationOk
+
+`func (o *ResourceRemoteInfo) GetCursorOrganizationOk() (*ResourceRemoteInfoCursorOrganization, bool)`
+
+GetCursorOrganizationOk returns a tuple with the CursorOrganization field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCursorOrganization
+
+`func (o *ResourceRemoteInfo) SetCursorOrganization(v ResourceRemoteInfoCursorOrganization)`
+
+SetCursorOrganization sets CursorOrganization field to given value.
+
+### HasCursorOrganization
+
+`func (o *ResourceRemoteInfo) HasCursorOrganization() bool`
+
+HasCursorOrganization returns a boolean if a field has been set.
+
+### GetOpenaiPlatformProject
+
+`func (o *ResourceRemoteInfo) GetOpenaiPlatformProject() ResourceRemoteInfoOpenaiPlatformProject`
+
+GetOpenaiPlatformProject returns the OpenaiPlatformProject field if non-nil, zero value otherwise.
+
+### GetOpenaiPlatformProjectOk
+
+`func (o *ResourceRemoteInfo) GetOpenaiPlatformProjectOk() (*ResourceRemoteInfoOpenaiPlatformProject, bool)`
+
+GetOpenaiPlatformProjectOk returns a tuple with the OpenaiPlatformProject field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpenaiPlatformProject
+
+`func (o *ResourceRemoteInfo) SetOpenaiPlatformProject(v ResourceRemoteInfoOpenaiPlatformProject)`
+
+SetOpenaiPlatformProject sets OpenaiPlatformProject field to given value.
+
+### HasOpenaiPlatformProject
+
+`func (o *ResourceRemoteInfo) HasOpenaiPlatformProject() bool`
+
+HasOpenaiPlatformProject returns a boolean if a field has been set.
+
+### GetOpenaiPlatformServiceAccount
+
+`func (o *ResourceRemoteInfo) GetOpenaiPlatformServiceAccount() ResourceRemoteInfoOpenaiPlatformServiceAccount`
+
+GetOpenaiPlatformServiceAccount returns the OpenaiPlatformServiceAccount field if non-nil, zero value otherwise.
+
+### GetOpenaiPlatformServiceAccountOk
+
+`func (o *ResourceRemoteInfo) GetOpenaiPlatformServiceAccountOk() (*ResourceRemoteInfoOpenaiPlatformServiceAccount, bool)`
+
+GetOpenaiPlatformServiceAccountOk returns a tuple with the OpenaiPlatformServiceAccount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpenaiPlatformServiceAccount
+
+`func (o *ResourceRemoteInfo) SetOpenaiPlatformServiceAccount(v ResourceRemoteInfoOpenaiPlatformServiceAccount)`
+
+SetOpenaiPlatformServiceAccount sets OpenaiPlatformServiceAccount field to given value.
+
+### HasOpenaiPlatformServiceAccount
+
+`func (o *ResourceRemoteInfo) HasOpenaiPlatformServiceAccount() bool`
+
+HasOpenaiPlatformServiceAccount returns a boolean if a field has been set.
+
+### GetAnthropicWorkspace
+
+`func (o *ResourceRemoteInfo) GetAnthropicWorkspace() ResourceRemoteInfoAnthropicWorkspace`
+
+GetAnthropicWorkspace returns the AnthropicWorkspace field if non-nil, zero value otherwise.
+
+### GetAnthropicWorkspaceOk
+
+`func (o *ResourceRemoteInfo) GetAnthropicWorkspaceOk() (*ResourceRemoteInfoAnthropicWorkspace, bool)`
+
+GetAnthropicWorkspaceOk returns a tuple with the AnthropicWorkspace field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAnthropicWorkspace
+
+`func (o *ResourceRemoteInfo) SetAnthropicWorkspace(v ResourceRemoteInfoAnthropicWorkspace)`
+
+SetAnthropicWorkspace sets AnthropicWorkspace field to given value.
+
+### HasAnthropicWorkspace
+
+`func (o *ResourceRemoteInfo) HasAnthropicWorkspace() bool`
+
+HasAnthropicWorkspace returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
