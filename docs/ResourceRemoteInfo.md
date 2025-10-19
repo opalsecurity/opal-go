@@ -4,6 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AzureSubscription** | Pointer to [**ResourceRemoteInfoAzureSubscription**](ResourceRemoteInfoAzureSubscription.md) |  | [optional] 
+**AzureResourceGroup** | Pointer to [**ResourceRemoteInfoAzureResourceGroup**](ResourceRemoteInfoAzureResourceGroup.md) |  | [optional] 
+**AzureManagementGroup** | Pointer to [**ResourceRemoteInfoAzureManagementGroup**](ResourceRemoteInfoAzureManagementGroup.md) |  | [optional] 
+**AzureVirtualMachine** | Pointer to [**ResourceRemoteInfoAzureVirtualMachine**](ResourceRemoteInfoAzureVirtualMachine.md) |  | [optional] 
+**AzureStorageAccount** | Pointer to [**ResourceRemoteInfoAzureStorageAccount**](ResourceRemoteInfoAzureStorageAccount.md) |  | [optional] 
+**AzureStorageContainer** | Pointer to [**ResourceRemoteInfoAzureStorageContainer**](ResourceRemoteInfoAzureStorageContainer.md) |  | [optional] 
+**AzureSqlServer** | Pointer to [**ResourceRemoteInfoAzureSqlServer**](ResourceRemoteInfoAzureSqlServer.md) |  | [optional] 
+**AzureSqlDatabase** | Pointer to [**ResourceRemoteInfoAzureSqlDatabase**](ResourceRemoteInfoAzureSqlDatabase.md) |  | [optional] 
+**AzureSqlManagedInstance** | Pointer to [**ResourceRemoteInfoAzureSqlManagedInstance**](ResourceRemoteInfoAzureSqlManagedInstance.md) |  | [optional] 
+**AzureSqlManagedDatabase** | Pointer to [**ResourceRemoteInfoAzureSqlManagedDatabase**](ResourceRemoteInfoAzureSqlManagedDatabase.md) |  | [optional] 
+**AzureUserAssignedManagedIdentity** | Pointer to [**ResourceRemoteInfoAzureUserAssignedManagedIdentity**](ResourceRemoteInfoAzureUserAssignedManagedIdentity.md) |  | [optional] 
+**AzureEnterpriseApp** | Pointer to [**ResourceRemoteInfoAzureEnterpriseApp**](ResourceRemoteInfoAzureEnterpriseApp.md) |  | [optional] 
+**AzureEntraIdRole** | Pointer to [**ResourceRemoteInfoAzureEntraIdRole**](ResourceRemoteInfoAzureEntraIdRole.md) |  | [optional] 
 **AwsOrganizationalUnit** | Pointer to [**ResourceRemoteInfoAwsOrganizationalUnit**](ResourceRemoteInfoAwsOrganizationalUnit.md) |  | [optional] 
 **AwsAccount** | Pointer to [**ResourceRemoteInfoAwsAccount**](ResourceRemoteInfoAwsAccount.md) |  | [optional] 
 **AwsPermissionSet** | Pointer to [**ResourceRemoteInfoAwsPermissionSet**](ResourceRemoteInfoAwsPermissionSet.md) |  | [optional] 
@@ -25,6 +38,7 @@ Name | Type | Description | Notes
 **GoogleWorkspaceRole** | Pointer to [**ResourceRemoteInfoGoogleWorkspaceRole**](ResourceRemoteInfoGoogleWorkspaceRole.md) |  | [optional] 
 **GithubRepo** | Pointer to [**ResourceRemoteInfoGithubRepo**](ResourceRemoteInfoGithubRepo.md) |  | [optional] 
 **GithubOrgRole** | Pointer to [**ResourceRemoteInfoGithubOrgRole**](ResourceRemoteInfoGithubOrgRole.md) |  | [optional] 
+**GithubOrg** | Pointer to [**ResourceRemoteInfoGithubOrg**](ResourceRemoteInfoGithubOrg.md) |  | [optional] 
 **GitlabProject** | Pointer to [**ResourceRemoteInfoGitlabProject**](ResourceRemoteInfoGitlabProject.md) |  | [optional] 
 **OktaApp** | Pointer to [**ResourceRemoteInfoOktaApp**](ResourceRemoteInfoOktaApp.md) |  | [optional] 
 **OktaStandardRole** | Pointer to [**ResourceRemoteInfoOktaStandardRole**](ResourceRemoteInfoOktaStandardRole.md) |  | [optional] 
@@ -36,6 +50,10 @@ Name | Type | Description | Notes
 **TeleportRole** | Pointer to [**ResourceRemoteInfoTeleportRole**](ResourceRemoteInfoTeleportRole.md) |  | [optional] 
 **DatastaxAstraRole** | Pointer to [**ResourceRemoteInfoDatastaxAstraRole**](ResourceRemoteInfoDatastaxAstraRole.md) |  | [optional] 
 **CoupaRole** | Pointer to [**ResourceRemoteInfoCoupaRole**](ResourceRemoteInfoCoupaRole.md) |  | [optional] 
+**CursorOrganization** | Pointer to [**ResourceRemoteInfoCursorOrganization**](ResourceRemoteInfoCursorOrganization.md) |  | [optional] 
+**OpenaiPlatformProject** | Pointer to [**ResourceRemoteInfoOpenaiPlatformProject**](ResourceRemoteInfoOpenaiPlatformProject.md) |  | [optional] 
+**OpenaiPlatformServiceAccount** | Pointer to [**ResourceRemoteInfoOpenaiPlatformServiceAccount**](ResourceRemoteInfoOpenaiPlatformServiceAccount.md) |  | [optional] 
+**AnthropicWorkspace** | Pointer to [**ResourceRemoteInfoAnthropicWorkspace**](ResourceRemoteInfoAnthropicWorkspace.md) |  | [optional] 
 
 ## Methods
 
@@ -55,6 +73,331 @@ will change when the set of required properties is changed
 NewResourceRemoteInfoWithDefaults instantiates a new ResourceRemoteInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAzureSubscription
+
+`func (o *ResourceRemoteInfo) GetAzureSubscription() ResourceRemoteInfoAzureSubscription`
+
+GetAzureSubscription returns the AzureSubscription field if non-nil, zero value otherwise.
+
+### GetAzureSubscriptionOk
+
+`func (o *ResourceRemoteInfo) GetAzureSubscriptionOk() (*ResourceRemoteInfoAzureSubscription, bool)`
+
+GetAzureSubscriptionOk returns a tuple with the AzureSubscription field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzureSubscription
+
+`func (o *ResourceRemoteInfo) SetAzureSubscription(v ResourceRemoteInfoAzureSubscription)`
+
+SetAzureSubscription sets AzureSubscription field to given value.
+
+### HasAzureSubscription
+
+`func (o *ResourceRemoteInfo) HasAzureSubscription() bool`
+
+HasAzureSubscription returns a boolean if a field has been set.
+
+### GetAzureResourceGroup
+
+`func (o *ResourceRemoteInfo) GetAzureResourceGroup() ResourceRemoteInfoAzureResourceGroup`
+
+GetAzureResourceGroup returns the AzureResourceGroup field if non-nil, zero value otherwise.
+
+### GetAzureResourceGroupOk
+
+`func (o *ResourceRemoteInfo) GetAzureResourceGroupOk() (*ResourceRemoteInfoAzureResourceGroup, bool)`
+
+GetAzureResourceGroupOk returns a tuple with the AzureResourceGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzureResourceGroup
+
+`func (o *ResourceRemoteInfo) SetAzureResourceGroup(v ResourceRemoteInfoAzureResourceGroup)`
+
+SetAzureResourceGroup sets AzureResourceGroup field to given value.
+
+### HasAzureResourceGroup
+
+`func (o *ResourceRemoteInfo) HasAzureResourceGroup() bool`
+
+HasAzureResourceGroup returns a boolean if a field has been set.
+
+### GetAzureManagementGroup
+
+`func (o *ResourceRemoteInfo) GetAzureManagementGroup() ResourceRemoteInfoAzureManagementGroup`
+
+GetAzureManagementGroup returns the AzureManagementGroup field if non-nil, zero value otherwise.
+
+### GetAzureManagementGroupOk
+
+`func (o *ResourceRemoteInfo) GetAzureManagementGroupOk() (*ResourceRemoteInfoAzureManagementGroup, bool)`
+
+GetAzureManagementGroupOk returns a tuple with the AzureManagementGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzureManagementGroup
+
+`func (o *ResourceRemoteInfo) SetAzureManagementGroup(v ResourceRemoteInfoAzureManagementGroup)`
+
+SetAzureManagementGroup sets AzureManagementGroup field to given value.
+
+### HasAzureManagementGroup
+
+`func (o *ResourceRemoteInfo) HasAzureManagementGroup() bool`
+
+HasAzureManagementGroup returns a boolean if a field has been set.
+
+### GetAzureVirtualMachine
+
+`func (o *ResourceRemoteInfo) GetAzureVirtualMachine() ResourceRemoteInfoAzureVirtualMachine`
+
+GetAzureVirtualMachine returns the AzureVirtualMachine field if non-nil, zero value otherwise.
+
+### GetAzureVirtualMachineOk
+
+`func (o *ResourceRemoteInfo) GetAzureVirtualMachineOk() (*ResourceRemoteInfoAzureVirtualMachine, bool)`
+
+GetAzureVirtualMachineOk returns a tuple with the AzureVirtualMachine field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzureVirtualMachine
+
+`func (o *ResourceRemoteInfo) SetAzureVirtualMachine(v ResourceRemoteInfoAzureVirtualMachine)`
+
+SetAzureVirtualMachine sets AzureVirtualMachine field to given value.
+
+### HasAzureVirtualMachine
+
+`func (o *ResourceRemoteInfo) HasAzureVirtualMachine() bool`
+
+HasAzureVirtualMachine returns a boolean if a field has been set.
+
+### GetAzureStorageAccount
+
+`func (o *ResourceRemoteInfo) GetAzureStorageAccount() ResourceRemoteInfoAzureStorageAccount`
+
+GetAzureStorageAccount returns the AzureStorageAccount field if non-nil, zero value otherwise.
+
+### GetAzureStorageAccountOk
+
+`func (o *ResourceRemoteInfo) GetAzureStorageAccountOk() (*ResourceRemoteInfoAzureStorageAccount, bool)`
+
+GetAzureStorageAccountOk returns a tuple with the AzureStorageAccount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzureStorageAccount
+
+`func (o *ResourceRemoteInfo) SetAzureStorageAccount(v ResourceRemoteInfoAzureStorageAccount)`
+
+SetAzureStorageAccount sets AzureStorageAccount field to given value.
+
+### HasAzureStorageAccount
+
+`func (o *ResourceRemoteInfo) HasAzureStorageAccount() bool`
+
+HasAzureStorageAccount returns a boolean if a field has been set.
+
+### GetAzureStorageContainer
+
+`func (o *ResourceRemoteInfo) GetAzureStorageContainer() ResourceRemoteInfoAzureStorageContainer`
+
+GetAzureStorageContainer returns the AzureStorageContainer field if non-nil, zero value otherwise.
+
+### GetAzureStorageContainerOk
+
+`func (o *ResourceRemoteInfo) GetAzureStorageContainerOk() (*ResourceRemoteInfoAzureStorageContainer, bool)`
+
+GetAzureStorageContainerOk returns a tuple with the AzureStorageContainer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzureStorageContainer
+
+`func (o *ResourceRemoteInfo) SetAzureStorageContainer(v ResourceRemoteInfoAzureStorageContainer)`
+
+SetAzureStorageContainer sets AzureStorageContainer field to given value.
+
+### HasAzureStorageContainer
+
+`func (o *ResourceRemoteInfo) HasAzureStorageContainer() bool`
+
+HasAzureStorageContainer returns a boolean if a field has been set.
+
+### GetAzureSqlServer
+
+`func (o *ResourceRemoteInfo) GetAzureSqlServer() ResourceRemoteInfoAzureSqlServer`
+
+GetAzureSqlServer returns the AzureSqlServer field if non-nil, zero value otherwise.
+
+### GetAzureSqlServerOk
+
+`func (o *ResourceRemoteInfo) GetAzureSqlServerOk() (*ResourceRemoteInfoAzureSqlServer, bool)`
+
+GetAzureSqlServerOk returns a tuple with the AzureSqlServer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzureSqlServer
+
+`func (o *ResourceRemoteInfo) SetAzureSqlServer(v ResourceRemoteInfoAzureSqlServer)`
+
+SetAzureSqlServer sets AzureSqlServer field to given value.
+
+### HasAzureSqlServer
+
+`func (o *ResourceRemoteInfo) HasAzureSqlServer() bool`
+
+HasAzureSqlServer returns a boolean if a field has been set.
+
+### GetAzureSqlDatabase
+
+`func (o *ResourceRemoteInfo) GetAzureSqlDatabase() ResourceRemoteInfoAzureSqlDatabase`
+
+GetAzureSqlDatabase returns the AzureSqlDatabase field if non-nil, zero value otherwise.
+
+### GetAzureSqlDatabaseOk
+
+`func (o *ResourceRemoteInfo) GetAzureSqlDatabaseOk() (*ResourceRemoteInfoAzureSqlDatabase, bool)`
+
+GetAzureSqlDatabaseOk returns a tuple with the AzureSqlDatabase field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzureSqlDatabase
+
+`func (o *ResourceRemoteInfo) SetAzureSqlDatabase(v ResourceRemoteInfoAzureSqlDatabase)`
+
+SetAzureSqlDatabase sets AzureSqlDatabase field to given value.
+
+### HasAzureSqlDatabase
+
+`func (o *ResourceRemoteInfo) HasAzureSqlDatabase() bool`
+
+HasAzureSqlDatabase returns a boolean if a field has been set.
+
+### GetAzureSqlManagedInstance
+
+`func (o *ResourceRemoteInfo) GetAzureSqlManagedInstance() ResourceRemoteInfoAzureSqlManagedInstance`
+
+GetAzureSqlManagedInstance returns the AzureSqlManagedInstance field if non-nil, zero value otherwise.
+
+### GetAzureSqlManagedInstanceOk
+
+`func (o *ResourceRemoteInfo) GetAzureSqlManagedInstanceOk() (*ResourceRemoteInfoAzureSqlManagedInstance, bool)`
+
+GetAzureSqlManagedInstanceOk returns a tuple with the AzureSqlManagedInstance field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzureSqlManagedInstance
+
+`func (o *ResourceRemoteInfo) SetAzureSqlManagedInstance(v ResourceRemoteInfoAzureSqlManagedInstance)`
+
+SetAzureSqlManagedInstance sets AzureSqlManagedInstance field to given value.
+
+### HasAzureSqlManagedInstance
+
+`func (o *ResourceRemoteInfo) HasAzureSqlManagedInstance() bool`
+
+HasAzureSqlManagedInstance returns a boolean if a field has been set.
+
+### GetAzureSqlManagedDatabase
+
+`func (o *ResourceRemoteInfo) GetAzureSqlManagedDatabase() ResourceRemoteInfoAzureSqlManagedDatabase`
+
+GetAzureSqlManagedDatabase returns the AzureSqlManagedDatabase field if non-nil, zero value otherwise.
+
+### GetAzureSqlManagedDatabaseOk
+
+`func (o *ResourceRemoteInfo) GetAzureSqlManagedDatabaseOk() (*ResourceRemoteInfoAzureSqlManagedDatabase, bool)`
+
+GetAzureSqlManagedDatabaseOk returns a tuple with the AzureSqlManagedDatabase field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzureSqlManagedDatabase
+
+`func (o *ResourceRemoteInfo) SetAzureSqlManagedDatabase(v ResourceRemoteInfoAzureSqlManagedDatabase)`
+
+SetAzureSqlManagedDatabase sets AzureSqlManagedDatabase field to given value.
+
+### HasAzureSqlManagedDatabase
+
+`func (o *ResourceRemoteInfo) HasAzureSqlManagedDatabase() bool`
+
+HasAzureSqlManagedDatabase returns a boolean if a field has been set.
+
+### GetAzureUserAssignedManagedIdentity
+
+`func (o *ResourceRemoteInfo) GetAzureUserAssignedManagedIdentity() ResourceRemoteInfoAzureUserAssignedManagedIdentity`
+
+GetAzureUserAssignedManagedIdentity returns the AzureUserAssignedManagedIdentity field if non-nil, zero value otherwise.
+
+### GetAzureUserAssignedManagedIdentityOk
+
+`func (o *ResourceRemoteInfo) GetAzureUserAssignedManagedIdentityOk() (*ResourceRemoteInfoAzureUserAssignedManagedIdentity, bool)`
+
+GetAzureUserAssignedManagedIdentityOk returns a tuple with the AzureUserAssignedManagedIdentity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzureUserAssignedManagedIdentity
+
+`func (o *ResourceRemoteInfo) SetAzureUserAssignedManagedIdentity(v ResourceRemoteInfoAzureUserAssignedManagedIdentity)`
+
+SetAzureUserAssignedManagedIdentity sets AzureUserAssignedManagedIdentity field to given value.
+
+### HasAzureUserAssignedManagedIdentity
+
+`func (o *ResourceRemoteInfo) HasAzureUserAssignedManagedIdentity() bool`
+
+HasAzureUserAssignedManagedIdentity returns a boolean if a field has been set.
+
+### GetAzureEnterpriseApp
+
+`func (o *ResourceRemoteInfo) GetAzureEnterpriseApp() ResourceRemoteInfoAzureEnterpriseApp`
+
+GetAzureEnterpriseApp returns the AzureEnterpriseApp field if non-nil, zero value otherwise.
+
+### GetAzureEnterpriseAppOk
+
+`func (o *ResourceRemoteInfo) GetAzureEnterpriseAppOk() (*ResourceRemoteInfoAzureEnterpriseApp, bool)`
+
+GetAzureEnterpriseAppOk returns a tuple with the AzureEnterpriseApp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzureEnterpriseApp
+
+`func (o *ResourceRemoteInfo) SetAzureEnterpriseApp(v ResourceRemoteInfoAzureEnterpriseApp)`
+
+SetAzureEnterpriseApp sets AzureEnterpriseApp field to given value.
+
+### HasAzureEnterpriseApp
+
+`func (o *ResourceRemoteInfo) HasAzureEnterpriseApp() bool`
+
+HasAzureEnterpriseApp returns a boolean if a field has been set.
+
+### GetAzureEntraIdRole
+
+`func (o *ResourceRemoteInfo) GetAzureEntraIdRole() ResourceRemoteInfoAzureEntraIdRole`
+
+GetAzureEntraIdRole returns the AzureEntraIdRole field if non-nil, zero value otherwise.
+
+### GetAzureEntraIdRoleOk
+
+`func (o *ResourceRemoteInfo) GetAzureEntraIdRoleOk() (*ResourceRemoteInfoAzureEntraIdRole, bool)`
+
+GetAzureEntraIdRoleOk returns a tuple with the AzureEntraIdRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzureEntraIdRole
+
+`func (o *ResourceRemoteInfo) SetAzureEntraIdRole(v ResourceRemoteInfoAzureEntraIdRole)`
+
+SetAzureEntraIdRole sets AzureEntraIdRole field to given value.
+
+### HasAzureEntraIdRole
+
+`func (o *ResourceRemoteInfo) HasAzureEntraIdRole() bool`
+
+HasAzureEntraIdRole returns a boolean if a field has been set.
 
 ### GetAwsOrganizationalUnit
 
@@ -581,6 +924,31 @@ SetGithubOrgRole sets GithubOrgRole field to given value.
 
 HasGithubOrgRole returns a boolean if a field has been set.
 
+### GetGithubOrg
+
+`func (o *ResourceRemoteInfo) GetGithubOrg() ResourceRemoteInfoGithubOrg`
+
+GetGithubOrg returns the GithubOrg field if non-nil, zero value otherwise.
+
+### GetGithubOrgOk
+
+`func (o *ResourceRemoteInfo) GetGithubOrgOk() (*ResourceRemoteInfoGithubOrg, bool)`
+
+GetGithubOrgOk returns a tuple with the GithubOrg field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGithubOrg
+
+`func (o *ResourceRemoteInfo) SetGithubOrg(v ResourceRemoteInfoGithubOrg)`
+
+SetGithubOrg sets GithubOrg field to given value.
+
+### HasGithubOrg
+
+`func (o *ResourceRemoteInfo) HasGithubOrg() bool`
+
+HasGithubOrg returns a boolean if a field has been set.
+
 ### GetGitlabProject
 
 `func (o *ResourceRemoteInfo) GetGitlabProject() ResourceRemoteInfoGitlabProject`
@@ -855,6 +1223,106 @@ SetCoupaRole sets CoupaRole field to given value.
 `func (o *ResourceRemoteInfo) HasCoupaRole() bool`
 
 HasCoupaRole returns a boolean if a field has been set.
+
+### GetCursorOrganization
+
+`func (o *ResourceRemoteInfo) GetCursorOrganization() ResourceRemoteInfoCursorOrganization`
+
+GetCursorOrganization returns the CursorOrganization field if non-nil, zero value otherwise.
+
+### GetCursorOrganizationOk
+
+`func (o *ResourceRemoteInfo) GetCursorOrganizationOk() (*ResourceRemoteInfoCursorOrganization, bool)`
+
+GetCursorOrganizationOk returns a tuple with the CursorOrganization field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCursorOrganization
+
+`func (o *ResourceRemoteInfo) SetCursorOrganization(v ResourceRemoteInfoCursorOrganization)`
+
+SetCursorOrganization sets CursorOrganization field to given value.
+
+### HasCursorOrganization
+
+`func (o *ResourceRemoteInfo) HasCursorOrganization() bool`
+
+HasCursorOrganization returns a boolean if a field has been set.
+
+### GetOpenaiPlatformProject
+
+`func (o *ResourceRemoteInfo) GetOpenaiPlatformProject() ResourceRemoteInfoOpenaiPlatformProject`
+
+GetOpenaiPlatformProject returns the OpenaiPlatformProject field if non-nil, zero value otherwise.
+
+### GetOpenaiPlatformProjectOk
+
+`func (o *ResourceRemoteInfo) GetOpenaiPlatformProjectOk() (*ResourceRemoteInfoOpenaiPlatformProject, bool)`
+
+GetOpenaiPlatformProjectOk returns a tuple with the OpenaiPlatformProject field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpenaiPlatformProject
+
+`func (o *ResourceRemoteInfo) SetOpenaiPlatformProject(v ResourceRemoteInfoOpenaiPlatformProject)`
+
+SetOpenaiPlatformProject sets OpenaiPlatformProject field to given value.
+
+### HasOpenaiPlatformProject
+
+`func (o *ResourceRemoteInfo) HasOpenaiPlatformProject() bool`
+
+HasOpenaiPlatformProject returns a boolean if a field has been set.
+
+### GetOpenaiPlatformServiceAccount
+
+`func (o *ResourceRemoteInfo) GetOpenaiPlatformServiceAccount() ResourceRemoteInfoOpenaiPlatformServiceAccount`
+
+GetOpenaiPlatformServiceAccount returns the OpenaiPlatformServiceAccount field if non-nil, zero value otherwise.
+
+### GetOpenaiPlatformServiceAccountOk
+
+`func (o *ResourceRemoteInfo) GetOpenaiPlatformServiceAccountOk() (*ResourceRemoteInfoOpenaiPlatformServiceAccount, bool)`
+
+GetOpenaiPlatformServiceAccountOk returns a tuple with the OpenaiPlatformServiceAccount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpenaiPlatformServiceAccount
+
+`func (o *ResourceRemoteInfo) SetOpenaiPlatformServiceAccount(v ResourceRemoteInfoOpenaiPlatformServiceAccount)`
+
+SetOpenaiPlatformServiceAccount sets OpenaiPlatformServiceAccount field to given value.
+
+### HasOpenaiPlatformServiceAccount
+
+`func (o *ResourceRemoteInfo) HasOpenaiPlatformServiceAccount() bool`
+
+HasOpenaiPlatformServiceAccount returns a boolean if a field has been set.
+
+### GetAnthropicWorkspace
+
+`func (o *ResourceRemoteInfo) GetAnthropicWorkspace() ResourceRemoteInfoAnthropicWorkspace`
+
+GetAnthropicWorkspace returns the AnthropicWorkspace field if non-nil, zero value otherwise.
+
+### GetAnthropicWorkspaceOk
+
+`func (o *ResourceRemoteInfo) GetAnthropicWorkspaceOk() (*ResourceRemoteInfoAnthropicWorkspace, bool)`
+
+GetAnthropicWorkspaceOk returns a tuple with the AnthropicWorkspace field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAnthropicWorkspace
+
+`func (o *ResourceRemoteInfo) SetAnthropicWorkspace(v ResourceRemoteInfoAnthropicWorkspace)`
+
+SetAnthropicWorkspace sets AnthropicWorkspace field to given value.
+
+### HasAnthropicWorkspace
+
+`func (o *ResourceRemoteInfo) HasAnthropicWorkspace() bool`
+
+HasAnthropicWorkspace returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
