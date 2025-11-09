@@ -82,8 +82,8 @@ Class | Method | HTTP request | Description
 *AccessRulesAPI* | [**CreateAccessRule**](docs/AccessRulesAPI.md#createaccessrule) | **Post** /access-rules | 
 *AccessRulesAPI* | [**GetAccessRule**](docs/AccessRulesAPI.md#getaccessrule) | **Get** /access-rules/{access_rule_id} | 
 *AccessRulesAPI* | [**UpdateAccessRule**](docs/AccessRulesAPI.md#updateaccessrule) | **Put** /access-rules/{access_rule_id} | 
-*AppsAPI* | [**GetApp**](docs/AppsAPI.md#getapp) | **Get** /apps/{app_id} | 
-*AppsAPI* | [**GetApps**](docs/AppsAPI.md#getapps) | **Get** /apps | 
+*AppsAPI* | [**GetApp**](docs/AppsAPI.md#getapp) | **Get** /apps/{app_id} | Get app by ID
+*AppsAPI* | [**GetApps**](docs/AppsAPI.md#getapps) | **Get** /apps | Get apps
 *AppsAPI* | [**GetSyncErrors**](docs/AppsAPI.md#getsyncerrors) | **Get** /sync_errors | 
 *BundlesAPI* | [**AddBundleGroup**](docs/BundlesAPI.md#addbundlegroup) | **Post** /bundles/{bundle_id}/groups | 
 *BundlesAPI* | [**AddBundleResource**](docs/BundlesAPI.md#addbundleresource) | **Post** /bundles/{bundle_id}/resources | 
@@ -104,8 +104,8 @@ Class | Method | HTTP request | Description
 *ConfigurationTemplatesAPI* | [**UpdateConfigurationTemplate**](docs/ConfigurationTemplatesAPI.md#updateconfigurationtemplate) | **Put** /configuration-templates | 
 *DelegationsAPI* | [**CreateDelegation**](docs/DelegationsAPI.md#createdelegation) | **Post** /delegations | 
 *DelegationsAPI* | [**DeleteDelegation**](docs/DelegationsAPI.md#deletedelegation) | **Delete** /delegations/{delegation_id} | 
-*DelegationsAPI* | [**GetDelegation**](docs/DelegationsAPI.md#getdelegation) | **Get** /delegations/{delegation_id} | 
-*DelegationsAPI* | [**GetDelegations**](docs/DelegationsAPI.md#getdelegations) | **Get** /delegations | 
+*DelegationsAPI* | [**GetDelegation**](docs/DelegationsAPI.md#getdelegation) | **Get** /delegations/{delegation_id} | Get delegation by ID
+*DelegationsAPI* | [**GetDelegations**](docs/DelegationsAPI.md#getdelegations) | **Get** /delegations | Get delegations
 *EventsAPI* | [**Events**](docs/EventsAPI.md#events) | **Get** /events | 
 *GroupBindingsAPI* | [**CreateGroupBinding**](docs/GroupBindingsAPI.md#creategroupbinding) | **Post** /group-bindings | 
 *GroupBindingsAPI* | [**DeleteGroupBinding**](docs/GroupBindingsAPI.md#deletegroupbinding) | **Delete** /group-bindings/{group_binding_id} | 
@@ -275,8 +275,11 @@ Class | Method | HTTP request | Description
  - [GroupContainingGroupList](docs/GroupContainingGroupList.md)
  - [GroupRemoteInfo](docs/GroupRemoteInfo.md)
  - [GroupRemoteInfoActiveDirectoryGroup](docs/GroupRemoteInfoActiveDirectoryGroup.md)
+ - [GroupRemoteInfoAwsSsoGroup](docs/GroupRemoteInfoAwsSsoGroup.md)
  - [GroupRemoteInfoAzureAdMicrosoft365Group](docs/GroupRemoteInfoAzureAdMicrosoft365Group.md)
  - [GroupRemoteInfoAzureAdSecurityGroup](docs/GroupRemoteInfoAzureAdSecurityGroup.md)
+ - [GroupRemoteInfoConnectorGroup](docs/GroupRemoteInfoConnectorGroup.md)
+ - [GroupRemoteInfoDatabricksAccountGroup](docs/GroupRemoteInfoDatabricksAccountGroup.md)
  - [GroupRemoteInfoDuoGroup](docs/GroupRemoteInfoDuoGroup.md)
  - [GroupRemoteInfoGithubTeam](docs/GroupRemoteInfoGithubTeam.md)
  - [GroupRemoteInfoGitlabGroup](docs/GroupRemoteInfoGitlabGroup.md)
@@ -285,6 +288,7 @@ Class | Method | HTTP request | Description
  - [GroupRemoteInfoOktaGroup](docs/GroupRemoteInfoOktaGroup.md)
  - [GroupRemoteInfoOktaGroupRule](docs/GroupRemoteInfoOktaGroupRule.md)
  - [GroupRemoteInfoSnowflakeRole](docs/GroupRemoteInfoSnowflakeRole.md)
+ - [GroupRemoteInfoTailscaleGroup](docs/GroupRemoteInfoTailscaleGroup.md)
  - [GroupRemoteInfoWorkdayUserSecurityGroup](docs/GroupRemoteInfoWorkdayUserSecurityGroup.md)
  - [GroupResource](docs/GroupResource.md)
  - [GroupResourceList](docs/GroupResourceList.md)
@@ -321,6 +325,7 @@ Class | Method | HTTP request | Description
  - [PaginatedUsersList](docs/PaginatedUsersList.md)
  - [PropagationStatus](docs/PropagationStatus.md)
  - [PropagationStatusEnum](docs/PropagationStatusEnum.md)
+ - [RDSEngineEnum](docs/RDSEngineEnum.md)
  - [RemoteUser](docs/RemoteUser.md)
  - [Request](docs/Request.md)
  - [RequestApprovalEnum](docs/RequestApprovalEnum.md)
@@ -345,15 +350,32 @@ Class | Method | HTTP request | Description
  - [ResourceAccessUserList](docs/ResourceAccessUserList.md)
  - [ResourceNHI](docs/ResourceNHI.md)
  - [ResourceRemoteInfo](docs/ResourceRemoteInfo.md)
+ - [ResourceRemoteInfoAnthropicWorkspace](docs/ResourceRemoteInfoAnthropicWorkspace.md)
  - [ResourceRemoteInfoAwsAccount](docs/ResourceRemoteInfoAwsAccount.md)
  - [ResourceRemoteInfoAwsEc2Instance](docs/ResourceRemoteInfoAwsEc2Instance.md)
  - [ResourceRemoteInfoAwsEksCluster](docs/ResourceRemoteInfoAwsEksCluster.md)
  - [ResourceRemoteInfoAwsIamRole](docs/ResourceRemoteInfoAwsIamRole.md)
  - [ResourceRemoteInfoAwsOrganizationalUnit](docs/ResourceRemoteInfoAwsOrganizationalUnit.md)
  - [ResourceRemoteInfoAwsPermissionSet](docs/ResourceRemoteInfoAwsPermissionSet.md)
+ - [ResourceRemoteInfoAwsRdsCluster](docs/ResourceRemoteInfoAwsRdsCluster.md)
  - [ResourceRemoteInfoAwsRdsInstance](docs/ResourceRemoteInfoAwsRdsInstance.md)
+ - [ResourceRemoteInfoAzureEnterpriseApp](docs/ResourceRemoteInfoAzureEnterpriseApp.md)
+ - [ResourceRemoteInfoAzureEntraIdRole](docs/ResourceRemoteInfoAzureEntraIdRole.md)
+ - [ResourceRemoteInfoAzureManagementGroup](docs/ResourceRemoteInfoAzureManagementGroup.md)
+ - [ResourceRemoteInfoAzureResourceGroup](docs/ResourceRemoteInfoAzureResourceGroup.md)
+ - [ResourceRemoteInfoAzureSqlDatabase](docs/ResourceRemoteInfoAzureSqlDatabase.md)
+ - [ResourceRemoteInfoAzureSqlManagedDatabase](docs/ResourceRemoteInfoAzureSqlManagedDatabase.md)
+ - [ResourceRemoteInfoAzureSqlManagedInstance](docs/ResourceRemoteInfoAzureSqlManagedInstance.md)
+ - [ResourceRemoteInfoAzureSqlServer](docs/ResourceRemoteInfoAzureSqlServer.md)
+ - [ResourceRemoteInfoAzureStorageAccount](docs/ResourceRemoteInfoAzureStorageAccount.md)
+ - [ResourceRemoteInfoAzureStorageContainer](docs/ResourceRemoteInfoAzureStorageContainer.md)
+ - [ResourceRemoteInfoAzureSubscription](docs/ResourceRemoteInfoAzureSubscription.md)
+ - [ResourceRemoteInfoAzureUserAssignedManagedIdentity](docs/ResourceRemoteInfoAzureUserAssignedManagedIdentity.md)
+ - [ResourceRemoteInfoAzureVirtualMachine](docs/ResourceRemoteInfoAzureVirtualMachine.md)
  - [ResourceRemoteInfoCoupaRole](docs/ResourceRemoteInfoCoupaRole.md)
+ - [ResourceRemoteInfoCursorOrganization](docs/ResourceRemoteInfoCursorOrganization.md)
  - [ResourceRemoteInfoCustomConnector](docs/ResourceRemoteInfoCustomConnector.md)
+ - [ResourceRemoteInfoDatabricksAccountServicePrincipal](docs/ResourceRemoteInfoDatabricksAccountServicePrincipal.md)
  - [ResourceRemoteInfoDatastaxAstraRole](docs/ResourceRemoteInfoDatastaxAstraRole.md)
  - [ResourceRemoteInfoGcpBigQueryDataset](docs/ResourceRemoteInfoGcpBigQueryDataset.md)
  - [ResourceRemoteInfoGcpBigQueryTable](docs/ResourceRemoteInfoGcpBigQueryTable.md)
@@ -365,18 +387,28 @@ Class | Method | HTTP request | Description
  - [ResourceRemoteInfoGcpProject](docs/ResourceRemoteInfoGcpProject.md)
  - [ResourceRemoteInfoGcpServiceAccount](docs/ResourceRemoteInfoGcpServiceAccount.md)
  - [ResourceRemoteInfoGcpSqlInstance](docs/ResourceRemoteInfoGcpSqlInstance.md)
+ - [ResourceRemoteInfoGithubOrg](docs/ResourceRemoteInfoGithubOrg.md)
  - [ResourceRemoteInfoGithubOrgRole](docs/ResourceRemoteInfoGithubOrgRole.md)
  - [ResourceRemoteInfoGithubRepo](docs/ResourceRemoteInfoGithubRepo.md)
  - [ResourceRemoteInfoGitlabProject](docs/ResourceRemoteInfoGitlabProject.md)
  - [ResourceRemoteInfoGoogleWorkspaceRole](docs/ResourceRemoteInfoGoogleWorkspaceRole.md)
+ - [ResourceRemoteInfoIlevelAdvancedRole](docs/ResourceRemoteInfoIlevelAdvancedRole.md)
  - [ResourceRemoteInfoOktaApp](docs/ResourceRemoteInfoOktaApp.md)
  - [ResourceRemoteInfoOktaCustomRole](docs/ResourceRemoteInfoOktaCustomRole.md)
  - [ResourceRemoteInfoOktaStandardRole](docs/ResourceRemoteInfoOktaStandardRole.md)
+ - [ResourceRemoteInfoOpenaiPlatformProject](docs/ResourceRemoteInfoOpenaiPlatformProject.md)
+ - [ResourceRemoteInfoOpenaiPlatformServiceAccount](docs/ResourceRemoteInfoOpenaiPlatformServiceAccount.md)
+ - [ResourceRemoteInfoOracleFusionRole](docs/ResourceRemoteInfoOracleFusionRole.md)
  - [ResourceRemoteInfoPagerdutyRole](docs/ResourceRemoteInfoPagerdutyRole.md)
  - [ResourceRemoteInfoSalesforcePermissionSet](docs/ResourceRemoteInfoSalesforcePermissionSet.md)
  - [ResourceRemoteInfoSalesforceProfile](docs/ResourceRemoteInfoSalesforceProfile.md)
  - [ResourceRemoteInfoSalesforceRole](docs/ResourceRemoteInfoSalesforceRole.md)
+ - [ResourceRemoteInfoSnowflakeDatabase](docs/ResourceRemoteInfoSnowflakeDatabase.md)
+ - [ResourceRemoteInfoSnowflakeSchema](docs/ResourceRemoteInfoSnowflakeSchema.md)
+ - [ResourceRemoteInfoSnowflakeTable](docs/ResourceRemoteInfoSnowflakeTable.md)
+ - [ResourceRemoteInfoTailscaleSsh](docs/ResourceRemoteInfoTailscaleSsh.md)
  - [ResourceRemoteInfoTeleportRole](docs/ResourceRemoteInfoTeleportRole.md)
+ - [ResourceRemoteInfoWorkdayRole](docs/ResourceRemoteInfoWorkdayRole.md)
  - [ResourceTypeEnum](docs/ResourceTypeEnum.md)
  - [ResourceUser](docs/ResourceUser.md)
  - [ResourceUserAccessStatus](docs/ResourceUserAccessStatus.md)
