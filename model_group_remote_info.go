@@ -21,6 +21,10 @@ var _ MappedNullable = &GroupRemoteInfo{}
 // GroupRemoteInfo Information that defines the remote group. This replaces the deprecated remote_id and metadata fields. If remote_info is provided, a group will be imported into Opal. For group types that support group creation through Opal, a new group will be created if remote_info is not provided.
 type GroupRemoteInfo struct {
 	ActiveDirectoryGroup *GroupRemoteInfoActiveDirectoryGroup `json:"active_directory_group,omitempty"`
+	TailscaleGroup *GroupRemoteInfoTailscaleGroup `json:"tailscale_group,omitempty"`
+	AwsSsoGroup *GroupRemoteInfoAwsSsoGroup `json:"aws_sso_group,omitempty"`
+	DatabricksAccountGroup *GroupRemoteInfoDatabricksAccountGroup `json:"databricks_account_group,omitempty"`
+	ConnectorGroup *GroupRemoteInfoConnectorGroup `json:"connector_group,omitempty"`
 	GithubTeam *GroupRemoteInfoGithubTeam `json:"github_team,omitempty"`
 	GitlabGroup *GroupRemoteInfoGitlabGroup `json:"gitlab_group,omitempty"`
 	GoogleGroup *GroupRemoteInfoGoogleGroup `json:"google_group,omitempty"`
@@ -32,6 +36,8 @@ type GroupRemoteInfo struct {
 	SnowflakeRole *GroupRemoteInfoSnowflakeRole `json:"snowflake_role,omitempty"`
 	OktaGroupRule *GroupRemoteInfoOktaGroupRule `json:"okta_group_rule,omitempty"`
 	WorkdayUserSecurityGroup *GroupRemoteInfoWorkdayUserSecurityGroup `json:"workday_user_security_group,omitempty"`
+	PagerdutyOnCallSchedule *GroupRemoteInfoPagerdutyOnCallSchedule `json:"pagerduty_on_call_schedule,omitempty"`
+	IncidentioOnCallSchedule *GroupRemoteInfoIncidentioOnCallSchedule `json:"incidentio_on_call_schedule,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -84,6 +90,134 @@ func (o *GroupRemoteInfo) HasActiveDirectoryGroup() bool {
 // SetActiveDirectoryGroup gets a reference to the given GroupRemoteInfoActiveDirectoryGroup and assigns it to the ActiveDirectoryGroup field.
 func (o *GroupRemoteInfo) SetActiveDirectoryGroup(v GroupRemoteInfoActiveDirectoryGroup) {
 	o.ActiveDirectoryGroup = &v
+}
+
+// GetTailscaleGroup returns the TailscaleGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetTailscaleGroup() GroupRemoteInfoTailscaleGroup {
+	if o == nil || IsNil(o.TailscaleGroup) {
+		var ret GroupRemoteInfoTailscaleGroup
+		return ret
+	}
+	return *o.TailscaleGroup
+}
+
+// GetTailscaleGroupOk returns a tuple with the TailscaleGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetTailscaleGroupOk() (*GroupRemoteInfoTailscaleGroup, bool) {
+	if o == nil || IsNil(o.TailscaleGroup) {
+		return nil, false
+	}
+	return o.TailscaleGroup, true
+}
+
+// HasTailscaleGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasTailscaleGroup() bool {
+	if o != nil && !IsNil(o.TailscaleGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetTailscaleGroup gets a reference to the given GroupRemoteInfoTailscaleGroup and assigns it to the TailscaleGroup field.
+func (o *GroupRemoteInfo) SetTailscaleGroup(v GroupRemoteInfoTailscaleGroup) {
+	o.TailscaleGroup = &v
+}
+
+// GetAwsSsoGroup returns the AwsSsoGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetAwsSsoGroup() GroupRemoteInfoAwsSsoGroup {
+	if o == nil || IsNil(o.AwsSsoGroup) {
+		var ret GroupRemoteInfoAwsSsoGroup
+		return ret
+	}
+	return *o.AwsSsoGroup
+}
+
+// GetAwsSsoGroupOk returns a tuple with the AwsSsoGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetAwsSsoGroupOk() (*GroupRemoteInfoAwsSsoGroup, bool) {
+	if o == nil || IsNil(o.AwsSsoGroup) {
+		return nil, false
+	}
+	return o.AwsSsoGroup, true
+}
+
+// HasAwsSsoGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasAwsSsoGroup() bool {
+	if o != nil && !IsNil(o.AwsSsoGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetAwsSsoGroup gets a reference to the given GroupRemoteInfoAwsSsoGroup and assigns it to the AwsSsoGroup field.
+func (o *GroupRemoteInfo) SetAwsSsoGroup(v GroupRemoteInfoAwsSsoGroup) {
+	o.AwsSsoGroup = &v
+}
+
+// GetDatabricksAccountGroup returns the DatabricksAccountGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetDatabricksAccountGroup() GroupRemoteInfoDatabricksAccountGroup {
+	if o == nil || IsNil(o.DatabricksAccountGroup) {
+		var ret GroupRemoteInfoDatabricksAccountGroup
+		return ret
+	}
+	return *o.DatabricksAccountGroup
+}
+
+// GetDatabricksAccountGroupOk returns a tuple with the DatabricksAccountGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetDatabricksAccountGroupOk() (*GroupRemoteInfoDatabricksAccountGroup, bool) {
+	if o == nil || IsNil(o.DatabricksAccountGroup) {
+		return nil, false
+	}
+	return o.DatabricksAccountGroup, true
+}
+
+// HasDatabricksAccountGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasDatabricksAccountGroup() bool {
+	if o != nil && !IsNil(o.DatabricksAccountGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetDatabricksAccountGroup gets a reference to the given GroupRemoteInfoDatabricksAccountGroup and assigns it to the DatabricksAccountGroup field.
+func (o *GroupRemoteInfo) SetDatabricksAccountGroup(v GroupRemoteInfoDatabricksAccountGroup) {
+	o.DatabricksAccountGroup = &v
+}
+
+// GetConnectorGroup returns the ConnectorGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetConnectorGroup() GroupRemoteInfoConnectorGroup {
+	if o == nil || IsNil(o.ConnectorGroup) {
+		var ret GroupRemoteInfoConnectorGroup
+		return ret
+	}
+	return *o.ConnectorGroup
+}
+
+// GetConnectorGroupOk returns a tuple with the ConnectorGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetConnectorGroupOk() (*GroupRemoteInfoConnectorGroup, bool) {
+	if o == nil || IsNil(o.ConnectorGroup) {
+		return nil, false
+	}
+	return o.ConnectorGroup, true
+}
+
+// HasConnectorGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasConnectorGroup() bool {
+	if o != nil && !IsNil(o.ConnectorGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetConnectorGroup gets a reference to the given GroupRemoteInfoConnectorGroup and assigns it to the ConnectorGroup field.
+func (o *GroupRemoteInfo) SetConnectorGroup(v GroupRemoteInfoConnectorGroup) {
+	o.ConnectorGroup = &v
 }
 
 // GetGithubTeam returns the GithubTeam field value if set, zero value otherwise.
@@ -438,6 +572,70 @@ func (o *GroupRemoteInfo) SetWorkdayUserSecurityGroup(v GroupRemoteInfoWorkdayUs
 	o.WorkdayUserSecurityGroup = &v
 }
 
+// GetPagerdutyOnCallSchedule returns the PagerdutyOnCallSchedule field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetPagerdutyOnCallSchedule() GroupRemoteInfoPagerdutyOnCallSchedule {
+	if o == nil || IsNil(o.PagerdutyOnCallSchedule) {
+		var ret GroupRemoteInfoPagerdutyOnCallSchedule
+		return ret
+	}
+	return *o.PagerdutyOnCallSchedule
+}
+
+// GetPagerdutyOnCallScheduleOk returns a tuple with the PagerdutyOnCallSchedule field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetPagerdutyOnCallScheduleOk() (*GroupRemoteInfoPagerdutyOnCallSchedule, bool) {
+	if o == nil || IsNil(o.PagerdutyOnCallSchedule) {
+		return nil, false
+	}
+	return o.PagerdutyOnCallSchedule, true
+}
+
+// HasPagerdutyOnCallSchedule returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasPagerdutyOnCallSchedule() bool {
+	if o != nil && !IsNil(o.PagerdutyOnCallSchedule) {
+		return true
+	}
+
+	return false
+}
+
+// SetPagerdutyOnCallSchedule gets a reference to the given GroupRemoteInfoPagerdutyOnCallSchedule and assigns it to the PagerdutyOnCallSchedule field.
+func (o *GroupRemoteInfo) SetPagerdutyOnCallSchedule(v GroupRemoteInfoPagerdutyOnCallSchedule) {
+	o.PagerdutyOnCallSchedule = &v
+}
+
+// GetIncidentioOnCallSchedule returns the IncidentioOnCallSchedule field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetIncidentioOnCallSchedule() GroupRemoteInfoIncidentioOnCallSchedule {
+	if o == nil || IsNil(o.IncidentioOnCallSchedule) {
+		var ret GroupRemoteInfoIncidentioOnCallSchedule
+		return ret
+	}
+	return *o.IncidentioOnCallSchedule
+}
+
+// GetIncidentioOnCallScheduleOk returns a tuple with the IncidentioOnCallSchedule field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetIncidentioOnCallScheduleOk() (*GroupRemoteInfoIncidentioOnCallSchedule, bool) {
+	if o == nil || IsNil(o.IncidentioOnCallSchedule) {
+		return nil, false
+	}
+	return o.IncidentioOnCallSchedule, true
+}
+
+// HasIncidentioOnCallSchedule returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasIncidentioOnCallSchedule() bool {
+	if o != nil && !IsNil(o.IncidentioOnCallSchedule) {
+		return true
+	}
+
+	return false
+}
+
+// SetIncidentioOnCallSchedule gets a reference to the given GroupRemoteInfoIncidentioOnCallSchedule and assigns it to the IncidentioOnCallSchedule field.
+func (o *GroupRemoteInfo) SetIncidentioOnCallSchedule(v GroupRemoteInfoIncidentioOnCallSchedule) {
+	o.IncidentioOnCallSchedule = &v
+}
+
 func (o GroupRemoteInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -450,6 +648,18 @@ func (o GroupRemoteInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.ActiveDirectoryGroup) {
 		toSerialize["active_directory_group"] = o.ActiveDirectoryGroup
+	}
+	if !IsNil(o.TailscaleGroup) {
+		toSerialize["tailscale_group"] = o.TailscaleGroup
+	}
+	if !IsNil(o.AwsSsoGroup) {
+		toSerialize["aws_sso_group"] = o.AwsSsoGroup
+	}
+	if !IsNil(o.DatabricksAccountGroup) {
+		toSerialize["databricks_account_group"] = o.DatabricksAccountGroup
+	}
+	if !IsNil(o.ConnectorGroup) {
+		toSerialize["connector_group"] = o.ConnectorGroup
 	}
 	if !IsNil(o.GithubTeam) {
 		toSerialize["github_team"] = o.GithubTeam
@@ -484,6 +694,12 @@ func (o GroupRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WorkdayUserSecurityGroup) {
 		toSerialize["workday_user_security_group"] = o.WorkdayUserSecurityGroup
 	}
+	if !IsNil(o.PagerdutyOnCallSchedule) {
+		toSerialize["pagerduty_on_call_schedule"] = o.PagerdutyOnCallSchedule
+	}
+	if !IsNil(o.IncidentioOnCallSchedule) {
+		toSerialize["incidentio_on_call_schedule"] = o.IncidentioOnCallSchedule
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -507,6 +723,10 @@ func (o *GroupRemoteInfo) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "active_directory_group")
+		delete(additionalProperties, "tailscale_group")
+		delete(additionalProperties, "aws_sso_group")
+		delete(additionalProperties, "databricks_account_group")
+		delete(additionalProperties, "connector_group")
 		delete(additionalProperties, "github_team")
 		delete(additionalProperties, "gitlab_group")
 		delete(additionalProperties, "google_group")
@@ -518,6 +738,8 @@ func (o *GroupRemoteInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "snowflake_role")
 		delete(additionalProperties, "okta_group_rule")
 		delete(additionalProperties, "workday_user_security_group")
+		delete(additionalProperties, "pagerduty_on_call_schedule")
+		delete(additionalProperties, "incidentio_on_call_schedule")
 		o.AdditionalProperties = additionalProperties
 	}
 
