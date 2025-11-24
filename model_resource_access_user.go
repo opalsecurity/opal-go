@@ -24,6 +24,10 @@ var _ MappedNullable = &ResourceAccessUser{}
 type ResourceAccessUser struct {
 	// The ID of the resource.
 	ResourceId string `json:"resource_id"`
+	// The name of the resource.
+	ResourceName *string `json:"resource_name,omitempty"`
+	// The description of the resource.
+	Description *string `json:"description,omitempty"`
 	// The ID of the user.
 	UserId string `json:"user_id"`
 	AccessLevel ResourceAccessLevel `json:"access_level"`
@@ -89,6 +93,70 @@ func (o *ResourceAccessUser) GetResourceIdOk() (*string, bool) {
 // SetResourceId sets field value
 func (o *ResourceAccessUser) SetResourceId(v string) {
 	o.ResourceId = v
+}
+
+// GetResourceName returns the ResourceName field value if set, zero value otherwise.
+func (o *ResourceAccessUser) GetResourceName() string {
+	if o == nil || IsNil(o.ResourceName) {
+		var ret string
+		return ret
+	}
+	return *o.ResourceName
+}
+
+// GetResourceNameOk returns a tuple with the ResourceName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceAccessUser) GetResourceNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ResourceName) {
+		return nil, false
+	}
+	return o.ResourceName, true
+}
+
+// HasResourceName returns a boolean if a field has been set.
+func (o *ResourceAccessUser) HasResourceName() bool {
+	if o != nil && !IsNil(o.ResourceName) {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceName gets a reference to the given string and assigns it to the ResourceName field.
+func (o *ResourceAccessUser) SetResourceName(v string) {
+	o.ResourceName = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *ResourceAccessUser) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceAccessUser) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *ResourceAccessUser) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *ResourceAccessUser) SetDescription(v string) {
+	o.Description = &v
 }
 
 // GetUserId returns the UserId field value
@@ -310,6 +378,12 @@ func (o ResourceAccessUser) MarshalJSON() ([]byte, error) {
 func (o ResourceAccessUser) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["resource_id"] = o.ResourceId
+	if !IsNil(o.ResourceName) {
+		toSerialize["resource_name"] = o.ResourceName
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
 	toSerialize["user_id"] = o.UserId
 	toSerialize["access_level"] = o.AccessLevel
 	toSerialize["full_name"] = o.FullName
@@ -372,6 +446,8 @@ func (o *ResourceAccessUser) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "resource_id")
+		delete(additionalProperties, "resource_name")
+		delete(additionalProperties, "description")
 		delete(additionalProperties, "user_id")
 		delete(additionalProperties, "access_level")
 		delete(additionalProperties, "full_name")
