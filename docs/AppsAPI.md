@@ -4,8 +4,8 @@ All URIs are relative to *https://api.opal.dev/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetApp**](AppsAPI.md#GetApp) | **Get** /apps/{app_id} | 
-[**GetApps**](AppsAPI.md#GetApps) | **Get** /apps | 
+[**GetApp**](AppsAPI.md#GetApp) | **Get** /apps/{app_id} | Get app by ID
+[**GetApps**](AppsAPI.md#GetApps) | **Get** /apps | Get apps
 [**GetSyncErrors**](AppsAPI.md#GetSyncErrors) | **Get** /sync_errors | 
 
 
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 > App GetApp(ctx, appId).Execute()
 
-
+Get app by ID
 
 
 
@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 > AppsList GetApps(ctx).AppTypeFilter(appTypeFilter).OwnerFilter(ownerFilter).Execute()
 
-
+Get apps
 
 
 
