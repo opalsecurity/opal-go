@@ -23,6 +23,7 @@ var _ MappedNullable = &DenyRequestRequest{}
 type DenyRequestRequest struct {
 	// Comment for the denial
 	Comment string `json:"comment"`
+	Level *RequestApprovalEnum `json:"level,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -70,6 +71,38 @@ func (o *DenyRequestRequest) SetComment(v string) {
 	o.Comment = v
 }
 
+// GetLevel returns the Level field value if set, zero value otherwise.
+func (o *DenyRequestRequest) GetLevel() RequestApprovalEnum {
+	if o == nil || IsNil(o.Level) {
+		var ret RequestApprovalEnum
+		return ret
+	}
+	return *o.Level
+}
+
+// GetLevelOk returns a tuple with the Level field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DenyRequestRequest) GetLevelOk() (*RequestApprovalEnum, bool) {
+	if o == nil || IsNil(o.Level) {
+		return nil, false
+	}
+	return o.Level, true
+}
+
+// HasLevel returns a boolean if a field has been set.
+func (o *DenyRequestRequest) HasLevel() bool {
+	if o != nil && !IsNil(o.Level) {
+		return true
+	}
+
+	return false
+}
+
+// SetLevel gets a reference to the given RequestApprovalEnum and assigns it to the Level field.
+func (o *DenyRequestRequest) SetLevel(v RequestApprovalEnum) {
+	o.Level = &v
+}
+
 func (o DenyRequestRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -81,6 +114,9 @@ func (o DenyRequestRequest) MarshalJSON() ([]byte, error) {
 func (o DenyRequestRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["comment"] = o.Comment
+	if !IsNil(o.Level) {
+		toSerialize["level"] = o.Level
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -125,6 +161,7 @@ func (o *DenyRequestRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "comment")
+		delete(additionalProperties, "level")
 		o.AdditionalProperties = additionalProperties
 	}
 
