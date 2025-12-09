@@ -11,13 +11,14 @@ Name | Type | Description | Notes
 **Deadline** | **time.Time** | The last day for reviewers to complete their access reviews. | 
 **TimeZone** | **string** | The time zone name (as defined by the IANA Time Zone database) used in the access review deadline and exported audit report. Default is America/Los_Angeles. | 
 **SelfReviewAllowed** | **bool** | A bool representing whether to present a warning when a user is the only reviewer for themself. Default is False. | 
+**InstantlyActionReviews** | **bool** | A bool representing whether to instantly action changes when reviewers submit their decision. Default is False. | 
 **UarScope** | Pointer to [**UARScope**](UARScope.md) |  | [optional] 
 
 ## Methods
 
 ### NewUAR
 
-`func NewUAR(uarId string, name string, reviewerAssignmentPolicy UARReviewerAssignmentPolicyEnum, sendReviewerAssignmentNotification bool, deadline time.Time, timeZone string, selfReviewAllowed bool, ) *UAR`
+`func NewUAR(uarId string, name string, reviewerAssignmentPolicy UARReviewerAssignmentPolicyEnum, sendReviewerAssignmentNotification bool, deadline time.Time, timeZone string, selfReviewAllowed bool, instantlyActionReviews bool, ) *UAR`
 
 NewUAR instantiates a new UAR object
 This constructor will assign default values to properties that have it defined,
@@ -170,6 +171,26 @@ and a boolean to check if the value has been set.
 `func (o *UAR) SetSelfReviewAllowed(v bool)`
 
 SetSelfReviewAllowed sets SelfReviewAllowed field to given value.
+
+
+### GetInstantlyActionReviews
+
+`func (o *UAR) GetInstantlyActionReviews() bool`
+
+GetInstantlyActionReviews returns the InstantlyActionReviews field if non-nil, zero value otherwise.
+
+### GetInstantlyActionReviewsOk
+
+`func (o *UAR) GetInstantlyActionReviewsOk() (*bool, bool)`
+
+GetInstantlyActionReviewsOk returns a tuple with the InstantlyActionReviews field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstantlyActionReviews
+
+`func (o *UAR) SetInstantlyActionReviews(v bool)`
+
+SetInstantlyActionReviews sets InstantlyActionReviews field to given value.
 
 
 ### GetUarScope

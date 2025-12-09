@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | The ID of the resource requested. Should not be specified if group_id is specified. | [optional] 
 **AccessLevelRemoteId** | Pointer to **string** | The ID of the access level requested on the remote system. | [optional] 
-**AccessLevelName** | Pointer to **string** | The ID of the access level requested on the remote system. | [optional] 
+**AccessLevelName** | Pointer to **string** | The ID of the access level requested on the remote system. This field is deprecated and no longer required. We will populate based on the access_level_remote_id. | [optional] 
 
 ## Methods
 
