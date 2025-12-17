@@ -5,6 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ResourceId** | **string** | The ID of the resource. | 
+**ResourceName** | Pointer to **string** | The name of the resource. | [optional] 
+**Description** | Pointer to **string** | The description of the resource. | [optional] 
 **UserId** | **string** | The ID of the user. | 
 **AccessLevel** | [**ResourceAccessLevel**](ResourceAccessLevel.md) |  | 
 **FullName** | **string** | The user&#39;s full name. | 
@@ -52,6 +54,56 @@ and a boolean to check if the value has been set.
 
 SetResourceId sets ResourceId field to given value.
 
+
+### GetResourceName
+
+`func (o *ResourceAccessUser) GetResourceName() string`
+
+GetResourceName returns the ResourceName field if non-nil, zero value otherwise.
+
+### GetResourceNameOk
+
+`func (o *ResourceAccessUser) GetResourceNameOk() (*string, bool)`
+
+GetResourceNameOk returns a tuple with the ResourceName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResourceName
+
+`func (o *ResourceAccessUser) SetResourceName(v string)`
+
+SetResourceName sets ResourceName field to given value.
+
+### HasResourceName
+
+`func (o *ResourceAccessUser) HasResourceName() bool`
+
+HasResourceName returns a boolean if a field has been set.
+
+### GetDescription
+
+`func (o *ResourceAccessUser) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *ResourceAccessUser) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *ResourceAccessUser) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *ResourceAccessUser) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
 
 ### GetUserId
 
