@@ -14,257 +14,123 @@ package opal
 import (
 	"encoding/json"
 	"fmt"
+	"gopkg.in/validator.v2"
 )
 
-// checks if the RequestReviewerStages type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &RequestReviewerStages{}
-
-// RequestReviewerStages The stages configuration for a request item
+// RequestReviewerStages - The configured reviewer stages for every item in this request, or an error message if reviewers could not be loaded
 type RequestReviewerStages struct {
-	// The name of the access level requested.
-	AccessLevelName *string `json:"access_level_name,omitempty"`
-	// The ID of the access level requested on the remote system.
-	AccessLevelRemoteId *string `json:"access_level_remote_id,omitempty"`
-	// The name of the requested item
-	ItemName string `json:"item_name"`
-	// The ID of the resource requested.
-	ItemId string `json:"item_id"`
-	// The stages of review for this request
-	Stages []RequestStage `json:"stages"`
-	AdditionalProperties map[string]interface{}
+	ArrayOfRequestReviewerStages *[]RequestReviewerStages
+	String *string
 }
 
-type _RequestReviewerStages RequestReviewerStages
-
-// NewRequestReviewerStages instantiates a new RequestReviewerStages object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewRequestReviewerStages(itemName string, itemId string, stages []RequestStage) *RequestReviewerStages {
-	this := RequestReviewerStages{}
-	this.ItemName = itemName
-	this.ItemId = itemId
-	this.Stages = stages
-	return &this
-}
-
-// NewRequestReviewerStagesWithDefaults instantiates a new RequestReviewerStages object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewRequestReviewerStagesWithDefaults() *RequestReviewerStages {
-	this := RequestReviewerStages{}
-	return &this
-}
-
-// GetAccessLevelName returns the AccessLevelName field value if set, zero value otherwise.
-func (o *RequestReviewerStages) GetAccessLevelName() string {
-	if o == nil || IsNil(o.AccessLevelName) {
-		var ret string
-		return ret
+// []RequestReviewerStagesAsRequestReviewerStages is a convenience function that returns []RequestReviewerStages wrapped in RequestReviewerStages
+func ArrayOfRequestReviewerStagesAsRequestReviewerStages(v *[]RequestReviewerStages) RequestReviewerStages {
+	return RequestReviewerStages{
+		ArrayOfRequestReviewerStages: v,
 	}
-	return *o.AccessLevelName
 }
 
-// GetAccessLevelNameOk returns a tuple with the AccessLevelName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RequestReviewerStages) GetAccessLevelNameOk() (*string, bool) {
-	if o == nil || IsNil(o.AccessLevelName) {
-		return nil, false
+// stringAsRequestReviewerStages is a convenience function that returns string wrapped in RequestReviewerStages
+func StringAsRequestReviewerStages(v *string) RequestReviewerStages {
+	return RequestReviewerStages{
+		String: v,
 	}
-	return o.AccessLevelName, true
 }
 
-// HasAccessLevelName returns a boolean if a field has been set.
-func (o *RequestReviewerStages) HasAccessLevelName() bool {
-	if o != nil && !IsNil(o.AccessLevelName) {
-		return true
-	}
 
-	return false
-}
-
-// SetAccessLevelName gets a reference to the given string and assigns it to the AccessLevelName field.
-func (o *RequestReviewerStages) SetAccessLevelName(v string) {
-	o.AccessLevelName = &v
-}
-
-// GetAccessLevelRemoteId returns the AccessLevelRemoteId field value if set, zero value otherwise.
-func (o *RequestReviewerStages) GetAccessLevelRemoteId() string {
-	if o == nil || IsNil(o.AccessLevelRemoteId) {
-		var ret string
-		return ret
-	}
-	return *o.AccessLevelRemoteId
-}
-
-// GetAccessLevelRemoteIdOk returns a tuple with the AccessLevelRemoteId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RequestReviewerStages) GetAccessLevelRemoteIdOk() (*string, bool) {
-	if o == nil || IsNil(o.AccessLevelRemoteId) {
-		return nil, false
-	}
-	return o.AccessLevelRemoteId, true
-}
-
-// HasAccessLevelRemoteId returns a boolean if a field has been set.
-func (o *RequestReviewerStages) HasAccessLevelRemoteId() bool {
-	if o != nil && !IsNil(o.AccessLevelRemoteId) {
-		return true
-	}
-
-	return false
-}
-
-// SetAccessLevelRemoteId gets a reference to the given string and assigns it to the AccessLevelRemoteId field.
-func (o *RequestReviewerStages) SetAccessLevelRemoteId(v string) {
-	o.AccessLevelRemoteId = &v
-}
-
-// GetItemName returns the ItemName field value
-func (o *RequestReviewerStages) GetItemName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ItemName
-}
-
-// GetItemNameOk returns a tuple with the ItemName field value
-// and a boolean to check if the value has been set.
-func (o *RequestReviewerStages) GetItemNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ItemName, true
-}
-
-// SetItemName sets field value
-func (o *RequestReviewerStages) SetItemName(v string) {
-	o.ItemName = v
-}
-
-// GetItemId returns the ItemId field value
-func (o *RequestReviewerStages) GetItemId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ItemId
-}
-
-// GetItemIdOk returns a tuple with the ItemId field value
-// and a boolean to check if the value has been set.
-func (o *RequestReviewerStages) GetItemIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ItemId, true
-}
-
-// SetItemId sets field value
-func (o *RequestReviewerStages) SetItemId(v string) {
-	o.ItemId = v
-}
-
-// GetStages returns the Stages field value
-func (o *RequestReviewerStages) GetStages() []RequestStage {
-	if o == nil {
-		var ret []RequestStage
-		return ret
-	}
-
-	return o.Stages
-}
-
-// GetStagesOk returns a tuple with the Stages field value
-// and a boolean to check if the value has been set.
-func (o *RequestReviewerStages) GetStagesOk() ([]RequestStage, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Stages, true
-}
-
-// SetStages sets field value
-func (o *RequestReviewerStages) SetStages(v []RequestStage) {
-	o.Stages = v
-}
-
-func (o RequestReviewerStages) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o RequestReviewerStages) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AccessLevelName) {
-		toSerialize["access_level_name"] = o.AccessLevelName
-	}
-	if !IsNil(o.AccessLevelRemoteId) {
-		toSerialize["access_level_remote_id"] = o.AccessLevelRemoteId
-	}
-	toSerialize["item_name"] = o.ItemName
-	toSerialize["item_id"] = o.ItemId
-	toSerialize["stages"] = o.Stages
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
-	return toSerialize, nil
-}
-
-func (o *RequestReviewerStages) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"item_name",
-		"item_id",
-		"stages",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
+// Unmarshal JSON data into one of the pointers in the struct
+func (dst *RequestReviewerStages) UnmarshalJSON(data []byte) error {
+	var err error
+	match := 0
+	// try to unmarshal data into ArrayOfRequestReviewerStages
+	err = newStrictDecoder(data).Decode(&dst.ArrayOfRequestReviewerStages)
+	if err == nil {
+		jsonArrayOfRequestReviewerStages, _ := json.Marshal(dst.ArrayOfRequestReviewerStages)
+		if string(jsonArrayOfRequestReviewerStages) == "{}" { // empty struct
+			dst.ArrayOfRequestReviewerStages = nil
+		} else {
+			if err = validator.Validate(dst.ArrayOfRequestReviewerStages); err != nil {
+				dst.ArrayOfRequestReviewerStages = nil
+			} else {
+				match++
+			}
 		}
+	} else {
+		dst.ArrayOfRequestReviewerStages = nil
 	}
 
-	varRequestReviewerStages := _RequestReviewerStages{}
-
-	err = json.Unmarshal(data, &varRequestReviewerStages)
-
-	if err != nil {
-		return err
+	// try to unmarshal data into String
+	err = newStrictDecoder(data).Decode(&dst.String)
+	if err == nil {
+		jsonString, _ := json.Marshal(dst.String)
+		if string(jsonString) == "{}" { // empty struct
+			dst.String = nil
+		} else {
+			if err = validator.Validate(dst.String); err != nil {
+				dst.String = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.String = nil
 	}
 
-	*o = RequestReviewerStages(varRequestReviewerStages)
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.ArrayOfRequestReviewerStages = nil
+		dst.String = nil
 
-	additionalProperties := make(map[string]interface{})
+		return fmt.Errorf("data matches more than one schema in oneOf(RequestReviewerStages)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("data failed to match schemas in oneOf(RequestReviewerStages)")
+	}
+}
 
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "access_level_name")
-		delete(additionalProperties, "access_level_remote_id")
-		delete(additionalProperties, "item_name")
-		delete(additionalProperties, "item_id")
-		delete(additionalProperties, "stages")
-		o.AdditionalProperties = additionalProperties
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src RequestReviewerStages) MarshalJSON() ([]byte, error) {
+	if src.ArrayOfRequestReviewerStages != nil {
+		return json.Marshal(&src.ArrayOfRequestReviewerStages)
 	}
 
-	return err
+	if src.String != nil {
+		return json.Marshal(&src.String)
+	}
+
+	return nil, nil // no data in oneOf schemas
+}
+
+// Get the actual instance
+func (obj *RequestReviewerStages) GetActualInstance() (interface{}) {
+	if obj == nil {
+		return nil
+	}
+	if obj.ArrayOfRequestReviewerStages != nil {
+		return obj.ArrayOfRequestReviewerStages
+	}
+
+	if obj.String != nil {
+		return obj.String
+	}
+
+	// all schemas are nil
+	return nil
+}
+
+// Get the actual instance value
+func (obj RequestReviewerStages) GetActualInstanceValue() (interface{}) {
+	if obj.ArrayOfRequestReviewerStages != nil {
+		return *obj.ArrayOfRequestReviewerStages
+	}
+
+	if obj.String != nil {
+		return *obj.String
+	}
+
+	// all schemas are nil
+	return nil
 }
 
 type NullableRequestReviewerStages struct {
