@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **RequestedItemsList** | Pointer to [**[]RequestedItem**](RequestedItem.md) | The list of targets for the request. | [optional] 
 **CustomFieldsResponses** | Pointer to [**[]RequestCustomFieldResponse**](RequestCustomFieldResponse.md) | The responses given to the custom fields associated to the request | [optional] 
 **Stages** | Pointer to [**RequestItemStages**](RequestItemStages.md) | The stages configuration for this request | [optional] 
-**ReviewerStages** | Pointer to [**[]RequestReviewerStages**](RequestReviewerStages.md) | The configured reviewer stages for every item in this request | [optional] 
+**ReviewerStages** | Pointer to [**RequestReviewerStages**](RequestReviewerStages.md) |  | [optional] 
 
 ## Methods
 
@@ -309,20 +309,20 @@ HasStages returns a boolean if a field has been set.
 
 ### GetReviewerStages
 
-`func (o *Request) GetReviewerStages() []RequestReviewerStages`
+`func (o *Request) GetReviewerStages() RequestReviewerStages`
 
 GetReviewerStages returns the ReviewerStages field if non-nil, zero value otherwise.
 
 ### GetReviewerStagesOk
 
-`func (o *Request) GetReviewerStagesOk() (*[]RequestReviewerStages, bool)`
+`func (o *Request) GetReviewerStagesOk() (*RequestReviewerStages, bool)`
 
 GetReviewerStagesOk returns a tuple with the ReviewerStages field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetReviewerStages
 
-`func (o *Request) SetReviewerStages(v []RequestReviewerStages)`
+`func (o *Request) SetReviewerStages(v RequestReviewerStages)`
 
 SetReviewerStages sets ReviewerStages field to given value.
 
