@@ -34,6 +34,7 @@ type Request struct {
 	TargetUserId *string `json:"target_user_id,omitempty"`
 	// The unique identifier of the group who is the target of the request.
 	TargetGroupId *string `json:"target_group_id,omitempty"`
+	// The status of the request.
 	Status RequestStatusEnum `json:"status"`
 	// The reason for the request.
 	Reason string `json:"reason"`
@@ -43,10 +44,10 @@ type Request struct {
 	RequestedItemsList []RequestedItem `json:"requested_items_list,omitempty"`
 	// The responses given to the custom fields associated to the request
 	CustomFieldsResponses []RequestCustomFieldResponse `json:"custom_fields_responses,omitempty"`
+	// The stages configuration for this request
 	// Deprecated
 	Stages *RequestItemStages `json:"stages,omitempty"`
-	// The configured reviewer stages for every item in this request
-	ReviewerStages []RequestReviewerStages `json:"reviewer_stages,omitempty"`
+	ReviewerStages *RequestReviewerStages `json:"reviewer_stages,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -415,17 +416,17 @@ func (o *Request) SetStages(v RequestItemStages) {
 }
 
 // GetReviewerStages returns the ReviewerStages field value if set, zero value otherwise.
-func (o *Request) GetReviewerStages() []RequestReviewerStages {
+func (o *Request) GetReviewerStages() RequestReviewerStages {
 	if o == nil || IsNil(o.ReviewerStages) {
-		var ret []RequestReviewerStages
+		var ret RequestReviewerStages
 		return ret
 	}
-	return o.ReviewerStages
+	return *o.ReviewerStages
 }
 
 // GetReviewerStagesOk returns a tuple with the ReviewerStages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Request) GetReviewerStagesOk() ([]RequestReviewerStages, bool) {
+func (o *Request) GetReviewerStagesOk() (*RequestReviewerStages, bool) {
 	if o == nil || IsNil(o.ReviewerStages) {
 		return nil, false
 	}
@@ -441,9 +442,9 @@ func (o *Request) HasReviewerStages() bool {
 	return false
 }
 
-// SetReviewerStages gets a reference to the given []RequestReviewerStages and assigns it to the ReviewerStages field.
-func (o *Request) SetReviewerStages(v []RequestReviewerStages) {
-	o.ReviewerStages = v
+// SetReviewerStages gets a reference to the given RequestReviewerStages and assigns it to the ReviewerStages field.
+func (o *Request) SetReviewerStages(v RequestReviewerStages) {
+	o.ReviewerStages = &v
 }
 
 func (o Request) MarshalJSON() ([]byte, error) {
