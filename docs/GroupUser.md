@@ -5,6 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **GroupId** | **string** | The ID of the group. | 
+**GroupName** | **string** | The name of the group. | 
+**Description** | **string** | The description of the group. | 
 **UserId** | **string** | The ID of the user. | 
 **AccessLevel** | Pointer to [**GroupAccessLevel**](GroupAccessLevel.md) |  | [optional] 
 **FullName** | **string** | The user&#39;s full name. | 
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewGroupUser
 
-`func NewGroupUser(groupId string, userId string, fullName string, email string, ) *GroupUser`
+`func NewGroupUser(groupId string, groupName string, description string, userId string, fullName string, email string, ) *GroupUser`
 
 NewGroupUser instantiates a new GroupUser object
 This constructor will assign default values to properties that have it defined,
@@ -49,6 +51,46 @@ and a boolean to check if the value has been set.
 `func (o *GroupUser) SetGroupId(v string)`
 
 SetGroupId sets GroupId field to given value.
+
+
+### GetGroupName
+
+`func (o *GroupUser) GetGroupName() string`
+
+GetGroupName returns the GroupName field if non-nil, zero value otherwise.
+
+### GetGroupNameOk
+
+`func (o *GroupUser) GetGroupNameOk() (*string, bool)`
+
+GetGroupNameOk returns a tuple with the GroupName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGroupName
+
+`func (o *GroupUser) SetGroupName(v string)`
+
+SetGroupName sets GroupName field to given value.
+
+
+### GetDescription
+
+`func (o *GroupUser) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *GroupUser) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *GroupUser) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
 
 
 ### GetUserId
