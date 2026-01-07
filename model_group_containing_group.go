@@ -23,6 +23,10 @@ var _ MappedNullable = &GroupContainingGroup{}
 type GroupContainingGroup struct {
 	// The groupID of the containing group.
 	ContainingGroupId string `json:"containing_group_id"`
+	// The updated duration for which the group can be accessed (in minutes). Use 0 for indefinite.
+	DurationMinutes *int32 `json:"duration_minutes,omitempty"`
+	// The updated remote ID of the access level granted to this group.
+	AccessLevelRemoteId *string `json:"access_level_remote_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -70,6 +74,70 @@ func (o *GroupContainingGroup) SetContainingGroupId(v string) {
 	o.ContainingGroupId = v
 }
 
+// GetDurationMinutes returns the DurationMinutes field value if set, zero value otherwise.
+func (o *GroupContainingGroup) GetDurationMinutes() int32 {
+	if o == nil || IsNil(o.DurationMinutes) {
+		var ret int32
+		return ret
+	}
+	return *o.DurationMinutes
+}
+
+// GetDurationMinutesOk returns a tuple with the DurationMinutes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupContainingGroup) GetDurationMinutesOk() (*int32, bool) {
+	if o == nil || IsNil(o.DurationMinutes) {
+		return nil, false
+	}
+	return o.DurationMinutes, true
+}
+
+// HasDurationMinutes returns a boolean if a field has been set.
+func (o *GroupContainingGroup) HasDurationMinutes() bool {
+	if o != nil && !IsNil(o.DurationMinutes) {
+		return true
+	}
+
+	return false
+}
+
+// SetDurationMinutes gets a reference to the given int32 and assigns it to the DurationMinutes field.
+func (o *GroupContainingGroup) SetDurationMinutes(v int32) {
+	o.DurationMinutes = &v
+}
+
+// GetAccessLevelRemoteId returns the AccessLevelRemoteId field value if set, zero value otherwise.
+func (o *GroupContainingGroup) GetAccessLevelRemoteId() string {
+	if o == nil || IsNil(o.AccessLevelRemoteId) {
+		var ret string
+		return ret
+	}
+	return *o.AccessLevelRemoteId
+}
+
+// GetAccessLevelRemoteIdOk returns a tuple with the AccessLevelRemoteId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupContainingGroup) GetAccessLevelRemoteIdOk() (*string, bool) {
+	if o == nil || IsNil(o.AccessLevelRemoteId) {
+		return nil, false
+	}
+	return o.AccessLevelRemoteId, true
+}
+
+// HasAccessLevelRemoteId returns a boolean if a field has been set.
+func (o *GroupContainingGroup) HasAccessLevelRemoteId() bool {
+	if o != nil && !IsNil(o.AccessLevelRemoteId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessLevelRemoteId gets a reference to the given string and assigns it to the AccessLevelRemoteId field.
+func (o *GroupContainingGroup) SetAccessLevelRemoteId(v string) {
+	o.AccessLevelRemoteId = &v
+}
+
 func (o GroupContainingGroup) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -81,6 +149,12 @@ func (o GroupContainingGroup) MarshalJSON() ([]byte, error) {
 func (o GroupContainingGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["containing_group_id"] = o.ContainingGroupId
+	if !IsNil(o.DurationMinutes) {
+		toSerialize["duration_minutes"] = o.DurationMinutes
+	}
+	if !IsNil(o.AccessLevelRemoteId) {
+		toSerialize["access_level_remote_id"] = o.AccessLevelRemoteId
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -125,6 +199,8 @@ func (o *GroupContainingGroup) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "containing_group_id")
+		delete(additionalProperties, "duration_minutes")
+		delete(additionalProperties, "access_level_remote_id")
 		o.AdditionalProperties = additionalProperties
 	}
 
