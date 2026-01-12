@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Comment** | **string** | Comment for the denial | 
+**Level** | Pointer to [**RequestApprovalEnum**](RequestApprovalEnum.md) |  | [optional] 
 
 ## Methods
 
@@ -44,6 +45,31 @@ and a boolean to check if the value has been set.
 
 SetComment sets Comment field to given value.
 
+
+### GetLevel
+
+`func (o *DenyRequestRequest) GetLevel() RequestApprovalEnum`
+
+GetLevel returns the Level field if non-nil, zero value otherwise.
+
+### GetLevelOk
+
+`func (o *DenyRequestRequest) GetLevelOk() (*RequestApprovalEnum, bool)`
+
+GetLevelOk returns a tuple with the Level field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLevel
+
+`func (o *DenyRequestRequest) SetLevel(v RequestApprovalEnum)`
+
+SetLevel sets Level field to given value.
+
+### HasLevel
+
+`func (o *DenyRequestRequest) HasLevel() bool`
+
+HasLevel returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
