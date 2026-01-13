@@ -24,7 +24,8 @@ type CreateRequestInfoResourcesInner struct {
 	Id *string `json:"id,omitempty"`
 	// The ID of the access level requested on the remote system.
 	AccessLevelRemoteId *string `json:"access_level_remote_id,omitempty"`
-	// The ID of the access level requested on the remote system.
+	// The ID of the access level requested on the remote system. This field is deprecated and no longer required. We will populate based on the access_level_remote_id.
+	// Deprecated
 	AccessLevelName *string `json:"access_level_name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -113,6 +114,7 @@ func (o *CreateRequestInfoResourcesInner) SetAccessLevelRemoteId(v string) {
 }
 
 // GetAccessLevelName returns the AccessLevelName field value if set, zero value otherwise.
+// Deprecated
 func (o *CreateRequestInfoResourcesInner) GetAccessLevelName() string {
 	if o == nil || IsNil(o.AccessLevelName) {
 		var ret string
@@ -123,6 +125,7 @@ func (o *CreateRequestInfoResourcesInner) GetAccessLevelName() string {
 
 // GetAccessLevelNameOk returns a tuple with the AccessLevelName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CreateRequestInfoResourcesInner) GetAccessLevelNameOk() (*string, bool) {
 	if o == nil || IsNil(o.AccessLevelName) {
 		return nil, false
@@ -140,6 +143,7 @@ func (o *CreateRequestInfoResourcesInner) HasAccessLevelName() bool {
 }
 
 // SetAccessLevelName gets a reference to the given string and assigns it to the AccessLevelName field.
+// Deprecated
 func (o *CreateRequestInfoResourcesInner) SetAccessLevelName(v string) {
 	o.AccessLevelName = &v
 }
