@@ -33,6 +33,8 @@ type CreateUARInfo struct {
 	TimeZone string `json:"time_zone"`
 	// A bool representing whether to present a warning when a user is the only reviewer for themself. Default is False.
 	SelfReviewAllowed bool `json:"self_review_allowed"`
+	// A bool representing whether to instantly action changes when reviewers submit their decision. Default is False.
+	InstantlyActionReviews *bool `json:"instantly_action_reviews,omitempty"`
 	ReminderSchedule []int32 `json:"reminder_schedule,omitempty"`
 	ReminderIncludeManager *bool `json:"reminder_include_manager,omitempty"`
 	UarScope *UARScope `json:"uar_scope,omitempty"`
@@ -208,6 +210,38 @@ func (o *CreateUARInfo) SetSelfReviewAllowed(v bool) {
 	o.SelfReviewAllowed = v
 }
 
+// GetInstantlyActionReviews returns the InstantlyActionReviews field value if set, zero value otherwise.
+func (o *CreateUARInfo) GetInstantlyActionReviews() bool {
+	if o == nil || IsNil(o.InstantlyActionReviews) {
+		var ret bool
+		return ret
+	}
+	return *o.InstantlyActionReviews
+}
+
+// GetInstantlyActionReviewsOk returns a tuple with the InstantlyActionReviews field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateUARInfo) GetInstantlyActionReviewsOk() (*bool, bool) {
+	if o == nil || IsNil(o.InstantlyActionReviews) {
+		return nil, false
+	}
+	return o.InstantlyActionReviews, true
+}
+
+// HasInstantlyActionReviews returns a boolean if a field has been set.
+func (o *CreateUARInfo) HasInstantlyActionReviews() bool {
+	if o != nil && !IsNil(o.InstantlyActionReviews) {
+		return true
+	}
+
+	return false
+}
+
+// SetInstantlyActionReviews gets a reference to the given bool and assigns it to the InstantlyActionReviews field.
+func (o *CreateUARInfo) SetInstantlyActionReviews(v bool) {
+	o.InstantlyActionReviews = &v
+}
+
 // GetReminderSchedule returns the ReminderSchedule field value if set, zero value otherwise.
 func (o *CreateUARInfo) GetReminderSchedule() []int32 {
 	if o == nil || IsNil(o.ReminderSchedule) {
@@ -320,6 +354,9 @@ func (o CreateUARInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize["deadline"] = o.Deadline
 	toSerialize["time_zone"] = o.TimeZone
 	toSerialize["self_review_allowed"] = o.SelfReviewAllowed
+	if !IsNil(o.InstantlyActionReviews) {
+		toSerialize["instantly_action_reviews"] = o.InstantlyActionReviews
+	}
 	if !IsNil(o.ReminderSchedule) {
 		toSerialize["reminder_schedule"] = o.ReminderSchedule
 	}
@@ -383,6 +420,7 @@ func (o *CreateUARInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "deadline")
 		delete(additionalProperties, "time_zone")
 		delete(additionalProperties, "self_review_allowed")
+		delete(additionalProperties, "instantly_action_reviews")
 		delete(additionalProperties, "reminder_schedule")
 		delete(additionalProperties, "reminder_include_manager")
 		delete(additionalProperties, "uar_scope")
