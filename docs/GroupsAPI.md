@@ -1416,7 +1416,7 @@ import (
 )
 
 func main() {
-	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the member group to remove.
 	containingGroupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the containing group.
 
 	configuration := openapiclient.NewConfiguration()
@@ -1435,7 +1435,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**groupId** | **string** | The ID of the group. | 
+**groupId** | **string** | The ID of the member group to remove. | 
 **containingGroupId** | **string** | The ID of the containing group. | 
 
 ### Other Parameters
