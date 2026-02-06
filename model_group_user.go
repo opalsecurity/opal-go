@@ -24,6 +24,10 @@ var _ MappedNullable = &GroupUser{}
 type GroupUser struct {
 	// The ID of the group.
 	GroupId string `json:"group_id"`
+	// The name of the group.
+	GroupName string `json:"group_name"`
+	// The description of the group.
+	Description string `json:"description"`
 	// The ID of the user.
 	UserId string `json:"user_id"`
 	AccessLevel *GroupAccessLevel `json:"access_level,omitempty"`
@@ -43,9 +47,11 @@ type _GroupUser GroupUser
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGroupUser(groupId string, userId string, fullName string, email string) *GroupUser {
+func NewGroupUser(groupId string, groupName string, description string, userId string, fullName string, email string) *GroupUser {
 	this := GroupUser{}
 	this.GroupId = groupId
+	this.GroupName = groupName
+	this.Description = description
 	this.UserId = userId
 	this.FullName = fullName
 	this.Email = email
@@ -82,6 +88,54 @@ func (o *GroupUser) GetGroupIdOk() (*string, bool) {
 // SetGroupId sets field value
 func (o *GroupUser) SetGroupId(v string) {
 	o.GroupId = v
+}
+
+// GetGroupName returns the GroupName field value
+func (o *GroupUser) GetGroupName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.GroupName
+}
+
+// GetGroupNameOk returns a tuple with the GroupName field value
+// and a boolean to check if the value has been set.
+func (o *GroupUser) GetGroupNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.GroupName, true
+}
+
+// SetGroupName sets field value
+func (o *GroupUser) SetGroupName(v string) {
+	o.GroupName = v
+}
+
+// GetDescription returns the Description field value
+func (o *GroupUser) GetDescription() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value
+// and a boolean to check if the value has been set.
+func (o *GroupUser) GetDescriptionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Description, true
+}
+
+// SetDescription sets field value
+func (o *GroupUser) SetDescription(v string) {
+	o.Description = v
 }
 
 // GetUserId returns the UserId field value
@@ -263,6 +317,8 @@ func (o GroupUser) MarshalJSON() ([]byte, error) {
 func (o GroupUser) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["group_id"] = o.GroupId
+	toSerialize["group_name"] = o.GroupName
+	toSerialize["description"] = o.Description
 	toSerialize["user_id"] = o.UserId
 	if !IsNil(o.AccessLevel) {
 		toSerialize["access_level"] = o.AccessLevel
@@ -289,6 +345,8 @@ func (o *GroupUser) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"group_id",
+		"group_name",
+		"description",
 		"user_id",
 		"full_name",
 		"email",
@@ -322,6 +380,8 @@ func (o *GroupUser) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "group_id")
+		delete(additionalProperties, "group_name")
+		delete(additionalProperties, "description")
 		delete(additionalProperties, "user_id")
 		delete(additionalProperties, "access_level")
 		delete(additionalProperties, "full_name")
