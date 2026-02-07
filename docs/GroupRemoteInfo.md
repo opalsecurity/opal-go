@@ -5,6 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ActiveDirectoryGroup** | Pointer to [**GroupRemoteInfoActiveDirectoryGroup**](GroupRemoteInfoActiveDirectoryGroup.md) |  | [optional] 
+**TailscaleGroup** | Pointer to [**GroupRemoteInfoTailscaleGroup**](GroupRemoteInfoTailscaleGroup.md) |  | [optional] 
+**AwsSsoGroup** | Pointer to [**GroupRemoteInfoAwsSsoGroup**](GroupRemoteInfoAwsSsoGroup.md) |  | [optional] 
+**DatabricksAccountGroup** | Pointer to [**GroupRemoteInfoDatabricksAccountGroup**](GroupRemoteInfoDatabricksAccountGroup.md) |  | [optional] 
+**ConnectorGroup** | Pointer to [**GroupRemoteInfoConnectorGroup**](GroupRemoteInfoConnectorGroup.md) |  | [optional] 
 **GithubTeam** | Pointer to [**GroupRemoteInfoGithubTeam**](GroupRemoteInfoGithubTeam.md) |  | [optional] 
 **GitlabGroup** | Pointer to [**GroupRemoteInfoGitlabGroup**](GroupRemoteInfoGitlabGroup.md) |  | [optional] 
 **GoogleGroup** | Pointer to [**GroupRemoteInfoGoogleGroup**](GroupRemoteInfoGoogleGroup.md) |  | [optional] 
@@ -16,6 +20,9 @@ Name | Type | Description | Notes
 **SnowflakeRole** | Pointer to [**GroupRemoteInfoSnowflakeRole**](GroupRemoteInfoSnowflakeRole.md) |  | [optional] 
 **OktaGroupRule** | Pointer to [**GroupRemoteInfoOktaGroupRule**](GroupRemoteInfoOktaGroupRule.md) |  | [optional] 
 **WorkdayUserSecurityGroup** | Pointer to [**GroupRemoteInfoWorkdayUserSecurityGroup**](GroupRemoteInfoWorkdayUserSecurityGroup.md) |  | [optional] 
+**PagerdutyOnCallSchedule** | Pointer to [**GroupRemoteInfoPagerdutyOnCallSchedule**](GroupRemoteInfoPagerdutyOnCallSchedule.md) |  | [optional] 
+**IncidentioOnCallSchedule** | Pointer to [**GroupRemoteInfoIncidentioOnCallSchedule**](GroupRemoteInfoIncidentioOnCallSchedule.md) |  | [optional] 
+**DevinGroup** | Pointer to [**GroupRemoteInfoDevinGroup**](GroupRemoteInfoDevinGroup.md) |  | [optional] 
 
 ## Methods
 
@@ -60,6 +67,106 @@ SetActiveDirectoryGroup sets ActiveDirectoryGroup field to given value.
 `func (o *GroupRemoteInfo) HasActiveDirectoryGroup() bool`
 
 HasActiveDirectoryGroup returns a boolean if a field has been set.
+
+### GetTailscaleGroup
+
+`func (o *GroupRemoteInfo) GetTailscaleGroup() GroupRemoteInfoTailscaleGroup`
+
+GetTailscaleGroup returns the TailscaleGroup field if non-nil, zero value otherwise.
+
+### GetTailscaleGroupOk
+
+`func (o *GroupRemoteInfo) GetTailscaleGroupOk() (*GroupRemoteInfoTailscaleGroup, bool)`
+
+GetTailscaleGroupOk returns a tuple with the TailscaleGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTailscaleGroup
+
+`func (o *GroupRemoteInfo) SetTailscaleGroup(v GroupRemoteInfoTailscaleGroup)`
+
+SetTailscaleGroup sets TailscaleGroup field to given value.
+
+### HasTailscaleGroup
+
+`func (o *GroupRemoteInfo) HasTailscaleGroup() bool`
+
+HasTailscaleGroup returns a boolean if a field has been set.
+
+### GetAwsSsoGroup
+
+`func (o *GroupRemoteInfo) GetAwsSsoGroup() GroupRemoteInfoAwsSsoGroup`
+
+GetAwsSsoGroup returns the AwsSsoGroup field if non-nil, zero value otherwise.
+
+### GetAwsSsoGroupOk
+
+`func (o *GroupRemoteInfo) GetAwsSsoGroupOk() (*GroupRemoteInfoAwsSsoGroup, bool)`
+
+GetAwsSsoGroupOk returns a tuple with the AwsSsoGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAwsSsoGroup
+
+`func (o *GroupRemoteInfo) SetAwsSsoGroup(v GroupRemoteInfoAwsSsoGroup)`
+
+SetAwsSsoGroup sets AwsSsoGroup field to given value.
+
+### HasAwsSsoGroup
+
+`func (o *GroupRemoteInfo) HasAwsSsoGroup() bool`
+
+HasAwsSsoGroup returns a boolean if a field has been set.
+
+### GetDatabricksAccountGroup
+
+`func (o *GroupRemoteInfo) GetDatabricksAccountGroup() GroupRemoteInfoDatabricksAccountGroup`
+
+GetDatabricksAccountGroup returns the DatabricksAccountGroup field if non-nil, zero value otherwise.
+
+### GetDatabricksAccountGroupOk
+
+`func (o *GroupRemoteInfo) GetDatabricksAccountGroupOk() (*GroupRemoteInfoDatabricksAccountGroup, bool)`
+
+GetDatabricksAccountGroupOk returns a tuple with the DatabricksAccountGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDatabricksAccountGroup
+
+`func (o *GroupRemoteInfo) SetDatabricksAccountGroup(v GroupRemoteInfoDatabricksAccountGroup)`
+
+SetDatabricksAccountGroup sets DatabricksAccountGroup field to given value.
+
+### HasDatabricksAccountGroup
+
+`func (o *GroupRemoteInfo) HasDatabricksAccountGroup() bool`
+
+HasDatabricksAccountGroup returns a boolean if a field has been set.
+
+### GetConnectorGroup
+
+`func (o *GroupRemoteInfo) GetConnectorGroup() GroupRemoteInfoConnectorGroup`
+
+GetConnectorGroup returns the ConnectorGroup field if non-nil, zero value otherwise.
+
+### GetConnectorGroupOk
+
+`func (o *GroupRemoteInfo) GetConnectorGroupOk() (*GroupRemoteInfoConnectorGroup, bool)`
+
+GetConnectorGroupOk returns a tuple with the ConnectorGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConnectorGroup
+
+`func (o *GroupRemoteInfo) SetConnectorGroup(v GroupRemoteInfoConnectorGroup)`
+
+SetConnectorGroup sets ConnectorGroup field to given value.
+
+### HasConnectorGroup
+
+`func (o *GroupRemoteInfo) HasConnectorGroup() bool`
+
+HasConnectorGroup returns a boolean if a field has been set.
 
 ### GetGithubTeam
 
@@ -335,6 +442,81 @@ SetWorkdayUserSecurityGroup sets WorkdayUserSecurityGroup field to given value.
 `func (o *GroupRemoteInfo) HasWorkdayUserSecurityGroup() bool`
 
 HasWorkdayUserSecurityGroup returns a boolean if a field has been set.
+
+### GetPagerdutyOnCallSchedule
+
+`func (o *GroupRemoteInfo) GetPagerdutyOnCallSchedule() GroupRemoteInfoPagerdutyOnCallSchedule`
+
+GetPagerdutyOnCallSchedule returns the PagerdutyOnCallSchedule field if non-nil, zero value otherwise.
+
+### GetPagerdutyOnCallScheduleOk
+
+`func (o *GroupRemoteInfo) GetPagerdutyOnCallScheduleOk() (*GroupRemoteInfoPagerdutyOnCallSchedule, bool)`
+
+GetPagerdutyOnCallScheduleOk returns a tuple with the PagerdutyOnCallSchedule field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPagerdutyOnCallSchedule
+
+`func (o *GroupRemoteInfo) SetPagerdutyOnCallSchedule(v GroupRemoteInfoPagerdutyOnCallSchedule)`
+
+SetPagerdutyOnCallSchedule sets PagerdutyOnCallSchedule field to given value.
+
+### HasPagerdutyOnCallSchedule
+
+`func (o *GroupRemoteInfo) HasPagerdutyOnCallSchedule() bool`
+
+HasPagerdutyOnCallSchedule returns a boolean if a field has been set.
+
+### GetIncidentioOnCallSchedule
+
+`func (o *GroupRemoteInfo) GetIncidentioOnCallSchedule() GroupRemoteInfoIncidentioOnCallSchedule`
+
+GetIncidentioOnCallSchedule returns the IncidentioOnCallSchedule field if non-nil, zero value otherwise.
+
+### GetIncidentioOnCallScheduleOk
+
+`func (o *GroupRemoteInfo) GetIncidentioOnCallScheduleOk() (*GroupRemoteInfoIncidentioOnCallSchedule, bool)`
+
+GetIncidentioOnCallScheduleOk returns a tuple with the IncidentioOnCallSchedule field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIncidentioOnCallSchedule
+
+`func (o *GroupRemoteInfo) SetIncidentioOnCallSchedule(v GroupRemoteInfoIncidentioOnCallSchedule)`
+
+SetIncidentioOnCallSchedule sets IncidentioOnCallSchedule field to given value.
+
+### HasIncidentioOnCallSchedule
+
+`func (o *GroupRemoteInfo) HasIncidentioOnCallSchedule() bool`
+
+HasIncidentioOnCallSchedule returns a boolean if a field has been set.
+
+### GetDevinGroup
+
+`func (o *GroupRemoteInfo) GetDevinGroup() GroupRemoteInfoDevinGroup`
+
+GetDevinGroup returns the DevinGroup field if non-nil, zero value otherwise.
+
+### GetDevinGroupOk
+
+`func (o *GroupRemoteInfo) GetDevinGroupOk() (*GroupRemoteInfoDevinGroup, bool)`
+
+GetDevinGroupOk returns a tuple with the DevinGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDevinGroup
+
+`func (o *GroupRemoteInfo) SetDevinGroup(v GroupRemoteInfoDevinGroup)`
+
+SetDevinGroup sets DevinGroup field to given value.
+
+### HasDevinGroup
+
+`func (o *GroupRemoteInfo) HasDevinGroup() bool`
+
+HasDevinGroup returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
