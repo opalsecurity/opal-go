@@ -2161,7 +2161,7 @@ RemoveGroupContainingGroup Method for RemoveGroupContainingGroup
 Removes a containing group from a group.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId The ID of the group.
+ @param groupId The ID of the member group to remove.
  @param containingGroupId The ID of the containing group.
  @return ApiRemoveGroupContainingGroupRequest
 */
