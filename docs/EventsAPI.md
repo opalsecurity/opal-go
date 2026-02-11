@@ -5,6 +5,7 @@ All URIs are relative to *https://api.opal.dev/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**Events**](EventsAPI.md#Events) | **Get** /events | 
+[**GetEvent**](EventsAPI.md#GetEvent) | **Get** /events/{event_id} | Get event by ID
 
 
 
@@ -73,6 +74,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PaginatedEventList**](PaginatedEventList.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetEvent
+
+> Event GetEvent(ctx, eventId).Execute()
+
+Get event by ID
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	eventId := "29827fb8-f2dd-4e80-9576-28e31e9934ac" // string | The ID of the event.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.EventsAPI.GetEvent(context.Background(), eventId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EventsAPI.GetEvent``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetEvent`: Event
+	fmt.Fprintf(os.Stdout, "Response from `EventsAPI.GetEvent`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**eventId** | **string** | The ID of the event. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetEventRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**Event**](Event.md)
 
 ### Authorization
 

@@ -49,6 +49,8 @@
 
 * `DEVIN_GROUP` (value: `"DEVIN_GROUP"`)
 
+* `GIT_HUB_ENTERPRISE_TEAM` (value: `"GIT_HUB_ENTERPRISE_TEAM"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

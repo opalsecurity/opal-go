@@ -107,6 +107,7 @@ Class | Method | HTTP request | Description
 *DelegationsAPI* | [**GetDelegation**](docs/DelegationsAPI.md#getdelegation) | **Get** /delegations/{delegation_id} | Get delegation by ID
 *DelegationsAPI* | [**GetDelegations**](docs/DelegationsAPI.md#getdelegations) | **Get** /delegations | Get delegations
 *EventsAPI* | [**Events**](docs/EventsAPI.md#events) | **Get** /events | 
+*EventsAPI* | [**GetEvent**](docs/EventsAPI.md#getevent) | **Get** /events/{event_id} | Get event by ID
 *GroupBindingsAPI* | [**CreateGroupBinding**](docs/GroupBindingsAPI.md#creategroupbinding) | **Post** /group-bindings | 
 *GroupBindingsAPI* | [**DeleteGroupBinding**](docs/GroupBindingsAPI.md#deletegroupbinding) | **Delete** /group-bindings/{group_binding_id} | 
 *GroupBindingsAPI* | [**GetGroupBinding**](docs/GroupBindingsAPI.md#getgroupbinding) | **Get** /group-bindings/{group_binding_id} | Get group binding by ID
@@ -283,6 +284,7 @@ Class | Method | HTTP request | Description
  - [GroupRemoteInfoDatabricksAccountGroup](docs/GroupRemoteInfoDatabricksAccountGroup.md)
  - [GroupRemoteInfoDevinGroup](docs/GroupRemoteInfoDevinGroup.md)
  - [GroupRemoteInfoDuoGroup](docs/GroupRemoteInfoDuoGroup.md)
+ - [GroupRemoteInfoGithubEnterpriseTeam](docs/GroupRemoteInfoGithubEnterpriseTeam.md)
  - [GroupRemoteInfoGithubTeam](docs/GroupRemoteInfoGithubTeam.md)
  - [GroupRemoteInfoGitlabGroup](docs/GroupRemoteInfoGitlabGroup.md)
  - [GroupRemoteInfoGoogleGroup](docs/GroupRemoteInfoGoogleGroup.md)
@@ -394,6 +396,7 @@ Class | Method | HTTP request | Description
  - [ResourceRemoteInfoGcpProject](docs/ResourceRemoteInfoGcpProject.md)
  - [ResourceRemoteInfoGcpServiceAccount](docs/ResourceRemoteInfoGcpServiceAccount.md)
  - [ResourceRemoteInfoGcpSqlInstance](docs/ResourceRemoteInfoGcpSqlInstance.md)
+ - [ResourceRemoteInfoGithubEnterpriseRole](docs/ResourceRemoteInfoGithubEnterpriseRole.md)
  - [ResourceRemoteInfoGithubOrg](docs/ResourceRemoteInfoGithubOrg.md)
  - [ResourceRemoteInfoGithubOrgRole](docs/ResourceRemoteInfoGithubOrgRole.md)
  - [ResourceRemoteInfoGithubRepo](docs/ResourceRemoteInfoGithubRepo.md)
