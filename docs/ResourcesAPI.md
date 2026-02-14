@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**DeleteResourceNhi**](ResourcesAPI.md#DeleteResourceNhi) | **Delete** /resources/{resource_id}/non-human-identities/{non_human_identity_id} | 
 [**DeleteResourceUser**](ResourcesAPI.md#DeleteResourceUser) | **Delete** /resources/{resource_id}/users/{user_id} | 
 [**GetResource**](ResourcesAPI.md#GetResource) | **Get** /resources/{resource_id} | Get resource by ID
+[**GetResourceGroups**](ResourcesAPI.md#GetResourceGroups) | **Get** /resources/{resource_id}/groups | 
 [**GetResourceMessageChannels**](ResourcesAPI.md#GetResourceMessageChannels) | **Get** /resources/{resource_id}/message-channels | 
 [**GetResourceNhis**](ResourcesAPI.md#GetResourceNhis) | **Get** /resources/{resource_id}/non-human-identities | 
 [**GetResourceReviewerStages**](ResourcesAPI.md#GetResourceReviewerStages) | **Get** /resources/{resource_id}/reviewer-stages | 
@@ -522,6 +523,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Resource**](Resource.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetResourceGroups
+
+> GroupResourceList GetResourceGroups(ctx, resourceId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the resource that the groups grant access to.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.GetResourceGroups(context.Background(), resourceId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetResourceGroups``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetResourceGroups`: GroupResourceList
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.GetResourceGroups`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource that the groups grant access to. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetResourceGroupsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**GroupResourceList**](GroupResourceList.md)
 
 ### Authorization
 
