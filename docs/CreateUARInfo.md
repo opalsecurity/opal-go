@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Deadline** | **time.Time** | The last day for reviewers to complete their access reviews. | 
 **TimeZone** | **string** | The time zone name (as defined by the IANA Time Zone database) used in the access review deadline and exported audit report. Default is America/Los_Angeles. | 
 **SelfReviewAllowed** | **bool** | A bool representing whether to present a warning when a user is the only reviewer for themself. Default is False. | 
+**InstantlyActionReviews** | Pointer to **bool** | A bool representing whether to instantly action changes when reviewers submit their decision. Default is False. | [optional] 
 **ReminderSchedule** | Pointer to **[]int32** |  | [optional] 
 **ReminderIncludeManager** | Pointer to **bool** |  | [optional] 
 **UarScope** | Pointer to [**UARScope**](UARScope.md) |  | [optional] 
@@ -152,6 +153,31 @@ and a boolean to check if the value has been set.
 
 SetSelfReviewAllowed sets SelfReviewAllowed field to given value.
 
+
+### GetInstantlyActionReviews
+
+`func (o *CreateUARInfo) GetInstantlyActionReviews() bool`
+
+GetInstantlyActionReviews returns the InstantlyActionReviews field if non-nil, zero value otherwise.
+
+### GetInstantlyActionReviewsOk
+
+`func (o *CreateUARInfo) GetInstantlyActionReviewsOk() (*bool, bool)`
+
+GetInstantlyActionReviewsOk returns a tuple with the InstantlyActionReviews field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstantlyActionReviews
+
+`func (o *CreateUARInfo) SetInstantlyActionReviews(v bool)`
+
+SetInstantlyActionReviews sets InstantlyActionReviews field to given value.
+
+### HasInstantlyActionReviews
+
+`func (o *CreateUARInfo) HasInstantlyActionReviews() bool`
+
+HasInstantlyActionReviews returns a boolean if a field has been set.
 
 ### GetReminderSchedule
 
