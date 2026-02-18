@@ -1397,7 +1397,7 @@ Name | Type | Description  | Notes
 
 ## RemoveGroupContainingGroup
 
-> RemoveGroupContainingGroup(ctx, groupId, containingGroupId).Execute()
+> RemoveGroupContainingGroup(ctx, groupId, containingGroupId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
 
 
 
@@ -1416,12 +1416,13 @@ import (
 )
 
 func main() {
-	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the member group to remove.
 	containingGroupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the containing group.
+	accessLevelRemoteId := "arn:aws:iam::590304332660:role/AdministratorAccess" // string | The remote ID of the member group's access level to filter by. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.GroupsAPI.RemoveGroupContainingGroup(context.Background(), groupId, containingGroupId).Execute()
+	r, err := apiClient.GroupsAPI.RemoveGroupContainingGroup(context.Background(), groupId, containingGroupId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.RemoveGroupContainingGroup``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1435,7 +1436,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**groupId** | **string** | The ID of the group. | 
+**groupId** | **string** | The ID of the member group to remove. | 
 **containingGroupId** | **string** | The ID of the containing group. | 
 
 ### Other Parameters
@@ -1447,6 +1448,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **accessLevelRemoteId** | **string** | The remote ID of the member group&#39;s access level to filter by. | 
 
 ### Return type
 
