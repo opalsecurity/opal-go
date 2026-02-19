@@ -2149,6 +2149,13 @@ type ApiRemoveGroupContainingGroupRequest struct {
 	ApiService *GroupsAPIService
 	groupId string
 	containingGroupId string
+	accessLevelRemoteId *string
+}
+
+// The remote ID of the member group&#39;s access level to filter by.
+func (r ApiRemoveGroupContainingGroupRequest) AccessLevelRemoteId(accessLevelRemoteId string) ApiRemoveGroupContainingGroupRequest {
+	r.accessLevelRemoteId = &accessLevelRemoteId
+	return r
 }
 
 func (r ApiRemoveGroupContainingGroupRequest) Execute() (*http.Response, error) {
@@ -2161,7 +2168,7 @@ RemoveGroupContainingGroup Method for RemoveGroupContainingGroup
 Removes a containing group from a group.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId The ID of the group.
+ @param groupId The ID of the member group to remove.
  @param containingGroupId The ID of the containing group.
  @return ApiRemoveGroupContainingGroupRequest
 */
@@ -2195,6 +2202,9 @@ func (a *GroupsAPIService) RemoveGroupContainingGroupExecute(r ApiRemoveGroupCon
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.accessLevelRemoteId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "access_level_remote_id", r.accessLevelRemoteId, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

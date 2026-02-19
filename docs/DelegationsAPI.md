@@ -6,8 +6,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateDelegation**](DelegationsAPI.md#CreateDelegation) | **Post** /delegations | 
 [**DeleteDelegation**](DelegationsAPI.md#DeleteDelegation) | **Delete** /delegations/{delegation_id} | 
-[**GetDelegation**](DelegationsAPI.md#GetDelegation) | **Get** /delegations/{delegation_id} | 
-[**GetDelegations**](DelegationsAPI.md#GetDelegations) | **Get** /delegations | 
+[**GetDelegation**](DelegationsAPI.md#GetDelegation) | **Get** /delegations/{delegation_id} | Get delegation by ID
+[**GetDelegations**](DelegationsAPI.md#GetDelegations) | **Get** /delegations | Get delegations
 
 
 
@@ -150,7 +150,7 @@ Name | Type | Description  | Notes
 
 > Delegation GetDelegation(ctx, delegationId).Execute()
 
-
+Get delegation by ID
 
 
 
@@ -220,7 +220,7 @@ Name | Type | Description  | Notes
 
 > PaginatedDelegationsList GetDelegations(ctx).DelegatorUserId(delegatorUserId).DelegateUserId(delegateUserId).Cursor(cursor).PageSize(pageSize).Execute()
 
-
+Get delegations
 
 
 

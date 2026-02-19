@@ -13,6 +13,7 @@ package opal
 
 import (
 	"encoding/json"
+	"time"
 	"fmt"
 )
 
@@ -25,6 +26,12 @@ type GroupResource struct {
 	GroupId string `json:"group_id"`
 	// The ID of the resource.
 	ResourceId string `json:"resource_id"`
+	// The name of the group
+	GroupName *string `json:"group_name,omitempty"`
+	// The name of the resource
+	ResourceName *string `json:"resource_name,omitempty"`
+	// The day and time the group's access will expire.
+	ExpirationDate *time.Time `json:"expiration_date,omitempty"`
 	AccessLevel ResourceAccessLevel `json:"access_level"`
 	AdditionalProperties map[string]interface{}
 }
@@ -99,6 +106,102 @@ func (o *GroupResource) SetResourceId(v string) {
 	o.ResourceId = v
 }
 
+// GetGroupName returns the GroupName field value if set, zero value otherwise.
+func (o *GroupResource) GetGroupName() string {
+	if o == nil || IsNil(o.GroupName) {
+		var ret string
+		return ret
+	}
+	return *o.GroupName
+}
+
+// GetGroupNameOk returns a tuple with the GroupName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupResource) GetGroupNameOk() (*string, bool) {
+	if o == nil || IsNil(o.GroupName) {
+		return nil, false
+	}
+	return o.GroupName, true
+}
+
+// HasGroupName returns a boolean if a field has been set.
+func (o *GroupResource) HasGroupName() bool {
+	if o != nil && !IsNil(o.GroupName) {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupName gets a reference to the given string and assigns it to the GroupName field.
+func (o *GroupResource) SetGroupName(v string) {
+	o.GroupName = &v
+}
+
+// GetResourceName returns the ResourceName field value if set, zero value otherwise.
+func (o *GroupResource) GetResourceName() string {
+	if o == nil || IsNil(o.ResourceName) {
+		var ret string
+		return ret
+	}
+	return *o.ResourceName
+}
+
+// GetResourceNameOk returns a tuple with the ResourceName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupResource) GetResourceNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ResourceName) {
+		return nil, false
+	}
+	return o.ResourceName, true
+}
+
+// HasResourceName returns a boolean if a field has been set.
+func (o *GroupResource) HasResourceName() bool {
+	if o != nil && !IsNil(o.ResourceName) {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceName gets a reference to the given string and assigns it to the ResourceName field.
+func (o *GroupResource) SetResourceName(v string) {
+	o.ResourceName = &v
+}
+
+// GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise.
+func (o *GroupResource) GetExpirationDate() time.Time {
+	if o == nil || IsNil(o.ExpirationDate) {
+		var ret time.Time
+		return ret
+	}
+	return *o.ExpirationDate
+}
+
+// GetExpirationDateOk returns a tuple with the ExpirationDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupResource) GetExpirationDateOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.ExpirationDate) {
+		return nil, false
+	}
+	return o.ExpirationDate, true
+}
+
+// HasExpirationDate returns a boolean if a field has been set.
+func (o *GroupResource) HasExpirationDate() bool {
+	if o != nil && !IsNil(o.ExpirationDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetExpirationDate gets a reference to the given time.Time and assigns it to the ExpirationDate field.
+func (o *GroupResource) SetExpirationDate(v time.Time) {
+	o.ExpirationDate = &v
+}
+
 // GetAccessLevel returns the AccessLevel field value
 func (o *GroupResource) GetAccessLevel() ResourceAccessLevel {
 	if o == nil {
@@ -135,6 +238,15 @@ func (o GroupResource) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["group_id"] = o.GroupId
 	toSerialize["resource_id"] = o.ResourceId
+	if !IsNil(o.GroupName) {
+		toSerialize["group_name"] = o.GroupName
+	}
+	if !IsNil(o.ResourceName) {
+		toSerialize["resource_name"] = o.ResourceName
+	}
+	if !IsNil(o.ExpirationDate) {
+		toSerialize["expiration_date"] = o.ExpirationDate
+	}
 	toSerialize["access_level"] = o.AccessLevel
 
 	for key, value := range o.AdditionalProperties {
@@ -183,6 +295,9 @@ func (o *GroupResource) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "group_id")
 		delete(additionalProperties, "resource_id")
+		delete(additionalProperties, "group_name")
+		delete(additionalProperties, "resource_name")
+		delete(additionalProperties, "expiration_date")
 		delete(additionalProperties, "access_level")
 		o.AdditionalProperties = additionalProperties
 	}
