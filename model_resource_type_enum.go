@@ -95,6 +95,7 @@ const (
 	RESOURCETYPEENUM_VAULT_SECRET ResourceTypeEnum = "VAULT_SECRET"
 	RESOURCETYPEENUM_VAULT_POLICY ResourceTypeEnum = "VAULT_POLICY"
 	RESOURCETYPEENUM_VAULT_OIDC_ROLE ResourceTypeEnum = "VAULT_OIDC_ROLE"
+	RESOURCETYPEENUM_GIT_HUB_ENTERPRISE_ROLE ResourceTypeEnum = "GIT_HUB_ENTERPRISE_ROLE"
 )
 
 // All allowed values of ResourceTypeEnum enum
@@ -173,6 +174,7 @@ var AllowedResourceTypeEnumEnumValues = []ResourceTypeEnum{
 	"VAULT_SECRET",
 	"VAULT_POLICY",
 	"VAULT_OIDC_ROLE",
+	"GIT_HUB_ENTERPRISE_ROLE",
 }
 
 func (v *ResourceTypeEnum) UnmarshalJSON(src []byte) error {
