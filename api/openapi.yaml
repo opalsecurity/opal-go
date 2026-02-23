@@ -6647,6 +6647,7 @@ components:
         - INCIDENTIO_ON_CALL_SCHEDULE
         - ROOTLY_ON_CALL_SCHEDULE
         - DEVIN_GROUP
+        - GIT_HUB_ENTERPRISE_TEAM
       example: OPAL_GROUP
       type: string
     ResourceTypeEnum:
@@ -6726,6 +6727,7 @@ components:
         - VAULT_SECRET
         - VAULT_POLICY
         - VAULT_OIDC_ROLE
+        - GIT_HUB_ENTERPRISE_ROLE
       example: AWS_IAM_ROLE
       type: string
     VisibilityTypeEnum:
@@ -7240,6 +7242,16 @@ components:
               type: string
             team_slug:
               description: The slug of the GitHub team.
+              example: opal-security
+              type: string
+          type: object
+          required:
+            - team_slug
+        github_enterprise_team:
+          description: Remote info for GitHub Enterprise team.
+          properties:
+            team_slug:
+              description: The slug of the GitHub Enterprise team.
               example: opal-security
               type: string
           type: object
@@ -7882,6 +7894,16 @@ components:
           type: object
           required:
             - org_name
+        github_enterprise_role:
+          description: Remote info for GitHub Enterprise role.
+          properties:
+            role_id:
+              description: The id of the role.
+              example: 112233
+              type: string
+          type: object
+          required:
+            - role_id
         gitlab_project:
           description: Remote info for Gitlab project.
           properties:
