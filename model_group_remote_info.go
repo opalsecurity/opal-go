@@ -26,6 +26,7 @@ type GroupRemoteInfo struct {
 	DatabricksAccountGroup *GroupRemoteInfoDatabricksAccountGroup `json:"databricks_account_group,omitempty"`
 	ConnectorGroup *GroupRemoteInfoConnectorGroup `json:"connector_group,omitempty"`
 	GithubTeam *GroupRemoteInfoGithubTeam `json:"github_team,omitempty"`
+	GithubEnterpriseTeam *GroupRemoteInfoGithubEnterpriseTeam `json:"github_enterprise_team,omitempty"`
 	GitlabGroup *GroupRemoteInfoGitlabGroup `json:"gitlab_group,omitempty"`
 	GoogleGroup *GroupRemoteInfoGoogleGroup `json:"google_group,omitempty"`
 	LdapGroup *GroupRemoteInfoLdapGroup `json:"ldap_group,omitempty"`
@@ -252,6 +253,38 @@ func (o *GroupRemoteInfo) HasGithubTeam() bool {
 // SetGithubTeam gets a reference to the given GroupRemoteInfoGithubTeam and assigns it to the GithubTeam field.
 func (o *GroupRemoteInfo) SetGithubTeam(v GroupRemoteInfoGithubTeam) {
 	o.GithubTeam = &v
+}
+
+// GetGithubEnterpriseTeam returns the GithubEnterpriseTeam field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetGithubEnterpriseTeam() GroupRemoteInfoGithubEnterpriseTeam {
+	if o == nil || IsNil(o.GithubEnterpriseTeam) {
+		var ret GroupRemoteInfoGithubEnterpriseTeam
+		return ret
+	}
+	return *o.GithubEnterpriseTeam
+}
+
+// GetGithubEnterpriseTeamOk returns a tuple with the GithubEnterpriseTeam field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetGithubEnterpriseTeamOk() (*GroupRemoteInfoGithubEnterpriseTeam, bool) {
+	if o == nil || IsNil(o.GithubEnterpriseTeam) {
+		return nil, false
+	}
+	return o.GithubEnterpriseTeam, true
+}
+
+// HasGithubEnterpriseTeam returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasGithubEnterpriseTeam() bool {
+	if o != nil && !IsNil(o.GithubEnterpriseTeam) {
+		return true
+	}
+
+	return false
+}
+
+// SetGithubEnterpriseTeam gets a reference to the given GroupRemoteInfoGithubEnterpriseTeam and assigns it to the GithubEnterpriseTeam field.
+func (o *GroupRemoteInfo) SetGithubEnterpriseTeam(v GroupRemoteInfoGithubEnterpriseTeam) {
+	o.GithubEnterpriseTeam = &v
 }
 
 // GetGitlabGroup returns the GitlabGroup field value if set, zero value otherwise.
@@ -730,6 +763,9 @@ func (o GroupRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GithubTeam) {
 		toSerialize["github_team"] = o.GithubTeam
 	}
+	if !IsNil(o.GithubEnterpriseTeam) {
+		toSerialize["github_enterprise_team"] = o.GithubEnterpriseTeam
+	}
 	if !IsNil(o.GitlabGroup) {
 		toSerialize["gitlab_group"] = o.GitlabGroup
 	}
@@ -800,6 +836,7 @@ func (o *GroupRemoteInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "databricks_account_group")
 		delete(additionalProperties, "connector_group")
 		delete(additionalProperties, "github_team")
+		delete(additionalProperties, "github_enterprise_team")
 		delete(additionalProperties, "gitlab_group")
 		delete(additionalProperties, "google_group")
 		delete(additionalProperties, "ldap_group")

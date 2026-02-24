@@ -92,6 +92,7 @@ docs/GroupRemoteInfoConnectorGroup.md
 docs/GroupRemoteInfoDatabricksAccountGroup.md
 docs/GroupRemoteInfoDevinGroup.md
 docs/GroupRemoteInfoDuoGroup.md
+docs/GroupRemoteInfoGithubEnterpriseTeam.md
 docs/GroupRemoteInfoGithubTeam.md
 docs/GroupRemoteInfoGitlabGroup.md
 docs/GroupRemoteInfoGoogleGroup.md
@@ -210,6 +211,7 @@ docs/ResourceRemoteInfoGcpOrganization.md
 docs/ResourceRemoteInfoGcpProject.md
 docs/ResourceRemoteInfoGcpServiceAccount.md
 docs/ResourceRemoteInfoGcpSqlInstance.md
+docs/ResourceRemoteInfoGithubEnterpriseRole.md
 docs/ResourceRemoteInfoGithubOrg.md
 docs/ResourceRemoteInfoGithubOrgRole.md
 docs/ResourceRemoteInfoGithubRepo.md
@@ -357,6 +359,7 @@ model_group_remote_info_connector_group.go
 model_group_remote_info_databricks_account_group.go
 model_group_remote_info_devin_group.go
 model_group_remote_info_duo_group.go
+model_group_remote_info_github_enterprise_team.go
 model_group_remote_info_github_team.go
 model_group_remote_info_gitlab_group.go
 model_group_remote_info_google_group.go
@@ -468,6 +471,7 @@ model_resource_remote_info_gcp_organization.go
 model_resource_remote_info_gcp_project.go
 model_resource_remote_info_gcp_service_account.go
 model_resource_remote_info_gcp_sql_instance.go
+model_resource_remote_info_github_enterprise_role.go
 model_resource_remote_info_github_org.go
 model_resource_remote_info_github_org_role.go
 model_resource_remote_info_github_repo.go
