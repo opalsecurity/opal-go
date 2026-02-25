@@ -57,6 +57,7 @@ type ResourceRemoteInfo struct {
 	GithubRepo *ResourceRemoteInfoGithubRepo `json:"github_repo,omitempty"`
 	GithubOrgRole *ResourceRemoteInfoGithubOrgRole `json:"github_org_role,omitempty"`
 	GithubOrg *ResourceRemoteInfoGithubOrg `json:"github_org,omitempty"`
+	GithubEnterpriseRole *ResourceRemoteInfoGithubEnterpriseRole `json:"github_enterprise_role,omitempty"`
 	GitlabProject *ResourceRemoteInfoGitlabProject `json:"gitlab_project,omitempty"`
 	OktaApp *ResourceRemoteInfoOktaApp `json:"okta_app,omitempty"`
 	OktaStandardRole *ResourceRemoteInfoOktaStandardRole `json:"okta_standard_role,omitempty"`
@@ -1287,6 +1288,38 @@ func (o *ResourceRemoteInfo) SetGithubOrg(v ResourceRemoteInfoGithubOrg) {
 	o.GithubOrg = &v
 }
 
+// GetGithubEnterpriseRole returns the GithubEnterpriseRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetGithubEnterpriseRole() ResourceRemoteInfoGithubEnterpriseRole {
+	if o == nil || IsNil(o.GithubEnterpriseRole) {
+		var ret ResourceRemoteInfoGithubEnterpriseRole
+		return ret
+	}
+	return *o.GithubEnterpriseRole
+}
+
+// GetGithubEnterpriseRoleOk returns a tuple with the GithubEnterpriseRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetGithubEnterpriseRoleOk() (*ResourceRemoteInfoGithubEnterpriseRole, bool) {
+	if o == nil || IsNil(o.GithubEnterpriseRole) {
+		return nil, false
+	}
+	return o.GithubEnterpriseRole, true
+}
+
+// HasGithubEnterpriseRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasGithubEnterpriseRole() bool {
+	if o != nil && !IsNil(o.GithubEnterpriseRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetGithubEnterpriseRole gets a reference to the given ResourceRemoteInfoGithubEnterpriseRole and assigns it to the GithubEnterpriseRole field.
+func (o *ResourceRemoteInfo) SetGithubEnterpriseRole(v ResourceRemoteInfoGithubEnterpriseRole) {
+	o.GithubEnterpriseRole = &v
+}
+
 // GetGitlabProject returns the GitlabProject field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetGitlabProject() ResourceRemoteInfoGitlabProject {
 	if o == nil || IsNil(o.GitlabProject) {
@@ -2176,6 +2209,9 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GithubOrg) {
 		toSerialize["github_org"] = o.GithubOrg
 	}
+	if !IsNil(o.GithubEnterpriseRole) {
+		toSerialize["github_enterprise_role"] = o.GithubEnterpriseRole
+	}
 	if !IsNil(o.GitlabProject) {
 		toSerialize["gitlab_project"] = o.GitlabProject
 	}
@@ -2307,6 +2343,7 @@ func (o *ResourceRemoteInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "github_repo")
 		delete(additionalProperties, "github_org_role")
 		delete(additionalProperties, "github_org")
+		delete(additionalProperties, "github_enterprise_role")
 		delete(additionalProperties, "gitlab_project")
 		delete(additionalProperties, "okta_app")
 		delete(additionalProperties, "okta_standard_role")
