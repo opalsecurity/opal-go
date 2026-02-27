@@ -615,7 +615,7 @@ Name | Type | Description  | Notes
 
 ## GetGroupContainingGroups
 
-> GroupContainingGroupList GetGroupContainingGroups(ctx, groupId).Execute()
+> GroupContainingGroupList GetGroupContainingGroups(ctx, groupId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
 
 Get nested groups
 
@@ -635,10 +635,11 @@ import (
 
 func main() {
 	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	accessLevelRemoteId := "arn:aws:iam::590304332660:role/AdministratorAccess" // string | The access level's remote ID to filter by. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.GroupsAPI.GetGroupContainingGroups(context.Background(), groupId).Execute()
+	resp, r, err := apiClient.GroupsAPI.GetGroupContainingGroups(context.Background(), groupId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetGroupContainingGroups``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -664,6 +665,7 @@ Other parameters are passed through a pointer to a apiGetGroupContainingGroupsRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **accessLevelRemoteId** | **string** | The access level&#39;s remote ID to filter by. | 
 
 ### Return type
 

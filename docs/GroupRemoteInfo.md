@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **DatabricksAccountGroup** | Pointer to [**GroupRemoteInfoDatabricksAccountGroup**](GroupRemoteInfoDatabricksAccountGroup.md) |  | [optional] 
 **ConnectorGroup** | Pointer to [**GroupRemoteInfoConnectorGroup**](GroupRemoteInfoConnectorGroup.md) |  | [optional] 
 **GithubTeam** | Pointer to [**GroupRemoteInfoGithubTeam**](GroupRemoteInfoGithubTeam.md) |  | [optional] 
+**GithubEnterpriseTeam** | Pointer to [**GroupRemoteInfoGithubEnterpriseTeam**](GroupRemoteInfoGithubEnterpriseTeam.md) |  | [optional] 
 **GitlabGroup** | Pointer to [**GroupRemoteInfoGitlabGroup**](GroupRemoteInfoGitlabGroup.md) |  | [optional] 
 **GoogleGroup** | Pointer to [**GroupRemoteInfoGoogleGroup**](GroupRemoteInfoGoogleGroup.md) |  | [optional] 
 **LdapGroup** | Pointer to [**GroupRemoteInfoLdapGroup**](GroupRemoteInfoLdapGroup.md) |  | [optional] 
@@ -193,6 +194,31 @@ SetGithubTeam sets GithubTeam field to given value.
 `func (o *GroupRemoteInfo) HasGithubTeam() bool`
 
 HasGithubTeam returns a boolean if a field has been set.
+
+### GetGithubEnterpriseTeam
+
+`func (o *GroupRemoteInfo) GetGithubEnterpriseTeam() GroupRemoteInfoGithubEnterpriseTeam`
+
+GetGithubEnterpriseTeam returns the GithubEnterpriseTeam field if non-nil, zero value otherwise.
+
+### GetGithubEnterpriseTeamOk
+
+`func (o *GroupRemoteInfo) GetGithubEnterpriseTeamOk() (*GroupRemoteInfoGithubEnterpriseTeam, bool)`
+
+GetGithubEnterpriseTeamOk returns a tuple with the GithubEnterpriseTeam field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGithubEnterpriseTeam
+
+`func (o *GroupRemoteInfo) SetGithubEnterpriseTeam(v GroupRemoteInfoGithubEnterpriseTeam)`
+
+SetGithubEnterpriseTeam sets GithubEnterpriseTeam field to given value.
+
+### HasGithubEnterpriseTeam
+
+`func (o *GroupRemoteInfo) HasGithubEnterpriseTeam() bool`
+
+HasGithubEnterpriseTeam returns a boolean if a field has been set.
 
 ### GetGitlabGroup
 
