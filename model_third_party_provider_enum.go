@@ -35,7 +35,6 @@ const (
 	THIRDPARTYPROVIDERENUM_GIT_LAB ThirdPartyProviderEnum = "GIT_LAB"
 	THIRDPARTYPROVIDERENUM_GIT_LAB_CONNECTION ThirdPartyProviderEnum = "GIT_LAB_CONNECTION"
 	THIRDPARTYPROVIDERENUM_TELEPORT ThirdPartyProviderEnum = "TELEPORT"
-	THIRDPARTYPROVIDERENUM_SLACK2 ThirdPartyProviderEnum = "SLACK"
 )
 
 // All allowed values of ThirdPartyProviderEnum enum
@@ -54,7 +53,6 @@ var AllowedThirdPartyProviderEnumEnumValues = []ThirdPartyProviderEnum{
 	"GIT_LAB",
 	"GIT_LAB_CONNECTION",
 	"TELEPORT",
-	"SLACK",
 }
 
 func (v *ThirdPartyProviderEnum) UnmarshalJSON(src []byte) error {

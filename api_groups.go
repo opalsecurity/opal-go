@@ -923,6 +923,13 @@ type ApiGetGroupContainingGroupsRequest struct {
 	ctx context.Context
 	ApiService *GroupsAPIService
 	groupId string
+	accessLevelRemoteId *string
+}
+
+// The access level&#39;s remote ID to filter by.
+func (r ApiGetGroupContainingGroupsRequest) AccessLevelRemoteId(accessLevelRemoteId string) ApiGetGroupContainingGroupsRequest {
+	r.accessLevelRemoteId = &accessLevelRemoteId
+	return r
 }
 
 func (r ApiGetGroupContainingGroupsRequest) Execute() (*GroupContainingGroupList, *http.Response, error) {
@@ -968,6 +975,9 @@ func (a *GroupsAPIService) GetGroupContainingGroupsExecute(r ApiGetGroupContaini
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.accessLevelRemoteId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "access_level_remote_id", r.accessLevelRemoteId, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
