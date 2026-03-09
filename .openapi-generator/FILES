@@ -16,6 +16,7 @@ api_requests.go
 api_resources.go
 api_sessions.go
 api_tags.go
+api_tokens.go
 api_uars.go
 api_users.go
 client.go
@@ -30,6 +31,7 @@ docs/AddGroupResourceRequest.md
 docs/AddGroupUserRequest.md
 docs/AddResourceNhiRequest.md
 docs/AddResourceUserRequest.md
+docs/ApiAccessLevelEnum.md
 docs/App.md
 docs/AppTypeEnum.md
 docs/AppValidation.md
@@ -142,6 +144,7 @@ docs/PaginatedOwnersList.md
 docs/PaginatedRemoteUsersList.md
 docs/PaginatedResourcesList.md
 docs/PaginatedTagsList.md
+docs/PaginatedTokensList.md
 docs/PaginatedUARsList.md
 docs/PaginatedUsersList.md
 docs/PropagationStatus.md
@@ -267,6 +270,8 @@ docs/TagsList.md
 docs/ThirdPartyProviderEnum.md
 docs/TicketPropagationConfiguration.md
 docs/TicketingProviderEnum.md
+docs/Token.md
+docs/TokensAPI.md
 docs/UAR.md
 docs/UARReviewerAssignmentPolicyEnum.md
 docs/UARScope.md
@@ -303,6 +308,7 @@ model_add_group_resource_request.go
 model_add_group_user_request.go
 model_add_resource_nhi_request.go
 model_add_resource_user_request.go
+model_api_access_level_enum.go
 model_app.go
 model_app_type_enum.go
 model_app_validation.go
@@ -403,6 +409,7 @@ model_paginated_owners_list.go
 model_paginated_remote_users_list.go
 model_paginated_resources_list.go
 model_paginated_tags_list.go
+model_paginated_tokens_list.go
 model_paginated_uars_list.go
 model_paginated_users_list.go
 model_propagation_status.go
@@ -524,6 +531,7 @@ model_tags_list.go
 model_third_party_provider_enum.go
 model_ticket_propagation_configuration.go
 model_ticketing_provider_enum.go
+model_token.go
 model_uar.go
 model_uar_reviewer_assignment_policy_enum.go
 model_uar_scope.go
