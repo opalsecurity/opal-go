@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 **RequireManagerApproval** | **bool** | Whether this reviewer stage should require manager approval. | 
 **RequireAdminApproval** | Pointer to **bool** | Whether this reviewer stage should require admin approval. | [optional] 
 **Operator** | **string** | The operator of the reviewer stage. Admin and manager approval are also treated as reviewers. | 
-**OwnerIds** | **[]string** |  | 
+**OwnerIds** | **[]string** | The IDs of owners assigned as reviewers for this stage. | 
+**ServiceUserIds** | Pointer to **[]string** | The IDs of service users assigned as reviewers for this stage. | [optional] 
 
 ## Methods
 
@@ -112,6 +113,31 @@ and a boolean to check if the value has been set.
 
 SetOwnerIds sets OwnerIds field to given value.
 
+
+### GetServiceUserIds
+
+`func (o *ReviewerStage) GetServiceUserIds() []string`
+
+GetServiceUserIds returns the ServiceUserIds field if non-nil, zero value otherwise.
+
+### GetServiceUserIdsOk
+
+`func (o *ReviewerStage) GetServiceUserIdsOk() (*[]string, bool)`
+
+GetServiceUserIdsOk returns a tuple with the ServiceUserIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServiceUserIds
+
+`func (o *ReviewerStage) SetServiceUserIds(v []string)`
+
+SetServiceUserIds sets ServiceUserIds field to given value.
+
+### HasServiceUserIds
+
+`func (o *ReviewerStage) HasServiceUserIds() bool`
+
+HasServiceUserIds returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
