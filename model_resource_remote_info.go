@@ -82,6 +82,7 @@ type ResourceRemoteInfo struct {
 	OracleFusionRole *ResourceRemoteInfoOracleFusionRole `json:"oracle_fusion_role,omitempty"`
 	DevinOrganization *ResourceRemoteInfoDevinOrganization `json:"devin_organization,omitempty"`
 	DevinRole *ResourceRemoteInfoDevinRole `json:"devin_role,omitempty"`
+	NetsuiteRole *ResourceRemoteInfoNetsuiteRole `json:"netsuite_role,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -2088,6 +2089,38 @@ func (o *ResourceRemoteInfo) SetDevinRole(v ResourceRemoteInfoDevinRole) {
 	o.DevinRole = &v
 }
 
+// GetNetsuiteRole returns the NetsuiteRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetNetsuiteRole() ResourceRemoteInfoNetsuiteRole {
+	if o == nil || IsNil(o.NetsuiteRole) {
+		var ret ResourceRemoteInfoNetsuiteRole
+		return ret
+	}
+	return *o.NetsuiteRole
+}
+
+// GetNetsuiteRoleOk returns a tuple with the NetsuiteRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetNetsuiteRoleOk() (*ResourceRemoteInfoNetsuiteRole, bool) {
+	if o == nil || IsNil(o.NetsuiteRole) {
+		return nil, false
+	}
+	return o.NetsuiteRole, true
+}
+
+// HasNetsuiteRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasNetsuiteRole() bool {
+	if o != nil && !IsNil(o.NetsuiteRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetNetsuiteRole gets a reference to the given ResourceRemoteInfoNetsuiteRole and assigns it to the NetsuiteRole field.
+func (o *ResourceRemoteInfo) SetNetsuiteRole(v ResourceRemoteInfoNetsuiteRole) {
+	o.NetsuiteRole = &v
+}
+
 func (o ResourceRemoteInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -2284,6 +2317,9 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DevinRole) {
 		toSerialize["devin_role"] = o.DevinRole
 	}
+	if !IsNil(o.NetsuiteRole) {
+		toSerialize["netsuite_role"] = o.NetsuiteRole
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -2368,6 +2404,7 @@ func (o *ResourceRemoteInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "oracle_fusion_role")
 		delete(additionalProperties, "devin_organization")
 		delete(additionalProperties, "devin_role")
+		delete(additionalProperties, "netsuite_role")
 		o.AdditionalProperties = additionalProperties
 	}
 

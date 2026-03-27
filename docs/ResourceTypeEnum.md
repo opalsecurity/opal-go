@@ -89,6 +89,8 @@
 
 * `MONGO_ATLAS_INSTANCE` (value: `"MONGO_ATLAS_INSTANCE"`)
 
+* `NETSUITE_ROLE` (value: `"NETSUITE_ROLE"`)
+
 * `OKTA_APP` (value: `"OKTA_APP"`)
 
 * `OKTA_ROLE` (value: `"OKTA_ROLE"`)
