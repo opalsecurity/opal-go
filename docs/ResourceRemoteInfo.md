@@ -66,6 +66,7 @@ Name | Type | Description | Notes
 **OracleFusionRole** | Pointer to [**ResourceRemoteInfoOracleFusionRole**](ResourceRemoteInfoOracleFusionRole.md) |  | [optional] 
 **DevinOrganization** | Pointer to [**ResourceRemoteInfoDevinOrganization**](ResourceRemoteInfoDevinOrganization.md) |  | [optional] 
 **DevinRole** | Pointer to [**ResourceRemoteInfoDevinRole**](ResourceRemoteInfoDevinRole.md) |  | [optional] 
+**NetsuiteRole** | Pointer to [**ResourceRemoteInfoNetsuiteRole**](ResourceRemoteInfoNetsuiteRole.md) |  | [optional] 
 
 ## Methods
 
@@ -1635,6 +1636,31 @@ SetDevinRole sets DevinRole field to given value.
 `func (o *ResourceRemoteInfo) HasDevinRole() bool`
 
 HasDevinRole returns a boolean if a field has been set.
+
+### GetNetsuiteRole
+
+`func (o *ResourceRemoteInfo) GetNetsuiteRole() ResourceRemoteInfoNetsuiteRole`
+
+GetNetsuiteRole returns the NetsuiteRole field if non-nil, zero value otherwise.
+
+### GetNetsuiteRoleOk
+
+`func (o *ResourceRemoteInfo) GetNetsuiteRoleOk() (*ResourceRemoteInfoNetsuiteRole, bool)`
+
+GetNetsuiteRoleOk returns a tuple with the NetsuiteRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetsuiteRole
+
+`func (o *ResourceRemoteInfo) SetNetsuiteRole(v ResourceRemoteInfoNetsuiteRole)`
+
+SetNetsuiteRole sets NetsuiteRole field to given value.
+
+### HasNetsuiteRole
+
+`func (o *ResourceRemoteInfo) HasNetsuiteRole() bool`
+
+HasNetsuiteRole returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
