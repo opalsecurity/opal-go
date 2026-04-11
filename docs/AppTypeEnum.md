@@ -19,6 +19,8 @@
 
 * `CUSTOM` (value: `"CUSTOM"`)
 
+* `CUSTOM_CONNECTOR` (value: `"CUSTOM_CONNECTOR"`)
+
 * `DATABRICKS` (value: `"DATABRICKS"`)
 
 * `DATASTAX_ASTRA` (value: `"DATASTAX_ASTRA"`)
@@ -48,6 +50,8 @@
 * `MONGO_ATLAS` (value: `"MONGO_ATLAS"`)
 
 * `MYSQL` (value: `"MYSQL"`)
+
+* `NETSUITE` (value: `"NETSUITE"`)
 
 * `OKTA_DIRECTORY` (value: `"OKTA_DIRECTORY"`)
 
