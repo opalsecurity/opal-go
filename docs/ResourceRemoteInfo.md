@@ -66,6 +66,9 @@ Name | Type | Description | Notes
 **OracleFusionRole** | Pointer to [**ResourceRemoteInfoOracleFusionRole**](ResourceRemoteInfoOracleFusionRole.md) |  | [optional] 
 **DevinOrganization** | Pointer to [**ResourceRemoteInfoDevinOrganization**](ResourceRemoteInfoDevinOrganization.md) |  | [optional] 
 **DevinRole** | Pointer to [**ResourceRemoteInfoDevinRole**](ResourceRemoteInfoDevinRole.md) |  | [optional] 
+**NetsuiteRole** | Pointer to [**ResourceRemoteInfoNetsuiteRole**](ResourceRemoteInfoNetsuiteRole.md) |  | [optional] 
+**ClickhouseDatabase** | Pointer to [**ResourceRemoteInfoClickhouseDatabase**](ResourceRemoteInfoClickhouseDatabase.md) |  | [optional] 
+**ClickhouseTable** | Pointer to [**ResourceRemoteInfoClickhouseTable**](ResourceRemoteInfoClickhouseTable.md) |  | [optional] 
 
 ## Methods
 
@@ -1635,6 +1638,81 @@ SetDevinRole sets DevinRole field to given value.
 `func (o *ResourceRemoteInfo) HasDevinRole() bool`
 
 HasDevinRole returns a boolean if a field has been set.
+
+### GetNetsuiteRole
+
+`func (o *ResourceRemoteInfo) GetNetsuiteRole() ResourceRemoteInfoNetsuiteRole`
+
+GetNetsuiteRole returns the NetsuiteRole field if non-nil, zero value otherwise.
+
+### GetNetsuiteRoleOk
+
+`func (o *ResourceRemoteInfo) GetNetsuiteRoleOk() (*ResourceRemoteInfoNetsuiteRole, bool)`
+
+GetNetsuiteRoleOk returns a tuple with the NetsuiteRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetsuiteRole
+
+`func (o *ResourceRemoteInfo) SetNetsuiteRole(v ResourceRemoteInfoNetsuiteRole)`
+
+SetNetsuiteRole sets NetsuiteRole field to given value.
+
+### HasNetsuiteRole
+
+`func (o *ResourceRemoteInfo) HasNetsuiteRole() bool`
+
+HasNetsuiteRole returns a boolean if a field has been set.
+
+### GetClickhouseDatabase
+
+`func (o *ResourceRemoteInfo) GetClickhouseDatabase() ResourceRemoteInfoClickhouseDatabase`
+
+GetClickhouseDatabase returns the ClickhouseDatabase field if non-nil, zero value otherwise.
+
+### GetClickhouseDatabaseOk
+
+`func (o *ResourceRemoteInfo) GetClickhouseDatabaseOk() (*ResourceRemoteInfoClickhouseDatabase, bool)`
+
+GetClickhouseDatabaseOk returns a tuple with the ClickhouseDatabase field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClickhouseDatabase
+
+`func (o *ResourceRemoteInfo) SetClickhouseDatabase(v ResourceRemoteInfoClickhouseDatabase)`
+
+SetClickhouseDatabase sets ClickhouseDatabase field to given value.
+
+### HasClickhouseDatabase
+
+`func (o *ResourceRemoteInfo) HasClickhouseDatabase() bool`
+
+HasClickhouseDatabase returns a boolean if a field has been set.
+
+### GetClickhouseTable
+
+`func (o *ResourceRemoteInfo) GetClickhouseTable() ResourceRemoteInfoClickhouseTable`
+
+GetClickhouseTable returns the ClickhouseTable field if non-nil, zero value otherwise.
+
+### GetClickhouseTableOk
+
+`func (o *ResourceRemoteInfo) GetClickhouseTableOk() (*ResourceRemoteInfoClickhouseTable, bool)`
+
+GetClickhouseTableOk returns a tuple with the ClickhouseTable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClickhouseTable
+
+`func (o *ResourceRemoteInfo) SetClickhouseTable(v ResourceRemoteInfoClickhouseTable)`
+
+SetClickhouseTable sets ClickhouseTable field to given value.
+
+### HasClickhouseTable
+
+`func (o *ResourceRemoteInfo) HasClickhouseTable() bool`
+
+HasClickhouseTable returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
