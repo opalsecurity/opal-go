@@ -41,6 +41,7 @@ type GroupRemoteInfo struct {
 	IncidentioOnCallSchedule *GroupRemoteInfoIncidentioOnCallSchedule `json:"incidentio_on_call_schedule,omitempty"`
 	RootlyOnCallSchedule *GroupRemoteInfoRootlyOnCallSchedule `json:"rootly_on_call_schedule,omitempty"`
 	DevinGroup *GroupRemoteInfoDevinGroup `json:"devin_group,omitempty"`
+	ClickhouseRole *GroupRemoteInfoClickhouseRole `json:"clickhouse_role,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -735,6 +736,38 @@ func (o *GroupRemoteInfo) SetDevinGroup(v GroupRemoteInfoDevinGroup) {
 	o.DevinGroup = &v
 }
 
+// GetClickhouseRole returns the ClickhouseRole field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetClickhouseRole() GroupRemoteInfoClickhouseRole {
+	if o == nil || IsNil(o.ClickhouseRole) {
+		var ret GroupRemoteInfoClickhouseRole
+		return ret
+	}
+	return *o.ClickhouseRole
+}
+
+// GetClickhouseRoleOk returns a tuple with the ClickhouseRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetClickhouseRoleOk() (*GroupRemoteInfoClickhouseRole, bool) {
+	if o == nil || IsNil(o.ClickhouseRole) {
+		return nil, false
+	}
+	return o.ClickhouseRole, true
+}
+
+// HasClickhouseRole returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasClickhouseRole() bool {
+	if o != nil && !IsNil(o.ClickhouseRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetClickhouseRole gets a reference to the given GroupRemoteInfoClickhouseRole and assigns it to the ClickhouseRole field.
+func (o *GroupRemoteInfo) SetClickhouseRole(v GroupRemoteInfoClickhouseRole) {
+	o.ClickhouseRole = &v
+}
+
 func (o GroupRemoteInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -808,6 +841,9 @@ func (o GroupRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DevinGroup) {
 		toSerialize["devin_group"] = o.DevinGroup
 	}
+	if !IsNil(o.ClickhouseRole) {
+		toSerialize["clickhouse_role"] = o.ClickhouseRole
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -851,6 +887,7 @@ func (o *GroupRemoteInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "incidentio_on_call_schedule")
 		delete(additionalProperties, "rootly_on_call_schedule")
 		delete(additionalProperties, "devin_group")
+		delete(additionalProperties, "clickhouse_role")
 		o.AdditionalProperties = additionalProperties
 	}
 
