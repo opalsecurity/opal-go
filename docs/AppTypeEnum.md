@@ -19,6 +19,8 @@
 
 * `CUSTOM` (value: `"CUSTOM"`)
 
+* `CUSTOM_CONNECTOR` (value: `"CUSTOM_CONNECTOR"`)
+
 * `DATABRICKS` (value: `"DATABRICKS"`)
 
 * `DATASTAX_ASTRA` (value: `"DATASTAX_ASTRA"`)
@@ -49,6 +51,8 @@
 
 * `MYSQL` (value: `"MYSQL"`)
 
+* `NETSUITE` (value: `"NETSUITE"`)
+
 * `OKTA_DIRECTORY` (value: `"OKTA_DIRECTORY"`)
 
 * `OPENAI_PLATFORM` (value: `"OPENAI_PLATFORM"`)
@@ -64,6 +68,8 @@
 * `TAILSCALE` (value: `"TAILSCALE"`)
 
 * `TELEPORT` (value: `"TELEPORT"`)
+
+* `TWINGATE` (value: `"TWINGATE"`)
 
 * `WORKDAY` (value: `"WORKDAY"`)
 
