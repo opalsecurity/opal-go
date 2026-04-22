@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ActiveDirectoryGroup** | Pointer to [**GroupRemoteInfoActiveDirectoryGroup**](GroupRemoteInfoActiveDirectoryGroup.md) |  | [optional] 
 **TailscaleGroup** | Pointer to [**GroupRemoteInfoTailscaleGroup**](GroupRemoteInfoTailscaleGroup.md) |  | [optional] 
+**TwingateGroup** | Pointer to [**GroupRemoteInfoTwingateGroup**](GroupRemoteInfoTwingateGroup.md) |  | [optional] 
 **AwsSsoGroup** | Pointer to [**GroupRemoteInfoAwsSsoGroup**](GroupRemoteInfoAwsSsoGroup.md) |  | [optional] 
 **DatabricksAccountGroup** | Pointer to [**GroupRemoteInfoDatabricksAccountGroup**](GroupRemoteInfoDatabricksAccountGroup.md) |  | [optional] 
 **ConnectorGroup** | Pointer to [**GroupRemoteInfoConnectorGroup**](GroupRemoteInfoConnectorGroup.md) |  | [optional] 
@@ -25,6 +26,7 @@ Name | Type | Description | Notes
 **IncidentioOnCallSchedule** | Pointer to [**GroupRemoteInfoIncidentioOnCallSchedule**](GroupRemoteInfoIncidentioOnCallSchedule.md) |  | [optional] 
 **RootlyOnCallSchedule** | Pointer to [**GroupRemoteInfoRootlyOnCallSchedule**](GroupRemoteInfoRootlyOnCallSchedule.md) |  | [optional] 
 **DevinGroup** | Pointer to [**GroupRemoteInfoDevinGroup**](GroupRemoteInfoDevinGroup.md) |  | [optional] 
+**ClickhouseRole** | Pointer to [**GroupRemoteInfoClickhouseRole**](GroupRemoteInfoClickhouseRole.md) |  | [optional] 
 
 ## Methods
 
@@ -94,6 +96,31 @@ SetTailscaleGroup sets TailscaleGroup field to given value.
 `func (o *GroupRemoteInfo) HasTailscaleGroup() bool`
 
 HasTailscaleGroup returns a boolean if a field has been set.
+
+### GetTwingateGroup
+
+`func (o *GroupRemoteInfo) GetTwingateGroup() GroupRemoteInfoTwingateGroup`
+
+GetTwingateGroup returns the TwingateGroup field if non-nil, zero value otherwise.
+
+### GetTwingateGroupOk
+
+`func (o *GroupRemoteInfo) GetTwingateGroupOk() (*GroupRemoteInfoTwingateGroup, bool)`
+
+GetTwingateGroupOk returns a tuple with the TwingateGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTwingateGroup
+
+`func (o *GroupRemoteInfo) SetTwingateGroup(v GroupRemoteInfoTwingateGroup)`
+
+SetTwingateGroup sets TwingateGroup field to given value.
+
+### HasTwingateGroup
+
+`func (o *GroupRemoteInfo) HasTwingateGroup() bool`
+
+HasTwingateGroup returns a boolean if a field has been set.
 
 ### GetAwsSsoGroup
 
@@ -569,6 +596,31 @@ SetDevinGroup sets DevinGroup field to given value.
 `func (o *GroupRemoteInfo) HasDevinGroup() bool`
 
 HasDevinGroup returns a boolean if a field has been set.
+
+### GetClickhouseRole
+
+`func (o *GroupRemoteInfo) GetClickhouseRole() GroupRemoteInfoClickhouseRole`
+
+GetClickhouseRole returns the ClickhouseRole field if non-nil, zero value otherwise.
+
+### GetClickhouseRoleOk
+
+`func (o *GroupRemoteInfo) GetClickhouseRoleOk() (*GroupRemoteInfoClickhouseRole, bool)`
+
+GetClickhouseRoleOk returns a tuple with the ClickhouseRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClickhouseRole
+
+`func (o *GroupRemoteInfo) SetClickhouseRole(v GroupRemoteInfoClickhouseRole)`
+
+SetClickhouseRole sets ClickhouseRole field to given value.
+
+### HasClickhouseRole
+
+`func (o *GroupRemoteInfo) HasClickhouseRole() bool`
+
+HasClickhouseRole returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
