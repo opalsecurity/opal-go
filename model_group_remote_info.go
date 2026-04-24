@@ -22,6 +22,7 @@ var _ MappedNullable = &GroupRemoteInfo{}
 type GroupRemoteInfo struct {
 	ActiveDirectoryGroup *GroupRemoteInfoActiveDirectoryGroup `json:"active_directory_group,omitempty"`
 	TailscaleGroup *GroupRemoteInfoTailscaleGroup `json:"tailscale_group,omitempty"`
+	TwingateGroup *GroupRemoteInfoTwingateGroup `json:"twingate_group,omitempty"`
 	AwsSsoGroup *GroupRemoteInfoAwsSsoGroup `json:"aws_sso_group,omitempty"`
 	DatabricksAccountGroup *GroupRemoteInfoDatabricksAccountGroup `json:"databricks_account_group,omitempty"`
 	ConnectorGroup *GroupRemoteInfoConnectorGroup `json:"connector_group,omitempty"`
@@ -41,6 +42,8 @@ type GroupRemoteInfo struct {
 	IncidentioOnCallSchedule *GroupRemoteInfoIncidentioOnCallSchedule `json:"incidentio_on_call_schedule,omitempty"`
 	RootlyOnCallSchedule *GroupRemoteInfoRootlyOnCallSchedule `json:"rootly_on_call_schedule,omitempty"`
 	DevinGroup *GroupRemoteInfoDevinGroup `json:"devin_group,omitempty"`
+	ClickhouseRole *GroupRemoteInfoClickhouseRole `json:"clickhouse_role,omitempty"`
+	GrafanaTeam *GroupRemoteInfoGrafanaTeam `json:"grafana_team,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -125,6 +128,38 @@ func (o *GroupRemoteInfo) HasTailscaleGroup() bool {
 // SetTailscaleGroup gets a reference to the given GroupRemoteInfoTailscaleGroup and assigns it to the TailscaleGroup field.
 func (o *GroupRemoteInfo) SetTailscaleGroup(v GroupRemoteInfoTailscaleGroup) {
 	o.TailscaleGroup = &v
+}
+
+// GetTwingateGroup returns the TwingateGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetTwingateGroup() GroupRemoteInfoTwingateGroup {
+	if o == nil || IsNil(o.TwingateGroup) {
+		var ret GroupRemoteInfoTwingateGroup
+		return ret
+	}
+	return *o.TwingateGroup
+}
+
+// GetTwingateGroupOk returns a tuple with the TwingateGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetTwingateGroupOk() (*GroupRemoteInfoTwingateGroup, bool) {
+	if o == nil || IsNil(o.TwingateGroup) {
+		return nil, false
+	}
+	return o.TwingateGroup, true
+}
+
+// HasTwingateGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasTwingateGroup() bool {
+	if o != nil && !IsNil(o.TwingateGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetTwingateGroup gets a reference to the given GroupRemoteInfoTwingateGroup and assigns it to the TwingateGroup field.
+func (o *GroupRemoteInfo) SetTwingateGroup(v GroupRemoteInfoTwingateGroup) {
+	o.TwingateGroup = &v
 }
 
 // GetAwsSsoGroup returns the AwsSsoGroup field value if set, zero value otherwise.
@@ -735,6 +770,70 @@ func (o *GroupRemoteInfo) SetDevinGroup(v GroupRemoteInfoDevinGroup) {
 	o.DevinGroup = &v
 }
 
+// GetClickhouseRole returns the ClickhouseRole field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetClickhouseRole() GroupRemoteInfoClickhouseRole {
+	if o == nil || IsNil(o.ClickhouseRole) {
+		var ret GroupRemoteInfoClickhouseRole
+		return ret
+	}
+	return *o.ClickhouseRole
+}
+
+// GetClickhouseRoleOk returns a tuple with the ClickhouseRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetClickhouseRoleOk() (*GroupRemoteInfoClickhouseRole, bool) {
+	if o == nil || IsNil(o.ClickhouseRole) {
+		return nil, false
+	}
+	return o.ClickhouseRole, true
+}
+
+// HasClickhouseRole returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasClickhouseRole() bool {
+	if o != nil && !IsNil(o.ClickhouseRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetClickhouseRole gets a reference to the given GroupRemoteInfoClickhouseRole and assigns it to the ClickhouseRole field.
+func (o *GroupRemoteInfo) SetClickhouseRole(v GroupRemoteInfoClickhouseRole) {
+	o.ClickhouseRole = &v
+}
+
+// GetGrafanaTeam returns the GrafanaTeam field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetGrafanaTeam() GroupRemoteInfoGrafanaTeam {
+	if o == nil || IsNil(o.GrafanaTeam) {
+		var ret GroupRemoteInfoGrafanaTeam
+		return ret
+	}
+	return *o.GrafanaTeam
+}
+
+// GetGrafanaTeamOk returns a tuple with the GrafanaTeam field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetGrafanaTeamOk() (*GroupRemoteInfoGrafanaTeam, bool) {
+	if o == nil || IsNil(o.GrafanaTeam) {
+		return nil, false
+	}
+	return o.GrafanaTeam, true
+}
+
+// HasGrafanaTeam returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasGrafanaTeam() bool {
+	if o != nil && !IsNil(o.GrafanaTeam) {
+		return true
+	}
+
+	return false
+}
+
+// SetGrafanaTeam gets a reference to the given GroupRemoteInfoGrafanaTeam and assigns it to the GrafanaTeam field.
+func (o *GroupRemoteInfo) SetGrafanaTeam(v GroupRemoteInfoGrafanaTeam) {
+	o.GrafanaTeam = &v
+}
+
 func (o GroupRemoteInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -750,6 +849,9 @@ func (o GroupRemoteInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.TailscaleGroup) {
 		toSerialize["tailscale_group"] = o.TailscaleGroup
+	}
+	if !IsNil(o.TwingateGroup) {
+		toSerialize["twingate_group"] = o.TwingateGroup
 	}
 	if !IsNil(o.AwsSsoGroup) {
 		toSerialize["aws_sso_group"] = o.AwsSsoGroup
@@ -808,6 +910,12 @@ func (o GroupRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DevinGroup) {
 		toSerialize["devin_group"] = o.DevinGroup
 	}
+	if !IsNil(o.ClickhouseRole) {
+		toSerialize["clickhouse_role"] = o.ClickhouseRole
+	}
+	if !IsNil(o.GrafanaTeam) {
+		toSerialize["grafana_team"] = o.GrafanaTeam
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -832,6 +940,7 @@ func (o *GroupRemoteInfo) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "active_directory_group")
 		delete(additionalProperties, "tailscale_group")
+		delete(additionalProperties, "twingate_group")
 		delete(additionalProperties, "aws_sso_group")
 		delete(additionalProperties, "databricks_account_group")
 		delete(additionalProperties, "connector_group")
@@ -851,6 +960,8 @@ func (o *GroupRemoteInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "incidentio_on_call_schedule")
 		delete(additionalProperties, "rootly_on_call_schedule")
 		delete(additionalProperties, "devin_group")
+		delete(additionalProperties, "clickhouse_role")
+		delete(additionalProperties, "grafana_team")
 		o.AdditionalProperties = additionalProperties
 	}
 
