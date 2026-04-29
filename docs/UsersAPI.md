@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 ## GetUsers
 
-> PaginatedUsersList GetUsers(ctx).Cursor(cursor).PageSize(pageSize).Execute()
+> PaginatedUsersList GetUsers(ctx).Cursor(cursor).PageSize(pageSize).TagIds(tagIds).Execute()
 
 
 
@@ -178,10 +178,11 @@ import (
 func main() {
 	cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
 	pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
+	tagIds := []string{"Inner_example"} // []string | The IDs of the tags to filter by. Returns only users that have any of these tags applied. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.UsersAPI.GetUsers(context.Background()).Cursor(cursor).PageSize(pageSize).Execute()
+	resp, r, err := apiClient.UsersAPI.GetUsers(context.Background()).Cursor(cursor).PageSize(pageSize).TagIds(tagIds).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.GetUsers``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -204,6 +205,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **string** | The pagination cursor value. | 
  **pageSize** | **int32** | Number of results to return per page. Default is 200. | 
+ **tagIds** | **[]string** | The IDs of the tags to filter by. Returns only users that have any of these tags applied. | 
 
 ### Return type
 

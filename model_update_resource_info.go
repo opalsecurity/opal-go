@@ -69,6 +69,8 @@ type UpdateResourceInfo struct {
 	// The duration for which access can be extended (in minutes). Deprecated, set the extension duration in the request_configuration you want it to apply to.
 	// Deprecated
 	ExtensionsDurationInMinutes *int32 `json:"extensions_duration_in_minutes,omitempty"`
+	// The ID of the parent resource.
+	ParentResourceId *string `json:"parent_resource_id,omitempty"`
 	// A list of configurations for requests to this resource. If not provided, the default request configuration will be used.
 	RequestConfigurations []RequestConfiguration `json:"request_configurations,omitempty"`
 	// A list of configurations for requests to this resource. If not provided, the default request configuration will be used. Deprecated in favor of `request_configurations`.
@@ -759,6 +761,38 @@ func (o *UpdateResourceInfo) SetExtensionsDurationInMinutes(v int32) {
 	o.ExtensionsDurationInMinutes = &v
 }
 
+// GetParentResourceId returns the ParentResourceId field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetParentResourceId() string {
+	if o == nil || IsNil(o.ParentResourceId) {
+		var ret string
+		return ret
+	}
+	return *o.ParentResourceId
+}
+
+// GetParentResourceIdOk returns a tuple with the ParentResourceId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceInfo) GetParentResourceIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ParentResourceId) {
+		return nil, false
+	}
+	return o.ParentResourceId, true
+}
+
+// HasParentResourceId returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasParentResourceId() bool {
+	if o != nil && !IsNil(o.ParentResourceId) {
+		return true
+	}
+
+	return false
+}
+
+// SetParentResourceId gets a reference to the given string and assigns it to the ParentResourceId field.
+func (o *UpdateResourceInfo) SetParentResourceId(v string) {
+	o.ParentResourceId = &v
+}
+
 // GetRequestConfigurations returns the RequestConfigurations field value if set, zero value otherwise.
 func (o *UpdateResourceInfo) GetRequestConfigurations() []RequestConfiguration {
 	if o == nil || IsNil(o.RequestConfigurations) {
@@ -894,6 +928,9 @@ func (o UpdateResourceInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExtensionsDurationInMinutes) {
 		toSerialize["extensions_duration_in_minutes"] = o.ExtensionsDurationInMinutes
 	}
+	if !IsNil(o.ParentResourceId) {
+		toSerialize["parent_resource_id"] = o.ParentResourceId
+	}
 	if !IsNil(o.RequestConfigurations) {
 		toSerialize["request_configurations"] = o.RequestConfigurations
 	}
@@ -963,6 +1000,7 @@ func (o *UpdateResourceInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "request_template_id")
 		delete(additionalProperties, "is_requestable")
 		delete(additionalProperties, "extensions_duration_in_minutes")
+		delete(additionalProperties, "parent_resource_id")
 		delete(additionalProperties, "request_configurations")
 		delete(additionalProperties, "request_configuration_list")
 		o.AdditionalProperties = additionalProperties
