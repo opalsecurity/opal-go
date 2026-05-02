@@ -51,6 +51,14 @@
 
 * `GIT_HUB_ENTERPRISE_TEAM` (value: `"GIT_HUB_ENTERPRISE_TEAM"`)
 
+* `GRAFANA_TEAM` (value: `"GRAFANA_TEAM"`)
+
+* `CLICKHOUSE_ROLE` (value: `"CLICKHOUSE_ROLE"`)
+
+* `TWINGATE_GROUP` (value: `"TWINGATE_GROUP"`)
+
+* `TWINGATE_GROUP_SYNCED` (value: `"TWINGATE_GROUP_SYNCED"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
