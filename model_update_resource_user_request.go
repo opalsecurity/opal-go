@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdateResourceUserRequest{}
 
 // UpdateResourceUserRequest struct for UpdateResourceUserRequest
 type UpdateResourceUserRequest struct {
-	// The updated duration for which the resource can be accessed (in minutes). Use 0 for indefinite.
+	// The updated duration for which the resource can be accessed (in minutes). Use 0 for indefinite, or a negative value to revoke access.
 	DurationMinutes int32 `json:"duration_minutes"`
 	// The updated remote ID of the access level granted to this user.
 	AccessLevelRemoteId *string `json:"access_level_remote_id,omitempty"`
