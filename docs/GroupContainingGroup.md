@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ContainingGroupId** | **string** | The groupID of the containing group. | 
-**DurationMinutes** | Pointer to **int32** | The updated duration for which the group can be accessed (in minutes). Use 0 for indefinite. | [optional] 
+**DurationMinutes** | Pointer to **int32** | The updated duration for which the group can be accessed (in minutes). Use 0 for indefinite, or a negative value to revoke access. | [optional] 
 **AccessLevelRemoteId** | Pointer to **string** | The updated remote ID of the access level granted to this group. | [optional] 
 
 ## Methods
