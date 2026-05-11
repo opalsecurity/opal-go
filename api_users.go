@@ -306,6 +306,7 @@ type ApiGetUsersRequest struct {
 	ApiService *UsersAPIService
 	cursor *string
 	pageSize *int32
+	tagIds *[]string
 }
 
 // The pagination cursor value.
@@ -317,6 +318,12 @@ func (r ApiGetUsersRequest) Cursor(cursor string) ApiGetUsersRequest {
 // Number of results to return per page. Default is 200.
 func (r ApiGetUsersRequest) PageSize(pageSize int32) ApiGetUsersRequest {
 	r.pageSize = &pageSize
+	return r
+}
+
+// The IDs of the tags to filter by. Returns only users that have any of these tags applied.
+func (r ApiGetUsersRequest) TagIds(tagIds []string) ApiGetUsersRequest {
+	r.tagIds = &tagIds
 	return r
 }
 
@@ -365,6 +372,17 @@ func (a *UsersAPIService) GetUsersExecute(r ApiGetUsersRequest) (*PaginatedUsers
 	}
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", "")
+	}
+	if r.tagIds != nil {
+		t := *r.tagIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "tag_ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "tag_ids", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
