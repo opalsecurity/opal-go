@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdateGroupUserRequest{}
 
 // UpdateGroupUserRequest struct for UpdateGroupUserRequest
 type UpdateGroupUserRequest struct {
-	// The updated duration for which the group can be accessed (in minutes). Use 0 for indefinite.
+	// The updated duration for which the group can be accessed (in minutes). Use 0 for indefinite, or a negative value to revoke access.
 	DurationMinutes int32 `json:"duration_minutes"`
 	// The updated remote ID of the access level granted to this user.
 	AccessLevelRemoteId *string `json:"access_level_remote_id,omitempty"`
