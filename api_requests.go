@@ -693,6 +693,8 @@ type ApiGetRequestsRequest struct {
 	endDateFilter *string
 	requesterId *string
 	targetUserId *string
+	resourceId *string
+	groupId *string
 	cursor *string
 	pageSize *int32
 	showPendingOnly *bool
@@ -719,6 +721,18 @@ func (r ApiGetRequestsRequest) RequesterId(requesterId string) ApiGetRequestsReq
 // Filter requests by their target user ID.
 func (r ApiGetRequestsRequest) TargetUserId(targetUserId string) ApiGetRequestsRequest {
 	r.targetUserId = &targetUserId
+	return r
+}
+
+// Filter requests by the resource ID that was requested.
+func (r ApiGetRequestsRequest) ResourceId(resourceId string) ApiGetRequestsRequest {
+	r.resourceId = &resourceId
+	return r
+}
+
+// Filter requests by the group ID that was requested.
+func (r ApiGetRequestsRequest) GroupId(groupId string) ApiGetRequestsRequest {
+	r.groupId = &groupId
 	return r
 }
 
@@ -791,6 +805,12 @@ func (a *RequestsAPIService) GetRequestsExecute(r ApiGetRequestsRequest) (*Reque
 	}
 	if r.targetUserId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "target_user_id", r.targetUserId, "form", "")
+	}
+	if r.resourceId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "resource_id", r.resourceId, "form", "")
+	}
+	if r.groupId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "group_id", r.groupId, "form", "")
 	}
 	if r.cursor != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
