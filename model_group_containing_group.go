@@ -23,7 +23,7 @@ var _ MappedNullable = &GroupContainingGroup{}
 type GroupContainingGroup struct {
 	// The groupID of the containing group.
 	ContainingGroupId string `json:"containing_group_id"`
-	// The updated duration for which the group can be accessed (in minutes). Use 0 for indefinite.
+	// The updated duration for which the group can be accessed (in minutes). Use 0 for indefinite, or a negative value to revoke access.
 	DurationMinutes *int32 `json:"duration_minutes,omitempty"`
 	// The updated remote ID of the access level granted to this group.
 	AccessLevelRemoteId *string `json:"access_level_remote_id,omitempty"`
