@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RepoId** | Pointer to **string** | The id of the repository. | [optional] 
 **RepoName** | **string** | The name of the repository. | 
+**OrgName** | Pointer to **string** | GitHub repo&#39;s org name, required only for Enterprise. | [optional] 
 
 ## Methods
 
@@ -70,6 +71,31 @@ and a boolean to check if the value has been set.
 
 SetRepoName sets RepoName field to given value.
 
+
+### GetOrgName
+
+`func (o *ResourceRemoteInfoGithubRepo) GetOrgName() string`
+
+GetOrgName returns the OrgName field if non-nil, zero value otherwise.
+
+### GetOrgNameOk
+
+`func (o *ResourceRemoteInfoGithubRepo) GetOrgNameOk() (*string, bool)`
+
+GetOrgNameOk returns a tuple with the OrgName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrgName
+
+`func (o *ResourceRemoteInfoGithubRepo) SetOrgName(v string)`
+
+SetOrgName sets OrgName field to given value.
+
+### HasOrgName
+
+`func (o *ResourceRemoteInfoGithubRepo) HasOrgName() bool`
+
+HasOrgName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
