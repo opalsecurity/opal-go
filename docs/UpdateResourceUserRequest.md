@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DurationMinutes** | **int32** | The updated duration for which the resource can be accessed (in minutes). Use 0 for indefinite. | 
+**DurationMinutes** | **int32** | The updated duration for which the resource can be accessed (in minutes). Use 0 for indefinite, or a negative value to revoke access. | 
 **AccessLevelRemoteId** | Pointer to **string** | The updated remote ID of the access level granted to this user. | [optional] 
 
 ## Methods

@@ -26,6 +26,8 @@ type GroupRemoteInfoGithubTeam struct {
 	TeamId *string `json:"team_id,omitempty"`
 	// The slug of the GitHub team.
 	TeamSlug string `json:"team_slug"`
+	// GitHub team's org name, required only for Enterprise
+	OrgName *string `json:"org_name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,6 +110,38 @@ func (o *GroupRemoteInfoGithubTeam) SetTeamSlug(v string) {
 	o.TeamSlug = v
 }
 
+// GetOrgName returns the OrgName field value if set, zero value otherwise.
+func (o *GroupRemoteInfoGithubTeam) GetOrgName() string {
+	if o == nil || IsNil(o.OrgName) {
+		var ret string
+		return ret
+	}
+	return *o.OrgName
+}
+
+// GetOrgNameOk returns a tuple with the OrgName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfoGithubTeam) GetOrgNameOk() (*string, bool) {
+	if o == nil || IsNil(o.OrgName) {
+		return nil, false
+	}
+	return o.OrgName, true
+}
+
+// HasOrgName returns a boolean if a field has been set.
+func (o *GroupRemoteInfoGithubTeam) HasOrgName() bool {
+	if o != nil && !IsNil(o.OrgName) {
+		return true
+	}
+
+	return false
+}
+
+// SetOrgName gets a reference to the given string and assigns it to the OrgName field.
+func (o *GroupRemoteInfoGithubTeam) SetOrgName(v string) {
+	o.OrgName = &v
+}
+
 func (o GroupRemoteInfoGithubTeam) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -122,6 +156,9 @@ func (o GroupRemoteInfoGithubTeam) ToMap() (map[string]interface{}, error) {
 		toSerialize["team_id"] = o.TeamId
 	}
 	toSerialize["team_slug"] = o.TeamSlug
+	if !IsNil(o.OrgName) {
+		toSerialize["org_name"] = o.OrgName
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -167,6 +204,7 @@ func (o *GroupRemoteInfoGithubTeam) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "team_id")
 		delete(additionalProperties, "team_slug")
+		delete(additionalProperties, "org_name")
 		o.AdditionalProperties = additionalProperties
 	}
 
