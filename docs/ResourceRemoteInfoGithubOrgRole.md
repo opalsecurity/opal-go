@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RoleId** | **string** | The id of the role. | 
+**OrgName** | Pointer to **string** | GitHub org role&#39;s org name, required only for Enterprise. | [optional] 
 
 ## Methods
 
@@ -44,6 +45,31 @@ and a boolean to check if the value has been set.
 
 SetRoleId sets RoleId field to given value.
 
+
+### GetOrgName
+
+`func (o *ResourceRemoteInfoGithubOrgRole) GetOrgName() string`
+
+GetOrgName returns the OrgName field if non-nil, zero value otherwise.
+
+### GetOrgNameOk
+
+`func (o *ResourceRemoteInfoGithubOrgRole) GetOrgNameOk() (*string, bool)`
+
+GetOrgNameOk returns a tuple with the OrgName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrgName
+
+`func (o *ResourceRemoteInfoGithubOrgRole) SetOrgName(v string)`
+
+SetOrgName sets OrgName field to given value.
+
+### HasOrgName
+
+`func (o *ResourceRemoteInfoGithubOrgRole) HasOrgName() bool`
+
+HasOrgName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
