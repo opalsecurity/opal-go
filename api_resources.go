@@ -18,6 +18,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
 
 
@@ -1868,6 +1869,7 @@ type ApiGetResourcesRequest struct {
 	parentResourceId *string
 	ancestorResourceId *string
 	remoteId *string
+	tagIds *[]string
 }
 
 // The pagination cursor value.
@@ -1915,6 +1917,12 @@ func (r ApiGetResourcesRequest) AncestorResourceId(ancestorResourceId string) Ap
 // Filter resources by their remote id. This will return all resources that have a remote id that matches the provided remote id. Note that this requires resource_type_filter to be provided.
 func (r ApiGetResourcesRequest) RemoteId(remoteId string) ApiGetResourcesRequest {
 	r.remoteId = &remoteId
+	return r
+}
+
+// The IDs of the tags to filter by. Returns only resources that have any of these tags applied.
+func (r ApiGetResourcesRequest) TagIds(tagIds []string) ApiGetResourcesRequest {
+	r.tagIds = &tagIds
 	return r
 }
 
@@ -1981,6 +1989,17 @@ func (a *ResourcesAPIService) GetResourcesExecute(r ApiGetResourcesRequest) (*Pa
 	}
 	if r.remoteId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "remote_id", r.remoteId, "form", "")
+	}
+	if r.tagIds != nil {
+		t := *r.tagIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "tag_ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "tag_ids", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
