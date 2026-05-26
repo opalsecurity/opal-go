@@ -74,6 +74,8 @@ type APIClient struct {
 
 	OnCallSchedulesAPI *OnCallSchedulesAPIService
 
+	OpalQueriesAPI *OpalQueriesAPIService
+
 	OwnersAPI *OwnersAPIService
 
 	RequestsAPI *RequestsAPIService
@@ -83,6 +85,8 @@ type APIClient struct {
 	SessionsAPI *SessionsAPIService
 
 	TagsAPI *TagsAPIService
+
+	TokensAPI *TokensAPIService
 
 	UarsAPI *UarsAPIService
 
@@ -117,11 +121,13 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.MessageChannelsAPI = (*MessageChannelsAPIService)(&c.common)
 	c.NonHumanIdentitiesAPI = (*NonHumanIdentitiesAPIService)(&c.common)
 	c.OnCallSchedulesAPI = (*OnCallSchedulesAPIService)(&c.common)
+	c.OpalQueriesAPI = (*OpalQueriesAPIService)(&c.common)
 	c.OwnersAPI = (*OwnersAPIService)(&c.common)
 	c.RequestsAPI = (*RequestsAPIService)(&c.common)
 	c.ResourcesAPI = (*ResourcesAPIService)(&c.common)
 	c.SessionsAPI = (*SessionsAPIService)(&c.common)
 	c.TagsAPI = (*TagsAPIService)(&c.common)
+	c.TokensAPI = (*TokensAPIService)(&c.common)
 	c.UarsAPI = (*UarsAPIService)(&c.common)
 	c.UsersAPI = (*UsersAPIService)(&c.common)
 
@@ -547,7 +553,10 @@ func addFile(w *multipart.Writer, fieldName, path string) error {
 	if err != nil {
 		return err
 	}
-	defer file.Close()
+	err = file.Close()
+	if err != nil {
+		return err
+	}
 
 	part, err := w.CreateFormFile(fieldName, filepath.Base(path))
 	if err != nil {
