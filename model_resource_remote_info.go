@@ -67,6 +67,7 @@ type ResourceRemoteInfo struct {
 	SnowflakeTable *ResourceRemoteInfoSnowflakeTable `json:"snowflake_table,omitempty"`
 	IlevelAdvancedRole *ResourceRemoteInfoIlevelAdvancedRole `json:"ilevel_advanced_role,omitempty"`
 	TailscaleSsh *ResourceRemoteInfoTailscaleSsh `json:"tailscale_ssh,omitempty"`
+	TwingateResource *ResourceRemoteInfoTwingateResource `json:"twingate_resource,omitempty"`
 	PagerdutyRole *ResourceRemoteInfoPagerdutyRole `json:"pagerduty_role,omitempty"`
 	WorkdayRole *ResourceRemoteInfoWorkdayRole `json:"workday_role,omitempty"`
 	SalesforcePermissionSet *ResourceRemoteInfoSalesforcePermissionSet `json:"salesforce_permission_set,omitempty"`
@@ -82,6 +83,13 @@ type ResourceRemoteInfo struct {
 	OracleFusionRole *ResourceRemoteInfoOracleFusionRole `json:"oracle_fusion_role,omitempty"`
 	DevinOrganization *ResourceRemoteInfoDevinOrganization `json:"devin_organization,omitempty"`
 	DevinRole *ResourceRemoteInfoDevinRole `json:"devin_role,omitempty"`
+	NetsuiteRole *ResourceRemoteInfoNetsuiteRole `json:"netsuite_role,omitempty"`
+	DatadogRole *ResourceRemoteInfoDatadogRole `json:"datadog_role,omitempty"`
+	ClickhouseDatabase *ResourceRemoteInfoClickhouseDatabase `json:"clickhouse_database,omitempty"`
+	ClickhouseTable *ResourceRemoteInfoClickhouseTable `json:"clickhouse_table,omitempty"`
+	GrafanaFolder *ResourceRemoteInfoGrafanaFolder `json:"grafana_folder,omitempty"`
+	GrafanaDashboard *ResourceRemoteInfoGrafanaDashboard `json:"grafana_dashboard,omitempty"`
+	GrafanaRole *ResourceRemoteInfoGrafanaRole `json:"grafana_role,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -1608,6 +1616,38 @@ func (o *ResourceRemoteInfo) SetTailscaleSsh(v ResourceRemoteInfoTailscaleSsh) {
 	o.TailscaleSsh = &v
 }
 
+// GetTwingateResource returns the TwingateResource field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetTwingateResource() ResourceRemoteInfoTwingateResource {
+	if o == nil || IsNil(o.TwingateResource) {
+		var ret ResourceRemoteInfoTwingateResource
+		return ret
+	}
+	return *o.TwingateResource
+}
+
+// GetTwingateResourceOk returns a tuple with the TwingateResource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetTwingateResourceOk() (*ResourceRemoteInfoTwingateResource, bool) {
+	if o == nil || IsNil(o.TwingateResource) {
+		return nil, false
+	}
+	return o.TwingateResource, true
+}
+
+// HasTwingateResource returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasTwingateResource() bool {
+	if o != nil && !IsNil(o.TwingateResource) {
+		return true
+	}
+
+	return false
+}
+
+// SetTwingateResource gets a reference to the given ResourceRemoteInfoTwingateResource and assigns it to the TwingateResource field.
+func (o *ResourceRemoteInfo) SetTwingateResource(v ResourceRemoteInfoTwingateResource) {
+	o.TwingateResource = &v
+}
+
 // GetPagerdutyRole returns the PagerdutyRole field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetPagerdutyRole() ResourceRemoteInfoPagerdutyRole {
 	if o == nil || IsNil(o.PagerdutyRole) {
@@ -2088,6 +2128,230 @@ func (o *ResourceRemoteInfo) SetDevinRole(v ResourceRemoteInfoDevinRole) {
 	o.DevinRole = &v
 }
 
+// GetNetsuiteRole returns the NetsuiteRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetNetsuiteRole() ResourceRemoteInfoNetsuiteRole {
+	if o == nil || IsNil(o.NetsuiteRole) {
+		var ret ResourceRemoteInfoNetsuiteRole
+		return ret
+	}
+	return *o.NetsuiteRole
+}
+
+// GetNetsuiteRoleOk returns a tuple with the NetsuiteRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetNetsuiteRoleOk() (*ResourceRemoteInfoNetsuiteRole, bool) {
+	if o == nil || IsNil(o.NetsuiteRole) {
+		return nil, false
+	}
+	return o.NetsuiteRole, true
+}
+
+// HasNetsuiteRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasNetsuiteRole() bool {
+	if o != nil && !IsNil(o.NetsuiteRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetNetsuiteRole gets a reference to the given ResourceRemoteInfoNetsuiteRole and assigns it to the NetsuiteRole field.
+func (o *ResourceRemoteInfo) SetNetsuiteRole(v ResourceRemoteInfoNetsuiteRole) {
+	o.NetsuiteRole = &v
+}
+
+// GetDatadogRole returns the DatadogRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetDatadogRole() ResourceRemoteInfoDatadogRole {
+	if o == nil || IsNil(o.DatadogRole) {
+		var ret ResourceRemoteInfoDatadogRole
+		return ret
+	}
+	return *o.DatadogRole
+}
+
+// GetDatadogRoleOk returns a tuple with the DatadogRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetDatadogRoleOk() (*ResourceRemoteInfoDatadogRole, bool) {
+	if o == nil || IsNil(o.DatadogRole) {
+		return nil, false
+	}
+	return o.DatadogRole, true
+}
+
+// HasDatadogRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasDatadogRole() bool {
+	if o != nil && !IsNil(o.DatadogRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetDatadogRole gets a reference to the given ResourceRemoteInfoDatadogRole and assigns it to the DatadogRole field.
+func (o *ResourceRemoteInfo) SetDatadogRole(v ResourceRemoteInfoDatadogRole) {
+	o.DatadogRole = &v
+}
+
+// GetClickhouseDatabase returns the ClickhouseDatabase field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetClickhouseDatabase() ResourceRemoteInfoClickhouseDatabase {
+	if o == nil || IsNil(o.ClickhouseDatabase) {
+		var ret ResourceRemoteInfoClickhouseDatabase
+		return ret
+	}
+	return *o.ClickhouseDatabase
+}
+
+// GetClickhouseDatabaseOk returns a tuple with the ClickhouseDatabase field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetClickhouseDatabaseOk() (*ResourceRemoteInfoClickhouseDatabase, bool) {
+	if o == nil || IsNil(o.ClickhouseDatabase) {
+		return nil, false
+	}
+	return o.ClickhouseDatabase, true
+}
+
+// HasClickhouseDatabase returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasClickhouseDatabase() bool {
+	if o != nil && !IsNil(o.ClickhouseDatabase) {
+		return true
+	}
+
+	return false
+}
+
+// SetClickhouseDatabase gets a reference to the given ResourceRemoteInfoClickhouseDatabase and assigns it to the ClickhouseDatabase field.
+func (o *ResourceRemoteInfo) SetClickhouseDatabase(v ResourceRemoteInfoClickhouseDatabase) {
+	o.ClickhouseDatabase = &v
+}
+
+// GetClickhouseTable returns the ClickhouseTable field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetClickhouseTable() ResourceRemoteInfoClickhouseTable {
+	if o == nil || IsNil(o.ClickhouseTable) {
+		var ret ResourceRemoteInfoClickhouseTable
+		return ret
+	}
+	return *o.ClickhouseTable
+}
+
+// GetClickhouseTableOk returns a tuple with the ClickhouseTable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetClickhouseTableOk() (*ResourceRemoteInfoClickhouseTable, bool) {
+	if o == nil || IsNil(o.ClickhouseTable) {
+		return nil, false
+	}
+	return o.ClickhouseTable, true
+}
+
+// HasClickhouseTable returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasClickhouseTable() bool {
+	if o != nil && !IsNil(o.ClickhouseTable) {
+		return true
+	}
+
+	return false
+}
+
+// SetClickhouseTable gets a reference to the given ResourceRemoteInfoClickhouseTable and assigns it to the ClickhouseTable field.
+func (o *ResourceRemoteInfo) SetClickhouseTable(v ResourceRemoteInfoClickhouseTable) {
+	o.ClickhouseTable = &v
+}
+
+// GetGrafanaFolder returns the GrafanaFolder field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetGrafanaFolder() ResourceRemoteInfoGrafanaFolder {
+	if o == nil || IsNil(o.GrafanaFolder) {
+		var ret ResourceRemoteInfoGrafanaFolder
+		return ret
+	}
+	return *o.GrafanaFolder
+}
+
+// GetGrafanaFolderOk returns a tuple with the GrafanaFolder field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetGrafanaFolderOk() (*ResourceRemoteInfoGrafanaFolder, bool) {
+	if o == nil || IsNil(o.GrafanaFolder) {
+		return nil, false
+	}
+	return o.GrafanaFolder, true
+}
+
+// HasGrafanaFolder returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasGrafanaFolder() bool {
+	if o != nil && !IsNil(o.GrafanaFolder) {
+		return true
+	}
+
+	return false
+}
+
+// SetGrafanaFolder gets a reference to the given ResourceRemoteInfoGrafanaFolder and assigns it to the GrafanaFolder field.
+func (o *ResourceRemoteInfo) SetGrafanaFolder(v ResourceRemoteInfoGrafanaFolder) {
+	o.GrafanaFolder = &v
+}
+
+// GetGrafanaDashboard returns the GrafanaDashboard field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetGrafanaDashboard() ResourceRemoteInfoGrafanaDashboard {
+	if o == nil || IsNil(o.GrafanaDashboard) {
+		var ret ResourceRemoteInfoGrafanaDashboard
+		return ret
+	}
+	return *o.GrafanaDashboard
+}
+
+// GetGrafanaDashboardOk returns a tuple with the GrafanaDashboard field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetGrafanaDashboardOk() (*ResourceRemoteInfoGrafanaDashboard, bool) {
+	if o == nil || IsNil(o.GrafanaDashboard) {
+		return nil, false
+	}
+	return o.GrafanaDashboard, true
+}
+
+// HasGrafanaDashboard returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasGrafanaDashboard() bool {
+	if o != nil && !IsNil(o.GrafanaDashboard) {
+		return true
+	}
+
+	return false
+}
+
+// SetGrafanaDashboard gets a reference to the given ResourceRemoteInfoGrafanaDashboard and assigns it to the GrafanaDashboard field.
+func (o *ResourceRemoteInfo) SetGrafanaDashboard(v ResourceRemoteInfoGrafanaDashboard) {
+	o.GrafanaDashboard = &v
+}
+
+// GetGrafanaRole returns the GrafanaRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetGrafanaRole() ResourceRemoteInfoGrafanaRole {
+	if o == nil || IsNil(o.GrafanaRole) {
+		var ret ResourceRemoteInfoGrafanaRole
+		return ret
+	}
+	return *o.GrafanaRole
+}
+
+// GetGrafanaRoleOk returns a tuple with the GrafanaRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetGrafanaRoleOk() (*ResourceRemoteInfoGrafanaRole, bool) {
+	if o == nil || IsNil(o.GrafanaRole) {
+		return nil, false
+	}
+	return o.GrafanaRole, true
+}
+
+// HasGrafanaRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasGrafanaRole() bool {
+	if o != nil && !IsNil(o.GrafanaRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetGrafanaRole gets a reference to the given ResourceRemoteInfoGrafanaRole and assigns it to the GrafanaRole field.
+func (o *ResourceRemoteInfo) SetGrafanaRole(v ResourceRemoteInfoGrafanaRole) {
+	o.GrafanaRole = &v
+}
+
 func (o ResourceRemoteInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -2239,6 +2503,9 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TailscaleSsh) {
 		toSerialize["tailscale_ssh"] = o.TailscaleSsh
 	}
+	if !IsNil(o.TwingateResource) {
+		toSerialize["twingate_resource"] = o.TwingateResource
+	}
 	if !IsNil(o.PagerdutyRole) {
 		toSerialize["pagerduty_role"] = o.PagerdutyRole
 	}
@@ -2283,6 +2550,27 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.DevinRole) {
 		toSerialize["devin_role"] = o.DevinRole
+	}
+	if !IsNil(o.NetsuiteRole) {
+		toSerialize["netsuite_role"] = o.NetsuiteRole
+	}
+	if !IsNil(o.DatadogRole) {
+		toSerialize["datadog_role"] = o.DatadogRole
+	}
+	if !IsNil(o.ClickhouseDatabase) {
+		toSerialize["clickhouse_database"] = o.ClickhouseDatabase
+	}
+	if !IsNil(o.ClickhouseTable) {
+		toSerialize["clickhouse_table"] = o.ClickhouseTable
+	}
+	if !IsNil(o.GrafanaFolder) {
+		toSerialize["grafana_folder"] = o.GrafanaFolder
+	}
+	if !IsNil(o.GrafanaDashboard) {
+		toSerialize["grafana_dashboard"] = o.GrafanaDashboard
+	}
+	if !IsNil(o.GrafanaRole) {
+		toSerialize["grafana_role"] = o.GrafanaRole
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -2353,6 +2641,7 @@ func (o *ResourceRemoteInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "snowflake_table")
 		delete(additionalProperties, "ilevel_advanced_role")
 		delete(additionalProperties, "tailscale_ssh")
+		delete(additionalProperties, "twingate_resource")
 		delete(additionalProperties, "pagerduty_role")
 		delete(additionalProperties, "workday_role")
 		delete(additionalProperties, "salesforce_permission_set")
@@ -2368,6 +2657,13 @@ func (o *ResourceRemoteInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "oracle_fusion_role")
 		delete(additionalProperties, "devin_organization")
 		delete(additionalProperties, "devin_role")
+		delete(additionalProperties, "netsuite_role")
+		delete(additionalProperties, "datadog_role")
+		delete(additionalProperties, "clickhouse_database")
+		delete(additionalProperties, "clickhouse_table")
+		delete(additionalProperties, "grafana_folder")
+		delete(additionalProperties, "grafana_dashboard")
+		delete(additionalProperties, "grafana_role")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -23,6 +23,8 @@ var _ MappedNullable = &ResourceRemoteInfoGithubOrgRole{}
 type ResourceRemoteInfoGithubOrgRole struct {
 	// The id of the role.
 	RoleId string `json:"role_id"`
+	// GitHub org role's org name, required only for Enterprise.
+	OrgName *string `json:"org_name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -70,6 +72,38 @@ func (o *ResourceRemoteInfoGithubOrgRole) SetRoleId(v string) {
 	o.RoleId = v
 }
 
+// GetOrgName returns the OrgName field value if set, zero value otherwise.
+func (o *ResourceRemoteInfoGithubOrgRole) GetOrgName() string {
+	if o == nil || IsNil(o.OrgName) {
+		var ret string
+		return ret
+	}
+	return *o.OrgName
+}
+
+// GetOrgNameOk returns a tuple with the OrgName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfoGithubOrgRole) GetOrgNameOk() (*string, bool) {
+	if o == nil || IsNil(o.OrgName) {
+		return nil, false
+	}
+	return o.OrgName, true
+}
+
+// HasOrgName returns a boolean if a field has been set.
+func (o *ResourceRemoteInfoGithubOrgRole) HasOrgName() bool {
+	if o != nil && !IsNil(o.OrgName) {
+		return true
+	}
+
+	return false
+}
+
+// SetOrgName gets a reference to the given string and assigns it to the OrgName field.
+func (o *ResourceRemoteInfoGithubOrgRole) SetOrgName(v string) {
+	o.OrgName = &v
+}
+
 func (o ResourceRemoteInfoGithubOrgRole) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -81,6 +115,9 @@ func (o ResourceRemoteInfoGithubOrgRole) MarshalJSON() ([]byte, error) {
 func (o ResourceRemoteInfoGithubOrgRole) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["role_id"] = o.RoleId
+	if !IsNil(o.OrgName) {
+		toSerialize["org_name"] = o.OrgName
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -125,6 +162,7 @@ func (o *ResourceRemoteInfoGithubOrgRole) UnmarshalJSON(data []byte) (err error)
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "role_id")
+		delete(additionalProperties, "org_name")
 		o.AdditionalProperties = additionalProperties
 	}
 
