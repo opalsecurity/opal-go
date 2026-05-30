@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **TeamId** | Pointer to **string** | The id of the GitHub team. | [optional] 
 **TeamSlug** | **string** | The slug of the GitHub team. | 
+**OrgName** | Pointer to **string** | GitHub team&#39;s org name, required only for Enterprise | [optional] 
 
 ## Methods
 
@@ -70,6 +71,31 @@ and a boolean to check if the value has been set.
 
 SetTeamSlug sets TeamSlug field to given value.
 
+
+### GetOrgName
+
+`func (o *GroupRemoteInfoGithubTeam) GetOrgName() string`
+
+GetOrgName returns the OrgName field if non-nil, zero value otherwise.
+
+### GetOrgNameOk
+
+`func (o *GroupRemoteInfoGithubTeam) GetOrgNameOk() (*string, bool)`
+
+GetOrgNameOk returns a tuple with the OrgName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrgName
+
+`func (o *GroupRemoteInfoGithubTeam) SetOrgName(v string)`
+
+SetOrgName sets OrgName field to given value.
+
+### HasOrgName
+
+`func (o *GroupRemoteInfoGithubTeam) HasOrgName() bool`
+
+HasOrgName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
