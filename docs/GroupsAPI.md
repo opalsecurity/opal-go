@@ -1251,7 +1251,7 @@ Name | Type | Description  | Notes
 
 ## GetGroups
 
-> PaginatedGroupsList GetGroups(ctx).Cursor(cursor).PageSize(pageSize).GroupTypeFilter(groupTypeFilter).GroupIds(groupIds).GroupName(groupName).Execute()
+> PaginatedGroupsList GetGroups(ctx).Cursor(cursor).PageSize(pageSize).GroupTypeFilter(groupTypeFilter).GroupIds(groupIds).GroupName(groupName).TagIds(tagIds).Execute()
 
 Get groups
 
@@ -1275,10 +1275,11 @@ func main() {
 	groupTypeFilter := openapiclient.GroupTypeEnum("ACTIVE_DIRECTORY_GROUP") // GroupTypeEnum | The group type to filter by. (optional)
 	groupIds := []string{"1b978423-db0a-4037-a4cf-f79c60cb67b3"} // []string | The group ids to filter by. (optional)
 	groupName := "example-name" // string | Group name. (optional)
+	tagIds := []string{"Inner_example"} // []string | The IDs of the tags to filter by. Returns only groups that have any of these tags applied. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.GroupsAPI.GetGroups(context.Background()).Cursor(cursor).PageSize(pageSize).GroupTypeFilter(groupTypeFilter).GroupIds(groupIds).GroupName(groupName).Execute()
+	resp, r, err := apiClient.GroupsAPI.GetGroups(context.Background()).Cursor(cursor).PageSize(pageSize).GroupTypeFilter(groupTypeFilter).GroupIds(groupIds).GroupName(groupName).TagIds(tagIds).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetGroups``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1304,6 +1305,7 @@ Name | Type | Description  | Notes
  **groupTypeFilter** | [**GroupTypeEnum**](GroupTypeEnum.md) | The group type to filter by. | 
  **groupIds** | **[]string** | The group ids to filter by. | 
  **groupName** | **string** | Group name. | 
+ **tagIds** | **[]string** | The IDs of the tags to filter by. Returns only groups that have any of these tags applied. | 
 
 ### Return type
 
