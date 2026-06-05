@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateAccessRule**](AccessRulesAPI.md#CreateAccessRule) | **Post** /access-rules | 
 [**GetAccessRule**](AccessRulesAPI.md#GetAccessRule) | **Get** /access-rules/{access_rule_id} | 
+[**GetAccessRules**](AccessRulesAPI.md#GetAccessRules) | **Get** /access-rules | 
 [**UpdateAccessRule**](AccessRulesAPI.md#UpdateAccessRule) | **Put** /access-rules/{access_rule_id} | 
 
 
@@ -131,6 +132,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AccessRule**](AccessRule.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAccessRules
+
+> PaginatedAccessRulesList GetAccessRules(ctx).Cursor(cursor).PageSize(pageSize).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
+	pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccessRulesAPI.GetAccessRules(context.Background()).Cursor(cursor).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccessRulesAPI.GetAccessRules``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAccessRules`: PaginatedAccessRulesList
+	fmt.Fprintf(os.Stdout, "Response from `AccessRulesAPI.GetAccessRules`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAccessRulesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cursor** | **string** | The pagination cursor value. | 
+ **pageSize** | **int32** | Number of results to return per page. Default is 200. | 
+
+### Return type
+
+[**PaginatedAccessRulesList**](PaginatedAccessRulesList.md)
 
 ### Authorization
 
