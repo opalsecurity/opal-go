@@ -66,6 +66,7 @@ type Resource struct {
 	// A list of configurations for requests to this resource.
 	RequestConfigurations []RequestConfiguration `json:"request_configurations,omitempty"`
 	// A list of configurations for requests to this resource. Deprecated in favor of `request_configurations`.
+	// Deprecated
 	RequestConfigurationList []RequestConfiguration `json:"request_configuration_list,omitempty"`
 	TicketPropagation *TicketPropagationConfiguration `json:"ticket_propagation,omitempty"`
 	// Custom request notification sent upon request approval.
@@ -806,6 +807,7 @@ func (o *Resource) SetRequestConfigurations(v []RequestConfiguration) {
 }
 
 // GetRequestConfigurationList returns the RequestConfigurationList field value if set, zero value otherwise.
+// Deprecated
 func (o *Resource) GetRequestConfigurationList() []RequestConfiguration {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		var ret []RequestConfiguration
@@ -816,6 +818,7 @@ func (o *Resource) GetRequestConfigurationList() []RequestConfiguration {
 
 // GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Resource) GetRequestConfigurationListOk() ([]RequestConfiguration, bool) {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		return nil, false
@@ -833,6 +836,7 @@ func (o *Resource) HasRequestConfigurationList() bool {
 }
 
 // SetRequestConfigurationList gets a reference to the given []RequestConfiguration and assigns it to the RequestConfigurationList field.
+// Deprecated
 func (o *Resource) SetRequestConfigurationList(v []RequestConfiguration) {
 	o.RequestConfigurationList = v
 }

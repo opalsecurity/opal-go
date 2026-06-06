@@ -7,10 +7,13 @@ Method | HTTP request | Description
 [**AddResourceNhi**](ResourcesAPI.md#AddResourceNhi) | **Post** /resources/{resource_id}/non-human-identities/{non_human_identity_id} | 
 [**AddResourceUser**](ResourcesAPI.md#AddResourceUser) | **Post** /resources/{resource_id}/users/{user_id} | 
 [**CreateResource**](ResourcesAPI.md#CreateResource) | **Post** /resources | 
+[**CreateResourceCustomAccessLevel**](ResourcesAPI.md#CreateResourceCustomAccessLevel) | **Post** /resources/{resource_id}/custom-access-levels | 
 [**DeleteResource**](ResourcesAPI.md#DeleteResource) | **Delete** /resources/{resource_id} | 
+[**DeleteResourceCustomAccessLevel**](ResourcesAPI.md#DeleteResourceCustomAccessLevel) | **Delete** /resources/{resource_id}/custom-access-levels/{access_level_remote_id} | 
 [**DeleteResourceNhi**](ResourcesAPI.md#DeleteResourceNhi) | **Delete** /resources/{resource_id}/non-human-identities/{non_human_identity_id} | 
 [**DeleteResourceUser**](ResourcesAPI.md#DeleteResourceUser) | **Delete** /resources/{resource_id}/users/{user_id} | 
 [**GetResource**](ResourcesAPI.md#GetResource) | **Get** /resources/{resource_id} | Get resource by ID
+[**GetResourceCustomAccessLevels**](ResourcesAPI.md#GetResourceCustomAccessLevels) | **Get** /resources/{resource_id}/custom-access-levels | 
 [**GetResourceGroups**](ResourcesAPI.md#GetResourceGroups) | **Get** /resources/{resource_id}/groups | 
 [**GetResourceMessageChannels**](ResourcesAPI.md#GetResourceMessageChannels) | **Get** /resources/{resource_id}/message-channels | 
 [**GetResourceNhis**](ResourcesAPI.md#GetResourceNhis) | **Get** /resources/{resource_id}/non-human-identities | 
@@ -29,6 +32,7 @@ Method | HTTP request | Description
 [**SetResourceReviewers**](ResourcesAPI.md#SetResourceReviewers) | **Put** /resources/{resource_id}/reviewers | 
 [**SetResourceScopedRolePermissions**](ResourcesAPI.md#SetResourceScopedRolePermissions) | **Put** /resources/{resource_id}/scoped-role-permissions | 
 [**SetResourceVisibility**](ResourcesAPI.md#SetResourceVisibility) | **Put** /resources/{resource_id}/visibility | 
+[**UpdateResourceCustomAccessLevel**](ResourcesAPI.md#UpdateResourceCustomAccessLevel) | **Patch** /resources/{resource_id}/custom-access-levels/{access_level_remote_id} | 
 [**UpdateResourceUser**](ResourcesAPI.md#UpdateResourceUser) | **Put** /resources/{resource_id}/users/{user_id} | 
 [**UpdateResources**](ResourcesAPI.md#UpdateResources) | **Put** /resources | 
 
@@ -254,6 +258,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateResourceCustomAccessLevel
+
+> ResourceCustomAccessLevelResponse CreateResourceCustomAccessLevel(ctx, resourceId).CreateResourceCustomAccessLevelInfo(createResourceCustomAccessLevelInfo).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the resource.
+	createResourceCustomAccessLevelInfo := *openapiclient.NewCreateResourceCustomAccessLevelInfo(*openapiclient.NewResourceAccessLevel("AdminRole", "arn:aws:iam::590304332660:role/AdministratorAccess")) // CreateResourceCustomAccessLevelInfo | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.CreateResourceCustomAccessLevel(context.Background(), resourceId).CreateResourceCustomAccessLevelInfo(createResourceCustomAccessLevelInfo).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.CreateResourceCustomAccessLevel``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateResourceCustomAccessLevel`: ResourceCustomAccessLevelResponse
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.CreateResourceCustomAccessLevel`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateResourceCustomAccessLevelRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **createResourceCustomAccessLevelInfo** | [**CreateResourceCustomAccessLevelInfo**](CreateResourceCustomAccessLevelInfo.md) |  | 
+
+### Return type
+
+[**ResourceCustomAccessLevelResponse**](ResourceCustomAccessLevelResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteResource
 
 > DeleteResource(ctx, resourceId).Execute()
@@ -302,6 +378,77 @@ Other parameters are passed through a pointer to a apiDeleteResourceRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteResourceCustomAccessLevel
+
+> DeleteResourceCustomAccessLevel(ctx, resourceId, accessLevelRemoteId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the resource.
+	accessLevelRemoteId := "admin" // string | The remote ID of the access level.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ResourcesAPI.DeleteResourceCustomAccessLevel(context.Background(), resourceId, accessLevelRemoteId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.DeleteResourceCustomAccessLevel``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+**accessLevelRemoteId** | **string** | The remote ID of the access level. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteResourceCustomAccessLevelRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 
 ### Return type
@@ -523,6 +670,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Resource**](Resource.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetResourceCustomAccessLevels
+
+> ResourceCustomAccessLevelList GetResourceCustomAccessLevels(ctx, resourceId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the resource.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.GetResourceCustomAccessLevels(context.Background(), resourceId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetResourceCustomAccessLevels``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetResourceCustomAccessLevels`: ResourceCustomAccessLevelList
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.GetResourceCustomAccessLevels`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetResourceCustomAccessLevelsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ResourceCustomAccessLevelList**](ResourceCustomAccessLevelList.md)
 
 ### Authorization
 
@@ -1249,7 +1466,7 @@ Name | Type | Description  | Notes
 
 ## GetResources
 
-> PaginatedResourcesList GetResources(ctx).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).AncestorResourceId(ancestorResourceId).RemoteId(remoteId).Execute()
+> PaginatedResourcesList GetResources(ctx).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).AncestorResourceId(ancestorResourceId).RemoteId(remoteId).TagIds(tagIds).Execute()
 
 Get resources
 
@@ -1273,13 +1490,14 @@ func main() {
 	resourceTypeFilter := openapiclient.ResourceTypeEnum("AWS_IAM_ROLE") // ResourceTypeEnum | The resource type to filter by. Required when remote_id is provided. (optional)
 	resourceIds := []string{"1b978423-db0a-4037-a4cf-f79c60cb67b3"} // []string | The resource ids to filter by. (optional)
 	resourceName := "example-name" // string | Resource name. (optional)
-	parentResourceId := "["4baf8423-db0a-4037-a4cf-f79c60cb67a5"]" // string | The parent resource id to filter by. (optional)
-	ancestorResourceId := "["4baf8423-db0a-4037-a4cf-f79c60cb67a5"]" // string | The ancestor resource id to filter by. Returns all resources that are descendants of the specified resource. (optional)
+	parentResourceId := "[\"4baf8423-db0a-4037-a4cf-f79c60cb67a5\"]" // string | The parent resource id to filter by. (optional)
+	ancestorResourceId := "[\"4baf8423-db0a-4037-a4cf-f79c60cb67a5\"]" // string | The ancestor resource id to filter by. Returns all resources that are descendants of the specified resource. (optional)
 	remoteId := "remoteId_example" // string | Filter resources by their remote id. This will return all resources that have a remote id that matches the provided remote id. Note that this requires resource_type_filter to be provided. (optional)
+	tagIds := []string{"Inner_example"} // []string | The IDs of the tags to filter by. Returns only resources that have any of these tags applied. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ResourcesAPI.GetResources(context.Background()).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).AncestorResourceId(ancestorResourceId).RemoteId(remoteId).Execute()
+	resp, r, err := apiClient.ResourcesAPI.GetResources(context.Background()).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).AncestorResourceId(ancestorResourceId).RemoteId(remoteId).TagIds(tagIds).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetResources``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1308,6 +1526,7 @@ Name | Type | Description  | Notes
  **parentResourceId** | **string** | The parent resource id to filter by. | 
  **ancestorResourceId** | **string** | The ancestor resource id to filter by. Returns all resources that are descendants of the specified resource. | 
  **remoteId** | **string** | Filter resources by their remote id. This will return all resources that have a remote id that matches the provided remote id. Note that this requires resource_type_filter to be provided. | 
+ **tagIds** | **[]string** | The IDs of the tags to filter by. Returns only resources that have any of these tags applied. | 
 
 ### Return type
 
@@ -1827,6 +2046,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**VisibilityInfo**](VisibilityInfo.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateResourceCustomAccessLevel
+
+> ResourceCustomAccessLevelResponse UpdateResourceCustomAccessLevel(ctx, resourceId, accessLevelRemoteId).UpdateResourceCustomAccessLevelInfo(updateResourceCustomAccessLevelInfo).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the resource.
+	accessLevelRemoteId := "admin" // string | The remote ID of the access level.
+	updateResourceCustomAccessLevelInfo := *openapiclient.NewUpdateResourceCustomAccessLevelInfo() // UpdateResourceCustomAccessLevelInfo | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.UpdateResourceCustomAccessLevel(context.Background(), resourceId, accessLevelRemoteId).UpdateResourceCustomAccessLevelInfo(updateResourceCustomAccessLevelInfo).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.UpdateResourceCustomAccessLevel``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateResourceCustomAccessLevel`: ResourceCustomAccessLevelResponse
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.UpdateResourceCustomAccessLevel`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+**accessLevelRemoteId** | **string** | The remote ID of the access level. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateResourceCustomAccessLevelRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **updateResourceCustomAccessLevelInfo** | [**UpdateResourceCustomAccessLevelInfo**](UpdateResourceCustomAccessLevelInfo.md) |  | 
+
+### Return type
+
+[**ResourceCustomAccessLevelResponse**](ResourceCustomAccessLevelResponse.md)
 
 ### Authorization
 

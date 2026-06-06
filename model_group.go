@@ -66,6 +66,7 @@ type Group struct {
 	// A list of request configurations for this group.
 	RequestConfigurations []RequestConfiguration `json:"request_configurations,omitempty"`
 	// A list of request configurations for this group. Deprecated in favor of `request_configurations`.
+	// Deprecated
 	RequestConfigurationList []RequestConfiguration `json:"request_configuration_list,omitempty"`
 	// JSON metadata about the remote group. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details.
 	// Deprecated
@@ -801,6 +802,7 @@ func (o *Group) SetRequestConfigurations(v []RequestConfiguration) {
 }
 
 // GetRequestConfigurationList returns the RequestConfigurationList field value if set, zero value otherwise.
+// Deprecated
 func (o *Group) GetRequestConfigurationList() []RequestConfiguration {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		var ret []RequestConfiguration
@@ -811,6 +813,7 @@ func (o *Group) GetRequestConfigurationList() []RequestConfiguration {
 
 // GetRequestConfigurationListOk returns a tuple with the RequestConfigurationList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Group) GetRequestConfigurationListOk() ([]RequestConfiguration, bool) {
 	if o == nil || IsNil(o.RequestConfigurationList) {
 		return nil, false
@@ -828,6 +831,7 @@ func (o *Group) HasRequestConfigurationList() bool {
 }
 
 // SetRequestConfigurationList gets a reference to the given []RequestConfiguration and assigns it to the RequestConfigurationList field.
+// Deprecated
 func (o *Group) SetRequestConfigurationList(v []RequestConfiguration) {
 	o.RequestConfigurationList = v
 }
