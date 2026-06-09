@@ -1249,7 +1249,7 @@ Name | Type | Description  | Notes
 
 ## GetResources
 
-> PaginatedResourcesList GetResources(ctx).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).AncestorResourceId(ancestorResourceId).RemoteId(remoteId).Execute()
+> PaginatedResourcesList GetResources(ctx).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).AncestorResourceId(ancestorResourceId).RemoteId(remoteId).TagIds(tagIds).Execute()
 
 Get resources
 
@@ -1276,10 +1276,11 @@ func main() {
 	parentResourceId := "["4baf8423-db0a-4037-a4cf-f79c60cb67a5"]" // string | The parent resource id to filter by. (optional)
 	ancestorResourceId := "["4baf8423-db0a-4037-a4cf-f79c60cb67a5"]" // string | The ancestor resource id to filter by. Returns all resources that are descendants of the specified resource. (optional)
 	remoteId := "remoteId_example" // string | Filter resources by their remote id. This will return all resources that have a remote id that matches the provided remote id. Note that this requires resource_type_filter to be provided. (optional)
+	tagIds := []string{"Inner_example"} // []string | The IDs of the tags to filter by. Returns only resources that have any of these tags applied. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ResourcesAPI.GetResources(context.Background()).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).AncestorResourceId(ancestorResourceId).RemoteId(remoteId).Execute()
+	resp, r, err := apiClient.ResourcesAPI.GetResources(context.Background()).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).AncestorResourceId(ancestorResourceId).RemoteId(remoteId).TagIds(tagIds).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetResources``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1308,6 +1309,7 @@ Name | Type | Description  | Notes
  **parentResourceId** | **string** | The parent resource id to filter by. | 
  **ancestorResourceId** | **string** | The ancestor resource id to filter by. Returns all resources that are descendants of the specified resource. | 
  **remoteId** | **string** | Filter resources by their remote id. This will return all resources that have a remote id that matches the provided remote id. Note that this requires resource_type_filter to be provided. | 
+ **tagIds** | **[]string** | The IDs of the tags to filter by. Returns only resources that have any of these tags applied. | 
 
 ### Return type
 
