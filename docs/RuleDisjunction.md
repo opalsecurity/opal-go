@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Selectors** | [**[]TagSelector**](TagSelector.md) |  | 
+**AttributeSelectors** | Pointer to [**[]UserAttributeSelector**](UserAttributeSelector.md) |  | [optional] 
 
 ## Methods
 
@@ -44,6 +45,31 @@ and a boolean to check if the value has been set.
 
 SetSelectors sets Selectors field to given value.
 
+
+### GetAttributeSelectors
+
+`func (o *RuleDisjunction) GetAttributeSelectors() []UserAttributeSelector`
+
+GetAttributeSelectors returns the AttributeSelectors field if non-nil, zero value otherwise.
+
+### GetAttributeSelectorsOk
+
+`func (o *RuleDisjunction) GetAttributeSelectorsOk() (*[]UserAttributeSelector, bool)`
+
+GetAttributeSelectorsOk returns a tuple with the AttributeSelectors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAttributeSelectors
+
+`func (o *RuleDisjunction) SetAttributeSelectors(v []UserAttributeSelector)`
+
+SetAttributeSelectors sets AttributeSelectors field to given value.
+
+### HasAttributeSelectors
+
+`func (o *RuleDisjunction) HasAttributeSelectors() bool`
+
+HasAttributeSelectors returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
