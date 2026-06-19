@@ -18,6 +18,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
 
 
@@ -1890,6 +1891,7 @@ type ApiGetGroupsRequest struct {
 	groupTypeFilter *GroupTypeEnum
 	groupIds *[]string
 	groupName *string
+	tagIds *[]string
 }
 
 // The pagination cursor value.
@@ -1919,6 +1921,12 @@ func (r ApiGetGroupsRequest) GroupIds(groupIds []string) ApiGetGroupsRequest {
 // Group name.
 func (r ApiGetGroupsRequest) GroupName(groupName string) ApiGetGroupsRequest {
 	r.groupName = &groupName
+	return r
+}
+
+// The IDs of the tags to filter by. Returns only groups that have any of these tags applied.
+func (r ApiGetGroupsRequest) TagIds(tagIds []string) ApiGetGroupsRequest {
+	r.tagIds = &tagIds
 	return r
 }
 
@@ -1976,6 +1984,17 @@ func (a *GroupsAPIService) GetGroupsExecute(r ApiGetGroupsRequest) (*PaginatedGr
 	}
 	if r.groupName != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "group_name", r.groupName, "form", "")
+	}
+	if r.tagIds != nil {
+		t := *r.tagIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "tag_ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "tag_ids", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
