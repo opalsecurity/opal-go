@@ -439,7 +439,7 @@ Name | Type | Description  | Notes
 
 ## GetRequests
 
-> RequestList GetRequests(ctx).StartDateFilter(startDateFilter).EndDateFilter(endDateFilter).RequesterId(requesterId).TargetUserId(targetUserId).Cursor(cursor).PageSize(pageSize).ShowPendingOnly(showPendingOnly).Execute()
+> RequestList GetRequests(ctx).StartDateFilter(startDateFilter).EndDateFilter(endDateFilter).RequesterId(requesterId).TargetUserId(targetUserId).ResourceId(resourceId).GroupId(groupId).Cursor(cursor).PageSize(pageSize).ShowPendingOnly(showPendingOnly).Execute()
 
 Get requests
 
@@ -462,13 +462,15 @@ func main() {
 	endDateFilter := "2021-11-12" // string | An end date filter for the events. (optional)
 	requesterId := "37cb7e41-12ba-46da-92ff-030abe0450b1" // string | Filter requests by their requester ID. (optional)
 	targetUserId := "37cb7e41-12ba-46da-92ff-030abe0450b1" // string | Filter requests by their target user ID. (optional)
+	resourceId := "37cb7e41-12ba-46da-92ff-030abe0450b1" // string | Filter requests by the resource ID that was requested. (optional)
+	groupId := "37cb7e41-12ba-46da-92ff-030abe0450b1" // string | Filter requests by the group ID that was requested. (optional)
 	cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
 	pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
 	showPendingOnly := true // bool | Boolean toggle for if it should only show pending requests. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RequestsAPI.GetRequests(context.Background()).StartDateFilter(startDateFilter).EndDateFilter(endDateFilter).RequesterId(requesterId).TargetUserId(targetUserId).Cursor(cursor).PageSize(pageSize).ShowPendingOnly(showPendingOnly).Execute()
+	resp, r, err := apiClient.RequestsAPI.GetRequests(context.Background()).StartDateFilter(startDateFilter).EndDateFilter(endDateFilter).RequesterId(requesterId).TargetUserId(targetUserId).ResourceId(resourceId).GroupId(groupId).Cursor(cursor).PageSize(pageSize).ShowPendingOnly(showPendingOnly).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RequestsAPI.GetRequests``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -493,6 +495,8 @@ Name | Type | Description  | Notes
  **endDateFilter** | **string** | An end date filter for the events. | 
  **requesterId** | **string** | Filter requests by their requester ID. | 
  **targetUserId** | **string** | Filter requests by their target user ID. | 
+ **resourceId** | **string** | Filter requests by the resource ID that was requested. | 
+ **groupId** | **string** | Filter requests by the group ID that was requested. | 
  **cursor** | **string** | The pagination cursor value. | 
  **pageSize** | **int32** | Number of results to return per page. Default is 200. | 
  **showPendingOnly** | **bool** | Boolean toggle for if it should only show pending requests. | 
