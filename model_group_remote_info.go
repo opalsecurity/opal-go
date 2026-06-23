@@ -22,6 +22,8 @@ var _ MappedNullable = &GroupRemoteInfo{}
 type GroupRemoteInfo struct {
 	ActiveDirectoryGroup *GroupRemoteInfoActiveDirectoryGroup `json:"active_directory_group,omitempty"`
 	TailscaleGroup *GroupRemoteInfoTailscaleGroup `json:"tailscale_group,omitempty"`
+	TwingateGroup *GroupRemoteInfoTwingateGroup `json:"twingate_group,omitempty"`
+	TwingateGroupSynced *GroupRemoteInfoTwingateGroupSynced `json:"twingate_group_synced,omitempty"`
 	AwsSsoGroup *GroupRemoteInfoAwsSsoGroup `json:"aws_sso_group,omitempty"`
 	DatabricksAccountGroup *GroupRemoteInfoDatabricksAccountGroup `json:"databricks_account_group,omitempty"`
 	ConnectorGroup *GroupRemoteInfoConnectorGroup `json:"connector_group,omitempty"`
@@ -41,6 +43,11 @@ type GroupRemoteInfo struct {
 	IncidentioOnCallSchedule *GroupRemoteInfoIncidentioOnCallSchedule `json:"incidentio_on_call_schedule,omitempty"`
 	RootlyOnCallSchedule *GroupRemoteInfoRootlyOnCallSchedule `json:"rootly_on_call_schedule,omitempty"`
 	DevinGroup *GroupRemoteInfoDevinGroup `json:"devin_group,omitempty"`
+	ClickhouseRole *GroupRemoteInfoClickhouseRole `json:"clickhouse_role,omitempty"`
+	GrafanaTeam *GroupRemoteInfoGrafanaTeam `json:"grafana_team,omitempty"`
+	ZendeskGroup *GroupRemoteInfoZendeskGroup `json:"zendesk_group,omitempty"`
+	SlackUserGroup *GroupRemoteInfoSlackUserGroup `json:"slack_user_group,omitempty"`
+	ZendeskOrganization *GroupRemoteInfoZendeskOrganization `json:"zendesk_organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -125,6 +132,70 @@ func (o *GroupRemoteInfo) HasTailscaleGroup() bool {
 // SetTailscaleGroup gets a reference to the given GroupRemoteInfoTailscaleGroup and assigns it to the TailscaleGroup field.
 func (o *GroupRemoteInfo) SetTailscaleGroup(v GroupRemoteInfoTailscaleGroup) {
 	o.TailscaleGroup = &v
+}
+
+// GetTwingateGroup returns the TwingateGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetTwingateGroup() GroupRemoteInfoTwingateGroup {
+	if o == nil || IsNil(o.TwingateGroup) {
+		var ret GroupRemoteInfoTwingateGroup
+		return ret
+	}
+	return *o.TwingateGroup
+}
+
+// GetTwingateGroupOk returns a tuple with the TwingateGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetTwingateGroupOk() (*GroupRemoteInfoTwingateGroup, bool) {
+	if o == nil || IsNil(o.TwingateGroup) {
+		return nil, false
+	}
+	return o.TwingateGroup, true
+}
+
+// HasTwingateGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasTwingateGroup() bool {
+	if o != nil && !IsNil(o.TwingateGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetTwingateGroup gets a reference to the given GroupRemoteInfoTwingateGroup and assigns it to the TwingateGroup field.
+func (o *GroupRemoteInfo) SetTwingateGroup(v GroupRemoteInfoTwingateGroup) {
+	o.TwingateGroup = &v
+}
+
+// GetTwingateGroupSynced returns the TwingateGroupSynced field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetTwingateGroupSynced() GroupRemoteInfoTwingateGroupSynced {
+	if o == nil || IsNil(o.TwingateGroupSynced) {
+		var ret GroupRemoteInfoTwingateGroupSynced
+		return ret
+	}
+	return *o.TwingateGroupSynced
+}
+
+// GetTwingateGroupSyncedOk returns a tuple with the TwingateGroupSynced field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetTwingateGroupSyncedOk() (*GroupRemoteInfoTwingateGroupSynced, bool) {
+	if o == nil || IsNil(o.TwingateGroupSynced) {
+		return nil, false
+	}
+	return o.TwingateGroupSynced, true
+}
+
+// HasTwingateGroupSynced returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasTwingateGroupSynced() bool {
+	if o != nil && !IsNil(o.TwingateGroupSynced) {
+		return true
+	}
+
+	return false
+}
+
+// SetTwingateGroupSynced gets a reference to the given GroupRemoteInfoTwingateGroupSynced and assigns it to the TwingateGroupSynced field.
+func (o *GroupRemoteInfo) SetTwingateGroupSynced(v GroupRemoteInfoTwingateGroupSynced) {
+	o.TwingateGroupSynced = &v
 }
 
 // GetAwsSsoGroup returns the AwsSsoGroup field value if set, zero value otherwise.
@@ -735,6 +806,166 @@ func (o *GroupRemoteInfo) SetDevinGroup(v GroupRemoteInfoDevinGroup) {
 	o.DevinGroup = &v
 }
 
+// GetClickhouseRole returns the ClickhouseRole field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetClickhouseRole() GroupRemoteInfoClickhouseRole {
+	if o == nil || IsNil(o.ClickhouseRole) {
+		var ret GroupRemoteInfoClickhouseRole
+		return ret
+	}
+	return *o.ClickhouseRole
+}
+
+// GetClickhouseRoleOk returns a tuple with the ClickhouseRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetClickhouseRoleOk() (*GroupRemoteInfoClickhouseRole, bool) {
+	if o == nil || IsNil(o.ClickhouseRole) {
+		return nil, false
+	}
+	return o.ClickhouseRole, true
+}
+
+// HasClickhouseRole returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasClickhouseRole() bool {
+	if o != nil && !IsNil(o.ClickhouseRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetClickhouseRole gets a reference to the given GroupRemoteInfoClickhouseRole and assigns it to the ClickhouseRole field.
+func (o *GroupRemoteInfo) SetClickhouseRole(v GroupRemoteInfoClickhouseRole) {
+	o.ClickhouseRole = &v
+}
+
+// GetGrafanaTeam returns the GrafanaTeam field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetGrafanaTeam() GroupRemoteInfoGrafanaTeam {
+	if o == nil || IsNil(o.GrafanaTeam) {
+		var ret GroupRemoteInfoGrafanaTeam
+		return ret
+	}
+	return *o.GrafanaTeam
+}
+
+// GetGrafanaTeamOk returns a tuple with the GrafanaTeam field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetGrafanaTeamOk() (*GroupRemoteInfoGrafanaTeam, bool) {
+	if o == nil || IsNil(o.GrafanaTeam) {
+		return nil, false
+	}
+	return o.GrafanaTeam, true
+}
+
+// HasGrafanaTeam returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasGrafanaTeam() bool {
+	if o != nil && !IsNil(o.GrafanaTeam) {
+		return true
+	}
+
+	return false
+}
+
+// SetGrafanaTeam gets a reference to the given GroupRemoteInfoGrafanaTeam and assigns it to the GrafanaTeam field.
+func (o *GroupRemoteInfo) SetGrafanaTeam(v GroupRemoteInfoGrafanaTeam) {
+	o.GrafanaTeam = &v
+}
+
+// GetZendeskGroup returns the ZendeskGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetZendeskGroup() GroupRemoteInfoZendeskGroup {
+	if o == nil || IsNil(o.ZendeskGroup) {
+		var ret GroupRemoteInfoZendeskGroup
+		return ret
+	}
+	return *o.ZendeskGroup
+}
+
+// GetZendeskGroupOk returns a tuple with the ZendeskGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetZendeskGroupOk() (*GroupRemoteInfoZendeskGroup, bool) {
+	if o == nil || IsNil(o.ZendeskGroup) {
+		return nil, false
+	}
+	return o.ZendeskGroup, true
+}
+
+// HasZendeskGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasZendeskGroup() bool {
+	if o != nil && !IsNil(o.ZendeskGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetZendeskGroup gets a reference to the given GroupRemoteInfoZendeskGroup and assigns it to the ZendeskGroup field.
+func (o *GroupRemoteInfo) SetZendeskGroup(v GroupRemoteInfoZendeskGroup) {
+	o.ZendeskGroup = &v
+}
+
+// GetSlackUserGroup returns the SlackUserGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetSlackUserGroup() GroupRemoteInfoSlackUserGroup {
+	if o == nil || IsNil(o.SlackUserGroup) {
+		var ret GroupRemoteInfoSlackUserGroup
+		return ret
+	}
+	return *o.SlackUserGroup
+}
+
+// GetSlackUserGroupOk returns a tuple with the SlackUserGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetSlackUserGroupOk() (*GroupRemoteInfoSlackUserGroup, bool) {
+	if o == nil || IsNil(o.SlackUserGroup) {
+		return nil, false
+	}
+	return o.SlackUserGroup, true
+}
+
+// HasSlackUserGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasSlackUserGroup() bool {
+	if o != nil && !IsNil(o.SlackUserGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlackUserGroup gets a reference to the given GroupRemoteInfoSlackUserGroup and assigns it to the SlackUserGroup field.
+func (o *GroupRemoteInfo) SetSlackUserGroup(v GroupRemoteInfoSlackUserGroup) {
+	o.SlackUserGroup = &v
+}
+
+// GetZendeskOrganization returns the ZendeskOrganization field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetZendeskOrganization() GroupRemoteInfoZendeskOrganization {
+	if o == nil || IsNil(o.ZendeskOrganization) {
+		var ret GroupRemoteInfoZendeskOrganization
+		return ret
+	}
+	return *o.ZendeskOrganization
+}
+
+// GetZendeskOrganizationOk returns a tuple with the ZendeskOrganization field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetZendeskOrganizationOk() (*GroupRemoteInfoZendeskOrganization, bool) {
+	if o == nil || IsNil(o.ZendeskOrganization) {
+		return nil, false
+	}
+	return o.ZendeskOrganization, true
+}
+
+// HasZendeskOrganization returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasZendeskOrganization() bool {
+	if o != nil && !IsNil(o.ZendeskOrganization) {
+		return true
+	}
+
+	return false
+}
+
+// SetZendeskOrganization gets a reference to the given GroupRemoteInfoZendeskOrganization and assigns it to the ZendeskOrganization field.
+func (o *GroupRemoteInfo) SetZendeskOrganization(v GroupRemoteInfoZendeskOrganization) {
+	o.ZendeskOrganization = &v
+}
+
 func (o GroupRemoteInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -750,6 +981,12 @@ func (o GroupRemoteInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.TailscaleGroup) {
 		toSerialize["tailscale_group"] = o.TailscaleGroup
+	}
+	if !IsNil(o.TwingateGroup) {
+		toSerialize["twingate_group"] = o.TwingateGroup
+	}
+	if !IsNil(o.TwingateGroupSynced) {
+		toSerialize["twingate_group_synced"] = o.TwingateGroupSynced
 	}
 	if !IsNil(o.AwsSsoGroup) {
 		toSerialize["aws_sso_group"] = o.AwsSsoGroup
@@ -808,6 +1045,21 @@ func (o GroupRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DevinGroup) {
 		toSerialize["devin_group"] = o.DevinGroup
 	}
+	if !IsNil(o.ClickhouseRole) {
+		toSerialize["clickhouse_role"] = o.ClickhouseRole
+	}
+	if !IsNil(o.GrafanaTeam) {
+		toSerialize["grafana_team"] = o.GrafanaTeam
+	}
+	if !IsNil(o.ZendeskGroup) {
+		toSerialize["zendesk_group"] = o.ZendeskGroup
+	}
+	if !IsNil(o.SlackUserGroup) {
+		toSerialize["slack_user_group"] = o.SlackUserGroup
+	}
+	if !IsNil(o.ZendeskOrganization) {
+		toSerialize["zendesk_organization"] = o.ZendeskOrganization
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -832,6 +1084,8 @@ func (o *GroupRemoteInfo) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "active_directory_group")
 		delete(additionalProperties, "tailscale_group")
+		delete(additionalProperties, "twingate_group")
+		delete(additionalProperties, "twingate_group_synced")
 		delete(additionalProperties, "aws_sso_group")
 		delete(additionalProperties, "databricks_account_group")
 		delete(additionalProperties, "connector_group")
@@ -851,6 +1105,11 @@ func (o *GroupRemoteInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "incidentio_on_call_schedule")
 		delete(additionalProperties, "rootly_on_call_schedule")
 		delete(additionalProperties, "devin_group")
+		delete(additionalProperties, "clickhouse_role")
+		delete(additionalProperties, "grafana_team")
+		delete(additionalProperties, "zendesk_group")
+		delete(additionalProperties, "slack_user_group")
+		delete(additionalProperties, "zendesk_organization")
 		o.AdditionalProperties = additionalProperties
 	}
 
