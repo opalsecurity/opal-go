@@ -19,7 +19,7 @@ import (
 // checks if the AccessRule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AccessRule{}
 
-// AccessRule # Access Rule Object ### Description The `AccessRule` object is used to represent an access rule configuration.  ### Usage Example Get access rule configurations from the `GET Access Rule Configs` endpoint.
+// AccessRule # Access Rule Object ### Description The `AccessRule` object is used to represent an access rule configuration.  ### Usage Example List access rules from the `GET /access-rules` endpoint, or retrieve a single access rule from the `GET /access-rules/{access_rule_id}` endpoint.
 type AccessRule struct {
 	// The ID (group ID) of the access rule.
 	AccessRuleId string `json:"access_rule_id"`
