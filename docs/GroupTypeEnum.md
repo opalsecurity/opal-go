@@ -51,6 +51,22 @@
 
 * `GIT_HUB_ENTERPRISE_TEAM` (value: `"GIT_HUB_ENTERPRISE_TEAM"`)
 
+* `GRAFANA_TEAM` (value: `"GRAFANA_TEAM"`)
+
+* `CLICKHOUSE_ROLE` (value: `"CLICKHOUSE_ROLE"`)
+
+* `SLACK_USER_GROUP` (value: `"SLACK_USER_GROUP"`)
+
+* `TWINGATE_GROUP` (value: `"TWINGATE_GROUP"`)
+
+* `TWINGATE_GROUP_SYNCED` (value: `"TWINGATE_GROUP_SYNCED"`)
+
+* `ZENDESK_GROUP` (value: `"ZENDESK_GROUP"`)
+
+* `ZENDESK_ORGANIZATION` (value: `"ZENDESK_ORGANIZATION"`)
+
+* `HUBSPOT_TEAM` (value: `"HUBSPOT_TEAM"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

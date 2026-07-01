@@ -51,6 +51,7 @@ Name | Type | Description | Notes
 **SnowflakeTable** | Pointer to [**ResourceRemoteInfoSnowflakeTable**](ResourceRemoteInfoSnowflakeTable.md) |  | [optional] 
 **IlevelAdvancedRole** | Pointer to [**ResourceRemoteInfoIlevelAdvancedRole**](ResourceRemoteInfoIlevelAdvancedRole.md) |  | [optional] 
 **TailscaleSsh** | Pointer to [**ResourceRemoteInfoTailscaleSsh**](ResourceRemoteInfoTailscaleSsh.md) |  | [optional] 
+**TwingateResource** | Pointer to [**ResourceRemoteInfoTwingateResource**](ResourceRemoteInfoTwingateResource.md) |  | [optional] 
 **PagerdutyRole** | Pointer to [**ResourceRemoteInfoPagerdutyRole**](ResourceRemoteInfoPagerdutyRole.md) |  | [optional] 
 **WorkdayRole** | Pointer to [**ResourceRemoteInfoWorkdayRole**](ResourceRemoteInfoWorkdayRole.md) |  | [optional] 
 **SalesforcePermissionSet** | Pointer to [**ResourceRemoteInfoSalesforcePermissionSet**](ResourceRemoteInfoSalesforcePermissionSet.md) |  | [optional] 
@@ -66,6 +67,15 @@ Name | Type | Description | Notes
 **OracleFusionRole** | Pointer to [**ResourceRemoteInfoOracleFusionRole**](ResourceRemoteInfoOracleFusionRole.md) |  | [optional] 
 **DevinOrganization** | Pointer to [**ResourceRemoteInfoDevinOrganization**](ResourceRemoteInfoDevinOrganization.md) |  | [optional] 
 **DevinRole** | Pointer to [**ResourceRemoteInfoDevinRole**](ResourceRemoteInfoDevinRole.md) |  | [optional] 
+**NetsuiteRole** | Pointer to [**ResourceRemoteInfoNetsuiteRole**](ResourceRemoteInfoNetsuiteRole.md) |  | [optional] 
+**DatadogRole** | Pointer to [**ResourceRemoteInfoDatadogRole**](ResourceRemoteInfoDatadogRole.md) |  | [optional] 
+**ClickhouseDatabase** | Pointer to [**ResourceRemoteInfoClickhouseDatabase**](ResourceRemoteInfoClickhouseDatabase.md) |  | [optional] 
+**ClickhouseTable** | Pointer to [**ResourceRemoteInfoClickhouseTable**](ResourceRemoteInfoClickhouseTable.md) |  | [optional] 
+**GrafanaFolder** | Pointer to [**ResourceRemoteInfoGrafanaFolder**](ResourceRemoteInfoGrafanaFolder.md) |  | [optional] 
+**GrafanaDashboard** | Pointer to [**ResourceRemoteInfoGrafanaDashboard**](ResourceRemoteInfoGrafanaDashboard.md) |  | [optional] 
+**GrafanaRole** | Pointer to [**ResourceRemoteInfoGrafanaRole**](ResourceRemoteInfoGrafanaRole.md) |  | [optional] 
+**ZendeskRole** | Pointer to [**ResourceRemoteInfoZendeskRole**](ResourceRemoteInfoZendeskRole.md) |  | [optional] 
+**HubspotRole** | Pointer to [**ResourceRemoteInfoHubspotRole**](ResourceRemoteInfoHubspotRole.md) |  | [optional] 
 
 ## Methods
 
@@ -1261,6 +1271,31 @@ SetTailscaleSsh sets TailscaleSsh field to given value.
 
 HasTailscaleSsh returns a boolean if a field has been set.
 
+### GetTwingateResource
+
+`func (o *ResourceRemoteInfo) GetTwingateResource() ResourceRemoteInfoTwingateResource`
+
+GetTwingateResource returns the TwingateResource field if non-nil, zero value otherwise.
+
+### GetTwingateResourceOk
+
+`func (o *ResourceRemoteInfo) GetTwingateResourceOk() (*ResourceRemoteInfoTwingateResource, bool)`
+
+GetTwingateResourceOk returns a tuple with the TwingateResource field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTwingateResource
+
+`func (o *ResourceRemoteInfo) SetTwingateResource(v ResourceRemoteInfoTwingateResource)`
+
+SetTwingateResource sets TwingateResource field to given value.
+
+### HasTwingateResource
+
+`func (o *ResourceRemoteInfo) HasTwingateResource() bool`
+
+HasTwingateResource returns a boolean if a field has been set.
+
 ### GetPagerdutyRole
 
 `func (o *ResourceRemoteInfo) GetPagerdutyRole() ResourceRemoteInfoPagerdutyRole`
@@ -1635,6 +1670,231 @@ SetDevinRole sets DevinRole field to given value.
 `func (o *ResourceRemoteInfo) HasDevinRole() bool`
 
 HasDevinRole returns a boolean if a field has been set.
+
+### GetNetsuiteRole
+
+`func (o *ResourceRemoteInfo) GetNetsuiteRole() ResourceRemoteInfoNetsuiteRole`
+
+GetNetsuiteRole returns the NetsuiteRole field if non-nil, zero value otherwise.
+
+### GetNetsuiteRoleOk
+
+`func (o *ResourceRemoteInfo) GetNetsuiteRoleOk() (*ResourceRemoteInfoNetsuiteRole, bool)`
+
+GetNetsuiteRoleOk returns a tuple with the NetsuiteRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetsuiteRole
+
+`func (o *ResourceRemoteInfo) SetNetsuiteRole(v ResourceRemoteInfoNetsuiteRole)`
+
+SetNetsuiteRole sets NetsuiteRole field to given value.
+
+### HasNetsuiteRole
+
+`func (o *ResourceRemoteInfo) HasNetsuiteRole() bool`
+
+HasNetsuiteRole returns a boolean if a field has been set.
+
+### GetDatadogRole
+
+`func (o *ResourceRemoteInfo) GetDatadogRole() ResourceRemoteInfoDatadogRole`
+
+GetDatadogRole returns the DatadogRole field if non-nil, zero value otherwise.
+
+### GetDatadogRoleOk
+
+`func (o *ResourceRemoteInfo) GetDatadogRoleOk() (*ResourceRemoteInfoDatadogRole, bool)`
+
+GetDatadogRoleOk returns a tuple with the DatadogRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDatadogRole
+
+`func (o *ResourceRemoteInfo) SetDatadogRole(v ResourceRemoteInfoDatadogRole)`
+
+SetDatadogRole sets DatadogRole field to given value.
+
+### HasDatadogRole
+
+`func (o *ResourceRemoteInfo) HasDatadogRole() bool`
+
+HasDatadogRole returns a boolean if a field has been set.
+
+### GetClickhouseDatabase
+
+`func (o *ResourceRemoteInfo) GetClickhouseDatabase() ResourceRemoteInfoClickhouseDatabase`
+
+GetClickhouseDatabase returns the ClickhouseDatabase field if non-nil, zero value otherwise.
+
+### GetClickhouseDatabaseOk
+
+`func (o *ResourceRemoteInfo) GetClickhouseDatabaseOk() (*ResourceRemoteInfoClickhouseDatabase, bool)`
+
+GetClickhouseDatabaseOk returns a tuple with the ClickhouseDatabase field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClickhouseDatabase
+
+`func (o *ResourceRemoteInfo) SetClickhouseDatabase(v ResourceRemoteInfoClickhouseDatabase)`
+
+SetClickhouseDatabase sets ClickhouseDatabase field to given value.
+
+### HasClickhouseDatabase
+
+`func (o *ResourceRemoteInfo) HasClickhouseDatabase() bool`
+
+HasClickhouseDatabase returns a boolean if a field has been set.
+
+### GetClickhouseTable
+
+`func (o *ResourceRemoteInfo) GetClickhouseTable() ResourceRemoteInfoClickhouseTable`
+
+GetClickhouseTable returns the ClickhouseTable field if non-nil, zero value otherwise.
+
+### GetClickhouseTableOk
+
+`func (o *ResourceRemoteInfo) GetClickhouseTableOk() (*ResourceRemoteInfoClickhouseTable, bool)`
+
+GetClickhouseTableOk returns a tuple with the ClickhouseTable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClickhouseTable
+
+`func (o *ResourceRemoteInfo) SetClickhouseTable(v ResourceRemoteInfoClickhouseTable)`
+
+SetClickhouseTable sets ClickhouseTable field to given value.
+
+### HasClickhouseTable
+
+`func (o *ResourceRemoteInfo) HasClickhouseTable() bool`
+
+HasClickhouseTable returns a boolean if a field has been set.
+
+### GetGrafanaFolder
+
+`func (o *ResourceRemoteInfo) GetGrafanaFolder() ResourceRemoteInfoGrafanaFolder`
+
+GetGrafanaFolder returns the GrafanaFolder field if non-nil, zero value otherwise.
+
+### GetGrafanaFolderOk
+
+`func (o *ResourceRemoteInfo) GetGrafanaFolderOk() (*ResourceRemoteInfoGrafanaFolder, bool)`
+
+GetGrafanaFolderOk returns a tuple with the GrafanaFolder field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGrafanaFolder
+
+`func (o *ResourceRemoteInfo) SetGrafanaFolder(v ResourceRemoteInfoGrafanaFolder)`
+
+SetGrafanaFolder sets GrafanaFolder field to given value.
+
+### HasGrafanaFolder
+
+`func (o *ResourceRemoteInfo) HasGrafanaFolder() bool`
+
+HasGrafanaFolder returns a boolean if a field has been set.
+
+### GetGrafanaDashboard
+
+`func (o *ResourceRemoteInfo) GetGrafanaDashboard() ResourceRemoteInfoGrafanaDashboard`
+
+GetGrafanaDashboard returns the GrafanaDashboard field if non-nil, zero value otherwise.
+
+### GetGrafanaDashboardOk
+
+`func (o *ResourceRemoteInfo) GetGrafanaDashboardOk() (*ResourceRemoteInfoGrafanaDashboard, bool)`
+
+GetGrafanaDashboardOk returns a tuple with the GrafanaDashboard field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGrafanaDashboard
+
+`func (o *ResourceRemoteInfo) SetGrafanaDashboard(v ResourceRemoteInfoGrafanaDashboard)`
+
+SetGrafanaDashboard sets GrafanaDashboard field to given value.
+
+### HasGrafanaDashboard
+
+`func (o *ResourceRemoteInfo) HasGrafanaDashboard() bool`
+
+HasGrafanaDashboard returns a boolean if a field has been set.
+
+### GetGrafanaRole
+
+`func (o *ResourceRemoteInfo) GetGrafanaRole() ResourceRemoteInfoGrafanaRole`
+
+GetGrafanaRole returns the GrafanaRole field if non-nil, zero value otherwise.
+
+### GetGrafanaRoleOk
+
+`func (o *ResourceRemoteInfo) GetGrafanaRoleOk() (*ResourceRemoteInfoGrafanaRole, bool)`
+
+GetGrafanaRoleOk returns a tuple with the GrafanaRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGrafanaRole
+
+`func (o *ResourceRemoteInfo) SetGrafanaRole(v ResourceRemoteInfoGrafanaRole)`
+
+SetGrafanaRole sets GrafanaRole field to given value.
+
+### HasGrafanaRole
+
+`func (o *ResourceRemoteInfo) HasGrafanaRole() bool`
+
+HasGrafanaRole returns a boolean if a field has been set.
+
+### GetZendeskRole
+
+`func (o *ResourceRemoteInfo) GetZendeskRole() ResourceRemoteInfoZendeskRole`
+
+GetZendeskRole returns the ZendeskRole field if non-nil, zero value otherwise.
+
+### GetZendeskRoleOk
+
+`func (o *ResourceRemoteInfo) GetZendeskRoleOk() (*ResourceRemoteInfoZendeskRole, bool)`
+
+GetZendeskRoleOk returns a tuple with the ZendeskRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetZendeskRole
+
+`func (o *ResourceRemoteInfo) SetZendeskRole(v ResourceRemoteInfoZendeskRole)`
+
+SetZendeskRole sets ZendeskRole field to given value.
+
+### HasZendeskRole
+
+`func (o *ResourceRemoteInfo) HasZendeskRole() bool`
+
+HasZendeskRole returns a boolean if a field has been set.
+
+### GetHubspotRole
+
+`func (o *ResourceRemoteInfo) GetHubspotRole() ResourceRemoteInfoHubspotRole`
+
+GetHubspotRole returns the HubspotRole field if non-nil, zero value otherwise.
+
+### GetHubspotRoleOk
+
+`func (o *ResourceRemoteInfo) GetHubspotRoleOk() (*ResourceRemoteInfoHubspotRole, bool)`
+
+GetHubspotRoleOk returns a tuple with the HubspotRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHubspotRole
+
+`func (o *ResourceRemoteInfo) SetHubspotRole(v ResourceRemoteInfoHubspotRole)`
+
+SetHubspotRole sets HubspotRole field to given value.
+
+### HasHubspotRole
+
+`func (o *ResourceRemoteInfo) HasHubspotRole() bool`
+
+HasHubspotRole returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
