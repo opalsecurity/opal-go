@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BundleId** | Pointer to **string** | The ID of the bundle containing the group. | [optional] [readonly] 
 **GroupId** | Pointer to **string** | The ID of the group within a bundle. | [optional] [readonly] 
+**AccessLevelName** | Pointer to **string** | The access level of the group within a bundle. | [optional] 
+**AccessLevelRemoteId** | Pointer to **string** | The remote ID of the access level of the group within a bundle. | [optional] 
 
 ## Methods
 
@@ -75,6 +77,56 @@ SetGroupId sets GroupId field to given value.
 `func (o *BundleGroup) HasGroupId() bool`
 
 HasGroupId returns a boolean if a field has been set.
+
+### GetAccessLevelName
+
+`func (o *BundleGroup) GetAccessLevelName() string`
+
+GetAccessLevelName returns the AccessLevelName field if non-nil, zero value otherwise.
+
+### GetAccessLevelNameOk
+
+`func (o *BundleGroup) GetAccessLevelNameOk() (*string, bool)`
+
+GetAccessLevelNameOk returns a tuple with the AccessLevelName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccessLevelName
+
+`func (o *BundleGroup) SetAccessLevelName(v string)`
+
+SetAccessLevelName sets AccessLevelName field to given value.
+
+### HasAccessLevelName
+
+`func (o *BundleGroup) HasAccessLevelName() bool`
+
+HasAccessLevelName returns a boolean if a field has been set.
+
+### GetAccessLevelRemoteId
+
+`func (o *BundleGroup) GetAccessLevelRemoteId() string`
+
+GetAccessLevelRemoteId returns the AccessLevelRemoteId field if non-nil, zero value otherwise.
+
+### GetAccessLevelRemoteIdOk
+
+`func (o *BundleGroup) GetAccessLevelRemoteIdOk() (*string, bool)`
+
+GetAccessLevelRemoteIdOk returns a tuple with the AccessLevelRemoteId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccessLevelRemoteId
+
+`func (o *BundleGroup) SetAccessLevelRemoteId(v string)`
+
+SetAccessLevelRemoteId sets AccessLevelRemoteId field to given value.
+
+### HasAccessLevelRemoteId
+
+`func (o *BundleGroup) HasAccessLevelRemoteId() bool`
+
+HasAccessLevelRemoteId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

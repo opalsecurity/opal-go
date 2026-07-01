@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AdminOwnerId** | **string** | The ID of the owner of the configuration template. | 
-**Visibility** | [**VisibilityInfo**](VisibilityInfo.md) |  | 
+**Visibility** | [**VisibilityInfo**](VisibilityInfo.md) | The visibility info of the configuration template. | 
 **LinkedAuditMessageChannelIds** | Pointer to **[]string** | The IDs of the audit message channels linked to the configuration template. | [optional] 
 **MemberOncallScheduleIds** | Pointer to **[]string** | The IDs of the on-call schedules linked to the configuration template. | [optional] 
 **BreakGlassUserIds** | Pointer to **[]string** | The IDs of the break glass users linked to the configuration template. | [optional] 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **RequireMfaToConnect** | **bool** | A bool representing whether or not to require MFA to connect to resources associated with this configuration template. | 
 **Name** | **string** | The name of the configuration template. | 
 **RequestConfigurations** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | The request configuration list of the configuration template. If not provided, the default request configuration will be used. | [optional] 
-**RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) |  | [optional] 
+**RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) | The request configuration list of the configuration template. If not provided, the default request configuration will be used. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **TicketPropagation** | Pointer to [**TicketPropagationConfiguration**](TicketPropagationConfiguration.md) |  | [optional] 
 **CustomRequestNotification** | Pointer to **string** | Custom request notification sent upon request approval for this configuration template. | [optional] 
 

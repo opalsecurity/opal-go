@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **ResourceType** | Pointer to [**ResourceTypeEnum**](ResourceTypeEnum.md) |  | [optional] 
 **MaxDuration** | Pointer to **int32** | The maximum duration for which the resource can be requested (in minutes). | [optional] 
 **RecommendedDuration** | Pointer to **int32** | The recommended duration for which the resource should be requested (in minutes). -1 represents an indefinite duration. | [optional] 
+**ExtensionsDurationInMinutes** | Pointer to **int32** | The duration for which access can be extended (in minutes). Set to 0 to disable extensions. When &gt; 0, extensions are enabled for the specified duration. | [optional] 
 **RequireManagerApproval** | Pointer to **bool** | A bool representing whether or not access requests to the resource require manager approval. | [optional] 
 **RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the resource require an access ticket. | [optional] 
 **RequireMfaToApprove** | Pointer to **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this resource. | [optional] 
@@ -32,6 +33,9 @@ Name | Type | Description | Notes
 **RiskSensitivityOverride** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) |  | [optional] 
 **Metadata** | Pointer to **string** | JSON metadata about the remote resource. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details. | [optional] 
 **RemoteInfo** | Pointer to [**ResourceRemoteInfo**](ResourceRemoteInfo.md) |  | [optional] 
+**AncestorResourceIds** | Pointer to **[]string** | List of resource IDs that are ancestors of this resource. | [optional] 
+**DescendantResourceIds** | Pointer to **[]string** | List of resource IDs that are descendants of this resource. | [optional] 
+**LastSuccessfulSync** | Pointer to [**SyncTask**](SyncTask.md) | Information about the last successful sync of this resource. | [optional] [readonly] 
 
 ## Methods
 
@@ -296,6 +300,31 @@ SetRecommendedDuration sets RecommendedDuration field to given value.
 `func (o *Resource) HasRecommendedDuration() bool`
 
 HasRecommendedDuration returns a boolean if a field has been set.
+
+### GetExtensionsDurationInMinutes
+
+`func (o *Resource) GetExtensionsDurationInMinutes() int32`
+
+GetExtensionsDurationInMinutes returns the ExtensionsDurationInMinutes field if non-nil, zero value otherwise.
+
+### GetExtensionsDurationInMinutesOk
+
+`func (o *Resource) GetExtensionsDurationInMinutesOk() (*int32, bool)`
+
+GetExtensionsDurationInMinutesOk returns a tuple with the ExtensionsDurationInMinutes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExtensionsDurationInMinutes
+
+`func (o *Resource) SetExtensionsDurationInMinutes(v int32)`
+
+SetExtensionsDurationInMinutes sets ExtensionsDurationInMinutes field to given value.
+
+### HasExtensionsDurationInMinutes
+
+`func (o *Resource) HasExtensionsDurationInMinutes() bool`
+
+HasExtensionsDurationInMinutes returns a boolean if a field has been set.
 
 ### GetRequireManagerApproval
 
@@ -746,6 +775,81 @@ SetRemoteInfo sets RemoteInfo field to given value.
 `func (o *Resource) HasRemoteInfo() bool`
 
 HasRemoteInfo returns a boolean if a field has been set.
+
+### GetAncestorResourceIds
+
+`func (o *Resource) GetAncestorResourceIds() []string`
+
+GetAncestorResourceIds returns the AncestorResourceIds field if non-nil, zero value otherwise.
+
+### GetAncestorResourceIdsOk
+
+`func (o *Resource) GetAncestorResourceIdsOk() (*[]string, bool)`
+
+GetAncestorResourceIdsOk returns a tuple with the AncestorResourceIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAncestorResourceIds
+
+`func (o *Resource) SetAncestorResourceIds(v []string)`
+
+SetAncestorResourceIds sets AncestorResourceIds field to given value.
+
+### HasAncestorResourceIds
+
+`func (o *Resource) HasAncestorResourceIds() bool`
+
+HasAncestorResourceIds returns a boolean if a field has been set.
+
+### GetDescendantResourceIds
+
+`func (o *Resource) GetDescendantResourceIds() []string`
+
+GetDescendantResourceIds returns the DescendantResourceIds field if non-nil, zero value otherwise.
+
+### GetDescendantResourceIdsOk
+
+`func (o *Resource) GetDescendantResourceIdsOk() (*[]string, bool)`
+
+GetDescendantResourceIdsOk returns a tuple with the DescendantResourceIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescendantResourceIds
+
+`func (o *Resource) SetDescendantResourceIds(v []string)`
+
+SetDescendantResourceIds sets DescendantResourceIds field to given value.
+
+### HasDescendantResourceIds
+
+`func (o *Resource) HasDescendantResourceIds() bool`
+
+HasDescendantResourceIds returns a boolean if a field has been set.
+
+### GetLastSuccessfulSync
+
+`func (o *Resource) GetLastSuccessfulSync() SyncTask`
+
+GetLastSuccessfulSync returns the LastSuccessfulSync field if non-nil, zero value otherwise.
+
+### GetLastSuccessfulSyncOk
+
+`func (o *Resource) GetLastSuccessfulSyncOk() (*SyncTask, bool)`
+
+GetLastSuccessfulSyncOk returns a tuple with the LastSuccessfulSync field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastSuccessfulSync
+
+`func (o *Resource) SetLastSuccessfulSync(v SyncTask)`
+
+SetLastSuccessfulSync sets LastSuccessfulSync field to given value.
+
+### HasLastSuccessfulSync
+
+`func (o *Resource) HasLastSuccessfulSync() bool`
+
+HasLastSuccessfulSync returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

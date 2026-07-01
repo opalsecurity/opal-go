@@ -24,6 +24,8 @@ var _ MappedNullable = &ResourceRemoteInfoAwsAccount{}
 type ResourceRemoteInfoAwsAccount struct {
 	// The id of the AWS account.
 	AccountId string `json:"account_id"`
+	// The id of the AWS organizational unit. Required only if customer has OUs enabled.
+	OrganizationalUnitId *string `json:"organizational_unit_id,omitempty"`
 }
 
 type _ResourceRemoteInfoAwsAccount ResourceRemoteInfoAwsAccount
@@ -70,6 +72,38 @@ func (o *ResourceRemoteInfoAwsAccount) SetAccountId(v string) {
 	o.AccountId = v
 }
 
+// GetOrganizationalUnitId returns the OrganizationalUnitId field value if set, zero value otherwise.
+func (o *ResourceRemoteInfoAwsAccount) GetOrganizationalUnitId() string {
+	if o == nil || IsNil(o.OrganizationalUnitId) {
+		var ret string
+		return ret
+	}
+	return *o.OrganizationalUnitId
+}
+
+// GetOrganizationalUnitIdOk returns a tuple with the OrganizationalUnitId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfoAwsAccount) GetOrganizationalUnitIdOk() (*string, bool) {
+	if o == nil || IsNil(o.OrganizationalUnitId) {
+		return nil, false
+	}
+	return o.OrganizationalUnitId, true
+}
+
+// HasOrganizationalUnitId returns a boolean if a field has been set.
+func (o *ResourceRemoteInfoAwsAccount) HasOrganizationalUnitId() bool {
+	if o != nil && !IsNil(o.OrganizationalUnitId) {
+		return true
+	}
+
+	return false
+}
+
+// SetOrganizationalUnitId gets a reference to the given string and assigns it to the OrganizationalUnitId field.
+func (o *ResourceRemoteInfoAwsAccount) SetOrganizationalUnitId(v string) {
+	o.OrganizationalUnitId = &v
+}
+
 func (o ResourceRemoteInfoAwsAccount) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -81,6 +115,9 @@ func (o ResourceRemoteInfoAwsAccount) MarshalJSON() ([]byte, error) {
 func (o ResourceRemoteInfoAwsAccount) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["account_id"] = o.AccountId
+	if !IsNil(o.OrganizationalUnitId) {
+		toSerialize["organizational_unit_id"] = o.OrganizationalUnitId
+	}
 	return toSerialize, nil
 }
 

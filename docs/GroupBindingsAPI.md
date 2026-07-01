@@ -6,8 +6,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateGroupBinding**](GroupBindingsAPI.md#CreateGroupBinding) | **Post** /group-bindings | 
 [**DeleteGroupBinding**](GroupBindingsAPI.md#DeleteGroupBinding) | **Delete** /group-bindings/{group_binding_id} | 
-[**GetGroupBinding**](GroupBindingsAPI.md#GetGroupBinding) | **Get** /group-bindings/{group_binding_id} | 
-[**GetGroupBindings**](GroupBindingsAPI.md#GetGroupBindings) | **Get** /group-bindings | 
+[**GetGroupBinding**](GroupBindingsAPI.md#GetGroupBinding) | **Get** /group-bindings/{group_binding_id} | Get group binding by ID
+[**GetGroupBindings**](GroupBindingsAPI.md#GetGroupBindings) | **Get** /group-bindings | Get group bindings
 [**UpdateGroupBindings**](GroupBindingsAPI.md#UpdateGroupBindings) | **Put** /group-bindings | 
 
 
@@ -150,7 +150,7 @@ Name | Type | Description  | Notes
 
 > GroupBinding GetGroupBinding(ctx, groupBindingId).Execute()
 
-
+Get group binding by ID
 
 
 
@@ -220,7 +220,7 @@ Name | Type | Description  | Notes
 
 > PaginatedGroupBindingsList GetGroupBindings(ctx).Cursor(cursor).PageSize(pageSize).Execute()
 
-
+Get group bindings
 
 
 

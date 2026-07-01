@@ -20,8 +20,9 @@ Name | Type | Description | Notes
 **RequestTemplateId** | Pointer to **string** | The ID of the associated request template. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this group. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **GroupLeaderUserIds** | Pointer to **[]string** | A list of User IDs for the group leaders of the group | [optional] 
+**ExtensionsDurationInMinutes** | Pointer to **int32** | The duration for which access can be extended (in minutes). Deprecated, set the extension duration in the request_configuration you want it to apply to. | [optional] 
 **RequestConfigurations** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | The request configuration list of the configuration template. If not provided, the default request configuration will be used. | [optional] 
-**RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) |  | [optional] 
+**RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) | The request configuration list of the configuration template. If not provided, the default request configuration will be used. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **CustomRequestNotification** | Pointer to **string** | Custom request notification sent to the requester when the request is approved. | [optional] 
 **RiskSensitivityOverride** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) |  | [optional] 
 
@@ -438,6 +439,31 @@ SetGroupLeaderUserIds sets GroupLeaderUserIds field to given value.
 `func (o *UpdateGroupInfo) HasGroupLeaderUserIds() bool`
 
 HasGroupLeaderUserIds returns a boolean if a field has been set.
+
+### GetExtensionsDurationInMinutes
+
+`func (o *UpdateGroupInfo) GetExtensionsDurationInMinutes() int32`
+
+GetExtensionsDurationInMinutes returns the ExtensionsDurationInMinutes field if non-nil, zero value otherwise.
+
+### GetExtensionsDurationInMinutesOk
+
+`func (o *UpdateGroupInfo) GetExtensionsDurationInMinutesOk() (*int32, bool)`
+
+GetExtensionsDurationInMinutesOk returns a tuple with the ExtensionsDurationInMinutes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExtensionsDurationInMinutes
+
+`func (o *UpdateGroupInfo) SetExtensionsDurationInMinutes(v int32)`
+
+SetExtensionsDurationInMinutes sets ExtensionsDurationInMinutes field to given value.
+
+### HasExtensionsDurationInMinutes
+
+`func (o *UpdateGroupInfo) HasExtensionsDurationInMinutes() bool`
+
+HasExtensionsDurationInMinutes returns a boolean if a field has been set.
 
 ### GetRequestConfigurations
 

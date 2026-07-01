@@ -20,12 +20,29 @@ var _ MappedNullable = &ResourceRemoteInfo{}
 
 // ResourceRemoteInfo Information that defines the remote resource. This replaces the deprecated remote_id and metadata fields.
 type ResourceRemoteInfo struct {
+	DatabricksAccountServicePrincipal *ResourceRemoteInfoDatabricksAccountServicePrincipal `json:"databricks_account_service_principal,omitempty"`
+	AzureSubscription *ResourceRemoteInfoAzureSubscription `json:"azure_subscription,omitempty"`
+	AzureResourceGroup *ResourceRemoteInfoAzureResourceGroup `json:"azure_resource_group,omitempty"`
+	AzureManagementGroup *ResourceRemoteInfoAzureManagementGroup `json:"azure_management_group,omitempty"`
+	AzureVirtualMachine *ResourceRemoteInfoAzureVirtualMachine `json:"azure_virtual_machine,omitempty"`
+	AzureStorageAccount *ResourceRemoteInfoAzureStorageAccount `json:"azure_storage_account,omitempty"`
+	AzureStorageContainer *ResourceRemoteInfoAzureStorageContainer `json:"azure_storage_container,omitempty"`
+	AzureSqlServer *ResourceRemoteInfoAzureSqlServer `json:"azure_sql_server,omitempty"`
+	AzureSqlDatabase *ResourceRemoteInfoAzureSqlDatabase `json:"azure_sql_database,omitempty"`
+	AzureSqlManagedInstance *ResourceRemoteInfoAzureSqlManagedInstance `json:"azure_sql_managed_instance,omitempty"`
+	AzureSqlManagedDatabase *ResourceRemoteInfoAzureSqlManagedDatabase `json:"azure_sql_managed_database,omitempty"`
+	AzureUserAssignedManagedIdentity *ResourceRemoteInfoAzureUserAssignedManagedIdentity `json:"azure_user_assigned_managed_identity,omitempty"`
+	AzureEnterpriseApp *ResourceRemoteInfoAzureEnterpriseApp `json:"azure_enterprise_app,omitempty"`
+	AzureEntraIdRole *ResourceRemoteInfoAzureEntraIdRole `json:"azure_entra_id_role,omitempty"`
+	AwsOrganizationalUnit *ResourceRemoteInfoAwsOrganizationalUnit `json:"aws_organizational_unit,omitempty"`
 	AwsAccount *ResourceRemoteInfoAwsAccount `json:"aws_account,omitempty"`
 	AwsPermissionSet *ResourceRemoteInfoAwsPermissionSet `json:"aws_permission_set,omitempty"`
 	AwsIamRole *ResourceRemoteInfoAwsIamRole `json:"aws_iam_role,omitempty"`
 	AwsEc2Instance *ResourceRemoteInfoAwsEc2Instance `json:"aws_ec2_instance,omitempty"`
+	AwsRdsCluster *ResourceRemoteInfoAwsRdsCluster `json:"aws_rds_cluster,omitempty"`
 	AwsRdsInstance *ResourceRemoteInfoAwsRdsInstance `json:"aws_rds_instance,omitempty"`
 	AwsEksCluster *ResourceRemoteInfoAwsEksCluster `json:"aws_eks_cluster,omitempty"`
+	CustomConnector *ResourceRemoteInfoCustomConnector `json:"custom_connector,omitempty"`
 	GcpOrganization *ResourceRemoteInfoGcpOrganization `json:"gcp_organization,omitempty"`
 	GcpBucket *ResourceRemoteInfoGcpBucket `json:"gcp_bucket,omitempty"`
 	GcpComputeInstance *ResourceRemoteInfoGcpComputeInstance `json:"gcp_compute_instance,omitempty"`
@@ -36,16 +53,45 @@ type ResourceRemoteInfo struct {
 	GcpProject *ResourceRemoteInfoGcpProject `json:"gcp_project,omitempty"`
 	GcpSqlInstance *ResourceRemoteInfoGcpSqlInstance `json:"gcp_sql_instance,omitempty"`
 	GcpServiceAccount *ResourceRemoteInfoGcpServiceAccount `json:"gcp_service_account,omitempty"`
+	GoogleWorkspaceRole *ResourceRemoteInfoGoogleWorkspaceRole `json:"google_workspace_role,omitempty"`
 	GithubRepo *ResourceRemoteInfoGithubRepo `json:"github_repo,omitempty"`
+	GithubOrgRole *ResourceRemoteInfoGithubOrgRole `json:"github_org_role,omitempty"`
+	GithubOrg *ResourceRemoteInfoGithubOrg `json:"github_org,omitempty"`
+	GithubEnterpriseRole *ResourceRemoteInfoGithubEnterpriseRole `json:"github_enterprise_role,omitempty"`
 	GitlabProject *ResourceRemoteInfoGitlabProject `json:"gitlab_project,omitempty"`
 	OktaApp *ResourceRemoteInfoOktaApp `json:"okta_app,omitempty"`
 	OktaStandardRole *ResourceRemoteInfoOktaStandardRole `json:"okta_standard_role,omitempty"`
 	OktaCustomRole *ResourceRemoteInfoOktaCustomRole `json:"okta_custom_role,omitempty"`
+	SnowflakeDatabase *ResourceRemoteInfoSnowflakeDatabase `json:"snowflake_database,omitempty"`
+	SnowflakeSchema *ResourceRemoteInfoSnowflakeSchema `json:"snowflake_schema,omitempty"`
+	SnowflakeTable *ResourceRemoteInfoSnowflakeTable `json:"snowflake_table,omitempty"`
+	IlevelAdvancedRole *ResourceRemoteInfoIlevelAdvancedRole `json:"ilevel_advanced_role,omitempty"`
+	TailscaleSsh *ResourceRemoteInfoTailscaleSsh `json:"tailscale_ssh,omitempty"`
+	TwingateResource *ResourceRemoteInfoTwingateResource `json:"twingate_resource,omitempty"`
 	PagerdutyRole *ResourceRemoteInfoPagerdutyRole `json:"pagerduty_role,omitempty"`
+	WorkdayRole *ResourceRemoteInfoWorkdayRole `json:"workday_role,omitempty"`
 	SalesforcePermissionSet *ResourceRemoteInfoSalesforcePermissionSet `json:"salesforce_permission_set,omitempty"`
 	SalesforceProfile *ResourceRemoteInfoSalesforceProfile `json:"salesforce_profile,omitempty"`
 	SalesforceRole *ResourceRemoteInfoSalesforceRole `json:"salesforce_role,omitempty"`
 	TeleportRole *ResourceRemoteInfoTeleportRole `json:"teleport_role,omitempty"`
+	DatastaxAstraRole *ResourceRemoteInfoDatastaxAstraRole `json:"datastax_astra_role,omitempty"`
+	CoupaRole *ResourceRemoteInfoCoupaRole `json:"coupa_role,omitempty"`
+	CursorOrganization *ResourceRemoteInfoCursorOrganization `json:"cursor_organization,omitempty"`
+	OpenaiPlatformProject *ResourceRemoteInfoOpenaiPlatformProject `json:"openai_platform_project,omitempty"`
+	OpenaiPlatformServiceAccount *ResourceRemoteInfoOpenaiPlatformServiceAccount `json:"openai_platform_service_account,omitempty"`
+	AnthropicWorkspace *ResourceRemoteInfoAnthropicWorkspace `json:"anthropic_workspace,omitempty"`
+	OracleFusionRole *ResourceRemoteInfoOracleFusionRole `json:"oracle_fusion_role,omitempty"`
+	DevinOrganization *ResourceRemoteInfoDevinOrganization `json:"devin_organization,omitempty"`
+	DevinRole *ResourceRemoteInfoDevinRole `json:"devin_role,omitempty"`
+	NetsuiteRole *ResourceRemoteInfoNetsuiteRole `json:"netsuite_role,omitempty"`
+	DatadogRole *ResourceRemoteInfoDatadogRole `json:"datadog_role,omitempty"`
+	ClickhouseDatabase *ResourceRemoteInfoClickhouseDatabase `json:"clickhouse_database,omitempty"`
+	ClickhouseTable *ResourceRemoteInfoClickhouseTable `json:"clickhouse_table,omitempty"`
+	GrafanaFolder *ResourceRemoteInfoGrafanaFolder `json:"grafana_folder,omitempty"`
+	GrafanaDashboard *ResourceRemoteInfoGrafanaDashboard `json:"grafana_dashboard,omitempty"`
+	GrafanaRole *ResourceRemoteInfoGrafanaRole `json:"grafana_role,omitempty"`
+	ZendeskRole *ResourceRemoteInfoZendeskRole `json:"zendesk_role,omitempty"`
+	HubspotRole *ResourceRemoteInfoHubspotRole `json:"hubspot_role,omitempty"`
 }
 
 // NewResourceRemoteInfo instantiates a new ResourceRemoteInfo object
@@ -63,6 +109,486 @@ func NewResourceRemoteInfo() *ResourceRemoteInfo {
 func NewResourceRemoteInfoWithDefaults() *ResourceRemoteInfo {
 	this := ResourceRemoteInfo{}
 	return &this
+}
+
+// GetDatabricksAccountServicePrincipal returns the DatabricksAccountServicePrincipal field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetDatabricksAccountServicePrincipal() ResourceRemoteInfoDatabricksAccountServicePrincipal {
+	if o == nil || IsNil(o.DatabricksAccountServicePrincipal) {
+		var ret ResourceRemoteInfoDatabricksAccountServicePrincipal
+		return ret
+	}
+	return *o.DatabricksAccountServicePrincipal
+}
+
+// GetDatabricksAccountServicePrincipalOk returns a tuple with the DatabricksAccountServicePrincipal field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetDatabricksAccountServicePrincipalOk() (*ResourceRemoteInfoDatabricksAccountServicePrincipal, bool) {
+	if o == nil || IsNil(o.DatabricksAccountServicePrincipal) {
+		return nil, false
+	}
+	return o.DatabricksAccountServicePrincipal, true
+}
+
+// HasDatabricksAccountServicePrincipal returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasDatabricksAccountServicePrincipal() bool {
+	if o != nil && !IsNil(o.DatabricksAccountServicePrincipal) {
+		return true
+	}
+
+	return false
+}
+
+// SetDatabricksAccountServicePrincipal gets a reference to the given ResourceRemoteInfoDatabricksAccountServicePrincipal and assigns it to the DatabricksAccountServicePrincipal field.
+func (o *ResourceRemoteInfo) SetDatabricksAccountServicePrincipal(v ResourceRemoteInfoDatabricksAccountServicePrincipal) {
+	o.DatabricksAccountServicePrincipal = &v
+}
+
+// GetAzureSubscription returns the AzureSubscription field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAzureSubscription() ResourceRemoteInfoAzureSubscription {
+	if o == nil || IsNil(o.AzureSubscription) {
+		var ret ResourceRemoteInfoAzureSubscription
+		return ret
+	}
+	return *o.AzureSubscription
+}
+
+// GetAzureSubscriptionOk returns a tuple with the AzureSubscription field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAzureSubscriptionOk() (*ResourceRemoteInfoAzureSubscription, bool) {
+	if o == nil || IsNil(o.AzureSubscription) {
+		return nil, false
+	}
+	return o.AzureSubscription, true
+}
+
+// HasAzureSubscription returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAzureSubscription() bool {
+	if o != nil && !IsNil(o.AzureSubscription) {
+		return true
+	}
+
+	return false
+}
+
+// SetAzureSubscription gets a reference to the given ResourceRemoteInfoAzureSubscription and assigns it to the AzureSubscription field.
+func (o *ResourceRemoteInfo) SetAzureSubscription(v ResourceRemoteInfoAzureSubscription) {
+	o.AzureSubscription = &v
+}
+
+// GetAzureResourceGroup returns the AzureResourceGroup field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAzureResourceGroup() ResourceRemoteInfoAzureResourceGroup {
+	if o == nil || IsNil(o.AzureResourceGroup) {
+		var ret ResourceRemoteInfoAzureResourceGroup
+		return ret
+	}
+	return *o.AzureResourceGroup
+}
+
+// GetAzureResourceGroupOk returns a tuple with the AzureResourceGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAzureResourceGroupOk() (*ResourceRemoteInfoAzureResourceGroup, bool) {
+	if o == nil || IsNil(o.AzureResourceGroup) {
+		return nil, false
+	}
+	return o.AzureResourceGroup, true
+}
+
+// HasAzureResourceGroup returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAzureResourceGroup() bool {
+	if o != nil && !IsNil(o.AzureResourceGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetAzureResourceGroup gets a reference to the given ResourceRemoteInfoAzureResourceGroup and assigns it to the AzureResourceGroup field.
+func (o *ResourceRemoteInfo) SetAzureResourceGroup(v ResourceRemoteInfoAzureResourceGroup) {
+	o.AzureResourceGroup = &v
+}
+
+// GetAzureManagementGroup returns the AzureManagementGroup field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAzureManagementGroup() ResourceRemoteInfoAzureManagementGroup {
+	if o == nil || IsNil(o.AzureManagementGroup) {
+		var ret ResourceRemoteInfoAzureManagementGroup
+		return ret
+	}
+	return *o.AzureManagementGroup
+}
+
+// GetAzureManagementGroupOk returns a tuple with the AzureManagementGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAzureManagementGroupOk() (*ResourceRemoteInfoAzureManagementGroup, bool) {
+	if o == nil || IsNil(o.AzureManagementGroup) {
+		return nil, false
+	}
+	return o.AzureManagementGroup, true
+}
+
+// HasAzureManagementGroup returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAzureManagementGroup() bool {
+	if o != nil && !IsNil(o.AzureManagementGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetAzureManagementGroup gets a reference to the given ResourceRemoteInfoAzureManagementGroup and assigns it to the AzureManagementGroup field.
+func (o *ResourceRemoteInfo) SetAzureManagementGroup(v ResourceRemoteInfoAzureManagementGroup) {
+	o.AzureManagementGroup = &v
+}
+
+// GetAzureVirtualMachine returns the AzureVirtualMachine field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAzureVirtualMachine() ResourceRemoteInfoAzureVirtualMachine {
+	if o == nil || IsNil(o.AzureVirtualMachine) {
+		var ret ResourceRemoteInfoAzureVirtualMachine
+		return ret
+	}
+	return *o.AzureVirtualMachine
+}
+
+// GetAzureVirtualMachineOk returns a tuple with the AzureVirtualMachine field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAzureVirtualMachineOk() (*ResourceRemoteInfoAzureVirtualMachine, bool) {
+	if o == nil || IsNil(o.AzureVirtualMachine) {
+		return nil, false
+	}
+	return o.AzureVirtualMachine, true
+}
+
+// HasAzureVirtualMachine returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAzureVirtualMachine() bool {
+	if o != nil && !IsNil(o.AzureVirtualMachine) {
+		return true
+	}
+
+	return false
+}
+
+// SetAzureVirtualMachine gets a reference to the given ResourceRemoteInfoAzureVirtualMachine and assigns it to the AzureVirtualMachine field.
+func (o *ResourceRemoteInfo) SetAzureVirtualMachine(v ResourceRemoteInfoAzureVirtualMachine) {
+	o.AzureVirtualMachine = &v
+}
+
+// GetAzureStorageAccount returns the AzureStorageAccount field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAzureStorageAccount() ResourceRemoteInfoAzureStorageAccount {
+	if o == nil || IsNil(o.AzureStorageAccount) {
+		var ret ResourceRemoteInfoAzureStorageAccount
+		return ret
+	}
+	return *o.AzureStorageAccount
+}
+
+// GetAzureStorageAccountOk returns a tuple with the AzureStorageAccount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAzureStorageAccountOk() (*ResourceRemoteInfoAzureStorageAccount, bool) {
+	if o == nil || IsNil(o.AzureStorageAccount) {
+		return nil, false
+	}
+	return o.AzureStorageAccount, true
+}
+
+// HasAzureStorageAccount returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAzureStorageAccount() bool {
+	if o != nil && !IsNil(o.AzureStorageAccount) {
+		return true
+	}
+
+	return false
+}
+
+// SetAzureStorageAccount gets a reference to the given ResourceRemoteInfoAzureStorageAccount and assigns it to the AzureStorageAccount field.
+func (o *ResourceRemoteInfo) SetAzureStorageAccount(v ResourceRemoteInfoAzureStorageAccount) {
+	o.AzureStorageAccount = &v
+}
+
+// GetAzureStorageContainer returns the AzureStorageContainer field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAzureStorageContainer() ResourceRemoteInfoAzureStorageContainer {
+	if o == nil || IsNil(o.AzureStorageContainer) {
+		var ret ResourceRemoteInfoAzureStorageContainer
+		return ret
+	}
+	return *o.AzureStorageContainer
+}
+
+// GetAzureStorageContainerOk returns a tuple with the AzureStorageContainer field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAzureStorageContainerOk() (*ResourceRemoteInfoAzureStorageContainer, bool) {
+	if o == nil || IsNil(o.AzureStorageContainer) {
+		return nil, false
+	}
+	return o.AzureStorageContainer, true
+}
+
+// HasAzureStorageContainer returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAzureStorageContainer() bool {
+	if o != nil && !IsNil(o.AzureStorageContainer) {
+		return true
+	}
+
+	return false
+}
+
+// SetAzureStorageContainer gets a reference to the given ResourceRemoteInfoAzureStorageContainer and assigns it to the AzureStorageContainer field.
+func (o *ResourceRemoteInfo) SetAzureStorageContainer(v ResourceRemoteInfoAzureStorageContainer) {
+	o.AzureStorageContainer = &v
+}
+
+// GetAzureSqlServer returns the AzureSqlServer field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAzureSqlServer() ResourceRemoteInfoAzureSqlServer {
+	if o == nil || IsNil(o.AzureSqlServer) {
+		var ret ResourceRemoteInfoAzureSqlServer
+		return ret
+	}
+	return *o.AzureSqlServer
+}
+
+// GetAzureSqlServerOk returns a tuple with the AzureSqlServer field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAzureSqlServerOk() (*ResourceRemoteInfoAzureSqlServer, bool) {
+	if o == nil || IsNil(o.AzureSqlServer) {
+		return nil, false
+	}
+	return o.AzureSqlServer, true
+}
+
+// HasAzureSqlServer returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAzureSqlServer() bool {
+	if o != nil && !IsNil(o.AzureSqlServer) {
+		return true
+	}
+
+	return false
+}
+
+// SetAzureSqlServer gets a reference to the given ResourceRemoteInfoAzureSqlServer and assigns it to the AzureSqlServer field.
+func (o *ResourceRemoteInfo) SetAzureSqlServer(v ResourceRemoteInfoAzureSqlServer) {
+	o.AzureSqlServer = &v
+}
+
+// GetAzureSqlDatabase returns the AzureSqlDatabase field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAzureSqlDatabase() ResourceRemoteInfoAzureSqlDatabase {
+	if o == nil || IsNil(o.AzureSqlDatabase) {
+		var ret ResourceRemoteInfoAzureSqlDatabase
+		return ret
+	}
+	return *o.AzureSqlDatabase
+}
+
+// GetAzureSqlDatabaseOk returns a tuple with the AzureSqlDatabase field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAzureSqlDatabaseOk() (*ResourceRemoteInfoAzureSqlDatabase, bool) {
+	if o == nil || IsNil(o.AzureSqlDatabase) {
+		return nil, false
+	}
+	return o.AzureSqlDatabase, true
+}
+
+// HasAzureSqlDatabase returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAzureSqlDatabase() bool {
+	if o != nil && !IsNil(o.AzureSqlDatabase) {
+		return true
+	}
+
+	return false
+}
+
+// SetAzureSqlDatabase gets a reference to the given ResourceRemoteInfoAzureSqlDatabase and assigns it to the AzureSqlDatabase field.
+func (o *ResourceRemoteInfo) SetAzureSqlDatabase(v ResourceRemoteInfoAzureSqlDatabase) {
+	o.AzureSqlDatabase = &v
+}
+
+// GetAzureSqlManagedInstance returns the AzureSqlManagedInstance field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAzureSqlManagedInstance() ResourceRemoteInfoAzureSqlManagedInstance {
+	if o == nil || IsNil(o.AzureSqlManagedInstance) {
+		var ret ResourceRemoteInfoAzureSqlManagedInstance
+		return ret
+	}
+	return *o.AzureSqlManagedInstance
+}
+
+// GetAzureSqlManagedInstanceOk returns a tuple with the AzureSqlManagedInstance field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAzureSqlManagedInstanceOk() (*ResourceRemoteInfoAzureSqlManagedInstance, bool) {
+	if o == nil || IsNil(o.AzureSqlManagedInstance) {
+		return nil, false
+	}
+	return o.AzureSqlManagedInstance, true
+}
+
+// HasAzureSqlManagedInstance returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAzureSqlManagedInstance() bool {
+	if o != nil && !IsNil(o.AzureSqlManagedInstance) {
+		return true
+	}
+
+	return false
+}
+
+// SetAzureSqlManagedInstance gets a reference to the given ResourceRemoteInfoAzureSqlManagedInstance and assigns it to the AzureSqlManagedInstance field.
+func (o *ResourceRemoteInfo) SetAzureSqlManagedInstance(v ResourceRemoteInfoAzureSqlManagedInstance) {
+	o.AzureSqlManagedInstance = &v
+}
+
+// GetAzureSqlManagedDatabase returns the AzureSqlManagedDatabase field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAzureSqlManagedDatabase() ResourceRemoteInfoAzureSqlManagedDatabase {
+	if o == nil || IsNil(o.AzureSqlManagedDatabase) {
+		var ret ResourceRemoteInfoAzureSqlManagedDatabase
+		return ret
+	}
+	return *o.AzureSqlManagedDatabase
+}
+
+// GetAzureSqlManagedDatabaseOk returns a tuple with the AzureSqlManagedDatabase field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAzureSqlManagedDatabaseOk() (*ResourceRemoteInfoAzureSqlManagedDatabase, bool) {
+	if o == nil || IsNil(o.AzureSqlManagedDatabase) {
+		return nil, false
+	}
+	return o.AzureSqlManagedDatabase, true
+}
+
+// HasAzureSqlManagedDatabase returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAzureSqlManagedDatabase() bool {
+	if o != nil && !IsNil(o.AzureSqlManagedDatabase) {
+		return true
+	}
+
+	return false
+}
+
+// SetAzureSqlManagedDatabase gets a reference to the given ResourceRemoteInfoAzureSqlManagedDatabase and assigns it to the AzureSqlManagedDatabase field.
+func (o *ResourceRemoteInfo) SetAzureSqlManagedDatabase(v ResourceRemoteInfoAzureSqlManagedDatabase) {
+	o.AzureSqlManagedDatabase = &v
+}
+
+// GetAzureUserAssignedManagedIdentity returns the AzureUserAssignedManagedIdentity field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAzureUserAssignedManagedIdentity() ResourceRemoteInfoAzureUserAssignedManagedIdentity {
+	if o == nil || IsNil(o.AzureUserAssignedManagedIdentity) {
+		var ret ResourceRemoteInfoAzureUserAssignedManagedIdentity
+		return ret
+	}
+	return *o.AzureUserAssignedManagedIdentity
+}
+
+// GetAzureUserAssignedManagedIdentityOk returns a tuple with the AzureUserAssignedManagedIdentity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAzureUserAssignedManagedIdentityOk() (*ResourceRemoteInfoAzureUserAssignedManagedIdentity, bool) {
+	if o == nil || IsNil(o.AzureUserAssignedManagedIdentity) {
+		return nil, false
+	}
+	return o.AzureUserAssignedManagedIdentity, true
+}
+
+// HasAzureUserAssignedManagedIdentity returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAzureUserAssignedManagedIdentity() bool {
+	if o != nil && !IsNil(o.AzureUserAssignedManagedIdentity) {
+		return true
+	}
+
+	return false
+}
+
+// SetAzureUserAssignedManagedIdentity gets a reference to the given ResourceRemoteInfoAzureUserAssignedManagedIdentity and assigns it to the AzureUserAssignedManagedIdentity field.
+func (o *ResourceRemoteInfo) SetAzureUserAssignedManagedIdentity(v ResourceRemoteInfoAzureUserAssignedManagedIdentity) {
+	o.AzureUserAssignedManagedIdentity = &v
+}
+
+// GetAzureEnterpriseApp returns the AzureEnterpriseApp field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAzureEnterpriseApp() ResourceRemoteInfoAzureEnterpriseApp {
+	if o == nil || IsNil(o.AzureEnterpriseApp) {
+		var ret ResourceRemoteInfoAzureEnterpriseApp
+		return ret
+	}
+	return *o.AzureEnterpriseApp
+}
+
+// GetAzureEnterpriseAppOk returns a tuple with the AzureEnterpriseApp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAzureEnterpriseAppOk() (*ResourceRemoteInfoAzureEnterpriseApp, bool) {
+	if o == nil || IsNil(o.AzureEnterpriseApp) {
+		return nil, false
+	}
+	return o.AzureEnterpriseApp, true
+}
+
+// HasAzureEnterpriseApp returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAzureEnterpriseApp() bool {
+	if o != nil && !IsNil(o.AzureEnterpriseApp) {
+		return true
+	}
+
+	return false
+}
+
+// SetAzureEnterpriseApp gets a reference to the given ResourceRemoteInfoAzureEnterpriseApp and assigns it to the AzureEnterpriseApp field.
+func (o *ResourceRemoteInfo) SetAzureEnterpriseApp(v ResourceRemoteInfoAzureEnterpriseApp) {
+	o.AzureEnterpriseApp = &v
+}
+
+// GetAzureEntraIdRole returns the AzureEntraIdRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAzureEntraIdRole() ResourceRemoteInfoAzureEntraIdRole {
+	if o == nil || IsNil(o.AzureEntraIdRole) {
+		var ret ResourceRemoteInfoAzureEntraIdRole
+		return ret
+	}
+	return *o.AzureEntraIdRole
+}
+
+// GetAzureEntraIdRoleOk returns a tuple with the AzureEntraIdRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAzureEntraIdRoleOk() (*ResourceRemoteInfoAzureEntraIdRole, bool) {
+	if o == nil || IsNil(o.AzureEntraIdRole) {
+		return nil, false
+	}
+	return o.AzureEntraIdRole, true
+}
+
+// HasAzureEntraIdRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAzureEntraIdRole() bool {
+	if o != nil && !IsNil(o.AzureEntraIdRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetAzureEntraIdRole gets a reference to the given ResourceRemoteInfoAzureEntraIdRole and assigns it to the AzureEntraIdRole field.
+func (o *ResourceRemoteInfo) SetAzureEntraIdRole(v ResourceRemoteInfoAzureEntraIdRole) {
+	o.AzureEntraIdRole = &v
+}
+
+// GetAwsOrganizationalUnit returns the AwsOrganizationalUnit field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAwsOrganizationalUnit() ResourceRemoteInfoAwsOrganizationalUnit {
+	if o == nil || IsNil(o.AwsOrganizationalUnit) {
+		var ret ResourceRemoteInfoAwsOrganizationalUnit
+		return ret
+	}
+	return *o.AwsOrganizationalUnit
+}
+
+// GetAwsOrganizationalUnitOk returns a tuple with the AwsOrganizationalUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAwsOrganizationalUnitOk() (*ResourceRemoteInfoAwsOrganizationalUnit, bool) {
+	if o == nil || IsNil(o.AwsOrganizationalUnit) {
+		return nil, false
+	}
+	return o.AwsOrganizationalUnit, true
+}
+
+// HasAwsOrganizationalUnit returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAwsOrganizationalUnit() bool {
+	if o != nil && !IsNil(o.AwsOrganizationalUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetAwsOrganizationalUnit gets a reference to the given ResourceRemoteInfoAwsOrganizationalUnit and assigns it to the AwsOrganizationalUnit field.
+func (o *ResourceRemoteInfo) SetAwsOrganizationalUnit(v ResourceRemoteInfoAwsOrganizationalUnit) {
+	o.AwsOrganizationalUnit = &v
 }
 
 // GetAwsAccount returns the AwsAccount field value if set, zero value otherwise.
@@ -193,6 +719,38 @@ func (o *ResourceRemoteInfo) SetAwsEc2Instance(v ResourceRemoteInfoAwsEc2Instanc
 	o.AwsEc2Instance = &v
 }
 
+// GetAwsRdsCluster returns the AwsRdsCluster field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAwsRdsCluster() ResourceRemoteInfoAwsRdsCluster {
+	if o == nil || IsNil(o.AwsRdsCluster) {
+		var ret ResourceRemoteInfoAwsRdsCluster
+		return ret
+	}
+	return *o.AwsRdsCluster
+}
+
+// GetAwsRdsClusterOk returns a tuple with the AwsRdsCluster field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAwsRdsClusterOk() (*ResourceRemoteInfoAwsRdsCluster, bool) {
+	if o == nil || IsNil(o.AwsRdsCluster) {
+		return nil, false
+	}
+	return o.AwsRdsCluster, true
+}
+
+// HasAwsRdsCluster returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAwsRdsCluster() bool {
+	if o != nil && !IsNil(o.AwsRdsCluster) {
+		return true
+	}
+
+	return false
+}
+
+// SetAwsRdsCluster gets a reference to the given ResourceRemoteInfoAwsRdsCluster and assigns it to the AwsRdsCluster field.
+func (o *ResourceRemoteInfo) SetAwsRdsCluster(v ResourceRemoteInfoAwsRdsCluster) {
+	o.AwsRdsCluster = &v
+}
+
 // GetAwsRdsInstance returns the AwsRdsInstance field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetAwsRdsInstance() ResourceRemoteInfoAwsRdsInstance {
 	if o == nil || IsNil(o.AwsRdsInstance) {
@@ -255,6 +813,38 @@ func (o *ResourceRemoteInfo) HasAwsEksCluster() bool {
 // SetAwsEksCluster gets a reference to the given ResourceRemoteInfoAwsEksCluster and assigns it to the AwsEksCluster field.
 func (o *ResourceRemoteInfo) SetAwsEksCluster(v ResourceRemoteInfoAwsEksCluster) {
 	o.AwsEksCluster = &v
+}
+
+// GetCustomConnector returns the CustomConnector field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetCustomConnector() ResourceRemoteInfoCustomConnector {
+	if o == nil || IsNil(o.CustomConnector) {
+		var ret ResourceRemoteInfoCustomConnector
+		return ret
+	}
+	return *o.CustomConnector
+}
+
+// GetCustomConnectorOk returns a tuple with the CustomConnector field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetCustomConnectorOk() (*ResourceRemoteInfoCustomConnector, bool) {
+	if o == nil || IsNil(o.CustomConnector) {
+		return nil, false
+	}
+	return o.CustomConnector, true
+}
+
+// HasCustomConnector returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasCustomConnector() bool {
+	if o != nil && !IsNil(o.CustomConnector) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomConnector gets a reference to the given ResourceRemoteInfoCustomConnector and assigns it to the CustomConnector field.
+func (o *ResourceRemoteInfo) SetCustomConnector(v ResourceRemoteInfoCustomConnector) {
+	o.CustomConnector = &v
 }
 
 // GetGcpOrganization returns the GcpOrganization field value if set, zero value otherwise.
@@ -577,6 +1167,38 @@ func (o *ResourceRemoteInfo) SetGcpServiceAccount(v ResourceRemoteInfoGcpService
 	o.GcpServiceAccount = &v
 }
 
+// GetGoogleWorkspaceRole returns the GoogleWorkspaceRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetGoogleWorkspaceRole() ResourceRemoteInfoGoogleWorkspaceRole {
+	if o == nil || IsNil(o.GoogleWorkspaceRole) {
+		var ret ResourceRemoteInfoGoogleWorkspaceRole
+		return ret
+	}
+	return *o.GoogleWorkspaceRole
+}
+
+// GetGoogleWorkspaceRoleOk returns a tuple with the GoogleWorkspaceRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetGoogleWorkspaceRoleOk() (*ResourceRemoteInfoGoogleWorkspaceRole, bool) {
+	if o == nil || IsNil(o.GoogleWorkspaceRole) {
+		return nil, false
+	}
+	return o.GoogleWorkspaceRole, true
+}
+
+// HasGoogleWorkspaceRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasGoogleWorkspaceRole() bool {
+	if o != nil && !IsNil(o.GoogleWorkspaceRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetGoogleWorkspaceRole gets a reference to the given ResourceRemoteInfoGoogleWorkspaceRole and assigns it to the GoogleWorkspaceRole field.
+func (o *ResourceRemoteInfo) SetGoogleWorkspaceRole(v ResourceRemoteInfoGoogleWorkspaceRole) {
+	o.GoogleWorkspaceRole = &v
+}
+
 // GetGithubRepo returns the GithubRepo field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetGithubRepo() ResourceRemoteInfoGithubRepo {
 	if o == nil || IsNil(o.GithubRepo) {
@@ -607,6 +1229,102 @@ func (o *ResourceRemoteInfo) HasGithubRepo() bool {
 // SetGithubRepo gets a reference to the given ResourceRemoteInfoGithubRepo and assigns it to the GithubRepo field.
 func (o *ResourceRemoteInfo) SetGithubRepo(v ResourceRemoteInfoGithubRepo) {
 	o.GithubRepo = &v
+}
+
+// GetGithubOrgRole returns the GithubOrgRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetGithubOrgRole() ResourceRemoteInfoGithubOrgRole {
+	if o == nil || IsNil(o.GithubOrgRole) {
+		var ret ResourceRemoteInfoGithubOrgRole
+		return ret
+	}
+	return *o.GithubOrgRole
+}
+
+// GetGithubOrgRoleOk returns a tuple with the GithubOrgRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetGithubOrgRoleOk() (*ResourceRemoteInfoGithubOrgRole, bool) {
+	if o == nil || IsNil(o.GithubOrgRole) {
+		return nil, false
+	}
+	return o.GithubOrgRole, true
+}
+
+// HasGithubOrgRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasGithubOrgRole() bool {
+	if o != nil && !IsNil(o.GithubOrgRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetGithubOrgRole gets a reference to the given ResourceRemoteInfoGithubOrgRole and assigns it to the GithubOrgRole field.
+func (o *ResourceRemoteInfo) SetGithubOrgRole(v ResourceRemoteInfoGithubOrgRole) {
+	o.GithubOrgRole = &v
+}
+
+// GetGithubOrg returns the GithubOrg field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetGithubOrg() ResourceRemoteInfoGithubOrg {
+	if o == nil || IsNil(o.GithubOrg) {
+		var ret ResourceRemoteInfoGithubOrg
+		return ret
+	}
+	return *o.GithubOrg
+}
+
+// GetGithubOrgOk returns a tuple with the GithubOrg field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetGithubOrgOk() (*ResourceRemoteInfoGithubOrg, bool) {
+	if o == nil || IsNil(o.GithubOrg) {
+		return nil, false
+	}
+	return o.GithubOrg, true
+}
+
+// HasGithubOrg returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasGithubOrg() bool {
+	if o != nil && !IsNil(o.GithubOrg) {
+		return true
+	}
+
+	return false
+}
+
+// SetGithubOrg gets a reference to the given ResourceRemoteInfoGithubOrg and assigns it to the GithubOrg field.
+func (o *ResourceRemoteInfo) SetGithubOrg(v ResourceRemoteInfoGithubOrg) {
+	o.GithubOrg = &v
+}
+
+// GetGithubEnterpriseRole returns the GithubEnterpriseRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetGithubEnterpriseRole() ResourceRemoteInfoGithubEnterpriseRole {
+	if o == nil || IsNil(o.GithubEnterpriseRole) {
+		var ret ResourceRemoteInfoGithubEnterpriseRole
+		return ret
+	}
+	return *o.GithubEnterpriseRole
+}
+
+// GetGithubEnterpriseRoleOk returns a tuple with the GithubEnterpriseRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetGithubEnterpriseRoleOk() (*ResourceRemoteInfoGithubEnterpriseRole, bool) {
+	if o == nil || IsNil(o.GithubEnterpriseRole) {
+		return nil, false
+	}
+	return o.GithubEnterpriseRole, true
+}
+
+// HasGithubEnterpriseRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasGithubEnterpriseRole() bool {
+	if o != nil && !IsNil(o.GithubEnterpriseRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetGithubEnterpriseRole gets a reference to the given ResourceRemoteInfoGithubEnterpriseRole and assigns it to the GithubEnterpriseRole field.
+func (o *ResourceRemoteInfo) SetGithubEnterpriseRole(v ResourceRemoteInfoGithubEnterpriseRole) {
+	o.GithubEnterpriseRole = &v
 }
 
 // GetGitlabProject returns the GitlabProject field value if set, zero value otherwise.
@@ -737,6 +1455,198 @@ func (o *ResourceRemoteInfo) SetOktaCustomRole(v ResourceRemoteInfoOktaCustomRol
 	o.OktaCustomRole = &v
 }
 
+// GetSnowflakeDatabase returns the SnowflakeDatabase field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetSnowflakeDatabase() ResourceRemoteInfoSnowflakeDatabase {
+	if o == nil || IsNil(o.SnowflakeDatabase) {
+		var ret ResourceRemoteInfoSnowflakeDatabase
+		return ret
+	}
+	return *o.SnowflakeDatabase
+}
+
+// GetSnowflakeDatabaseOk returns a tuple with the SnowflakeDatabase field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetSnowflakeDatabaseOk() (*ResourceRemoteInfoSnowflakeDatabase, bool) {
+	if o == nil || IsNil(o.SnowflakeDatabase) {
+		return nil, false
+	}
+	return o.SnowflakeDatabase, true
+}
+
+// HasSnowflakeDatabase returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasSnowflakeDatabase() bool {
+	if o != nil && !IsNil(o.SnowflakeDatabase) {
+		return true
+	}
+
+	return false
+}
+
+// SetSnowflakeDatabase gets a reference to the given ResourceRemoteInfoSnowflakeDatabase and assigns it to the SnowflakeDatabase field.
+func (o *ResourceRemoteInfo) SetSnowflakeDatabase(v ResourceRemoteInfoSnowflakeDatabase) {
+	o.SnowflakeDatabase = &v
+}
+
+// GetSnowflakeSchema returns the SnowflakeSchema field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetSnowflakeSchema() ResourceRemoteInfoSnowflakeSchema {
+	if o == nil || IsNil(o.SnowflakeSchema) {
+		var ret ResourceRemoteInfoSnowflakeSchema
+		return ret
+	}
+	return *o.SnowflakeSchema
+}
+
+// GetSnowflakeSchemaOk returns a tuple with the SnowflakeSchema field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetSnowflakeSchemaOk() (*ResourceRemoteInfoSnowflakeSchema, bool) {
+	if o == nil || IsNil(o.SnowflakeSchema) {
+		return nil, false
+	}
+	return o.SnowflakeSchema, true
+}
+
+// HasSnowflakeSchema returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasSnowflakeSchema() bool {
+	if o != nil && !IsNil(o.SnowflakeSchema) {
+		return true
+	}
+
+	return false
+}
+
+// SetSnowflakeSchema gets a reference to the given ResourceRemoteInfoSnowflakeSchema and assigns it to the SnowflakeSchema field.
+func (o *ResourceRemoteInfo) SetSnowflakeSchema(v ResourceRemoteInfoSnowflakeSchema) {
+	o.SnowflakeSchema = &v
+}
+
+// GetSnowflakeTable returns the SnowflakeTable field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetSnowflakeTable() ResourceRemoteInfoSnowflakeTable {
+	if o == nil || IsNil(o.SnowflakeTable) {
+		var ret ResourceRemoteInfoSnowflakeTable
+		return ret
+	}
+	return *o.SnowflakeTable
+}
+
+// GetSnowflakeTableOk returns a tuple with the SnowflakeTable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetSnowflakeTableOk() (*ResourceRemoteInfoSnowflakeTable, bool) {
+	if o == nil || IsNil(o.SnowflakeTable) {
+		return nil, false
+	}
+	return o.SnowflakeTable, true
+}
+
+// HasSnowflakeTable returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasSnowflakeTable() bool {
+	if o != nil && !IsNil(o.SnowflakeTable) {
+		return true
+	}
+
+	return false
+}
+
+// SetSnowflakeTable gets a reference to the given ResourceRemoteInfoSnowflakeTable and assigns it to the SnowflakeTable field.
+func (o *ResourceRemoteInfo) SetSnowflakeTable(v ResourceRemoteInfoSnowflakeTable) {
+	o.SnowflakeTable = &v
+}
+
+// GetIlevelAdvancedRole returns the IlevelAdvancedRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetIlevelAdvancedRole() ResourceRemoteInfoIlevelAdvancedRole {
+	if o == nil || IsNil(o.IlevelAdvancedRole) {
+		var ret ResourceRemoteInfoIlevelAdvancedRole
+		return ret
+	}
+	return *o.IlevelAdvancedRole
+}
+
+// GetIlevelAdvancedRoleOk returns a tuple with the IlevelAdvancedRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetIlevelAdvancedRoleOk() (*ResourceRemoteInfoIlevelAdvancedRole, bool) {
+	if o == nil || IsNil(o.IlevelAdvancedRole) {
+		return nil, false
+	}
+	return o.IlevelAdvancedRole, true
+}
+
+// HasIlevelAdvancedRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasIlevelAdvancedRole() bool {
+	if o != nil && !IsNil(o.IlevelAdvancedRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetIlevelAdvancedRole gets a reference to the given ResourceRemoteInfoIlevelAdvancedRole and assigns it to the IlevelAdvancedRole field.
+func (o *ResourceRemoteInfo) SetIlevelAdvancedRole(v ResourceRemoteInfoIlevelAdvancedRole) {
+	o.IlevelAdvancedRole = &v
+}
+
+// GetTailscaleSsh returns the TailscaleSsh field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetTailscaleSsh() ResourceRemoteInfoTailscaleSsh {
+	if o == nil || IsNil(o.TailscaleSsh) {
+		var ret ResourceRemoteInfoTailscaleSsh
+		return ret
+	}
+	return *o.TailscaleSsh
+}
+
+// GetTailscaleSshOk returns a tuple with the TailscaleSsh field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetTailscaleSshOk() (*ResourceRemoteInfoTailscaleSsh, bool) {
+	if o == nil || IsNil(o.TailscaleSsh) {
+		return nil, false
+	}
+	return o.TailscaleSsh, true
+}
+
+// HasTailscaleSsh returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasTailscaleSsh() bool {
+	if o != nil && !IsNil(o.TailscaleSsh) {
+		return true
+	}
+
+	return false
+}
+
+// SetTailscaleSsh gets a reference to the given ResourceRemoteInfoTailscaleSsh and assigns it to the TailscaleSsh field.
+func (o *ResourceRemoteInfo) SetTailscaleSsh(v ResourceRemoteInfoTailscaleSsh) {
+	o.TailscaleSsh = &v
+}
+
+// GetTwingateResource returns the TwingateResource field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetTwingateResource() ResourceRemoteInfoTwingateResource {
+	if o == nil || IsNil(o.TwingateResource) {
+		var ret ResourceRemoteInfoTwingateResource
+		return ret
+	}
+	return *o.TwingateResource
+}
+
+// GetTwingateResourceOk returns a tuple with the TwingateResource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetTwingateResourceOk() (*ResourceRemoteInfoTwingateResource, bool) {
+	if o == nil || IsNil(o.TwingateResource) {
+		return nil, false
+	}
+	return o.TwingateResource, true
+}
+
+// HasTwingateResource returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasTwingateResource() bool {
+	if o != nil && !IsNil(o.TwingateResource) {
+		return true
+	}
+
+	return false
+}
+
+// SetTwingateResource gets a reference to the given ResourceRemoteInfoTwingateResource and assigns it to the TwingateResource field.
+func (o *ResourceRemoteInfo) SetTwingateResource(v ResourceRemoteInfoTwingateResource) {
+	o.TwingateResource = &v
+}
+
 // GetPagerdutyRole returns the PagerdutyRole field value if set, zero value otherwise.
 func (o *ResourceRemoteInfo) GetPagerdutyRole() ResourceRemoteInfoPagerdutyRole {
 	if o == nil || IsNil(o.PagerdutyRole) {
@@ -767,6 +1677,38 @@ func (o *ResourceRemoteInfo) HasPagerdutyRole() bool {
 // SetPagerdutyRole gets a reference to the given ResourceRemoteInfoPagerdutyRole and assigns it to the PagerdutyRole field.
 func (o *ResourceRemoteInfo) SetPagerdutyRole(v ResourceRemoteInfoPagerdutyRole) {
 	o.PagerdutyRole = &v
+}
+
+// GetWorkdayRole returns the WorkdayRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetWorkdayRole() ResourceRemoteInfoWorkdayRole {
+	if o == nil || IsNil(o.WorkdayRole) {
+		var ret ResourceRemoteInfoWorkdayRole
+		return ret
+	}
+	return *o.WorkdayRole
+}
+
+// GetWorkdayRoleOk returns a tuple with the WorkdayRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetWorkdayRoleOk() (*ResourceRemoteInfoWorkdayRole, bool) {
+	if o == nil || IsNil(o.WorkdayRole) {
+		return nil, false
+	}
+	return o.WorkdayRole, true
+}
+
+// HasWorkdayRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasWorkdayRole() bool {
+	if o != nil && !IsNil(o.WorkdayRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetWorkdayRole gets a reference to the given ResourceRemoteInfoWorkdayRole and assigns it to the WorkdayRole field.
+func (o *ResourceRemoteInfo) SetWorkdayRole(v ResourceRemoteInfoWorkdayRole) {
+	o.WorkdayRole = &v
 }
 
 // GetSalesforcePermissionSet returns the SalesforcePermissionSet field value if set, zero value otherwise.
@@ -897,6 +1839,582 @@ func (o *ResourceRemoteInfo) SetTeleportRole(v ResourceRemoteInfoTeleportRole) {
 	o.TeleportRole = &v
 }
 
+// GetDatastaxAstraRole returns the DatastaxAstraRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetDatastaxAstraRole() ResourceRemoteInfoDatastaxAstraRole {
+	if o == nil || IsNil(o.DatastaxAstraRole) {
+		var ret ResourceRemoteInfoDatastaxAstraRole
+		return ret
+	}
+	return *o.DatastaxAstraRole
+}
+
+// GetDatastaxAstraRoleOk returns a tuple with the DatastaxAstraRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetDatastaxAstraRoleOk() (*ResourceRemoteInfoDatastaxAstraRole, bool) {
+	if o == nil || IsNil(o.DatastaxAstraRole) {
+		return nil, false
+	}
+	return o.DatastaxAstraRole, true
+}
+
+// HasDatastaxAstraRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasDatastaxAstraRole() bool {
+	if o != nil && !IsNil(o.DatastaxAstraRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetDatastaxAstraRole gets a reference to the given ResourceRemoteInfoDatastaxAstraRole and assigns it to the DatastaxAstraRole field.
+func (o *ResourceRemoteInfo) SetDatastaxAstraRole(v ResourceRemoteInfoDatastaxAstraRole) {
+	o.DatastaxAstraRole = &v
+}
+
+// GetCoupaRole returns the CoupaRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetCoupaRole() ResourceRemoteInfoCoupaRole {
+	if o == nil || IsNil(o.CoupaRole) {
+		var ret ResourceRemoteInfoCoupaRole
+		return ret
+	}
+	return *o.CoupaRole
+}
+
+// GetCoupaRoleOk returns a tuple with the CoupaRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetCoupaRoleOk() (*ResourceRemoteInfoCoupaRole, bool) {
+	if o == nil || IsNil(o.CoupaRole) {
+		return nil, false
+	}
+	return o.CoupaRole, true
+}
+
+// HasCoupaRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasCoupaRole() bool {
+	if o != nil && !IsNil(o.CoupaRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetCoupaRole gets a reference to the given ResourceRemoteInfoCoupaRole and assigns it to the CoupaRole field.
+func (o *ResourceRemoteInfo) SetCoupaRole(v ResourceRemoteInfoCoupaRole) {
+	o.CoupaRole = &v
+}
+
+// GetCursorOrganization returns the CursorOrganization field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetCursorOrganization() ResourceRemoteInfoCursorOrganization {
+	if o == nil || IsNil(o.CursorOrganization) {
+		var ret ResourceRemoteInfoCursorOrganization
+		return ret
+	}
+	return *o.CursorOrganization
+}
+
+// GetCursorOrganizationOk returns a tuple with the CursorOrganization field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetCursorOrganizationOk() (*ResourceRemoteInfoCursorOrganization, bool) {
+	if o == nil || IsNil(o.CursorOrganization) {
+		return nil, false
+	}
+	return o.CursorOrganization, true
+}
+
+// HasCursorOrganization returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasCursorOrganization() bool {
+	if o != nil && !IsNil(o.CursorOrganization) {
+		return true
+	}
+
+	return false
+}
+
+// SetCursorOrganization gets a reference to the given ResourceRemoteInfoCursorOrganization and assigns it to the CursorOrganization field.
+func (o *ResourceRemoteInfo) SetCursorOrganization(v ResourceRemoteInfoCursorOrganization) {
+	o.CursorOrganization = &v
+}
+
+// GetOpenaiPlatformProject returns the OpenaiPlatformProject field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetOpenaiPlatformProject() ResourceRemoteInfoOpenaiPlatformProject {
+	if o == nil || IsNil(o.OpenaiPlatformProject) {
+		var ret ResourceRemoteInfoOpenaiPlatformProject
+		return ret
+	}
+	return *o.OpenaiPlatformProject
+}
+
+// GetOpenaiPlatformProjectOk returns a tuple with the OpenaiPlatformProject field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetOpenaiPlatformProjectOk() (*ResourceRemoteInfoOpenaiPlatformProject, bool) {
+	if o == nil || IsNil(o.OpenaiPlatformProject) {
+		return nil, false
+	}
+	return o.OpenaiPlatformProject, true
+}
+
+// HasOpenaiPlatformProject returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasOpenaiPlatformProject() bool {
+	if o != nil && !IsNil(o.OpenaiPlatformProject) {
+		return true
+	}
+
+	return false
+}
+
+// SetOpenaiPlatformProject gets a reference to the given ResourceRemoteInfoOpenaiPlatformProject and assigns it to the OpenaiPlatformProject field.
+func (o *ResourceRemoteInfo) SetOpenaiPlatformProject(v ResourceRemoteInfoOpenaiPlatformProject) {
+	o.OpenaiPlatformProject = &v
+}
+
+// GetOpenaiPlatformServiceAccount returns the OpenaiPlatformServiceAccount field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetOpenaiPlatformServiceAccount() ResourceRemoteInfoOpenaiPlatformServiceAccount {
+	if o == nil || IsNil(o.OpenaiPlatformServiceAccount) {
+		var ret ResourceRemoteInfoOpenaiPlatformServiceAccount
+		return ret
+	}
+	return *o.OpenaiPlatformServiceAccount
+}
+
+// GetOpenaiPlatformServiceAccountOk returns a tuple with the OpenaiPlatformServiceAccount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetOpenaiPlatformServiceAccountOk() (*ResourceRemoteInfoOpenaiPlatformServiceAccount, bool) {
+	if o == nil || IsNil(o.OpenaiPlatformServiceAccount) {
+		return nil, false
+	}
+	return o.OpenaiPlatformServiceAccount, true
+}
+
+// HasOpenaiPlatformServiceAccount returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasOpenaiPlatformServiceAccount() bool {
+	if o != nil && !IsNil(o.OpenaiPlatformServiceAccount) {
+		return true
+	}
+
+	return false
+}
+
+// SetOpenaiPlatformServiceAccount gets a reference to the given ResourceRemoteInfoOpenaiPlatformServiceAccount and assigns it to the OpenaiPlatformServiceAccount field.
+func (o *ResourceRemoteInfo) SetOpenaiPlatformServiceAccount(v ResourceRemoteInfoOpenaiPlatformServiceAccount) {
+	o.OpenaiPlatformServiceAccount = &v
+}
+
+// GetAnthropicWorkspace returns the AnthropicWorkspace field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAnthropicWorkspace() ResourceRemoteInfoAnthropicWorkspace {
+	if o == nil || IsNil(o.AnthropicWorkspace) {
+		var ret ResourceRemoteInfoAnthropicWorkspace
+		return ret
+	}
+	return *o.AnthropicWorkspace
+}
+
+// GetAnthropicWorkspaceOk returns a tuple with the AnthropicWorkspace field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAnthropicWorkspaceOk() (*ResourceRemoteInfoAnthropicWorkspace, bool) {
+	if o == nil || IsNil(o.AnthropicWorkspace) {
+		return nil, false
+	}
+	return o.AnthropicWorkspace, true
+}
+
+// HasAnthropicWorkspace returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAnthropicWorkspace() bool {
+	if o != nil && !IsNil(o.AnthropicWorkspace) {
+		return true
+	}
+
+	return false
+}
+
+// SetAnthropicWorkspace gets a reference to the given ResourceRemoteInfoAnthropicWorkspace and assigns it to the AnthropicWorkspace field.
+func (o *ResourceRemoteInfo) SetAnthropicWorkspace(v ResourceRemoteInfoAnthropicWorkspace) {
+	o.AnthropicWorkspace = &v
+}
+
+// GetOracleFusionRole returns the OracleFusionRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetOracleFusionRole() ResourceRemoteInfoOracleFusionRole {
+	if o == nil || IsNil(o.OracleFusionRole) {
+		var ret ResourceRemoteInfoOracleFusionRole
+		return ret
+	}
+	return *o.OracleFusionRole
+}
+
+// GetOracleFusionRoleOk returns a tuple with the OracleFusionRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetOracleFusionRoleOk() (*ResourceRemoteInfoOracleFusionRole, bool) {
+	if o == nil || IsNil(o.OracleFusionRole) {
+		return nil, false
+	}
+	return o.OracleFusionRole, true
+}
+
+// HasOracleFusionRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasOracleFusionRole() bool {
+	if o != nil && !IsNil(o.OracleFusionRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetOracleFusionRole gets a reference to the given ResourceRemoteInfoOracleFusionRole and assigns it to the OracleFusionRole field.
+func (o *ResourceRemoteInfo) SetOracleFusionRole(v ResourceRemoteInfoOracleFusionRole) {
+	o.OracleFusionRole = &v
+}
+
+// GetDevinOrganization returns the DevinOrganization field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetDevinOrganization() ResourceRemoteInfoDevinOrganization {
+	if o == nil || IsNil(o.DevinOrganization) {
+		var ret ResourceRemoteInfoDevinOrganization
+		return ret
+	}
+	return *o.DevinOrganization
+}
+
+// GetDevinOrganizationOk returns a tuple with the DevinOrganization field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetDevinOrganizationOk() (*ResourceRemoteInfoDevinOrganization, bool) {
+	if o == nil || IsNil(o.DevinOrganization) {
+		return nil, false
+	}
+	return o.DevinOrganization, true
+}
+
+// HasDevinOrganization returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasDevinOrganization() bool {
+	if o != nil && !IsNil(o.DevinOrganization) {
+		return true
+	}
+
+	return false
+}
+
+// SetDevinOrganization gets a reference to the given ResourceRemoteInfoDevinOrganization and assigns it to the DevinOrganization field.
+func (o *ResourceRemoteInfo) SetDevinOrganization(v ResourceRemoteInfoDevinOrganization) {
+	o.DevinOrganization = &v
+}
+
+// GetDevinRole returns the DevinRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetDevinRole() ResourceRemoteInfoDevinRole {
+	if o == nil || IsNil(o.DevinRole) {
+		var ret ResourceRemoteInfoDevinRole
+		return ret
+	}
+	return *o.DevinRole
+}
+
+// GetDevinRoleOk returns a tuple with the DevinRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetDevinRoleOk() (*ResourceRemoteInfoDevinRole, bool) {
+	if o == nil || IsNil(o.DevinRole) {
+		return nil, false
+	}
+	return o.DevinRole, true
+}
+
+// HasDevinRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasDevinRole() bool {
+	if o != nil && !IsNil(o.DevinRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetDevinRole gets a reference to the given ResourceRemoteInfoDevinRole and assigns it to the DevinRole field.
+func (o *ResourceRemoteInfo) SetDevinRole(v ResourceRemoteInfoDevinRole) {
+	o.DevinRole = &v
+}
+
+// GetNetsuiteRole returns the NetsuiteRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetNetsuiteRole() ResourceRemoteInfoNetsuiteRole {
+	if o == nil || IsNil(o.NetsuiteRole) {
+		var ret ResourceRemoteInfoNetsuiteRole
+		return ret
+	}
+	return *o.NetsuiteRole
+}
+
+// GetNetsuiteRoleOk returns a tuple with the NetsuiteRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetNetsuiteRoleOk() (*ResourceRemoteInfoNetsuiteRole, bool) {
+	if o == nil || IsNil(o.NetsuiteRole) {
+		return nil, false
+	}
+	return o.NetsuiteRole, true
+}
+
+// HasNetsuiteRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasNetsuiteRole() bool {
+	if o != nil && !IsNil(o.NetsuiteRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetNetsuiteRole gets a reference to the given ResourceRemoteInfoNetsuiteRole and assigns it to the NetsuiteRole field.
+func (o *ResourceRemoteInfo) SetNetsuiteRole(v ResourceRemoteInfoNetsuiteRole) {
+	o.NetsuiteRole = &v
+}
+
+// GetDatadogRole returns the DatadogRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetDatadogRole() ResourceRemoteInfoDatadogRole {
+	if o == nil || IsNil(o.DatadogRole) {
+		var ret ResourceRemoteInfoDatadogRole
+		return ret
+	}
+	return *o.DatadogRole
+}
+
+// GetDatadogRoleOk returns a tuple with the DatadogRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetDatadogRoleOk() (*ResourceRemoteInfoDatadogRole, bool) {
+	if o == nil || IsNil(o.DatadogRole) {
+		return nil, false
+	}
+	return o.DatadogRole, true
+}
+
+// HasDatadogRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasDatadogRole() bool {
+	if o != nil && !IsNil(o.DatadogRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetDatadogRole gets a reference to the given ResourceRemoteInfoDatadogRole and assigns it to the DatadogRole field.
+func (o *ResourceRemoteInfo) SetDatadogRole(v ResourceRemoteInfoDatadogRole) {
+	o.DatadogRole = &v
+}
+
+// GetClickhouseDatabase returns the ClickhouseDatabase field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetClickhouseDatabase() ResourceRemoteInfoClickhouseDatabase {
+	if o == nil || IsNil(o.ClickhouseDatabase) {
+		var ret ResourceRemoteInfoClickhouseDatabase
+		return ret
+	}
+	return *o.ClickhouseDatabase
+}
+
+// GetClickhouseDatabaseOk returns a tuple with the ClickhouseDatabase field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetClickhouseDatabaseOk() (*ResourceRemoteInfoClickhouseDatabase, bool) {
+	if o == nil || IsNil(o.ClickhouseDatabase) {
+		return nil, false
+	}
+	return o.ClickhouseDatabase, true
+}
+
+// HasClickhouseDatabase returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasClickhouseDatabase() bool {
+	if o != nil && !IsNil(o.ClickhouseDatabase) {
+		return true
+	}
+
+	return false
+}
+
+// SetClickhouseDatabase gets a reference to the given ResourceRemoteInfoClickhouseDatabase and assigns it to the ClickhouseDatabase field.
+func (o *ResourceRemoteInfo) SetClickhouseDatabase(v ResourceRemoteInfoClickhouseDatabase) {
+	o.ClickhouseDatabase = &v
+}
+
+// GetClickhouseTable returns the ClickhouseTable field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetClickhouseTable() ResourceRemoteInfoClickhouseTable {
+	if o == nil || IsNil(o.ClickhouseTable) {
+		var ret ResourceRemoteInfoClickhouseTable
+		return ret
+	}
+	return *o.ClickhouseTable
+}
+
+// GetClickhouseTableOk returns a tuple with the ClickhouseTable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetClickhouseTableOk() (*ResourceRemoteInfoClickhouseTable, bool) {
+	if o == nil || IsNil(o.ClickhouseTable) {
+		return nil, false
+	}
+	return o.ClickhouseTable, true
+}
+
+// HasClickhouseTable returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasClickhouseTable() bool {
+	if o != nil && !IsNil(o.ClickhouseTable) {
+		return true
+	}
+
+	return false
+}
+
+// SetClickhouseTable gets a reference to the given ResourceRemoteInfoClickhouseTable and assigns it to the ClickhouseTable field.
+func (o *ResourceRemoteInfo) SetClickhouseTable(v ResourceRemoteInfoClickhouseTable) {
+	o.ClickhouseTable = &v
+}
+
+// GetGrafanaFolder returns the GrafanaFolder field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetGrafanaFolder() ResourceRemoteInfoGrafanaFolder {
+	if o == nil || IsNil(o.GrafanaFolder) {
+		var ret ResourceRemoteInfoGrafanaFolder
+		return ret
+	}
+	return *o.GrafanaFolder
+}
+
+// GetGrafanaFolderOk returns a tuple with the GrafanaFolder field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetGrafanaFolderOk() (*ResourceRemoteInfoGrafanaFolder, bool) {
+	if o == nil || IsNil(o.GrafanaFolder) {
+		return nil, false
+	}
+	return o.GrafanaFolder, true
+}
+
+// HasGrafanaFolder returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasGrafanaFolder() bool {
+	if o != nil && !IsNil(o.GrafanaFolder) {
+		return true
+	}
+
+	return false
+}
+
+// SetGrafanaFolder gets a reference to the given ResourceRemoteInfoGrafanaFolder and assigns it to the GrafanaFolder field.
+func (o *ResourceRemoteInfo) SetGrafanaFolder(v ResourceRemoteInfoGrafanaFolder) {
+	o.GrafanaFolder = &v
+}
+
+// GetGrafanaDashboard returns the GrafanaDashboard field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetGrafanaDashboard() ResourceRemoteInfoGrafanaDashboard {
+	if o == nil || IsNil(o.GrafanaDashboard) {
+		var ret ResourceRemoteInfoGrafanaDashboard
+		return ret
+	}
+	return *o.GrafanaDashboard
+}
+
+// GetGrafanaDashboardOk returns a tuple with the GrafanaDashboard field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetGrafanaDashboardOk() (*ResourceRemoteInfoGrafanaDashboard, bool) {
+	if o == nil || IsNil(o.GrafanaDashboard) {
+		return nil, false
+	}
+	return o.GrafanaDashboard, true
+}
+
+// HasGrafanaDashboard returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasGrafanaDashboard() bool {
+	if o != nil && !IsNil(o.GrafanaDashboard) {
+		return true
+	}
+
+	return false
+}
+
+// SetGrafanaDashboard gets a reference to the given ResourceRemoteInfoGrafanaDashboard and assigns it to the GrafanaDashboard field.
+func (o *ResourceRemoteInfo) SetGrafanaDashboard(v ResourceRemoteInfoGrafanaDashboard) {
+	o.GrafanaDashboard = &v
+}
+
+// GetGrafanaRole returns the GrafanaRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetGrafanaRole() ResourceRemoteInfoGrafanaRole {
+	if o == nil || IsNil(o.GrafanaRole) {
+		var ret ResourceRemoteInfoGrafanaRole
+		return ret
+	}
+	return *o.GrafanaRole
+}
+
+// GetGrafanaRoleOk returns a tuple with the GrafanaRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetGrafanaRoleOk() (*ResourceRemoteInfoGrafanaRole, bool) {
+	if o == nil || IsNil(o.GrafanaRole) {
+		return nil, false
+	}
+	return o.GrafanaRole, true
+}
+
+// HasGrafanaRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasGrafanaRole() bool {
+	if o != nil && !IsNil(o.GrafanaRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetGrafanaRole gets a reference to the given ResourceRemoteInfoGrafanaRole and assigns it to the GrafanaRole field.
+func (o *ResourceRemoteInfo) SetGrafanaRole(v ResourceRemoteInfoGrafanaRole) {
+	o.GrafanaRole = &v
+}
+
+// GetZendeskRole returns the ZendeskRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetZendeskRole() ResourceRemoteInfoZendeskRole {
+	if o == nil || IsNil(o.ZendeskRole) {
+		var ret ResourceRemoteInfoZendeskRole
+		return ret
+	}
+	return *o.ZendeskRole
+}
+
+// GetZendeskRoleOk returns a tuple with the ZendeskRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetZendeskRoleOk() (*ResourceRemoteInfoZendeskRole, bool) {
+	if o == nil || IsNil(o.ZendeskRole) {
+		return nil, false
+	}
+	return o.ZendeskRole, true
+}
+
+// HasZendeskRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasZendeskRole() bool {
+	if o != nil && !IsNil(o.ZendeskRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetZendeskRole gets a reference to the given ResourceRemoteInfoZendeskRole and assigns it to the ZendeskRole field.
+func (o *ResourceRemoteInfo) SetZendeskRole(v ResourceRemoteInfoZendeskRole) {
+	o.ZendeskRole = &v
+}
+
+// GetHubspotRole returns the HubspotRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetHubspotRole() ResourceRemoteInfoHubspotRole {
+	if o == nil || IsNil(o.HubspotRole) {
+		var ret ResourceRemoteInfoHubspotRole
+		return ret
+	}
+	return *o.HubspotRole
+}
+
+// GetHubspotRoleOk returns a tuple with the HubspotRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetHubspotRoleOk() (*ResourceRemoteInfoHubspotRole, bool) {
+	if o == nil || IsNil(o.HubspotRole) {
+		return nil, false
+	}
+	return o.HubspotRole, true
+}
+
+// HasHubspotRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasHubspotRole() bool {
+	if o != nil && !IsNil(o.HubspotRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetHubspotRole gets a reference to the given ResourceRemoteInfoHubspotRole and assigns it to the HubspotRole field.
+func (o *ResourceRemoteInfo) SetHubspotRole(v ResourceRemoteInfoHubspotRole) {
+	o.HubspotRole = &v
+}
+
 func (o ResourceRemoteInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -907,6 +2425,51 @@ func (o ResourceRemoteInfo) MarshalJSON() ([]byte, error) {
 
 func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.DatabricksAccountServicePrincipal) {
+		toSerialize["databricks_account_service_principal"] = o.DatabricksAccountServicePrincipal
+	}
+	if !IsNil(o.AzureSubscription) {
+		toSerialize["azure_subscription"] = o.AzureSubscription
+	}
+	if !IsNil(o.AzureResourceGroup) {
+		toSerialize["azure_resource_group"] = o.AzureResourceGroup
+	}
+	if !IsNil(o.AzureManagementGroup) {
+		toSerialize["azure_management_group"] = o.AzureManagementGroup
+	}
+	if !IsNil(o.AzureVirtualMachine) {
+		toSerialize["azure_virtual_machine"] = o.AzureVirtualMachine
+	}
+	if !IsNil(o.AzureStorageAccount) {
+		toSerialize["azure_storage_account"] = o.AzureStorageAccount
+	}
+	if !IsNil(o.AzureStorageContainer) {
+		toSerialize["azure_storage_container"] = o.AzureStorageContainer
+	}
+	if !IsNil(o.AzureSqlServer) {
+		toSerialize["azure_sql_server"] = o.AzureSqlServer
+	}
+	if !IsNil(o.AzureSqlDatabase) {
+		toSerialize["azure_sql_database"] = o.AzureSqlDatabase
+	}
+	if !IsNil(o.AzureSqlManagedInstance) {
+		toSerialize["azure_sql_managed_instance"] = o.AzureSqlManagedInstance
+	}
+	if !IsNil(o.AzureSqlManagedDatabase) {
+		toSerialize["azure_sql_managed_database"] = o.AzureSqlManagedDatabase
+	}
+	if !IsNil(o.AzureUserAssignedManagedIdentity) {
+		toSerialize["azure_user_assigned_managed_identity"] = o.AzureUserAssignedManagedIdentity
+	}
+	if !IsNil(o.AzureEnterpriseApp) {
+		toSerialize["azure_enterprise_app"] = o.AzureEnterpriseApp
+	}
+	if !IsNil(o.AzureEntraIdRole) {
+		toSerialize["azure_entra_id_role"] = o.AzureEntraIdRole
+	}
+	if !IsNil(o.AwsOrganizationalUnit) {
+		toSerialize["aws_organizational_unit"] = o.AwsOrganizationalUnit
+	}
 	if !IsNil(o.AwsAccount) {
 		toSerialize["aws_account"] = o.AwsAccount
 	}
@@ -919,11 +2482,17 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AwsEc2Instance) {
 		toSerialize["aws_ec2_instance"] = o.AwsEc2Instance
 	}
+	if !IsNil(o.AwsRdsCluster) {
+		toSerialize["aws_rds_cluster"] = o.AwsRdsCluster
+	}
 	if !IsNil(o.AwsRdsInstance) {
 		toSerialize["aws_rds_instance"] = o.AwsRdsInstance
 	}
 	if !IsNil(o.AwsEksCluster) {
 		toSerialize["aws_eks_cluster"] = o.AwsEksCluster
+	}
+	if !IsNil(o.CustomConnector) {
+		toSerialize["custom_connector"] = o.CustomConnector
 	}
 	if !IsNil(o.GcpOrganization) {
 		toSerialize["gcp_organization"] = o.GcpOrganization
@@ -955,8 +2524,20 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GcpServiceAccount) {
 		toSerialize["gcp_service_account"] = o.GcpServiceAccount
 	}
+	if !IsNil(o.GoogleWorkspaceRole) {
+		toSerialize["google_workspace_role"] = o.GoogleWorkspaceRole
+	}
 	if !IsNil(o.GithubRepo) {
 		toSerialize["github_repo"] = o.GithubRepo
+	}
+	if !IsNil(o.GithubOrgRole) {
+		toSerialize["github_org_role"] = o.GithubOrgRole
+	}
+	if !IsNil(o.GithubOrg) {
+		toSerialize["github_org"] = o.GithubOrg
+	}
+	if !IsNil(o.GithubEnterpriseRole) {
+		toSerialize["github_enterprise_role"] = o.GithubEnterpriseRole
 	}
 	if !IsNil(o.GitlabProject) {
 		toSerialize["gitlab_project"] = o.GitlabProject
@@ -970,8 +2551,29 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OktaCustomRole) {
 		toSerialize["okta_custom_role"] = o.OktaCustomRole
 	}
+	if !IsNil(o.SnowflakeDatabase) {
+		toSerialize["snowflake_database"] = o.SnowflakeDatabase
+	}
+	if !IsNil(o.SnowflakeSchema) {
+		toSerialize["snowflake_schema"] = o.SnowflakeSchema
+	}
+	if !IsNil(o.SnowflakeTable) {
+		toSerialize["snowflake_table"] = o.SnowflakeTable
+	}
+	if !IsNil(o.IlevelAdvancedRole) {
+		toSerialize["ilevel_advanced_role"] = o.IlevelAdvancedRole
+	}
+	if !IsNil(o.TailscaleSsh) {
+		toSerialize["tailscale_ssh"] = o.TailscaleSsh
+	}
+	if !IsNil(o.TwingateResource) {
+		toSerialize["twingate_resource"] = o.TwingateResource
+	}
 	if !IsNil(o.PagerdutyRole) {
 		toSerialize["pagerduty_role"] = o.PagerdutyRole
+	}
+	if !IsNil(o.WorkdayRole) {
+		toSerialize["workday_role"] = o.WorkdayRole
 	}
 	if !IsNil(o.SalesforcePermissionSet) {
 		toSerialize["salesforce_permission_set"] = o.SalesforcePermissionSet
@@ -984,6 +2586,60 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.TeleportRole) {
 		toSerialize["teleport_role"] = o.TeleportRole
+	}
+	if !IsNil(o.DatastaxAstraRole) {
+		toSerialize["datastax_astra_role"] = o.DatastaxAstraRole
+	}
+	if !IsNil(o.CoupaRole) {
+		toSerialize["coupa_role"] = o.CoupaRole
+	}
+	if !IsNil(o.CursorOrganization) {
+		toSerialize["cursor_organization"] = o.CursorOrganization
+	}
+	if !IsNil(o.OpenaiPlatformProject) {
+		toSerialize["openai_platform_project"] = o.OpenaiPlatformProject
+	}
+	if !IsNil(o.OpenaiPlatformServiceAccount) {
+		toSerialize["openai_platform_service_account"] = o.OpenaiPlatformServiceAccount
+	}
+	if !IsNil(o.AnthropicWorkspace) {
+		toSerialize["anthropic_workspace"] = o.AnthropicWorkspace
+	}
+	if !IsNil(o.OracleFusionRole) {
+		toSerialize["oracle_fusion_role"] = o.OracleFusionRole
+	}
+	if !IsNil(o.DevinOrganization) {
+		toSerialize["devin_organization"] = o.DevinOrganization
+	}
+	if !IsNil(o.DevinRole) {
+		toSerialize["devin_role"] = o.DevinRole
+	}
+	if !IsNil(o.NetsuiteRole) {
+		toSerialize["netsuite_role"] = o.NetsuiteRole
+	}
+	if !IsNil(o.DatadogRole) {
+		toSerialize["datadog_role"] = o.DatadogRole
+	}
+	if !IsNil(o.ClickhouseDatabase) {
+		toSerialize["clickhouse_database"] = o.ClickhouseDatabase
+	}
+	if !IsNil(o.ClickhouseTable) {
+		toSerialize["clickhouse_table"] = o.ClickhouseTable
+	}
+	if !IsNil(o.GrafanaFolder) {
+		toSerialize["grafana_folder"] = o.GrafanaFolder
+	}
+	if !IsNil(o.GrafanaDashboard) {
+		toSerialize["grafana_dashboard"] = o.GrafanaDashboard
+	}
+	if !IsNil(o.GrafanaRole) {
+		toSerialize["grafana_role"] = o.GrafanaRole
+	}
+	if !IsNil(o.ZendeskRole) {
+		toSerialize["zendesk_role"] = o.ZendeskRole
+	}
+	if !IsNil(o.HubspotRole) {
+		toSerialize["hubspot_role"] = o.HubspotRole
 	}
 	return toSerialize, nil
 }

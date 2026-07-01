@@ -30,6 +30,10 @@ type RequestedItem struct {
 	AccessLevelRemoteId *string `json:"access_level_remote_id,omitempty"`
 	// The name of the target.
 	Name *string `json:"name,omitempty"`
+	// The ID of the target on the remote system.
+	RemoteId *string `json:"remote_id,omitempty"`
+	// The name of the target on the remote system.
+	RemoteName *string `json:"remote_name,omitempty"`
 }
 
 // NewRequestedItem instantiates a new RequestedItem object
@@ -209,6 +213,70 @@ func (o *RequestedItem) SetName(v string) {
 	o.Name = &v
 }
 
+// GetRemoteId returns the RemoteId field value if set, zero value otherwise.
+func (o *RequestedItem) GetRemoteId() string {
+	if o == nil || IsNil(o.RemoteId) {
+		var ret string
+		return ret
+	}
+	return *o.RemoteId
+}
+
+// GetRemoteIdOk returns a tuple with the RemoteId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RequestedItem) GetRemoteIdOk() (*string, bool) {
+	if o == nil || IsNil(o.RemoteId) {
+		return nil, false
+	}
+	return o.RemoteId, true
+}
+
+// HasRemoteId returns a boolean if a field has been set.
+func (o *RequestedItem) HasRemoteId() bool {
+	if o != nil && !IsNil(o.RemoteId) {
+		return true
+	}
+
+	return false
+}
+
+// SetRemoteId gets a reference to the given string and assigns it to the RemoteId field.
+func (o *RequestedItem) SetRemoteId(v string) {
+	o.RemoteId = &v
+}
+
+// GetRemoteName returns the RemoteName field value if set, zero value otherwise.
+func (o *RequestedItem) GetRemoteName() string {
+	if o == nil || IsNil(o.RemoteName) {
+		var ret string
+		return ret
+	}
+	return *o.RemoteName
+}
+
+// GetRemoteNameOk returns a tuple with the RemoteName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RequestedItem) GetRemoteNameOk() (*string, bool) {
+	if o == nil || IsNil(o.RemoteName) {
+		return nil, false
+	}
+	return o.RemoteName, true
+}
+
+// HasRemoteName returns a boolean if a field has been set.
+func (o *RequestedItem) HasRemoteName() bool {
+	if o != nil && !IsNil(o.RemoteName) {
+		return true
+	}
+
+	return false
+}
+
+// SetRemoteName gets a reference to the given string and assigns it to the RemoteName field.
+func (o *RequestedItem) SetRemoteName(v string) {
+	o.RemoteName = &v
+}
+
 func (o RequestedItem) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -233,6 +301,12 @@ func (o RequestedItem) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.RemoteId) {
+		toSerialize["remote_id"] = o.RemoteId
+	}
+	if !IsNil(o.RemoteName) {
+		toSerialize["remote_name"] = o.RemoteName
 	}
 	return toSerialize, nil
 }

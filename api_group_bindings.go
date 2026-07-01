@@ -237,7 +237,7 @@ func (r ApiGetGroupBindingRequest) Execute() (*GroupBinding, *http.Response, err
 }
 
 /*
-GetGroupBinding Method for GetGroupBinding
+GetGroupBinding Get group binding by ID
 
 Returns a `GroupBinding` object.
 
@@ -353,7 +353,7 @@ func (r ApiGetGroupBindingsRequest) Execute() (*PaginatedGroupBindingsList, *htt
 }
 
 /*
-GetGroupBindings Method for GetGroupBindings
+GetGroupBindings Get group bindings
 
 Returns a list of `GroupBinding` objects.
 

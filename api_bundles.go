@@ -462,7 +462,7 @@ func (r ApiGetBundleRequest) Execute() (*Bundle, *http.Response, error) {
 }
 
 /*
-GetBundle Method for GetBundle
+GetBundle Get bundle by ID
 
 Returns a `Bundle` object.
 
@@ -934,7 +934,7 @@ func (r ApiGetBundlesRequest) Execute() (*PaginatedBundleList, *http.Response, e
 }
 
 /*
-GetBundles Method for GetBundles
+GetBundles Get bundles
 
 Returns a list of `Bundle` objects.
 
@@ -1037,6 +1037,13 @@ type ApiRemoveBundleGroupRequest struct {
 	ApiService *BundlesAPIService
 	bundleId string
 	groupId string
+	accessLevelRemoteId *string
+}
+
+// The remote ID of the access level to remove.
+func (r ApiRemoveBundleGroupRequest) AccessLevelRemoteId(accessLevelRemoteId string) ApiRemoveBundleGroupRequest {
+	r.accessLevelRemoteId = &accessLevelRemoteId
+	return r
 }
 
 func (r ApiRemoveBundleGroupRequest) Execute() (*http.Response, error) {
@@ -1083,6 +1090,9 @@ func (a *BundlesAPIService) RemoveBundleGroupExecute(r ApiRemoveBundleGroupReque
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.accessLevelRemoteId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "access_level_remote_id", r.accessLevelRemoteId, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

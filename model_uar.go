@@ -36,6 +36,8 @@ type UAR struct {
 	TimeZone string `json:"time_zone"`
 	// A bool representing whether to present a warning when a user is the only reviewer for themself. Default is False.
 	SelfReviewAllowed bool `json:"self_review_allowed"`
+	// A bool representing whether to instantly action changes when reviewers submit their decision. Default is False.
+	InstantlyActionReviews bool `json:"instantly_action_reviews"`
 	UarScope *UARScope `json:"uar_scope,omitempty"`
 }
 
@@ -45,7 +47,7 @@ type _UAR UAR
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUAR(uarId string, name string, reviewerAssignmentPolicy UARReviewerAssignmentPolicyEnum, sendReviewerAssignmentNotification bool, deadline time.Time, timeZone string, selfReviewAllowed bool) *UAR {
+func NewUAR(uarId string, name string, reviewerAssignmentPolicy UARReviewerAssignmentPolicyEnum, sendReviewerAssignmentNotification bool, deadline time.Time, timeZone string, selfReviewAllowed bool, instantlyActionReviews bool) *UAR {
 	this := UAR{}
 	this.UarId = uarId
 	this.Name = name
@@ -54,6 +56,7 @@ func NewUAR(uarId string, name string, reviewerAssignmentPolicy UARReviewerAssig
 	this.Deadline = deadline
 	this.TimeZone = timeZone
 	this.SelfReviewAllowed = selfReviewAllowed
+	this.InstantlyActionReviews = instantlyActionReviews
 	return &this
 }
 
@@ -233,6 +236,30 @@ func (o *UAR) SetSelfReviewAllowed(v bool) {
 	o.SelfReviewAllowed = v
 }
 
+// GetInstantlyActionReviews returns the InstantlyActionReviews field value
+func (o *UAR) GetInstantlyActionReviews() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.InstantlyActionReviews
+}
+
+// GetInstantlyActionReviewsOk returns a tuple with the InstantlyActionReviews field value
+// and a boolean to check if the value has been set.
+func (o *UAR) GetInstantlyActionReviewsOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.InstantlyActionReviews, true
+}
+
+// SetInstantlyActionReviews sets field value
+func (o *UAR) SetInstantlyActionReviews(v bool) {
+	o.InstantlyActionReviews = v
+}
+
 // GetUarScope returns the UarScope field value if set, zero value otherwise.
 func (o *UAR) GetUarScope() UARScope {
 	if o == nil || IsNil(o.UarScope) {
@@ -282,6 +309,7 @@ func (o UAR) ToMap() (map[string]interface{}, error) {
 	toSerialize["deadline"] = o.Deadline
 	toSerialize["time_zone"] = o.TimeZone
 	toSerialize["self_review_allowed"] = o.SelfReviewAllowed
+	toSerialize["instantly_action_reviews"] = o.InstantlyActionReviews
 	if !IsNil(o.UarScope) {
 		toSerialize["uar_scope"] = o.UarScope
 	}
@@ -300,6 +328,7 @@ func (o *UAR) UnmarshalJSON(data []byte) (err error) {
 		"deadline",
 		"time_zone",
 		"self_review_allowed",
+		"instantly_action_reviews",
 	}
 
 	allProperties := make(map[string]interface{})

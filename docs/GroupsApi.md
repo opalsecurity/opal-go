@@ -10,9 +10,9 @@ Method | HTTP request | Description
 [**CreateGroup**](GroupsAPI.md#CreateGroup) | **Post** /groups | 
 [**DeleteGroup**](GroupsAPI.md#DeleteGroup) | **Delete** /groups/{group_id} | 
 [**DeleteGroupUser**](GroupsAPI.md#DeleteGroupUser) | **Delete** /groups/{group_id}/users/{user_id} | 
-[**GetGroup**](GroupsAPI.md#GetGroup) | **Get** /groups/{group_id} | 
-[**GetGroupContainingGroup**](GroupsAPI.md#GetGroupContainingGroup) | **Get** /groups/{group_id}/containing-groups/{containing_group_id} | 
-[**GetGroupContainingGroups**](GroupsAPI.md#GetGroupContainingGroups) | **Get** /groups/{group_id}/containing-groups | 
+[**GetGroup**](GroupsAPI.md#GetGroup) | **Get** /groups/{group_id} | Get group by ID
+[**GetGroupContainingGroup**](GroupsAPI.md#GetGroupContainingGroup) | **Get** /groups/{group_id}/containing-groups/{containing_group_id} | Get nested group by ID
+[**GetGroupContainingGroups**](GroupsAPI.md#GetGroupContainingGroups) | **Get** /groups/{group_id}/containing-groups | Get nested groups
 [**GetGroupMessageChannels**](GroupsAPI.md#GetGroupMessageChannels) | **Get** /groups/{group_id}/message-channels | 
 [**GetGroupOnCallSchedules**](GroupsAPI.md#GetGroupOnCallSchedules) | **Get** /groups/{group_id}/on-call-schedules | 
 [**GetGroupResources**](GroupsAPI.md#GetGroupResources) | **Get** /groups/{group_id}/resources | 
@@ -21,7 +21,8 @@ Method | HTTP request | Description
 [**GetGroupTags**](GroupsAPI.md#GetGroupTags) | **Get** /groups/{group_id}/tags | 
 [**GetGroupUsers**](GroupsAPI.md#GetGroupUsers) | **Get** /groups/{group_id}/users | 
 [**GetGroupVisibility**](GroupsAPI.md#GetGroupVisibility) | **Get** /groups/{group_id}/visibility | 
-[**GetGroups**](GroupsAPI.md#GetGroups) | **Get** /groups | 
+[**GetGroups**](GroupsAPI.md#GetGroups) | **Get** /groups | Get groups
+[**GetUserGroups**](GroupsAPI.md#GetUserGroups) | **Get** /groups/users/{user_id} | 
 [**RemoveGroupContainingGroup**](GroupsAPI.md#RemoveGroupContainingGroup) | **Delete** /groups/{group_id}/containing-groups/{containing_group_id} | 
 [**SetGroupMessageChannels**](GroupsAPI.md#SetGroupMessageChannels) | **Put** /groups/{group_id}/message-channels | 
 [**SetGroupOnCallSchedules**](GroupsAPI.md#SetGroupOnCallSchedules) | **Put** /groups/{group_id}/on-call-schedules | 
@@ -29,6 +30,7 @@ Method | HTTP request | Description
 [**SetGroupReviewerStages**](GroupsAPI.md#SetGroupReviewerStages) | **Put** /groups/{group_id}/reviewer-stages | 
 [**SetGroupReviewers**](GroupsAPI.md#SetGroupReviewers) | **Put** /groups/{group_id}/reviewers | 
 [**SetGroupVisibility**](GroupsAPI.md#SetGroupVisibility) | **Put** /groups/{group_id}/visibility | 
+[**UpdateGroupUser**](GroupsAPI.md#UpdateGroupUser) | **Put** /groups/{group_id}/users/{user_id} | 
 [**UpdateGroups**](GroupsAPI.md#UpdateGroups) | **Put** /groups | 
 
 
@@ -397,7 +399,7 @@ Name | Type | Description  | Notes
 
 ## DeleteGroupUser
 
-> DeleteGroupUser(ctx, groupId, userId).Execute()
+> DeleteGroupUser(ctx, groupId, userId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
 
 
 
@@ -418,10 +420,11 @@ import (
 func main() {
 	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
 	userId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of a user to remove from this group.
+	accessLevelRemoteId := "30" // string | The remote ID of the access level for which this user has direct access. If omitted, the default access level remote ID value (empty string) is assumed. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.GroupsAPI.DeleteGroupUser(context.Background(), groupId, userId).Execute()
+	r, err := apiClient.GroupsAPI.DeleteGroupUser(context.Background(), groupId, userId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.DeleteGroupUser``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -447,6 +450,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **accessLevelRemoteId** | **string** | The remote ID of the access level for which this user has direct access. If omitted, the default access level remote ID value (empty string) is assumed. | 
 
 ### Return type
 
@@ -470,7 +474,7 @@ Name | Type | Description  | Notes
 
 > Group GetGroup(ctx, groupId).Execute()
 
-
+Get group by ID
 
 
 
@@ -540,7 +544,7 @@ Name | Type | Description  | Notes
 
 > GroupContainingGroup GetGroupContainingGroup(ctx, groupId, containingGroupId).Execute()
 
-
+Get nested group by ID
 
 
 
@@ -611,9 +615,9 @@ Name | Type | Description  | Notes
 
 ## GetGroupContainingGroups
 
-> GroupContainingGroupList GetGroupContainingGroups(ctx, groupId).Execute()
+> GroupContainingGroupList GetGroupContainingGroups(ctx, groupId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
 
-
+Get nested groups
 
 
 
@@ -631,10 +635,11 @@ import (
 
 func main() {
 	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	accessLevelRemoteId := "arn:aws:iam::590304332660:role/AdministratorAccess" // string | The access level's remote ID to filter by. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.GroupsAPI.GetGroupContainingGroups(context.Background(), groupId).Execute()
+	resp, r, err := apiClient.GroupsAPI.GetGroupContainingGroups(context.Background(), groupId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetGroupContainingGroups``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -660,6 +665,7 @@ Other parameters are passed through a pointer to a apiGetGroupContainingGroupsRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **accessLevelRemoteId** | **string** | The access level&#39;s remote ID to filter by. | 
 
 ### Return type
 
@@ -1101,7 +1107,7 @@ Name | Type | Description  | Notes
 
 ## GetGroupUsers
 
-> GroupUserList GetGroupUsers(ctx, groupId).Execute()
+> GroupUserList GetGroupUsers(ctx, groupId).Cursor(cursor).PageSize(pageSize).Execute()
 
 
 
@@ -1121,10 +1127,12 @@ import (
 
 func main() {
 	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
+	pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.GroupsAPI.GetGroupUsers(context.Background(), groupId).Execute()
+	resp, r, err := apiClient.GroupsAPI.GetGroupUsers(context.Background(), groupId).Cursor(cursor).PageSize(pageSize).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetGroupUsers``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1150,6 +1158,8 @@ Other parameters are passed through a pointer to a apiGetGroupUsersRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **cursor** | **string** | The pagination cursor value. | 
+ **pageSize** | **int32** | Number of results to return per page. Default is 200. | 
 
 ### Return type
 
@@ -1241,9 +1251,9 @@ Name | Type | Description  | Notes
 
 ## GetGroups
 
-> PaginatedGroupsList GetGroups(ctx).Cursor(cursor).PageSize(pageSize).GroupTypeFilter(groupTypeFilter).GroupIds(groupIds).GroupName(groupName).Execute()
+> PaginatedGroupsList GetGroups(ctx).Cursor(cursor).PageSize(pageSize).GroupTypeFilter(groupTypeFilter).GroupIds(groupIds).GroupName(groupName).TagIds(tagIds).Execute()
 
-
+Get groups
 
 
 
@@ -1265,10 +1275,11 @@ func main() {
 	groupTypeFilter := openapiclient.GroupTypeEnum("ACTIVE_DIRECTORY_GROUP") // GroupTypeEnum | The group type to filter by. (optional)
 	groupIds := []string{"1b978423-db0a-4037-a4cf-f79c60cb67b3"} // []string | The group ids to filter by. (optional)
 	groupName := "example-name" // string | Group name. (optional)
+	tagIds := []string{"Inner_example"} // []string | The IDs of the tags to filter by. Returns only groups that have any of these tags applied. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.GroupsAPI.GetGroups(context.Background()).Cursor(cursor).PageSize(pageSize).GroupTypeFilter(groupTypeFilter).GroupIds(groupIds).GroupName(groupName).Execute()
+	resp, r, err := apiClient.GroupsAPI.GetGroups(context.Background()).Cursor(cursor).PageSize(pageSize).GroupTypeFilter(groupTypeFilter).GroupIds(groupIds).GroupName(groupName).TagIds(tagIds).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetGroups``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1294,6 +1305,7 @@ Name | Type | Description  | Notes
  **groupTypeFilter** | [**GroupTypeEnum**](GroupTypeEnum.md) | The group type to filter by. | 
  **groupIds** | **[]string** | The group ids to filter by. | 
  **groupName** | **string** | Group name. | 
+ **tagIds** | **[]string** | The IDs of the tags to filter by. Returns only groups that have any of these tags applied. | 
 
 ### Return type
 
@@ -1313,9 +1325,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## RemoveGroupContainingGroup
+## GetUserGroups
 
-> RemoveGroupContainingGroup(ctx, groupId, containingGroupId).Execute()
+> GroupUserList GetUserGroups(ctx, userId).Cursor(cursor).PageSize(pageSize).Execute()
 
 
 
@@ -1334,12 +1346,87 @@ import (
 )
 
 func main() {
-	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
-	containingGroupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the containing group.
+	userId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the user whose groups to return.
+	cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
+	pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.GroupsAPI.RemoveGroupContainingGroup(context.Background(), groupId, containingGroupId).Execute()
+	resp, r, err := apiClient.GroupsAPI.GetUserGroups(context.Background(), userId).Cursor(cursor).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.GetUserGroups``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUserGroups`: GroupUserList
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.GetUserGroups`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** | The ID of the user whose groups to return. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUserGroupsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **cursor** | **string** | The pagination cursor value. | 
+ **pageSize** | **int32** | Number of results to return per page. Default is 200. | 
+
+### Return type
+
+[**GroupUserList**](GroupUserList.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RemoveGroupContainingGroup
+
+> RemoveGroupContainingGroup(ctx, groupId, containingGroupId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the member group to remove.
+	containingGroupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the containing group.
+	accessLevelRemoteId := "arn:aws:iam::590304332660:role/AdministratorAccess" // string | The remote ID of the member group's access level to filter by. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.GroupsAPI.RemoveGroupContainingGroup(context.Background(), groupId, containingGroupId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.RemoveGroupContainingGroup``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1353,7 +1440,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**groupId** | **string** | The ID of the group. | 
+**groupId** | **string** | The ID of the member group to remove. | 
 **containingGroupId** | **string** | The ID of the containing group. | 
 
 ### Other Parameters
@@ -1365,6 +1452,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **accessLevelRemoteId** | **string** | The remote ID of the member group&#39;s access level to filter by. | 
 
 ### Return type
 
@@ -1814,6 +1902,81 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## UpdateGroupUser
+
+> GroupUser UpdateGroupUser(ctx, groupId, userId).UpdateGroupUserRequest(updateGroupUserRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	groupId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the group.
+	userId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of the user whose access is being updated.
+	updateGroupUserRequest := *openapiclient.NewUpdateGroupUserRequest(int32(120)) // UpdateGroupUserRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.GroupsAPI.UpdateGroupUser(context.Background(), groupId, userId).UpdateGroupUserRequest(updateGroupUserRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `GroupsAPI.UpdateGroupUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateGroupUser`: GroupUser
+	fmt.Fprintf(os.Stdout, "Response from `GroupsAPI.UpdateGroupUser`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**groupId** | **string** | The ID of the group. | 
+**userId** | **string** | The ID of the user whose access is being updated. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateGroupUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **updateGroupUserRequest** | [**UpdateGroupUserRequest**](UpdateGroupUserRequest.md) |  | 
+
+### Return type
+
+[**GroupUser**](GroupUser.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateGroups
 
 > UpdateGroupInfoList UpdateGroups(ctx).UpdateGroupInfoList(updateGroupInfoList).Execute()
@@ -1835,7 +1998,7 @@ import (
 )
 
 func main() {
-	updateGroupInfoList := *openapiclient.NewUpdateGroupInfoList([]openapiclient.UpdateGroupInfo{*openapiclient.NewUpdateGroupInfo("f454d283-ca87-4a8a-bdbb-df212eca5353")}) // UpdateGroupInfoList | Groups to be updated
+	updateGroupInfoList := *openapiclient.NewUpdateGroupInfoList([]openapiclient.UpdateGroupInfo{*openapiclient.NewUpdateGroupInfo("f454d283-ca87-4a87-bdbb-df212eca5353")}) // UpdateGroupInfoList | Groups to be updated
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

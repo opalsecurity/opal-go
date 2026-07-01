@@ -41,6 +41,8 @@ type Resource struct {
 	MaxDuration *int32 `json:"max_duration,omitempty"`
 	// The recommended duration for which the resource should be requested (in minutes). -1 represents an indefinite duration.
 	RecommendedDuration *int32 `json:"recommended_duration,omitempty"`
+	// The duration for which access can be extended (in minutes). Set to 0 to disable extensions. When > 0, extensions are enabled for the specified duration.
+	ExtensionsDurationInMinutes *int32 `json:"extensions_duration_in_minutes,omitempty"`
 	// A bool representing whether or not access requests to the resource require manager approval.
 	// Deprecated
 	RequireManagerApproval *bool `json:"require_manager_approval,omitempty"`
@@ -76,6 +78,12 @@ type Resource struct {
 	// Deprecated
 	Metadata *string `json:"metadata,omitempty"`
 	RemoteInfo *ResourceRemoteInfo `json:"remote_info,omitempty"`
+	// List of resource IDs that are ancestors of this resource.
+	AncestorResourceIds []string `json:"ancestor_resource_ids,omitempty"`
+	// List of resource IDs that are descendants of this resource.
+	DescendantResourceIds []string `json:"descendant_resource_ids,omitempty"`
+	// Information about the last successful sync of this resource.
+	LastSuccessfulSync *SyncTask `json:"last_successful_sync,omitempty"`
 }
 
 type _Resource Resource
@@ -408,6 +416,38 @@ func (o *Resource) HasRecommendedDuration() bool {
 // SetRecommendedDuration gets a reference to the given int32 and assigns it to the RecommendedDuration field.
 func (o *Resource) SetRecommendedDuration(v int32) {
 	o.RecommendedDuration = &v
+}
+
+// GetExtensionsDurationInMinutes returns the ExtensionsDurationInMinutes field value if set, zero value otherwise.
+func (o *Resource) GetExtensionsDurationInMinutes() int32 {
+	if o == nil || IsNil(o.ExtensionsDurationInMinutes) {
+		var ret int32
+		return ret
+	}
+	return *o.ExtensionsDurationInMinutes
+}
+
+// GetExtensionsDurationInMinutesOk returns a tuple with the ExtensionsDurationInMinutes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetExtensionsDurationInMinutesOk() (*int32, bool) {
+	if o == nil || IsNil(o.ExtensionsDurationInMinutes) {
+		return nil, false
+	}
+	return o.ExtensionsDurationInMinutes, true
+}
+
+// HasExtensionsDurationInMinutes returns a boolean if a field has been set.
+func (o *Resource) HasExtensionsDurationInMinutes() bool {
+	if o != nil && !IsNil(o.ExtensionsDurationInMinutes) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtensionsDurationInMinutes gets a reference to the given int32 and assigns it to the ExtensionsDurationInMinutes field.
+func (o *Resource) SetExtensionsDurationInMinutes(v int32) {
+	o.ExtensionsDurationInMinutes = &v
 }
 
 // GetRequireManagerApproval returns the RequireManagerApproval field value if set, zero value otherwise.
@@ -992,6 +1032,102 @@ func (o *Resource) SetRemoteInfo(v ResourceRemoteInfo) {
 	o.RemoteInfo = &v
 }
 
+// GetAncestorResourceIds returns the AncestorResourceIds field value if set, zero value otherwise.
+func (o *Resource) GetAncestorResourceIds() []string {
+	if o == nil || IsNil(o.AncestorResourceIds) {
+		var ret []string
+		return ret
+	}
+	return o.AncestorResourceIds
+}
+
+// GetAncestorResourceIdsOk returns a tuple with the AncestorResourceIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetAncestorResourceIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.AncestorResourceIds) {
+		return nil, false
+	}
+	return o.AncestorResourceIds, true
+}
+
+// HasAncestorResourceIds returns a boolean if a field has been set.
+func (o *Resource) HasAncestorResourceIds() bool {
+	if o != nil && !IsNil(o.AncestorResourceIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetAncestorResourceIds gets a reference to the given []string and assigns it to the AncestorResourceIds field.
+func (o *Resource) SetAncestorResourceIds(v []string) {
+	o.AncestorResourceIds = v
+}
+
+// GetDescendantResourceIds returns the DescendantResourceIds field value if set, zero value otherwise.
+func (o *Resource) GetDescendantResourceIds() []string {
+	if o == nil || IsNil(o.DescendantResourceIds) {
+		var ret []string
+		return ret
+	}
+	return o.DescendantResourceIds
+}
+
+// GetDescendantResourceIdsOk returns a tuple with the DescendantResourceIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetDescendantResourceIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.DescendantResourceIds) {
+		return nil, false
+	}
+	return o.DescendantResourceIds, true
+}
+
+// HasDescendantResourceIds returns a boolean if a field has been set.
+func (o *Resource) HasDescendantResourceIds() bool {
+	if o != nil && !IsNil(o.DescendantResourceIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescendantResourceIds gets a reference to the given []string and assigns it to the DescendantResourceIds field.
+func (o *Resource) SetDescendantResourceIds(v []string) {
+	o.DescendantResourceIds = v
+}
+
+// GetLastSuccessfulSync returns the LastSuccessfulSync field value if set, zero value otherwise.
+func (o *Resource) GetLastSuccessfulSync() SyncTask {
+	if o == nil || IsNil(o.LastSuccessfulSync) {
+		var ret SyncTask
+		return ret
+	}
+	return *o.LastSuccessfulSync
+}
+
+// GetLastSuccessfulSyncOk returns a tuple with the LastSuccessfulSync field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetLastSuccessfulSyncOk() (*SyncTask, bool) {
+	if o == nil || IsNil(o.LastSuccessfulSync) {
+		return nil, false
+	}
+	return o.LastSuccessfulSync, true
+}
+
+// HasLastSuccessfulSync returns a boolean if a field has been set.
+func (o *Resource) HasLastSuccessfulSync() bool {
+	if o != nil && !IsNil(o.LastSuccessfulSync) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastSuccessfulSync gets a reference to the given SyncTask and assigns it to the LastSuccessfulSync field.
+func (o *Resource) SetLastSuccessfulSync(v SyncTask) {
+	o.LastSuccessfulSync = &v
+}
+
 func (o Resource) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -1029,6 +1165,9 @@ func (o Resource) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.RecommendedDuration) {
 		toSerialize["recommended_duration"] = o.RecommendedDuration
+	}
+	if !IsNil(o.ExtensionsDurationInMinutes) {
+		toSerialize["extensions_duration_in_minutes"] = o.ExtensionsDurationInMinutes
 	}
 	if !IsNil(o.RequireManagerApproval) {
 		toSerialize["require_manager_approval"] = o.RequireManagerApproval
@@ -1083,6 +1222,15 @@ func (o Resource) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.RemoteInfo) {
 		toSerialize["remote_info"] = o.RemoteInfo
+	}
+	if !IsNil(o.AncestorResourceIds) {
+		toSerialize["ancestor_resource_ids"] = o.AncestorResourceIds
+	}
+	if !IsNil(o.DescendantResourceIds) {
+		toSerialize["descendant_resource_ids"] = o.DescendantResourceIds
+	}
+	if !IsNil(o.LastSuccessfulSync) {
+		toSerialize["last_successful_sync"] = o.LastSuccessfulSync
 	}
 	return toSerialize, nil
 }

@@ -21,18 +21,18 @@ type RequestStatusEnum string
 
 // List of RequestStatusEnum
 const (
-	REQUESTSTATUSENUM_PENDING RequestStatusEnum = "pending"
-	REQUESTSTATUSENUM_APPROVED RequestStatusEnum = "approved"
-	REQUESTSTATUSENUM_DENIED RequestStatusEnum = "denied"
-	REQUESTSTATUSENUM_CANCELED RequestStatusEnum = "canceled"
+	REQUESTSTATUSENUM_PENDING RequestStatusEnum = "PENDING"
+	REQUESTSTATUSENUM_APPROVED RequestStatusEnum = "APPROVED"
+	REQUESTSTATUSENUM_DENIED RequestStatusEnum = "DENIED"
+	REQUESTSTATUSENUM_CANCELED RequestStatusEnum = "CANCELED"
 )
 
 // All allowed values of RequestStatusEnum enum
 var AllowedRequestStatusEnumEnumValues = []RequestStatusEnum{
-	"pending",
-	"approved",
-	"denied",
-	"canceled",
+	"PENDING",
+	"APPROVED",
+	"DENIED",
+	"CANCELED",
 }
 
 func (v *RequestStatusEnum) UnmarshalJSON(src []byte) error {

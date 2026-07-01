@@ -6,6 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **GroupId** | **string** | The ID of the group. | 
 **ResourceId** | **string** | The ID of the resource. | 
+**GroupName** | Pointer to **string** | The name of the group | [optional] 
+**ResourceName** | Pointer to **string** | The name of the resource | [optional] 
+**ExpirationDate** | Pointer to **time.Time** | The day and time the group&#39;s access will expire. | [optional] 
 **AccessLevel** | [**ResourceAccessLevel**](ResourceAccessLevel.md) |  | 
 
 ## Methods
@@ -66,6 +69,81 @@ and a boolean to check if the value has been set.
 
 SetResourceId sets ResourceId field to given value.
 
+
+### GetGroupName
+
+`func (o *GroupResource) GetGroupName() string`
+
+GetGroupName returns the GroupName field if non-nil, zero value otherwise.
+
+### GetGroupNameOk
+
+`func (o *GroupResource) GetGroupNameOk() (*string, bool)`
+
+GetGroupNameOk returns a tuple with the GroupName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGroupName
+
+`func (o *GroupResource) SetGroupName(v string)`
+
+SetGroupName sets GroupName field to given value.
+
+### HasGroupName
+
+`func (o *GroupResource) HasGroupName() bool`
+
+HasGroupName returns a boolean if a field has been set.
+
+### GetResourceName
+
+`func (o *GroupResource) GetResourceName() string`
+
+GetResourceName returns the ResourceName field if non-nil, zero value otherwise.
+
+### GetResourceNameOk
+
+`func (o *GroupResource) GetResourceNameOk() (*string, bool)`
+
+GetResourceNameOk returns a tuple with the ResourceName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResourceName
+
+`func (o *GroupResource) SetResourceName(v string)`
+
+SetResourceName sets ResourceName field to given value.
+
+### HasResourceName
+
+`func (o *GroupResource) HasResourceName() bool`
+
+HasResourceName returns a boolean if a field has been set.
+
+### GetExpirationDate
+
+`func (o *GroupResource) GetExpirationDate() time.Time`
+
+GetExpirationDate returns the ExpirationDate field if non-nil, zero value otherwise.
+
+### GetExpirationDateOk
+
+`func (o *GroupResource) GetExpirationDateOk() (*time.Time, bool)`
+
+GetExpirationDateOk returns a tuple with the ExpirationDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpirationDate
+
+`func (o *GroupResource) SetExpirationDate(v time.Time)`
+
+SetExpirationDate sets ExpirationDate field to given value.
+
+### HasExpirationDate
+
+`func (o *GroupResource) HasExpirationDate() bool`
+
+HasExpirationDate returns a boolean if a field has been set.
 
 ### GetAccessLevel
 

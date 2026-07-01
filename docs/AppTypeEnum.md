@@ -5,13 +5,25 @@
 
 * `ACTIVE_DIRECTORY` (value: `"ACTIVE_DIRECTORY"`)
 
+* `ANTHROPIC` (value: `"ANTHROPIC"`)
+
 * `AZURE_AD` (value: `"AZURE_AD"`)
 
 * `AWS` (value: `"AWS"`)
 
 * `AWS_SSO` (value: `"AWS_SSO"`)
 
+* `COUPA` (value: `"COUPA"`)
+
+* `CURSOR` (value: `"CURSOR"`)
+
 * `CUSTOM` (value: `"CUSTOM"`)
+
+* `CUSTOM_CONNECTOR` (value: `"CUSTOM_CONNECTOR"`)
+
+* `DATABRICKS` (value: `"DATABRICKS"`)
+
+* `DATASTAX_ASTRA` (value: `"DATASTAX_ASTRA"`)
 
 * `DUO` (value: `"DUO"`)
 
@@ -25,6 +37,10 @@
 
 * `GOOGLE_WORKSPACE` (value: `"GOOGLE_WORKSPACE"`)
 
+* `ILEVEL` (value: `"ILEVEL"`)
+
+* `INCIDENTIO` (value: `"INCIDENTIO"`)
+
 * `LDAP` (value: `"LDAP"`)
 
 * `MARIADB` (value: `"MARIADB"`)
@@ -35,7 +51,13 @@
 
 * `MYSQL` (value: `"MYSQL"`)
 
+* `NETSUITE` (value: `"NETSUITE"`)
+
+* `DATADOG` (value: `"DATADOG"`)
+
 * `OKTA_DIRECTORY` (value: `"OKTA_DIRECTORY"`)
+
+* `OPENAI_PLATFORM` (value: `"OPENAI_PLATFORM"`)
 
 * `OPAL` (value: `"OPAL"`)
 
@@ -43,9 +65,15 @@
 
 * `SALESFORCE` (value: `"SALESFORCE"`)
 
+* `SNOWFLAKE` (value: `"SNOWFLAKE"`)
+
+* `SLACK` (value: `"SLACK"`)
+
 * `TAILSCALE` (value: `"TAILSCALE"`)
 
 * `TELEPORT` (value: `"TELEPORT"`)
+
+* `TWINGATE` (value: `"TWINGATE"`)
 
 * `WORKDAY` (value: `"WORKDAY"`)
 

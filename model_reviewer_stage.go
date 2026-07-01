@@ -28,7 +28,10 @@ type ReviewerStage struct {
 	RequireAdminApproval *bool `json:"require_admin_approval,omitempty"`
 	// The operator of the reviewer stage. Admin and manager approval are also treated as reviewers.
 	Operator string `json:"operator"`
+	// The IDs of owners assigned as reviewers for this stage.
 	OwnerIds []string `json:"owner_ids"`
+	// The IDs of service users assigned as reviewers for this stage.
+	ServiceUserIds []string `json:"service_user_ids,omitempty"`
 }
 
 type _ReviewerStage ReviewerStage
@@ -157,6 +160,38 @@ func (o *ReviewerStage) SetOwnerIds(v []string) {
 	o.OwnerIds = v
 }
 
+// GetServiceUserIds returns the ServiceUserIds field value if set, zero value otherwise.
+func (o *ReviewerStage) GetServiceUserIds() []string {
+	if o == nil || IsNil(o.ServiceUserIds) {
+		var ret []string
+		return ret
+	}
+	return o.ServiceUserIds
+}
+
+// GetServiceUserIdsOk returns a tuple with the ServiceUserIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ReviewerStage) GetServiceUserIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ServiceUserIds) {
+		return nil, false
+	}
+	return o.ServiceUserIds, true
+}
+
+// HasServiceUserIds returns a boolean if a field has been set.
+func (o *ReviewerStage) HasServiceUserIds() bool {
+	if o != nil && !IsNil(o.ServiceUserIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetServiceUserIds gets a reference to the given []string and assigns it to the ServiceUserIds field.
+func (o *ReviewerStage) SetServiceUserIds(v []string) {
+	o.ServiceUserIds = v
+}
+
 func (o ReviewerStage) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -173,6 +208,9 @@ func (o ReviewerStage) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["operator"] = o.Operator
 	toSerialize["owner_ids"] = o.OwnerIds
+	if !IsNil(o.ServiceUserIds) {
+		toSerialize["service_user_ids"] = o.ServiceUserIds
+	}
 	return toSerialize, nil
 }
 

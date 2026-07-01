@@ -6,10 +6,10 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateOwner**](OwnersAPI.md#CreateOwner) | **Post** /owners | 
 [**DeleteOwner**](OwnersAPI.md#DeleteOwner) | **Delete** /owners/{owner_id} | 
-[**GetOwner**](OwnersAPI.md#GetOwner) | **Get** /owners/{owner_id} | 
+[**GetOwner**](OwnersAPI.md#GetOwner) | **Get** /owners/{owner_id} | Get owner by ID
 [**GetOwnerFromName**](OwnersAPI.md#GetOwnerFromName) | **Get** /owners/name/{owner_name} | 
 [**GetOwnerUsers**](OwnersAPI.md#GetOwnerUsers) | **Get** /owners/{owner_id}/users | 
-[**GetOwners**](OwnersAPI.md#GetOwners) | **Get** /owners | 
+[**GetOwners**](OwnersAPI.md#GetOwners) | **Get** /owners | Get owners
 [**SetOwnerUsers**](OwnersAPI.md#SetOwnerUsers) | **Put** /owners/{owner_id}/users | 
 [**UpdateOwners**](OwnersAPI.md#UpdateOwners) | **Put** /owners | 
 
@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
 
 > Owner GetOwner(ctx, ownerId).Execute()
 
-
+Get owner by ID
 
 
 
@@ -363,7 +363,7 @@ Name | Type | Description  | Notes
 
 > PaginatedOwnersList GetOwners(ctx).Cursor(cursor).PageSize(pageSize).Name(name).Execute()
 
-
+Get owners
 
 
 

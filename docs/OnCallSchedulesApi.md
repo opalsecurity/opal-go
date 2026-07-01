@@ -5,8 +5,8 @@ All URIs are relative to *https://api.opal.dev/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateOnCallSchedule**](OnCallSchedulesAPI.md#CreateOnCallSchedule) | **Post** /on-call-schedules | 
-[**GetOnCallSchedule**](OnCallSchedulesAPI.md#GetOnCallSchedule) | **Get** /on-call-schedules/{on_call_schedule_id} | 
-[**GetOnCallSchedules**](OnCallSchedulesAPI.md#GetOnCallSchedules) | **Get** /on-call-schedules | 
+[**GetOnCallSchedule**](OnCallSchedulesAPI.md#GetOnCallSchedule) | **Get** /on-call-schedules/{on_call_schedule_id} | Get on call schedule by ID
+[**GetOnCallSchedules**](OnCallSchedulesAPI.md#GetOnCallSchedules) | **Get** /on-call-schedules | Get on call schedules
 
 
 
@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 > OnCallSchedule GetOnCallSchedule(ctx, onCallScheduleId).Execute()
 
-
+Get on call schedule by ID
 
 
 
@@ -150,7 +150,7 @@ Name | Type | Description  | Notes
 
 > OnCallScheduleList GetOnCallSchedules(ctx).Execute()
 
-
+Get on call schedules
 
 
 

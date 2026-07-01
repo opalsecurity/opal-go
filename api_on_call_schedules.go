@@ -146,7 +146,7 @@ func (r ApiGetOnCallScheduleRequest) Execute() (*OnCallSchedule, *http.Response,
 }
 
 /*
-GetOnCallSchedule Method for GetOnCallSchedule
+GetOnCallSchedule Get on call schedule by ID
 
 Gets a `OnCallSchedule` object.
 
@@ -248,7 +248,7 @@ func (r ApiGetOnCallSchedulesRequest) Execute() (*OnCallScheduleList, *http.Resp
 }
 
 /*
-GetOnCallSchedules Method for GetOnCallSchedules
+GetOnCallSchedules Get on call schedules
 
 Returns a list of `OnCallSchedule` objects.
 

@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AppResourceId** | Pointer to **string** | The ID of the app resource. | [optional] 
 **GroupId** | **string** | The ID of the group. | 
 **Alias** | Pointer to **string** | The alias of the group. | [optional] 
 **HiddenFromEndUser** | **bool** | A bool representing whether or not the group is hidden from the end user. | 
@@ -26,6 +27,31 @@ will change when the set of required properties is changed
 NewIdpGroupMappingWithDefaults instantiates a new IdpGroupMapping object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAppResourceId
+
+`func (o *IdpGroupMapping) GetAppResourceId() string`
+
+GetAppResourceId returns the AppResourceId field if non-nil, zero value otherwise.
+
+### GetAppResourceIdOk
+
+`func (o *IdpGroupMapping) GetAppResourceIdOk() (*string, bool)`
+
+GetAppResourceIdOk returns a tuple with the AppResourceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAppResourceId
+
+`func (o *IdpGroupMapping) SetAppResourceId(v string)`
+
+SetAppResourceId sets AppResourceId field to given value.
+
+### HasAppResourceId
+
+`func (o *IdpGroupMapping) HasAppResourceId() bool`
+
+HasAppResourceId returns a boolean if a field has been set.
 
 ### GetGroupId
 

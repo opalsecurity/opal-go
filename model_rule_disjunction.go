@@ -23,6 +23,7 @@ var _ MappedNullable = &RuleDisjunction{}
 // RuleDisjunction struct for RuleDisjunction
 type RuleDisjunction struct {
 	Selectors []TagSelector `json:"selectors"`
+	AttributeSelectors []UserAttributeSelector `json:"attribute_selectors,omitempty"`
 }
 
 type _RuleDisjunction RuleDisjunction
@@ -69,6 +70,38 @@ func (o *RuleDisjunction) SetSelectors(v []TagSelector) {
 	o.Selectors = v
 }
 
+// GetAttributeSelectors returns the AttributeSelectors field value if set, zero value otherwise.
+func (o *RuleDisjunction) GetAttributeSelectors() []UserAttributeSelector {
+	if o == nil || IsNil(o.AttributeSelectors) {
+		var ret []UserAttributeSelector
+		return ret
+	}
+	return o.AttributeSelectors
+}
+
+// GetAttributeSelectorsOk returns a tuple with the AttributeSelectors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleDisjunction) GetAttributeSelectorsOk() ([]UserAttributeSelector, bool) {
+	if o == nil || IsNil(o.AttributeSelectors) {
+		return nil, false
+	}
+	return o.AttributeSelectors, true
+}
+
+// HasAttributeSelectors returns a boolean if a field has been set.
+func (o *RuleDisjunction) HasAttributeSelectors() bool {
+	if o != nil && !IsNil(o.AttributeSelectors) {
+		return true
+	}
+
+	return false
+}
+
+// SetAttributeSelectors gets a reference to the given []UserAttributeSelector and assigns it to the AttributeSelectors field.
+func (o *RuleDisjunction) SetAttributeSelectors(v []UserAttributeSelector) {
+	o.AttributeSelectors = v
+}
+
 func (o RuleDisjunction) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -80,6 +113,9 @@ func (o RuleDisjunction) MarshalJSON() ([]byte, error) {
 func (o RuleDisjunction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["selectors"] = o.Selectors
+	if !IsNil(o.AttributeSelectors) {
+		toSerialize["attribute_selectors"] = o.AttributeSelectors
+	}
 	return toSerialize, nil
 }
 

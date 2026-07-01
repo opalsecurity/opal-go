@@ -26,6 +26,7 @@ type ConfigurationTemplate struct {
 	Name *string `json:"name,omitempty"`
 	// The ID of the owner of the configuration template.
 	AdminOwnerId *string `json:"admin_owner_id,omitempty"`
+	// The visibility info of the configuration template.
 	Visibility *VisibilityInfo `json:"visibility,omitempty"`
 	// The IDs of the audit message channels linked to the configuration template.
 	LinkedAuditMessageChannelIds []string `json:"linked_audit_message_channel_ids,omitempty"`

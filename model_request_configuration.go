@@ -22,6 +22,7 @@ var _ MappedNullable = &RequestConfiguration{}
 
 // RequestConfiguration # Request Configuration Object ### Description The `RequestConfiguration` object is used to represent a request configuration.  ### Usage Example Returned from the `GET Request Configurations` endpoint.
 type RequestConfiguration struct {
+	// The condition for the request configuration.
 	Condition *Condition `json:"condition,omitempty"`
 	// A bool representing whether or not to allow requests for this resource.
 	AllowRequests bool `json:"allow_requests"`
@@ -35,6 +36,8 @@ type RequestConfiguration struct {
 	RecommendedDurationMinutes *int32 `json:"recommended_duration_minutes,omitempty"`
 	// A bool representing whether or not access requests to the resource require an access ticket.
 	RequireSupportTicket bool `json:"require_support_ticket"`
+	// The duration for which access can be extended (in minutes). Set to 0 to disable extensions. When > 0, extensions are enabled for the specified duration.
+	ExtensionsDurationInMinutes *int32 `json:"extensions_duration_in_minutes,omitempty"`
 	// The ID of the associated request template.
 	RequestTemplateId *string `json:"request_template_id,omitempty"`
 	// The list of reviewer stages for the request configuration.
@@ -259,6 +262,38 @@ func (o *RequestConfiguration) SetRequireSupportTicket(v bool) {
 	o.RequireSupportTicket = v
 }
 
+// GetExtensionsDurationInMinutes returns the ExtensionsDurationInMinutes field value if set, zero value otherwise.
+func (o *RequestConfiguration) GetExtensionsDurationInMinutes() int32 {
+	if o == nil || IsNil(o.ExtensionsDurationInMinutes) {
+		var ret int32
+		return ret
+	}
+	return *o.ExtensionsDurationInMinutes
+}
+
+// GetExtensionsDurationInMinutesOk returns a tuple with the ExtensionsDurationInMinutes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RequestConfiguration) GetExtensionsDurationInMinutesOk() (*int32, bool) {
+	if o == nil || IsNil(o.ExtensionsDurationInMinutes) {
+		return nil, false
+	}
+	return o.ExtensionsDurationInMinutes, true
+}
+
+// HasExtensionsDurationInMinutes returns a boolean if a field has been set.
+func (o *RequestConfiguration) HasExtensionsDurationInMinutes() bool {
+	if o != nil && !IsNil(o.ExtensionsDurationInMinutes) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtensionsDurationInMinutes gets a reference to the given int32 and assigns it to the ExtensionsDurationInMinutes field.
+func (o *RequestConfiguration) SetExtensionsDurationInMinutes(v int32) {
+	o.ExtensionsDurationInMinutes = &v
+}
+
 // GetRequestTemplateId returns the RequestTemplateId field value if set, zero value otherwise.
 func (o *RequestConfiguration) GetRequestTemplateId() string {
 	if o == nil || IsNil(o.RequestTemplateId) {
@@ -370,6 +405,9 @@ func (o RequestConfiguration) ToMap() (map[string]interface{}, error) {
 		toSerialize["recommended_duration_minutes"] = o.RecommendedDurationMinutes
 	}
 	toSerialize["require_support_ticket"] = o.RequireSupportTicket
+	if !IsNil(o.ExtensionsDurationInMinutes) {
+		toSerialize["extensions_duration_in_minutes"] = o.ExtensionsDurationInMinutes
+	}
 	if !IsNil(o.RequestTemplateId) {
 		toSerialize["request_template_id"] = o.RequestTemplateId
 	}

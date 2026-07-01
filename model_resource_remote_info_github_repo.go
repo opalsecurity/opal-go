@@ -27,6 +27,8 @@ type ResourceRemoteInfoGithubRepo struct {
 	RepoId *string `json:"repo_id,omitempty"`
 	// The name of the repository.
 	RepoName string `json:"repo_name"`
+	// GitHub repo's org name, required only for Enterprise.
+	OrgName *string `json:"org_name,omitempty"`
 }
 
 type _ResourceRemoteInfoGithubRepo ResourceRemoteInfoGithubRepo
@@ -108,6 +110,38 @@ func (o *ResourceRemoteInfoGithubRepo) SetRepoName(v string) {
 	o.RepoName = v
 }
 
+// GetOrgName returns the OrgName field value if set, zero value otherwise.
+func (o *ResourceRemoteInfoGithubRepo) GetOrgName() string {
+	if o == nil || IsNil(o.OrgName) {
+		var ret string
+		return ret
+	}
+	return *o.OrgName
+}
+
+// GetOrgNameOk returns a tuple with the OrgName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfoGithubRepo) GetOrgNameOk() (*string, bool) {
+	if o == nil || IsNil(o.OrgName) {
+		return nil, false
+	}
+	return o.OrgName, true
+}
+
+// HasOrgName returns a boolean if a field has been set.
+func (o *ResourceRemoteInfoGithubRepo) HasOrgName() bool {
+	if o != nil && !IsNil(o.OrgName) {
+		return true
+	}
+
+	return false
+}
+
+// SetOrgName gets a reference to the given string and assigns it to the OrgName field.
+func (o *ResourceRemoteInfoGithubRepo) SetOrgName(v string) {
+	o.OrgName = &v
+}
+
 func (o ResourceRemoteInfoGithubRepo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -122,6 +156,9 @@ func (o ResourceRemoteInfoGithubRepo) ToMap() (map[string]interface{}, error) {
 		toSerialize["repo_id"] = o.RepoId
 	}
 	toSerialize["repo_name"] = o.RepoName
+	if !IsNil(o.OrgName) {
+		toSerialize["org_name"] = o.OrgName
+	}
 	return toSerialize, nil
 }
 

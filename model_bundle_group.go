@@ -24,6 +24,10 @@ type BundleGroup struct {
 	BundleId *string `json:"bundle_id,omitempty"`
 	// The ID of the group within a bundle.
 	GroupId *string `json:"group_id,omitempty"`
+	// The access level of the group within a bundle.
+	AccessLevelName *string `json:"access_level_name,omitempty"`
+	// The remote ID of the access level of the group within a bundle.
+	AccessLevelRemoteId *string `json:"access_level_remote_id,omitempty"`
 }
 
 // NewBundleGroup instantiates a new BundleGroup object
@@ -107,6 +111,70 @@ func (o *BundleGroup) SetGroupId(v string) {
 	o.GroupId = &v
 }
 
+// GetAccessLevelName returns the AccessLevelName field value if set, zero value otherwise.
+func (o *BundleGroup) GetAccessLevelName() string {
+	if o == nil || IsNil(o.AccessLevelName) {
+		var ret string
+		return ret
+	}
+	return *o.AccessLevelName
+}
+
+// GetAccessLevelNameOk returns a tuple with the AccessLevelName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleGroup) GetAccessLevelNameOk() (*string, bool) {
+	if o == nil || IsNil(o.AccessLevelName) {
+		return nil, false
+	}
+	return o.AccessLevelName, true
+}
+
+// HasAccessLevelName returns a boolean if a field has been set.
+func (o *BundleGroup) HasAccessLevelName() bool {
+	if o != nil && !IsNil(o.AccessLevelName) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessLevelName gets a reference to the given string and assigns it to the AccessLevelName field.
+func (o *BundleGroup) SetAccessLevelName(v string) {
+	o.AccessLevelName = &v
+}
+
+// GetAccessLevelRemoteId returns the AccessLevelRemoteId field value if set, zero value otherwise.
+func (o *BundleGroup) GetAccessLevelRemoteId() string {
+	if o == nil || IsNil(o.AccessLevelRemoteId) {
+		var ret string
+		return ret
+	}
+	return *o.AccessLevelRemoteId
+}
+
+// GetAccessLevelRemoteIdOk returns a tuple with the AccessLevelRemoteId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleGroup) GetAccessLevelRemoteIdOk() (*string, bool) {
+	if o == nil || IsNil(o.AccessLevelRemoteId) {
+		return nil, false
+	}
+	return o.AccessLevelRemoteId, true
+}
+
+// HasAccessLevelRemoteId returns a boolean if a field has been set.
+func (o *BundleGroup) HasAccessLevelRemoteId() bool {
+	if o != nil && !IsNil(o.AccessLevelRemoteId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessLevelRemoteId gets a reference to the given string and assigns it to the AccessLevelRemoteId field.
+func (o *BundleGroup) SetAccessLevelRemoteId(v string) {
+	o.AccessLevelRemoteId = &v
+}
+
 func (o BundleGroup) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -122,6 +190,12 @@ func (o BundleGroup) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.GroupId) {
 		toSerialize["group_id"] = o.GroupId
+	}
+	if !IsNil(o.AccessLevelName) {
+		toSerialize["access_level_name"] = o.AccessLevelName
+	}
+	if !IsNil(o.AccessLevelRemoteId) {
+		toSerialize["access_level_remote_id"] = o.AccessLevelRemoteId
 	}
 	return toSerialize, nil
 }
