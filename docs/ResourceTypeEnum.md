@@ -89,6 +89,10 @@
 
 * `MONGO_ATLAS_INSTANCE` (value: `"MONGO_ATLAS_INSTANCE"`)
 
+* `NETSUITE_ROLE` (value: `"NETSUITE_ROLE"`)
+
+* `DATADOG_ROLE` (value: `"DATADOG_ROLE"`)
+
 * `OKTA_APP` (value: `"OKTA_APP"`)
 
 * `OKTA_ROLE` (value: `"OKTA_ROLE"`)
@@ -152,6 +156,24 @@
 * `VAULT_OIDC_ROLE` (value: `"VAULT_OIDC_ROLE"`)
 
 * `GIT_HUB_ENTERPRISE_ROLE` (value: `"GIT_HUB_ENTERPRISE_ROLE"`)
+
+* `GRAFANA_FOLDER` (value: `"GRAFANA_FOLDER"`)
+
+* `GRAFANA_DASHBOARD` (value: `"GRAFANA_DASHBOARD"`)
+
+* `GRAFANA_BASIC_ROLE` (value: `"GRAFANA_BASIC_ROLE"`)
+
+* `GRAFANA_ROLE` (value: `"GRAFANA_ROLE"`)
+
+* `CLICKHOUSE_DATABASE` (value: `"CLICKHOUSE_DATABASE"`)
+
+* `CLICKHOUSE_TABLE` (value: `"CLICKHOUSE_TABLE"`)
+
+* `TWINGATE_RESOURCE` (value: `"TWINGATE_RESOURCE"`)
+
+* `ZENDESK_ROLE` (value: `"ZENDESK_ROLE"`)
+
+* `HUBSPOT_ROLE` (value: `"HUBSPOT_ROLE"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

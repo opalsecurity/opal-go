@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ActiveDirectoryGroup** | Pointer to [**GroupRemoteInfoActiveDirectoryGroup**](GroupRemoteInfoActiveDirectoryGroup.md) |  | [optional] 
 **TailscaleGroup** | Pointer to [**GroupRemoteInfoTailscaleGroup**](GroupRemoteInfoTailscaleGroup.md) |  | [optional] 
+**TwingateGroup** | Pointer to [**GroupRemoteInfoTwingateGroup**](GroupRemoteInfoTwingateGroup.md) |  | [optional] 
+**TwingateGroupSynced** | Pointer to [**GroupRemoteInfoTwingateGroupSynced**](GroupRemoteInfoTwingateGroupSynced.md) |  | [optional] 
 **AwsSsoGroup** | Pointer to [**GroupRemoteInfoAwsSsoGroup**](GroupRemoteInfoAwsSsoGroup.md) |  | [optional] 
 **DatabricksAccountGroup** | Pointer to [**GroupRemoteInfoDatabricksAccountGroup**](GroupRemoteInfoDatabricksAccountGroup.md) |  | [optional] 
 **ConnectorGroup** | Pointer to [**GroupRemoteInfoConnectorGroup**](GroupRemoteInfoConnectorGroup.md) |  | [optional] 
@@ -25,6 +27,12 @@ Name | Type | Description | Notes
 **IncidentioOnCallSchedule** | Pointer to [**GroupRemoteInfoIncidentioOnCallSchedule**](GroupRemoteInfoIncidentioOnCallSchedule.md) |  | [optional] 
 **RootlyOnCallSchedule** | Pointer to [**GroupRemoteInfoRootlyOnCallSchedule**](GroupRemoteInfoRootlyOnCallSchedule.md) |  | [optional] 
 **DevinGroup** | Pointer to [**GroupRemoteInfoDevinGroup**](GroupRemoteInfoDevinGroup.md) |  | [optional] 
+**ClickhouseRole** | Pointer to [**GroupRemoteInfoClickhouseRole**](GroupRemoteInfoClickhouseRole.md) |  | [optional] 
+**GrafanaTeam** | Pointer to [**GroupRemoteInfoGrafanaTeam**](GroupRemoteInfoGrafanaTeam.md) |  | [optional] 
+**ZendeskGroup** | Pointer to [**GroupRemoteInfoZendeskGroup**](GroupRemoteInfoZendeskGroup.md) |  | [optional] 
+**SlackUserGroup** | Pointer to [**GroupRemoteInfoSlackUserGroup**](GroupRemoteInfoSlackUserGroup.md) |  | [optional] 
+**ZendeskOrganization** | Pointer to [**GroupRemoteInfoZendeskOrganization**](GroupRemoteInfoZendeskOrganization.md) |  | [optional] 
+**HubspotTeam** | Pointer to [**GroupRemoteInfoHubspotTeam**](GroupRemoteInfoHubspotTeam.md) |  | [optional] 
 
 ## Methods
 
@@ -94,6 +102,56 @@ SetTailscaleGroup sets TailscaleGroup field to given value.
 `func (o *GroupRemoteInfo) HasTailscaleGroup() bool`
 
 HasTailscaleGroup returns a boolean if a field has been set.
+
+### GetTwingateGroup
+
+`func (o *GroupRemoteInfo) GetTwingateGroup() GroupRemoteInfoTwingateGroup`
+
+GetTwingateGroup returns the TwingateGroup field if non-nil, zero value otherwise.
+
+### GetTwingateGroupOk
+
+`func (o *GroupRemoteInfo) GetTwingateGroupOk() (*GroupRemoteInfoTwingateGroup, bool)`
+
+GetTwingateGroupOk returns a tuple with the TwingateGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTwingateGroup
+
+`func (o *GroupRemoteInfo) SetTwingateGroup(v GroupRemoteInfoTwingateGroup)`
+
+SetTwingateGroup sets TwingateGroup field to given value.
+
+### HasTwingateGroup
+
+`func (o *GroupRemoteInfo) HasTwingateGroup() bool`
+
+HasTwingateGroup returns a boolean if a field has been set.
+
+### GetTwingateGroupSynced
+
+`func (o *GroupRemoteInfo) GetTwingateGroupSynced() GroupRemoteInfoTwingateGroupSynced`
+
+GetTwingateGroupSynced returns the TwingateGroupSynced field if non-nil, zero value otherwise.
+
+### GetTwingateGroupSyncedOk
+
+`func (o *GroupRemoteInfo) GetTwingateGroupSyncedOk() (*GroupRemoteInfoTwingateGroupSynced, bool)`
+
+GetTwingateGroupSyncedOk returns a tuple with the TwingateGroupSynced field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTwingateGroupSynced
+
+`func (o *GroupRemoteInfo) SetTwingateGroupSynced(v GroupRemoteInfoTwingateGroupSynced)`
+
+SetTwingateGroupSynced sets TwingateGroupSynced field to given value.
+
+### HasTwingateGroupSynced
+
+`func (o *GroupRemoteInfo) HasTwingateGroupSynced() bool`
+
+HasTwingateGroupSynced returns a boolean if a field has been set.
 
 ### GetAwsSsoGroup
 
@@ -569,6 +627,156 @@ SetDevinGroup sets DevinGroup field to given value.
 `func (o *GroupRemoteInfo) HasDevinGroup() bool`
 
 HasDevinGroup returns a boolean if a field has been set.
+
+### GetClickhouseRole
+
+`func (o *GroupRemoteInfo) GetClickhouseRole() GroupRemoteInfoClickhouseRole`
+
+GetClickhouseRole returns the ClickhouseRole field if non-nil, zero value otherwise.
+
+### GetClickhouseRoleOk
+
+`func (o *GroupRemoteInfo) GetClickhouseRoleOk() (*GroupRemoteInfoClickhouseRole, bool)`
+
+GetClickhouseRoleOk returns a tuple with the ClickhouseRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClickhouseRole
+
+`func (o *GroupRemoteInfo) SetClickhouseRole(v GroupRemoteInfoClickhouseRole)`
+
+SetClickhouseRole sets ClickhouseRole field to given value.
+
+### HasClickhouseRole
+
+`func (o *GroupRemoteInfo) HasClickhouseRole() bool`
+
+HasClickhouseRole returns a boolean if a field has been set.
+
+### GetGrafanaTeam
+
+`func (o *GroupRemoteInfo) GetGrafanaTeam() GroupRemoteInfoGrafanaTeam`
+
+GetGrafanaTeam returns the GrafanaTeam field if non-nil, zero value otherwise.
+
+### GetGrafanaTeamOk
+
+`func (o *GroupRemoteInfo) GetGrafanaTeamOk() (*GroupRemoteInfoGrafanaTeam, bool)`
+
+GetGrafanaTeamOk returns a tuple with the GrafanaTeam field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGrafanaTeam
+
+`func (o *GroupRemoteInfo) SetGrafanaTeam(v GroupRemoteInfoGrafanaTeam)`
+
+SetGrafanaTeam sets GrafanaTeam field to given value.
+
+### HasGrafanaTeam
+
+`func (o *GroupRemoteInfo) HasGrafanaTeam() bool`
+
+HasGrafanaTeam returns a boolean if a field has been set.
+
+### GetZendeskGroup
+
+`func (o *GroupRemoteInfo) GetZendeskGroup() GroupRemoteInfoZendeskGroup`
+
+GetZendeskGroup returns the ZendeskGroup field if non-nil, zero value otherwise.
+
+### GetZendeskGroupOk
+
+`func (o *GroupRemoteInfo) GetZendeskGroupOk() (*GroupRemoteInfoZendeskGroup, bool)`
+
+GetZendeskGroupOk returns a tuple with the ZendeskGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetZendeskGroup
+
+`func (o *GroupRemoteInfo) SetZendeskGroup(v GroupRemoteInfoZendeskGroup)`
+
+SetZendeskGroup sets ZendeskGroup field to given value.
+
+### HasZendeskGroup
+
+`func (o *GroupRemoteInfo) HasZendeskGroup() bool`
+
+HasZendeskGroup returns a boolean if a field has been set.
+
+### GetSlackUserGroup
+
+`func (o *GroupRemoteInfo) GetSlackUserGroup() GroupRemoteInfoSlackUserGroup`
+
+GetSlackUserGroup returns the SlackUserGroup field if non-nil, zero value otherwise.
+
+### GetSlackUserGroupOk
+
+`func (o *GroupRemoteInfo) GetSlackUserGroupOk() (*GroupRemoteInfoSlackUserGroup, bool)`
+
+GetSlackUserGroupOk returns a tuple with the SlackUserGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSlackUserGroup
+
+`func (o *GroupRemoteInfo) SetSlackUserGroup(v GroupRemoteInfoSlackUserGroup)`
+
+SetSlackUserGroup sets SlackUserGroup field to given value.
+
+### HasSlackUserGroup
+
+`func (o *GroupRemoteInfo) HasSlackUserGroup() bool`
+
+HasSlackUserGroup returns a boolean if a field has been set.
+
+### GetZendeskOrganization
+
+`func (o *GroupRemoteInfo) GetZendeskOrganization() GroupRemoteInfoZendeskOrganization`
+
+GetZendeskOrganization returns the ZendeskOrganization field if non-nil, zero value otherwise.
+
+### GetZendeskOrganizationOk
+
+`func (o *GroupRemoteInfo) GetZendeskOrganizationOk() (*GroupRemoteInfoZendeskOrganization, bool)`
+
+GetZendeskOrganizationOk returns a tuple with the ZendeskOrganization field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetZendeskOrganization
+
+`func (o *GroupRemoteInfo) SetZendeskOrganization(v GroupRemoteInfoZendeskOrganization)`
+
+SetZendeskOrganization sets ZendeskOrganization field to given value.
+
+### HasZendeskOrganization
+
+`func (o *GroupRemoteInfo) HasZendeskOrganization() bool`
+
+HasZendeskOrganization returns a boolean if a field has been set.
+
+### GetHubspotTeam
+
+`func (o *GroupRemoteInfo) GetHubspotTeam() GroupRemoteInfoHubspotTeam`
+
+GetHubspotTeam returns the HubspotTeam field if non-nil, zero value otherwise.
+
+### GetHubspotTeamOk
+
+`func (o *GroupRemoteInfo) GetHubspotTeamOk() (*GroupRemoteInfoHubspotTeam, bool)`
+
+GetHubspotTeamOk returns a tuple with the HubspotTeam field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHubspotTeam
+
+`func (o *GroupRemoteInfo) SetHubspotTeam(v GroupRemoteInfoHubspotTeam)`
+
+SetHubspotTeam sets HubspotTeam field to given value.
+
+### HasHubspotTeam
+
+`func (o *GroupRemoteInfo) HasHubspotTeam() bool`
+
+HasHubspotTeam returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
