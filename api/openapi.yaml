@@ -6009,22 +6009,18 @@ components:
         - AZURE_AD
         - AWS
         - AWS_SSO
-        - CLICKHOUSE
         - COUPA
         - CURSOR
         - CUSTOM
         - CUSTOM_CONNECTOR
         - DATABRICKS
         - DATASTAX_ASTRA
-        - DEVIN
         - DUO
         - GCP
         - GIT_HUB
         - GIT_LAB
         - GOOGLE_GROUPS
         - GOOGLE_WORKSPACE
-        - GRAFANA
-        - HUBSPOT
         - ILEVEL
         - INCIDENTIO
         - LDAP
@@ -6034,23 +6030,17 @@ components:
         - MYSQL
         - NETSUITE
         - DATADOG
-        - OKTA_CIAM
         - OKTA_DIRECTORY
         - OPENAI_PLATFORM
         - OPAL
-        - ORACLE_FUSION
         - PAGERDUTY
-        - POSTGRES
-        - ROOTLY
         - SALESFORCE
         - SNOWFLAKE
         - SLACK
         - TAILSCALE
         - TELEPORT
         - TWINGATE
-        - VAULT
         - WORKDAY
-        - ZENDESK
       example: OKTA_DIRECTORY
       type: string
     EntityTypeEnum:
