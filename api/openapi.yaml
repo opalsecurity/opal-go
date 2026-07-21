@@ -1706,7 +1706,13 @@ paths:
           schema:
             type: string
           style: form
-        - description: Number of results to return per page. Default is 200.
+        - description:
+            Number of results to return per page, up to 1000. When set (or when a
+            cursor is provided), the response contains a single page of results and
+            a `next` cursor; the default page size is 200. When both page_size and
+            cursor are omitted, the entire group membership is returned in one
+            response with no `next` cursor. For large groups, prefer setting
+            page_size and following `next`.
           example: 200
           explode: true
           in: query
@@ -6045,6 +6051,7 @@ components:
         - SALESFORCE
         - SNOWFLAKE
         - SLACK
+        - TABLEAU
         - TAILSCALE
         - TELEPORT
         - TWINGATE
@@ -7349,6 +7356,7 @@ components:
         - ERR_DRY_RUN_MODE_ENABLED
         - ERR_HR_IDP_PROVIDER_NOT_LINKED
         - ERR_REMOTE_UNRECOVERABLE_ERROR
+        - ERR_REMOTE_TICKET_NOT_FOUND
       example:
         - SUCCESS
       type: string
@@ -7615,6 +7623,7 @@ components:
         - ZENDESK_GROUP
         - ZENDESK_ORGANIZATION
         - HUBSPOT_TEAM
+        - TABLEAU_GROUP
       example: OPAL_GROUP
       type: string
     ResourceTypeEnum:
@@ -8566,6 +8575,16 @@ components:
           type: object
           required:
             - team_id
+        tableau_group:
+          description: Remote info for Tableau group.
+          properties:
+            group_id:
+              description: The ID of the Tableau group.
+              example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+              type: string
+          type: object
+          required:
+            - group_id
       type: object
     ResourceRemoteInfo:
       description:

@@ -49,6 +49,7 @@ type GroupRemoteInfo struct {
 	SlackUserGroup *GroupRemoteInfoSlackUserGroup `json:"slack_user_group,omitempty"`
 	ZendeskOrganization *GroupRemoteInfoZendeskOrganization `json:"zendesk_organization,omitempty"`
 	HubspotTeam *GroupRemoteInfoHubspotTeam `json:"hubspot_team,omitempty"`
+	TableauGroup *GroupRemoteInfoTableauGroup `json:"tableau_group,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -999,6 +1000,38 @@ func (o *GroupRemoteInfo) SetHubspotTeam(v GroupRemoteInfoHubspotTeam) {
 	o.HubspotTeam = &v
 }
 
+// GetTableauGroup returns the TableauGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetTableauGroup() GroupRemoteInfoTableauGroup {
+	if o == nil || IsNil(o.TableauGroup) {
+		var ret GroupRemoteInfoTableauGroup
+		return ret
+	}
+	return *o.TableauGroup
+}
+
+// GetTableauGroupOk returns a tuple with the TableauGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetTableauGroupOk() (*GroupRemoteInfoTableauGroup, bool) {
+	if o == nil || IsNil(o.TableauGroup) {
+		return nil, false
+	}
+	return o.TableauGroup, true
+}
+
+// HasTableauGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasTableauGroup() bool {
+	if o != nil && !IsNil(o.TableauGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetTableauGroup gets a reference to the given GroupRemoteInfoTableauGroup and assigns it to the TableauGroup field.
+func (o *GroupRemoteInfo) SetTableauGroup(v GroupRemoteInfoTableauGroup) {
+	o.TableauGroup = &v
+}
+
 func (o GroupRemoteInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -1096,6 +1129,9 @@ func (o GroupRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HubspotTeam) {
 		toSerialize["hubspot_team"] = o.HubspotTeam
 	}
+	if !IsNil(o.TableauGroup) {
+		toSerialize["tableau_group"] = o.TableauGroup
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1147,6 +1183,7 @@ func (o *GroupRemoteInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "slack_user_group")
 		delete(additionalProperties, "zendesk_organization")
 		delete(additionalProperties, "hubspot_team")
+		delete(additionalProperties, "tableau_group")
 		o.AdditionalProperties = additionalProperties
 	}
 
