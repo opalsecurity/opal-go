@@ -122,6 +122,7 @@ docs/GroupRemoteInfoPagerdutyOnCallSchedule.md
 docs/GroupRemoteInfoRootlyOnCallSchedule.md
 docs/GroupRemoteInfoSlackUserGroup.md
 docs/GroupRemoteInfoSnowflakeRole.md
+docs/GroupRemoteInfoTableauGroup.md
 docs/GroupRemoteInfoTailscaleGroup.md
 docs/GroupRemoteInfoTwingateGroup.md
 docs/GroupRemoteInfoTwingateGroupSynced.md
@@ -436,6 +437,7 @@ model_group_remote_info_pagerduty_on_call_schedule.go
 model_group_remote_info_rootly_on_call_schedule.go
 model_group_remote_info_slack_user_group.go
 model_group_remote_info_snowflake_role.go
+model_group_remote_info_tableau_group.go
 model_group_remote_info_tailscale_group.go
 model_group_remote_info_twingate_group.go
 model_group_remote_info_twingate_group_synced.go
