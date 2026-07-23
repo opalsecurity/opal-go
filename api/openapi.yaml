@@ -20,6 +20,8 @@ tags:
     description: Operations related to apps
   - name: bundles
     description: Operations related to bundles
+  - name: campaigns
+    description: Operations related to access review campaigns
   - name: configuration-templates
     description: Operations related to configuration templates
   - name: delegations
@@ -598,6 +600,41 @@ paths:
         - BearerAuth: []
       tags:
         - bundles
+  /campaigns:
+    get:
+      description: Returns a list of `Campaign` objects.
+      operationId: getCampaigns
+      parameters:
+        - description: The pagination cursor value.
+          example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+          explode: true
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: Number of results to return per page. Default is 200.
+          example: 200
+          explode: true
+          in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            maximum: 1000
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedCampaignsList"
+          description: A list of campaigns for your organization.
+      security:
+        - BearerAuth: []
+      tags:
+        - campaigns
   /configuration-templates:
     get:
       description: Returns a list of `ConfigurationTemplate` objects.
@@ -1706,7 +1743,13 @@ paths:
           schema:
             type: string
           style: form
-        - description: Number of results to return per page. Default is 200.
+        - description:
+            Number of results to return per page, up to 1000. When set (or when a
+            cursor is provided), the response contains a single page of results and
+            a `next` cursor; the default page size is 200. When both page_size and
+            cursor are omitted, the entire group membership is returned in one
+            response with no `next` cursor. For large groups, prefer setting
+            page_size and following `next`.
           example: 200
           explode: true
           in: query
@@ -5692,6 +5735,324 @@ components:
             type: string
           type: array
       type: object
+    CampaignStatusEnum:
+      description: The current status of a campaign.
+      enum:
+        - DRAFT
+        - ONGOING
+        - COMPLETED
+        - STOPPED
+        - ENDED
+      example: ONGOING
+      type: string
+    CampaignRevokeOnEnum:
+      description: When access decisions take effect during a campaign.
+      enum:
+        - ACTION
+        - END
+        - NONE
+      example: END
+      type: string
+    CampaignGroupAssetVisibilityPolicyEnum:
+      description: Controls what group assets reviewers can see during the campaign.
+      enum:
+        - STRICT
+        - VIEW_VISIBLE_AND_ASSIGNED
+        - VIEW_ALL
+      example: STRICT
+      type: string
+    CampaignConfiguration:
+      description: Configuration for an access review campaign.
+      example:
+        configuration_id: 39a4d283-ca87-4a8a-bdbb-df212eca5fdb
+        created_at: 2026-07-01T00:00:00Z
+        updated_at: 2026-07-01T00:00:00Z
+        query: null
+        reviewer_assignment_policy: MANUALLY
+        allow_self_review: false
+        send_reviewer_assignment_notification: true
+        allow_reviewer_reassignment: false
+        start_date: null
+        end_date: 2026-09-30T00:00:00Z
+        timezone: America/Los_Angeles
+        revoke_on: END
+        reminder_schedule: [7, 3, 1]
+        reminder_include_manager: true
+        require_reason_on_denial: false
+        hide_ai_suggestions: false
+        custom_start_message: null
+        group_asset_visibility_policy: STRICT
+        is_template: false
+        cron_expression: null
+        next_scheduled_run: null
+        last_scheduled_run: null
+        recurring_duration_days: null
+      properties:
+        configuration_id:
+          description: The ID of the campaign configuration.
+          example: 39a4d283-ca87-4a8a-bdbb-df212eca5fdb
+          format: uuid
+          type: string
+        created_at:
+          description: The creation time of the configuration.
+          example: 2026-07-01T00:00:00Z
+          format: date-time
+          type: string
+        updated_at:
+          description: The last updated time of the configuration.
+          example: 2026-07-01T00:00:00Z
+          format: date-time
+          type: string
+        query:
+          description:
+            Edge-based query defining the scope of access to review. Matches the
+            stored Opal edge-query JSON shape.
+          nullable: true
+          type: object
+          additionalProperties: true
+        reviewer_assignment_policy:
+          $ref: "#/components/schemas/UARReviewerAssignmentPolicyEnum"
+        allow_self_review:
+          description: Whether reviewers can review their own access.
+          example: false
+          type: boolean
+        send_reviewer_assignment_notification:
+          description: Whether to notify reviewers upon assignment.
+          example: true
+          type: boolean
+        allow_reviewer_reassignment:
+          description: Whether reviewers may reassign their reviews to another user.
+          example: false
+          type: boolean
+        start_date:
+          description: Scheduled start date of the campaign.
+          example: 2026-07-02T00:00:00Z
+          format: date-time
+          nullable: true
+          type: string
+        end_date:
+          description: Scheduled end date of the campaign.
+          example: 2026-09-30T00:00:00Z
+          format: date-time
+          nullable: true
+          type: string
+        timezone:
+          description:
+            IANA timezone used to interpret campaign deadlines (e.g.
+            America/Los_Angeles).
+          example: America/Los_Angeles
+          type: string
+        revoke_on:
+          $ref: "#/components/schemas/CampaignRevokeOnEnum"
+        reminder_schedule:
+          description: Days before end date to send reminder notifications.
+          example: [7, 3, 1]
+          items:
+            type: integer
+          type: array
+        reminder_include_manager:
+          description: Whether to include the reviewer's manager in reminders.
+          example: true
+          type: boolean
+        require_reason_on_denial:
+          description:
+            Whether reviewers must provide a reason when denying (revoking)
+            access.
+          example: false
+          type: boolean
+        hide_ai_suggestions:
+          description: Whether AI suggestions are hidden from reviewers.
+          example: false
+          type: boolean
+        custom_start_message:
+          description:
+            Optional custom message included when notifying reviewers that the
+            campaign started.
+          example: Please complete your reviews by Friday.
+          nullable: true
+          type: string
+        group_asset_visibility_policy:
+          $ref: "#/components/schemas/CampaignGroupAssetVisibilityPolicyEnum"
+        is_template:
+          description:
+            Whether this configuration is a recurring schedule template.
+          example: false
+          type: boolean
+        cron_expression:
+          description:
+            Cron expression driving the recurring schedule. Null for one-off
+            campaigns.
+          example: 0 9 1 * *
+          nullable: true
+          type: string
+        next_scheduled_run:
+          description: Next time a draft will be generated from this template.
+          example: 2026-08-01T16:00:00Z
+          format: date-time
+          nullable: true
+          type: string
+        last_scheduled_run:
+          description: Most recent time a draft was generated from this template.
+          example: 2026-07-01T16:00:00Z
+          format: date-time
+          nullable: true
+          type: string
+        recurring_duration_days:
+          description:
+            Deadline window in days applied to each draft generated from this
+            template.
+          example: 14
+          nullable: true
+          type: integer
+      required:
+        - configuration_id
+        - created_at
+        - updated_at
+        - reviewer_assignment_policy
+        - allow_self_review
+        - send_reviewer_assignment_notification
+        - allow_reviewer_reassignment
+        - timezone
+        - revoke_on
+        - reminder_include_manager
+        - require_reason_on_denial
+        - hide_ai_suggestions
+        - group_asset_visibility_policy
+        - is_template
+      type: object
+    Campaign:
+      description: An access review campaign.
+      example:
+        campaign_id: f454d283-ca87-4a8a-bdbb-df212eca5353
+        name: Q3 Access Review
+        status: DRAFT
+        is_template: false
+        created_at: 2026-07-01T00:00:00Z
+        updated_at: 2026-07-01T00:00:00Z
+        created_by_user_id: 32acc112-21ff-4669-91c2-21e27683eaa1
+        configuration: null
+        started_at: null
+        started_by_user_id: null
+        stopped_at: null
+        stopped_by_user_id: null
+        ended_at: null
+        ended_by_user_id: null
+      properties:
+        campaign_id:
+          description: The ID of the campaign.
+          example: f454d283-ca87-4a8a-bdbb-df212eca5353
+          format: uuid
+          type: string
+        name:
+          description: The name of the campaign.
+          example: Q3 Access Review
+          type: string
+        status:
+          $ref: "#/components/schemas/CampaignStatusEnum"
+        is_template:
+          description:
+            Whether this campaign is a recurring schedule template. Templates
+            spawn draft campaigns on schedule rather than being reviewed directly.
+          example: false
+          type: boolean
+        created_at:
+          description: The creation time of the campaign.
+          example: 2026-07-01T00:00:00Z
+          format: date-time
+          type: string
+        updated_at:
+          description: The last updated time of the campaign.
+          example: 2026-07-01T00:00:00Z
+          format: date-time
+          type: string
+        created_by_user_id:
+          description: The ID of the user who created the campaign.
+          example: 32acc112-21ff-4669-91c2-21e27683eaa1
+          format: uuid
+          type: string
+        configuration:
+          description: The campaign's configuration, if set.
+          allOf:
+            - $ref: "#/components/schemas/CampaignConfiguration"
+          nullable: true
+        started_at:
+          description: The time the campaign was started, if started.
+          example: 2026-07-02T00:00:00Z
+          format: date-time
+          nullable: true
+          type: string
+        started_by_user_id:
+          description: The ID of the user who started the campaign, if started.
+          example: 32acc112-21ff-4669-91c2-21e27683eaa1
+          format: uuid
+          nullable: true
+          type: string
+        stopped_at:
+          description: The time the campaign was manually stopped, if stopped.
+          example: 2026-07-10T00:00:00Z
+          format: date-time
+          nullable: true
+          type: string
+        stopped_by_user_id:
+          description: The ID of the user who stopped the campaign, if stopped.
+          example: 32acc112-21ff-4669-91c2-21e27683eaa1
+          format: uuid
+          nullable: true
+          type: string
+        ended_at:
+          description: The time the campaign reached its scheduled end, if ended.
+          example: 2026-07-14T00:00:00Z
+          format: date-time
+          nullable: true
+          type: string
+        ended_by_user_id:
+          description: The ID of the user who ended the campaign, if ended.
+          example: 32acc112-21ff-4669-91c2-21e27683eaa1
+          format: uuid
+          nullable: true
+          type: string
+      required:
+        - campaign_id
+        - name
+        - status
+        - is_template
+        - created_at
+        - updated_at
+        - created_by_user_id
+      type: object
+    PaginatedCampaignsList:
+      description: A list of campaigns.
+      example:
+        next: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+        previous: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
+        results:
+          - campaign_id: f454d283-ca87-4a8a-bdbb-df212eca5353
+            name: Q3 Access Review
+            status: DRAFT
+            is_template: false
+            created_at: 2026-07-01T00:00:00Z
+            updated_at: 2026-07-01T00:00:00Z
+            created_by_user_id: 32acc112-21ff-4669-91c2-21e27683eaa1
+      properties:
+        next:
+          description:
+            The cursor with which to continue pagination if additional result
+            pages exist.
+          example: cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw
+          nullable: true
+          type: string
+        previous:
+          description: The cursor used to obtain the current result page.
+          example: cj1sZXdwd2VycWVtY29zZnNkc2NzUWxNMEUxTXk0ME16UXpNallsTWtJ
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: "#/components/schemas/Campaign"
+          type: array
+      required:
+        - results
+      type: object
     PaginatedUARsList:
       description: A list of UARs.
       example:
@@ -6045,6 +6406,7 @@ components:
         - SALESFORCE
         - SNOWFLAKE
         - SLACK
+        - TABLEAU
         - TAILSCALE
         - TELEPORT
         - TWINGATE
@@ -7349,6 +7711,7 @@ components:
         - ERR_DRY_RUN_MODE_ENABLED
         - ERR_HR_IDP_PROVIDER_NOT_LINKED
         - ERR_REMOTE_UNRECOVERABLE_ERROR
+        - ERR_REMOTE_TICKET_NOT_FOUND
       example:
         - SUCCESS
       type: string
@@ -7615,6 +7978,7 @@ components:
         - ZENDESK_GROUP
         - ZENDESK_ORGANIZATION
         - HUBSPOT_TEAM
+        - TABLEAU_GROUP
       example: OPAL_GROUP
       type: string
     ResourceTypeEnum:
@@ -8566,6 +8930,16 @@ components:
           type: object
           required:
             - team_id
+        tableau_group:
+          description: Remote info for Tableau group.
+          properties:
+            group_id:
+              description: The ID of the Tableau group.
+              example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+              type: string
+          type: object
+          required:
+            - group_id
       type: object
     ResourceRemoteInfo:
       description:
