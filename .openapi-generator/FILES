@@ -2,6 +2,7 @@ README.md
 api_access_rules.go
 api_apps.go
 api_bundles.go
+api_campaigns.go
 api_configuration_templates.go
 api_delegations.go
 api_event_streams.go
@@ -51,6 +52,12 @@ docs/Bundle.md
 docs/BundleGroup.md
 docs/BundleResource.md
 docs/BundlesAPI.md
+docs/Campaign.md
+docs/CampaignConfiguration.md
+docs/CampaignGroupAssetVisibilityPolicyEnum.md
+docs/CampaignRevokeOnEnum.md
+docs/CampaignStatusEnum.md
+docs/CampaignsAPI.md
 docs/Condition.md
 docs/ConfigurationTemplate.md
 docs/ConfigurationTemplatesAPI.md
@@ -122,6 +129,7 @@ docs/GroupRemoteInfoPagerdutyOnCallSchedule.md
 docs/GroupRemoteInfoRootlyOnCallSchedule.md
 docs/GroupRemoteInfoSlackUserGroup.md
 docs/GroupRemoteInfoSnowflakeRole.md
+docs/GroupRemoteInfoTableauGroup.md
 docs/GroupRemoteInfoTailscaleGroup.md
 docs/GroupRemoteInfoTwingateGroup.md
 docs/GroupRemoteInfoTwingateGroupSynced.md
@@ -163,6 +171,7 @@ docs/PaginatedAssignedRequestList.md
 docs/PaginatedBundleGroupList.md
 docs/PaginatedBundleList.md
 docs/PaginatedBundleResourceList.md
+docs/PaginatedCampaignsList.md
 docs/PaginatedConfigurationTemplateList.md
 docs/PaginatedDelegationsList.md
 docs/PaginatedEventList.md
@@ -370,6 +379,11 @@ model_aws_permission_set_metadata_aws_permission_set.go
 model_bundle.go
 model_bundle_group.go
 model_bundle_resource.go
+model_campaign.go
+model_campaign_configuration.go
+model_campaign_group_asset_visibility_policy_enum.go
+model_campaign_revoke_on_enum.go
+model_campaign_status_enum.go
 model_condition.go
 model_configuration_template.go
 model_create_bundle_info.go
@@ -436,6 +450,7 @@ model_group_remote_info_pagerduty_on_call_schedule.go
 model_group_remote_info_rootly_on_call_schedule.go
 model_group_remote_info_slack_user_group.go
 model_group_remote_info_snowflake_role.go
+model_group_remote_info_tableau_group.go
 model_group_remote_info_tailscale_group.go
 model_group_remote_info_twingate_group.go
 model_group_remote_info_twingate_group_synced.go
@@ -470,6 +485,7 @@ model_paginated_assigned_request_list.go
 model_paginated_bundle_group_list.go
 model_paginated_bundle_list.go
 model_paginated_bundle_resource_list.go
+model_paginated_campaigns_list.go
 model_paginated_configuration_template_list.go
 model_paginated_delegations_list.go
 model_paginated_event_list.go
