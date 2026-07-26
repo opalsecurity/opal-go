@@ -67,6 +67,8 @@
 
 * `HUBSPOT_TEAM` (value: `"HUBSPOT_TEAM"`)
 
+* `TABLEAU_GROUP` (value: `"TABLEAU_GROUP"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
