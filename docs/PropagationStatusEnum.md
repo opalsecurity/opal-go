@@ -45,6 +45,8 @@
 
 * `ERR_REMOTE_UNRECOVERABLE_ERROR` (value: `"ERR_REMOTE_UNRECOVERABLE_ERROR"`)
 
+* `ERR_REMOTE_TICKET_NOT_FOUND` (value: `"ERR_REMOTE_TICKET_NOT_FOUND"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
