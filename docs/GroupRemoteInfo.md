@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **SlackUserGroup** | Pointer to [**GroupRemoteInfoSlackUserGroup**](GroupRemoteInfoSlackUserGroup.md) |  | [optional] 
 **ZendeskOrganization** | Pointer to [**GroupRemoteInfoZendeskOrganization**](GroupRemoteInfoZendeskOrganization.md) |  | [optional] 
 **HubspotTeam** | Pointer to [**GroupRemoteInfoHubspotTeam**](GroupRemoteInfoHubspotTeam.md) |  | [optional] 
+**TableauGroup** | Pointer to [**GroupRemoteInfoTableauGroup**](GroupRemoteInfoTableauGroup.md) |  | [optional] 
 
 ## Methods
 
@@ -777,6 +778,31 @@ SetHubspotTeam sets HubspotTeam field to given value.
 `func (o *GroupRemoteInfo) HasHubspotTeam() bool`
 
 HasHubspotTeam returns a boolean if a field has been set.
+
+### GetTableauGroup
+
+`func (o *GroupRemoteInfo) GetTableauGroup() GroupRemoteInfoTableauGroup`
+
+GetTableauGroup returns the TableauGroup field if non-nil, zero value otherwise.
+
+### GetTableauGroupOk
+
+`func (o *GroupRemoteInfo) GetTableauGroupOk() (*GroupRemoteInfoTableauGroup, bool)`
+
+GetTableauGroupOk returns a tuple with the TableauGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTableauGroup
+
+`func (o *GroupRemoteInfo) SetTableauGroup(v GroupRemoteInfoTableauGroup)`
+
+SetTableauGroup sets TableauGroup field to given value.
+
+### HasTableauGroup
+
+`func (o *GroupRemoteInfo) HasTableauGroup() bool`
+
+HasTableauGroup returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

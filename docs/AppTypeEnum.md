@@ -85,6 +85,8 @@
 
 * `SLACK` (value: `"SLACK"`)
 
+* `TABLEAU` (value: `"TABLEAU"`)
+
 * `TAILSCALE` (value: `"TAILSCALE"`)
 
 * `TELEPORT` (value: `"TELEPORT"`)
