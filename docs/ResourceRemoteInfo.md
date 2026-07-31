@@ -76,6 +76,8 @@ Name | Type | Description | Notes
 **GrafanaRole** | Pointer to [**ResourceRemoteInfoGrafanaRole**](ResourceRemoteInfoGrafanaRole.md) |  | [optional] 
 **ZendeskRole** | Pointer to [**ResourceRemoteInfoZendeskRole**](ResourceRemoteInfoZendeskRole.md) |  | [optional] 
 **HubspotRole** | Pointer to [**ResourceRemoteInfoHubspotRole**](ResourceRemoteInfoHubspotRole.md) |  | [optional] 
+**AlicloudRamRole** | Pointer to [**ResourceRemoteInfoAlicloudRamRole**](ResourceRemoteInfoAlicloudRamRole.md) |  | [optional] 
+**AlicloudEcsInstance** | Pointer to [**ResourceRemoteInfoAlicloudEcsInstance**](ResourceRemoteInfoAlicloudEcsInstance.md) |  | [optional] 
 
 ## Methods
 
@@ -1895,6 +1897,56 @@ SetHubspotRole sets HubspotRole field to given value.
 `func (o *ResourceRemoteInfo) HasHubspotRole() bool`
 
 HasHubspotRole returns a boolean if a field has been set.
+
+### GetAlicloudRamRole
+
+`func (o *ResourceRemoteInfo) GetAlicloudRamRole() ResourceRemoteInfoAlicloudRamRole`
+
+GetAlicloudRamRole returns the AlicloudRamRole field if non-nil, zero value otherwise.
+
+### GetAlicloudRamRoleOk
+
+`func (o *ResourceRemoteInfo) GetAlicloudRamRoleOk() (*ResourceRemoteInfoAlicloudRamRole, bool)`
+
+GetAlicloudRamRoleOk returns a tuple with the AlicloudRamRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAlicloudRamRole
+
+`func (o *ResourceRemoteInfo) SetAlicloudRamRole(v ResourceRemoteInfoAlicloudRamRole)`
+
+SetAlicloudRamRole sets AlicloudRamRole field to given value.
+
+### HasAlicloudRamRole
+
+`func (o *ResourceRemoteInfo) HasAlicloudRamRole() bool`
+
+HasAlicloudRamRole returns a boolean if a field has been set.
+
+### GetAlicloudEcsInstance
+
+`func (o *ResourceRemoteInfo) GetAlicloudEcsInstance() ResourceRemoteInfoAlicloudEcsInstance`
+
+GetAlicloudEcsInstance returns the AlicloudEcsInstance field if non-nil, zero value otherwise.
+
+### GetAlicloudEcsInstanceOk
+
+`func (o *ResourceRemoteInfo) GetAlicloudEcsInstanceOk() (*ResourceRemoteInfoAlicloudEcsInstance, bool)`
+
+GetAlicloudEcsInstanceOk returns a tuple with the AlicloudEcsInstance field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAlicloudEcsInstance
+
+`func (o *ResourceRemoteInfo) SetAlicloudEcsInstance(v ResourceRemoteInfoAlicloudEcsInstance)`
+
+SetAlicloudEcsInstance sets AlicloudEcsInstance field to given value.
+
+### HasAlicloudEcsInstance
+
+`func (o *ResourceRemoteInfo) HasAlicloudEcsInstance() bool`
+
+HasAlicloudEcsInstance returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
