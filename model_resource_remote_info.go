@@ -92,6 +92,8 @@ type ResourceRemoteInfo struct {
 	GrafanaRole *ResourceRemoteInfoGrafanaRole `json:"grafana_role,omitempty"`
 	ZendeskRole *ResourceRemoteInfoZendeskRole `json:"zendesk_role,omitempty"`
 	HubspotRole *ResourceRemoteInfoHubspotRole `json:"hubspot_role,omitempty"`
+	AlicloudRamRole *ResourceRemoteInfoAlicloudRamRole `json:"alicloud_ram_role,omitempty"`
+	AlicloudEcsInstance *ResourceRemoteInfoAlicloudEcsInstance `json:"alicloud_ecs_instance,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -2418,6 +2420,70 @@ func (o *ResourceRemoteInfo) SetHubspotRole(v ResourceRemoteInfoHubspotRole) {
 	o.HubspotRole = &v
 }
 
+// GetAlicloudRamRole returns the AlicloudRamRole field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAlicloudRamRole() ResourceRemoteInfoAlicloudRamRole {
+	if o == nil || IsNil(o.AlicloudRamRole) {
+		var ret ResourceRemoteInfoAlicloudRamRole
+		return ret
+	}
+	return *o.AlicloudRamRole
+}
+
+// GetAlicloudRamRoleOk returns a tuple with the AlicloudRamRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAlicloudRamRoleOk() (*ResourceRemoteInfoAlicloudRamRole, bool) {
+	if o == nil || IsNil(o.AlicloudRamRole) {
+		return nil, false
+	}
+	return o.AlicloudRamRole, true
+}
+
+// HasAlicloudRamRole returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAlicloudRamRole() bool {
+	if o != nil && !IsNil(o.AlicloudRamRole) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlicloudRamRole gets a reference to the given ResourceRemoteInfoAlicloudRamRole and assigns it to the AlicloudRamRole field.
+func (o *ResourceRemoteInfo) SetAlicloudRamRole(v ResourceRemoteInfoAlicloudRamRole) {
+	o.AlicloudRamRole = &v
+}
+
+// GetAlicloudEcsInstance returns the AlicloudEcsInstance field value if set, zero value otherwise.
+func (o *ResourceRemoteInfo) GetAlicloudEcsInstance() ResourceRemoteInfoAlicloudEcsInstance {
+	if o == nil || IsNil(o.AlicloudEcsInstance) {
+		var ret ResourceRemoteInfoAlicloudEcsInstance
+		return ret
+	}
+	return *o.AlicloudEcsInstance
+}
+
+// GetAlicloudEcsInstanceOk returns a tuple with the AlicloudEcsInstance field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceRemoteInfo) GetAlicloudEcsInstanceOk() (*ResourceRemoteInfoAlicloudEcsInstance, bool) {
+	if o == nil || IsNil(o.AlicloudEcsInstance) {
+		return nil, false
+	}
+	return o.AlicloudEcsInstance, true
+}
+
+// HasAlicloudEcsInstance returns a boolean if a field has been set.
+func (o *ResourceRemoteInfo) HasAlicloudEcsInstance() bool {
+	if o != nil && !IsNil(o.AlicloudEcsInstance) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlicloudEcsInstance gets a reference to the given ResourceRemoteInfoAlicloudEcsInstance and assigns it to the AlicloudEcsInstance field.
+func (o *ResourceRemoteInfo) SetAlicloudEcsInstance(v ResourceRemoteInfoAlicloudEcsInstance) {
+	o.AlicloudEcsInstance = &v
+}
+
 func (o ResourceRemoteInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -2644,6 +2710,12 @@ func (o ResourceRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HubspotRole) {
 		toSerialize["hubspot_role"] = o.HubspotRole
 	}
+	if !IsNil(o.AlicloudRamRole) {
+		toSerialize["alicloud_ram_role"] = o.AlicloudRamRole
+	}
+	if !IsNil(o.AlicloudEcsInstance) {
+		toSerialize["alicloud_ecs_instance"] = o.AlicloudEcsInstance
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -2738,6 +2810,8 @@ func (o *ResourceRemoteInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "grafana_role")
 		delete(additionalProperties, "zendesk_role")
 		delete(additionalProperties, "hubspot_role")
+		delete(additionalProperties, "alicloud_ram_role")
+		delete(additionalProperties, "alicloud_ecs_instance")
 		o.AdditionalProperties = additionalProperties
 	}
 
