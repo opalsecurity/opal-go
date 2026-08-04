@@ -56,6 +56,8 @@ type APIClient struct {
 
 	BundlesAPI *BundlesAPIService
 
+	CampaignsAPI *CampaignsAPIService
+
 	ConfigurationTemplatesAPI *ConfigurationTemplatesAPIService
 
 	DelegationsAPI *DelegationsAPIService
@@ -114,6 +116,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AccessRulesAPI = (*AccessRulesAPIService)(&c.common)
 	c.AppsAPI = (*AppsAPIService)(&c.common)
 	c.BundlesAPI = (*BundlesAPIService)(&c.common)
+	c.CampaignsAPI = (*CampaignsAPIService)(&c.common)
 	c.ConfigurationTemplatesAPI = (*ConfigurationTemplatesAPIService)(&c.common)
 	c.DelegationsAPI = (*DelegationsAPIService)(&c.common)
 	c.EventStreamsAPI = (*EventStreamsAPIService)(&c.common)
@@ -556,7 +559,10 @@ func addFile(w *multipart.Writer, fieldName, path string) error {
 	if err != nil {
 		return err
 	}
-	defer file.Close()
+	err = file.Close()
+	if err != nil {
+		return err
+	}
 
 	part, err := w.CreateFormFile(fieldName, filepath.Base(path))
 	if err != nil {
