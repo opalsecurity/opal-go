@@ -175,6 +175,10 @@
 
 * `HUBSPOT_ROLE` (value: `"HUBSPOT_ROLE"`)
 
+* `ALICLOUD_RAM_ROLE` (value: `"ALICLOUD_RAM_ROLE"`)
+
+* `ALICLOUD_ECS_INSTANCE` (value: `"ALICLOUD_ECS_INSTANCE"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
