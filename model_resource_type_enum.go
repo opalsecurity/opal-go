@@ -107,6 +107,8 @@ const (
 	RESOURCETYPEENUM_TWINGATE_RESOURCE ResourceTypeEnum = "TWINGATE_RESOURCE"
 	RESOURCETYPEENUM_ZENDESK_ROLE ResourceTypeEnum = "ZENDESK_ROLE"
 	RESOURCETYPEENUM_HUBSPOT_ROLE ResourceTypeEnum = "HUBSPOT_ROLE"
+	RESOURCETYPEENUM_ALICLOUD_RAM_ROLE ResourceTypeEnum = "ALICLOUD_RAM_ROLE"
+	RESOURCETYPEENUM_ALICLOUD_ECS_INSTANCE ResourceTypeEnum = "ALICLOUD_ECS_INSTANCE"
 )
 
 // All allowed values of ResourceTypeEnum enum
@@ -197,6 +199,8 @@ var AllowedResourceTypeEnumEnumValues = []ResourceTypeEnum{
 	"TWINGATE_RESOURCE",
 	"ZENDESK_ROLE",
 	"HUBSPOT_ROLE",
+	"ALICLOUD_RAM_ROLE",
+	"ALICLOUD_ECS_INSTANCE",
 }
 
 func (v *ResourceTypeEnum) UnmarshalJSON(src []byte) error {

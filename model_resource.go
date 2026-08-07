@@ -81,6 +81,10 @@ type Resource struct {
 	AncestorResourceIds []string `json:"ancestor_resource_ids,omitempty"`
 	// List of resource IDs that are descendants of this resource.
 	DescendantResourceIds []string `json:"descendant_resource_ids,omitempty"`
+	// A bool representing whether or not the resource's name is synced from the end system. When true, the name is overwritten with the remote name on each sync. Defaults to false.
+	MatchRemoteName *bool `json:"match_remote_name,omitempty"`
+	// A bool representing whether or not the resource's description is synced from the end system. When true, the description is overwritten with the remote description on each sync. Defaults to false.
+	MatchRemoteDescription *bool `json:"match_remote_description,omitempty"`
 	// Information about the last successful sync of this resource.
 	LastSuccessfulSync *SyncTask `json:"last_successful_sync,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -1096,6 +1100,70 @@ func (o *Resource) SetDescendantResourceIds(v []string) {
 	o.DescendantResourceIds = v
 }
 
+// GetMatchRemoteName returns the MatchRemoteName field value if set, zero value otherwise.
+func (o *Resource) GetMatchRemoteName() bool {
+	if o == nil || IsNil(o.MatchRemoteName) {
+		var ret bool
+		return ret
+	}
+	return *o.MatchRemoteName
+}
+
+// GetMatchRemoteNameOk returns a tuple with the MatchRemoteName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetMatchRemoteNameOk() (*bool, bool) {
+	if o == nil || IsNil(o.MatchRemoteName) {
+		return nil, false
+	}
+	return o.MatchRemoteName, true
+}
+
+// HasMatchRemoteName returns a boolean if a field has been set.
+func (o *Resource) HasMatchRemoteName() bool {
+	if o != nil && !IsNil(o.MatchRemoteName) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatchRemoteName gets a reference to the given bool and assigns it to the MatchRemoteName field.
+func (o *Resource) SetMatchRemoteName(v bool) {
+	o.MatchRemoteName = &v
+}
+
+// GetMatchRemoteDescription returns the MatchRemoteDescription field value if set, zero value otherwise.
+func (o *Resource) GetMatchRemoteDescription() bool {
+	if o == nil || IsNil(o.MatchRemoteDescription) {
+		var ret bool
+		return ret
+	}
+	return *o.MatchRemoteDescription
+}
+
+// GetMatchRemoteDescriptionOk returns a tuple with the MatchRemoteDescription field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Resource) GetMatchRemoteDescriptionOk() (*bool, bool) {
+	if o == nil || IsNil(o.MatchRemoteDescription) {
+		return nil, false
+	}
+	return o.MatchRemoteDescription, true
+}
+
+// HasMatchRemoteDescription returns a boolean if a field has been set.
+func (o *Resource) HasMatchRemoteDescription() bool {
+	if o != nil && !IsNil(o.MatchRemoteDescription) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatchRemoteDescription gets a reference to the given bool and assigns it to the MatchRemoteDescription field.
+func (o *Resource) SetMatchRemoteDescription(v bool) {
+	o.MatchRemoteDescription = &v
+}
+
 // GetLastSuccessfulSync returns the LastSuccessfulSync field value if set, zero value otherwise.
 func (o *Resource) GetLastSuccessfulSync() SyncTask {
 	if o == nil || IsNil(o.LastSuccessfulSync) {
@@ -1229,6 +1297,12 @@ func (o Resource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DescendantResourceIds) {
 		toSerialize["descendant_resource_ids"] = o.DescendantResourceIds
 	}
+	if !IsNil(o.MatchRemoteName) {
+		toSerialize["match_remote_name"] = o.MatchRemoteName
+	}
+	if !IsNil(o.MatchRemoteDescription) {
+		toSerialize["match_remote_description"] = o.MatchRemoteDescription
+	}
 	if !IsNil(o.LastSuccessfulSync) {
 		toSerialize["last_successful_sync"] = o.LastSuccessfulSync
 	}
@@ -1306,6 +1380,8 @@ func (o *Resource) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "remote_info")
 		delete(additionalProperties, "ancestor_resource_ids")
 		delete(additionalProperties, "descendant_resource_ids")
+		delete(additionalProperties, "match_remote_name")
+		delete(additionalProperties, "match_remote_description")
 		delete(additionalProperties, "last_successful_sync")
 		o.AdditionalProperties = additionalProperties
 	}

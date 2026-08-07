@@ -53,6 +53,7 @@ const (
 	GROUPTYPEENUM_ZENDESK_GROUP GroupTypeEnum = "ZENDESK_GROUP"
 	GROUPTYPEENUM_ZENDESK_ORGANIZATION GroupTypeEnum = "ZENDESK_ORGANIZATION"
 	GROUPTYPEENUM_HUBSPOT_TEAM GroupTypeEnum = "HUBSPOT_TEAM"
+	GROUPTYPEENUM_TABLEAU_GROUP GroupTypeEnum = "TABLEAU_GROUP"
 )
 
 // All allowed values of GroupTypeEnum enum
@@ -89,6 +90,7 @@ var AllowedGroupTypeEnumEnumValues = []GroupTypeEnum{
 	"ZENDESK_GROUP",
 	"ZENDESK_ORGANIZATION",
 	"HUBSPOT_TEAM",
+	"TABLEAU_GROUP",
 }
 
 func (v *GroupTypeEnum) UnmarshalJSON(src []byte) error {
