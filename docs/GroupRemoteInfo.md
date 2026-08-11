@@ -33,6 +33,9 @@ Name | Type | Description | Notes
 **SlackUserGroup** | Pointer to [**GroupRemoteInfoSlackUserGroup**](GroupRemoteInfoSlackUserGroup.md) |  | [optional] 
 **ZendeskOrganization** | Pointer to [**GroupRemoteInfoZendeskOrganization**](GroupRemoteInfoZendeskOrganization.md) |  | [optional] 
 **HubspotTeam** | Pointer to [**GroupRemoteInfoHubspotTeam**](GroupRemoteInfoHubspotTeam.md) |  | [optional] 
+**TableauGroup** | Pointer to [**GroupRemoteInfoTableauGroup**](GroupRemoteInfoTableauGroup.md) |  | [optional] 
+**DocusignGroup** | Pointer to [**GroupRemoteInfoDocusignGroup**](GroupRemoteInfoDocusignGroup.md) |  | [optional] 
+**DocusignSigningGroup** | Pointer to [**GroupRemoteInfoDocusignSigningGroup**](GroupRemoteInfoDocusignSigningGroup.md) |  | [optional] 
 
 ## Methods
 
@@ -777,6 +780,81 @@ SetHubspotTeam sets HubspotTeam field to given value.
 `func (o *GroupRemoteInfo) HasHubspotTeam() bool`
 
 HasHubspotTeam returns a boolean if a field has been set.
+
+### GetTableauGroup
+
+`func (o *GroupRemoteInfo) GetTableauGroup() GroupRemoteInfoTableauGroup`
+
+GetTableauGroup returns the TableauGroup field if non-nil, zero value otherwise.
+
+### GetTableauGroupOk
+
+`func (o *GroupRemoteInfo) GetTableauGroupOk() (*GroupRemoteInfoTableauGroup, bool)`
+
+GetTableauGroupOk returns a tuple with the TableauGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTableauGroup
+
+`func (o *GroupRemoteInfo) SetTableauGroup(v GroupRemoteInfoTableauGroup)`
+
+SetTableauGroup sets TableauGroup field to given value.
+
+### HasTableauGroup
+
+`func (o *GroupRemoteInfo) HasTableauGroup() bool`
+
+HasTableauGroup returns a boolean if a field has been set.
+
+### GetDocusignGroup
+
+`func (o *GroupRemoteInfo) GetDocusignGroup() GroupRemoteInfoDocusignGroup`
+
+GetDocusignGroup returns the DocusignGroup field if non-nil, zero value otherwise.
+
+### GetDocusignGroupOk
+
+`func (o *GroupRemoteInfo) GetDocusignGroupOk() (*GroupRemoteInfoDocusignGroup, bool)`
+
+GetDocusignGroupOk returns a tuple with the DocusignGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDocusignGroup
+
+`func (o *GroupRemoteInfo) SetDocusignGroup(v GroupRemoteInfoDocusignGroup)`
+
+SetDocusignGroup sets DocusignGroup field to given value.
+
+### HasDocusignGroup
+
+`func (o *GroupRemoteInfo) HasDocusignGroup() bool`
+
+HasDocusignGroup returns a boolean if a field has been set.
+
+### GetDocusignSigningGroup
+
+`func (o *GroupRemoteInfo) GetDocusignSigningGroup() GroupRemoteInfoDocusignSigningGroup`
+
+GetDocusignSigningGroup returns the DocusignSigningGroup field if non-nil, zero value otherwise.
+
+### GetDocusignSigningGroupOk
+
+`func (o *GroupRemoteInfo) GetDocusignSigningGroupOk() (*GroupRemoteInfoDocusignSigningGroup, bool)`
+
+GetDocusignSigningGroupOk returns a tuple with the DocusignSigningGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDocusignSigningGroup
+
+`func (o *GroupRemoteInfo) SetDocusignSigningGroup(v GroupRemoteInfoDocusignSigningGroup)`
+
+SetDocusignSigningGroup sets DocusignSigningGroup field to given value.
+
+### HasDocusignSigningGroup
+
+`func (o *GroupRemoteInfo) HasDocusignSigningGroup() bool`
+
+HasDocusignSigningGroup returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

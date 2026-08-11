@@ -27,7 +27,11 @@
 
 * `DATASTAX_ASTRA` (value: `"DATASTAX_ASTRA"`)
 
+* `ALICLOUD` (value: `"ALICLOUD"`)
+
 * `DEVIN` (value: `"DEVIN"`)
+
+* `DOCUSIGN` (value: `"DOCUSIGN"`)
 
 * `DUO` (value: `"DUO"`)
 
@@ -84,6 +88,8 @@
 * `SNOWFLAKE` (value: `"SNOWFLAKE"`)
 
 * `SLACK` (value: `"SLACK"`)
+
+* `TABLEAU` (value: `"TABLEAU"`)
 
 * `TAILSCALE` (value: `"TAILSCALE"`)
 
