@@ -56,6 +56,7 @@ Name | Type | Description | Notes
 **WorkdayRole** | Pointer to [**ResourceRemoteInfoWorkdayRole**](ResourceRemoteInfoWorkdayRole.md) |  | [optional] 
 **SalesforcePermissionSet** | Pointer to [**ResourceRemoteInfoSalesforcePermissionSet**](ResourceRemoteInfoSalesforcePermissionSet.md) |  | [optional] 
 **SalesforceProfile** | Pointer to [**ResourceRemoteInfoSalesforceProfile**](ResourceRemoteInfoSalesforceProfile.md) |  | [optional] 
+**DocusignPermissionProfile** | Pointer to [**ResourceRemoteInfoDocusignPermissionProfile**](ResourceRemoteInfoDocusignPermissionProfile.md) |  | [optional] 
 **SalesforceRole** | Pointer to [**ResourceRemoteInfoSalesforceRole**](ResourceRemoteInfoSalesforceRole.md) |  | [optional] 
 **TeleportRole** | Pointer to [**ResourceRemoteInfoTeleportRole**](ResourceRemoteInfoTeleportRole.md) |  | [optional] 
 **DatastaxAstraRole** | Pointer to [**ResourceRemoteInfoDatastaxAstraRole**](ResourceRemoteInfoDatastaxAstraRole.md) |  | [optional] 
@@ -76,6 +77,10 @@ Name | Type | Description | Notes
 **GrafanaRole** | Pointer to [**ResourceRemoteInfoGrafanaRole**](ResourceRemoteInfoGrafanaRole.md) |  | [optional] 
 **ZendeskRole** | Pointer to [**ResourceRemoteInfoZendeskRole**](ResourceRemoteInfoZendeskRole.md) |  | [optional] 
 **HubspotRole** | Pointer to [**ResourceRemoteInfoHubspotRole**](ResourceRemoteInfoHubspotRole.md) |  | [optional] 
+**AlicloudRamRole** | Pointer to [**ResourceRemoteInfoAlicloudRamRole**](ResourceRemoteInfoAlicloudRamRole.md) |  | [optional] 
+**AlicloudEcsInstance** | Pointer to [**ResourceRemoteInfoAlicloudEcsInstance**](ResourceRemoteInfoAlicloudEcsInstance.md) |  | [optional] 
+**ZoomRole** | Pointer to [**ResourceRemoteInfoZoomRole**](ResourceRemoteInfoZoomRole.md) |  | [optional] 
+**ZoomLicense** | Pointer to [**ResourceRemoteInfoZoomLicense**](ResourceRemoteInfoZoomLicense.md) |  | [optional] 
 
 ## Methods
 
@@ -1396,6 +1401,31 @@ SetSalesforceProfile sets SalesforceProfile field to given value.
 
 HasSalesforceProfile returns a boolean if a field has been set.
 
+### GetDocusignPermissionProfile
+
+`func (o *ResourceRemoteInfo) GetDocusignPermissionProfile() ResourceRemoteInfoDocusignPermissionProfile`
+
+GetDocusignPermissionProfile returns the DocusignPermissionProfile field if non-nil, zero value otherwise.
+
+### GetDocusignPermissionProfileOk
+
+`func (o *ResourceRemoteInfo) GetDocusignPermissionProfileOk() (*ResourceRemoteInfoDocusignPermissionProfile, bool)`
+
+GetDocusignPermissionProfileOk returns a tuple with the DocusignPermissionProfile field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDocusignPermissionProfile
+
+`func (o *ResourceRemoteInfo) SetDocusignPermissionProfile(v ResourceRemoteInfoDocusignPermissionProfile)`
+
+SetDocusignPermissionProfile sets DocusignPermissionProfile field to given value.
+
+### HasDocusignPermissionProfile
+
+`func (o *ResourceRemoteInfo) HasDocusignPermissionProfile() bool`
+
+HasDocusignPermissionProfile returns a boolean if a field has been set.
+
 ### GetSalesforceRole
 
 `func (o *ResourceRemoteInfo) GetSalesforceRole() ResourceRemoteInfoSalesforceRole`
@@ -1895,6 +1925,106 @@ SetHubspotRole sets HubspotRole field to given value.
 `func (o *ResourceRemoteInfo) HasHubspotRole() bool`
 
 HasHubspotRole returns a boolean if a field has been set.
+
+### GetAlicloudRamRole
+
+`func (o *ResourceRemoteInfo) GetAlicloudRamRole() ResourceRemoteInfoAlicloudRamRole`
+
+GetAlicloudRamRole returns the AlicloudRamRole field if non-nil, zero value otherwise.
+
+### GetAlicloudRamRoleOk
+
+`func (o *ResourceRemoteInfo) GetAlicloudRamRoleOk() (*ResourceRemoteInfoAlicloudRamRole, bool)`
+
+GetAlicloudRamRoleOk returns a tuple with the AlicloudRamRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAlicloudRamRole
+
+`func (o *ResourceRemoteInfo) SetAlicloudRamRole(v ResourceRemoteInfoAlicloudRamRole)`
+
+SetAlicloudRamRole sets AlicloudRamRole field to given value.
+
+### HasAlicloudRamRole
+
+`func (o *ResourceRemoteInfo) HasAlicloudRamRole() bool`
+
+HasAlicloudRamRole returns a boolean if a field has been set.
+
+### GetAlicloudEcsInstance
+
+`func (o *ResourceRemoteInfo) GetAlicloudEcsInstance() ResourceRemoteInfoAlicloudEcsInstance`
+
+GetAlicloudEcsInstance returns the AlicloudEcsInstance field if non-nil, zero value otherwise.
+
+### GetAlicloudEcsInstanceOk
+
+`func (o *ResourceRemoteInfo) GetAlicloudEcsInstanceOk() (*ResourceRemoteInfoAlicloudEcsInstance, bool)`
+
+GetAlicloudEcsInstanceOk returns a tuple with the AlicloudEcsInstance field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAlicloudEcsInstance
+
+`func (o *ResourceRemoteInfo) SetAlicloudEcsInstance(v ResourceRemoteInfoAlicloudEcsInstance)`
+
+SetAlicloudEcsInstance sets AlicloudEcsInstance field to given value.
+
+### HasAlicloudEcsInstance
+
+`func (o *ResourceRemoteInfo) HasAlicloudEcsInstance() bool`
+
+HasAlicloudEcsInstance returns a boolean if a field has been set.
+
+### GetZoomRole
+
+`func (o *ResourceRemoteInfo) GetZoomRole() ResourceRemoteInfoZoomRole`
+
+GetZoomRole returns the ZoomRole field if non-nil, zero value otherwise.
+
+### GetZoomRoleOk
+
+`func (o *ResourceRemoteInfo) GetZoomRoleOk() (*ResourceRemoteInfoZoomRole, bool)`
+
+GetZoomRoleOk returns a tuple with the ZoomRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetZoomRole
+
+`func (o *ResourceRemoteInfo) SetZoomRole(v ResourceRemoteInfoZoomRole)`
+
+SetZoomRole sets ZoomRole field to given value.
+
+### HasZoomRole
+
+`func (o *ResourceRemoteInfo) HasZoomRole() bool`
+
+HasZoomRole returns a boolean if a field has been set.
+
+### GetZoomLicense
+
+`func (o *ResourceRemoteInfo) GetZoomLicense() ResourceRemoteInfoZoomLicense`
+
+GetZoomLicense returns the ZoomLicense field if non-nil, zero value otherwise.
+
+### GetZoomLicenseOk
+
+`func (o *ResourceRemoteInfo) GetZoomLicenseOk() (*ResourceRemoteInfoZoomLicense, bool)`
+
+GetZoomLicenseOk returns a tuple with the ZoomLicense field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetZoomLicense
+
+`func (o *ResourceRemoteInfo) SetZoomLicense(v ResourceRemoteInfoZoomLicense)`
+
+SetZoomLicense sets ZoomLicense field to given value.
+
+### HasZoomLicense
+
+`func (o *ResourceRemoteInfo) HasZoomLicense() bool`
+
+HasZoomLicense returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
