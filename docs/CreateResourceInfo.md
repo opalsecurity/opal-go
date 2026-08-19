@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **Metadata** | Pointer to **string** | Deprecated - use remote_info instead.  JSON metadata about the remote resource. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details on how to specify this field. The required format is dependent on resource_type and should have the following schema: &lt;style type&#x3D;\&quot;text/css\&quot;&gt; code {max-height:300px !important} &lt;/style&gt; &#x60;&#x60;&#x60;json {   \&quot;$schema\&quot;: \&quot;http://json-schema.org/draft-04/schema#\&quot;,   \&quot;title\&quot;: \&quot;Resource Metadata\&quot;,   \&quot;properties\&quot;: {     \&quot;aws_ec2_instance\&quot;: {       \&quot;properties\&quot;: {         \&quot;instance_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;region\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;instance_id\&quot;, \&quot;region\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;AWS EC2 Instance\&quot;     },     \&quot;aws_eks_cluster\&quot;: {       \&quot;properties\&quot;: {         \&quot;cluster_name\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;cluster_region\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;cluster_arn\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;cluster_name\&quot;, \&quot;cluster_region\&quot;, \&quot;cluster_arn\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;AWS EKS Cluster\&quot;     },     \&quot;aws_rds_instance\&quot;: {       \&quot;properties\&quot;: {         \&quot;instance_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;engine\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;region\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;resource_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;database_name\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [         \&quot;instance_id\&quot;,         \&quot;engine\&quot;,         \&quot;region\&quot;,         \&quot;resource_id\&quot;,         \&quot;database_name\&quot;       ],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;AWS RDS Instance\&quot;     },     \&quot;aws_role\&quot;: {       \&quot;properties\&quot;: {         \&quot;arn\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;name\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;arn\&quot;, \&quot;name\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;AWS Role\&quot;     },     \&quot;gcp_bucket\&quot;: {       \&quot;properties\&quot;: {         \&quot;bucket_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;bucket_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;GCP Bucket\&quot;     },     \&quot;gcp_compute_instance\&quot;: {       \&quot;properties\&quot;: {         \&quot;instance_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;project_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;zone\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;instance_id\&quot;, \&quot;project_id\&quot;, \&quot;zone\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;GCP Compute Instance\&quot;     },     \&quot;gcp_folder\&quot;: {       \&quot;properties\&quot;: {         \&quot;folder_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;folder_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;GCP Folder\&quot;     },     \&quot;gcp_gke_cluster\&quot;: {       \&quot;properties\&quot;: {         \&quot;cluster_name\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;cluster_name\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;GCP GKE Cluster\&quot;     },     \&quot;gcp_project\&quot;: {       \&quot;properties\&quot;: {         \&quot;project_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;project_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;GCP Project\&quot;     },     \&quot;gcp_sql_instance\&quot;: {       \&quot;properties\&quot;: {         \&quot;instance_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;project_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;instance_id\&quot;, \&quot;project_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;GCP SQL Instance\&quot;     },     \&quot;git_hub_repo\&quot;: {       \&quot;properties\&quot;: {         \&quot;org_name\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;repo_name\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;org_name\&quot;, \&quot;repo_name\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;GitHub Repo\&quot;     },     \&quot;okta_directory_app\&quot;: {       \&quot;properties\&quot;: {         \&quot;app_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;logo_url\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;app_id\&quot;, \&quot;logo_url\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Okta Directory App\&quot;     },     \&quot;okta_directory_role\&quot;: {       \&quot;properties\&quot;: {         \&quot;role_type\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;role_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;role_type\&quot;, \&quot;role_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Okta Directory Role\&quot;     },     \&quot;salesforce_profile\&quot;: {       \&quot;properties\&quot;: {         \&quot;user_license\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;user_license\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Salesforce Profile\&quot;     }   },   \&quot;additionalProperties\&quot;: false,   \&quot;minProperties\&quot;: 1,   \&quot;maxProperties\&quot;: 1,   \&quot;type\&quot;: \&quot;object\&quot; } &#x60;&#x60;&#x60; | [optional] 
 **CustomRequestNotification** | Pointer to **string** | Custom request notification sent upon request approval. | [optional] 
 **RiskSensitivityOverride** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) |  | [optional] 
+**MatchRemoteName** | Pointer to **bool** | A bool representing whether or not the resource&#39;s name should be synced from the end system. When true, the name is overwritten with the remote name on each sync, so a &#x60;name&#x60; provided together with this field set to true will be replaced at the next sync. Defaults to false. | [optional] 
+**MatchRemoteDescription** | Pointer to **bool** | A bool representing whether or not the resource&#39;s description should be synced from the end system. When true, the description is overwritten with the remote description on each sync, so a &#x60;description&#x60; provided together with this field set to true will be replaced at the next sync. Defaults to false. | [optional] 
 
 ## Methods
 
@@ -242,6 +244,56 @@ SetRiskSensitivityOverride sets RiskSensitivityOverride field to given value.
 `func (o *CreateResourceInfo) HasRiskSensitivityOverride() bool`
 
 HasRiskSensitivityOverride returns a boolean if a field has been set.
+
+### GetMatchRemoteName
+
+`func (o *CreateResourceInfo) GetMatchRemoteName() bool`
+
+GetMatchRemoteName returns the MatchRemoteName field if non-nil, zero value otherwise.
+
+### GetMatchRemoteNameOk
+
+`func (o *CreateResourceInfo) GetMatchRemoteNameOk() (*bool, bool)`
+
+GetMatchRemoteNameOk returns a tuple with the MatchRemoteName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchRemoteName
+
+`func (o *CreateResourceInfo) SetMatchRemoteName(v bool)`
+
+SetMatchRemoteName sets MatchRemoteName field to given value.
+
+### HasMatchRemoteName
+
+`func (o *CreateResourceInfo) HasMatchRemoteName() bool`
+
+HasMatchRemoteName returns a boolean if a field has been set.
+
+### GetMatchRemoteDescription
+
+`func (o *CreateResourceInfo) GetMatchRemoteDescription() bool`
+
+GetMatchRemoteDescription returns the MatchRemoteDescription field if non-nil, zero value otherwise.
+
+### GetMatchRemoteDescriptionOk
+
+`func (o *CreateResourceInfo) GetMatchRemoteDescriptionOk() (*bool, bool)`
+
+GetMatchRemoteDescriptionOk returns a tuple with the MatchRemoteDescription field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchRemoteDescription
+
+`func (o *CreateResourceInfo) SetMatchRemoteDescription(v bool)`
+
+SetMatchRemoteDescription sets MatchRemoteDescription field to given value.
+
+### HasMatchRemoteDescription
+
+`func (o *CreateResourceInfo) HasMatchRemoteDescription() bool`
+
+HasMatchRemoteDescription returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
