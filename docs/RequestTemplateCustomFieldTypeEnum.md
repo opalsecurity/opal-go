@@ -11,6 +11,10 @@
 
 * `MULTI_CHOICE` (value: `"MULTI_CHOICE"`)
 
+* `MULTI_SELECT` (value: `"MULTI_SELECT"`)
+
+* `CALLOUT` (value: `"CALLOUT"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

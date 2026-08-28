@@ -32,6 +32,8 @@ Name | Type | Description | Notes
 **CustomRequestNotification** | Pointer to **string** | Custom request notification sent to the requester when the request is approved. | [optional] 
 **RiskSensitivity** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) | The risk sensitivity level for the group. When an override is set, this field will match that. | [optional] [readonly] 
 **RiskSensitivityOverride** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) |  | [optional] 
+**MatchRemoteName** | Pointer to **bool** | A bool representing whether or not the group&#39;s name is synced from the end system. When true, the name is overwritten with the remote name on each sync. Defaults to false. | [optional] 
+**MatchRemoteDescription** | Pointer to **bool** | A bool representing whether or not the group&#39;s description is synced from the end system. When true, the description is overwritten with the remote description on each sync. Defaults to false. | [optional] 
 **LastSuccessfulSync** | Pointer to [**SyncTask**](SyncTask.md) | Information about the last successful sync of this group. | [optional] [readonly] 
 
 ## Methods
@@ -747,6 +749,56 @@ SetRiskSensitivityOverride sets RiskSensitivityOverride field to given value.
 `func (o *Group) HasRiskSensitivityOverride() bool`
 
 HasRiskSensitivityOverride returns a boolean if a field has been set.
+
+### GetMatchRemoteName
+
+`func (o *Group) GetMatchRemoteName() bool`
+
+GetMatchRemoteName returns the MatchRemoteName field if non-nil, zero value otherwise.
+
+### GetMatchRemoteNameOk
+
+`func (o *Group) GetMatchRemoteNameOk() (*bool, bool)`
+
+GetMatchRemoteNameOk returns a tuple with the MatchRemoteName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchRemoteName
+
+`func (o *Group) SetMatchRemoteName(v bool)`
+
+SetMatchRemoteName sets MatchRemoteName field to given value.
+
+### HasMatchRemoteName
+
+`func (o *Group) HasMatchRemoteName() bool`
+
+HasMatchRemoteName returns a boolean if a field has been set.
+
+### GetMatchRemoteDescription
+
+`func (o *Group) GetMatchRemoteDescription() bool`
+
+GetMatchRemoteDescription returns the MatchRemoteDescription field if non-nil, zero value otherwise.
+
+### GetMatchRemoteDescriptionOk
+
+`func (o *Group) GetMatchRemoteDescriptionOk() (*bool, bool)`
+
+GetMatchRemoteDescriptionOk returns a tuple with the MatchRemoteDescription field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchRemoteDescription
+
+`func (o *Group) SetMatchRemoteDescription(v bool)`
+
+SetMatchRemoteDescription sets MatchRemoteDescription field to given value.
+
+### HasMatchRemoteDescription
+
+`func (o *Group) HasMatchRemoteDescription() bool`
+
+HasMatchRemoteDescription returns a boolean if a field has been set.
 
 ### GetLastSuccessfulSync
 
