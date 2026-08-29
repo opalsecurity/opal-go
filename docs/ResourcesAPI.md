@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**DeleteResourceNhi**](ResourcesAPI.md#DeleteResourceNhi) | **Delete** /resources/{resource_id}/non-human-identities/{non_human_identity_id} | 
 [**DeleteResourceUser**](ResourcesAPI.md#DeleteResourceUser) | **Delete** /resources/{resource_id}/users/{user_id} | 
 [**GetResource**](ResourcesAPI.md#GetResource) | **Get** /resources/{resource_id} | Get resource by ID
+[**GetResourceAccessLevels**](ResourcesAPI.md#GetResourceAccessLevels) | **Get** /resources/{resource_id}/access_levels | Get resource access levels
 [**GetResourceGroups**](ResourcesAPI.md#GetResourceGroups) | **Get** /resources/{resource_id}/groups | 
 [**GetResourceMessageChannels**](ResourcesAPI.md#GetResourceMessageChannels) | **Get** /resources/{resource_id}/message-channels | 
 [**GetResourceNhis**](ResourcesAPI.md#GetResourceNhis) | **Get** /resources/{resource_id}/non-human-identities | 
@@ -523,6 +524,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Resource**](Resource.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetResourceAccessLevels
+
+> ResourceAccessLevelList GetResourceAccessLevels(ctx, resourceId).Execute()
+
+Get resource access levels
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the resource whose access levels to return.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.GetResourceAccessLevels(context.Background(), resourceId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetResourceAccessLevels``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetResourceAccessLevels`: ResourceAccessLevelList
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.GetResourceAccessLevels`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource whose access levels to return. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetResourceAccessLevelsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ResourceAccessLevelList**](ResourceAccessLevelList.md)
 
 ### Authorization
 
