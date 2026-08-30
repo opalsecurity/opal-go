@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## RunOpalQuery
 
-> OpalNodeQueryResults RunOpalQuery(ctx).Body(body).Execute()
+> OpalQueryResults RunOpalQuery(ctx).RunOpalQueryRequest(runOpalQueryRequest).Execute()
 
 Run an ad-hoc OpalQuery
 
@@ -29,16 +29,16 @@ import (
 )
 
 func main() {
-	body := OpalNodeQuery(987) // OpalNodeQuery | 
+	runOpalQueryRequest := openapiclient.RunOpalQueryRequest{OpalAccessPathQuery: openapiclient.NewOpalAccessPathQuery("Type_example")} // RunOpalQueryRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OpalQueriesAPI.RunOpalQuery(context.Background()).Body(body).Execute()
+	resp, r, err := apiClient.OpalQueriesAPI.RunOpalQuery(context.Background()).RunOpalQueryRequest(runOpalQueryRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OpalQueriesAPI.RunOpalQuery``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RunOpalQuery`: OpalNodeQueryResults
+	// response from `RunOpalQuery`: OpalQueryResults
 	fmt.Fprintf(os.Stdout, "Response from `OpalQueriesAPI.RunOpalQuery`: %v\n", resp)
 }
 ```
@@ -54,11 +54,11 @@ Other parameters are passed through a pointer to a apiRunOpalQueryRequest struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **OpalNodeQuery** |  | 
+ **runOpalQueryRequest** | [**RunOpalQueryRequest**](RunOpalQueryRequest.md) |  | 
 
 ### Return type
 
-[**OpalNodeQueryResults**](OpalNodeQueryResults.md)
+[**OpalQueryResults**](OpalQueryResults.md)
 
 ### Authorization
 
