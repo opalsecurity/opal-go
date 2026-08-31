@@ -58,6 +58,10 @@ type UpdateResourceInfo struct {
 	// Custom request notification sent upon request approval.
 	CustomRequestNotification *string `json:"custom_request_notification,omitempty"`
 	RiskSensitivityOverride *RiskSensitivityEnum `json:"risk_sensitivity_override,omitempty"`
+	// A bool representing whether or not the resource's name should be synced from the end system. When true, the name is overwritten with the remote name on each sync, so a `name` provided together with this field set to true will be replaced at the next sync. If not provided, the current value is left unchanged.
+	MatchRemoteName *bool `json:"match_remote_name,omitempty"`
+	// A bool representing whether or not the resource's description should be synced from the end system. When true, the description is overwritten with the remote description on each sync, so a `description` provided together with this field set to true will be replaced at the next sync. If not provided, the current value is left unchanged.
+	MatchRemoteDescription *bool `json:"match_remote_description,omitempty"`
 	// The ID of the associated configuration template.
 	ConfigurationTemplateId *string `json:"configuration_template_id,omitempty"`
 	// The ID of the associated request template. Deprecated in favor of `request_configurations`.
@@ -624,6 +628,70 @@ func (o *UpdateResourceInfo) SetRiskSensitivityOverride(v RiskSensitivityEnum) {
 	o.RiskSensitivityOverride = &v
 }
 
+// GetMatchRemoteName returns the MatchRemoteName field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetMatchRemoteName() bool {
+	if o == nil || IsNil(o.MatchRemoteName) {
+		var ret bool
+		return ret
+	}
+	return *o.MatchRemoteName
+}
+
+// GetMatchRemoteNameOk returns a tuple with the MatchRemoteName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceInfo) GetMatchRemoteNameOk() (*bool, bool) {
+	if o == nil || IsNil(o.MatchRemoteName) {
+		return nil, false
+	}
+	return o.MatchRemoteName, true
+}
+
+// HasMatchRemoteName returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasMatchRemoteName() bool {
+	if o != nil && !IsNil(o.MatchRemoteName) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatchRemoteName gets a reference to the given bool and assigns it to the MatchRemoteName field.
+func (o *UpdateResourceInfo) SetMatchRemoteName(v bool) {
+	o.MatchRemoteName = &v
+}
+
+// GetMatchRemoteDescription returns the MatchRemoteDescription field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetMatchRemoteDescription() bool {
+	if o == nil || IsNil(o.MatchRemoteDescription) {
+		var ret bool
+		return ret
+	}
+	return *o.MatchRemoteDescription
+}
+
+// GetMatchRemoteDescriptionOk returns a tuple with the MatchRemoteDescription field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceInfo) GetMatchRemoteDescriptionOk() (*bool, bool) {
+	if o == nil || IsNil(o.MatchRemoteDescription) {
+		return nil, false
+	}
+	return o.MatchRemoteDescription, true
+}
+
+// HasMatchRemoteDescription returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasMatchRemoteDescription() bool {
+	if o != nil && !IsNil(o.MatchRemoteDescription) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatchRemoteDescription gets a reference to the given bool and assigns it to the MatchRemoteDescription field.
+func (o *UpdateResourceInfo) SetMatchRemoteDescription(v bool) {
+	o.MatchRemoteDescription = &v
+}
+
 // GetConfigurationTemplateId returns the ConfigurationTemplateId field value if set, zero value otherwise.
 func (o *UpdateResourceInfo) GetConfigurationTemplateId() string {
 	if o == nil || IsNil(o.ConfigurationTemplateId) {
@@ -916,6 +984,12 @@ func (o UpdateResourceInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RiskSensitivityOverride) {
 		toSerialize["risk_sensitivity_override"] = o.RiskSensitivityOverride
 	}
+	if !IsNil(o.MatchRemoteName) {
+		toSerialize["match_remote_name"] = o.MatchRemoteName
+	}
+	if !IsNil(o.MatchRemoteDescription) {
+		toSerialize["match_remote_description"] = o.MatchRemoteDescription
+	}
 	if !IsNil(o.ConfigurationTemplateId) {
 		toSerialize["configuration_template_id"] = o.ConfigurationTemplateId
 	}
@@ -996,6 +1070,8 @@ func (o *UpdateResourceInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ticket_propagation")
 		delete(additionalProperties, "custom_request_notification")
 		delete(additionalProperties, "risk_sensitivity_override")
+		delete(additionalProperties, "match_remote_name")
+		delete(additionalProperties, "match_remote_description")
 		delete(additionalProperties, "configuration_template_id")
 		delete(additionalProperties, "request_template_id")
 		delete(additionalProperties, "is_requestable")
