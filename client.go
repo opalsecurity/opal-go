@@ -56,6 +56,8 @@ type APIClient struct {
 
 	BundlesAPI *BundlesAPIService
 
+	CampaignsAPI *CampaignsAPIService
+
 	ConfigurationTemplatesAPI *ConfigurationTemplatesAPIService
 
 	DelegationsAPI *DelegationsAPIService
@@ -79,6 +81,10 @@ type APIClient struct {
 	OpalQueriesAPI *OpalQueriesAPIService
 
 	OwnersAPI *OwnersAPIService
+
+	PaladinAPI *PaladinAPIService
+
+	RequestTemplatesAPI *RequestTemplatesAPIService
 
 	RequestsAPI *RequestsAPIService
 
@@ -114,6 +120,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AccessRulesAPI = (*AccessRulesAPIService)(&c.common)
 	c.AppsAPI = (*AppsAPIService)(&c.common)
 	c.BundlesAPI = (*BundlesAPIService)(&c.common)
+	c.CampaignsAPI = (*CampaignsAPIService)(&c.common)
 	c.ConfigurationTemplatesAPI = (*ConfigurationTemplatesAPIService)(&c.common)
 	c.DelegationsAPI = (*DelegationsAPIService)(&c.common)
 	c.EventStreamsAPI = (*EventStreamsAPIService)(&c.common)
@@ -126,6 +133,8 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.OnCallSchedulesAPI = (*OnCallSchedulesAPIService)(&c.common)
 	c.OpalQueriesAPI = (*OpalQueriesAPIService)(&c.common)
 	c.OwnersAPI = (*OwnersAPIService)(&c.common)
+	c.PaladinAPI = (*PaladinAPIService)(&c.common)
+	c.RequestTemplatesAPI = (*RequestTemplatesAPIService)(&c.common)
 	c.RequestsAPI = (*RequestsAPIService)(&c.common)
 	c.ResourcesAPI = (*ResourcesAPIService)(&c.common)
 	c.SessionsAPI = (*SessionsAPIService)(&c.common)
@@ -556,7 +565,10 @@ func addFile(w *multipart.Writer, fieldName, path string) error {
 	if err != nil {
 		return err
 	}
-	defer file.Close()
+	err = file.Close()
+	if err != nil {
+		return err
+	}
 
 	part, err := w.CreateFormFile(fieldName, filepath.Base(path))
 	if err != nil {
