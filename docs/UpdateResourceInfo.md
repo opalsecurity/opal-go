@@ -20,6 +20,8 @@ Name | Type | Description | Notes
 **TicketPropagation** | Pointer to [**TicketPropagationConfiguration**](TicketPropagationConfiguration.md) |  | [optional] 
 **CustomRequestNotification** | Pointer to **string** | Custom request notification sent upon request approval. | [optional] 
 **RiskSensitivityOverride** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) |  | [optional] 
+**MatchRemoteName** | Pointer to **bool** | A bool representing whether or not the resource&#39;s name should be synced from the end system. When true, the name is overwritten with the remote name on each sync, so a &#x60;name&#x60; provided together with this field set to true will be replaced at the next sync. If not provided, the current value is left unchanged. | [optional] 
+**MatchRemoteDescription** | Pointer to **bool** | A bool representing whether or not the resource&#39;s description should be synced from the end system. When true, the description is overwritten with the remote description on each sync, so a &#x60;description&#x60; provided together with this field set to true will be replaced at the next sync. If not provided, the current value is left unchanged. | [optional] 
 **ConfigurationTemplateId** | Pointer to **string** | The ID of the associated configuration template. | [optional] 
 **RequestTemplateId** | Pointer to **string** | The ID of the associated request template. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this resource. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
@@ -441,6 +443,56 @@ SetRiskSensitivityOverride sets RiskSensitivityOverride field to given value.
 `func (o *UpdateResourceInfo) HasRiskSensitivityOverride() bool`
 
 HasRiskSensitivityOverride returns a boolean if a field has been set.
+
+### GetMatchRemoteName
+
+`func (o *UpdateResourceInfo) GetMatchRemoteName() bool`
+
+GetMatchRemoteName returns the MatchRemoteName field if non-nil, zero value otherwise.
+
+### GetMatchRemoteNameOk
+
+`func (o *UpdateResourceInfo) GetMatchRemoteNameOk() (*bool, bool)`
+
+GetMatchRemoteNameOk returns a tuple with the MatchRemoteName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchRemoteName
+
+`func (o *UpdateResourceInfo) SetMatchRemoteName(v bool)`
+
+SetMatchRemoteName sets MatchRemoteName field to given value.
+
+### HasMatchRemoteName
+
+`func (o *UpdateResourceInfo) HasMatchRemoteName() bool`
+
+HasMatchRemoteName returns a boolean if a field has been set.
+
+### GetMatchRemoteDescription
+
+`func (o *UpdateResourceInfo) GetMatchRemoteDescription() bool`
+
+GetMatchRemoteDescription returns the MatchRemoteDescription field if non-nil, zero value otherwise.
+
+### GetMatchRemoteDescriptionOk
+
+`func (o *UpdateResourceInfo) GetMatchRemoteDescriptionOk() (*bool, bool)`
+
+GetMatchRemoteDescriptionOk returns a tuple with the MatchRemoteDescription field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchRemoteDescription
+
+`func (o *UpdateResourceInfo) SetMatchRemoteDescription(v bool)`
+
+SetMatchRemoteDescription sets MatchRemoteDescription field to given value.
+
+### HasMatchRemoteDescription
+
+`func (o *UpdateResourceInfo) HasMatchRemoteDescription() bool`
+
+HasMatchRemoteDescription returns a boolean if a field has been set.
 
 ### GetConfigurationTemplateId
 
