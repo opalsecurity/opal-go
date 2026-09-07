@@ -29,7 +29,7 @@ type RequestConfiguration struct {
 	AutoApproval bool `json:"auto_approval"`
 	// A bool representing whether or not to require MFA for requesting access to this resource.
 	RequireMfaToRequest bool `json:"require_mfa_to_request"`
-	// The maximum duration for which the resource can be requested (in minutes).
+	// The maximum duration for which the resource can be requested (in minutes). Capped at 1 year (525600) unless a longer maximum has been enabled for your organization. Use -1 for an indefinite duration.
 	MaxDurationMinutes *int32 `json:"max_duration_minutes,omitempty"`
 	// The recommended duration for which the resource should be requested (in minutes). -1 represents an indefinite duration.
 	RecommendedDurationMinutes *int32 `json:"recommended_duration_minutes,omitempty"`
