@@ -49,6 +49,13 @@ type GroupRemoteInfo struct {
 	SlackUserGroup *GroupRemoteInfoSlackUserGroup `json:"slack_user_group,omitempty"`
 	ZendeskOrganization *GroupRemoteInfoZendeskOrganization `json:"zendesk_organization,omitempty"`
 	HubspotTeam *GroupRemoteInfoHubspotTeam `json:"hubspot_team,omitempty"`
+	TableauGroup *GroupRemoteInfoTableauGroup `json:"tableau_group,omitempty"`
+	ConfluenceGroup *GroupRemoteInfoConfluenceGroup `json:"confluence_group,omitempty"`
+	JiraGroup *GroupRemoteInfoJiraGroup `json:"jira_group,omitempty"`
+	DocusignGroup *GroupRemoteInfoDocusignGroup `json:"docusign_group,omitempty"`
+	ZoomGroup *GroupRemoteInfoZoomGroup `json:"zoom_group,omitempty"`
+	DocusignSigningGroup *GroupRemoteInfoDocusignSigningGroup `json:"docusign_signing_group,omitempty"`
+	LinearTeam *GroupRemoteInfoLinearTeam `json:"linear_team,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -999,6 +1006,230 @@ func (o *GroupRemoteInfo) SetHubspotTeam(v GroupRemoteInfoHubspotTeam) {
 	o.HubspotTeam = &v
 }
 
+// GetTableauGroup returns the TableauGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetTableauGroup() GroupRemoteInfoTableauGroup {
+	if o == nil || IsNil(o.TableauGroup) {
+		var ret GroupRemoteInfoTableauGroup
+		return ret
+	}
+	return *o.TableauGroup
+}
+
+// GetTableauGroupOk returns a tuple with the TableauGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetTableauGroupOk() (*GroupRemoteInfoTableauGroup, bool) {
+	if o == nil || IsNil(o.TableauGroup) {
+		return nil, false
+	}
+	return o.TableauGroup, true
+}
+
+// HasTableauGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasTableauGroup() bool {
+	if o != nil && !IsNil(o.TableauGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetTableauGroup gets a reference to the given GroupRemoteInfoTableauGroup and assigns it to the TableauGroup field.
+func (o *GroupRemoteInfo) SetTableauGroup(v GroupRemoteInfoTableauGroup) {
+	o.TableauGroup = &v
+}
+
+// GetConfluenceGroup returns the ConfluenceGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetConfluenceGroup() GroupRemoteInfoConfluenceGroup {
+	if o == nil || IsNil(o.ConfluenceGroup) {
+		var ret GroupRemoteInfoConfluenceGroup
+		return ret
+	}
+	return *o.ConfluenceGroup
+}
+
+// GetConfluenceGroupOk returns a tuple with the ConfluenceGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetConfluenceGroupOk() (*GroupRemoteInfoConfluenceGroup, bool) {
+	if o == nil || IsNil(o.ConfluenceGroup) {
+		return nil, false
+	}
+	return o.ConfluenceGroup, true
+}
+
+// HasConfluenceGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasConfluenceGroup() bool {
+	if o != nil && !IsNil(o.ConfluenceGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfluenceGroup gets a reference to the given GroupRemoteInfoConfluenceGroup and assigns it to the ConfluenceGroup field.
+func (o *GroupRemoteInfo) SetConfluenceGroup(v GroupRemoteInfoConfluenceGroup) {
+	o.ConfluenceGroup = &v
+}
+
+// GetJiraGroup returns the JiraGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetJiraGroup() GroupRemoteInfoJiraGroup {
+	if o == nil || IsNil(o.JiraGroup) {
+		var ret GroupRemoteInfoJiraGroup
+		return ret
+	}
+	return *o.JiraGroup
+}
+
+// GetJiraGroupOk returns a tuple with the JiraGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetJiraGroupOk() (*GroupRemoteInfoJiraGroup, bool) {
+	if o == nil || IsNil(o.JiraGroup) {
+		return nil, false
+	}
+	return o.JiraGroup, true
+}
+
+// HasJiraGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasJiraGroup() bool {
+	if o != nil && !IsNil(o.JiraGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetJiraGroup gets a reference to the given GroupRemoteInfoJiraGroup and assigns it to the JiraGroup field.
+func (o *GroupRemoteInfo) SetJiraGroup(v GroupRemoteInfoJiraGroup) {
+	o.JiraGroup = &v
+}
+
+// GetDocusignGroup returns the DocusignGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetDocusignGroup() GroupRemoteInfoDocusignGroup {
+	if o == nil || IsNil(o.DocusignGroup) {
+		var ret GroupRemoteInfoDocusignGroup
+		return ret
+	}
+	return *o.DocusignGroup
+}
+
+// GetDocusignGroupOk returns a tuple with the DocusignGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetDocusignGroupOk() (*GroupRemoteInfoDocusignGroup, bool) {
+	if o == nil || IsNil(o.DocusignGroup) {
+		return nil, false
+	}
+	return o.DocusignGroup, true
+}
+
+// HasDocusignGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasDocusignGroup() bool {
+	if o != nil && !IsNil(o.DocusignGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetDocusignGroup gets a reference to the given GroupRemoteInfoDocusignGroup and assigns it to the DocusignGroup field.
+func (o *GroupRemoteInfo) SetDocusignGroup(v GroupRemoteInfoDocusignGroup) {
+	o.DocusignGroup = &v
+}
+
+// GetZoomGroup returns the ZoomGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetZoomGroup() GroupRemoteInfoZoomGroup {
+	if o == nil || IsNil(o.ZoomGroup) {
+		var ret GroupRemoteInfoZoomGroup
+		return ret
+	}
+	return *o.ZoomGroup
+}
+
+// GetZoomGroupOk returns a tuple with the ZoomGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetZoomGroupOk() (*GroupRemoteInfoZoomGroup, bool) {
+	if o == nil || IsNil(o.ZoomGroup) {
+		return nil, false
+	}
+	return o.ZoomGroup, true
+}
+
+// HasZoomGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasZoomGroup() bool {
+	if o != nil && !IsNil(o.ZoomGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetZoomGroup gets a reference to the given GroupRemoteInfoZoomGroup and assigns it to the ZoomGroup field.
+func (o *GroupRemoteInfo) SetZoomGroup(v GroupRemoteInfoZoomGroup) {
+	o.ZoomGroup = &v
+}
+
+// GetDocusignSigningGroup returns the DocusignSigningGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetDocusignSigningGroup() GroupRemoteInfoDocusignSigningGroup {
+	if o == nil || IsNil(o.DocusignSigningGroup) {
+		var ret GroupRemoteInfoDocusignSigningGroup
+		return ret
+	}
+	return *o.DocusignSigningGroup
+}
+
+// GetDocusignSigningGroupOk returns a tuple with the DocusignSigningGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetDocusignSigningGroupOk() (*GroupRemoteInfoDocusignSigningGroup, bool) {
+	if o == nil || IsNil(o.DocusignSigningGroup) {
+		return nil, false
+	}
+	return o.DocusignSigningGroup, true
+}
+
+// HasDocusignSigningGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasDocusignSigningGroup() bool {
+	if o != nil && !IsNil(o.DocusignSigningGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetDocusignSigningGroup gets a reference to the given GroupRemoteInfoDocusignSigningGroup and assigns it to the DocusignSigningGroup field.
+func (o *GroupRemoteInfo) SetDocusignSigningGroup(v GroupRemoteInfoDocusignSigningGroup) {
+	o.DocusignSigningGroup = &v
+}
+
+// GetLinearTeam returns the LinearTeam field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetLinearTeam() GroupRemoteInfoLinearTeam {
+	if o == nil || IsNil(o.LinearTeam) {
+		var ret GroupRemoteInfoLinearTeam
+		return ret
+	}
+	return *o.LinearTeam
+}
+
+// GetLinearTeamOk returns a tuple with the LinearTeam field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetLinearTeamOk() (*GroupRemoteInfoLinearTeam, bool) {
+	if o == nil || IsNil(o.LinearTeam) {
+		return nil, false
+	}
+	return o.LinearTeam, true
+}
+
+// HasLinearTeam returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasLinearTeam() bool {
+	if o != nil && !IsNil(o.LinearTeam) {
+		return true
+	}
+
+	return false
+}
+
+// SetLinearTeam gets a reference to the given GroupRemoteInfoLinearTeam and assigns it to the LinearTeam field.
+func (o *GroupRemoteInfo) SetLinearTeam(v GroupRemoteInfoLinearTeam) {
+	o.LinearTeam = &v
+}
+
 func (o GroupRemoteInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -1096,6 +1327,27 @@ func (o GroupRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HubspotTeam) {
 		toSerialize["hubspot_team"] = o.HubspotTeam
 	}
+	if !IsNil(o.TableauGroup) {
+		toSerialize["tableau_group"] = o.TableauGroup
+	}
+	if !IsNil(o.ConfluenceGroup) {
+		toSerialize["confluence_group"] = o.ConfluenceGroup
+	}
+	if !IsNil(o.JiraGroup) {
+		toSerialize["jira_group"] = o.JiraGroup
+	}
+	if !IsNil(o.DocusignGroup) {
+		toSerialize["docusign_group"] = o.DocusignGroup
+	}
+	if !IsNil(o.ZoomGroup) {
+		toSerialize["zoom_group"] = o.ZoomGroup
+	}
+	if !IsNil(o.DocusignSigningGroup) {
+		toSerialize["docusign_signing_group"] = o.DocusignSigningGroup
+	}
+	if !IsNil(o.LinearTeam) {
+		toSerialize["linear_team"] = o.LinearTeam
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1147,6 +1399,13 @@ func (o *GroupRemoteInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "slack_user_group")
 		delete(additionalProperties, "zendesk_organization")
 		delete(additionalProperties, "hubspot_team")
+		delete(additionalProperties, "tableau_group")
+		delete(additionalProperties, "confluence_group")
+		delete(additionalProperties, "jira_group")
+		delete(additionalProperties, "docusign_group")
+		delete(additionalProperties, "zoom_group")
+		delete(additionalProperties, "docusign_signing_group")
+		delete(additionalProperties, "linear_team")
 		o.AdditionalProperties = additionalProperties
 	}
 
