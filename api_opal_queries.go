@@ -26,22 +26,25 @@ type OpalQueriesAPIService service
 type ApiRunOpalQueryRequest struct {
 	ctx context.Context
 	ApiService *OpalQueriesAPIService
-	body *OpalNodeQuery
+	runOpalQueryRequest *RunOpalQueryRequest
 }
 
-func (r ApiRunOpalQueryRequest) Body(body OpalNodeQuery) ApiRunOpalQueryRequest {
-	r.body = &body
+func (r ApiRunOpalQueryRequest) RunOpalQueryRequest(runOpalQueryRequest RunOpalQueryRequest) ApiRunOpalQueryRequest {
+	r.runOpalQueryRequest = &runOpalQueryRequest
 	return r
 }
 
-func (r ApiRunOpalQueryRequest) Execute() (*OpalNodeQueryResults, *http.Response, error) {
+func (r ApiRunOpalQueryRequest) Execute() (*OpalQueryResults, *http.Response, error) {
 	return r.ApiService.RunOpalQueryExecute(r)
 }
 
 /*
 RunOpalQuery Run an ad-hoc OpalQuery
 
-Runs an ad-hoc OpalQuery and returns the results. Currently supports NODE queries (users, resources, groups). This endpoint is only available to our OpalQuery beta group. Please contact Opal support if you'd like to be added to the beta.
+Executes an ad-hoc OpalQuery and returns paginated results. Two query types are supported: a **Node** query filters and returns entities (users, resources, or groups); an **Access Path** query returns the access edges between principals and their entitlements. Set `type` to `NODE` or `ACCESS_PATH` in the request body to select the query type.
+
+This endpoint is available to OpalQuery beta participants. To request access, contact Opal support.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRunOpalQueryRequest
@@ -54,13 +57,13 @@ func (a *OpalQueriesAPIService) RunOpalQuery(ctx context.Context) ApiRunOpalQuer
 }
 
 // Execute executes the request
-//  @return OpalNodeQueryResults
-func (a *OpalQueriesAPIService) RunOpalQueryExecute(r ApiRunOpalQueryRequest) (*OpalNodeQueryResults, *http.Response, error) {
+//  @return OpalQueryResults
+func (a *OpalQueriesAPIService) RunOpalQueryExecute(r ApiRunOpalQueryRequest) (*OpalQueryResults, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OpalNodeQueryResults
+		localVarReturnValue  *OpalQueryResults
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OpalQueriesAPIService.RunOpalQuery")
@@ -73,8 +76,8 @@ func (a *OpalQueriesAPIService) RunOpalQueryExecute(r ApiRunOpalQueryRequest) (*
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.runOpalQueryRequest == nil {
+		return localVarReturnValue, nil, reportError("runOpalQueryRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -95,7 +98,7 @@ func (a *OpalQueriesAPIService) RunOpalQueryExecute(r ApiRunOpalQueryRequest) (*
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.runOpalQueryRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
