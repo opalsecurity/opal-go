@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// StringMatchType How to match a string value against entity names.
+// StringMatchType How to match a string value against entity names. REGEX matches the value as a case-insensitive regular expression.
 type StringMatchType string
 
 // List of StringMatchType
@@ -25,6 +25,7 @@ const (
 	STRINGMATCHTYPE_EQUALS StringMatchType = "EQUALS"
 	STRINGMATCHTYPE_STARTS_WITH StringMatchType = "STARTS_WITH"
 	STRINGMATCHTYPE_ENDS_WITH StringMatchType = "ENDS_WITH"
+	STRINGMATCHTYPE_REGEX StringMatchType = "REGEX"
 )
 
 // All allowed values of StringMatchType enum
@@ -33,6 +34,7 @@ var AllowedStringMatchTypeEnumValues = []StringMatchType{
 	"EQUALS",
 	"STARTS_WITH",
 	"ENDS_WITH",
+	"REGEX",
 }
 
 func (v *StringMatchType) UnmarshalJSON(src []byte) error {

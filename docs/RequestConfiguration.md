@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **AllowRequests** | **bool** | A bool representing whether or not to allow requests for this resource. | 
 **AutoApproval** | **bool** | A bool representing whether or not to automatically approve requests for this resource. | 
 **RequireMfaToRequest** | **bool** | A bool representing whether or not to require MFA for requesting access to this resource. | 
-**MaxDurationMinutes** | Pointer to **int32** | The maximum duration for which the resource can be requested (in minutes). | [optional] 
+**MaxDurationMinutes** | Pointer to **int32** | The maximum duration for which the resource can be requested (in minutes). Capped at 1 year (525600) unless a longer maximum has been enabled for your organization. Use -1 for an indefinite duration. | [optional] 
 **RecommendedDurationMinutes** | Pointer to **int32** | The recommended duration for which the resource should be requested (in minutes). -1 represents an indefinite duration. | [optional] 
 **RequireSupportTicket** | **bool** | A bool representing whether or not access requests to the resource require an access ticket. | 
 **ExtensionsDurationInMinutes** | Pointer to **int32** | The duration for which access can be extended (in minutes). Set to 0 to disable extensions. When &gt; 0, extensions are enabled for the specified duration. | [optional] 
