@@ -29,12 +29,14 @@ type RequestConfiguration struct {
 	AutoApproval bool `json:"auto_approval"`
 	// A bool representing whether or not to require MFA for requesting access to this resource.
 	RequireMfaToRequest bool `json:"require_mfa_to_request"`
-	// The maximum duration for which the resource can be requested (in minutes).
+	// The maximum duration for which the resource can be requested (in minutes). Capped at 1 year (525600) unless a longer maximum has been enabled for your organization. Use -1 for an indefinite duration.
 	MaxDurationMinutes *int32 `json:"max_duration_minutes,omitempty"`
 	// The recommended duration for which the resource should be requested (in minutes). -1 represents an indefinite duration.
 	RecommendedDurationMinutes *int32 `json:"recommended_duration_minutes,omitempty"`
 	// A bool representing whether or not access requests to the resource require an access ticket.
 	RequireSupportTicket bool `json:"require_support_ticket"`
+	// A bool representing whether the reason field is optional for requests.
+	ReasonOptional bool `json:"reason_optional"`
 	// The duration for which access can be extended (in minutes). Set to 0 to disable extensions. When > 0, extensions are enabled for the specified duration.
 	ExtensionsDurationInMinutes *int32 `json:"extensions_duration_in_minutes,omitempty"`
 	// The ID of the associated request template.
@@ -52,12 +54,13 @@ type _RequestConfiguration RequestConfiguration
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRequestConfiguration(allowRequests bool, autoApproval bool, requireMfaToRequest bool, requireSupportTicket bool, priority int32) *RequestConfiguration {
+func NewRequestConfiguration(allowRequests bool, autoApproval bool, requireMfaToRequest bool, requireSupportTicket bool, reasonOptional bool, priority int32) *RequestConfiguration {
 	this := RequestConfiguration{}
 	this.AllowRequests = allowRequests
 	this.AutoApproval = autoApproval
 	this.RequireMfaToRequest = requireMfaToRequest
 	this.RequireSupportTicket = requireSupportTicket
+	this.ReasonOptional = reasonOptional
 	this.Priority = priority
 	return &this
 }
@@ -262,6 +265,30 @@ func (o *RequestConfiguration) SetRequireSupportTicket(v bool) {
 	o.RequireSupportTicket = v
 }
 
+// GetReasonOptional returns the ReasonOptional field value
+func (o *RequestConfiguration) GetReasonOptional() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.ReasonOptional
+}
+
+// GetReasonOptionalOk returns a tuple with the ReasonOptional field value
+// and a boolean to check if the value has been set.
+func (o *RequestConfiguration) GetReasonOptionalOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ReasonOptional, true
+}
+
+// SetReasonOptional sets field value
+func (o *RequestConfiguration) SetReasonOptional(v bool) {
+	o.ReasonOptional = v
+}
+
 // GetExtensionsDurationInMinutes returns the ExtensionsDurationInMinutes field value if set, zero value otherwise.
 func (o *RequestConfiguration) GetExtensionsDurationInMinutes() int32 {
 	if o == nil || IsNil(o.ExtensionsDurationInMinutes) {
@@ -405,6 +432,7 @@ func (o RequestConfiguration) ToMap() (map[string]interface{}, error) {
 		toSerialize["recommended_duration_minutes"] = o.RecommendedDurationMinutes
 	}
 	toSerialize["require_support_ticket"] = o.RequireSupportTicket
+	toSerialize["reason_optional"] = o.ReasonOptional
 	if !IsNil(o.ExtensionsDurationInMinutes) {
 		toSerialize["extensions_duration_in_minutes"] = o.ExtensionsDurationInMinutes
 	}
@@ -432,6 +460,7 @@ func (o *RequestConfiguration) UnmarshalJSON(data []byte) (err error) {
 		"auto_approval",
 		"require_mfa_to_request",
 		"require_support_ticket",
+		"reason_optional",
 		"priority",
 	}
 
@@ -469,6 +498,7 @@ func (o *RequestConfiguration) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "max_duration_minutes")
 		delete(additionalProperties, "recommended_duration_minutes")
 		delete(additionalProperties, "require_support_ticket")
+		delete(additionalProperties, "reason_optional")
 		delete(additionalProperties, "extensions_duration_in_minutes")
 		delete(additionalProperties, "request_template_id")
 		delete(additionalProperties, "reviewer_stages")

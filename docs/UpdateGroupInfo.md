@@ -25,6 +25,8 @@ Name | Type | Description | Notes
 **RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) | The request configuration list of the configuration template. If not provided, the default request configuration will be used. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **CustomRequestNotification** | Pointer to **string** | Custom request notification sent to the requester when the request is approved. | [optional] 
 **RiskSensitivityOverride** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) |  | [optional] 
+**MatchRemoteName** | Pointer to **bool** | A bool representing whether or not the group&#39;s name should be synced from the end system. When true, the name is overwritten with the remote name on each sync, so a &#x60;name&#x60; provided together with this field set to true will be replaced at the next sync. If not provided, the current value is left unchanged. | [optional] 
+**MatchRemoteDescription** | Pointer to **bool** | A bool representing whether or not the group&#39;s description should be synced from the end system. When true, the description is overwritten with the remote description on each sync, so a &#x60;description&#x60; provided together with this field set to true will be replaced at the next sync. If not provided, the current value is left unchanged. | [optional] 
 
 ## Methods
 
@@ -564,6 +566,56 @@ SetRiskSensitivityOverride sets RiskSensitivityOverride field to given value.
 `func (o *UpdateGroupInfo) HasRiskSensitivityOverride() bool`
 
 HasRiskSensitivityOverride returns a boolean if a field has been set.
+
+### GetMatchRemoteName
+
+`func (o *UpdateGroupInfo) GetMatchRemoteName() bool`
+
+GetMatchRemoteName returns the MatchRemoteName field if non-nil, zero value otherwise.
+
+### GetMatchRemoteNameOk
+
+`func (o *UpdateGroupInfo) GetMatchRemoteNameOk() (*bool, bool)`
+
+GetMatchRemoteNameOk returns a tuple with the MatchRemoteName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchRemoteName
+
+`func (o *UpdateGroupInfo) SetMatchRemoteName(v bool)`
+
+SetMatchRemoteName sets MatchRemoteName field to given value.
+
+### HasMatchRemoteName
+
+`func (o *UpdateGroupInfo) HasMatchRemoteName() bool`
+
+HasMatchRemoteName returns a boolean if a field has been set.
+
+### GetMatchRemoteDescription
+
+`func (o *UpdateGroupInfo) GetMatchRemoteDescription() bool`
+
+GetMatchRemoteDescription returns the MatchRemoteDescription field if non-nil, zero value otherwise.
+
+### GetMatchRemoteDescriptionOk
+
+`func (o *UpdateGroupInfo) GetMatchRemoteDescriptionOk() (*bool, bool)`
+
+GetMatchRemoteDescriptionOk returns a tuple with the MatchRemoteDescription field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchRemoteDescription
+
+`func (o *UpdateGroupInfo) SetMatchRemoteDescription(v bool)`
+
+SetMatchRemoteDescription sets MatchRemoteDescription field to given value.
+
+### HasMatchRemoteDescription
+
+`func (o *UpdateGroupInfo) HasMatchRemoteDescription() bool`
+
+HasMatchRemoteDescription returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
