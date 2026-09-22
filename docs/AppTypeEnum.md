@@ -21,13 +21,19 @@
 
 * `CUSTOM` (value: `"CUSTOM"`)
 
+* `CONFLUENCE` (value: `"CONFLUENCE"`)
+
 * `CUSTOM_CONNECTOR` (value: `"CUSTOM_CONNECTOR"`)
 
 * `DATABRICKS` (value: `"DATABRICKS"`)
 
 * `DATASTAX_ASTRA` (value: `"DATASTAX_ASTRA"`)
 
+* `ALICLOUD` (value: `"ALICLOUD"`)
+
 * `DEVIN` (value: `"DEVIN"`)
+
+* `DOCUSIGN` (value: `"DOCUSIGN"`)
 
 * `DUO` (value: `"DUO"`)
 
@@ -49,7 +55,11 @@
 
 * `INCIDENTIO` (value: `"INCIDENTIO"`)
 
+* `JIRA` (value: `"JIRA"`)
+
 * `LDAP` (value: `"LDAP"`)
+
+* `LINEAR` (value: `"LINEAR"`)
 
 * `MARIADB` (value: `"MARIADB"`)
 
@@ -85,6 +95,8 @@
 
 * `SLACK` (value: `"SLACK"`)
 
+* `TABLEAU` (value: `"TABLEAU"`)
+
 * `TAILSCALE` (value: `"TAILSCALE"`)
 
 * `TELEPORT` (value: `"TELEPORT"`)
@@ -96,6 +108,14 @@
 * `WORKDAY` (value: `"WORKDAY"`)
 
 * `ZENDESK` (value: `"ZENDESK"`)
+
+* `ZOOM` (value: `"ZOOM"`)
+
+* `RAMP` (value: `"RAMP"`)
+
+* `WRIKE` (value: `"WRIKE"`)
+
+* `VERCEL` (value: `"VERCEL"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
