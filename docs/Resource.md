@@ -35,6 +35,8 @@ Name | Type | Description | Notes
 **RemoteInfo** | Pointer to [**ResourceRemoteInfo**](ResourceRemoteInfo.md) |  | [optional] 
 **AncestorResourceIds** | Pointer to **[]string** | List of resource IDs that are ancestors of this resource. | [optional] 
 **DescendantResourceIds** | Pointer to **[]string** | List of resource IDs that are descendants of this resource. | [optional] 
+**MatchRemoteName** | Pointer to **bool** | A bool representing whether or not the resource&#39;s name is synced from the end system. When true, the name is overwritten with the remote name on each sync. Defaults to false. | [optional] 
+**MatchRemoteDescription** | Pointer to **bool** | A bool representing whether or not the resource&#39;s description is synced from the end system. When true, the description is overwritten with the remote description on each sync. Defaults to false. | [optional] 
 **LastSuccessfulSync** | Pointer to [**SyncTask**](SyncTask.md) | Information about the last successful sync of this resource. | [optional] [readonly] 
 
 ## Methods
@@ -825,6 +827,56 @@ SetDescendantResourceIds sets DescendantResourceIds field to given value.
 `func (o *Resource) HasDescendantResourceIds() bool`
 
 HasDescendantResourceIds returns a boolean if a field has been set.
+
+### GetMatchRemoteName
+
+`func (o *Resource) GetMatchRemoteName() bool`
+
+GetMatchRemoteName returns the MatchRemoteName field if non-nil, zero value otherwise.
+
+### GetMatchRemoteNameOk
+
+`func (o *Resource) GetMatchRemoteNameOk() (*bool, bool)`
+
+GetMatchRemoteNameOk returns a tuple with the MatchRemoteName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchRemoteName
+
+`func (o *Resource) SetMatchRemoteName(v bool)`
+
+SetMatchRemoteName sets MatchRemoteName field to given value.
+
+### HasMatchRemoteName
+
+`func (o *Resource) HasMatchRemoteName() bool`
+
+HasMatchRemoteName returns a boolean if a field has been set.
+
+### GetMatchRemoteDescription
+
+`func (o *Resource) GetMatchRemoteDescription() bool`
+
+GetMatchRemoteDescription returns the MatchRemoteDescription field if non-nil, zero value otherwise.
+
+### GetMatchRemoteDescriptionOk
+
+`func (o *Resource) GetMatchRemoteDescriptionOk() (*bool, bool)`
+
+GetMatchRemoteDescriptionOk returns a tuple with the MatchRemoteDescription field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchRemoteDescription
+
+`func (o *Resource) SetMatchRemoteDescription(v bool)`
+
+SetMatchRemoteDescription sets MatchRemoteDescription field to given value.
+
+### HasMatchRemoteDescription
+
+`func (o *Resource) HasMatchRemoteDescription() bool`
+
+HasMatchRemoteDescription returns a boolean if a field has been set.
 
 ### GetLastSuccessfulSync
 
