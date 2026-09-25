@@ -8,9 +8,10 @@ Name | Type | Description | Notes
 **AllowRequests** | **bool** | A bool representing whether or not to allow requests for this resource. | 
 **AutoApproval** | **bool** | A bool representing whether or not to automatically approve requests for this resource. | 
 **RequireMfaToRequest** | **bool** | A bool representing whether or not to require MFA for requesting access to this resource. | 
-**MaxDurationMinutes** | Pointer to **int32** | The maximum duration for which the resource can be requested (in minutes). | [optional] 
+**MaxDurationMinutes** | Pointer to **int32** | The maximum duration for which the resource can be requested (in minutes). Capped at 1 year (525600) unless a longer maximum has been enabled for your organization. Use -1 for an indefinite duration. | [optional] 
 **RecommendedDurationMinutes** | Pointer to **int32** | The recommended duration for which the resource should be requested (in minutes). -1 represents an indefinite duration. | [optional] 
 **RequireSupportTicket** | **bool** | A bool representing whether or not access requests to the resource require an access ticket. | 
+**ReasonOptional** | Pointer to **bool** | A bool representing whether the reason field is optional for requests. | [optional] 
 **ExtensionsDurationInMinutes** | Pointer to **int32** | The duration for which access can be extended (in minutes). Set to 0 to disable extensions. When &gt; 0, extensions are enabled for the specified duration. | [optional] 
 **RequestTemplateId** | Pointer to **string** | The ID of the associated request template. | [optional] 
 **ReviewerStages** | Pointer to [**[]ReviewerStage**](ReviewerStage.md) | The list of reviewer stages for the request configuration. | [optional] 
@@ -189,6 +190,31 @@ and a boolean to check if the value has been set.
 
 SetRequireSupportTicket sets RequireSupportTicket field to given value.
 
+
+### GetReasonOptional
+
+`func (o *RequestConfiguration) GetReasonOptional() bool`
+
+GetReasonOptional returns the ReasonOptional field if non-nil, zero value otherwise.
+
+### GetReasonOptionalOk
+
+`func (o *RequestConfiguration) GetReasonOptionalOk() (*bool, bool)`
+
+GetReasonOptionalOk returns a tuple with the ReasonOptional field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReasonOptional
+
+`func (o *RequestConfiguration) SetReasonOptional(v bool)`
+
+SetReasonOptional sets ReasonOptional field to given value.
+
+### HasReasonOptional
+
+`func (o *RequestConfiguration) HasReasonOptional() bool`
+
+HasReasonOptional returns a boolean if a field has been set.
 
 ### GetExtensionsDurationInMinutes
 
