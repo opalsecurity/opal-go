@@ -6,9 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RequireManagerApproval** | **bool** | Whether this reviewer stage should require manager approval. | 
 **RequireAdminApproval** | Pointer to **bool** | Whether this reviewer stage should require admin approval. | [optional] 
-**Operator** | **string** | The operator of the reviewer stage. Admin and manager approval are also treated as reviewers. | 
+**Operator** | **string** | The operator of the reviewer stage. Admin and manager approval are also treated as reviewers. A stage that sets &#x60;escalation&#x60; must use &#x60;OR&#x60;; &#x60;AND&#x60; is rejected there, because the escalation timer joins the stage as an additional reviewer and would otherwise become a required approver that stalls every request until the timeout. | 
 **OwnerIds** | **[]string** | The IDs of owners assigned as reviewers for this stage. | 
 **ServiceUserIds** | Pointer to **[]string** | The IDs of service users assigned as reviewers for this stage. | [optional] 
+**Escalation** | Pointer to [**ReviewerStageEscalation**](ReviewerStageEscalation.md) |  | [optional] 
 
 ## Methods
 
@@ -138,6 +139,31 @@ SetServiceUserIds sets ServiceUserIds field to given value.
 `func (o *ReviewerStage) HasServiceUserIds() bool`
 
 HasServiceUserIds returns a boolean if a field has been set.
+
+### GetEscalation
+
+`func (o *ReviewerStage) GetEscalation() ReviewerStageEscalation`
+
+GetEscalation returns the Escalation field if non-nil, zero value otherwise.
+
+### GetEscalationOk
+
+`func (o *ReviewerStage) GetEscalationOk() (*ReviewerStageEscalation, bool)`
+
+GetEscalationOk returns a tuple with the Escalation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEscalation
+
+`func (o *ReviewerStage) SetEscalation(v ReviewerStageEscalation)`
+
+SetEscalation sets Escalation field to given value.
+
+### HasEscalation
+
+`func (o *ReviewerStage) HasEscalation() bool`
+
+HasEscalation returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
