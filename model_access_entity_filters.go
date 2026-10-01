@@ -25,7 +25,10 @@ type AccessEntityFilters struct {
 	// Filter by entity item types.
 	EntityItemTypes []EntityItemTypeEnum `json:"entityItemTypes,omitempty"`
 	EntityName *EntityNameFilter `json:"entityName,omitempty"`
+	EntityDescription *EntityDescriptionFilter `json:"entityDescription,omitempty"`
 	EntityTag *EntityTagFilter `json:"entityTag,omitempty"`
+	HrIdpStatus *IdpStatusFilter `json:"hrIdpStatus,omitempty"`
+	EntityAdminOwner *EntityAdminFilter `json:"entityAdminOwner,omitempty"`
 	// Filter by specific entity UUIDs.
 	EntityIDs []string `json:"entityIDs,omitempty"`
 	// Filter by app IDs from which returned nodes will be imported from.
@@ -158,6 +161,38 @@ func (o *AccessEntityFilters) SetEntityName(v EntityNameFilter) {
 	o.EntityName = &v
 }
 
+// GetEntityDescription returns the EntityDescription field value if set, zero value otherwise.
+func (o *AccessEntityFilters) GetEntityDescription() EntityDescriptionFilter {
+	if o == nil || IsNil(o.EntityDescription) {
+		var ret EntityDescriptionFilter
+		return ret
+	}
+	return *o.EntityDescription
+}
+
+// GetEntityDescriptionOk returns a tuple with the EntityDescription field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccessEntityFilters) GetEntityDescriptionOk() (*EntityDescriptionFilter, bool) {
+	if o == nil || IsNil(o.EntityDescription) {
+		return nil, false
+	}
+	return o.EntityDescription, true
+}
+
+// HasEntityDescription returns a boolean if a field has been set.
+func (o *AccessEntityFilters) HasEntityDescription() bool {
+	if o != nil && !IsNil(o.EntityDescription) {
+		return true
+	}
+
+	return false
+}
+
+// SetEntityDescription gets a reference to the given EntityDescriptionFilter and assigns it to the EntityDescription field.
+func (o *AccessEntityFilters) SetEntityDescription(v EntityDescriptionFilter) {
+	o.EntityDescription = &v
+}
+
 // GetEntityTag returns the EntityTag field value if set, zero value otherwise.
 func (o *AccessEntityFilters) GetEntityTag() EntityTagFilter {
 	if o == nil || IsNil(o.EntityTag) {
@@ -188,6 +223,70 @@ func (o *AccessEntityFilters) HasEntityTag() bool {
 // SetEntityTag gets a reference to the given EntityTagFilter and assigns it to the EntityTag field.
 func (o *AccessEntityFilters) SetEntityTag(v EntityTagFilter) {
 	o.EntityTag = &v
+}
+
+// GetHrIdpStatus returns the HrIdpStatus field value if set, zero value otherwise.
+func (o *AccessEntityFilters) GetHrIdpStatus() IdpStatusFilter {
+	if o == nil || IsNil(o.HrIdpStatus) {
+		var ret IdpStatusFilter
+		return ret
+	}
+	return *o.HrIdpStatus
+}
+
+// GetHrIdpStatusOk returns a tuple with the HrIdpStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccessEntityFilters) GetHrIdpStatusOk() (*IdpStatusFilter, bool) {
+	if o == nil || IsNil(o.HrIdpStatus) {
+		return nil, false
+	}
+	return o.HrIdpStatus, true
+}
+
+// HasHrIdpStatus returns a boolean if a field has been set.
+func (o *AccessEntityFilters) HasHrIdpStatus() bool {
+	if o != nil && !IsNil(o.HrIdpStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetHrIdpStatus gets a reference to the given IdpStatusFilter and assigns it to the HrIdpStatus field.
+func (o *AccessEntityFilters) SetHrIdpStatus(v IdpStatusFilter) {
+	o.HrIdpStatus = &v
+}
+
+// GetEntityAdminOwner returns the EntityAdminOwner field value if set, zero value otherwise.
+func (o *AccessEntityFilters) GetEntityAdminOwner() EntityAdminFilter {
+	if o == nil || IsNil(o.EntityAdminOwner) {
+		var ret EntityAdminFilter
+		return ret
+	}
+	return *o.EntityAdminOwner
+}
+
+// GetEntityAdminOwnerOk returns a tuple with the EntityAdminOwner field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccessEntityFilters) GetEntityAdminOwnerOk() (*EntityAdminFilter, bool) {
+	if o == nil || IsNil(o.EntityAdminOwner) {
+		return nil, false
+	}
+	return o.EntityAdminOwner, true
+}
+
+// HasEntityAdminOwner returns a boolean if a field has been set.
+func (o *AccessEntityFilters) HasEntityAdminOwner() bool {
+	if o != nil && !IsNil(o.EntityAdminOwner) {
+		return true
+	}
+
+	return false
+}
+
+// SetEntityAdminOwner gets a reference to the given EntityAdminFilter and assigns it to the EntityAdminOwner field.
+func (o *AccessEntityFilters) SetEntityAdminOwner(v EntityAdminFilter) {
+	o.EntityAdminOwner = &v
 }
 
 // GetEntityIDs returns the EntityIDs field value if set, zero value otherwise.
@@ -433,8 +532,17 @@ func (o AccessEntityFilters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EntityName) {
 		toSerialize["entityName"] = o.EntityName
 	}
+	if !IsNil(o.EntityDescription) {
+		toSerialize["entityDescription"] = o.EntityDescription
+	}
 	if !IsNil(o.EntityTag) {
 		toSerialize["entityTag"] = o.EntityTag
+	}
+	if !IsNil(o.HrIdpStatus) {
+		toSerialize["hrIdpStatus"] = o.HrIdpStatus
+	}
+	if !IsNil(o.EntityAdminOwner) {
+		toSerialize["entityAdminOwner"] = o.EntityAdminOwner
 	}
 	if !IsNil(o.EntityIDs) {
 		toSerialize["entityIDs"] = o.EntityIDs
@@ -482,7 +590,10 @@ func (o *AccessEntityFilters) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "entityTypes")
 		delete(additionalProperties, "entityItemTypes")
 		delete(additionalProperties, "entityName")
+		delete(additionalProperties, "entityDescription")
 		delete(additionalProperties, "entityTag")
+		delete(additionalProperties, "hrIdpStatus")
+		delete(additionalProperties, "entityAdminOwner")
 		delete(additionalProperties, "entityIDs")
 		delete(additionalProperties, "importedFromApp")
 		delete(additionalProperties, "roleRemoteIds")
