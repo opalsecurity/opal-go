@@ -30,8 +30,10 @@ type App struct {
 	// The ID of the owner of the app.
 	AdminOwnerId string `json:"admin_owner_id"`
 	AppType AppTypeEnum `json:"app_type"`
+	Visibility *VisibilityTypeEnum `json:"visibility,omitempty"`
 	// Validation checks of an apps' configuration and permissions.
 	Validations []AppValidation `json:"validations,omitempty"`
+	CustomConnector *CustomConnectorAppConfig `json:"custom_connector,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -179,6 +181,38 @@ func (o *App) SetAppType(v AppTypeEnum) {
 	o.AppType = v
 }
 
+// GetVisibility returns the Visibility field value if set, zero value otherwise.
+func (o *App) GetVisibility() VisibilityTypeEnum {
+	if o == nil || IsNil(o.Visibility) {
+		var ret VisibilityTypeEnum
+		return ret
+	}
+	return *o.Visibility
+}
+
+// GetVisibilityOk returns a tuple with the Visibility field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *App) GetVisibilityOk() (*VisibilityTypeEnum, bool) {
+	if o == nil || IsNil(o.Visibility) {
+		return nil, false
+	}
+	return o.Visibility, true
+}
+
+// HasVisibility returns a boolean if a field has been set.
+func (o *App) HasVisibility() bool {
+	if o != nil && !IsNil(o.Visibility) {
+		return true
+	}
+
+	return false
+}
+
+// SetVisibility gets a reference to the given VisibilityTypeEnum and assigns it to the Visibility field.
+func (o *App) SetVisibility(v VisibilityTypeEnum) {
+	o.Visibility = &v
+}
+
 // GetValidations returns the Validations field value if set, zero value otherwise.
 func (o *App) GetValidations() []AppValidation {
 	if o == nil || IsNil(o.Validations) {
@@ -211,6 +245,38 @@ func (o *App) SetValidations(v []AppValidation) {
 	o.Validations = v
 }
 
+// GetCustomConnector returns the CustomConnector field value if set, zero value otherwise.
+func (o *App) GetCustomConnector() CustomConnectorAppConfig {
+	if o == nil || IsNil(o.CustomConnector) {
+		var ret CustomConnectorAppConfig
+		return ret
+	}
+	return *o.CustomConnector
+}
+
+// GetCustomConnectorOk returns a tuple with the CustomConnector field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *App) GetCustomConnectorOk() (*CustomConnectorAppConfig, bool) {
+	if o == nil || IsNil(o.CustomConnector) {
+		return nil, false
+	}
+	return o.CustomConnector, true
+}
+
+// HasCustomConnector returns a boolean if a field has been set.
+func (o *App) HasCustomConnector() bool {
+	if o != nil && !IsNil(o.CustomConnector) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomConnector gets a reference to the given CustomConnectorAppConfig and assigns it to the CustomConnector field.
+func (o *App) SetCustomConnector(v CustomConnectorAppConfig) {
+	o.CustomConnector = &v
+}
+
 func (o App) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -226,8 +292,14 @@ func (o App) ToMap() (map[string]interface{}, error) {
 	toSerialize["description"] = o.Description
 	toSerialize["admin_owner_id"] = o.AdminOwnerId
 	toSerialize["app_type"] = o.AppType
+	if !IsNil(o.Visibility) {
+		toSerialize["visibility"] = o.Visibility
+	}
 	if !IsNil(o.Validations) {
 		toSerialize["validations"] = o.Validations
+	}
+	if !IsNil(o.CustomConnector) {
+		toSerialize["custom_connector"] = o.CustomConnector
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -281,7 +353,9 @@ func (o *App) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "admin_owner_id")
 		delete(additionalProperties, "app_type")
+		delete(additionalProperties, "visibility")
 		delete(additionalProperties, "validations")
+		delete(additionalProperties, "custom_connector")
 		o.AdditionalProperties = additionalProperties
 	}
 
