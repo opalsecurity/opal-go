@@ -9,7 +9,9 @@ Name | Type | Description | Notes
 **Description** | **string** | A description of the app. | 
 **AdminOwnerId** | **string** | The ID of the owner of the app. | 
 **AppType** | [**AppTypeEnum**](AppTypeEnum.md) |  | 
+**Visibility** | Pointer to [**VisibilityTypeEnum**](VisibilityTypeEnum.md) |  | [optional] 
 **Validations** | Pointer to [**[]AppValidation**](AppValidation.md) | Validation checks of an apps&#39; configuration and permissions. | [optional] 
+**CustomConnector** | Pointer to [**CustomConnectorAppConfig**](CustomConnectorAppConfig.md) |  | [optional] 
 
 ## Methods
 
@@ -130,6 +132,31 @@ and a boolean to check if the value has been set.
 SetAppType sets AppType field to given value.
 
 
+### GetVisibility
+
+`func (o *App) GetVisibility() VisibilityTypeEnum`
+
+GetVisibility returns the Visibility field if non-nil, zero value otherwise.
+
+### GetVisibilityOk
+
+`func (o *App) GetVisibilityOk() (*VisibilityTypeEnum, bool)`
+
+GetVisibilityOk returns a tuple with the Visibility field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVisibility
+
+`func (o *App) SetVisibility(v VisibilityTypeEnum)`
+
+SetVisibility sets Visibility field to given value.
+
+### HasVisibility
+
+`func (o *App) HasVisibility() bool`
+
+HasVisibility returns a boolean if a field has been set.
+
 ### GetValidations
 
 `func (o *App) GetValidations() []AppValidation`
@@ -154,6 +181,31 @@ SetValidations sets Validations field to given value.
 `func (o *App) HasValidations() bool`
 
 HasValidations returns a boolean if a field has been set.
+
+### GetCustomConnector
+
+`func (o *App) GetCustomConnector() CustomConnectorAppConfig`
+
+GetCustomConnector returns the CustomConnector field if non-nil, zero value otherwise.
+
+### GetCustomConnectorOk
+
+`func (o *App) GetCustomConnectorOk() (*CustomConnectorAppConfig, bool)`
+
+GetCustomConnectorOk returns a tuple with the CustomConnector field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomConnector
+
+`func (o *App) SetCustomConnector(v CustomConnectorAppConfig)`
+
+SetCustomConnector sets CustomConnector field to given value.
+
+### HasCustomConnector
+
+`func (o *App) HasCustomConnector() bool`
+
+HasCustomConnector returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
