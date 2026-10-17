@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **FirstName** | **string** | The first name of the user. | 
 **LastName** | **string** | The last name of the user. | 
 **Position** | **string** | The user&#39;s position. | 
+**ManagerId** | Pointer to **string** | The ID of the user&#39;s manager. Null if the user has no manager. | [optional] 
 **HrIdpStatus** | Pointer to [**UserHrIdpStatusEnum**](UserHrIdpStatusEnum.md) |  | [optional] 
 
 ## Methods
@@ -150,6 +151,31 @@ and a boolean to check if the value has been set.
 
 SetPosition sets Position field to given value.
 
+
+### GetManagerId
+
+`func (o *User) GetManagerId() string`
+
+GetManagerId returns the ManagerId field if non-nil, zero value otherwise.
+
+### GetManagerIdOk
+
+`func (o *User) GetManagerIdOk() (*string, bool)`
+
+GetManagerIdOk returns a tuple with the ManagerId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManagerId
+
+`func (o *User) SetManagerId(v string)`
+
+SetManagerId sets ManagerId field to given value.
+
+### HasManagerId
+
+`func (o *User) HasManagerId() bool`
+
+HasManagerId returns a boolean if a field has been set.
 
 ### GetHrIdpStatus
 
