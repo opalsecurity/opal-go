@@ -49,6 +49,23 @@ type GroupRemoteInfo struct {
 	SlackUserGroup *GroupRemoteInfoSlackUserGroup `json:"slack_user_group,omitempty"`
 	ZendeskOrganization *GroupRemoteInfoZendeskOrganization `json:"zendesk_organization,omitempty"`
 	HubspotTeam *GroupRemoteInfoHubspotTeam `json:"hubspot_team,omitempty"`
+	TableauGroup *GroupRemoteInfoTableauGroup `json:"tableau_group,omitempty"`
+	ConfluenceGroup *GroupRemoteInfoConfluenceGroup `json:"confluence_group,omitempty"`
+	JiraGroup *GroupRemoteInfoJiraGroup `json:"jira_group,omitempty"`
+	DocusignGroup *GroupRemoteInfoDocusignGroup `json:"docusign_group,omitempty"`
+	ZoomGroup *GroupRemoteInfoZoomGroup `json:"zoom_group,omitempty"`
+	RampDepartment *GroupRemoteInfoRampDepartment `json:"ramp_department,omitempty"`
+	RampLocation *GroupRemoteInfoRampLocation `json:"ramp_location,omitempty"`
+	WrikeGroup *GroupRemoteInfoWrikeGroup `json:"wrike_group,omitempty"`
+	AxiomGroup *GroupRemoteInfoAxiomGroup `json:"axiom_group,omitempty"`
+	DocusignSigningGroup *GroupRemoteInfoDocusignSigningGroup `json:"docusign_signing_group,omitempty"`
+	LinearTeam *GroupRemoteInfoLinearTeam `json:"linear_team,omitempty"`
+	AsanaTeam *GroupRemoteInfoAsanaTeam `json:"asana_team,omitempty"`
+	BitwardenGroup *GroupRemoteInfoBitwardenGroup `json:"bitwarden_group,omitempty"`
+	SquareLocation *GroupRemoteInfoSquareLocation `json:"square_location,omitempty"`
+	SquareJob *GroupRemoteInfoSquareJob `json:"square_job,omitempty"`
+	RipplingTeam *GroupRemoteInfoRipplingTeam `json:"rippling_team,omitempty"`
+	RipplingSupergroup *GroupRemoteInfoRipplingSupergroup `json:"rippling_supergroup,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -999,6 +1016,550 @@ func (o *GroupRemoteInfo) SetHubspotTeam(v GroupRemoteInfoHubspotTeam) {
 	o.HubspotTeam = &v
 }
 
+// GetTableauGroup returns the TableauGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetTableauGroup() GroupRemoteInfoTableauGroup {
+	if o == nil || IsNil(o.TableauGroup) {
+		var ret GroupRemoteInfoTableauGroup
+		return ret
+	}
+	return *o.TableauGroup
+}
+
+// GetTableauGroupOk returns a tuple with the TableauGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetTableauGroupOk() (*GroupRemoteInfoTableauGroup, bool) {
+	if o == nil || IsNil(o.TableauGroup) {
+		return nil, false
+	}
+	return o.TableauGroup, true
+}
+
+// HasTableauGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasTableauGroup() bool {
+	if o != nil && !IsNil(o.TableauGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetTableauGroup gets a reference to the given GroupRemoteInfoTableauGroup and assigns it to the TableauGroup field.
+func (o *GroupRemoteInfo) SetTableauGroup(v GroupRemoteInfoTableauGroup) {
+	o.TableauGroup = &v
+}
+
+// GetConfluenceGroup returns the ConfluenceGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetConfluenceGroup() GroupRemoteInfoConfluenceGroup {
+	if o == nil || IsNil(o.ConfluenceGroup) {
+		var ret GroupRemoteInfoConfluenceGroup
+		return ret
+	}
+	return *o.ConfluenceGroup
+}
+
+// GetConfluenceGroupOk returns a tuple with the ConfluenceGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetConfluenceGroupOk() (*GroupRemoteInfoConfluenceGroup, bool) {
+	if o == nil || IsNil(o.ConfluenceGroup) {
+		return nil, false
+	}
+	return o.ConfluenceGroup, true
+}
+
+// HasConfluenceGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasConfluenceGroup() bool {
+	if o != nil && !IsNil(o.ConfluenceGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfluenceGroup gets a reference to the given GroupRemoteInfoConfluenceGroup and assigns it to the ConfluenceGroup field.
+func (o *GroupRemoteInfo) SetConfluenceGroup(v GroupRemoteInfoConfluenceGroup) {
+	o.ConfluenceGroup = &v
+}
+
+// GetJiraGroup returns the JiraGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetJiraGroup() GroupRemoteInfoJiraGroup {
+	if o == nil || IsNil(o.JiraGroup) {
+		var ret GroupRemoteInfoJiraGroup
+		return ret
+	}
+	return *o.JiraGroup
+}
+
+// GetJiraGroupOk returns a tuple with the JiraGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetJiraGroupOk() (*GroupRemoteInfoJiraGroup, bool) {
+	if o == nil || IsNil(o.JiraGroup) {
+		return nil, false
+	}
+	return o.JiraGroup, true
+}
+
+// HasJiraGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasJiraGroup() bool {
+	if o != nil && !IsNil(o.JiraGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetJiraGroup gets a reference to the given GroupRemoteInfoJiraGroup and assigns it to the JiraGroup field.
+func (o *GroupRemoteInfo) SetJiraGroup(v GroupRemoteInfoJiraGroup) {
+	o.JiraGroup = &v
+}
+
+// GetDocusignGroup returns the DocusignGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetDocusignGroup() GroupRemoteInfoDocusignGroup {
+	if o == nil || IsNil(o.DocusignGroup) {
+		var ret GroupRemoteInfoDocusignGroup
+		return ret
+	}
+	return *o.DocusignGroup
+}
+
+// GetDocusignGroupOk returns a tuple with the DocusignGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetDocusignGroupOk() (*GroupRemoteInfoDocusignGroup, bool) {
+	if o == nil || IsNil(o.DocusignGroup) {
+		return nil, false
+	}
+	return o.DocusignGroup, true
+}
+
+// HasDocusignGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasDocusignGroup() bool {
+	if o != nil && !IsNil(o.DocusignGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetDocusignGroup gets a reference to the given GroupRemoteInfoDocusignGroup and assigns it to the DocusignGroup field.
+func (o *GroupRemoteInfo) SetDocusignGroup(v GroupRemoteInfoDocusignGroup) {
+	o.DocusignGroup = &v
+}
+
+// GetZoomGroup returns the ZoomGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetZoomGroup() GroupRemoteInfoZoomGroup {
+	if o == nil || IsNil(o.ZoomGroup) {
+		var ret GroupRemoteInfoZoomGroup
+		return ret
+	}
+	return *o.ZoomGroup
+}
+
+// GetZoomGroupOk returns a tuple with the ZoomGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetZoomGroupOk() (*GroupRemoteInfoZoomGroup, bool) {
+	if o == nil || IsNil(o.ZoomGroup) {
+		return nil, false
+	}
+	return o.ZoomGroup, true
+}
+
+// HasZoomGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasZoomGroup() bool {
+	if o != nil && !IsNil(o.ZoomGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetZoomGroup gets a reference to the given GroupRemoteInfoZoomGroup and assigns it to the ZoomGroup field.
+func (o *GroupRemoteInfo) SetZoomGroup(v GroupRemoteInfoZoomGroup) {
+	o.ZoomGroup = &v
+}
+
+// GetRampDepartment returns the RampDepartment field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetRampDepartment() GroupRemoteInfoRampDepartment {
+	if o == nil || IsNil(o.RampDepartment) {
+		var ret GroupRemoteInfoRampDepartment
+		return ret
+	}
+	return *o.RampDepartment
+}
+
+// GetRampDepartmentOk returns a tuple with the RampDepartment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetRampDepartmentOk() (*GroupRemoteInfoRampDepartment, bool) {
+	if o == nil || IsNil(o.RampDepartment) {
+		return nil, false
+	}
+	return o.RampDepartment, true
+}
+
+// HasRampDepartment returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasRampDepartment() bool {
+	if o != nil && !IsNil(o.RampDepartment) {
+		return true
+	}
+
+	return false
+}
+
+// SetRampDepartment gets a reference to the given GroupRemoteInfoRampDepartment and assigns it to the RampDepartment field.
+func (o *GroupRemoteInfo) SetRampDepartment(v GroupRemoteInfoRampDepartment) {
+	o.RampDepartment = &v
+}
+
+// GetRampLocation returns the RampLocation field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetRampLocation() GroupRemoteInfoRampLocation {
+	if o == nil || IsNil(o.RampLocation) {
+		var ret GroupRemoteInfoRampLocation
+		return ret
+	}
+	return *o.RampLocation
+}
+
+// GetRampLocationOk returns a tuple with the RampLocation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetRampLocationOk() (*GroupRemoteInfoRampLocation, bool) {
+	if o == nil || IsNil(o.RampLocation) {
+		return nil, false
+	}
+	return o.RampLocation, true
+}
+
+// HasRampLocation returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasRampLocation() bool {
+	if o != nil && !IsNil(o.RampLocation) {
+		return true
+	}
+
+	return false
+}
+
+// SetRampLocation gets a reference to the given GroupRemoteInfoRampLocation and assigns it to the RampLocation field.
+func (o *GroupRemoteInfo) SetRampLocation(v GroupRemoteInfoRampLocation) {
+	o.RampLocation = &v
+}
+
+// GetWrikeGroup returns the WrikeGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetWrikeGroup() GroupRemoteInfoWrikeGroup {
+	if o == nil || IsNil(o.WrikeGroup) {
+		var ret GroupRemoteInfoWrikeGroup
+		return ret
+	}
+	return *o.WrikeGroup
+}
+
+// GetWrikeGroupOk returns a tuple with the WrikeGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetWrikeGroupOk() (*GroupRemoteInfoWrikeGroup, bool) {
+	if o == nil || IsNil(o.WrikeGroup) {
+		return nil, false
+	}
+	return o.WrikeGroup, true
+}
+
+// HasWrikeGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasWrikeGroup() bool {
+	if o != nil && !IsNil(o.WrikeGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetWrikeGroup gets a reference to the given GroupRemoteInfoWrikeGroup and assigns it to the WrikeGroup field.
+func (o *GroupRemoteInfo) SetWrikeGroup(v GroupRemoteInfoWrikeGroup) {
+	o.WrikeGroup = &v
+}
+
+// GetAxiomGroup returns the AxiomGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetAxiomGroup() GroupRemoteInfoAxiomGroup {
+	if o == nil || IsNil(o.AxiomGroup) {
+		var ret GroupRemoteInfoAxiomGroup
+		return ret
+	}
+	return *o.AxiomGroup
+}
+
+// GetAxiomGroupOk returns a tuple with the AxiomGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetAxiomGroupOk() (*GroupRemoteInfoAxiomGroup, bool) {
+	if o == nil || IsNil(o.AxiomGroup) {
+		return nil, false
+	}
+	return o.AxiomGroup, true
+}
+
+// HasAxiomGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasAxiomGroup() bool {
+	if o != nil && !IsNil(o.AxiomGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetAxiomGroup gets a reference to the given GroupRemoteInfoAxiomGroup and assigns it to the AxiomGroup field.
+func (o *GroupRemoteInfo) SetAxiomGroup(v GroupRemoteInfoAxiomGroup) {
+	o.AxiomGroup = &v
+}
+
+// GetDocusignSigningGroup returns the DocusignSigningGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetDocusignSigningGroup() GroupRemoteInfoDocusignSigningGroup {
+	if o == nil || IsNil(o.DocusignSigningGroup) {
+		var ret GroupRemoteInfoDocusignSigningGroup
+		return ret
+	}
+	return *o.DocusignSigningGroup
+}
+
+// GetDocusignSigningGroupOk returns a tuple with the DocusignSigningGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetDocusignSigningGroupOk() (*GroupRemoteInfoDocusignSigningGroup, bool) {
+	if o == nil || IsNil(o.DocusignSigningGroup) {
+		return nil, false
+	}
+	return o.DocusignSigningGroup, true
+}
+
+// HasDocusignSigningGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasDocusignSigningGroup() bool {
+	if o != nil && !IsNil(o.DocusignSigningGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetDocusignSigningGroup gets a reference to the given GroupRemoteInfoDocusignSigningGroup and assigns it to the DocusignSigningGroup field.
+func (o *GroupRemoteInfo) SetDocusignSigningGroup(v GroupRemoteInfoDocusignSigningGroup) {
+	o.DocusignSigningGroup = &v
+}
+
+// GetLinearTeam returns the LinearTeam field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetLinearTeam() GroupRemoteInfoLinearTeam {
+	if o == nil || IsNil(o.LinearTeam) {
+		var ret GroupRemoteInfoLinearTeam
+		return ret
+	}
+	return *o.LinearTeam
+}
+
+// GetLinearTeamOk returns a tuple with the LinearTeam field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetLinearTeamOk() (*GroupRemoteInfoLinearTeam, bool) {
+	if o == nil || IsNil(o.LinearTeam) {
+		return nil, false
+	}
+	return o.LinearTeam, true
+}
+
+// HasLinearTeam returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasLinearTeam() bool {
+	if o != nil && !IsNil(o.LinearTeam) {
+		return true
+	}
+
+	return false
+}
+
+// SetLinearTeam gets a reference to the given GroupRemoteInfoLinearTeam and assigns it to the LinearTeam field.
+func (o *GroupRemoteInfo) SetLinearTeam(v GroupRemoteInfoLinearTeam) {
+	o.LinearTeam = &v
+}
+
+// GetAsanaTeam returns the AsanaTeam field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetAsanaTeam() GroupRemoteInfoAsanaTeam {
+	if o == nil || IsNil(o.AsanaTeam) {
+		var ret GroupRemoteInfoAsanaTeam
+		return ret
+	}
+	return *o.AsanaTeam
+}
+
+// GetAsanaTeamOk returns a tuple with the AsanaTeam field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetAsanaTeamOk() (*GroupRemoteInfoAsanaTeam, bool) {
+	if o == nil || IsNil(o.AsanaTeam) {
+		return nil, false
+	}
+	return o.AsanaTeam, true
+}
+
+// HasAsanaTeam returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasAsanaTeam() bool {
+	if o != nil && !IsNil(o.AsanaTeam) {
+		return true
+	}
+
+	return false
+}
+
+// SetAsanaTeam gets a reference to the given GroupRemoteInfoAsanaTeam and assigns it to the AsanaTeam field.
+func (o *GroupRemoteInfo) SetAsanaTeam(v GroupRemoteInfoAsanaTeam) {
+	o.AsanaTeam = &v
+}
+
+// GetBitwardenGroup returns the BitwardenGroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetBitwardenGroup() GroupRemoteInfoBitwardenGroup {
+	if o == nil || IsNil(o.BitwardenGroup) {
+		var ret GroupRemoteInfoBitwardenGroup
+		return ret
+	}
+	return *o.BitwardenGroup
+}
+
+// GetBitwardenGroupOk returns a tuple with the BitwardenGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetBitwardenGroupOk() (*GroupRemoteInfoBitwardenGroup, bool) {
+	if o == nil || IsNil(o.BitwardenGroup) {
+		return nil, false
+	}
+	return o.BitwardenGroup, true
+}
+
+// HasBitwardenGroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasBitwardenGroup() bool {
+	if o != nil && !IsNil(o.BitwardenGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetBitwardenGroup gets a reference to the given GroupRemoteInfoBitwardenGroup and assigns it to the BitwardenGroup field.
+func (o *GroupRemoteInfo) SetBitwardenGroup(v GroupRemoteInfoBitwardenGroup) {
+	o.BitwardenGroup = &v
+}
+
+// GetSquareLocation returns the SquareLocation field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetSquareLocation() GroupRemoteInfoSquareLocation {
+	if o == nil || IsNil(o.SquareLocation) {
+		var ret GroupRemoteInfoSquareLocation
+		return ret
+	}
+	return *o.SquareLocation
+}
+
+// GetSquareLocationOk returns a tuple with the SquareLocation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetSquareLocationOk() (*GroupRemoteInfoSquareLocation, bool) {
+	if o == nil || IsNil(o.SquareLocation) {
+		return nil, false
+	}
+	return o.SquareLocation, true
+}
+
+// HasSquareLocation returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasSquareLocation() bool {
+	if o != nil && !IsNil(o.SquareLocation) {
+		return true
+	}
+
+	return false
+}
+
+// SetSquareLocation gets a reference to the given GroupRemoteInfoSquareLocation and assigns it to the SquareLocation field.
+func (o *GroupRemoteInfo) SetSquareLocation(v GroupRemoteInfoSquareLocation) {
+	o.SquareLocation = &v
+}
+
+// GetSquareJob returns the SquareJob field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetSquareJob() GroupRemoteInfoSquareJob {
+	if o == nil || IsNil(o.SquareJob) {
+		var ret GroupRemoteInfoSquareJob
+		return ret
+	}
+	return *o.SquareJob
+}
+
+// GetSquareJobOk returns a tuple with the SquareJob field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetSquareJobOk() (*GroupRemoteInfoSquareJob, bool) {
+	if o == nil || IsNil(o.SquareJob) {
+		return nil, false
+	}
+	return o.SquareJob, true
+}
+
+// HasSquareJob returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasSquareJob() bool {
+	if o != nil && !IsNil(o.SquareJob) {
+		return true
+	}
+
+	return false
+}
+
+// SetSquareJob gets a reference to the given GroupRemoteInfoSquareJob and assigns it to the SquareJob field.
+func (o *GroupRemoteInfo) SetSquareJob(v GroupRemoteInfoSquareJob) {
+	o.SquareJob = &v
+}
+
+// GetRipplingTeam returns the RipplingTeam field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetRipplingTeam() GroupRemoteInfoRipplingTeam {
+	if o == nil || IsNil(o.RipplingTeam) {
+		var ret GroupRemoteInfoRipplingTeam
+		return ret
+	}
+	return *o.RipplingTeam
+}
+
+// GetRipplingTeamOk returns a tuple with the RipplingTeam field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetRipplingTeamOk() (*GroupRemoteInfoRipplingTeam, bool) {
+	if o == nil || IsNil(o.RipplingTeam) {
+		return nil, false
+	}
+	return o.RipplingTeam, true
+}
+
+// HasRipplingTeam returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasRipplingTeam() bool {
+	if o != nil && !IsNil(o.RipplingTeam) {
+		return true
+	}
+
+	return false
+}
+
+// SetRipplingTeam gets a reference to the given GroupRemoteInfoRipplingTeam and assigns it to the RipplingTeam field.
+func (o *GroupRemoteInfo) SetRipplingTeam(v GroupRemoteInfoRipplingTeam) {
+	o.RipplingTeam = &v
+}
+
+// GetRipplingSupergroup returns the RipplingSupergroup field value if set, zero value otherwise.
+func (o *GroupRemoteInfo) GetRipplingSupergroup() GroupRemoteInfoRipplingSupergroup {
+	if o == nil || IsNil(o.RipplingSupergroup) {
+		var ret GroupRemoteInfoRipplingSupergroup
+		return ret
+	}
+	return *o.RipplingSupergroup
+}
+
+// GetRipplingSupergroupOk returns a tuple with the RipplingSupergroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GroupRemoteInfo) GetRipplingSupergroupOk() (*GroupRemoteInfoRipplingSupergroup, bool) {
+	if o == nil || IsNil(o.RipplingSupergroup) {
+		return nil, false
+	}
+	return o.RipplingSupergroup, true
+}
+
+// HasRipplingSupergroup returns a boolean if a field has been set.
+func (o *GroupRemoteInfo) HasRipplingSupergroup() bool {
+	if o != nil && !IsNil(o.RipplingSupergroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetRipplingSupergroup gets a reference to the given GroupRemoteInfoRipplingSupergroup and assigns it to the RipplingSupergroup field.
+func (o *GroupRemoteInfo) SetRipplingSupergroup(v GroupRemoteInfoRipplingSupergroup) {
+	o.RipplingSupergroup = &v
+}
+
 func (o GroupRemoteInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -1096,6 +1657,57 @@ func (o GroupRemoteInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HubspotTeam) {
 		toSerialize["hubspot_team"] = o.HubspotTeam
 	}
+	if !IsNil(o.TableauGroup) {
+		toSerialize["tableau_group"] = o.TableauGroup
+	}
+	if !IsNil(o.ConfluenceGroup) {
+		toSerialize["confluence_group"] = o.ConfluenceGroup
+	}
+	if !IsNil(o.JiraGroup) {
+		toSerialize["jira_group"] = o.JiraGroup
+	}
+	if !IsNil(o.DocusignGroup) {
+		toSerialize["docusign_group"] = o.DocusignGroup
+	}
+	if !IsNil(o.ZoomGroup) {
+		toSerialize["zoom_group"] = o.ZoomGroup
+	}
+	if !IsNil(o.RampDepartment) {
+		toSerialize["ramp_department"] = o.RampDepartment
+	}
+	if !IsNil(o.RampLocation) {
+		toSerialize["ramp_location"] = o.RampLocation
+	}
+	if !IsNil(o.WrikeGroup) {
+		toSerialize["wrike_group"] = o.WrikeGroup
+	}
+	if !IsNil(o.AxiomGroup) {
+		toSerialize["axiom_group"] = o.AxiomGroup
+	}
+	if !IsNil(o.DocusignSigningGroup) {
+		toSerialize["docusign_signing_group"] = o.DocusignSigningGroup
+	}
+	if !IsNil(o.LinearTeam) {
+		toSerialize["linear_team"] = o.LinearTeam
+	}
+	if !IsNil(o.AsanaTeam) {
+		toSerialize["asana_team"] = o.AsanaTeam
+	}
+	if !IsNil(o.BitwardenGroup) {
+		toSerialize["bitwarden_group"] = o.BitwardenGroup
+	}
+	if !IsNil(o.SquareLocation) {
+		toSerialize["square_location"] = o.SquareLocation
+	}
+	if !IsNil(o.SquareJob) {
+		toSerialize["square_job"] = o.SquareJob
+	}
+	if !IsNil(o.RipplingTeam) {
+		toSerialize["rippling_team"] = o.RipplingTeam
+	}
+	if !IsNil(o.RipplingSupergroup) {
+		toSerialize["rippling_supergroup"] = o.RipplingSupergroup
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1147,6 +1759,23 @@ func (o *GroupRemoteInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "slack_user_group")
 		delete(additionalProperties, "zendesk_organization")
 		delete(additionalProperties, "hubspot_team")
+		delete(additionalProperties, "tableau_group")
+		delete(additionalProperties, "confluence_group")
+		delete(additionalProperties, "jira_group")
+		delete(additionalProperties, "docusign_group")
+		delete(additionalProperties, "zoom_group")
+		delete(additionalProperties, "ramp_department")
+		delete(additionalProperties, "ramp_location")
+		delete(additionalProperties, "wrike_group")
+		delete(additionalProperties, "axiom_group")
+		delete(additionalProperties, "docusign_signing_group")
+		delete(additionalProperties, "linear_team")
+		delete(additionalProperties, "asana_team")
+		delete(additionalProperties, "bitwarden_group")
+		delete(additionalProperties, "square_location")
+		delete(additionalProperties, "square_job")
+		delete(additionalProperties, "rippling_team")
+		delete(additionalProperties, "rippling_supergroup")
 		o.AdditionalProperties = additionalProperties
 	}
 
