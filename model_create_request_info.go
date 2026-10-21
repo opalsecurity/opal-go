@@ -27,6 +27,8 @@ type CreateRequestInfo struct {
 	TargetUserId *string `json:"target_user_id,omitempty"`
 	// The ID of the group the request is for.  Should not be specified if target_user_id is specified.
 	TargetGroupId *string `json:"target_group_id,omitempty"`
+	// The ID of the user who asked for this access, for callers filing a request on someone else's behalf. Opal records this claim as given and does not verify it, so it never affects authorization, reviewer routing, or who may cancel the request; the authenticated caller remains the requester. Must be a user of your organization. Only accepted from a service user for which an Opal admin has enabled \"Let this service user record who asked for access\" under Settings on the service user's page; any other caller receives a 403 when this field is set.
+	InitiatedByUserId *string `json:"initiated_by_user_id,omitempty"`
 	Reason string `json:"reason"`
 	SupportTicket *CreateRequestInfoSupportTicket `json:"support_ticket,omitempty"`
 	// The duration of the request in minutes. -1 represents an indefinite duration
@@ -170,6 +172,38 @@ func (o *CreateRequestInfo) SetTargetGroupId(v string) {
 	o.TargetGroupId = &v
 }
 
+// GetInitiatedByUserId returns the InitiatedByUserId field value if set, zero value otherwise.
+func (o *CreateRequestInfo) GetInitiatedByUserId() string {
+	if o == nil || IsNil(o.InitiatedByUserId) {
+		var ret string
+		return ret
+	}
+	return *o.InitiatedByUserId
+}
+
+// GetInitiatedByUserIdOk returns a tuple with the InitiatedByUserId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateRequestInfo) GetInitiatedByUserIdOk() (*string, bool) {
+	if o == nil || IsNil(o.InitiatedByUserId) {
+		return nil, false
+	}
+	return o.InitiatedByUserId, true
+}
+
+// HasInitiatedByUserId returns a boolean if a field has been set.
+func (o *CreateRequestInfo) HasInitiatedByUserId() bool {
+	if o != nil && !IsNil(o.InitiatedByUserId) {
+		return true
+	}
+
+	return false
+}
+
+// SetInitiatedByUserId gets a reference to the given string and assigns it to the InitiatedByUserId field.
+func (o *CreateRequestInfo) SetInitiatedByUserId(v string) {
+	o.InitiatedByUserId = &v
+}
+
 // GetReason returns the Reason field value
 func (o *CreateRequestInfo) GetReason() string {
 	if o == nil {
@@ -300,6 +334,9 @@ func (o CreateRequestInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TargetGroupId) {
 		toSerialize["target_group_id"] = o.TargetGroupId
 	}
+	if !IsNil(o.InitiatedByUserId) {
+		toSerialize["initiated_by_user_id"] = o.InitiatedByUserId
+	}
 	toSerialize["reason"] = o.Reason
 	if !IsNil(o.SupportTicket) {
 		toSerialize["support_ticket"] = o.SupportTicket
@@ -358,6 +395,7 @@ func (o *CreateRequestInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "groups")
 		delete(additionalProperties, "target_user_id")
 		delete(additionalProperties, "target_group_id")
+		delete(additionalProperties, "initiated_by_user_id")
 		delete(additionalProperties, "reason")
 		delete(additionalProperties, "support_ticket")
 		delete(additionalProperties, "duration_minutes")
