@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// UARReviewerAssignmentPolicyEnum A policy for auto-assigning reviewers. If auto-assignment is on, specific assignments can still be manually adjusted after the access review is started. Default is Manually. BY_OWNING_TEAM_ADMIN assigns reviews to resource admins in round-robin fashion. BY_OWNING_TEAM_ADMIN_ALL assigns reviews to all resource admins. BY_APPROVERS assigns reviews to resource approvers in round-robin fashion. BY_APPROVERS_ALL assigns reviews to all resource approvers.
+// UARReviewerAssignmentPolicyEnum A policy for auto-assigning reviewers. If auto-assignment is on, specific assignments can still be manually adjusted after the access review is started. Default is Manually. BY_OWNING_TEAM_ADMIN assigns reviews to resource admins in round-robin fashion. BY_OWNING_TEAM_ADMIN_ALL assigns reviews to all resource admins. BY_APPROVERS assigns reviews to resource approvers in round-robin fashion. BY_APPROVERS_ALL assigns reviews to all resource approvers. BY_SELF assigns each item to the reviewed principal themselves.
 type UARReviewerAssignmentPolicyEnum string
 
 // List of UARReviewerAssignmentPolicyEnum
@@ -27,6 +27,7 @@ const (
 	UARREVIEWERASSIGNMENTPOLICYENUM_BY_MANAGER UARReviewerAssignmentPolicyEnum = "BY_MANAGER"
 	UARREVIEWERASSIGNMENTPOLICYENUM_BY_APPROVERS UARReviewerAssignmentPolicyEnum = "BY_APPROVERS"
 	UARREVIEWERASSIGNMENTPOLICYENUM_BY_APPROVERS_ALL UARReviewerAssignmentPolicyEnum = "BY_APPROVERS_ALL"
+	UARREVIEWERASSIGNMENTPOLICYENUM_BY_SELF UARReviewerAssignmentPolicyEnum = "BY_SELF"
 )
 
 // All allowed values of UARReviewerAssignmentPolicyEnum enum
@@ -37,6 +38,7 @@ var AllowedUARReviewerAssignmentPolicyEnumEnumValues = []UARReviewerAssignmentPo
 	"BY_MANAGER",
 	"BY_APPROVERS",
 	"BY_APPROVERS_ALL",
+	"BY_SELF",
 }
 
 func (v *UARReviewerAssignmentPolicyEnum) UnmarshalJSON(src []byte) error {
