@@ -4,9 +4,76 @@ All URIs are relative to *https://api.opal.dev/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CreateToken**](TokensAPI.md#CreateToken) | **Post** /tokens | Create token
 [**DeleteToken**](TokensAPI.md#DeleteToken) | **Delete** /tokens/{token_id} | Delete token
 [**GetTokens**](TokensAPI.md#GetTokens) | **Get** /tokens | Get tokens
 
+
+
+## CreateToken
+
+> CreateTokenResponse CreateToken(ctx).CreateTokenInfo(createTokenInfo).Execute()
+
+Create token
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	createTokenInfo := *openapiclient.NewCreateTokenInfo("My API Token", openapiclient.ApiAccessLevelEnum("READ_ONLY")) // CreateTokenInfo | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.TokensAPI.CreateToken(context.Background()).CreateTokenInfo(createTokenInfo).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `TokensAPI.CreateToken``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateToken`: CreateTokenResponse
+	fmt.Fprintf(os.Stdout, "Response from `TokensAPI.CreateToken`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateTokenRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createTokenInfo** | [**CreateTokenInfo**](CreateTokenInfo.md) |  | 
+
+### Return type
+
+[**CreateTokenResponse**](CreateTokenResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## DeleteToken
