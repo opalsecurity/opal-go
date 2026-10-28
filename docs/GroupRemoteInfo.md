@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ActiveDirectoryGroup** | Pointer to [**GroupRemoteInfoActiveDirectoryGroup**](GroupRemoteInfoActiveDirectoryGroup.md) |  | [optional] 
 **TailscaleGroup** | Pointer to [**GroupRemoteInfoTailscaleGroup**](GroupRemoteInfoTailscaleGroup.md) |  | [optional] 
+**CursorGroup** | Pointer to [**GroupRemoteInfoCursorGroup**](GroupRemoteInfoCursorGroup.md) |  | [optional] 
 **TwingateGroup** | Pointer to [**GroupRemoteInfoTwingateGroup**](GroupRemoteInfoTwingateGroup.md) |  | [optional] 
 **TwingateGroupSynced** | Pointer to [**GroupRemoteInfoTwingateGroupSynced**](GroupRemoteInfoTwingateGroupSynced.md) |  | [optional] 
 **AwsSsoGroup** | Pointer to [**GroupRemoteInfoAwsSsoGroup**](GroupRemoteInfoAwsSsoGroup.md) |  | [optional] 
@@ -33,6 +34,25 @@ Name | Type | Description | Notes
 **SlackUserGroup** | Pointer to [**GroupRemoteInfoSlackUserGroup**](GroupRemoteInfoSlackUserGroup.md) |  | [optional] 
 **ZendeskOrganization** | Pointer to [**GroupRemoteInfoZendeskOrganization**](GroupRemoteInfoZendeskOrganization.md) |  | [optional] 
 **HubspotTeam** | Pointer to [**GroupRemoteInfoHubspotTeam**](GroupRemoteInfoHubspotTeam.md) |  | [optional] 
+**TableauGroup** | Pointer to [**GroupRemoteInfoTableauGroup**](GroupRemoteInfoTableauGroup.md) |  | [optional] 
+**ConfluenceGroup** | Pointer to [**GroupRemoteInfoConfluenceGroup**](GroupRemoteInfoConfluenceGroup.md) |  | [optional] 
+**JiraGroup** | Pointer to [**GroupRemoteInfoJiraGroup**](GroupRemoteInfoJiraGroup.md) |  | [optional] 
+**DocusignGroup** | Pointer to [**GroupRemoteInfoDocusignGroup**](GroupRemoteInfoDocusignGroup.md) |  | [optional] 
+**ZoomGroup** | Pointer to [**GroupRemoteInfoZoomGroup**](GroupRemoteInfoZoomGroup.md) |  | [optional] 
+**RampDepartment** | Pointer to [**GroupRemoteInfoRampDepartment**](GroupRemoteInfoRampDepartment.md) |  | [optional] 
+**RampLocation** | Pointer to [**GroupRemoteInfoRampLocation**](GroupRemoteInfoRampLocation.md) |  | [optional] 
+**WrikeGroup** | Pointer to [**GroupRemoteInfoWrikeGroup**](GroupRemoteInfoWrikeGroup.md) |  | [optional] 
+**AxiomGroup** | Pointer to [**GroupRemoteInfoAxiomGroup**](GroupRemoteInfoAxiomGroup.md) |  | [optional] 
+**DocusignSigningGroup** | Pointer to [**GroupRemoteInfoDocusignSigningGroup**](GroupRemoteInfoDocusignSigningGroup.md) |  | [optional] 
+**LinearTeam** | Pointer to [**GroupRemoteInfoLinearTeam**](GroupRemoteInfoLinearTeam.md) |  | [optional] 
+**AsanaTeam** | Pointer to [**GroupRemoteInfoAsanaTeam**](GroupRemoteInfoAsanaTeam.md) |  | [optional] 
+**BitwardenGroup** | Pointer to [**GroupRemoteInfoBitwardenGroup**](GroupRemoteInfoBitwardenGroup.md) |  | [optional] 
+**BoxGroup** | Pointer to [**GroupRemoteInfoBoxGroup**](GroupRemoteInfoBoxGroup.md) |  | [optional] 
+**CalendlyGroup** | Pointer to [**GroupRemoteInfoCalendlyGroup**](GroupRemoteInfoCalendlyGroup.md) |  | [optional] 
+**SquareLocation** | Pointer to [**GroupRemoteInfoSquareLocation**](GroupRemoteInfoSquareLocation.md) |  | [optional] 
+**SquareJob** | Pointer to [**GroupRemoteInfoSquareJob**](GroupRemoteInfoSquareJob.md) |  | [optional] 
+**RipplingTeam** | Pointer to [**GroupRemoteInfoRipplingTeam**](GroupRemoteInfoRipplingTeam.md) |  | [optional] 
+**RipplingSupergroup** | Pointer to [**GroupRemoteInfoRipplingSupergroup**](GroupRemoteInfoRipplingSupergroup.md) |  | [optional] 
 
 ## Methods
 
@@ -102,6 +122,31 @@ SetTailscaleGroup sets TailscaleGroup field to given value.
 `func (o *GroupRemoteInfo) HasTailscaleGroup() bool`
 
 HasTailscaleGroup returns a boolean if a field has been set.
+
+### GetCursorGroup
+
+`func (o *GroupRemoteInfo) GetCursorGroup() GroupRemoteInfoCursorGroup`
+
+GetCursorGroup returns the CursorGroup field if non-nil, zero value otherwise.
+
+### GetCursorGroupOk
+
+`func (o *GroupRemoteInfo) GetCursorGroupOk() (*GroupRemoteInfoCursorGroup, bool)`
+
+GetCursorGroupOk returns a tuple with the CursorGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCursorGroup
+
+`func (o *GroupRemoteInfo) SetCursorGroup(v GroupRemoteInfoCursorGroup)`
+
+SetCursorGroup sets CursorGroup field to given value.
+
+### HasCursorGroup
+
+`func (o *GroupRemoteInfo) HasCursorGroup() bool`
+
+HasCursorGroup returns a boolean if a field has been set.
 
 ### GetTwingateGroup
 
@@ -777,6 +822,481 @@ SetHubspotTeam sets HubspotTeam field to given value.
 `func (o *GroupRemoteInfo) HasHubspotTeam() bool`
 
 HasHubspotTeam returns a boolean if a field has been set.
+
+### GetTableauGroup
+
+`func (o *GroupRemoteInfo) GetTableauGroup() GroupRemoteInfoTableauGroup`
+
+GetTableauGroup returns the TableauGroup field if non-nil, zero value otherwise.
+
+### GetTableauGroupOk
+
+`func (o *GroupRemoteInfo) GetTableauGroupOk() (*GroupRemoteInfoTableauGroup, bool)`
+
+GetTableauGroupOk returns a tuple with the TableauGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTableauGroup
+
+`func (o *GroupRemoteInfo) SetTableauGroup(v GroupRemoteInfoTableauGroup)`
+
+SetTableauGroup sets TableauGroup field to given value.
+
+### HasTableauGroup
+
+`func (o *GroupRemoteInfo) HasTableauGroup() bool`
+
+HasTableauGroup returns a boolean if a field has been set.
+
+### GetConfluenceGroup
+
+`func (o *GroupRemoteInfo) GetConfluenceGroup() GroupRemoteInfoConfluenceGroup`
+
+GetConfluenceGroup returns the ConfluenceGroup field if non-nil, zero value otherwise.
+
+### GetConfluenceGroupOk
+
+`func (o *GroupRemoteInfo) GetConfluenceGroupOk() (*GroupRemoteInfoConfluenceGroup, bool)`
+
+GetConfluenceGroupOk returns a tuple with the ConfluenceGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfluenceGroup
+
+`func (o *GroupRemoteInfo) SetConfluenceGroup(v GroupRemoteInfoConfluenceGroup)`
+
+SetConfluenceGroup sets ConfluenceGroup field to given value.
+
+### HasConfluenceGroup
+
+`func (o *GroupRemoteInfo) HasConfluenceGroup() bool`
+
+HasConfluenceGroup returns a boolean if a field has been set.
+
+### GetJiraGroup
+
+`func (o *GroupRemoteInfo) GetJiraGroup() GroupRemoteInfoJiraGroup`
+
+GetJiraGroup returns the JiraGroup field if non-nil, zero value otherwise.
+
+### GetJiraGroupOk
+
+`func (o *GroupRemoteInfo) GetJiraGroupOk() (*GroupRemoteInfoJiraGroup, bool)`
+
+GetJiraGroupOk returns a tuple with the JiraGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetJiraGroup
+
+`func (o *GroupRemoteInfo) SetJiraGroup(v GroupRemoteInfoJiraGroup)`
+
+SetJiraGroup sets JiraGroup field to given value.
+
+### HasJiraGroup
+
+`func (o *GroupRemoteInfo) HasJiraGroup() bool`
+
+HasJiraGroup returns a boolean if a field has been set.
+
+### GetDocusignGroup
+
+`func (o *GroupRemoteInfo) GetDocusignGroup() GroupRemoteInfoDocusignGroup`
+
+GetDocusignGroup returns the DocusignGroup field if non-nil, zero value otherwise.
+
+### GetDocusignGroupOk
+
+`func (o *GroupRemoteInfo) GetDocusignGroupOk() (*GroupRemoteInfoDocusignGroup, bool)`
+
+GetDocusignGroupOk returns a tuple with the DocusignGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDocusignGroup
+
+`func (o *GroupRemoteInfo) SetDocusignGroup(v GroupRemoteInfoDocusignGroup)`
+
+SetDocusignGroup sets DocusignGroup field to given value.
+
+### HasDocusignGroup
+
+`func (o *GroupRemoteInfo) HasDocusignGroup() bool`
+
+HasDocusignGroup returns a boolean if a field has been set.
+
+### GetZoomGroup
+
+`func (o *GroupRemoteInfo) GetZoomGroup() GroupRemoteInfoZoomGroup`
+
+GetZoomGroup returns the ZoomGroup field if non-nil, zero value otherwise.
+
+### GetZoomGroupOk
+
+`func (o *GroupRemoteInfo) GetZoomGroupOk() (*GroupRemoteInfoZoomGroup, bool)`
+
+GetZoomGroupOk returns a tuple with the ZoomGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetZoomGroup
+
+`func (o *GroupRemoteInfo) SetZoomGroup(v GroupRemoteInfoZoomGroup)`
+
+SetZoomGroup sets ZoomGroup field to given value.
+
+### HasZoomGroup
+
+`func (o *GroupRemoteInfo) HasZoomGroup() bool`
+
+HasZoomGroup returns a boolean if a field has been set.
+
+### GetRampDepartment
+
+`func (o *GroupRemoteInfo) GetRampDepartment() GroupRemoteInfoRampDepartment`
+
+GetRampDepartment returns the RampDepartment field if non-nil, zero value otherwise.
+
+### GetRampDepartmentOk
+
+`func (o *GroupRemoteInfo) GetRampDepartmentOk() (*GroupRemoteInfoRampDepartment, bool)`
+
+GetRampDepartmentOk returns a tuple with the RampDepartment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRampDepartment
+
+`func (o *GroupRemoteInfo) SetRampDepartment(v GroupRemoteInfoRampDepartment)`
+
+SetRampDepartment sets RampDepartment field to given value.
+
+### HasRampDepartment
+
+`func (o *GroupRemoteInfo) HasRampDepartment() bool`
+
+HasRampDepartment returns a boolean if a field has been set.
+
+### GetRampLocation
+
+`func (o *GroupRemoteInfo) GetRampLocation() GroupRemoteInfoRampLocation`
+
+GetRampLocation returns the RampLocation field if non-nil, zero value otherwise.
+
+### GetRampLocationOk
+
+`func (o *GroupRemoteInfo) GetRampLocationOk() (*GroupRemoteInfoRampLocation, bool)`
+
+GetRampLocationOk returns a tuple with the RampLocation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRampLocation
+
+`func (o *GroupRemoteInfo) SetRampLocation(v GroupRemoteInfoRampLocation)`
+
+SetRampLocation sets RampLocation field to given value.
+
+### HasRampLocation
+
+`func (o *GroupRemoteInfo) HasRampLocation() bool`
+
+HasRampLocation returns a boolean if a field has been set.
+
+### GetWrikeGroup
+
+`func (o *GroupRemoteInfo) GetWrikeGroup() GroupRemoteInfoWrikeGroup`
+
+GetWrikeGroup returns the WrikeGroup field if non-nil, zero value otherwise.
+
+### GetWrikeGroupOk
+
+`func (o *GroupRemoteInfo) GetWrikeGroupOk() (*GroupRemoteInfoWrikeGroup, bool)`
+
+GetWrikeGroupOk returns a tuple with the WrikeGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWrikeGroup
+
+`func (o *GroupRemoteInfo) SetWrikeGroup(v GroupRemoteInfoWrikeGroup)`
+
+SetWrikeGroup sets WrikeGroup field to given value.
+
+### HasWrikeGroup
+
+`func (o *GroupRemoteInfo) HasWrikeGroup() bool`
+
+HasWrikeGroup returns a boolean if a field has been set.
+
+### GetAxiomGroup
+
+`func (o *GroupRemoteInfo) GetAxiomGroup() GroupRemoteInfoAxiomGroup`
+
+GetAxiomGroup returns the AxiomGroup field if non-nil, zero value otherwise.
+
+### GetAxiomGroupOk
+
+`func (o *GroupRemoteInfo) GetAxiomGroupOk() (*GroupRemoteInfoAxiomGroup, bool)`
+
+GetAxiomGroupOk returns a tuple with the AxiomGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAxiomGroup
+
+`func (o *GroupRemoteInfo) SetAxiomGroup(v GroupRemoteInfoAxiomGroup)`
+
+SetAxiomGroup sets AxiomGroup field to given value.
+
+### HasAxiomGroup
+
+`func (o *GroupRemoteInfo) HasAxiomGroup() bool`
+
+HasAxiomGroup returns a boolean if a field has been set.
+
+### GetDocusignSigningGroup
+
+`func (o *GroupRemoteInfo) GetDocusignSigningGroup() GroupRemoteInfoDocusignSigningGroup`
+
+GetDocusignSigningGroup returns the DocusignSigningGroup field if non-nil, zero value otherwise.
+
+### GetDocusignSigningGroupOk
+
+`func (o *GroupRemoteInfo) GetDocusignSigningGroupOk() (*GroupRemoteInfoDocusignSigningGroup, bool)`
+
+GetDocusignSigningGroupOk returns a tuple with the DocusignSigningGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDocusignSigningGroup
+
+`func (o *GroupRemoteInfo) SetDocusignSigningGroup(v GroupRemoteInfoDocusignSigningGroup)`
+
+SetDocusignSigningGroup sets DocusignSigningGroup field to given value.
+
+### HasDocusignSigningGroup
+
+`func (o *GroupRemoteInfo) HasDocusignSigningGroup() bool`
+
+HasDocusignSigningGroup returns a boolean if a field has been set.
+
+### GetLinearTeam
+
+`func (o *GroupRemoteInfo) GetLinearTeam() GroupRemoteInfoLinearTeam`
+
+GetLinearTeam returns the LinearTeam field if non-nil, zero value otherwise.
+
+### GetLinearTeamOk
+
+`func (o *GroupRemoteInfo) GetLinearTeamOk() (*GroupRemoteInfoLinearTeam, bool)`
+
+GetLinearTeamOk returns a tuple with the LinearTeam field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLinearTeam
+
+`func (o *GroupRemoteInfo) SetLinearTeam(v GroupRemoteInfoLinearTeam)`
+
+SetLinearTeam sets LinearTeam field to given value.
+
+### HasLinearTeam
+
+`func (o *GroupRemoteInfo) HasLinearTeam() bool`
+
+HasLinearTeam returns a boolean if a field has been set.
+
+### GetAsanaTeam
+
+`func (o *GroupRemoteInfo) GetAsanaTeam() GroupRemoteInfoAsanaTeam`
+
+GetAsanaTeam returns the AsanaTeam field if non-nil, zero value otherwise.
+
+### GetAsanaTeamOk
+
+`func (o *GroupRemoteInfo) GetAsanaTeamOk() (*GroupRemoteInfoAsanaTeam, bool)`
+
+GetAsanaTeamOk returns a tuple with the AsanaTeam field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAsanaTeam
+
+`func (o *GroupRemoteInfo) SetAsanaTeam(v GroupRemoteInfoAsanaTeam)`
+
+SetAsanaTeam sets AsanaTeam field to given value.
+
+### HasAsanaTeam
+
+`func (o *GroupRemoteInfo) HasAsanaTeam() bool`
+
+HasAsanaTeam returns a boolean if a field has been set.
+
+### GetBitwardenGroup
+
+`func (o *GroupRemoteInfo) GetBitwardenGroup() GroupRemoteInfoBitwardenGroup`
+
+GetBitwardenGroup returns the BitwardenGroup field if non-nil, zero value otherwise.
+
+### GetBitwardenGroupOk
+
+`func (o *GroupRemoteInfo) GetBitwardenGroupOk() (*GroupRemoteInfoBitwardenGroup, bool)`
+
+GetBitwardenGroupOk returns a tuple with the BitwardenGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBitwardenGroup
+
+`func (o *GroupRemoteInfo) SetBitwardenGroup(v GroupRemoteInfoBitwardenGroup)`
+
+SetBitwardenGroup sets BitwardenGroup field to given value.
+
+### HasBitwardenGroup
+
+`func (o *GroupRemoteInfo) HasBitwardenGroup() bool`
+
+HasBitwardenGroup returns a boolean if a field has been set.
+
+### GetBoxGroup
+
+`func (o *GroupRemoteInfo) GetBoxGroup() GroupRemoteInfoBoxGroup`
+
+GetBoxGroup returns the BoxGroup field if non-nil, zero value otherwise.
+
+### GetBoxGroupOk
+
+`func (o *GroupRemoteInfo) GetBoxGroupOk() (*GroupRemoteInfoBoxGroup, bool)`
+
+GetBoxGroupOk returns a tuple with the BoxGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBoxGroup
+
+`func (o *GroupRemoteInfo) SetBoxGroup(v GroupRemoteInfoBoxGroup)`
+
+SetBoxGroup sets BoxGroup field to given value.
+
+### HasBoxGroup
+
+`func (o *GroupRemoteInfo) HasBoxGroup() bool`
+
+HasBoxGroup returns a boolean if a field has been set.
+
+### GetCalendlyGroup
+
+`func (o *GroupRemoteInfo) GetCalendlyGroup() GroupRemoteInfoCalendlyGroup`
+
+GetCalendlyGroup returns the CalendlyGroup field if non-nil, zero value otherwise.
+
+### GetCalendlyGroupOk
+
+`func (o *GroupRemoteInfo) GetCalendlyGroupOk() (*GroupRemoteInfoCalendlyGroup, bool)`
+
+GetCalendlyGroupOk returns a tuple with the CalendlyGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCalendlyGroup
+
+`func (o *GroupRemoteInfo) SetCalendlyGroup(v GroupRemoteInfoCalendlyGroup)`
+
+SetCalendlyGroup sets CalendlyGroup field to given value.
+
+### HasCalendlyGroup
+
+`func (o *GroupRemoteInfo) HasCalendlyGroup() bool`
+
+HasCalendlyGroup returns a boolean if a field has been set.
+
+### GetSquareLocation
+
+`func (o *GroupRemoteInfo) GetSquareLocation() GroupRemoteInfoSquareLocation`
+
+GetSquareLocation returns the SquareLocation field if non-nil, zero value otherwise.
+
+### GetSquareLocationOk
+
+`func (o *GroupRemoteInfo) GetSquareLocationOk() (*GroupRemoteInfoSquareLocation, bool)`
+
+GetSquareLocationOk returns a tuple with the SquareLocation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSquareLocation
+
+`func (o *GroupRemoteInfo) SetSquareLocation(v GroupRemoteInfoSquareLocation)`
+
+SetSquareLocation sets SquareLocation field to given value.
+
+### HasSquareLocation
+
+`func (o *GroupRemoteInfo) HasSquareLocation() bool`
+
+HasSquareLocation returns a boolean if a field has been set.
+
+### GetSquareJob
+
+`func (o *GroupRemoteInfo) GetSquareJob() GroupRemoteInfoSquareJob`
+
+GetSquareJob returns the SquareJob field if non-nil, zero value otherwise.
+
+### GetSquareJobOk
+
+`func (o *GroupRemoteInfo) GetSquareJobOk() (*GroupRemoteInfoSquareJob, bool)`
+
+GetSquareJobOk returns a tuple with the SquareJob field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSquareJob
+
+`func (o *GroupRemoteInfo) SetSquareJob(v GroupRemoteInfoSquareJob)`
+
+SetSquareJob sets SquareJob field to given value.
+
+### HasSquareJob
+
+`func (o *GroupRemoteInfo) HasSquareJob() bool`
+
+HasSquareJob returns a boolean if a field has been set.
+
+### GetRipplingTeam
+
+`func (o *GroupRemoteInfo) GetRipplingTeam() GroupRemoteInfoRipplingTeam`
+
+GetRipplingTeam returns the RipplingTeam field if non-nil, zero value otherwise.
+
+### GetRipplingTeamOk
+
+`func (o *GroupRemoteInfo) GetRipplingTeamOk() (*GroupRemoteInfoRipplingTeam, bool)`
+
+GetRipplingTeamOk returns a tuple with the RipplingTeam field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRipplingTeam
+
+`func (o *GroupRemoteInfo) SetRipplingTeam(v GroupRemoteInfoRipplingTeam)`
+
+SetRipplingTeam sets RipplingTeam field to given value.
+
+### HasRipplingTeam
+
+`func (o *GroupRemoteInfo) HasRipplingTeam() bool`
+
+HasRipplingTeam returns a boolean if a field has been set.
+
+### GetRipplingSupergroup
+
+`func (o *GroupRemoteInfo) GetRipplingSupergroup() GroupRemoteInfoRipplingSupergroup`
+
+GetRipplingSupergroup returns the RipplingSupergroup field if non-nil, zero value otherwise.
+
+### GetRipplingSupergroupOk
+
+`func (o *GroupRemoteInfo) GetRipplingSupergroupOk() (*GroupRemoteInfoRipplingSupergroup, bool)`
+
+GetRipplingSupergroupOk returns a tuple with the RipplingSupergroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRipplingSupergroup
+
+`func (o *GroupRemoteInfo) SetRipplingSupergroup(v GroupRemoteInfoRipplingSupergroup)`
+
+SetRipplingSupergroup sets RipplingSupergroup field to given value.
+
+### HasRipplingSupergroup
+
+`func (o *GroupRemoteInfo) HasRipplingSupergroup() bool`
+
+HasRipplingSupergroup returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
