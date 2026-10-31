@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **RequireManagerApproval** | Pointer to **bool** | A bool representing whether or not access requests to the resource require manager approval. | [optional] 
 **RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the resource require an access ticket. | [optional] 
 **RequireMfaToApprove** | Pointer to **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this resource. | [optional] 
+**RequiresForfeitReason** | Pointer to **bool** | A bool representing whether or not a reason is required when forfeiting access to this resource. | [optional] 
 **RequireMfaToRequest** | Pointer to **bool** | A bool representing whether or not to require MFA for requesting access to this resource. | [optional] 
 **RequireMfaToConnect** | Pointer to **bool** | A bool representing whether or not to require MFA to connect to this resource. | [optional] 
 **AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this resource. | [optional] 
@@ -35,6 +36,8 @@ Name | Type | Description | Notes
 **RemoteInfo** | Pointer to [**ResourceRemoteInfo**](ResourceRemoteInfo.md) |  | [optional] 
 **AncestorResourceIds** | Pointer to **[]string** | List of resource IDs that are ancestors of this resource. | [optional] 
 **DescendantResourceIds** | Pointer to **[]string** | List of resource IDs that are descendants of this resource. | [optional] 
+**MatchRemoteName** | Pointer to **bool** | A bool representing whether or not the resource&#39;s name is synced from the end system. When true, the name is overwritten with the remote name on each sync. Defaults to false. | [optional] 
+**MatchRemoteDescription** | Pointer to **bool** | A bool representing whether or not the resource&#39;s description is synced from the end system. When true, the description is overwritten with the remote description on each sync. Defaults to false. | [optional] 
 **LastSuccessfulSync** | Pointer to [**SyncTask**](SyncTask.md) | Information about the last successful sync of this resource. | [optional] [readonly] 
 
 ## Methods
@@ -400,6 +403,31 @@ SetRequireMfaToApprove sets RequireMfaToApprove field to given value.
 `func (o *Resource) HasRequireMfaToApprove() bool`
 
 HasRequireMfaToApprove returns a boolean if a field has been set.
+
+### GetRequiresForfeitReason
+
+`func (o *Resource) GetRequiresForfeitReason() bool`
+
+GetRequiresForfeitReason returns the RequiresForfeitReason field if non-nil, zero value otherwise.
+
+### GetRequiresForfeitReasonOk
+
+`func (o *Resource) GetRequiresForfeitReasonOk() (*bool, bool)`
+
+GetRequiresForfeitReasonOk returns a tuple with the RequiresForfeitReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequiresForfeitReason
+
+`func (o *Resource) SetRequiresForfeitReason(v bool)`
+
+SetRequiresForfeitReason sets RequiresForfeitReason field to given value.
+
+### HasRequiresForfeitReason
+
+`func (o *Resource) HasRequiresForfeitReason() bool`
+
+HasRequiresForfeitReason returns a boolean if a field has been set.
 
 ### GetRequireMfaToRequest
 
@@ -825,6 +853,56 @@ SetDescendantResourceIds sets DescendantResourceIds field to given value.
 `func (o *Resource) HasDescendantResourceIds() bool`
 
 HasDescendantResourceIds returns a boolean if a field has been set.
+
+### GetMatchRemoteName
+
+`func (o *Resource) GetMatchRemoteName() bool`
+
+GetMatchRemoteName returns the MatchRemoteName field if non-nil, zero value otherwise.
+
+### GetMatchRemoteNameOk
+
+`func (o *Resource) GetMatchRemoteNameOk() (*bool, bool)`
+
+GetMatchRemoteNameOk returns a tuple with the MatchRemoteName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchRemoteName
+
+`func (o *Resource) SetMatchRemoteName(v bool)`
+
+SetMatchRemoteName sets MatchRemoteName field to given value.
+
+### HasMatchRemoteName
+
+`func (o *Resource) HasMatchRemoteName() bool`
+
+HasMatchRemoteName returns a boolean if a field has been set.
+
+### GetMatchRemoteDescription
+
+`func (o *Resource) GetMatchRemoteDescription() bool`
+
+GetMatchRemoteDescription returns the MatchRemoteDescription field if non-nil, zero value otherwise.
+
+### GetMatchRemoteDescriptionOk
+
+`func (o *Resource) GetMatchRemoteDescriptionOk() (*bool, bool)`
+
+GetMatchRemoteDescriptionOk returns a tuple with the MatchRemoteDescription field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchRemoteDescription
+
+`func (o *Resource) SetMatchRemoteDescription(v bool)`
+
+SetMatchRemoteDescription sets MatchRemoteDescription field to given value.
+
+### HasMatchRemoteDescription
+
+`func (o *Resource) HasMatchRemoteDescription() bool`
+
+HasMatchRemoteDescription returns a boolean if a field has been set.
 
 ### GetLastSuccessfulSync
 
