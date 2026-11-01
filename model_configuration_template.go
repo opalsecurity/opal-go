@@ -40,6 +40,8 @@ type ConfigurationTemplate struct {
 	RequireMfaToApprove *bool `json:"require_mfa_to_approve,omitempty"`
 	// A bool representing whether or not to require MFA to connect to resources associated with this configuration template.
 	RequireMfaToConnect *bool `json:"require_mfa_to_connect,omitempty"`
+	// A bool representing whether or not a reason is required when forfeiting access to resources or groups using this configuration template.
+	RequiresForfeitReason *bool `json:"requires_forfeit_reason,omitempty"`
 	TicketPropagation *TicketPropagationConfiguration `json:"ticket_propagation,omitempty"`
 	// Custom request notification sent upon request approval for this configuration template.
 	CustomRequestNotification *string `json:"custom_request_notification,omitempty"`
@@ -385,6 +387,38 @@ func (o *ConfigurationTemplate) SetRequireMfaToConnect(v bool) {
 	o.RequireMfaToConnect = &v
 }
 
+// GetRequiresForfeitReason returns the RequiresForfeitReason field value if set, zero value otherwise.
+func (o *ConfigurationTemplate) GetRequiresForfeitReason() bool {
+	if o == nil || IsNil(o.RequiresForfeitReason) {
+		var ret bool
+		return ret
+	}
+	return *o.RequiresForfeitReason
+}
+
+// GetRequiresForfeitReasonOk returns a tuple with the RequiresForfeitReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationTemplate) GetRequiresForfeitReasonOk() (*bool, bool) {
+	if o == nil || IsNil(o.RequiresForfeitReason) {
+		return nil, false
+	}
+	return o.RequiresForfeitReason, true
+}
+
+// HasRequiresForfeitReason returns a boolean if a field has been set.
+func (o *ConfigurationTemplate) HasRequiresForfeitReason() bool {
+	if o != nil && !IsNil(o.RequiresForfeitReason) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequiresForfeitReason gets a reference to the given bool and assigns it to the RequiresForfeitReason field.
+func (o *ConfigurationTemplate) SetRequiresForfeitReason(v bool) {
+	o.RequiresForfeitReason = &v
+}
+
 // GetTicketPropagation returns the TicketPropagation field value if set, zero value otherwise.
 func (o *ConfigurationTemplate) GetTicketPropagation() TicketPropagationConfiguration {
 	if o == nil || IsNil(o.TicketPropagation) {
@@ -489,6 +523,9 @@ func (o ConfigurationTemplate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RequireMfaToConnect) {
 		toSerialize["require_mfa_to_connect"] = o.RequireMfaToConnect
 	}
+	if !IsNil(o.RequiresForfeitReason) {
+		toSerialize["requires_forfeit_reason"] = o.RequiresForfeitReason
+	}
 	if !IsNil(o.TicketPropagation) {
 		toSerialize["ticket_propagation"] = o.TicketPropagation
 	}
@@ -527,6 +564,7 @@ func (o *ConfigurationTemplate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "break_glass_user_ids")
 		delete(additionalProperties, "require_mfa_to_approve")
 		delete(additionalProperties, "require_mfa_to_connect")
+		delete(additionalProperties, "requires_forfeit_reason")
 		delete(additionalProperties, "ticket_propagation")
 		delete(additionalProperties, "custom_request_notification")
 		o.AdditionalProperties = additionalProperties
