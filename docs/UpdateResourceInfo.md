@@ -14,13 +14,16 @@ Name | Type | Description | Notes
 **RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the resource require an access ticket. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **FolderId** | Pointer to **string** | The ID of the folder that the resource is located in. | [optional] 
 **RequireMfaToApprove** | Pointer to **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this resource. | [optional] 
+**RequiresForfeitReason** | Pointer to **bool** | A bool representing whether or not a reason is required when forfeiting access to this resource. | [optional] 
 **RequireMfaToRequest** | Pointer to **bool** | A bool representing whether or not to require MFA for requesting access to this resource. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **RequireMfaToConnect** | Pointer to **bool** | A bool representing whether or not to require MFA to connect to this resource. | [optional] 
 **AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this resource. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **TicketPropagation** | Pointer to [**TicketPropagationConfiguration**](TicketPropagationConfiguration.md) |  | [optional] 
 **CustomRequestNotification** | Pointer to **string** | Custom request notification sent upon request approval. | [optional] 
 **RiskSensitivityOverride** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) |  | [optional] 
-**ConfigurationTemplateId** | Pointer to **string** | The ID of the associated configuration template. | [optional] 
+**MatchRemoteName** | Pointer to **bool** | A bool representing whether or not the resource&#39;s name should be synced from the end system. When true, the name is overwritten with the remote name on each sync, so a &#x60;name&#x60; provided together with this field set to true will be replaced at the next sync. If not provided, the current value is left unchanged. | [optional] 
+**MatchRemoteDescription** | Pointer to **bool** | A bool representing whether or not the resource&#39;s description should be synced from the end system. When true, the description is overwritten with the remote description on each sync, so a &#x60;description&#x60; provided together with this field set to true will be replaced at the next sync. If not provided, the current value is left unchanged. | [optional] 
+**ConfigurationTemplateId** | Pointer to **string** | Deprecated. Use &#x60;PUT /resources/{resource_id}/configuration-template&#x60; instead; that endpoint exposes attach, re-point, and detach as a single idempotent REST sub-resource and is the Terraform-friendly surface for managing this linkage. This field remains honored on the main PUT for now: set to a UUID to attach or re-point, set to &#x60;null&#x60; to unlink (forks the template into a private configuration that preserves the current settings), omit to leave linkage unchanged. Scheduled for removal in a future major version. | [optional] 
 **RequestTemplateId** | Pointer to **string** | The ID of the associated request template. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this resource. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **ExtensionsDurationInMinutes** | Pointer to **int32** | The duration for which access can be extended (in minutes). Deprecated, set the extension duration in the request_configuration you want it to apply to. | [optional] 
@@ -292,6 +295,31 @@ SetRequireMfaToApprove sets RequireMfaToApprove field to given value.
 
 HasRequireMfaToApprove returns a boolean if a field has been set.
 
+### GetRequiresForfeitReason
+
+`func (o *UpdateResourceInfo) GetRequiresForfeitReason() bool`
+
+GetRequiresForfeitReason returns the RequiresForfeitReason field if non-nil, zero value otherwise.
+
+### GetRequiresForfeitReasonOk
+
+`func (o *UpdateResourceInfo) GetRequiresForfeitReasonOk() (*bool, bool)`
+
+GetRequiresForfeitReasonOk returns a tuple with the RequiresForfeitReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequiresForfeitReason
+
+`func (o *UpdateResourceInfo) SetRequiresForfeitReason(v bool)`
+
+SetRequiresForfeitReason sets RequiresForfeitReason field to given value.
+
+### HasRequiresForfeitReason
+
+`func (o *UpdateResourceInfo) HasRequiresForfeitReason() bool`
+
+HasRequiresForfeitReason returns a boolean if a field has been set.
+
 ### GetRequireMfaToRequest
 
 `func (o *UpdateResourceInfo) GetRequireMfaToRequest() bool`
@@ -441,6 +469,56 @@ SetRiskSensitivityOverride sets RiskSensitivityOverride field to given value.
 `func (o *UpdateResourceInfo) HasRiskSensitivityOverride() bool`
 
 HasRiskSensitivityOverride returns a boolean if a field has been set.
+
+### GetMatchRemoteName
+
+`func (o *UpdateResourceInfo) GetMatchRemoteName() bool`
+
+GetMatchRemoteName returns the MatchRemoteName field if non-nil, zero value otherwise.
+
+### GetMatchRemoteNameOk
+
+`func (o *UpdateResourceInfo) GetMatchRemoteNameOk() (*bool, bool)`
+
+GetMatchRemoteNameOk returns a tuple with the MatchRemoteName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchRemoteName
+
+`func (o *UpdateResourceInfo) SetMatchRemoteName(v bool)`
+
+SetMatchRemoteName sets MatchRemoteName field to given value.
+
+### HasMatchRemoteName
+
+`func (o *UpdateResourceInfo) HasMatchRemoteName() bool`
+
+HasMatchRemoteName returns a boolean if a field has been set.
+
+### GetMatchRemoteDescription
+
+`func (o *UpdateResourceInfo) GetMatchRemoteDescription() bool`
+
+GetMatchRemoteDescription returns the MatchRemoteDescription field if non-nil, zero value otherwise.
+
+### GetMatchRemoteDescriptionOk
+
+`func (o *UpdateResourceInfo) GetMatchRemoteDescriptionOk() (*bool, bool)`
+
+GetMatchRemoteDescriptionOk returns a tuple with the MatchRemoteDescription field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchRemoteDescription
+
+`func (o *UpdateResourceInfo) SetMatchRemoteDescription(v bool)`
+
+SetMatchRemoteDescription sets MatchRemoteDescription field to given value.
+
+### HasMatchRemoteDescription
+
+`func (o *UpdateResourceInfo) HasMatchRemoteDescription() bool`
+
+HasMatchRemoteDescription returns a boolean if a field has been set.
 
 ### GetConfigurationTemplateId
 
