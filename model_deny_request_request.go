@@ -21,6 +21,8 @@ var _ MappedNullable = &DenyRequestRequest{}
 
 // DenyRequestRequest struct for DenyRequestRequest
 type DenyRequestRequest struct {
+	// Deny as this Opal user instead of the caller. Only for service users an admin has allowed to act for users, in organizations with the feature enabled. The user must be active in the identity provider and be a reviewer on the request's current stage and not the request's target; the decision counts as theirs. ADMIN level is rejected.
+	ActingUserId *string `json:"acting_user_id,omitempty"`
 	// Comment for the denial
 	Comment string `json:"comment"`
 	Level *RequestApprovalEnum `json:"level,omitempty"`
@@ -45,6 +47,38 @@ func NewDenyRequestRequest(comment string) *DenyRequestRequest {
 func NewDenyRequestRequestWithDefaults() *DenyRequestRequest {
 	this := DenyRequestRequest{}
 	return &this
+}
+
+// GetActingUserId returns the ActingUserId field value if set, zero value otherwise.
+func (o *DenyRequestRequest) GetActingUserId() string {
+	if o == nil || IsNil(o.ActingUserId) {
+		var ret string
+		return ret
+	}
+	return *o.ActingUserId
+}
+
+// GetActingUserIdOk returns a tuple with the ActingUserId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DenyRequestRequest) GetActingUserIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ActingUserId) {
+		return nil, false
+	}
+	return o.ActingUserId, true
+}
+
+// HasActingUserId returns a boolean if a field has been set.
+func (o *DenyRequestRequest) HasActingUserId() bool {
+	if o != nil && !IsNil(o.ActingUserId) {
+		return true
+	}
+
+	return false
+}
+
+// SetActingUserId gets a reference to the given string and assigns it to the ActingUserId field.
+func (o *DenyRequestRequest) SetActingUserId(v string) {
+	o.ActingUserId = &v
 }
 
 // GetComment returns the Comment field value
@@ -113,6 +147,9 @@ func (o DenyRequestRequest) MarshalJSON() ([]byte, error) {
 
 func (o DenyRequestRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ActingUserId) {
+		toSerialize["acting_user_id"] = o.ActingUserId
+	}
 	toSerialize["comment"] = o.Comment
 	if !IsNil(o.Level) {
 		toSerialize["level"] = o.Level
@@ -160,6 +197,7 @@ func (o *DenyRequestRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "acting_user_id")
 		delete(additionalProperties, "comment")
 		delete(additionalProperties, "level")
 		o.AdditionalProperties = additionalProperties

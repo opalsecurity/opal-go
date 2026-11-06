@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **GroupIds** | Pointer to **[]string** | The list of group IDs to match. | [optional] 
 **RoleRemoteIds** | Pointer to **[]string** | The list of role remote IDs to match. | [optional] 
+**OpalScriptId** | Pointer to **string** | The ID of a &#x60;REQUEST_CONFIGURATION_CONDITION&#x60; OpalScript that decides whether this request configuration applies. Cannot be combined with &#x60;group_ids&#x60; or &#x60;role_remote_ids&#x60;. | [optional] 
 
 ## Methods
 
@@ -75,6 +76,31 @@ SetRoleRemoteIds sets RoleRemoteIds field to given value.
 `func (o *Condition) HasRoleRemoteIds() bool`
 
 HasRoleRemoteIds returns a boolean if a field has been set.
+
+### GetOpalScriptId
+
+`func (o *Condition) GetOpalScriptId() string`
+
+GetOpalScriptId returns the OpalScriptId field if non-nil, zero value otherwise.
+
+### GetOpalScriptIdOk
+
+`func (o *Condition) GetOpalScriptIdOk() (*string, bool)`
+
+GetOpalScriptIdOk returns a tuple with the OpalScriptId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpalScriptId
+
+`func (o *Condition) SetOpalScriptId(v string)`
+
+SetOpalScriptId sets OpalScriptId field to given value.
+
+### HasOpalScriptId
+
+`func (o *Condition) HasOpalScriptId() bool`
+
+HasOpalScriptId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
