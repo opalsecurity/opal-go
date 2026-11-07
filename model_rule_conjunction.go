@@ -21,6 +21,7 @@ var _ MappedNullable = &RuleConjunction{}
 
 // RuleConjunction struct for RuleConjunction
 type RuleConjunction struct {
+	// Empty only when the access rule has `uses_opal_query` set.
 	Clauses []RuleDisjunction `json:"clauses"`
 	AdditionalProperties map[string]interface{}
 }
