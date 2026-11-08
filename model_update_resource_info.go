@@ -46,6 +46,8 @@ type UpdateResourceInfo struct {
 	FolderId *string `json:"folder_id,omitempty"`
 	// A bool representing whether or not to require MFA for reviewers to approve requests for this resource.
 	RequireMfaToApprove *bool `json:"require_mfa_to_approve,omitempty"`
+	// A bool representing whether or not a reason is required when forfeiting access to this resource.
+	RequiresForfeitReason *bool `json:"requires_forfeit_reason,omitempty"`
 	// A bool representing whether or not to require MFA for requesting access to this resource. Deprecated in favor of `request_configurations`.
 	// Deprecated
 	RequireMfaToRequest *bool `json:"require_mfa_to_request,omitempty"`
@@ -58,7 +60,12 @@ type UpdateResourceInfo struct {
 	// Custom request notification sent upon request approval.
 	CustomRequestNotification *string `json:"custom_request_notification,omitempty"`
 	RiskSensitivityOverride *RiskSensitivityEnum `json:"risk_sensitivity_override,omitempty"`
-	// The ID of the associated configuration template.
+	// A bool representing whether or not the resource's name should be synced from the end system. When true, the name is overwritten with the remote name on each sync, so a `name` provided together with this field set to true will be replaced at the next sync. If not provided, the current value is left unchanged.
+	MatchRemoteName *bool `json:"match_remote_name,omitempty"`
+	// A bool representing whether or not the resource's description should be synced from the end system. When true, the description is overwritten with the remote description on each sync, so a `description` provided together with this field set to true will be replaced at the next sync. If not provided, the current value is left unchanged.
+	MatchRemoteDescription *bool `json:"match_remote_description,omitempty"`
+	// Deprecated. Use `PUT /resources/{resource_id}/configuration-template` instead; that endpoint exposes attach, re-point, and detach as a single idempotent REST sub-resource and is the Terraform-friendly surface for managing this linkage. This field remains honored on the main PUT for now: set to a UUID to attach or re-point, set to `null` to unlink (forks the template into a private configuration that preserves the current settings), omit to leave linkage unchanged. Scheduled for removal in a future major version.
+	// Deprecated
 	ConfigurationTemplateId *string `json:"configuration_template_id,omitempty"`
 	// The ID of the associated request template. Deprecated in favor of `request_configurations`.
 	// Deprecated
@@ -426,6 +433,38 @@ func (o *UpdateResourceInfo) SetRequireMfaToApprove(v bool) {
 	o.RequireMfaToApprove = &v
 }
 
+// GetRequiresForfeitReason returns the RequiresForfeitReason field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetRequiresForfeitReason() bool {
+	if o == nil || IsNil(o.RequiresForfeitReason) {
+		var ret bool
+		return ret
+	}
+	return *o.RequiresForfeitReason
+}
+
+// GetRequiresForfeitReasonOk returns a tuple with the RequiresForfeitReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceInfo) GetRequiresForfeitReasonOk() (*bool, bool) {
+	if o == nil || IsNil(o.RequiresForfeitReason) {
+		return nil, false
+	}
+	return o.RequiresForfeitReason, true
+}
+
+// HasRequiresForfeitReason returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasRequiresForfeitReason() bool {
+	if o != nil && !IsNil(o.RequiresForfeitReason) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequiresForfeitReason gets a reference to the given bool and assigns it to the RequiresForfeitReason field.
+func (o *UpdateResourceInfo) SetRequiresForfeitReason(v bool) {
+	o.RequiresForfeitReason = &v
+}
+
 // GetRequireMfaToRequest returns the RequireMfaToRequest field value if set, zero value otherwise.
 // Deprecated
 func (o *UpdateResourceInfo) GetRequireMfaToRequest() bool {
@@ -624,7 +663,72 @@ func (o *UpdateResourceInfo) SetRiskSensitivityOverride(v RiskSensitivityEnum) {
 	o.RiskSensitivityOverride = &v
 }
 
+// GetMatchRemoteName returns the MatchRemoteName field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetMatchRemoteName() bool {
+	if o == nil || IsNil(o.MatchRemoteName) {
+		var ret bool
+		return ret
+	}
+	return *o.MatchRemoteName
+}
+
+// GetMatchRemoteNameOk returns a tuple with the MatchRemoteName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceInfo) GetMatchRemoteNameOk() (*bool, bool) {
+	if o == nil || IsNil(o.MatchRemoteName) {
+		return nil, false
+	}
+	return o.MatchRemoteName, true
+}
+
+// HasMatchRemoteName returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasMatchRemoteName() bool {
+	if o != nil && !IsNil(o.MatchRemoteName) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatchRemoteName gets a reference to the given bool and assigns it to the MatchRemoteName field.
+func (o *UpdateResourceInfo) SetMatchRemoteName(v bool) {
+	o.MatchRemoteName = &v
+}
+
+// GetMatchRemoteDescription returns the MatchRemoteDescription field value if set, zero value otherwise.
+func (o *UpdateResourceInfo) GetMatchRemoteDescription() bool {
+	if o == nil || IsNil(o.MatchRemoteDescription) {
+		var ret bool
+		return ret
+	}
+	return *o.MatchRemoteDescription
+}
+
+// GetMatchRemoteDescriptionOk returns a tuple with the MatchRemoteDescription field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceInfo) GetMatchRemoteDescriptionOk() (*bool, bool) {
+	if o == nil || IsNil(o.MatchRemoteDescription) {
+		return nil, false
+	}
+	return o.MatchRemoteDescription, true
+}
+
+// HasMatchRemoteDescription returns a boolean if a field has been set.
+func (o *UpdateResourceInfo) HasMatchRemoteDescription() bool {
+	if o != nil && !IsNil(o.MatchRemoteDescription) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatchRemoteDescription gets a reference to the given bool and assigns it to the MatchRemoteDescription field.
+func (o *UpdateResourceInfo) SetMatchRemoteDescription(v bool) {
+	o.MatchRemoteDescription = &v
+}
+
 // GetConfigurationTemplateId returns the ConfigurationTemplateId field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateResourceInfo) GetConfigurationTemplateId() string {
 	if o == nil || IsNil(o.ConfigurationTemplateId) {
 		var ret string
@@ -635,6 +739,7 @@ func (o *UpdateResourceInfo) GetConfigurationTemplateId() string {
 
 // GetConfigurationTemplateIdOk returns a tuple with the ConfigurationTemplateId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateResourceInfo) GetConfigurationTemplateIdOk() (*string, bool) {
 	if o == nil || IsNil(o.ConfigurationTemplateId) {
 		return nil, false
@@ -652,6 +757,7 @@ func (o *UpdateResourceInfo) HasConfigurationTemplateId() bool {
 }
 
 // SetConfigurationTemplateId gets a reference to the given string and assigns it to the ConfigurationTemplateId field.
+// Deprecated
 func (o *UpdateResourceInfo) SetConfigurationTemplateId(v string) {
 	o.ConfigurationTemplateId = &v
 }
@@ -898,6 +1004,9 @@ func (o UpdateResourceInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RequireMfaToApprove) {
 		toSerialize["require_mfa_to_approve"] = o.RequireMfaToApprove
 	}
+	if !IsNil(o.RequiresForfeitReason) {
+		toSerialize["requires_forfeit_reason"] = o.RequiresForfeitReason
+	}
 	if !IsNil(o.RequireMfaToRequest) {
 		toSerialize["require_mfa_to_request"] = o.RequireMfaToRequest
 	}
@@ -915,6 +1024,12 @@ func (o UpdateResourceInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.RiskSensitivityOverride) {
 		toSerialize["risk_sensitivity_override"] = o.RiskSensitivityOverride
+	}
+	if !IsNil(o.MatchRemoteName) {
+		toSerialize["match_remote_name"] = o.MatchRemoteName
+	}
+	if !IsNil(o.MatchRemoteDescription) {
+		toSerialize["match_remote_description"] = o.MatchRemoteDescription
 	}
 	if !IsNil(o.ConfigurationTemplateId) {
 		toSerialize["configuration_template_id"] = o.ConfigurationTemplateId
@@ -990,12 +1105,15 @@ func (o *UpdateResourceInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "require_support_ticket")
 		delete(additionalProperties, "folder_id")
 		delete(additionalProperties, "require_mfa_to_approve")
+		delete(additionalProperties, "requires_forfeit_reason")
 		delete(additionalProperties, "require_mfa_to_request")
 		delete(additionalProperties, "require_mfa_to_connect")
 		delete(additionalProperties, "auto_approval")
 		delete(additionalProperties, "ticket_propagation")
 		delete(additionalProperties, "custom_request_notification")
 		delete(additionalProperties, "risk_sensitivity_override")
+		delete(additionalProperties, "match_remote_name")
+		delete(additionalProperties, "match_remote_description")
 		delete(additionalProperties, "configuration_template_id")
 		delete(additionalProperties, "request_template_id")
 		delete(additionalProperties, "is_requestable")

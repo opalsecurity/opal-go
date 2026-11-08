@@ -21,6 +21,8 @@ var _ MappedNullable = &CreateRequestCommentRequest{}
 
 // CreateRequestCommentRequest struct for CreateRequestCommentRequest
 type CreateRequestCommentRequest struct {
+	// Comment as this Opal user instead of the caller. Only for service users an admin has allowed to act for users, in organizations with the feature enabled. The user must be active in the identity provider and be the request's requester, target or initiated_by user, an admin, or a reviewer who can act on or has acted on the request.
+	ActingUserId *string `json:"acting_user_id,omitempty"`
 	// comment
 	Comment string `json:"comment"`
 	AdditionalProperties map[string]interface{}
@@ -44,6 +46,38 @@ func NewCreateRequestCommentRequest(comment string) *CreateRequestCommentRequest
 func NewCreateRequestCommentRequestWithDefaults() *CreateRequestCommentRequest {
 	this := CreateRequestCommentRequest{}
 	return &this
+}
+
+// GetActingUserId returns the ActingUserId field value if set, zero value otherwise.
+func (o *CreateRequestCommentRequest) GetActingUserId() string {
+	if o == nil || IsNil(o.ActingUserId) {
+		var ret string
+		return ret
+	}
+	return *o.ActingUserId
+}
+
+// GetActingUserIdOk returns a tuple with the ActingUserId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateRequestCommentRequest) GetActingUserIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ActingUserId) {
+		return nil, false
+	}
+	return o.ActingUserId, true
+}
+
+// HasActingUserId returns a boolean if a field has been set.
+func (o *CreateRequestCommentRequest) HasActingUserId() bool {
+	if o != nil && !IsNil(o.ActingUserId) {
+		return true
+	}
+
+	return false
+}
+
+// SetActingUserId gets a reference to the given string and assigns it to the ActingUserId field.
+func (o *CreateRequestCommentRequest) SetActingUserId(v string) {
+	o.ActingUserId = &v
 }
 
 // GetComment returns the Comment field value
@@ -80,6 +114,9 @@ func (o CreateRequestCommentRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateRequestCommentRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ActingUserId) {
+		toSerialize["acting_user_id"] = o.ActingUserId
+	}
 	toSerialize["comment"] = o.Comment
 
 	for key, value := range o.AdditionalProperties {
@@ -124,6 +161,7 @@ func (o *CreateRequestCommentRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "acting_user_id")
 		delete(additionalProperties, "comment")
 		o.AdditionalProperties = additionalProperties
 	}
