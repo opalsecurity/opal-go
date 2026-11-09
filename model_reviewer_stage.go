@@ -25,12 +25,15 @@ type ReviewerStage struct {
 	RequireManagerApproval bool `json:"require_manager_approval"`
 	// Whether this reviewer stage should require admin approval.
 	RequireAdminApproval *bool `json:"require_admin_approval,omitempty"`
-	// The operator of the reviewer stage. Admin and manager approval are also treated as reviewers.
+	// The operator of the reviewer stage. Admin and manager approval are also treated as reviewers. A stage that sets `escalation` must use `OR`; `AND` is rejected there, because the escalation timer joins the stage as an additional reviewer and would otherwise become a required approver that stalls every request until the timeout.
 	Operator string `json:"operator"`
 	// The IDs of owners assigned as reviewers for this stage.
 	OwnerIds []string `json:"owner_ids"`
 	// The IDs of service users assigned as reviewers for this stage.
 	ServiceUserIds []string `json:"service_user_ids,omitempty"`
+	Escalation *ReviewerStageEscalation `json:"escalation,omitempty"`
+	// The IDs of OpalScripts assigned as reviewers for this stage. Only `REQUEST_REVIEW` scripts can review; any other script type is rejected.
+	OpalScriptIds []string `json:"opal_script_ids,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -192,6 +195,70 @@ func (o *ReviewerStage) SetServiceUserIds(v []string) {
 	o.ServiceUserIds = v
 }
 
+// GetEscalation returns the Escalation field value if set, zero value otherwise.
+func (o *ReviewerStage) GetEscalation() ReviewerStageEscalation {
+	if o == nil || IsNil(o.Escalation) {
+		var ret ReviewerStageEscalation
+		return ret
+	}
+	return *o.Escalation
+}
+
+// GetEscalationOk returns a tuple with the Escalation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ReviewerStage) GetEscalationOk() (*ReviewerStageEscalation, bool) {
+	if o == nil || IsNil(o.Escalation) {
+		return nil, false
+	}
+	return o.Escalation, true
+}
+
+// HasEscalation returns a boolean if a field has been set.
+func (o *ReviewerStage) HasEscalation() bool {
+	if o != nil && !IsNil(o.Escalation) {
+		return true
+	}
+
+	return false
+}
+
+// SetEscalation gets a reference to the given ReviewerStageEscalation and assigns it to the Escalation field.
+func (o *ReviewerStage) SetEscalation(v ReviewerStageEscalation) {
+	o.Escalation = &v
+}
+
+// GetOpalScriptIds returns the OpalScriptIds field value if set, zero value otherwise.
+func (o *ReviewerStage) GetOpalScriptIds() []string {
+	if o == nil || IsNil(o.OpalScriptIds) {
+		var ret []string
+		return ret
+	}
+	return o.OpalScriptIds
+}
+
+// GetOpalScriptIdsOk returns a tuple with the OpalScriptIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ReviewerStage) GetOpalScriptIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.OpalScriptIds) {
+		return nil, false
+	}
+	return o.OpalScriptIds, true
+}
+
+// HasOpalScriptIds returns a boolean if a field has been set.
+func (o *ReviewerStage) HasOpalScriptIds() bool {
+	if o != nil && !IsNil(o.OpalScriptIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetOpalScriptIds gets a reference to the given []string and assigns it to the OpalScriptIds field.
+func (o *ReviewerStage) SetOpalScriptIds(v []string) {
+	o.OpalScriptIds = v
+}
+
 func (o ReviewerStage) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -210,6 +277,12 @@ func (o ReviewerStage) ToMap() (map[string]interface{}, error) {
 	toSerialize["owner_ids"] = o.OwnerIds
 	if !IsNil(o.ServiceUserIds) {
 		toSerialize["service_user_ids"] = o.ServiceUserIds
+	}
+	if !IsNil(o.Escalation) {
+		toSerialize["escalation"] = o.Escalation
+	}
+	if !IsNil(o.OpalScriptIds) {
+		toSerialize["opal_script_ids"] = o.OpalScriptIds
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -261,6 +334,8 @@ func (o *ReviewerStage) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "operator")
 		delete(additionalProperties, "owner_ids")
 		delete(additionalProperties, "service_user_ids")
+		delete(additionalProperties, "escalation")
+		delete(additionalProperties, "opal_script_ids")
 		o.AdditionalProperties = additionalProperties
 	}
 
