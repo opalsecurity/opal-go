@@ -139,6 +139,117 @@ func (a *RequestsAPIService) ApproveRequestExecute(r ApiApproveRequestRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCancelRequestRequest struct {
+	ctx context.Context
+	ApiService *RequestsAPIService
+	id string
+	cancelRequestRequest *CancelRequestRequest
+}
+
+func (r ApiCancelRequestRequest) CancelRequestRequest(cancelRequestRequest CancelRequestRequest) ApiCancelRequestRequest {
+	r.cancelRequestRequest = &cancelRequestRequest
+	return r
+}
+
+func (r ApiCancelRequestRequest) Execute() (*Request, *http.Response, error) {
+	return r.ApiService.CancelRequestExecute(r)
+}
+
+/*
+CancelRequest Cancel request
+
+Cancels a pending access request.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The ID of the request to cancel.
+ @return ApiCancelRequestRequest
+*/
+func (a *RequestsAPIService) CancelRequest(ctx context.Context, id string) ApiCancelRequestRequest {
+	return ApiCancelRequestRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return Request
+func (a *RequestsAPIService) CancelRequestExecute(r ApiCancelRequestRequest) (*Request, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Request
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RequestsAPIService.CancelRequest")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/requests/{id}/cancel"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.cancelRequestRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCreateRequestRequest struct {
 	ctx context.Context
 	ApiService *RequestsAPIService
@@ -480,6 +591,111 @@ func (a *RequestsAPIService) DenyRequestExecute(r ApiDenyRequestRequest) (*Appro
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiEscalateRequestRequest struct {
+	ctx context.Context
+	ApiService *RequestsAPIService
+	id string
+}
+
+func (r ApiEscalateRequestRequest) Execute() (*EscalateRequest200Response, *http.Response, error) {
+	return r.ApiService.EscalateRequestExecute(r)
+}
+
+/*
+EscalateRequest Escalate request to skip-manager
+
+Escalates a pending access request to the target user's skip-level manager.
+Only the request's requester may call this endpoint.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The ID of the request to escalate.
+ @return ApiEscalateRequestRequest
+*/
+func (a *RequestsAPIService) EscalateRequest(ctx context.Context, id string) ApiEscalateRequestRequest {
+	return ApiEscalateRequestRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return EscalateRequest200Response
+func (a *RequestsAPIService) EscalateRequestExecute(r ApiEscalateRequestRequest) (*EscalateRequest200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *EscalateRequest200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RequestsAPIService.EscalateRequest")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/requests/{id}/escalate"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetRequestRequest struct {
 	ctx context.Context
 	ApiService *RequestsAPIService
@@ -695,6 +911,7 @@ type ApiGetRequestsRequest struct {
 	targetUserId *string
 	resourceId *string
 	groupId *string
+	appId *string
 	cursor *string
 	pageSize *int32
 	showPendingOnly *bool
@@ -733,6 +950,12 @@ func (r ApiGetRequestsRequest) ResourceId(resourceId string) ApiGetRequestsReque
 // Filter requests by the group ID that was requested.
 func (r ApiGetRequestsRequest) GroupId(groupId string) ApiGetRequestsRequest {
 	r.groupId = &groupId
+	return r
+}
+
+// Filter requests by the ID of the app that a requested resource or group belongs to. Returns an empty page if the app does not exist or has no requests visible to the caller.
+func (r ApiGetRequestsRequest) AppId(appId string) ApiGetRequestsRequest {
+	r.appId = &appId
 	return r
 }
 
@@ -811,6 +1034,9 @@ func (a *RequestsAPIService) GetRequestsExecute(r ApiGetRequestsRequest) (*Reque
 	}
 	if r.groupId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "group_id", r.groupId, "form", "")
+	}
+	if r.appId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "app_id", r.appId, "form", "")
 	}
 	if r.cursor != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
@@ -993,6 +1219,216 @@ func (a *RequestsAPIService) GetRequestsRelayExecute(r ApiGetRequestsRelayReques
 	if r.from != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "form", "")
 	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiRemindRequestRequest struct {
+	ctx context.Context
+	ApiService *RequestsAPIService
+	id string
+}
+
+func (r ApiRemindRequestRequest) Execute() (*EscalateRequest200Response, *http.Response, error) {
+	return r.ApiService.RemindRequestExecute(r)
+}
+
+/*
+RemindRequest Send request reminder
+
+Sends a reminder to all pending reviewers of the request.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The ID of the request whose reviewers should be reminded.
+ @return ApiRemindRequestRequest
+*/
+func (a *RequestsAPIService) RemindRequest(ctx context.Context, id string) ApiRemindRequestRequest {
+	return ApiRemindRequestRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return EscalateRequest200Response
+func (a *RequestsAPIService) RemindRequestExecute(r ApiRemindRequestRequest) (*EscalateRequest200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *EscalateRequest200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RequestsAPIService.RemindRequest")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/requests/{id}/remind"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiRemindRequestReviewerRequest struct {
+	ctx context.Context
+	ApiService *RequestsAPIService
+	id string
+	reviewerId string
+}
+
+func (r ApiRemindRequestReviewerRequest) Execute() (*EscalateRequest200Response, *http.Response, error) {
+	return r.ApiService.RemindRequestReviewerExecute(r)
+}
+
+/*
+RemindRequestReviewer Send reminder to a reviewer
+
+Sends a reminder to one pending reviewer of the request.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The ID of the request whose reviewer should be reminded.
+ @param reviewerId The ID of the pending reviewer to remind.
+ @return ApiRemindRequestReviewerRequest
+*/
+func (a *RequestsAPIService) RemindRequestReviewer(ctx context.Context, id string, reviewerId string) ApiRemindRequestReviewerRequest {
+	return ApiRemindRequestReviewerRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+		reviewerId: reviewerId,
+	}
+}
+
+// Execute executes the request
+//  @return EscalateRequest200Response
+func (a *RequestsAPIService) RemindRequestReviewerExecute(r ApiRemindRequestReviewerRequest) (*EscalateRequest200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *EscalateRequest200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RequestsAPIService.RemindRequestReviewer")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/requests/{id}/reviewers/{reviewer_id}/remind"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"reviewer_id"+"}", url.PathEscape(parameterValueToString(r.reviewerId, "reviewerId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
