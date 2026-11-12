@@ -16,19 +16,21 @@ import (
 	"fmt"
 )
 
-// ApiAccessLevelEnum The access level of an API token.
+// ApiAccessLevelEnum The access level of an API token. AGENT_HOOKS tokens are made only by the Claude Code hook kit's browser sign-in and can only report agent activity; they cannot be created through this API.
 type ApiAccessLevelEnum string
 
 // List of ApiAccessLevelEnum
 const (
 	APIACCESSLEVELENUM_READ_ONLY ApiAccessLevelEnum = "READ_ONLY"
 	APIACCESSLEVELENUM_FULL_ACCESS ApiAccessLevelEnum = "FULL_ACCESS"
+	APIACCESSLEVELENUM_AGENT_HOOKS ApiAccessLevelEnum = "AGENT_HOOKS"
 )
 
 // All allowed values of ApiAccessLevelEnum enum
 var AllowedApiAccessLevelEnumEnumValues = []ApiAccessLevelEnum{
 	"READ_ONLY",
 	"FULL_ACCESS",
+	"AGENT_HOOKS",
 }
 
 func (v *ApiAccessLevelEnum) UnmarshalJSON(src []byte) error {

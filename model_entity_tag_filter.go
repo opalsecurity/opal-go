@@ -23,7 +23,7 @@ var _ MappedNullable = &EntityTagFilter{}
 type EntityTagFilter struct {
 	// The tag key to filter by.
 	Key string `json:"key"`
-	// The tag value to filter by. If omitted, matches any value for the given key.
+	// The tag value to filter by. If omitted, matches only tags with no value; use entityTagKey to match any value for a key.
 	Value *string `json:"value,omitempty"`
 	// If specified, filters by tags associated with this connection.
 	ConnectionId *string `json:"connectionId,omitempty"`
