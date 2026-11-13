@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **BreakGlassUserIds** | Pointer to **[]string** | The IDs of the break glass users linked to the configuration template. | [optional] 
 **RequireMfaToApprove** | **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this configuration template. | 
 **RequireMfaToConnect** | **bool** | A bool representing whether or not to require MFA to connect to resources associated with this configuration template. | 
+**RequiresForfeitReason** | Pointer to **bool** | A bool representing whether or not a reason is required when forfeiting access to resources or groups using this configuration template. | [optional] 
 **Name** | **string** | The name of the configuration template. | 
 **RequestConfigurations** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | The request configuration list of the configuration template. If not provided, the default request configuration will be used. | [optional] 
 **RequestConfigurationList** | Pointer to [**CreateRequestConfigurationInfoList**](CreateRequestConfigurationInfoList.md) | The request configuration list of the configuration template. If not provided, the default request configuration will be used. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
@@ -190,6 +191,31 @@ and a boolean to check if the value has been set.
 
 SetRequireMfaToConnect sets RequireMfaToConnect field to given value.
 
+
+### GetRequiresForfeitReason
+
+`func (o *CreateConfigurationTemplateInfo) GetRequiresForfeitReason() bool`
+
+GetRequiresForfeitReason returns the RequiresForfeitReason field if non-nil, zero value otherwise.
+
+### GetRequiresForfeitReasonOk
+
+`func (o *CreateConfigurationTemplateInfo) GetRequiresForfeitReasonOk() (*bool, bool)`
+
+GetRequiresForfeitReasonOk returns a tuple with the RequiresForfeitReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequiresForfeitReason
+
+`func (o *CreateConfigurationTemplateInfo) SetRequiresForfeitReason(v bool)`
+
+SetRequiresForfeitReason sets RequiresForfeitReason field to given value.
+
+### HasRequiresForfeitReason
+
+`func (o *CreateConfigurationTemplateInfo) HasRequiresForfeitReason() bool`
+
+HasRequiresForfeitReason returns a boolean if a field has been set.
 
 ### GetName
 

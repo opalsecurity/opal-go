@@ -15,6 +15,8 @@
 
 * `BY_APPROVERS_ALL` (value: `"BY_APPROVERS_ALL"`)
 
+* `BY_SELF` (value: `"BY_SELF"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

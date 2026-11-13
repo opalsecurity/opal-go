@@ -37,7 +37,15 @@ type CreateResourceInfo struct {
 	Metadata *string `json:"metadata,omitempty"`
 	// Custom request notification sent upon request approval.
 	CustomRequestNotification *string `json:"custom_request_notification,omitempty"`
+	// The maximum number of direct users allowed for this resource at once. Set to null to remove the limit.
+	MaxDirectUsersAllowed *int32 `json:"max_direct_users_allowed,omitempty"`
 	RiskSensitivityOverride *RiskSensitivityEnum `json:"risk_sensitivity_override,omitempty"`
+	// A bool representing whether or not the resource's name should be synced from the end system. When true, the name is overwritten with the remote name on each sync, so a `name` provided together with this field set to true will be replaced at the next sync. Defaults to false.
+	MatchRemoteName *bool `json:"match_remote_name,omitempty"`
+	// A bool representing whether or not the resource's description should be synced from the end system. When true, the description is overwritten with the remote description on each sync, so a `description` provided together with this field set to true will be replaced at the next sync. Defaults to false.
+	MatchRemoteDescription *bool `json:"match_remote_description,omitempty"`
+	// A bool representing whether or not a reason is required when forfeiting access to this resource.
+	RequiresForfeitReason *bool `json:"requires_forfeit_reason,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -301,6 +309,38 @@ func (o *CreateResourceInfo) SetCustomRequestNotification(v string) {
 	o.CustomRequestNotification = &v
 }
 
+// GetMaxDirectUsersAllowed returns the MaxDirectUsersAllowed field value if set, zero value otherwise.
+func (o *CreateResourceInfo) GetMaxDirectUsersAllowed() int32 {
+	if o == nil || IsNil(o.MaxDirectUsersAllowed) {
+		var ret int32
+		return ret
+	}
+	return *o.MaxDirectUsersAllowed
+}
+
+// GetMaxDirectUsersAllowedOk returns a tuple with the MaxDirectUsersAllowed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateResourceInfo) GetMaxDirectUsersAllowedOk() (*int32, bool) {
+	if o == nil || IsNil(o.MaxDirectUsersAllowed) {
+		return nil, false
+	}
+	return o.MaxDirectUsersAllowed, true
+}
+
+// HasMaxDirectUsersAllowed returns a boolean if a field has been set.
+func (o *CreateResourceInfo) HasMaxDirectUsersAllowed() bool {
+	if o != nil && !IsNil(o.MaxDirectUsersAllowed) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxDirectUsersAllowed gets a reference to the given int32 and assigns it to the MaxDirectUsersAllowed field.
+func (o *CreateResourceInfo) SetMaxDirectUsersAllowed(v int32) {
+	o.MaxDirectUsersAllowed = &v
+}
+
 // GetRiskSensitivityOverride returns the RiskSensitivityOverride field value if set, zero value otherwise.
 func (o *CreateResourceInfo) GetRiskSensitivityOverride() RiskSensitivityEnum {
 	if o == nil || IsNil(o.RiskSensitivityOverride) {
@@ -333,6 +373,102 @@ func (o *CreateResourceInfo) SetRiskSensitivityOverride(v RiskSensitivityEnum) {
 	o.RiskSensitivityOverride = &v
 }
 
+// GetMatchRemoteName returns the MatchRemoteName field value if set, zero value otherwise.
+func (o *CreateResourceInfo) GetMatchRemoteName() bool {
+	if o == nil || IsNil(o.MatchRemoteName) {
+		var ret bool
+		return ret
+	}
+	return *o.MatchRemoteName
+}
+
+// GetMatchRemoteNameOk returns a tuple with the MatchRemoteName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateResourceInfo) GetMatchRemoteNameOk() (*bool, bool) {
+	if o == nil || IsNil(o.MatchRemoteName) {
+		return nil, false
+	}
+	return o.MatchRemoteName, true
+}
+
+// HasMatchRemoteName returns a boolean if a field has been set.
+func (o *CreateResourceInfo) HasMatchRemoteName() bool {
+	if o != nil && !IsNil(o.MatchRemoteName) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatchRemoteName gets a reference to the given bool and assigns it to the MatchRemoteName field.
+func (o *CreateResourceInfo) SetMatchRemoteName(v bool) {
+	o.MatchRemoteName = &v
+}
+
+// GetMatchRemoteDescription returns the MatchRemoteDescription field value if set, zero value otherwise.
+func (o *CreateResourceInfo) GetMatchRemoteDescription() bool {
+	if o == nil || IsNil(o.MatchRemoteDescription) {
+		var ret bool
+		return ret
+	}
+	return *o.MatchRemoteDescription
+}
+
+// GetMatchRemoteDescriptionOk returns a tuple with the MatchRemoteDescription field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateResourceInfo) GetMatchRemoteDescriptionOk() (*bool, bool) {
+	if o == nil || IsNil(o.MatchRemoteDescription) {
+		return nil, false
+	}
+	return o.MatchRemoteDescription, true
+}
+
+// HasMatchRemoteDescription returns a boolean if a field has been set.
+func (o *CreateResourceInfo) HasMatchRemoteDescription() bool {
+	if o != nil && !IsNil(o.MatchRemoteDescription) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatchRemoteDescription gets a reference to the given bool and assigns it to the MatchRemoteDescription field.
+func (o *CreateResourceInfo) SetMatchRemoteDescription(v bool) {
+	o.MatchRemoteDescription = &v
+}
+
+// GetRequiresForfeitReason returns the RequiresForfeitReason field value if set, zero value otherwise.
+func (o *CreateResourceInfo) GetRequiresForfeitReason() bool {
+	if o == nil || IsNil(o.RequiresForfeitReason) {
+		var ret bool
+		return ret
+	}
+	return *o.RequiresForfeitReason
+}
+
+// GetRequiresForfeitReasonOk returns a tuple with the RequiresForfeitReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateResourceInfo) GetRequiresForfeitReasonOk() (*bool, bool) {
+	if o == nil || IsNil(o.RequiresForfeitReason) {
+		return nil, false
+	}
+	return o.RequiresForfeitReason, true
+}
+
+// HasRequiresForfeitReason returns a boolean if a field has been set.
+func (o *CreateResourceInfo) HasRequiresForfeitReason() bool {
+	if o != nil && !IsNil(o.RequiresForfeitReason) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequiresForfeitReason gets a reference to the given bool and assigns it to the RequiresForfeitReason field.
+func (o *CreateResourceInfo) SetRequiresForfeitReason(v bool) {
+	o.RequiresForfeitReason = &v
+}
+
 func (o CreateResourceInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -361,8 +497,20 @@ func (o CreateResourceInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomRequestNotification) {
 		toSerialize["custom_request_notification"] = o.CustomRequestNotification
 	}
+	if !IsNil(o.MaxDirectUsersAllowed) {
+		toSerialize["max_direct_users_allowed"] = o.MaxDirectUsersAllowed
+	}
 	if !IsNil(o.RiskSensitivityOverride) {
 		toSerialize["risk_sensitivity_override"] = o.RiskSensitivityOverride
+	}
+	if !IsNil(o.MatchRemoteName) {
+		toSerialize["match_remote_name"] = o.MatchRemoteName
+	}
+	if !IsNil(o.MatchRemoteDescription) {
+		toSerialize["match_remote_description"] = o.MatchRemoteDescription
+	}
+	if !IsNil(o.RequiresForfeitReason) {
+		toSerialize["requires_forfeit_reason"] = o.RequiresForfeitReason
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -417,7 +565,11 @@ func (o *CreateResourceInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "remote_resource_id")
 		delete(additionalProperties, "metadata")
 		delete(additionalProperties, "custom_request_notification")
+		delete(additionalProperties, "max_direct_users_allowed")
 		delete(additionalProperties, "risk_sensitivity_override")
+		delete(additionalProperties, "match_remote_name")
+		delete(additionalProperties, "match_remote_description")
+		delete(additionalProperties, "requires_forfeit_reason")
 		o.AdditionalProperties = additionalProperties
 	}
 
