@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ActingUserId** | Pointer to **string** | Approve as this Opal user instead of the caller. Only for service users an admin has allowed to act for users, in organizations with the feature enabled. The user must be active in the identity provider and be a reviewer on the request&#39;s current stage and not the request&#39;s target; the decision counts as theirs. Requests that require MFA to approve, and ADMIN level, are rejected. | [optional] 
 **Level** | [**RequestApprovalEnum**](RequestApprovalEnum.md) |  | 
 **Comment** | Pointer to **string** | Optional comment for the approval | [optional] 
 
@@ -25,6 +26,31 @@ will change when the set of required properties is changed
 NewApproveRequestRequestWithDefaults instantiates a new ApproveRequestRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetActingUserId
+
+`func (o *ApproveRequestRequest) GetActingUserId() string`
+
+GetActingUserId returns the ActingUserId field if non-nil, zero value otherwise.
+
+### GetActingUserIdOk
+
+`func (o *ApproveRequestRequest) GetActingUserIdOk() (*string, bool)`
+
+GetActingUserIdOk returns a tuple with the ActingUserId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActingUserId
+
+`func (o *ApproveRequestRequest) SetActingUserId(v string)`
+
+SetActingUserId sets ActingUserId field to given value.
+
+### HasActingUserId
+
+`func (o *ApproveRequestRequest) HasActingUserId() bool`
+
+HasActingUserId returns a boolean if a field has been set.
 
 ### GetLevel
 
