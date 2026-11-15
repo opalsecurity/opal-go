@@ -24,6 +24,211 @@ import (
 // AppsAPIService AppsAPI service
 type AppsAPIService service
 
+type ApiCreateAppRequest struct {
+	ctx context.Context
+	ApiService *AppsAPIService
+	createAppInfo *CreateAppInfo
+}
+
+func (r ApiCreateAppRequest) CreateAppInfo(createAppInfo CreateAppInfo) ApiCreateAppRequest {
+	r.createAppInfo = &createAppInfo
+	return r
+}
+
+func (r ApiCreateAppRequest) Execute() (*App, *http.Response, error) {
+	return r.ApiService.CreateAppExecute(r)
+}
+
+/*
+CreateApp Create app
+
+Creates an `App` in Opal. Currently supports only Push-only apps (`CUSTOM`)
+and Custom Connector apps (`CUSTOM_CONNECTOR`).
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateAppRequest
+*/
+func (a *AppsAPIService) CreateApp(ctx context.Context) ApiCreateAppRequest {
+	return ApiCreateAppRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return App
+func (a *AppsAPIService) CreateAppExecute(r ApiCreateAppRequest) (*App, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *App
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AppsAPIService.CreateApp")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/apps"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.createAppInfo == nil {
+		return localVarReturnValue, nil, reportError("createAppInfo is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createAppInfo
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDeleteAppRequest struct {
+	ctx context.Context
+	ApiService *AppsAPIService
+	appId string
+}
+
+func (r ApiDeleteAppRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteAppExecute(r)
+}
+
+/*
+DeleteApp Delete app
+
+Deletes an `App`. Currently supports only Push-only apps (`CUSTOM`) and
+Custom Connector apps (`CUSTOM_CONNECTOR`). Matches the UI: soft-deletes
+the app and cleans up its resources, groups, and users.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param appId The ID of the app.
+ @return ApiDeleteAppRequest
+*/
+func (a *AppsAPIService) DeleteApp(ctx context.Context, appId string) ApiDeleteAppRequest {
+	return ApiDeleteAppRequest{
+		ApiService: a,
+		ctx: ctx,
+		appId: appId,
+	}
+}
+
+// Execute executes the request
+func (a *AppsAPIService) DeleteAppExecute(r ApiDeleteAppRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AppsAPIService.DeleteApp")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/apps/{app_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"app_id"+"}", url.PathEscape(parameterValueToString(r.appId, "appId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type ApiGetAppRequest struct {
 	ctx context.Context
 	ApiService *AppsAPIService
@@ -67,6 +272,109 @@ func (a *AppsAPIService) GetAppExecute(r ApiGetAppRequest) (*App, *http.Response
 	}
 
 	localVarPath := localBasePath + "/apps/{app_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"app_id"+"}", url.PathEscape(parameterValueToString(r.appId, "appId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetAppVisibilityRequest struct {
+	ctx context.Context
+	ApiService *AppsAPIService
+	appId string
+}
+
+func (r ApiGetAppVisibilityRequest) Execute() (*AppVisibilityInfo, *http.Response, error) {
+	return r.ApiService.GetAppVisibilityExecute(r)
+}
+
+/*
+GetAppVisibility Get app visibility
+
+Returns the visibility of this app.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param appId The ID of the app.
+ @return ApiGetAppVisibilityRequest
+*/
+func (a *AppsAPIService) GetAppVisibility(ctx context.Context, appId string) ApiGetAppVisibilityRequest {
+	return ApiGetAppVisibilityRequest{
+		ApiService: a,
+		ctx: ctx,
+		appId: appId,
+	}
+}
+
+// Execute executes the request
+//  @return AppVisibilityInfo
+func (a *AppsAPIService) GetAppVisibilityExecute(r ApiGetAppVisibilityRequest) (*AppVisibilityInfo, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AppVisibilityInfo
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AppsAPIService.GetAppVisibility")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/apps/{app_id}/visibility"
 	localVarPath = strings.Replace(localVarPath, "{"+"app_id"+"}", url.PathEscape(parameterValueToString(r.appId, "appId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -338,6 +646,241 @@ func (a *AppsAPIService) GetSyncErrorsExecute(r ApiGetSyncErrorsRequest) ([]Sync
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiSetAppVisibilityRequest struct {
+	ctx context.Context
+	ApiService *AppsAPIService
+	appId string
+	appVisibilityInfo *AppVisibilityInfo
+}
+
+func (r ApiSetAppVisibilityRequest) AppVisibilityInfo(appVisibilityInfo AppVisibilityInfo) ApiSetAppVisibilityRequest {
+	r.appVisibilityInfo = &appVisibilityInfo
+	return r
+}
+
+func (r ApiSetAppVisibilityRequest) Execute() (*AppVisibilityInfo, *http.Response, error) {
+	return r.ApiService.SetAppVisibilityExecute(r)
+}
+
+/*
+SetAppVisibility Set app visibility
+
+Sets the visibility of this app. Preferred over setting
+`visibility` / `visibility_group_ids` / `import_visibility` inline on
+`POST /apps` or `PATCH /apps/{app_id}` for drift-sensitive callers
+(Terraform, GitOps). Semantics are a replace, not a merge:
+`visibility_group_ids` is written to exactly what the request sends
+(an omitted or empty array clears all groups), and `import_visibility`
+is updated only when present.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param appId The ID of the app.
+ @return ApiSetAppVisibilityRequest
+*/
+func (a *AppsAPIService) SetAppVisibility(ctx context.Context, appId string) ApiSetAppVisibilityRequest {
+	return ApiSetAppVisibilityRequest{
+		ApiService: a,
+		ctx: ctx,
+		appId: appId,
+	}
+}
+
+// Execute executes the request
+//  @return AppVisibilityInfo
+func (a *AppsAPIService) SetAppVisibilityExecute(r ApiSetAppVisibilityRequest) (*AppVisibilityInfo, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AppVisibilityInfo
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AppsAPIService.SetAppVisibility")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/apps/{app_id}/visibility"
+	localVarPath = strings.Replace(localVarPath, "{"+"app_id"+"}", url.PathEscape(parameterValueToString(r.appId, "appId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.appVisibilityInfo == nil {
+		return localVarReturnValue, nil, reportError("appVisibilityInfo is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.appVisibilityInfo
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateAppRequest struct {
+	ctx context.Context
+	ApiService *AppsAPIService
+	appId string
+	updateAppInfo *UpdateAppInfo
+}
+
+func (r ApiUpdateAppRequest) UpdateAppInfo(updateAppInfo UpdateAppInfo) ApiUpdateAppRequest {
+	r.updateAppInfo = &updateAppInfo
+	return r
+}
+
+func (r ApiUpdateAppRequest) Execute() (*App, *http.Response, error) {
+	return r.ApiService.UpdateAppExecute(r)
+}
+
+/*
+UpdateApp Update app
+
+Updates an `App`. Currently supports only Push-only apps (`CUSTOM`) and
+Custom Connector apps (`CUSTOM_CONNECTOR`).
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param appId The ID of the app.
+ @return ApiUpdateAppRequest
+*/
+func (a *AppsAPIService) UpdateApp(ctx context.Context, appId string) ApiUpdateAppRequest {
+	return ApiUpdateAppRequest{
+		ApiService: a,
+		ctx: ctx,
+		appId: appId,
+	}
+}
+
+// Execute executes the request
+//  @return App
+func (a *AppsAPIService) UpdateAppExecute(r ApiUpdateAppRequest) (*App, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *App
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AppsAPIService.UpdateApp")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/apps/{app_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"app_id"+"}", url.PathEscape(parameterValueToString(r.appId, "appId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.updateAppInfo == nil {
+		return localVarReturnValue, nil, reportError("updateAppInfo is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.updateAppInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -4,11 +4,89 @@ All URIs are relative to *https://api.opal.dev/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**DeleteUser**](UsersAPI.md#DeleteUser) | **Delete** /users/{user_id} | 
 [**GetRemoteUsers**](UsersAPI.md#GetRemoteUsers) | **Get** /users/remote_users | 
+[**GetUserAccess**](UsersAPI.md#GetUserAccess) | **Get** /users/{user_id}/access | Get a user&#39;s access
+[**GetUserByID**](UsersAPI.md#GetUserByID) | **Get** /users/{user_id} | Get user by ID
 [**GetUserTags**](UsersAPI.md#GetUserTags) | **Get** /users/{user_id}/tags | 
+[**GetUserWhoami**](UsersAPI.md#GetUserWhoami) | **Get** /users/whoami | 
 [**GetUsers**](UsersAPI.md#GetUsers) | **Get** /users | 
+[**InviteUser**](UsersAPI.md#InviteUser) | **Post** /users | 
+[**ResetUserMfa**](UsersAPI.md#ResetUserMfa) | **Post** /users/{user_id}/mfa/reset | Reset a user&#39;s Opal MFA
+[**RevokeAllUserAccess**](UsersAPI.md#RevokeAllUserAccess) | **Post** /users/{user_id}/revoke-all | Revoke all of a user&#39;s access
+[**UpdateUser**](UsersAPI.md#UpdateUser) | **Patch** /users/{user_id} | 
 [**User**](UsersAPI.md#User) | **Get** /user | 
 
+
+
+## DeleteUser
+
+> User DeleteUser(ctx, userId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The ID of the user to delete.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UsersAPI.DeleteUser(context.Background(), userId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.DeleteUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeleteUser`: User
+	fmt.Fprintf(os.Stdout, "Response from `UsersAPI.DeleteUser`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** | The ID of the user to delete. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**User**](User.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## GetRemoteUsers
@@ -70,6 +148,154 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PaginatedRemoteUsersList**](PaginatedRemoteUsersList.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUserAccess
+
+> UserAccessList GetUserAccess(ctx, userId).Cursor(cursor).PageSize(pageSize).EntityType(entityType).IncludeUnmanaged(includeUnmanaged).Execute()
+
+Get a user's access
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	userId := "32acc112-21ff-4669-91c2-21e27683eaa1" // string | The ID of the user whose access to return.
+	cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The `next` cursor from a previous response. Resumes the list at that point. (optional)
+	pageSize := int32(200) // int32 | Number of results to return per page. Maximum is 1000. If omitted, all results are returned in a single response and `next` is null.  (optional)
+	entityType := openapiclient.UserAccessEntityTypeEnum("GROUP") // UserAccessEntityTypeEnum | Only return access to this type of entity. Omit to return both resources and groups. (optional)
+	includeUnmanaged := false // bool | Include the user's access to unmanaged resources. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UsersAPI.GetUserAccess(context.Background(), userId).Cursor(cursor).PageSize(pageSize).EntityType(entityType).IncludeUnmanaged(includeUnmanaged).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.GetUserAccess``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUserAccess`: UserAccessList
+	fmt.Fprintf(os.Stdout, "Response from `UsersAPI.GetUserAccess`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** | The ID of the user whose access to return. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUserAccessRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **cursor** | **string** | The &#x60;next&#x60; cursor from a previous response. Resumes the list at that point. | 
+ **pageSize** | **int32** | Number of results to return per page. Maximum is 1000. If omitted, all results are returned in a single response and &#x60;next&#x60; is null.  | 
+ **entityType** | [**UserAccessEntityTypeEnum**](UserAccessEntityTypeEnum.md) | Only return access to this type of entity. Omit to return both resources and groups. | 
+ **includeUnmanaged** | **bool** | Include the user&#39;s access to unmanaged resources. | 
+
+### Return type
+
+[**UserAccessList**](UserAccessList.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUserByID
+
+> User GetUserByID(ctx, userId).Execute()
+
+Get user by ID
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	userId := "32acc112-21ff-4669-91c2-21e27683eaa1" // string | The ID of the user.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UsersAPI.GetUserByID(context.Background(), userId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.GetUserByID``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUserByID`: User
+	fmt.Fprintf(os.Stdout, "Response from `UsersAPI.GetUserByID`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** | The ID of the user. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUserByIDRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**User**](User.md)
 
 ### Authorization
 
@@ -155,6 +381,67 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetUserWhoami
+
+> User GetUserWhoami(ctx).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UsersAPI.GetUserWhoami(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.GetUserWhoami``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUserWhoami`: User
+	fmt.Fprintf(os.Stdout, "Response from `UsersAPI.GetUserWhoami`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUserWhoamiRequest struct via the builder pattern
+
+
+### Return type
+
+[**User**](User.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetUsers
 
 > PaginatedUsersList GetUsers(ctx).Cursor(cursor).PageSize(pageSize).TagIds(tagIds).Execute()
@@ -218,6 +505,284 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## InviteUser
+
+> User InviteUser(ctx).InviteUserInfo(inviteUserInfo).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	inviteUserInfo := *openapiclient.NewInviteUserInfo("Email_example", "FirstName_example", "LastName_example", openapiclient.UserProductRoleEnum("MEMBER")) // InviteUserInfo | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UsersAPI.InviteUser(context.Background()).InviteUserInfo(inviteUserInfo).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.InviteUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `InviteUser`: User
+	fmt.Fprintf(os.Stdout, "Response from `UsersAPI.InviteUser`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiInviteUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **inviteUserInfo** | [**InviteUserInfo**](InviteUserInfo.md) |  | 
+
+### Return type
+
+[**User**](User.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ResetUserMfa
+
+> EscalateRequest200Response ResetUserMfa(ctx, userId).Execute()
+
+Reset a user's Opal MFA
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	userId := "32acc112-21ff-4669-91c2-21e27683eaa1" // string | The ID of the user whose MFA should be reset.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UsersAPI.ResetUserMfa(context.Background(), userId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.ResetUserMfa``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ResetUserMfa`: EscalateRequest200Response
+	fmt.Fprintf(os.Stdout, "Response from `UsersAPI.ResetUserMfa`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** | The ID of the user whose MFA should be reset. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiResetUserMfaRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**EscalateRequest200Response**](EscalateRequest200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RevokeAllUserAccess
+
+> EscalateRequest200Response RevokeAllUserAccess(ctx, userId).Execute()
+
+Revoke all of a user's access
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	userId := "32acc112-21ff-4669-91c2-21e27683eaa1" // string | The ID of the user whose access should be revoked.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UsersAPI.RevokeAllUserAccess(context.Background(), userId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.RevokeAllUserAccess``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RevokeAllUserAccess`: EscalateRequest200Response
+	fmt.Fprintf(os.Stdout, "Response from `UsersAPI.RevokeAllUserAccess`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** | The ID of the user whose access should be revoked. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRevokeAllUserAccessRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**EscalateRequest200Response**](EscalateRequest200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateUser
+
+> User UpdateUser(ctx, userId).UpdateUserInfo(updateUserInfo).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	userId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The ID of the user to update.
+	updateUserInfo := *openapiclient.NewUpdateUserInfo() // UpdateUserInfo | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UsersAPI.UpdateUser(context.Background(), userId).UpdateUserInfo(updateUserInfo).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.UpdateUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateUser`: User
+	fmt.Fprintf(os.Stdout, "Response from `UsersAPI.UpdateUser`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**userId** | **string** | The ID of the user to update. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **updateUserInfo** | [**UpdateUserInfo**](UpdateUserInfo.md) |  | 
+
+### Return type
+
+[**User**](User.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
