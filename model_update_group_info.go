@@ -46,13 +46,16 @@ type UpdateGroupInfo struct {
 	FolderId *string `json:"folder_id,omitempty"`
 	// A bool representing whether or not to require MFA for reviewers to approve requests for this group.
 	RequireMfaToApprove *bool `json:"require_mfa_to_approve,omitempty"`
+	// A bool representing whether or not a reason is required when forfeiting access to this group.
+	RequiresForfeitReason *bool `json:"requires_forfeit_reason,omitempty"`
 	// A bool representing whether or not to require MFA for requesting access to this group. Deprecated in favor of `request_configurations`.
 	// Deprecated
 	RequireMfaToRequest *bool `json:"require_mfa_to_request,omitempty"`
 	// A bool representing whether or not to automatically approve requests to this group. Deprecated in favor of `request_configurations`.
 	// Deprecated
 	AutoApproval *bool `json:"auto_approval,omitempty"`
-	// The ID of the associated configuration template.
+	// Deprecated. Use `PUT /groups/{group_id}/configuration-template` instead; that endpoint exposes attach, re-point, and detach as a single idempotent REST sub-resource and is the Terraform-friendly surface for managing this linkage. This field remains honored on the main PUT for now: set to a UUID to attach or re-point, set to `null` to unlink (forks the template into a private configuration that preserves the current settings), omit to leave linkage unchanged. Scheduled for removal in a future major version.
+	// Deprecated
 	ConfigurationTemplateId *string `json:"configuration_template_id,omitempty"`
 	// The ID of the associated request template. Deprecated in favor of `request_configurations`.
 	// Deprecated
@@ -72,7 +75,13 @@ type UpdateGroupInfo struct {
 	RequestConfigurationList *CreateRequestConfigurationInfoList `json:"request_configuration_list,omitempty"`
 	// Custom request notification sent to the requester when the request is approved.
 	CustomRequestNotification *string `json:"custom_request_notification,omitempty"`
+	// The maximum number of direct users allowed for this group at once. Set to null to remove the limit.
+	MaxDirectUsersAllowed *int32 `json:"max_direct_users_allowed,omitempty"`
 	RiskSensitivityOverride *RiskSensitivityEnum `json:"risk_sensitivity_override,omitempty"`
+	// A bool representing whether or not the group's name should be synced from the end system. When true, the name is overwritten with the remote name on each sync, so a `name` provided together with this field set to true will be replaced at the next sync. If not provided, the current value is left unchanged.
+	MatchRemoteName *bool `json:"match_remote_name,omitempty"`
+	// A bool representing whether or not the group's description should be synced from the end system. When true, the description is overwritten with the remote description on each sync, so a `description` provided together with this field set to true will be replaced at the next sync. If not provided, the current value is left unchanged.
+	MatchRemoteDescription *bool `json:"match_remote_description,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -423,6 +432,38 @@ func (o *UpdateGroupInfo) SetRequireMfaToApprove(v bool) {
 	o.RequireMfaToApprove = &v
 }
 
+// GetRequiresForfeitReason returns the RequiresForfeitReason field value if set, zero value otherwise.
+func (o *UpdateGroupInfo) GetRequiresForfeitReason() bool {
+	if o == nil || IsNil(o.RequiresForfeitReason) {
+		var ret bool
+		return ret
+	}
+	return *o.RequiresForfeitReason
+}
+
+// GetRequiresForfeitReasonOk returns a tuple with the RequiresForfeitReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateGroupInfo) GetRequiresForfeitReasonOk() (*bool, bool) {
+	if o == nil || IsNil(o.RequiresForfeitReason) {
+		return nil, false
+	}
+	return o.RequiresForfeitReason, true
+}
+
+// HasRequiresForfeitReason returns a boolean if a field has been set.
+func (o *UpdateGroupInfo) HasRequiresForfeitReason() bool {
+	if o != nil && !IsNil(o.RequiresForfeitReason) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequiresForfeitReason gets a reference to the given bool and assigns it to the RequiresForfeitReason field.
+func (o *UpdateGroupInfo) SetRequiresForfeitReason(v bool) {
+	o.RequiresForfeitReason = &v
+}
+
 // GetRequireMfaToRequest returns the RequireMfaToRequest field value if set, zero value otherwise.
 // Deprecated
 func (o *UpdateGroupInfo) GetRequireMfaToRequest() bool {
@@ -494,6 +535,7 @@ func (o *UpdateGroupInfo) SetAutoApproval(v bool) {
 }
 
 // GetConfigurationTemplateId returns the ConfigurationTemplateId field value if set, zero value otherwise.
+// Deprecated
 func (o *UpdateGroupInfo) GetConfigurationTemplateId() string {
 	if o == nil || IsNil(o.ConfigurationTemplateId) {
 		var ret string
@@ -504,6 +546,7 @@ func (o *UpdateGroupInfo) GetConfigurationTemplateId() string {
 
 // GetConfigurationTemplateIdOk returns a tuple with the ConfigurationTemplateId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UpdateGroupInfo) GetConfigurationTemplateIdOk() (*string, bool) {
 	if o == nil || IsNil(o.ConfigurationTemplateId) {
 		return nil, false
@@ -521,6 +564,7 @@ func (o *UpdateGroupInfo) HasConfigurationTemplateId() bool {
 }
 
 // SetConfigurationTemplateId gets a reference to the given string and assigns it to the ConfigurationTemplateId field.
+// Deprecated
 func (o *UpdateGroupInfo) SetConfigurationTemplateId(v string) {
 	o.ConfigurationTemplateId = &v
 }
@@ -761,6 +805,38 @@ func (o *UpdateGroupInfo) SetCustomRequestNotification(v string) {
 	o.CustomRequestNotification = &v
 }
 
+// GetMaxDirectUsersAllowed returns the MaxDirectUsersAllowed field value if set, zero value otherwise.
+func (o *UpdateGroupInfo) GetMaxDirectUsersAllowed() int32 {
+	if o == nil || IsNil(o.MaxDirectUsersAllowed) {
+		var ret int32
+		return ret
+	}
+	return *o.MaxDirectUsersAllowed
+}
+
+// GetMaxDirectUsersAllowedOk returns a tuple with the MaxDirectUsersAllowed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateGroupInfo) GetMaxDirectUsersAllowedOk() (*int32, bool) {
+	if o == nil || IsNil(o.MaxDirectUsersAllowed) {
+		return nil, false
+	}
+	return o.MaxDirectUsersAllowed, true
+}
+
+// HasMaxDirectUsersAllowed returns a boolean if a field has been set.
+func (o *UpdateGroupInfo) HasMaxDirectUsersAllowed() bool {
+	if o != nil && !IsNil(o.MaxDirectUsersAllowed) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxDirectUsersAllowed gets a reference to the given int32 and assigns it to the MaxDirectUsersAllowed field.
+func (o *UpdateGroupInfo) SetMaxDirectUsersAllowed(v int32) {
+	o.MaxDirectUsersAllowed = &v
+}
+
 // GetRiskSensitivityOverride returns the RiskSensitivityOverride field value if set, zero value otherwise.
 func (o *UpdateGroupInfo) GetRiskSensitivityOverride() RiskSensitivityEnum {
 	if o == nil || IsNil(o.RiskSensitivityOverride) {
@@ -791,6 +867,70 @@ func (o *UpdateGroupInfo) HasRiskSensitivityOverride() bool {
 // SetRiskSensitivityOverride gets a reference to the given RiskSensitivityEnum and assigns it to the RiskSensitivityOverride field.
 func (o *UpdateGroupInfo) SetRiskSensitivityOverride(v RiskSensitivityEnum) {
 	o.RiskSensitivityOverride = &v
+}
+
+// GetMatchRemoteName returns the MatchRemoteName field value if set, zero value otherwise.
+func (o *UpdateGroupInfo) GetMatchRemoteName() bool {
+	if o == nil || IsNil(o.MatchRemoteName) {
+		var ret bool
+		return ret
+	}
+	return *o.MatchRemoteName
+}
+
+// GetMatchRemoteNameOk returns a tuple with the MatchRemoteName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateGroupInfo) GetMatchRemoteNameOk() (*bool, bool) {
+	if o == nil || IsNil(o.MatchRemoteName) {
+		return nil, false
+	}
+	return o.MatchRemoteName, true
+}
+
+// HasMatchRemoteName returns a boolean if a field has been set.
+func (o *UpdateGroupInfo) HasMatchRemoteName() bool {
+	if o != nil && !IsNil(o.MatchRemoteName) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatchRemoteName gets a reference to the given bool and assigns it to the MatchRemoteName field.
+func (o *UpdateGroupInfo) SetMatchRemoteName(v bool) {
+	o.MatchRemoteName = &v
+}
+
+// GetMatchRemoteDescription returns the MatchRemoteDescription field value if set, zero value otherwise.
+func (o *UpdateGroupInfo) GetMatchRemoteDescription() bool {
+	if o == nil || IsNil(o.MatchRemoteDescription) {
+		var ret bool
+		return ret
+	}
+	return *o.MatchRemoteDescription
+}
+
+// GetMatchRemoteDescriptionOk returns a tuple with the MatchRemoteDescription field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateGroupInfo) GetMatchRemoteDescriptionOk() (*bool, bool) {
+	if o == nil || IsNil(o.MatchRemoteDescription) {
+		return nil, false
+	}
+	return o.MatchRemoteDescription, true
+}
+
+// HasMatchRemoteDescription returns a boolean if a field has been set.
+func (o *UpdateGroupInfo) HasMatchRemoteDescription() bool {
+	if o != nil && !IsNil(o.MatchRemoteDescription) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatchRemoteDescription gets a reference to the given bool and assigns it to the MatchRemoteDescription field.
+func (o *UpdateGroupInfo) SetMatchRemoteDescription(v bool) {
+	o.MatchRemoteDescription = &v
 }
 
 func (o UpdateGroupInfo) MarshalJSON() ([]byte, error) {
@@ -831,6 +971,9 @@ func (o UpdateGroupInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RequireMfaToApprove) {
 		toSerialize["require_mfa_to_approve"] = o.RequireMfaToApprove
 	}
+	if !IsNil(o.RequiresForfeitReason) {
+		toSerialize["requires_forfeit_reason"] = o.RequiresForfeitReason
+	}
 	if !IsNil(o.RequireMfaToRequest) {
 		toSerialize["require_mfa_to_request"] = o.RequireMfaToRequest
 	}
@@ -861,8 +1004,17 @@ func (o UpdateGroupInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomRequestNotification) {
 		toSerialize["custom_request_notification"] = o.CustomRequestNotification
 	}
+	if !IsNil(o.MaxDirectUsersAllowed) {
+		toSerialize["max_direct_users_allowed"] = o.MaxDirectUsersAllowed
+	}
 	if !IsNil(o.RiskSensitivityOverride) {
 		toSerialize["risk_sensitivity_override"] = o.RiskSensitivityOverride
+	}
+	if !IsNil(o.MatchRemoteName) {
+		toSerialize["match_remote_name"] = o.MatchRemoteName
+	}
+	if !IsNil(o.MatchRemoteDescription) {
+		toSerialize["match_remote_description"] = o.MatchRemoteDescription
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -917,6 +1069,7 @@ func (o *UpdateGroupInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "require_support_ticket")
 		delete(additionalProperties, "folder_id")
 		delete(additionalProperties, "require_mfa_to_approve")
+		delete(additionalProperties, "requires_forfeit_reason")
 		delete(additionalProperties, "require_mfa_to_request")
 		delete(additionalProperties, "auto_approval")
 		delete(additionalProperties, "configuration_template_id")
@@ -927,7 +1080,10 @@ func (o *UpdateGroupInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "request_configurations")
 		delete(additionalProperties, "request_configuration_list")
 		delete(additionalProperties, "custom_request_notification")
+		delete(additionalProperties, "max_direct_users_allowed")
 		delete(additionalProperties, "risk_sensitivity_override")
+		delete(additionalProperties, "match_remote_name")
+		delete(additionalProperties, "match_remote_description")
 		o.AdditionalProperties = additionalProperties
 	}
 

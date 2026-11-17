@@ -35,6 +35,8 @@ type CreateConfigurationTemplateInfo struct {
 	RequireMfaToApprove bool `json:"require_mfa_to_approve"`
 	// A bool representing whether or not to require MFA to connect to resources associated with this configuration template.
 	RequireMfaToConnect bool `json:"require_mfa_to_connect"`
+	// A bool representing whether or not a reason is required when forfeiting access to resources or groups using this configuration template.
+	RequiresForfeitReason *bool `json:"requires_forfeit_reason,omitempty"`
 	// The name of the configuration template.
 	Name string `json:"name"`
 	// The request configuration list of the configuration template. If not provided, the default request configuration will be used.
@@ -264,6 +266,38 @@ func (o *CreateConfigurationTemplateInfo) SetRequireMfaToConnect(v bool) {
 	o.RequireMfaToConnect = v
 }
 
+// GetRequiresForfeitReason returns the RequiresForfeitReason field value if set, zero value otherwise.
+func (o *CreateConfigurationTemplateInfo) GetRequiresForfeitReason() bool {
+	if o == nil || IsNil(o.RequiresForfeitReason) {
+		var ret bool
+		return ret
+	}
+	return *o.RequiresForfeitReason
+}
+
+// GetRequiresForfeitReasonOk returns a tuple with the RequiresForfeitReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateConfigurationTemplateInfo) GetRequiresForfeitReasonOk() (*bool, bool) {
+	if o == nil || IsNil(o.RequiresForfeitReason) {
+		return nil, false
+	}
+	return o.RequiresForfeitReason, true
+}
+
+// HasRequiresForfeitReason returns a boolean if a field has been set.
+func (o *CreateConfigurationTemplateInfo) HasRequiresForfeitReason() bool {
+	if o != nil && !IsNil(o.RequiresForfeitReason) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequiresForfeitReason gets a reference to the given bool and assigns it to the RequiresForfeitReason field.
+func (o *CreateConfigurationTemplateInfo) SetRequiresForfeitReason(v bool) {
+	o.RequiresForfeitReason = &v
+}
+
 // GetName returns the Name field value
 func (o *CreateConfigurationTemplateInfo) GetName() string {
 	if o == nil {
@@ -442,6 +476,9 @@ func (o CreateConfigurationTemplateInfo) ToMap() (map[string]interface{}, error)
 	}
 	toSerialize["require_mfa_to_approve"] = o.RequireMfaToApprove
 	toSerialize["require_mfa_to_connect"] = o.RequireMfaToConnect
+	if !IsNil(o.RequiresForfeitReason) {
+		toSerialize["requires_forfeit_reason"] = o.RequiresForfeitReason
+	}
 	toSerialize["name"] = o.Name
 	if !IsNil(o.RequestConfigurations) {
 		toSerialize["request_configurations"] = o.RequestConfigurations
@@ -509,6 +546,7 @@ func (o *CreateConfigurationTemplateInfo) UnmarshalJSON(data []byte) (err error)
 		delete(additionalProperties, "break_glass_user_ids")
 		delete(additionalProperties, "require_mfa_to_approve")
 		delete(additionalProperties, "require_mfa_to_connect")
+		delete(additionalProperties, "requires_forfeit_reason")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "request_configurations")
 		delete(additionalProperties, "request_configuration_list")

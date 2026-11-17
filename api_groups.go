@@ -813,6 +813,225 @@ func (a *GroupsAPIService) GetGroupExecute(r ApiGetGroupRequest) (*Group, *http.
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetGroupAccessLevelsRequest struct {
+	ctx context.Context
+	ApiService *GroupsAPIService
+	groupId string
+}
+
+func (r ApiGetGroupAccessLevelsRequest) Execute() (*GroupAccessLevelList, *http.Response, error) {
+	return r.ApiService.GetGroupAccessLevelsExecute(r)
+}
+
+/*
+GetGroupAccessLevels Get group access levels
+
+Returns the list of access levels defined for the group. Groups that only offer default (unnamed) access return an empty list.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param groupId The ID of the group whose access levels to return.
+ @return ApiGetGroupAccessLevelsRequest
+*/
+func (a *GroupsAPIService) GetGroupAccessLevels(ctx context.Context, groupId string) ApiGetGroupAccessLevelsRequest {
+	return ApiGetGroupAccessLevelsRequest{
+		ApiService: a,
+		ctx: ctx,
+		groupId: groupId,
+	}
+}
+
+// Execute executes the request
+//  @return GroupAccessLevelList
+func (a *GroupsAPIService) GetGroupAccessLevelsExecute(r ApiGetGroupAccessLevelsRequest) (*GroupAccessLevelList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GroupAccessLevelList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GroupsAPIService.GetGroupAccessLevels")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/groups/{group_id}/access_levels"
+	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterValueToString(r.groupId, "groupId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetGroupConfigurationTemplateRequest struct {
+	ctx context.Context
+	ApiService *GroupsAPIService
+	groupId string
+}
+
+func (r ApiGetGroupConfigurationTemplateRequest) Execute() (*GroupConfigurationTemplate, *http.Response, error) {
+	return r.ApiService.GetGroupConfigurationTemplateExecute(r)
+}
+
+/*
+GetGroupConfigurationTemplate Get the ID of the configuration template linked to a group
+
+Returns the ID of the configuration template that the group is currently
+linked to. The response body is
+`{"configuration_template_id": "<uuid>" | null}`:
+
+  * `<uuid>` is the ID of the configuration template the group is linked to.
+  * `null` means the group is not linked to any configuration template
+    and uses its own private configuration.
+
+This endpoint only exposes the link between a group and a configuration
+template — it does not return the template's own fields (name,
+description, request configurations, visibility, etc.). To read those,
+call `GET /configuration-templates/{configuration_template_id}` with the
+ID returned here.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param groupId The ID of the group whose configuration template link is being read.
+ @return ApiGetGroupConfigurationTemplateRequest
+*/
+func (a *GroupsAPIService) GetGroupConfigurationTemplate(ctx context.Context, groupId string) ApiGetGroupConfigurationTemplateRequest {
+	return ApiGetGroupConfigurationTemplateRequest{
+		ApiService: a,
+		ctx: ctx,
+		groupId: groupId,
+	}
+}
+
+// Execute executes the request
+//  @return GroupConfigurationTemplate
+func (a *GroupsAPIService) GetGroupConfigurationTemplateExecute(r ApiGetGroupConfigurationTemplateRequest) (*GroupConfigurationTemplate, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GroupConfigurationTemplate
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GroupsAPIService.GetGroupConfigurationTemplate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/groups/{group_id}/configuration-template"
+	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterValueToString(r.groupId, "groupId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetGroupContainingGroupRequest struct {
 	ctx context.Context
 	ApiService *GroupsAPIService
@@ -1033,6 +1252,109 @@ func (a *GroupsAPIService) GetGroupContainingGroupsExecute(r ApiGetGroupContaini
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetGroupGroupsRequest struct {
+	ctx context.Context
+	ApiService *GroupsAPIService
+	groupId string
+}
+
+func (r ApiGetGroupGroupsRequest) Execute() (*GroupMemberGroupList, *http.Response, error) {
+	return r.ApiService.GetGroupGroupsExecute(r)
+}
+
+/*
+GetGroupGroups Get member groups
+
+Gets the list of groups that are nested directly in the group (its member groups).
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param groupId The ID of the group.
+ @return ApiGetGroupGroupsRequest
+*/
+func (a *GroupsAPIService) GetGroupGroups(ctx context.Context, groupId string) ApiGetGroupGroupsRequest {
+	return ApiGetGroupGroupsRequest{
+		ApiService: a,
+		ctx: ctx,
+		groupId: groupId,
+	}
+}
+
+// Execute executes the request
+//  @return GroupMemberGroupList
+func (a *GroupsAPIService) GetGroupGroupsExecute(r ApiGetGroupGroupsRequest) (*GroupMemberGroupList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GroupMemberGroupList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GroupsAPIService.GetGroupGroups")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/groups/{group_id}/groups"
+	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterValueToString(r.groupId, "groupId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetGroupMessageChannelsRequest struct {
 	ctx context.Context
 	ApiService *GroupsAPIService
@@ -1185,6 +1507,140 @@ func (a *GroupsAPIService) GetGroupOnCallSchedulesExecute(r ApiGetGroupOnCallSch
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetGroupRequestableToUserRequest struct {
+	ctx context.Context
+	ApiService *GroupsAPIService
+	groupId string
+	userId string
+	accessLevelRemoteId *string
+	requesterId *string
+}
+
+// Optional access level remote ID to check a single level. Must be an access level of the group. Omit for groups without access levels. 
+func (r ApiGetGroupRequestableToUserRequest) AccessLevelRemoteId(accessLevelRemoteId string) ApiGetGroupRequestableToUserRequest {
+	r.accessLevelRemoteId = &accessLevelRemoteId
+	return r
+}
+
+// Optional ID of the person filling in the form when different from user_id. Adds the on-behalf check evaluated as that requester, following EnforceRequestOnBehalfOfUser. 
+func (r ApiGetGroupRequestableToUserRequest) RequesterId(requesterId string) ApiGetGroupRequestableToUserRequest {
+	r.requesterId = &requesterId
+	return r
+}
+
+func (r ApiGetGroupRequestableToUserRequest) Execute() (*UserRequestabilityCheck, *http.Response, error) {
+	return r.ApiService.GetGroupRequestableToUserExecute(r)
+}
+
+/*
+GetGroupRequestableToUser Method for GetGroupRequestableToUser
+
+Checks whether a user can request this group, and at which access levels, using the same
+request-configuration selection as Opal's Access Request page and `POST /requests`. Checking
+another user (or a requester other than the caller) requires an Opal admin or a custom role
+with the CHECK_REQUESTABILITY permission; a caller can always check their own requestability,
+in which case a group they cannot read is reported as not found. Linked (non-source) groups
+return requestable false with LINKED_GROUP_NOT_REQUESTABLE. Requestability does not factor
+visibility.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param groupId The ID of the group.
+ @param userId The ID of the user the access would be for.
+ @return ApiGetGroupRequestableToUserRequest
+*/
+func (a *GroupsAPIService) GetGroupRequestableToUser(ctx context.Context, groupId string, userId string) ApiGetGroupRequestableToUserRequest {
+	return ApiGetGroupRequestableToUserRequest{
+		ApiService: a,
+		ctx: ctx,
+		groupId: groupId,
+		userId: userId,
+	}
+}
+
+// Execute executes the request
+//  @return UserRequestabilityCheck
+func (a *GroupsAPIService) GetGroupRequestableToUserExecute(r ApiGetGroupRequestableToUserRequest) (*UserRequestabilityCheck, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UserRequestabilityCheck
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GroupsAPIService.GetGroupRequestableToUser")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/groups/{group_id}/requestable/users/{user_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterValueToString(r.groupId, "groupId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"user_id"+"}", url.PathEscape(parameterValueToString(r.userId, "userId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.accessLevelRemoteId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "access_level_remote_id", r.accessLevelRemoteId, "form", "")
+	}
+	if r.requesterId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "requester_id", r.requesterId, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1671,7 +2127,7 @@ func (r ApiGetGroupUsersRequest) Cursor(cursor string) ApiGetGroupUsersRequest {
 	return r
 }
 
-// Number of results to return per page. Default is 200.
+// Number of results to return per page, up to 1000. When set (or when a cursor is provided), the response contains a single page of results and a &#x60;next&#x60; cursor; the default page size is 200. When both page_size and cursor are omitted, the entire group membership is returned in one response with no &#x60;next&#x60; cursor. For large groups, prefer setting page_size and following &#x60;next&#x60;.
 func (r ApiGetGroupUsersRequest) PageSize(pageSize int32) ApiGetGroupUsersRequest {
 	r.pageSize = &pageSize
 	return r
@@ -1883,6 +2339,113 @@ func (a *GroupsAPIService) GetGroupVisibilityExecute(r ApiGetGroupVisibilityRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetGroupVisibleToUserRequest struct {
+	ctx context.Context
+	ApiService *GroupsAPIService
+	groupId string
+	userId string
+}
+
+func (r ApiGetGroupVisibleToUserRequest) Execute() (*UserVisibilityCheck, *http.Response, error) {
+	return r.ApiService.GetGroupVisibleToUserExecute(r)
+}
+
+/*
+GetGroupVisibleToUser Method for GetGroupVisibleToUser
+
+Checks whether a user can see this group, as shown in the Opal UI for that user. Checking another user requires an Opal admin or a custom role with the CHECK_VISIBILITY permission; a caller can always check their own visibility, in which case an entity they cannot see is reported as not found.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param groupId The ID of the group.
+ @param userId The ID of the user whose visibility is being checked.
+ @return ApiGetGroupVisibleToUserRequest
+*/
+func (a *GroupsAPIService) GetGroupVisibleToUser(ctx context.Context, groupId string, userId string) ApiGetGroupVisibleToUserRequest {
+	return ApiGetGroupVisibleToUserRequest{
+		ApiService: a,
+		ctx: ctx,
+		groupId: groupId,
+		userId: userId,
+	}
+}
+
+// Execute executes the request
+//  @return UserVisibilityCheck
+func (a *GroupsAPIService) GetGroupVisibleToUserExecute(r ApiGetGroupVisibleToUserRequest) (*UserVisibilityCheck, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UserVisibilityCheck
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GroupsAPIService.GetGroupVisibleToUser")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/groups/{group_id}/visible/users/{user_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterValueToString(r.groupId, "groupId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"user_id"+"}", url.PathEscape(parameterValueToString(r.userId, "userId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetGroupsRequest struct {
 	ctx context.Context
 	ApiService *GroupsAPIService
@@ -1891,7 +2454,10 @@ type ApiGetGroupsRequest struct {
 	groupTypeFilter *GroupTypeEnum
 	groupIds *[]string
 	groupName *string
+	groupNameMatch *NameMatchType
+	remoteId *string
 	tagIds *[]string
+	requestable *bool
 }
 
 // The pagination cursor value.
@@ -1906,7 +2472,7 @@ func (r ApiGetGroupsRequest) PageSize(pageSize int32) ApiGetGroupsRequest {
 	return r
 }
 
-// The group type to filter by.
+// The group type to filter by. Required when remote_id is provided.
 func (r ApiGetGroupsRequest) GroupTypeFilter(groupTypeFilter GroupTypeEnum) ApiGetGroupsRequest {
 	r.groupTypeFilter = &groupTypeFilter
 	return r
@@ -1918,15 +2484,33 @@ func (r ApiGetGroupsRequest) GroupIds(groupIds []string) ApiGetGroupsRequest {
 	return r
 }
 
-// Group name.
+// Filter groups by name. Matches against both &#x60;name&#x60; and &#x60;remote_name&#x60;. Matching is case-insensitive. Use &#x60;group_name_match&#x60; to choose the match type; when omitted, CONTAINS (substring) is used.
 func (r ApiGetGroupsRequest) GroupName(groupName string) ApiGetGroupsRequest {
 	r.groupName = &groupName
+	return r
+}
+
+// How to apply &#x60;group_name&#x60;. Requires &#x60;group_name&#x60; to be set. Defaults to CONTAINS when &#x60;group_name&#x60; is provided without this parameter.
+func (r ApiGetGroupsRequest) GroupNameMatch(groupNameMatch NameMatchType) ApiGetGroupsRequest {
+	r.groupNameMatch = &groupNameMatch
+	return r
+}
+
+// Filter groups by their remote id. Returns groups whose remote id matches the provided value exactly. Requires group_type_filter. Remote ids are only unique within a connection, so groups from different connections can share a remote id and more than one group may be returned. Unmanaged groups are not returned.
+func (r ApiGetGroupsRequest) RemoteId(remoteId string) ApiGetGroupsRequest {
+	r.remoteId = &remoteId
 	return r
 }
 
 // The IDs of the tags to filter by. Returns only groups that have any of these tags applied.
 func (r ApiGetGroupsRequest) TagIds(tagIds []string) ApiGetGroupsRequest {
 	r.tagIds = &tagIds
+	return r
+}
+
+// If true, only return groups that allow access requests. Does not check whether the caller is permitted to request the group.
+func (r ApiGetGroupsRequest) Requestable(requestable bool) ApiGetGroupsRequest {
+	r.requestable = &requestable
 	return r
 }
 
@@ -1985,6 +2569,12 @@ func (a *GroupsAPIService) GetGroupsExecute(r ApiGetGroupsRequest) (*PaginatedGr
 	if r.groupName != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "group_name", r.groupName, "form", "")
 	}
+	if r.groupNameMatch != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "group_name_match", r.groupNameMatch, "form", "")
+	}
+	if r.remoteId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "remote_id", r.remoteId, "form", "")
+	}
 	if r.tagIds != nil {
 		t := *r.tagIds
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -1995,6 +2585,9 @@ func (a *GroupsAPIService) GetGroupsExecute(r ApiGetGroupsRequest) (*PaginatedGr
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "tag_ids", t, "form", "multi")
 		}
+	}
+	if r.requestable != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "requestable", r.requestable, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2921,6 +3514,147 @@ func (a *GroupsAPIService) SetGroupVisibilityExecute(r ApiSetGroupVisibilityRequ
 	}
 	// body params
 	localVarPostBody = r.visibilityInfo
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateGroupConfigurationTemplateRequest struct {
+	ctx context.Context
+	ApiService *GroupsAPIService
+	groupId string
+	groupConfigurationTemplate *GroupConfigurationTemplate
+}
+
+func (r ApiUpdateGroupConfigurationTemplateRequest) GroupConfigurationTemplate(groupConfigurationTemplate GroupConfigurationTemplate) ApiUpdateGroupConfigurationTemplateRequest {
+	r.groupConfigurationTemplate = &groupConfigurationTemplate
+	return r
+}
+
+func (r ApiUpdateGroupConfigurationTemplateRequest) Execute() (*GroupConfigurationTemplate, *http.Response, error) {
+	return r.ApiService.UpdateGroupConfigurationTemplateExecute(r)
+}
+
+/*
+UpdateGroupConfigurationTemplate Set the ID of the configuration template linked to a group
+
+Attaches, repoints, or detaches the configuration template linked to a
+group. This endpoint only manages the link (by ID) between a group and
+an existing configuration template — it does not create, modify, or
+delete the template itself. To manage a template's own fields (name,
+description, request configurations, visibility, etc.), use the
+`/configuration-templates` endpoints.
+
+The request body is `{"configuration_template_id": "<uuid>" | null}`:
+
+  * A `<uuid>` value links the group to the configuration template with
+    that ID. If the group was previously linked to a different
+    template, the group is repointed in place.
+  * `null` detaches the group from its current configuration template.
+    The template is deep-copied into a new private configuration with
+    the same settings so the group's current behaviour is preserved,
+    and the group is repointed at the fork.
+
+The `configuration_template_id` field is required. Sending `{}` or any
+body in which the field is omitted is rejected with `400`.
+
+The call is idempotent: if the request body matches the group's current
+link, no changes are made and no audit events are emitted.
+
+This endpoint is the preferred, Terraform-friendly surface for linking
+and unlinking configuration templates on groups. The equivalent
+`configuration_template_id` field on `PUT /groups` remains available
+but is deprecated for this purpose.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param groupId The ID of the group whose configuration template link is being set.
+ @return ApiUpdateGroupConfigurationTemplateRequest
+*/
+func (a *GroupsAPIService) UpdateGroupConfigurationTemplate(ctx context.Context, groupId string) ApiUpdateGroupConfigurationTemplateRequest {
+	return ApiUpdateGroupConfigurationTemplateRequest{
+		ApiService: a,
+		ctx: ctx,
+		groupId: groupId,
+	}
+}
+
+// Execute executes the request
+//  @return GroupConfigurationTemplate
+func (a *GroupsAPIService) UpdateGroupConfigurationTemplateExecute(r ApiUpdateGroupConfigurationTemplateRequest) (*GroupConfigurationTemplate, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GroupConfigurationTemplate
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GroupsAPIService.UpdateGroupConfigurationTemplate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/groups/{group_id}/configuration-template"
+	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterValueToString(r.groupId, "groupId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.groupConfigurationTemplate == nil {
+		return localVarReturnValue, nil, reportError("groupConfigurationTemplate is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.groupConfigurationTemplate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
