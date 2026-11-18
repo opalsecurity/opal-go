@@ -37,7 +37,21 @@ type CreateGroupInfo struct {
 	Metadata *string `json:"metadata,omitempty"`
 	// Custom request notification sent upon request approval.
 	CustomRequestNotification *string `json:"custom_request_notification,omitempty"`
+	// The maximum number of direct users allowed for this group at once. Set to null to remove the limit.
+	MaxDirectUsersAllowed *int32 `json:"max_direct_users_allowed,omitempty"`
 	RiskSensitivityOverride *RiskSensitivityEnum `json:"risk_sensitivity_override,omitempty"`
+	// A bool representing whether or not the group's name should be synced from the end system. When true, the name is overwritten with the remote name on each sync, so a `name` provided together with this field set to true will be replaced at the next sync. Defaults to false.
+	MatchRemoteName *bool `json:"match_remote_name,omitempty"`
+	// A bool representing whether or not the group's description should be synced from the end system. When true, the description is overwritten with the remote description on each sync, so a `description` provided together with this field set to true will be replaced at the next sync. Defaults to false.
+	MatchRemoteDescription *bool `json:"match_remote_description,omitempty"`
+	// A bool representing whether or not a reason is required when forfeiting access to this group.
+	RequiresForfeitReason *bool `json:"requires_forfeit_reason,omitempty"`
+	// Slack user group mention name, without the @. Optional; Slack assigns one if omitted.
+	Handle *string `json:"handle,omitempty"`
+	// Slack workspace ID. Required when the Slack connection spans multiple workspaces.
+	TeamId *string `json:"team_id,omitempty"`
+	// Opal user IDs to add as the group's initial members. Required when creating a Slack user group.
+	InitialUserIds []string `json:"initial_user_ids,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -301,6 +315,38 @@ func (o *CreateGroupInfo) SetCustomRequestNotification(v string) {
 	o.CustomRequestNotification = &v
 }
 
+// GetMaxDirectUsersAllowed returns the MaxDirectUsersAllowed field value if set, zero value otherwise.
+func (o *CreateGroupInfo) GetMaxDirectUsersAllowed() int32 {
+	if o == nil || IsNil(o.MaxDirectUsersAllowed) {
+		var ret int32
+		return ret
+	}
+	return *o.MaxDirectUsersAllowed
+}
+
+// GetMaxDirectUsersAllowedOk returns a tuple with the MaxDirectUsersAllowed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateGroupInfo) GetMaxDirectUsersAllowedOk() (*int32, bool) {
+	if o == nil || IsNil(o.MaxDirectUsersAllowed) {
+		return nil, false
+	}
+	return o.MaxDirectUsersAllowed, true
+}
+
+// HasMaxDirectUsersAllowed returns a boolean if a field has been set.
+func (o *CreateGroupInfo) HasMaxDirectUsersAllowed() bool {
+	if o != nil && !IsNil(o.MaxDirectUsersAllowed) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxDirectUsersAllowed gets a reference to the given int32 and assigns it to the MaxDirectUsersAllowed field.
+func (o *CreateGroupInfo) SetMaxDirectUsersAllowed(v int32) {
+	o.MaxDirectUsersAllowed = &v
+}
+
 // GetRiskSensitivityOverride returns the RiskSensitivityOverride field value if set, zero value otherwise.
 func (o *CreateGroupInfo) GetRiskSensitivityOverride() RiskSensitivityEnum {
 	if o == nil || IsNil(o.RiskSensitivityOverride) {
@@ -333,6 +379,198 @@ func (o *CreateGroupInfo) SetRiskSensitivityOverride(v RiskSensitivityEnum) {
 	o.RiskSensitivityOverride = &v
 }
 
+// GetMatchRemoteName returns the MatchRemoteName field value if set, zero value otherwise.
+func (o *CreateGroupInfo) GetMatchRemoteName() bool {
+	if o == nil || IsNil(o.MatchRemoteName) {
+		var ret bool
+		return ret
+	}
+	return *o.MatchRemoteName
+}
+
+// GetMatchRemoteNameOk returns a tuple with the MatchRemoteName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateGroupInfo) GetMatchRemoteNameOk() (*bool, bool) {
+	if o == nil || IsNil(o.MatchRemoteName) {
+		return nil, false
+	}
+	return o.MatchRemoteName, true
+}
+
+// HasMatchRemoteName returns a boolean if a field has been set.
+func (o *CreateGroupInfo) HasMatchRemoteName() bool {
+	if o != nil && !IsNil(o.MatchRemoteName) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatchRemoteName gets a reference to the given bool and assigns it to the MatchRemoteName field.
+func (o *CreateGroupInfo) SetMatchRemoteName(v bool) {
+	o.MatchRemoteName = &v
+}
+
+// GetMatchRemoteDescription returns the MatchRemoteDescription field value if set, zero value otherwise.
+func (o *CreateGroupInfo) GetMatchRemoteDescription() bool {
+	if o == nil || IsNil(o.MatchRemoteDescription) {
+		var ret bool
+		return ret
+	}
+	return *o.MatchRemoteDescription
+}
+
+// GetMatchRemoteDescriptionOk returns a tuple with the MatchRemoteDescription field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateGroupInfo) GetMatchRemoteDescriptionOk() (*bool, bool) {
+	if o == nil || IsNil(o.MatchRemoteDescription) {
+		return nil, false
+	}
+	return o.MatchRemoteDescription, true
+}
+
+// HasMatchRemoteDescription returns a boolean if a field has been set.
+func (o *CreateGroupInfo) HasMatchRemoteDescription() bool {
+	if o != nil && !IsNil(o.MatchRemoteDescription) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatchRemoteDescription gets a reference to the given bool and assigns it to the MatchRemoteDescription field.
+func (o *CreateGroupInfo) SetMatchRemoteDescription(v bool) {
+	o.MatchRemoteDescription = &v
+}
+
+// GetRequiresForfeitReason returns the RequiresForfeitReason field value if set, zero value otherwise.
+func (o *CreateGroupInfo) GetRequiresForfeitReason() bool {
+	if o == nil || IsNil(o.RequiresForfeitReason) {
+		var ret bool
+		return ret
+	}
+	return *o.RequiresForfeitReason
+}
+
+// GetRequiresForfeitReasonOk returns a tuple with the RequiresForfeitReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateGroupInfo) GetRequiresForfeitReasonOk() (*bool, bool) {
+	if o == nil || IsNil(o.RequiresForfeitReason) {
+		return nil, false
+	}
+	return o.RequiresForfeitReason, true
+}
+
+// HasRequiresForfeitReason returns a boolean if a field has been set.
+func (o *CreateGroupInfo) HasRequiresForfeitReason() bool {
+	if o != nil && !IsNil(o.RequiresForfeitReason) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequiresForfeitReason gets a reference to the given bool and assigns it to the RequiresForfeitReason field.
+func (o *CreateGroupInfo) SetRequiresForfeitReason(v bool) {
+	o.RequiresForfeitReason = &v
+}
+
+// GetHandle returns the Handle field value if set, zero value otherwise.
+func (o *CreateGroupInfo) GetHandle() string {
+	if o == nil || IsNil(o.Handle) {
+		var ret string
+		return ret
+	}
+	return *o.Handle
+}
+
+// GetHandleOk returns a tuple with the Handle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateGroupInfo) GetHandleOk() (*string, bool) {
+	if o == nil || IsNil(o.Handle) {
+		return nil, false
+	}
+	return o.Handle, true
+}
+
+// HasHandle returns a boolean if a field has been set.
+func (o *CreateGroupInfo) HasHandle() bool {
+	if o != nil && !IsNil(o.Handle) {
+		return true
+	}
+
+	return false
+}
+
+// SetHandle gets a reference to the given string and assigns it to the Handle field.
+func (o *CreateGroupInfo) SetHandle(v string) {
+	o.Handle = &v
+}
+
+// GetTeamId returns the TeamId field value if set, zero value otherwise.
+func (o *CreateGroupInfo) GetTeamId() string {
+	if o == nil || IsNil(o.TeamId) {
+		var ret string
+		return ret
+	}
+	return *o.TeamId
+}
+
+// GetTeamIdOk returns a tuple with the TeamId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateGroupInfo) GetTeamIdOk() (*string, bool) {
+	if o == nil || IsNil(o.TeamId) {
+		return nil, false
+	}
+	return o.TeamId, true
+}
+
+// HasTeamId returns a boolean if a field has been set.
+func (o *CreateGroupInfo) HasTeamId() bool {
+	if o != nil && !IsNil(o.TeamId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTeamId gets a reference to the given string and assigns it to the TeamId field.
+func (o *CreateGroupInfo) SetTeamId(v string) {
+	o.TeamId = &v
+}
+
+// GetInitialUserIds returns the InitialUserIds field value if set, zero value otherwise.
+func (o *CreateGroupInfo) GetInitialUserIds() []string {
+	if o == nil || IsNil(o.InitialUserIds) {
+		var ret []string
+		return ret
+	}
+	return o.InitialUserIds
+}
+
+// GetInitialUserIdsOk returns a tuple with the InitialUserIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateGroupInfo) GetInitialUserIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.InitialUserIds) {
+		return nil, false
+	}
+	return o.InitialUserIds, true
+}
+
+// HasInitialUserIds returns a boolean if a field has been set.
+func (o *CreateGroupInfo) HasInitialUserIds() bool {
+	if o != nil && !IsNil(o.InitialUserIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetInitialUserIds gets a reference to the given []string and assigns it to the InitialUserIds field.
+func (o *CreateGroupInfo) SetInitialUserIds(v []string) {
+	o.InitialUserIds = v
+}
+
 func (o CreateGroupInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -361,8 +599,29 @@ func (o CreateGroupInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomRequestNotification) {
 		toSerialize["custom_request_notification"] = o.CustomRequestNotification
 	}
+	if !IsNil(o.MaxDirectUsersAllowed) {
+		toSerialize["max_direct_users_allowed"] = o.MaxDirectUsersAllowed
+	}
 	if !IsNil(o.RiskSensitivityOverride) {
 		toSerialize["risk_sensitivity_override"] = o.RiskSensitivityOverride
+	}
+	if !IsNil(o.MatchRemoteName) {
+		toSerialize["match_remote_name"] = o.MatchRemoteName
+	}
+	if !IsNil(o.MatchRemoteDescription) {
+		toSerialize["match_remote_description"] = o.MatchRemoteDescription
+	}
+	if !IsNil(o.RequiresForfeitReason) {
+		toSerialize["requires_forfeit_reason"] = o.RequiresForfeitReason
+	}
+	if !IsNil(o.Handle) {
+		toSerialize["handle"] = o.Handle
+	}
+	if !IsNil(o.TeamId) {
+		toSerialize["team_id"] = o.TeamId
+	}
+	if !IsNil(o.InitialUserIds) {
+		toSerialize["initial_user_ids"] = o.InitialUserIds
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -417,7 +676,14 @@ func (o *CreateGroupInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "remote_group_id")
 		delete(additionalProperties, "metadata")
 		delete(additionalProperties, "custom_request_notification")
+		delete(additionalProperties, "max_direct_users_allowed")
 		delete(additionalProperties, "risk_sensitivity_override")
+		delete(additionalProperties, "match_remote_name")
+		delete(additionalProperties, "match_remote_description")
+		delete(additionalProperties, "requires_forfeit_reason")
+		delete(additionalProperties, "handle")
+		delete(additionalProperties, "team_id")
+		delete(additionalProperties, "initial_user_ids")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -40,6 +40,8 @@ const (
 	ROLEPERMISSIONNAMEENUM_STOP RolePermissionNameEnum = "STOP"
 	ROLEPERMISSIONNAMEENUM_REQUEST_ON_BEHALF RolePermissionNameEnum = "REQUEST_ON_BEHALF"
 	ROLEPERMISSIONNAMEENUM_RESET_MFA RolePermissionNameEnum = "RESET_MFA"
+	ROLEPERMISSIONNAMEENUM_CHECK_VISIBILITY RolePermissionNameEnum = "CHECK_VISIBILITY"
+	ROLEPERMISSIONNAMEENUM_CHECK_REQUESTABILITY RolePermissionNameEnum = "CHECK_REQUESTABILITY"
 )
 
 // All allowed values of RolePermissionNameEnum enum
@@ -63,6 +65,8 @@ var AllowedRolePermissionNameEnumEnumValues = []RolePermissionNameEnum{
 	"STOP",
 	"REQUEST_ON_BEHALF",
 	"RESET_MFA",
+	"CHECK_VISIBILITY",
+	"CHECK_REQUESTABILITY",
 }
 
 func (v *RolePermissionNameEnum) UnmarshalJSON(src []byte) error {
