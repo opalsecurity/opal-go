@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **BreakGlassUserIds** | Pointer to **[]string** | The IDs of the break glass users linked to the configuration template. | [optional] 
 **RequireMfaToApprove** | Pointer to **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this configuration template. | [optional] 
 **RequireMfaToConnect** | Pointer to **bool** | A bool representing whether or not to require MFA to connect to resources associated with this configuration template. | [optional] 
+**RequiresForfeitReason** | Pointer to **bool** | A bool representing whether or not a reason is required when forfeiting access to resources or groups using this configuration template. | [optional] 
 **TicketPropagation** | Pointer to [**TicketPropagationConfiguration**](TicketPropagationConfiguration.md) |  | [optional] 
 **CustomRequestNotification** | Pointer to **string** | Custom request notification sent upon request approval for this configuration template. | [optional] 
 
@@ -306,6 +307,31 @@ SetRequireMfaToConnect sets RequireMfaToConnect field to given value.
 `func (o *UpdateConfigurationTemplateInfo) HasRequireMfaToConnect() bool`
 
 HasRequireMfaToConnect returns a boolean if a field has been set.
+
+### GetRequiresForfeitReason
+
+`func (o *UpdateConfigurationTemplateInfo) GetRequiresForfeitReason() bool`
+
+GetRequiresForfeitReason returns the RequiresForfeitReason field if non-nil, zero value otherwise.
+
+### GetRequiresForfeitReasonOk
+
+`func (o *UpdateConfigurationTemplateInfo) GetRequiresForfeitReasonOk() (*bool, bool)`
+
+GetRequiresForfeitReasonOk returns a tuple with the RequiresForfeitReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequiresForfeitReason
+
+`func (o *UpdateConfigurationTemplateInfo) SetRequiresForfeitReason(v bool)`
+
+SetRequiresForfeitReason sets RequiresForfeitReason field to given value.
+
+### HasRequiresForfeitReason
+
+`func (o *UpdateConfigurationTemplateInfo) HasRequiresForfeitReason() bool`
+
+HasRequiresForfeitReason returns a boolean if a field has been set.
 
 ### GetTicketPropagation
 
