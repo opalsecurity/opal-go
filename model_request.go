@@ -30,12 +30,16 @@ type Request struct {
 	UpdatedAt time.Time `json:"updated_at"`
 	// The unique identifier of the user who created the request.
 	RequesterId string `json:"requester_id"`
+	// The unique identifier of the user the caller asserted asked for this access. Unverified - Opal records the claim as given. Absent unless the caller supplied it.
+	InitiatedByUserId *string `json:"initiated_by_user_id,omitempty"`
 	// The unique identifier of the user who is the target of the request.
 	TargetUserId *string `json:"target_user_id,omitempty"`
 	// The unique identifier of the group who is the target of the request.
 	TargetGroupId *string `json:"target_group_id,omitempty"`
 	// The status of the request.
 	Status RequestStatusEnum `json:"status"`
+	// The channel that created the request. Omitted when the source was not recorded. MCP counts only OAuth sessions. An agent using an API token or a person's credentials is counted as API, CLI, or WEB.
+	Source *string `json:"source,omitempty"`
 	// The reason for the request.
 	Reason string `json:"reason"`
 	// The duration of the request in minutes.
@@ -172,6 +176,38 @@ func (o *Request) SetRequesterId(v string) {
 	o.RequesterId = v
 }
 
+// GetInitiatedByUserId returns the InitiatedByUserId field value if set, zero value otherwise.
+func (o *Request) GetInitiatedByUserId() string {
+	if o == nil || IsNil(o.InitiatedByUserId) {
+		var ret string
+		return ret
+	}
+	return *o.InitiatedByUserId
+}
+
+// GetInitiatedByUserIdOk returns a tuple with the InitiatedByUserId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Request) GetInitiatedByUserIdOk() (*string, bool) {
+	if o == nil || IsNil(o.InitiatedByUserId) {
+		return nil, false
+	}
+	return o.InitiatedByUserId, true
+}
+
+// HasInitiatedByUserId returns a boolean if a field has been set.
+func (o *Request) HasInitiatedByUserId() bool {
+	if o != nil && !IsNil(o.InitiatedByUserId) {
+		return true
+	}
+
+	return false
+}
+
+// SetInitiatedByUserId gets a reference to the given string and assigns it to the InitiatedByUserId field.
+func (o *Request) SetInitiatedByUserId(v string) {
+	o.InitiatedByUserId = &v
+}
+
 // GetTargetUserId returns the TargetUserId field value if set, zero value otherwise.
 func (o *Request) GetTargetUserId() string {
 	if o == nil || IsNil(o.TargetUserId) {
@@ -258,6 +294,38 @@ func (o *Request) GetStatusOk() (*RequestStatusEnum, bool) {
 // SetStatus sets field value
 func (o *Request) SetStatus(v RequestStatusEnum) {
 	o.Status = v
+}
+
+// GetSource returns the Source field value if set, zero value otherwise.
+func (o *Request) GetSource() string {
+	if o == nil || IsNil(o.Source) {
+		var ret string
+		return ret
+	}
+	return *o.Source
+}
+
+// GetSourceOk returns a tuple with the Source field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Request) GetSourceOk() (*string, bool) {
+	if o == nil || IsNil(o.Source) {
+		return nil, false
+	}
+	return o.Source, true
+}
+
+// HasSource returns a boolean if a field has been set.
+func (o *Request) HasSource() bool {
+	if o != nil && !IsNil(o.Source) {
+		return true
+	}
+
+	return false
+}
+
+// SetSource gets a reference to the given string and assigns it to the Source field.
+func (o *Request) SetSource(v string) {
+	o.Source = &v
 }
 
 // GetReason returns the Reason field value
@@ -461,6 +529,9 @@ func (o Request) ToMap() (map[string]interface{}, error) {
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["updated_at"] = o.UpdatedAt
 	toSerialize["requester_id"] = o.RequesterId
+	if !IsNil(o.InitiatedByUserId) {
+		toSerialize["initiated_by_user_id"] = o.InitiatedByUserId
+	}
 	if !IsNil(o.TargetUserId) {
 		toSerialize["target_user_id"] = o.TargetUserId
 	}
@@ -468,6 +539,9 @@ func (o Request) ToMap() (map[string]interface{}, error) {
 		toSerialize["target_group_id"] = o.TargetGroupId
 	}
 	toSerialize["status"] = o.Status
+	if !IsNil(o.Source) {
+		toSerialize["source"] = o.Source
+	}
 	toSerialize["reason"] = o.Reason
 	if !IsNil(o.DurationMinutes) {
 		toSerialize["duration_minutes"] = o.DurationMinutes
@@ -536,9 +610,11 @@ func (o *Request) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "updated_at")
 		delete(additionalProperties, "requester_id")
+		delete(additionalProperties, "initiated_by_user_id")
 		delete(additionalProperties, "target_user_id")
 		delete(additionalProperties, "target_group_id")
 		delete(additionalProperties, "status")
+		delete(additionalProperties, "source")
 		delete(additionalProperties, "reason")
 		delete(additionalProperties, "duration_minutes")
 		delete(additionalProperties, "requested_items_list")

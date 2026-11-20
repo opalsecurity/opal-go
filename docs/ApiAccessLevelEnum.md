@@ -7,6 +7,12 @@
 
 * `FULL_ACCESS` (value: `"FULL_ACCESS"`)
 
+* `AGENT_HOOKS` (value: `"AGENT_HOOKS"`)
+
+* `INFERENCE_HOOK` (value: `"INFERENCE_HOOK"`)
+
+* `AGENT_GATEWAY` (value: `"AGENT_GATEWAY"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
