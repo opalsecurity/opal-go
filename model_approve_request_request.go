@@ -21,6 +21,8 @@ var _ MappedNullable = &ApproveRequestRequest{}
 
 // ApproveRequestRequest struct for ApproveRequestRequest
 type ApproveRequestRequest struct {
+	// Approve as this Opal user instead of the caller. Only for service users an admin has allowed to act for users, in organizations with the feature enabled. The user must be active in the identity provider and be a reviewer on the request's current stage and not the request's target; the decision counts as theirs. Requests that require MFA to approve, and ADMIN level, are rejected.
+	ActingUserId *string `json:"acting_user_id,omitempty"`
 	Level RequestApprovalEnum `json:"level"`
 	// Optional comment for the approval
 	Comment *string `json:"comment,omitempty"`
@@ -45,6 +47,38 @@ func NewApproveRequestRequest(level RequestApprovalEnum) *ApproveRequestRequest 
 func NewApproveRequestRequestWithDefaults() *ApproveRequestRequest {
 	this := ApproveRequestRequest{}
 	return &this
+}
+
+// GetActingUserId returns the ActingUserId field value if set, zero value otherwise.
+func (o *ApproveRequestRequest) GetActingUserId() string {
+	if o == nil || IsNil(o.ActingUserId) {
+		var ret string
+		return ret
+	}
+	return *o.ActingUserId
+}
+
+// GetActingUserIdOk returns a tuple with the ActingUserId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApproveRequestRequest) GetActingUserIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ActingUserId) {
+		return nil, false
+	}
+	return o.ActingUserId, true
+}
+
+// HasActingUserId returns a boolean if a field has been set.
+func (o *ApproveRequestRequest) HasActingUserId() bool {
+	if o != nil && !IsNil(o.ActingUserId) {
+		return true
+	}
+
+	return false
+}
+
+// SetActingUserId gets a reference to the given string and assigns it to the ActingUserId field.
+func (o *ApproveRequestRequest) SetActingUserId(v string) {
+	o.ActingUserId = &v
 }
 
 // GetLevel returns the Level field value
@@ -113,6 +147,9 @@ func (o ApproveRequestRequest) MarshalJSON() ([]byte, error) {
 
 func (o ApproveRequestRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ActingUserId) {
+		toSerialize["acting_user_id"] = o.ActingUserId
+	}
 	toSerialize["level"] = o.Level
 	if !IsNil(o.Comment) {
 		toSerialize["comment"] = o.Comment
@@ -160,6 +197,7 @@ func (o *ApproveRequestRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "acting_user_id")
 		delete(additionalProperties, "level")
 		delete(additionalProperties, "comment")
 		o.AdditionalProperties = additionalProperties

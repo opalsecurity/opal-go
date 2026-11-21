@@ -12,7 +12,14 @@ Name | Type | Description | Notes
 **RemoteGroupId** | Pointer to **string** | Deprecated - use remote_info instead. The ID of the group on the remote system. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details on how to specify this field. | [optional] 
 **Metadata** | Pointer to **string** | Deprecated - use remote_info instead.  JSON metadata about the remote group. Include only for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details on how to specify this field. The required format is dependent on group_type and should have the following schema: &lt;style type&#x3D;\&quot;text/css\&quot;&gt; code {max-height:300px !important} &lt;/style&gt; &#x60;&#x60;&#x60;json {   \&quot;$schema\&quot;: \&quot;http://json-schema.org/draft-04/schema#\&quot;,   \&quot;title\&quot;: \&quot;Group Metadata\&quot;,   \&quot;properties\&quot;: {     \&quot;ad_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;object_guid\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;object_guid\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Active Directory Group\&quot;     },     \&quot;duo_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;group_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;group_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Duo Group\&quot;     },     \&quot;git_hub_team\&quot;: {       \&quot;properties\&quot;: {         \&quot;org_name\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         },         \&quot;team_slug\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;org_name\&quot;, \&quot;team_slug\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;GitHub Team\&quot;     },     \&quot;google_groups_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;group_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;group_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Google Groups Group\&quot;     },     \&quot;ldap_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;group_uid\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;group_uid\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;LDAP Group\&quot;     },     \&quot;okta_directory_group\&quot;: {       \&quot;properties\&quot;: {         \&quot;group_id\&quot;: {           \&quot;type\&quot;: \&quot;string\&quot;         }       },       \&quot;required\&quot;: [\&quot;group_id\&quot;],       \&quot;additionalProperties\&quot;: false,       \&quot;type\&quot;: \&quot;object\&quot;,       \&quot;title\&quot;: \&quot;Okta Directory Group\&quot;     }   },   \&quot;additionalProperties\&quot;: false,   \&quot;minProperties\&quot;: 1,   \&quot;maxProperties\&quot;: 1,   \&quot;type\&quot;: \&quot;object\&quot; } &#x60;&#x60;&#x60; | [optional] 
 **CustomRequestNotification** | Pointer to **string** | Custom request notification sent upon request approval. | [optional] 
+**MaxDirectUsersAllowed** | Pointer to **int32** | The maximum number of direct users allowed for this group at once. Set to null to remove the limit. | [optional] 
 **RiskSensitivityOverride** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) |  | [optional] 
+**MatchRemoteName** | Pointer to **bool** | A bool representing whether or not the group&#39;s name should be synced from the end system. When true, the name is overwritten with the remote name on each sync, so a &#x60;name&#x60; provided together with this field set to true will be replaced at the next sync. Defaults to false. | [optional] 
+**MatchRemoteDescription** | Pointer to **bool** | A bool representing whether or not the group&#39;s description should be synced from the end system. When true, the description is overwritten with the remote description on each sync, so a &#x60;description&#x60; provided together with this field set to true will be replaced at the next sync. Defaults to false. | [optional] 
+**RequiresForfeitReason** | Pointer to **bool** | A bool representing whether or not a reason is required when forfeiting access to this group. | [optional] 
+**Handle** | Pointer to **string** | Slack user group mention name, without the @. Optional; Slack assigns one if omitted. | [optional] 
+**TeamId** | Pointer to **string** | Slack workspace ID. Required when the Slack connection spans multiple workspaces. | [optional] 
+**InitialUserIds** | Pointer to **[]string** | Opal user IDs to add as the group&#39;s initial members. Required when creating a Slack user group. | [optional] 
 
 ## Methods
 
@@ -218,6 +225,31 @@ SetCustomRequestNotification sets CustomRequestNotification field to given value
 
 HasCustomRequestNotification returns a boolean if a field has been set.
 
+### GetMaxDirectUsersAllowed
+
+`func (o *CreateGroupInfo) GetMaxDirectUsersAllowed() int32`
+
+GetMaxDirectUsersAllowed returns the MaxDirectUsersAllowed field if non-nil, zero value otherwise.
+
+### GetMaxDirectUsersAllowedOk
+
+`func (o *CreateGroupInfo) GetMaxDirectUsersAllowedOk() (*int32, bool)`
+
+GetMaxDirectUsersAllowedOk returns a tuple with the MaxDirectUsersAllowed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxDirectUsersAllowed
+
+`func (o *CreateGroupInfo) SetMaxDirectUsersAllowed(v int32)`
+
+SetMaxDirectUsersAllowed sets MaxDirectUsersAllowed field to given value.
+
+### HasMaxDirectUsersAllowed
+
+`func (o *CreateGroupInfo) HasMaxDirectUsersAllowed() bool`
+
+HasMaxDirectUsersAllowed returns a boolean if a field has been set.
+
 ### GetRiskSensitivityOverride
 
 `func (o *CreateGroupInfo) GetRiskSensitivityOverride() RiskSensitivityEnum`
@@ -242,6 +274,156 @@ SetRiskSensitivityOverride sets RiskSensitivityOverride field to given value.
 `func (o *CreateGroupInfo) HasRiskSensitivityOverride() bool`
 
 HasRiskSensitivityOverride returns a boolean if a field has been set.
+
+### GetMatchRemoteName
+
+`func (o *CreateGroupInfo) GetMatchRemoteName() bool`
+
+GetMatchRemoteName returns the MatchRemoteName field if non-nil, zero value otherwise.
+
+### GetMatchRemoteNameOk
+
+`func (o *CreateGroupInfo) GetMatchRemoteNameOk() (*bool, bool)`
+
+GetMatchRemoteNameOk returns a tuple with the MatchRemoteName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchRemoteName
+
+`func (o *CreateGroupInfo) SetMatchRemoteName(v bool)`
+
+SetMatchRemoteName sets MatchRemoteName field to given value.
+
+### HasMatchRemoteName
+
+`func (o *CreateGroupInfo) HasMatchRemoteName() bool`
+
+HasMatchRemoteName returns a boolean if a field has been set.
+
+### GetMatchRemoteDescription
+
+`func (o *CreateGroupInfo) GetMatchRemoteDescription() bool`
+
+GetMatchRemoteDescription returns the MatchRemoteDescription field if non-nil, zero value otherwise.
+
+### GetMatchRemoteDescriptionOk
+
+`func (o *CreateGroupInfo) GetMatchRemoteDescriptionOk() (*bool, bool)`
+
+GetMatchRemoteDescriptionOk returns a tuple with the MatchRemoteDescription field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchRemoteDescription
+
+`func (o *CreateGroupInfo) SetMatchRemoteDescription(v bool)`
+
+SetMatchRemoteDescription sets MatchRemoteDescription field to given value.
+
+### HasMatchRemoteDescription
+
+`func (o *CreateGroupInfo) HasMatchRemoteDescription() bool`
+
+HasMatchRemoteDescription returns a boolean if a field has been set.
+
+### GetRequiresForfeitReason
+
+`func (o *CreateGroupInfo) GetRequiresForfeitReason() bool`
+
+GetRequiresForfeitReason returns the RequiresForfeitReason field if non-nil, zero value otherwise.
+
+### GetRequiresForfeitReasonOk
+
+`func (o *CreateGroupInfo) GetRequiresForfeitReasonOk() (*bool, bool)`
+
+GetRequiresForfeitReasonOk returns a tuple with the RequiresForfeitReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequiresForfeitReason
+
+`func (o *CreateGroupInfo) SetRequiresForfeitReason(v bool)`
+
+SetRequiresForfeitReason sets RequiresForfeitReason field to given value.
+
+### HasRequiresForfeitReason
+
+`func (o *CreateGroupInfo) HasRequiresForfeitReason() bool`
+
+HasRequiresForfeitReason returns a boolean if a field has been set.
+
+### GetHandle
+
+`func (o *CreateGroupInfo) GetHandle() string`
+
+GetHandle returns the Handle field if non-nil, zero value otherwise.
+
+### GetHandleOk
+
+`func (o *CreateGroupInfo) GetHandleOk() (*string, bool)`
+
+GetHandleOk returns a tuple with the Handle field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHandle
+
+`func (o *CreateGroupInfo) SetHandle(v string)`
+
+SetHandle sets Handle field to given value.
+
+### HasHandle
+
+`func (o *CreateGroupInfo) HasHandle() bool`
+
+HasHandle returns a boolean if a field has been set.
+
+### GetTeamId
+
+`func (o *CreateGroupInfo) GetTeamId() string`
+
+GetTeamId returns the TeamId field if non-nil, zero value otherwise.
+
+### GetTeamIdOk
+
+`func (o *CreateGroupInfo) GetTeamIdOk() (*string, bool)`
+
+GetTeamIdOk returns a tuple with the TeamId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTeamId
+
+`func (o *CreateGroupInfo) SetTeamId(v string)`
+
+SetTeamId sets TeamId field to given value.
+
+### HasTeamId
+
+`func (o *CreateGroupInfo) HasTeamId() bool`
+
+HasTeamId returns a boolean if a field has been set.
+
+### GetInitialUserIds
+
+`func (o *CreateGroupInfo) GetInitialUserIds() []string`
+
+GetInitialUserIds returns the InitialUserIds field if non-nil, zero value otherwise.
+
+### GetInitialUserIdsOk
+
+`func (o *CreateGroupInfo) GetInitialUserIdsOk() (*[]string, bool)`
+
+GetInitialUserIdsOk returns a tuple with the InitialUserIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInitialUserIds
+
+`func (o *CreateGroupInfo) SetInitialUserIds(v []string)`
+
+SetInitialUserIds sets InitialUserIds field to given value.
+
+### HasInitialUserIds
+
+`func (o *CreateGroupInfo) HasInitialUserIds() bool`
+
+HasInitialUserIds returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

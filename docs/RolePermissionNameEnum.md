@@ -41,6 +41,10 @@
 
 * `RESET_MFA` (value: `"RESET_MFA"`)
 
+* `CHECK_VISIBILITY` (value: `"CHECK_VISIBILITY"`)
+
+* `CHECK_REQUESTABILITY` (value: `"CHECK_REQUESTABILITY"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
