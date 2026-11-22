@@ -33,6 +33,8 @@ type User struct {
 	LastName string `json:"last_name"`
 	// The user's position.
 	Position string `json:"position"`
+	// The ID of the user's manager. Null if the user has no manager.
+	ManagerId *string `json:"manager_id,omitempty"`
 	HrIdpStatus *UserHrIdpStatusEnum `json:"hr_idp_status,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -206,6 +208,38 @@ func (o *User) SetPosition(v string) {
 	o.Position = v
 }
 
+// GetManagerId returns the ManagerId field value if set, zero value otherwise.
+func (o *User) GetManagerId() string {
+	if o == nil || IsNil(o.ManagerId) {
+		var ret string
+		return ret
+	}
+	return *o.ManagerId
+}
+
+// GetManagerIdOk returns a tuple with the ManagerId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *User) GetManagerIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ManagerId) {
+		return nil, false
+	}
+	return o.ManagerId, true
+}
+
+// HasManagerId returns a boolean if a field has been set.
+func (o *User) HasManagerId() bool {
+	if o != nil && !IsNil(o.ManagerId) {
+		return true
+	}
+
+	return false
+}
+
+// SetManagerId gets a reference to the given string and assigns it to the ManagerId field.
+func (o *User) SetManagerId(v string) {
+	o.ManagerId = &v
+}
+
 // GetHrIdpStatus returns the HrIdpStatus field value if set, zero value otherwise.
 func (o *User) GetHrIdpStatus() UserHrIdpStatusEnum {
 	if o == nil || IsNil(o.HrIdpStatus) {
@@ -254,6 +288,9 @@ func (o User) ToMap() (map[string]interface{}, error) {
 	toSerialize["first_name"] = o.FirstName
 	toSerialize["last_name"] = o.LastName
 	toSerialize["position"] = o.Position
+	if !IsNil(o.ManagerId) {
+		toSerialize["manager_id"] = o.ManagerId
+	}
 	if !IsNil(o.HrIdpStatus) {
 		toSerialize["hr_idp_status"] = o.HrIdpStatus
 	}
@@ -311,6 +348,7 @@ func (o *User) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "first_name")
 		delete(additionalProperties, "last_name")
 		delete(additionalProperties, "position")
+		delete(additionalProperties, "manager_id")
 		delete(additionalProperties, "hr_idp_status")
 		o.AdditionalProperties = additionalProperties
 	}

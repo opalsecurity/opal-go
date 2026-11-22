@@ -4,10 +4,151 @@ All URIs are relative to *https://api.opal.dev/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CreateApp**](AppsAPI.md#CreateApp) | **Post** /apps | Create app
+[**DeleteApp**](AppsAPI.md#DeleteApp) | **Delete** /apps/{app_id} | Delete app
 [**GetApp**](AppsAPI.md#GetApp) | **Get** /apps/{app_id} | Get app by ID
+[**GetAppRequestableToUser**](AppsAPI.md#GetAppRequestableToUser) | **Get** /apps/{app_id}/requestable/users/{user_id} | 
+[**GetAppVisibility**](AppsAPI.md#GetAppVisibility) | **Get** /apps/{app_id}/visibility | Get app visibility
+[**GetAppVisibleToUser**](AppsAPI.md#GetAppVisibleToUser) | **Get** /apps/{app_id}/visible/users/{user_id} | 
 [**GetApps**](AppsAPI.md#GetApps) | **Get** /apps | Get apps
 [**GetSyncErrors**](AppsAPI.md#GetSyncErrors) | **Get** /sync_errors | 
+[**SetAppVisibility**](AppsAPI.md#SetAppVisibility) | **Put** /apps/{app_id}/visibility | Set app visibility
+[**UpdateApp**](AppsAPI.md#UpdateApp) | **Put** /apps/{app_id} | Update app
 
+
+
+## CreateApp
+
+> App CreateApp(ctx).CreateAppInfo(createAppInfo).Execute()
+
+Create app
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	createAppInfo := *openapiclient.NewCreateAppInfo("My Push-only App", "Bookkeeping app for internal tools.", "7c86c85d-0651-43e2-a748-d69d658418e8", openapiclient.AppTypeEnum("ACTIVE_DIRECTORY")) // CreateAppInfo | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AppsAPI.CreateApp(context.Background()).CreateAppInfo(createAppInfo).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AppsAPI.CreateApp``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateApp`: App
+	fmt.Fprintf(os.Stdout, "Response from `AppsAPI.CreateApp`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateAppRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createAppInfo** | [**CreateAppInfo**](CreateAppInfo.md) |  | 
+
+### Return type
+
+[**App**](App.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteApp
+
+> DeleteApp(ctx, appId).Execute()
+
+Delete app
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	appId := "32acc112-21ff-4669-91c2-21e27683eaa1" // string | The ID of the app.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.AppsAPI.DeleteApp(context.Background(), appId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AppsAPI.DeleteApp``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**appId** | **string** | The ID of the app. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteAppRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## GetApp
@@ -80,9 +221,227 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetAppRequestableToUser
+
+> UserRequestabilityCheck GetAppRequestableToUser(ctx, appId, userId).RequesterId(requesterId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	appId := "32acc112-21ff-4669-91c2-21e27683eaa1" // string | The ID of the app (connection ID or IDP resource-app ID).
+	userId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of the user the access would be for.
+	requesterId := "29827fb8-f2dd-4e80-9576-28e31e9934ac" // string | Optional ID of the person filling in the form when different from user_id. Adds the on-behalf check evaluated as that requester, following EnforceRequestOnBehalfOfUser.  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AppsAPI.GetAppRequestableToUser(context.Background(), appId, userId).RequesterId(requesterId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AppsAPI.GetAppRequestableToUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAppRequestableToUser`: UserRequestabilityCheck
+	fmt.Fprintf(os.Stdout, "Response from `AppsAPI.GetAppRequestableToUser`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**appId** | **string** | The ID of the app (connection ID or IDP resource-app ID). | 
+**userId** | **string** | The ID of the user the access would be for. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAppRequestableToUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **requesterId** | **string** | Optional ID of the person filling in the form when different from user_id. Adds the on-behalf check evaluated as that requester, following EnforceRequestOnBehalfOfUser.  | 
+
+### Return type
+
+[**UserRequestabilityCheck**](UserRequestabilityCheck.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAppVisibility
+
+> AppVisibilityInfo GetAppVisibility(ctx, appId).Execute()
+
+Get app visibility
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	appId := "32acc112-21ff-4669-91c2-21e27683eaa1" // string | The ID of the app.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AppsAPI.GetAppVisibility(context.Background(), appId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AppsAPI.GetAppVisibility``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAppVisibility`: AppVisibilityInfo
+	fmt.Fprintf(os.Stdout, "Response from `AppsAPI.GetAppVisibility`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**appId** | **string** | The ID of the app. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAppVisibilityRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**AppVisibilityInfo**](AppVisibilityInfo.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAppVisibleToUser
+
+> UserVisibilityCheck GetAppVisibleToUser(ctx, appId, userId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	appId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the app.
+	userId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of the user whose visibility is being checked.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AppsAPI.GetAppVisibleToUser(context.Background(), appId, userId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AppsAPI.GetAppVisibleToUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAppVisibleToUser`: UserVisibilityCheck
+	fmt.Fprintf(os.Stdout, "Response from `AppsAPI.GetAppVisibleToUser`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**appId** | **string** | The ID of the app. | 
+**userId** | **string** | The ID of the user whose visibility is being checked. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAppVisibleToUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**UserVisibilityCheck**](UserVisibilityCheck.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetApps
 
-> AppsList GetApps(ctx).AppTypeFilter(appTypeFilter).OwnerFilter(ownerFilter).Execute()
+> AppsList GetApps(ctx).AppTypeFilter(appTypeFilter).OwnerFilter(ownerFilter).RequestableByUserId(requestableByUserId).Execute()
 
 Get apps
 
@@ -103,10 +462,11 @@ import (
 func main() {
 	appTypeFilter := []openapiclient.AppTypeEnum{openapiclient.AppTypeEnum("ACTIVE_DIRECTORY")} // []AppTypeEnum | A list of app types to filter by. (optional)
 	ownerFilter := "29827fb8-f2dd-4e80-9576-28e31e9934ac" // string | An owner ID to filter by. (optional)
+	requestableByUserId := "29827fb8-f2dd-4e80-9576-28e31e9934ac" // string | Only return apps containing at least one resource or group this user can request, using the same evaluation as `GET /apps/{app_id}/requestable/users/{user_id}` (and matching `GET /resources?app_id=…&requestable_by_user_id=…` / the groups equivalent). Resources listed in the caller's OrgDisabledOpalRoles and linked (non-source) groups are excluded. Filtering for another user requires an Opal admin or a custom role with the CHECK_REQUESTABILITY permission. The response is always filtered by the caller's own READ visibility, so a non-admin CHECK_REQUESTABILITY holder sees the intersection of apps they can read and apps the target user can request something inside. Filtering for yourself needs no permission.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AppsAPI.GetApps(context.Background()).AppTypeFilter(appTypeFilter).OwnerFilter(ownerFilter).Execute()
+	resp, r, err := apiClient.AppsAPI.GetApps(context.Background()).AppTypeFilter(appTypeFilter).OwnerFilter(ownerFilter).RequestableByUserId(requestableByUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AppsAPI.GetApps``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -129,6 +489,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **appTypeFilter** | [**[]AppTypeEnum**](AppTypeEnum.md) | A list of app types to filter by. | 
  **ownerFilter** | **string** | An owner ID to filter by. | 
+ **requestableByUserId** | **string** | Only return apps containing at least one resource or group this user can request, using the same evaluation as &#x60;GET /apps/{app_id}/requestable/users/{user_id}&#x60; (and matching &#x60;GET /resources?app_id&#x3D;…&amp;requestable_by_user_id&#x3D;…&#x60; / the groups equivalent). Resources listed in the caller&#39;s OrgDisabledOpalRoles and linked (non-source) groups are excluded. Filtering for another user requires an Opal admin or a custom role with the CHECK_REQUESTABILITY permission. The response is always filtered by the caller&#39;s own READ visibility, so a non-admin CHECK_REQUESTABILITY holder sees the intersection of apps they can read and apps the target user can request something inside. Filtering for yourself needs no permission.  | 
 
 ### Return type
 
@@ -211,6 +572,150 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SetAppVisibility
+
+> AppVisibilityInfo SetAppVisibility(ctx, appId).AppVisibilityInfo(appVisibilityInfo).Execute()
+
+Set app visibility
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	appId := "32acc112-21ff-4669-91c2-21e27683eaa1" // string | The ID of the app.
+	appVisibilityInfo := *openapiclient.NewAppVisibilityInfo(openapiclient.VisibilityTypeEnum("GLOBAL")) // AppVisibilityInfo | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AppsAPI.SetAppVisibility(context.Background(), appId).AppVisibilityInfo(appVisibilityInfo).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AppsAPI.SetAppVisibility``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SetAppVisibility`: AppVisibilityInfo
+	fmt.Fprintf(os.Stdout, "Response from `AppsAPI.SetAppVisibility`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**appId** | **string** | The ID of the app. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSetAppVisibilityRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **appVisibilityInfo** | [**AppVisibilityInfo**](AppVisibilityInfo.md) |  | 
+
+### Return type
+
+[**AppVisibilityInfo**](AppVisibilityInfo.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateApp
+
+> App UpdateApp(ctx, appId).UpdateAppInfo(updateAppInfo).Execute()
+
+Update app
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	appId := "32acc112-21ff-4669-91c2-21e27683eaa1" // string | The ID of the app.
+	updateAppInfo := *openapiclient.NewUpdateAppInfo() // UpdateAppInfo | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AppsAPI.UpdateApp(context.Background(), appId).UpdateAppInfo(updateAppInfo).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AppsAPI.UpdateApp``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateApp`: App
+	fmt.Fprintf(os.Stdout, "Response from `AppsAPI.UpdateApp`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**appId** | **string** | The ID of the app. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateAppRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **updateAppInfo** | [**UpdateAppInfo**](UpdateAppInfo.md) |  | 
+
+### Return type
+
+[**App**](App.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
