@@ -1,0 +1,29 @@
+# RequestabilityReasonEnum
+
+## Enum
+
+
+* `ASSET_DELETED` (value: `"ASSET_DELETED"`)
+
+* `REQUESTER_CANNOT_REQUEST_FOR_USER` (value: `"REQUESTER_CANNOT_REQUEST_FOR_USER"`)
+
+* `UNSUPPORTED_ASSET_TYPE` (value: `"UNSUPPORTED_ASSET_TYPE"`)
+
+* `LINKED_GROUP_NOT_REQUESTABLE` (value: `"LINKED_GROUP_NOT_REQUESTABLE"`)
+
+* `CONDITION_SCRIPT_FAILED` (value: `"CONDITION_SCRIPT_FAILED"`)
+
+* `REQUESTS_DISABLED` (value: `"REQUESTS_DISABLED"`)
+
+* `NO_REQUESTABLE_ACCESS_LEVEL` (value: `"NO_REQUESTABLE_ACCESS_LEVEL"`)
+
+* `NO_REQUESTABLE_ITEMS` (value: `"NO_REQUESTABLE_ITEMS"`)
+
+* `NOT_FOUND` (value: `"NOT_FOUND"`)
+
+* `REQUESTABLE` (value: `"REQUESTABLE"`)
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

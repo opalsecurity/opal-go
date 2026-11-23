@@ -25,6 +25,8 @@ type UpdateResourceUserRequest struct {
 	DurationMinutes int32 `json:"duration_minutes"`
 	// The updated remote ID of the access level granted to this user.
 	AccessLevelRemoteId *string `json:"access_level_remote_id,omitempty"`
+	// Record this Opal user as the actor of the access change in the audit event instead of the caller. Only for service users an admin has allowed to act for users, in organizations with the feature enabled. The named user must be a person (not a service user) in the caller's organization and active in the identity provider. Authorization is unchanged: the caller still needs permission to edit assignments on the resource. The named user's own permissions on the resource are not evaluated.
+	ActingUserId *string `json:"acting_user_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -104,6 +106,38 @@ func (o *UpdateResourceUserRequest) SetAccessLevelRemoteId(v string) {
 	o.AccessLevelRemoteId = &v
 }
 
+// GetActingUserId returns the ActingUserId field value if set, zero value otherwise.
+func (o *UpdateResourceUserRequest) GetActingUserId() string {
+	if o == nil || IsNil(o.ActingUserId) {
+		var ret string
+		return ret
+	}
+	return *o.ActingUserId
+}
+
+// GetActingUserIdOk returns a tuple with the ActingUserId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateResourceUserRequest) GetActingUserIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ActingUserId) {
+		return nil, false
+	}
+	return o.ActingUserId, true
+}
+
+// HasActingUserId returns a boolean if a field has been set.
+func (o *UpdateResourceUserRequest) HasActingUserId() bool {
+	if o != nil && !IsNil(o.ActingUserId) {
+		return true
+	}
+
+	return false
+}
+
+// SetActingUserId gets a reference to the given string and assigns it to the ActingUserId field.
+func (o *UpdateResourceUserRequest) SetActingUserId(v string) {
+	o.ActingUserId = &v
+}
+
 func (o UpdateResourceUserRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -117,6 +151,9 @@ func (o UpdateResourceUserRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["duration_minutes"] = o.DurationMinutes
 	if !IsNil(o.AccessLevelRemoteId) {
 		toSerialize["access_level_remote_id"] = o.AccessLevelRemoteId
+	}
+	if !IsNil(o.ActingUserId) {
+		toSerialize["acting_user_id"] = o.ActingUserId
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -163,6 +200,7 @@ func (o *UpdateResourceUserRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "duration_minutes")
 		delete(additionalProperties, "access_level_remote_id")
+		delete(additionalProperties, "acting_user_id")
 		o.AdditionalProperties = additionalProperties
 	}
 

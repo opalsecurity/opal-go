@@ -24,6 +24,8 @@ type Condition struct {
 	GroupIds []string `json:"group_ids,omitempty"`
 	// The list of role remote IDs to match.
 	RoleRemoteIds []string `json:"role_remote_ids,omitempty"`
+	// The ID of a `REQUEST_CONFIGURATION_CONDITION` OpalScript that decides whether this request configuration applies. Cannot be combined with `group_ids` or `role_remote_ids`.
+	OpalScriptId *string `json:"opal_script_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -110,6 +112,38 @@ func (o *Condition) SetRoleRemoteIds(v []string) {
 	o.RoleRemoteIds = v
 }
 
+// GetOpalScriptId returns the OpalScriptId field value if set, zero value otherwise.
+func (o *Condition) GetOpalScriptId() string {
+	if o == nil || IsNil(o.OpalScriptId) {
+		var ret string
+		return ret
+	}
+	return *o.OpalScriptId
+}
+
+// GetOpalScriptIdOk returns a tuple with the OpalScriptId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Condition) GetOpalScriptIdOk() (*string, bool) {
+	if o == nil || IsNil(o.OpalScriptId) {
+		return nil, false
+	}
+	return o.OpalScriptId, true
+}
+
+// HasOpalScriptId returns a boolean if a field has been set.
+func (o *Condition) HasOpalScriptId() bool {
+	if o != nil && !IsNil(o.OpalScriptId) {
+		return true
+	}
+
+	return false
+}
+
+// SetOpalScriptId gets a reference to the given string and assigns it to the OpalScriptId field.
+func (o *Condition) SetOpalScriptId(v string) {
+	o.OpalScriptId = &v
+}
+
 func (o Condition) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -125,6 +159,9 @@ func (o Condition) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.RoleRemoteIds) {
 		toSerialize["role_remote_ids"] = o.RoleRemoteIds
+	}
+	if !IsNil(o.OpalScriptId) {
+		toSerialize["opal_script_id"] = o.OpalScriptId
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -150,6 +187,7 @@ func (o *Condition) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "group_ids")
 		delete(additionalProperties, "role_remote_ids")
+		delete(additionalProperties, "opal_script_id")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DurationMinutes** | **int32** | The duration for which the resource can be accessed (in minutes). Use 0 to set to indefinite. | 
 **AccessLevelRemoteId** | Pointer to **string** | The remote ID of the access level to grant to this user. If omitted, the default access level remote ID value (empty string) is used. | [optional] 
+**ActingUserId** | Pointer to **string** | Record this Opal user as the actor of the access add in the audit event instead of the caller. Only for service users an admin has allowed to act for users, in organizations with the feature enabled. The named user must be a person (not a service user) in the caller&#39;s organization and active in the identity provider. Authorization is unchanged: the caller still needs permission to edit assignments on the resource. The named user&#39;s own permissions on the resource are not evaluated. Only accepted in the request body, not as a query parameter. | [optional] 
 
 ## Methods
 
@@ -70,6 +71,31 @@ SetAccessLevelRemoteId sets AccessLevelRemoteId field to given value.
 `func (o *AddResourceUserRequest) HasAccessLevelRemoteId() bool`
 
 HasAccessLevelRemoteId returns a boolean if a field has been set.
+
+### GetActingUserId
+
+`func (o *AddResourceUserRequest) GetActingUserId() string`
+
+GetActingUserId returns the ActingUserId field if non-nil, zero value otherwise.
+
+### GetActingUserIdOk
+
+`func (o *AddResourceUserRequest) GetActingUserIdOk() (*string, bool)`
+
+GetActingUserIdOk returns a tuple with the ActingUserId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActingUserId
+
+`func (o *AddResourceUserRequest) SetActingUserId(v string)`
+
+SetActingUserId sets ActingUserId field to given value.
+
+### HasActingUserId
+
+`func (o *AddResourceUserRequest) HasActingUserId() bool`
+
+HasActingUserId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

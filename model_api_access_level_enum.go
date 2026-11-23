@@ -16,19 +16,25 @@ import (
 	"fmt"
 )
 
-// ApiAccessLevelEnum The access level of an API token.
+// ApiAccessLevelEnum The access level of an API token. AGENT_HOOKS tokens are made only by the Claude Code hook kit's browser sign-in and can only report agent activity. INFERENCE_HOOK tokens are made only on the Inference hooks setup page and can only call the inference hook endpoints. AGENT_GATEWAY tokens are made only by Setup > LiteLLM and can only reach one LiteLLM gateway's routes. None of these can be created through this API.
 type ApiAccessLevelEnum string
 
 // List of ApiAccessLevelEnum
 const (
 	APIACCESSLEVELENUM_READ_ONLY ApiAccessLevelEnum = "READ_ONLY"
 	APIACCESSLEVELENUM_FULL_ACCESS ApiAccessLevelEnum = "FULL_ACCESS"
+	APIACCESSLEVELENUM_AGENT_HOOKS ApiAccessLevelEnum = "AGENT_HOOKS"
+	APIACCESSLEVELENUM_INFERENCE_HOOK ApiAccessLevelEnum = "INFERENCE_HOOK"
+	APIACCESSLEVELENUM_AGENT_GATEWAY ApiAccessLevelEnum = "AGENT_GATEWAY"
 )
 
 // All allowed values of ApiAccessLevelEnum enum
 var AllowedApiAccessLevelEnumEnumValues = []ApiAccessLevelEnum{
 	"READ_ONLY",
 	"FULL_ACCESS",
+	"AGENT_HOOKS",
+	"INFERENCE_HOOK",
+	"AGENT_GATEWAY",
 }
 
 func (v *ApiAccessLevelEnum) UnmarshalJSON(src []byte) error {
