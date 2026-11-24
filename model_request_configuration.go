@@ -29,14 +29,18 @@ type RequestConfiguration struct {
 	AutoApproval bool `json:"auto_approval"`
 	// A bool representing whether or not to require MFA for requesting access to this resource.
 	RequireMfaToRequest bool `json:"require_mfa_to_request"`
-	// The maximum duration for which the resource can be requested (in minutes).
+	// The maximum duration for which the resource can be requested (in minutes). Capped at 1 year (525600) unless a longer maximum has been enabled for your organization. Use -1 for an indefinite duration.
 	MaxDurationMinutes *int32 `json:"max_duration_minutes,omitempty"`
 	// The recommended duration for which the resource should be requested (in minutes). -1 represents an indefinite duration.
 	RecommendedDurationMinutes *int32 `json:"recommended_duration_minutes,omitempty"`
 	// A bool representing whether or not access requests to the resource require an access ticket.
 	RequireSupportTicket bool `json:"require_support_ticket"`
+	// A bool representing whether the reason field is optional for requests.
+	ReasonOptional *bool `json:"reason_optional,omitempty"`
 	// The duration for which access can be extended (in minutes). Set to 0 to disable extensions. When > 0, extensions are enabled for the specified duration.
 	ExtensionsDurationInMinutes *int32 `json:"extensions_duration_in_minutes,omitempty"`
+	// When true, requesters cannot escalate requests to their skip-level manager. When any item in a request has this set to true, the escalation button is disabled and the action is blocked. Defaults to false.
+	DisableSkipLevelEscalation *bool `json:"disable_skip_level_escalation,omitempty"`
 	// The ID of the associated request template.
 	RequestTemplateId *string `json:"request_template_id,omitempty"`
 	// The list of reviewer stages for the request configuration.
@@ -262,6 +266,38 @@ func (o *RequestConfiguration) SetRequireSupportTicket(v bool) {
 	o.RequireSupportTicket = v
 }
 
+// GetReasonOptional returns the ReasonOptional field value if set, zero value otherwise.
+func (o *RequestConfiguration) GetReasonOptional() bool {
+	if o == nil || IsNil(o.ReasonOptional) {
+		var ret bool
+		return ret
+	}
+	return *o.ReasonOptional
+}
+
+// GetReasonOptionalOk returns a tuple with the ReasonOptional field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RequestConfiguration) GetReasonOptionalOk() (*bool, bool) {
+	if o == nil || IsNil(o.ReasonOptional) {
+		return nil, false
+	}
+	return o.ReasonOptional, true
+}
+
+// HasReasonOptional returns a boolean if a field has been set.
+func (o *RequestConfiguration) HasReasonOptional() bool {
+	if o != nil && !IsNil(o.ReasonOptional) {
+		return true
+	}
+
+	return false
+}
+
+// SetReasonOptional gets a reference to the given bool and assigns it to the ReasonOptional field.
+func (o *RequestConfiguration) SetReasonOptional(v bool) {
+	o.ReasonOptional = &v
+}
+
 // GetExtensionsDurationInMinutes returns the ExtensionsDurationInMinutes field value if set, zero value otherwise.
 func (o *RequestConfiguration) GetExtensionsDurationInMinutes() int32 {
 	if o == nil || IsNil(o.ExtensionsDurationInMinutes) {
@@ -292,6 +328,38 @@ func (o *RequestConfiguration) HasExtensionsDurationInMinutes() bool {
 // SetExtensionsDurationInMinutes gets a reference to the given int32 and assigns it to the ExtensionsDurationInMinutes field.
 func (o *RequestConfiguration) SetExtensionsDurationInMinutes(v int32) {
 	o.ExtensionsDurationInMinutes = &v
+}
+
+// GetDisableSkipLevelEscalation returns the DisableSkipLevelEscalation field value if set, zero value otherwise.
+func (o *RequestConfiguration) GetDisableSkipLevelEscalation() bool {
+	if o == nil || IsNil(o.DisableSkipLevelEscalation) {
+		var ret bool
+		return ret
+	}
+	return *o.DisableSkipLevelEscalation
+}
+
+// GetDisableSkipLevelEscalationOk returns a tuple with the DisableSkipLevelEscalation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RequestConfiguration) GetDisableSkipLevelEscalationOk() (*bool, bool) {
+	if o == nil || IsNil(o.DisableSkipLevelEscalation) {
+		return nil, false
+	}
+	return o.DisableSkipLevelEscalation, true
+}
+
+// HasDisableSkipLevelEscalation returns a boolean if a field has been set.
+func (o *RequestConfiguration) HasDisableSkipLevelEscalation() bool {
+	if o != nil && !IsNil(o.DisableSkipLevelEscalation) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisableSkipLevelEscalation gets a reference to the given bool and assigns it to the DisableSkipLevelEscalation field.
+func (o *RequestConfiguration) SetDisableSkipLevelEscalation(v bool) {
+	o.DisableSkipLevelEscalation = &v
 }
 
 // GetRequestTemplateId returns the RequestTemplateId field value if set, zero value otherwise.
@@ -405,8 +473,14 @@ func (o RequestConfiguration) ToMap() (map[string]interface{}, error) {
 		toSerialize["recommended_duration_minutes"] = o.RecommendedDurationMinutes
 	}
 	toSerialize["require_support_ticket"] = o.RequireSupportTicket
+	if !IsNil(o.ReasonOptional) {
+		toSerialize["reason_optional"] = o.ReasonOptional
+	}
 	if !IsNil(o.ExtensionsDurationInMinutes) {
 		toSerialize["extensions_duration_in_minutes"] = o.ExtensionsDurationInMinutes
+	}
+	if !IsNil(o.DisableSkipLevelEscalation) {
+		toSerialize["disable_skip_level_escalation"] = o.DisableSkipLevelEscalation
 	}
 	if !IsNil(o.RequestTemplateId) {
 		toSerialize["request_template_id"] = o.RequestTemplateId
@@ -469,7 +543,9 @@ func (o *RequestConfiguration) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "max_duration_minutes")
 		delete(additionalProperties, "recommended_duration_minutes")
 		delete(additionalProperties, "require_support_ticket")
+		delete(additionalProperties, "reason_optional")
 		delete(additionalProperties, "extensions_duration_in_minutes")
+		delete(additionalProperties, "disable_skip_level_escalation")
 		delete(additionalProperties, "request_template_id")
 		delete(additionalProperties, "reviewer_stages")
 		delete(additionalProperties, "priority")

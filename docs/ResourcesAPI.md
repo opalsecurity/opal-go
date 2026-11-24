@@ -6,14 +6,23 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddResourceNhi**](ResourcesAPI.md#AddResourceNhi) | **Post** /resources/{resource_id}/non-human-identities/{non_human_identity_id} | 
 [**AddResourceUser**](ResourcesAPI.md#AddResourceUser) | **Post** /resources/{resource_id}/users/{user_id} | 
+[**CheckResourcesRequestable**](ResourcesAPI.md#CheckResourcesRequestable) | **Post** /resources/requestable/check | Check requestability of many resources
 [**CreateResource**](ResourcesAPI.md#CreateResource) | **Post** /resources | 
+[**CreateResourceCustomAccessLevel**](ResourcesAPI.md#CreateResourceCustomAccessLevel) | **Post** /resources/{resource_id}/custom-access-levels | 
 [**DeleteResource**](ResourcesAPI.md#DeleteResource) | **Delete** /resources/{resource_id} | 
+[**DeleteResourceCustomAccessLevel**](ResourcesAPI.md#DeleteResourceCustomAccessLevel) | **Delete** /resources/{resource_id}/custom-access-levels/{access_level_remote_id} | 
+[**DeleteResourceCustomAttributeByKey**](ResourcesAPI.md#DeleteResourceCustomAttributeByKey) | **Delete** /resources/{resource_id}/custom-attributes/{attribute_key} | 
 [**DeleteResourceNhi**](ResourcesAPI.md#DeleteResourceNhi) | **Delete** /resources/{resource_id}/non-human-identities/{non_human_identity_id} | 
 [**DeleteResourceUser**](ResourcesAPI.md#DeleteResourceUser) | **Delete** /resources/{resource_id}/users/{user_id} | 
 [**GetResource**](ResourcesAPI.md#GetResource) | **Get** /resources/{resource_id} | Get resource by ID
+[**GetResourceAccessLevels**](ResourcesAPI.md#GetResourceAccessLevels) | **Get** /resources/{resource_id}/access_levels | Get resource access levels
+[**GetResourceConfigurationTemplate**](ResourcesAPI.md#GetResourceConfigurationTemplate) | **Get** /resources/{resource_id}/configuration-template | Get the ID of the configuration template linked to a resource
+[**GetResourceCustomAccessLevels**](ResourcesAPI.md#GetResourceCustomAccessLevels) | **Get** /resources/{resource_id}/custom-access-levels | 
+[**GetResourceCustomAttributes**](ResourcesAPI.md#GetResourceCustomAttributes) | **Get** /resources/{resource_id}/custom-attributes | 
 [**GetResourceGroups**](ResourcesAPI.md#GetResourceGroups) | **Get** /resources/{resource_id}/groups | 
 [**GetResourceMessageChannels**](ResourcesAPI.md#GetResourceMessageChannels) | **Get** /resources/{resource_id}/message-channels | 
 [**GetResourceNhis**](ResourcesAPI.md#GetResourceNhis) | **Get** /resources/{resource_id}/non-human-identities | 
+[**GetResourceRequestableToUser**](ResourcesAPI.md#GetResourceRequestableToUser) | **Get** /resources/{resource_id}/requestable/users/{user_id} | 
 [**GetResourceReviewerStages**](ResourcesAPI.md#GetResourceReviewerStages) | **Get** /resources/{resource_id}/reviewer-stages | 
 [**GetResourceReviewers**](ResourcesAPI.md#GetResourceReviewers) | **Get** /resources/{resource_id}/reviewers | 
 [**GetResourceScopedRolePermissions**](ResourcesAPI.md#GetResourceScopedRolePermissions) | **Get** /resources/{resource_id}/scoped-role-permissions | 
@@ -21,14 +30,19 @@ Method | HTTP request | Description
 [**GetResourceUser**](ResourcesAPI.md#GetResourceUser) | **Get** /resources/{resource_id}/users/{user_id} | Get resource user
 [**GetResourceUsers**](ResourcesAPI.md#GetResourceUsers) | **Get** /resources/{resource_id}/users | Get resource users
 [**GetResourceVisibility**](ResourcesAPI.md#GetResourceVisibility) | **Get** /resources/{resource_id}/visibility | 
+[**GetResourceVisibleToUser**](ResourcesAPI.md#GetResourceVisibleToUser) | **Get** /resources/{resource_id}/visible/users/{user_id} | 
 [**GetResources**](ResourcesAPI.md#GetResources) | **Get** /resources | Get resources
 [**GetUserResources**](ResourcesAPI.md#GetUserResources) | **Get** /resources/users/{user_id} | 
+[**PatchResourceCustomAttributes**](ResourcesAPI.md#PatchResourceCustomAttributes) | **Patch** /resources/{resource_id}/custom-attributes | 
 [**ResourceUserAccessStatusRetrieve**](ResourcesAPI.md#ResourceUserAccessStatusRetrieve) | **Get** /resource-user-access-status/{resource_id}/{user_id} | 
+[**SetResourceCustomAttributes**](ResourcesAPI.md#SetResourceCustomAttributes) | **Put** /resources/{resource_id}/custom-attributes | 
 [**SetResourceMessageChannels**](ResourcesAPI.md#SetResourceMessageChannels) | **Put** /resources/{resource_id}/message-channels | 
 [**SetResourceReviewerStages**](ResourcesAPI.md#SetResourceReviewerStages) | **Put** /resources/{resource_id}/reviewer-stages | 
 [**SetResourceReviewers**](ResourcesAPI.md#SetResourceReviewers) | **Put** /resources/{resource_id}/reviewers | 
 [**SetResourceScopedRolePermissions**](ResourcesAPI.md#SetResourceScopedRolePermissions) | **Put** /resources/{resource_id}/scoped-role-permissions | 
 [**SetResourceVisibility**](ResourcesAPI.md#SetResourceVisibility) | **Put** /resources/{resource_id}/visibility | 
+[**UpdateResourceConfigurationTemplate**](ResourcesAPI.md#UpdateResourceConfigurationTemplate) | **Put** /resources/{resource_id}/configuration-template | Set the ID of the configuration template linked to a resource
+[**UpdateResourceCustomAccessLevel**](ResourcesAPI.md#UpdateResourceCustomAccessLevel) | **Patch** /resources/{resource_id}/custom-access-levels/{access_level_remote_id} | 
 [**UpdateResourceUser**](ResourcesAPI.md#UpdateResourceUser) | **Put** /resources/{resource_id}/users/{user_id} | 
 [**UpdateResources**](ResourcesAPI.md#UpdateResources) | **Put** /resources | 
 
@@ -188,6 +202,72 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CheckResourcesRequestable
+
+> BatchRequestabilityCheckResponse CheckResourcesRequestable(ctx).BatchRequestabilityCheckRequest(batchRequestabilityCheckRequest).Execute()
+
+Check requestability of many resources
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	batchRequestabilityCheckRequest := *openapiclient.NewBatchRequestabilityCheckRequest("UserId_example", []string{"Ids_example"}) // BatchRequestabilityCheckRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.CheckResourcesRequestable(context.Background()).BatchRequestabilityCheckRequest(batchRequestabilityCheckRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.CheckResourcesRequestable``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CheckResourcesRequestable`: BatchRequestabilityCheckResponse
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.CheckResourcesRequestable`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCheckResourcesRequestableRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **batchRequestabilityCheckRequest** | [**BatchRequestabilityCheckRequest**](BatchRequestabilityCheckRequest.md) |  | 
+
+### Return type
+
+[**BatchRequestabilityCheckResponse**](BatchRequestabilityCheckResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CreateResource
 
 > Resource CreateResource(ctx).CreateResourceInfo(createResourceInfo).Execute()
@@ -254,6 +334,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateResourceCustomAccessLevel
+
+> ResourceCustomAccessLevelResponse CreateResourceCustomAccessLevel(ctx, resourceId).CreateResourceCustomAccessLevelInfo(createResourceCustomAccessLevelInfo).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the resource.
+	createResourceCustomAccessLevelInfo := *openapiclient.NewCreateResourceCustomAccessLevelInfo(*openapiclient.NewResourceAccessLevel("AdminRole", "arn:aws:iam::590304332660:role/AdministratorAccess")) // CreateResourceCustomAccessLevelInfo | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.CreateResourceCustomAccessLevel(context.Background(), resourceId).CreateResourceCustomAccessLevelInfo(createResourceCustomAccessLevelInfo).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.CreateResourceCustomAccessLevel``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateResourceCustomAccessLevel`: ResourceCustomAccessLevelResponse
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.CreateResourceCustomAccessLevel`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateResourceCustomAccessLevelRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **createResourceCustomAccessLevelInfo** | [**CreateResourceCustomAccessLevelInfo**](CreateResourceCustomAccessLevelInfo.md) |  | 
+
+### Return type
+
+[**ResourceCustomAccessLevelResponse**](ResourceCustomAccessLevelResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteResource
 
 > DeleteResource(ctx, resourceId).Execute()
@@ -302,6 +454,148 @@ Other parameters are passed through a pointer to a apiDeleteResourceRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteResourceCustomAccessLevel
+
+> DeleteResourceCustomAccessLevel(ctx, resourceId, accessLevelRemoteId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the resource.
+	accessLevelRemoteId := "admin" // string | The remote ID of the access level.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ResourcesAPI.DeleteResourceCustomAccessLevel(context.Background(), resourceId, accessLevelRemoteId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.DeleteResourceCustomAccessLevel``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+**accessLevelRemoteId** | **string** | The remote ID of the access level. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteResourceCustomAccessLevelRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteResourceCustomAttributeByKey
+
+> DeleteResourceCustomAttributeByKey(ctx, resourceId, attributeKey).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the resource.
+	attributeKey := "environment" // string | The custom attribute key to remove.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ResourcesAPI.DeleteResourceCustomAttributeByKey(context.Background(), resourceId, attributeKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.DeleteResourceCustomAttributeByKey``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+**attributeKey** | **string** | The custom attribute key to remove. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteResourceCustomAttributeByKeyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 
 ### Return type
@@ -397,7 +691,7 @@ Name | Type | Description  | Notes
 
 ## DeleteResourceUser
 
-> DeleteResourceUser(ctx, resourceId, userId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
+> DeleteResourceUser(ctx, resourceId, userId).AccessLevelRemoteId(accessLevelRemoteId).DeleteResourceUserRequest(deleteResourceUserRequest).Execute()
 
 
 
@@ -419,10 +713,11 @@ func main() {
 	resourceId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the resource.
 	userId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of a user to remove from this resource.
 	accessLevelRemoteId := "arn:aws:iam::590304332660:role/AdministratorAccess" // string | The remote ID of the access level for which this user has direct access. If omitted, the default access level remote ID value (empty string) is assumed. (optional)
+	deleteResourceUserRequest := *openapiclient.NewDeleteResourceUserRequest() // DeleteResourceUserRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.ResourcesAPI.DeleteResourceUser(context.Background(), resourceId, userId).AccessLevelRemoteId(accessLevelRemoteId).Execute()
+	r, err := apiClient.ResourcesAPI.DeleteResourceUser(context.Background(), resourceId, userId).AccessLevelRemoteId(accessLevelRemoteId).DeleteResourceUserRequest(deleteResourceUserRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.DeleteResourceUser``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -449,6 +744,7 @@ Name | Type | Description  | Notes
 
 
  **accessLevelRemoteId** | **string** | The remote ID of the access level for which this user has direct access. If omitted, the default access level remote ID value (empty string) is assumed. | 
+ **deleteResourceUserRequest** | [**DeleteResourceUserRequest**](DeleteResourceUserRequest.md) |  | 
 
 ### Return type
 
@@ -460,7 +756,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -523,6 +819,286 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Resource**](Resource.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetResourceAccessLevels
+
+> ResourceAccessLevelList GetResourceAccessLevels(ctx, resourceId).Execute()
+
+Get resource access levels
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the resource whose access levels to return.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.GetResourceAccessLevels(context.Background(), resourceId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetResourceAccessLevels``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetResourceAccessLevels`: ResourceAccessLevelList
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.GetResourceAccessLevels`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource whose access levels to return. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetResourceAccessLevelsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ResourceAccessLevelList**](ResourceAccessLevelList.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetResourceConfigurationTemplate
+
+> ResourceConfigurationTemplate GetResourceConfigurationTemplate(ctx, resourceId).Execute()
+
+Get the ID of the configuration template linked to a resource
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the resource whose configuration template link is being read.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.GetResourceConfigurationTemplate(context.Background(), resourceId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetResourceConfigurationTemplate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetResourceConfigurationTemplate`: ResourceConfigurationTemplate
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.GetResourceConfigurationTemplate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource whose configuration template link is being read. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetResourceConfigurationTemplateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ResourceConfigurationTemplate**](ResourceConfigurationTemplate.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetResourceCustomAccessLevels
+
+> ResourceCustomAccessLevelList GetResourceCustomAccessLevels(ctx, resourceId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the resource.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.GetResourceCustomAccessLevels(context.Background(), resourceId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetResourceCustomAccessLevels``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetResourceCustomAccessLevels`: ResourceCustomAccessLevelList
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.GetResourceCustomAccessLevels`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetResourceCustomAccessLevelsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ResourceCustomAccessLevelList**](ResourceCustomAccessLevelList.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetResourceCustomAttributes
+
+> CustomAttributesList GetResourceCustomAttributes(ctx, resourceId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the resource whose custom attributes to return.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.GetResourceCustomAttributes(context.Background(), resourceId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetResourceCustomAttributes``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetResourceCustomAttributes`: CustomAttributesList
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.GetResourceCustomAttributes`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource whose custom attributes to return. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetResourceCustomAttributesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**CustomAttributesList**](CustomAttributesList.md)
 
 ### Authorization
 
@@ -735,6 +1311,83 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AccessList**](AccessList.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetResourceRequestableToUser
+
+> UserRequestabilityCheck GetResourceRequestableToUser(ctx, resourceId, userId).AccessLevelRemoteId(accessLevelRemoteId).RequesterId(requesterId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the resource.
+	userId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of the user the access would be for.
+	accessLevelRemoteId := "accessLevelRemoteId_example" // string | Optional access level remote ID to check a single level. Must be an access level of the resource. Omit for resources without access levels.  (optional)
+	requesterId := "29827fb8-f2dd-4e80-9576-28e31e9934ac" // string | Optional ID of the person filling in the form when different from user_id. Adds the on-behalf check evaluated as that requester, following EnforceRequestOnBehalfOfUser.  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.GetResourceRequestableToUser(context.Background(), resourceId, userId).AccessLevelRemoteId(accessLevelRemoteId).RequesterId(requesterId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetResourceRequestableToUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetResourceRequestableToUser`: UserRequestabilityCheck
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.GetResourceRequestableToUser`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+**userId** | **string** | The ID of the user the access would be for. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetResourceRequestableToUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **accessLevelRemoteId** | **string** | Optional access level remote ID to check a single level. Must be an access level of the resource. Omit for resources without access levels.  | 
+ **requesterId** | **string** | Optional ID of the person filling in the form when different from user_id. Adds the on-behalf check evaluated as that requester, following EnforceRequestOnBehalfOfUser.  | 
+
+### Return type
+
+[**UserRequestabilityCheck**](UserRequestabilityCheck.md)
 
 ### Authorization
 
@@ -1247,9 +1900,82 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetResourceVisibleToUser
+
+> UserVisibilityCheck GetResourceVisibleToUser(ctx, resourceId, userId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the resource.
+	userId := "f92aa855-cea9-4814-b9d8-f2a60d3e4a06" // string | The ID of the user whose visibility is being checked.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.GetResourceVisibleToUser(context.Background(), resourceId, userId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetResourceVisibleToUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetResourceVisibleToUser`: UserVisibilityCheck
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.GetResourceVisibleToUser`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+**userId** | **string** | The ID of the user whose visibility is being checked. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetResourceVisibleToUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**UserVisibilityCheck**](UserVisibilityCheck.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetResources
 
-> PaginatedResourcesList GetResources(ctx).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).AncestorResourceId(ancestorResourceId).RemoteId(remoteId).TagIds(tagIds).Execute()
+> PaginatedResourcesList GetResources(ctx).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ResourceNameMatch(resourceNameMatch).ParentResourceId(parentResourceId).AncestorResourceId(ancestorResourceId).RemoteId(remoteId).TagIds(tagIds).AppId(appId).RequestableByUserId(requestableByUserId).Execute()
 
 Get resources
 
@@ -1272,15 +1998,18 @@ func main() {
 	pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
 	resourceTypeFilter := openapiclient.ResourceTypeEnum("AWS_IAM_ROLE") // ResourceTypeEnum | The resource type to filter by. Required when remote_id is provided. (optional)
 	resourceIds := []string{"1b978423-db0a-4037-a4cf-f79c60cb67b3"} // []string | The resource ids to filter by. (optional)
-	resourceName := "example-name" // string | Resource name. (optional)
+	resourceName := "example-name" // string | Filter resources by name. Matches against `name`, `remote_name`, parent-name combinations, and `remote_id`. Matching is case-insensitive. Use `resource_name_match` to choose the match type; when omitted, CONTAINS (substring) is used. (optional)
+	resourceNameMatch := openapiclient.NameMatchType("CONTAINS") // NameMatchType | How to apply `resource_name`. Requires `resource_name` to be set. Defaults to CONTAINS when `resource_name` is provided without this parameter. EQUALS, STARTS_WITH, and ENDS_WITH match only the resource's own `name` and `remote_name`, not parent-name combinations or `remote_id`. (optional)
 	parentResourceId := "["4baf8423-db0a-4037-a4cf-f79c60cb67a5"]" // string | The parent resource id to filter by. (optional)
 	ancestorResourceId := "["4baf8423-db0a-4037-a4cf-f79c60cb67a5"]" // string | The ancestor resource id to filter by. Returns all resources that are descendants of the specified resource. (optional)
 	remoteId := "remoteId_example" // string | Filter resources by their remote id. This will return all resources that have a remote id that matches the provided remote id. Note that this requires resource_type_filter to be provided. (optional)
 	tagIds := []string{"Inner_example"} // []string | The IDs of the tags to filter by. Returns only resources that have any of these tags applied. (optional)
+	appId := "f454d283-ca87-4a8a-bdbb-df212eca5353" // string | Only return resources that belong to this app. (optional)
+	requestableByUserId := "29827fb8-f2dd-4e80-9576-28e31e9934ac" // string | Only return resources this user can request at one or more access levels, using the same evaluation as `GET /resources/{resource_id}/requestable/users/{user_id}`. Filtering for another user requires an Opal admin or a custom role with the CHECK_REQUESTABILITY permission. The response is always filtered by the caller's own READ visibility, so a non-admin CHECK_REQUESTABILITY holder sees the intersection of items they can read and items the target user can request. Filtering for yourself needs no permission.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ResourcesAPI.GetResources(context.Background()).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ParentResourceId(parentResourceId).AncestorResourceId(ancestorResourceId).RemoteId(remoteId).TagIds(tagIds).Execute()
+	resp, r, err := apiClient.ResourcesAPI.GetResources(context.Background()).Cursor(cursor).PageSize(pageSize).ResourceTypeFilter(resourceTypeFilter).ResourceIds(resourceIds).ResourceName(resourceName).ResourceNameMatch(resourceNameMatch).ParentResourceId(parentResourceId).AncestorResourceId(ancestorResourceId).RemoteId(remoteId).TagIds(tagIds).AppId(appId).RequestableByUserId(requestableByUserId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetResources``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1305,11 +2034,14 @@ Name | Type | Description  | Notes
  **pageSize** | **int32** | Number of results to return per page. Default is 200. | 
  **resourceTypeFilter** | [**ResourceTypeEnum**](ResourceTypeEnum.md) | The resource type to filter by. Required when remote_id is provided. | 
  **resourceIds** | **[]string** | The resource ids to filter by. | 
- **resourceName** | **string** | Resource name. | 
+ **resourceName** | **string** | Filter resources by name. Matches against &#x60;name&#x60;, &#x60;remote_name&#x60;, parent-name combinations, and &#x60;remote_id&#x60;. Matching is case-insensitive. Use &#x60;resource_name_match&#x60; to choose the match type; when omitted, CONTAINS (substring) is used. | 
+ **resourceNameMatch** | [**NameMatchType**](NameMatchType.md) | How to apply &#x60;resource_name&#x60;. Requires &#x60;resource_name&#x60; to be set. Defaults to CONTAINS when &#x60;resource_name&#x60; is provided without this parameter. EQUALS, STARTS_WITH, and ENDS_WITH match only the resource&#39;s own &#x60;name&#x60; and &#x60;remote_name&#x60;, not parent-name combinations or &#x60;remote_id&#x60;. | 
  **parentResourceId** | **string** | The parent resource id to filter by. | 
  **ancestorResourceId** | **string** | The ancestor resource id to filter by. Returns all resources that are descendants of the specified resource. | 
  **remoteId** | **string** | Filter resources by their remote id. This will return all resources that have a remote id that matches the provided remote id. Note that this requires resource_type_filter to be provided. | 
  **tagIds** | **[]string** | The IDs of the tags to filter by. Returns only resources that have any of these tags applied. | 
+ **appId** | **string** | Only return resources that belong to this app. | 
+ **requestableByUserId** | **string** | Only return resources this user can request at one or more access levels, using the same evaluation as &#x60;GET /resources/{resource_id}/requestable/users/{user_id}&#x60;. Filtering for another user requires an Opal admin or a custom role with the CHECK_REQUESTABILITY permission. The response is always filtered by the caller&#39;s own READ visibility, so a non-admin CHECK_REQUESTABILITY holder sees the intersection of items they can read and items the target user can request. Filtering for yourself needs no permission.  | 
 
 ### Return type
 
@@ -1405,6 +2137,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchResourceCustomAttributes
+
+> CustomAttributesList PatchResourceCustomAttributes(ctx, resourceId).CustomAttributesList(customAttributesList).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the resource whose custom attributes to upsert.
+	customAttributesList := *openapiclient.NewCustomAttributesList([]openapiclient.CustomAttribute{*openapiclient.NewCustomAttribute("team", openapiclient.CustomAttributeValueTypeEnum("TEXT"), []string{"Values_example"})}) // CustomAttributesList | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.PatchResourceCustomAttributes(context.Background(), resourceId).CustomAttributesList(customAttributesList).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.PatchResourceCustomAttributes``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchResourceCustomAttributes`: CustomAttributesList
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.PatchResourceCustomAttributes`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource whose custom attributes to upsert. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchResourceCustomAttributesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **customAttributesList** | [**CustomAttributesList**](CustomAttributesList.md) |  | 
+
+### Return type
+
+[**CustomAttributesList**](CustomAttributesList.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ResourceUserAccessStatusRetrieve
 
 > ResourceUserAccessStatus ResourceUserAccessStatusRetrieve(ctx, resourceId, userId).AccessLevelRemoteId(accessLevelRemoteId).Cursor(cursor).PageSize(pageSize).Execute()
@@ -1477,6 +2281,78 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SetResourceCustomAttributes
+
+> CustomAttributesList SetResourceCustomAttributes(ctx, resourceId).CustomAttributesList(customAttributesList).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the resource whose custom attributes to set.
+	customAttributesList := *openapiclient.NewCustomAttributesList([]openapiclient.CustomAttribute{*openapiclient.NewCustomAttribute("team", openapiclient.CustomAttributeValueTypeEnum("TEXT"), []string{"Values_example"})}) // CustomAttributesList | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.SetResourceCustomAttributes(context.Background(), resourceId).CustomAttributesList(customAttributesList).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.SetResourceCustomAttributes``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SetResourceCustomAttributes`: CustomAttributesList
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.SetResourceCustomAttributes`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource whose custom attributes to set. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSetResourceCustomAttributesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **customAttributesList** | [**CustomAttributesList**](CustomAttributesList.md) |  | 
+
+### Return type
+
+[**CustomAttributesList**](CustomAttributesList.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -1829,6 +2705,153 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**VisibilityInfo**](VisibilityInfo.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateResourceConfigurationTemplate
+
+> ResourceConfigurationTemplate UpdateResourceConfigurationTemplate(ctx, resourceId).ResourceConfigurationTemplate(resourceConfigurationTemplate).Execute()
+
+Set the ID of the configuration template linked to a resource
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "4baf8423-db0a-4037-a4cf-f79c60cb67a5" // string | The ID of the resource whose configuration template link is being set.
+	resourceConfigurationTemplate := *openapiclient.NewResourceConfigurationTemplate("06851574-e50d-40ca-8c78-f72ae6ab4304") // ResourceConfigurationTemplate | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.UpdateResourceConfigurationTemplate(context.Background(), resourceId).ResourceConfigurationTemplate(resourceConfigurationTemplate).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.UpdateResourceConfigurationTemplate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateResourceConfigurationTemplate`: ResourceConfigurationTemplate
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.UpdateResourceConfigurationTemplate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource whose configuration template link is being set. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateResourceConfigurationTemplateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **resourceConfigurationTemplate** | [**ResourceConfigurationTemplate**](ResourceConfigurationTemplate.md) |  | 
+
+### Return type
+
+[**ResourceConfigurationTemplate**](ResourceConfigurationTemplate.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateResourceCustomAccessLevel
+
+> ResourceCustomAccessLevelResponse UpdateResourceCustomAccessLevel(ctx, resourceId, accessLevelRemoteId).UpdateResourceCustomAccessLevelInfo(updateResourceCustomAccessLevelInfo).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	resourceId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The ID of the resource.
+	accessLevelRemoteId := "admin" // string | The remote ID of the access level.
+	updateResourceCustomAccessLevelInfo := *openapiclient.NewUpdateResourceCustomAccessLevelInfo() // UpdateResourceCustomAccessLevelInfo | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.UpdateResourceCustomAccessLevel(context.Background(), resourceId, accessLevelRemoteId).UpdateResourceCustomAccessLevelInfo(updateResourceCustomAccessLevelInfo).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.UpdateResourceCustomAccessLevel``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateResourceCustomAccessLevel`: ResourceCustomAccessLevelResponse
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.UpdateResourceCustomAccessLevel`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**resourceId** | **string** | The ID of the resource. | 
+**accessLevelRemoteId** | **string** | The remote ID of the access level. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateResourceCustomAccessLevelRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **updateResourceCustomAccessLevelInfo** | [**UpdateResourceCustomAccessLevelInfo**](UpdateResourceCustomAccessLevelInfo.md) |  | 
+
+### Return type
+
+[**ResourceCustomAccessLevelResponse**](ResourceCustomAccessLevelResponse.md)
 
 ### Authorization
 

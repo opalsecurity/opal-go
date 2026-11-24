@@ -28,6 +28,8 @@ const (
 	ROLEPERMISSIONTARGETTYPEENUM_USER RolePermissionTargetTypeEnum = "USER"
 	ROLEPERMISSIONTARGETTYPEENUM_ACCESS_REVIEW RolePermissionTargetTypeEnum = "ACCESS_REVIEW"
 	ROLEPERMISSIONTARGETTYPEENUM_OWNER RolePermissionTargetTypeEnum = "OWNER"
+	ROLEPERMISSIONTARGETTYPEENUM_EVENT RolePermissionTargetTypeEnum = "EVENT"
+	ROLEPERMISSIONTARGETTYPEENUM_PALADIN_AGENT RolePermissionTargetTypeEnum = "PALADIN_AGENT"
 )
 
 // All allowed values of RolePermissionTargetTypeEnum enum
@@ -39,6 +41,8 @@ var AllowedRolePermissionTargetTypeEnumEnumValues = []RolePermissionTargetTypeEn
 	"USER",
 	"ACCESS_REVIEW",
 	"OWNER",
+	"EVENT",
+	"PALADIN_AGENT",
 }
 
 func (v *RolePermissionTargetTypeEnum) UnmarshalJSON(src []byte) error {

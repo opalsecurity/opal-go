@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Groups** | [**[]CreateRequestInfoGroupsInner**](CreateRequestInfoGroupsInner.md) |  | 
 **TargetUserId** | Pointer to **string** | The ID of the user to be granted access. Should not be specified if target_group_id is specified. | [optional] 
 **TargetGroupId** | Pointer to **string** | The ID of the group the request is for.  Should not be specified if target_user_id is specified. | [optional] 
+**InitiatedByUserId** | Pointer to **string** | The ID of the user who asked for this access, for callers filing a request on someone else&#39;s behalf. Opal records this claim as given and does not verify it, so it never affects authorization, reviewer routing, or who may cancel the request; the authenticated caller remains the requester. Must be a user of your organization. Only accepted from a service user for which an Opal admin has enabled \&quot;Let this service user record who asked for access\&quot; under Settings on the service user&#39;s page; any other caller receives a 403 when this field is set. | [optional] 
 **Reason** | **string** |  | 
 **SupportTicket** | Pointer to [**CreateRequestInfoSupportTicket**](CreateRequestInfoSupportTicket.md) |  | [optional] 
 **DurationMinutes** | **int32** | The duration of the request in minutes. -1 represents an indefinite duration | 
@@ -121,6 +122,31 @@ SetTargetGroupId sets TargetGroupId field to given value.
 `func (o *CreateRequestInfo) HasTargetGroupId() bool`
 
 HasTargetGroupId returns a boolean if a field has been set.
+
+### GetInitiatedByUserId
+
+`func (o *CreateRequestInfo) GetInitiatedByUserId() string`
+
+GetInitiatedByUserId returns the InitiatedByUserId field if non-nil, zero value otherwise.
+
+### GetInitiatedByUserIdOk
+
+`func (o *CreateRequestInfo) GetInitiatedByUserIdOk() (*string, bool)`
+
+GetInitiatedByUserIdOk returns a tuple with the InitiatedByUserId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInitiatedByUserId
+
+`func (o *CreateRequestInfo) SetInitiatedByUserId(v string)`
+
+SetInitiatedByUserId sets InitiatedByUserId field to given value.
+
+### HasInitiatedByUserId
+
+`func (o *CreateRequestInfo) HasInitiatedByUserId() bool`
+
+HasInitiatedByUserId returns a boolean if a field has been set.
 
 ### GetReason
 

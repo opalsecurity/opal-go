@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Attribute** | **string** |  | 
-**Values** | **[]string** |  | 
+**Values** | **[]string** | Values to match; a user matches if their attribute equals any of them. For HR_IDP_STATUS, use HrIdpStatus values, or UNSET for users with no IDP status (shown as \&quot;Inactive\&quot;). UNSET must be the last value. | 
 
 ## Methods
 

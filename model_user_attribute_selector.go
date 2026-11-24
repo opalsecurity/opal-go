@@ -22,6 +22,7 @@ var _ MappedNullable = &UserAttributeSelector{}
 // UserAttributeSelector struct for UserAttributeSelector
 type UserAttributeSelector struct {
 	Attribute string `json:"attribute"`
+	// Values to match; a user matches if their attribute equals any of them. For HR_IDP_STATUS, use HrIdpStatus values, or UNSET for users with no IDP status (shown as \"Inactive\"). UNSET must be the last value.
 	Values []string `json:"values"`
 	AdditionalProperties map[string]interface{}
 }
