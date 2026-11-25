@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | A description of the group. | [optional] 
 **AdminOwnerId** | Pointer to **string** | The ID of the owner of the group. | [optional] 
 **GroupLeaderUserIds** | Pointer to **[]string** | A list of User IDs for the group leaders of the group | [optional] 
+**PushedToAppIds** | Pointer to **[]string** | The IDs of the Okta apps that Okta pushes this group into (Okta Group Push). | [optional] 
 **RemoteId** | Pointer to **string** | The ID of the remote. | [optional] 
 **RemoteName** | Pointer to **string** | The name of the remote. | [optional] 
 **GroupType** | Pointer to [**GroupTypeEnum**](GroupTypeEnum.md) |  | [optional] 
@@ -19,20 +20,26 @@ Name | Type | Description | Notes
 **RequireManagerApproval** | Pointer to **bool** | A bool representing whether or not access requests to the group require manager approval. | [optional] 
 **RequireSupportTicket** | Pointer to **bool** | A bool representing whether or not access requests to the group require an access ticket. | [optional] 
 **RequireMfaToApprove** | Pointer to **bool** | A bool representing whether or not to require MFA for reviewers to approve requests for this group. | [optional] 
+**RequiresForfeitReason** | Pointer to **bool** | A bool representing whether or not a reason is required when forfeiting access to this group. | [optional] 
 **RequireMfaToRequest** | Pointer to **bool** | A bool representing whether or not to require MFA for requesting access to this group. | [optional] 
 **AutoApproval** | Pointer to **bool** | A bool representing whether or not to automatically approve requests to this group. | [optional] 
 **RequestTemplateId** | Pointer to **string** | The ID of the associated request template. | [optional] 
 **ConfigurationTemplateId** | Pointer to **string** | The ID of the associated configuration template. | [optional] 
 **GroupBindingId** | Pointer to **string** | The ID of the associated group binding. | [optional] 
-**IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this group. | [optional] 
+**IsRequestable** | Pointer to **bool** | A bool representing whether or not to allow access requests to this group. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **RequestConfigurations** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | A list of request configurations for this group. | [optional] 
 **RequestConfigurationList** | Pointer to [**[]RequestConfiguration**](RequestConfiguration.md) | A list of request configurations for this group. Deprecated in favor of &#x60;request_configurations&#x60;. | [optional] 
 **Metadata** | Pointer to **string** | JSON metadata about the remote group. Only set for items linked to remote systems. See [this guide](https://docs.opal.dev/reference/end-system-objects) for details. | [optional] 
 **RemoteInfo** | Pointer to [**GroupRemoteInfo**](GroupRemoteInfo.md) |  | [optional] 
 **CustomRequestNotification** | Pointer to **string** | Custom request notification sent to the requester when the request is approved. | [optional] 
+**MaxDirectUsersAllowed** | Pointer to **int32** | The maximum number of direct users allowed for this group at once. Set to null to remove the limit. | [optional] 
+**MaxUsersExceededMessage** | Pointer to **string** | Custom message shown to users when the maximum number of allowed users for this group has been reached. | [optional] 
 **RiskSensitivity** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) | The risk sensitivity level for the group. When an override is set, this field will match that. | [optional] [readonly] 
 **RiskSensitivityOverride** | Pointer to [**RiskSensitivityEnum**](RiskSensitivityEnum.md) |  | [optional] 
+**MatchRemoteName** | Pointer to **bool** | A bool representing whether or not the group&#39;s name is synced from the end system. When true, the name is overwritten with the remote name on each sync. Defaults to false. | [optional] 
+**MatchRemoteDescription** | Pointer to **bool** | A bool representing whether or not the group&#39;s description is synced from the end system. When true, the description is overwritten with the remote description on each sync. Defaults to false. | [optional] 
 **LastSuccessfulSync** | Pointer to [**SyncTask**](SyncTask.md) | Information about the last successful sync of this group. | [optional] [readonly] 
+**CustomAttributes** | Pointer to [**[]CustomAttribute**](CustomAttribute.md) | The custom attributes set on this group. | [optional] 
 
 ## Methods
 
@@ -197,6 +204,31 @@ SetGroupLeaderUserIds sets GroupLeaderUserIds field to given value.
 `func (o *Group) HasGroupLeaderUserIds() bool`
 
 HasGroupLeaderUserIds returns a boolean if a field has been set.
+
+### GetPushedToAppIds
+
+`func (o *Group) GetPushedToAppIds() []string`
+
+GetPushedToAppIds returns the PushedToAppIds field if non-nil, zero value otherwise.
+
+### GetPushedToAppIdsOk
+
+`func (o *Group) GetPushedToAppIdsOk() (*[]string, bool)`
+
+GetPushedToAppIdsOk returns a tuple with the PushedToAppIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPushedToAppIds
+
+`func (o *Group) SetPushedToAppIds(v []string)`
+
+SetPushedToAppIds sets PushedToAppIds field to given value.
+
+### HasPushedToAppIds
+
+`func (o *Group) HasPushedToAppIds() bool`
+
+HasPushedToAppIds returns a boolean if a field has been set.
 
 ### GetRemoteId
 
@@ -422,6 +454,31 @@ SetRequireMfaToApprove sets RequireMfaToApprove field to given value.
 `func (o *Group) HasRequireMfaToApprove() bool`
 
 HasRequireMfaToApprove returns a boolean if a field has been set.
+
+### GetRequiresForfeitReason
+
+`func (o *Group) GetRequiresForfeitReason() bool`
+
+GetRequiresForfeitReason returns the RequiresForfeitReason field if non-nil, zero value otherwise.
+
+### GetRequiresForfeitReasonOk
+
+`func (o *Group) GetRequiresForfeitReasonOk() (*bool, bool)`
+
+GetRequiresForfeitReasonOk returns a tuple with the RequiresForfeitReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequiresForfeitReason
+
+`func (o *Group) SetRequiresForfeitReason(v bool)`
+
+SetRequiresForfeitReason sets RequiresForfeitReason field to given value.
+
+### HasRequiresForfeitReason
+
+`func (o *Group) HasRequiresForfeitReason() bool`
+
+HasRequiresForfeitReason returns a boolean if a field has been set.
 
 ### GetRequireMfaToRequest
 
@@ -698,6 +755,56 @@ SetCustomRequestNotification sets CustomRequestNotification field to given value
 
 HasCustomRequestNotification returns a boolean if a field has been set.
 
+### GetMaxDirectUsersAllowed
+
+`func (o *Group) GetMaxDirectUsersAllowed() int32`
+
+GetMaxDirectUsersAllowed returns the MaxDirectUsersAllowed field if non-nil, zero value otherwise.
+
+### GetMaxDirectUsersAllowedOk
+
+`func (o *Group) GetMaxDirectUsersAllowedOk() (*int32, bool)`
+
+GetMaxDirectUsersAllowedOk returns a tuple with the MaxDirectUsersAllowed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxDirectUsersAllowed
+
+`func (o *Group) SetMaxDirectUsersAllowed(v int32)`
+
+SetMaxDirectUsersAllowed sets MaxDirectUsersAllowed field to given value.
+
+### HasMaxDirectUsersAllowed
+
+`func (o *Group) HasMaxDirectUsersAllowed() bool`
+
+HasMaxDirectUsersAllowed returns a boolean if a field has been set.
+
+### GetMaxUsersExceededMessage
+
+`func (o *Group) GetMaxUsersExceededMessage() string`
+
+GetMaxUsersExceededMessage returns the MaxUsersExceededMessage field if non-nil, zero value otherwise.
+
+### GetMaxUsersExceededMessageOk
+
+`func (o *Group) GetMaxUsersExceededMessageOk() (*string, bool)`
+
+GetMaxUsersExceededMessageOk returns a tuple with the MaxUsersExceededMessage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxUsersExceededMessage
+
+`func (o *Group) SetMaxUsersExceededMessage(v string)`
+
+SetMaxUsersExceededMessage sets MaxUsersExceededMessage field to given value.
+
+### HasMaxUsersExceededMessage
+
+`func (o *Group) HasMaxUsersExceededMessage() bool`
+
+HasMaxUsersExceededMessage returns a boolean if a field has been set.
+
 ### GetRiskSensitivity
 
 `func (o *Group) GetRiskSensitivity() RiskSensitivityEnum`
@@ -748,6 +855,56 @@ SetRiskSensitivityOverride sets RiskSensitivityOverride field to given value.
 
 HasRiskSensitivityOverride returns a boolean if a field has been set.
 
+### GetMatchRemoteName
+
+`func (o *Group) GetMatchRemoteName() bool`
+
+GetMatchRemoteName returns the MatchRemoteName field if non-nil, zero value otherwise.
+
+### GetMatchRemoteNameOk
+
+`func (o *Group) GetMatchRemoteNameOk() (*bool, bool)`
+
+GetMatchRemoteNameOk returns a tuple with the MatchRemoteName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchRemoteName
+
+`func (o *Group) SetMatchRemoteName(v bool)`
+
+SetMatchRemoteName sets MatchRemoteName field to given value.
+
+### HasMatchRemoteName
+
+`func (o *Group) HasMatchRemoteName() bool`
+
+HasMatchRemoteName returns a boolean if a field has been set.
+
+### GetMatchRemoteDescription
+
+`func (o *Group) GetMatchRemoteDescription() bool`
+
+GetMatchRemoteDescription returns the MatchRemoteDescription field if non-nil, zero value otherwise.
+
+### GetMatchRemoteDescriptionOk
+
+`func (o *Group) GetMatchRemoteDescriptionOk() (*bool, bool)`
+
+GetMatchRemoteDescriptionOk returns a tuple with the MatchRemoteDescription field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchRemoteDescription
+
+`func (o *Group) SetMatchRemoteDescription(v bool)`
+
+SetMatchRemoteDescription sets MatchRemoteDescription field to given value.
+
+### HasMatchRemoteDescription
+
+`func (o *Group) HasMatchRemoteDescription() bool`
+
+HasMatchRemoteDescription returns a boolean if a field has been set.
+
 ### GetLastSuccessfulSync
 
 `func (o *Group) GetLastSuccessfulSync() SyncTask`
@@ -772,6 +929,31 @@ SetLastSuccessfulSync sets LastSuccessfulSync field to given value.
 `func (o *Group) HasLastSuccessfulSync() bool`
 
 HasLastSuccessfulSync returns a boolean if a field has been set.
+
+### GetCustomAttributes
+
+`func (o *Group) GetCustomAttributes() []CustomAttribute`
+
+GetCustomAttributes returns the CustomAttributes field if non-nil, zero value otherwise.
+
+### GetCustomAttributesOk
+
+`func (o *Group) GetCustomAttributesOk() (*[]CustomAttribute, bool)`
+
+GetCustomAttributesOk returns a tuple with the CustomAttributes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomAttributes
+
+`func (o *Group) SetCustomAttributes(v []CustomAttribute)`
+
+SetCustomAttributes sets CustomAttributes field to given value.
+
+### HasCustomAttributes
+
+`func (o *Group) HasCustomAttributes() bool`
+
+HasCustomAttributes returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

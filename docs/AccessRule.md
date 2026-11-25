@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **AdminOwnerId** | **string** | The ID of the owner of the group. | 
 **Status** | **string** | The status of the access rule. | 
 **RuleClauses** | [**RuleClauses**](RuleClauses.md) |  | 
+**UsesOpalQuery** | Pointer to **bool** | True when the access rule uses an Opal Query, which the API can&#39;t describe yet. Its &#x60;ruleClauses&#x60; are then empty; view the rule in Opal. | [optional] 
 
 ## Methods
 
@@ -149,6 +150,31 @@ and a boolean to check if the value has been set.
 
 SetRuleClauses sets RuleClauses field to given value.
 
+
+### GetUsesOpalQuery
+
+`func (o *AccessRule) GetUsesOpalQuery() bool`
+
+GetUsesOpalQuery returns the UsesOpalQuery field if non-nil, zero value otherwise.
+
+### GetUsesOpalQueryOk
+
+`func (o *AccessRule) GetUsesOpalQueryOk() (*bool, bool)`
+
+GetUsesOpalQueryOk returns a tuple with the UsesOpalQuery field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsesOpalQuery
+
+`func (o *AccessRule) SetUsesOpalQuery(v bool)`
+
+SetUsesOpalQuery sets UsesOpalQuery field to given value.
+
+### HasUsesOpalQuery
+
+`func (o *AccessRule) HasUsesOpalQuery() bool`
+
+HasUsesOpalQuery returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

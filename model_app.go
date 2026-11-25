@@ -30,8 +30,14 @@ type App struct {
 	// The ID of the owner of the app.
 	AdminOwnerId string `json:"admin_owner_id"`
 	AppType AppTypeEnum `json:"app_type"`
+	Visibility *VisibilityTypeEnum `json:"visibility,omitempty"`
+	// The IDs of groups that can see this app when visibility is `LIMITED`. Must be empty when visibility is `GLOBAL`.
+	VisibilityGroupIds []string `json:"visibility_group_ids,omitempty"`
+	// The visibility level of items imported from this app.
+	ImportVisibility *VisibilityTypeEnum `json:"import_visibility,omitempty"`
 	// Validation checks of an apps' configuration and permissions.
 	Validations []AppValidation `json:"validations,omitempty"`
+	CustomConnector *CustomConnectorAppConfig `json:"custom_connector,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -179,6 +185,102 @@ func (o *App) SetAppType(v AppTypeEnum) {
 	o.AppType = v
 }
 
+// GetVisibility returns the Visibility field value if set, zero value otherwise.
+func (o *App) GetVisibility() VisibilityTypeEnum {
+	if o == nil || IsNil(o.Visibility) {
+		var ret VisibilityTypeEnum
+		return ret
+	}
+	return *o.Visibility
+}
+
+// GetVisibilityOk returns a tuple with the Visibility field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *App) GetVisibilityOk() (*VisibilityTypeEnum, bool) {
+	if o == nil || IsNil(o.Visibility) {
+		return nil, false
+	}
+	return o.Visibility, true
+}
+
+// HasVisibility returns a boolean if a field has been set.
+func (o *App) HasVisibility() bool {
+	if o != nil && !IsNil(o.Visibility) {
+		return true
+	}
+
+	return false
+}
+
+// SetVisibility gets a reference to the given VisibilityTypeEnum and assigns it to the Visibility field.
+func (o *App) SetVisibility(v VisibilityTypeEnum) {
+	o.Visibility = &v
+}
+
+// GetVisibilityGroupIds returns the VisibilityGroupIds field value if set, zero value otherwise.
+func (o *App) GetVisibilityGroupIds() []string {
+	if o == nil || IsNil(o.VisibilityGroupIds) {
+		var ret []string
+		return ret
+	}
+	return o.VisibilityGroupIds
+}
+
+// GetVisibilityGroupIdsOk returns a tuple with the VisibilityGroupIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *App) GetVisibilityGroupIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.VisibilityGroupIds) {
+		return nil, false
+	}
+	return o.VisibilityGroupIds, true
+}
+
+// HasVisibilityGroupIds returns a boolean if a field has been set.
+func (o *App) HasVisibilityGroupIds() bool {
+	if o != nil && !IsNil(o.VisibilityGroupIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetVisibilityGroupIds gets a reference to the given []string and assigns it to the VisibilityGroupIds field.
+func (o *App) SetVisibilityGroupIds(v []string) {
+	o.VisibilityGroupIds = v
+}
+
+// GetImportVisibility returns the ImportVisibility field value if set, zero value otherwise.
+func (o *App) GetImportVisibility() VisibilityTypeEnum {
+	if o == nil || IsNil(o.ImportVisibility) {
+		var ret VisibilityTypeEnum
+		return ret
+	}
+	return *o.ImportVisibility
+}
+
+// GetImportVisibilityOk returns a tuple with the ImportVisibility field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *App) GetImportVisibilityOk() (*VisibilityTypeEnum, bool) {
+	if o == nil || IsNil(o.ImportVisibility) {
+		return nil, false
+	}
+	return o.ImportVisibility, true
+}
+
+// HasImportVisibility returns a boolean if a field has been set.
+func (o *App) HasImportVisibility() bool {
+	if o != nil && !IsNil(o.ImportVisibility) {
+		return true
+	}
+
+	return false
+}
+
+// SetImportVisibility gets a reference to the given VisibilityTypeEnum and assigns it to the ImportVisibility field.
+func (o *App) SetImportVisibility(v VisibilityTypeEnum) {
+	o.ImportVisibility = &v
+}
+
 // GetValidations returns the Validations field value if set, zero value otherwise.
 func (o *App) GetValidations() []AppValidation {
 	if o == nil || IsNil(o.Validations) {
@@ -211,6 +313,38 @@ func (o *App) SetValidations(v []AppValidation) {
 	o.Validations = v
 }
 
+// GetCustomConnector returns the CustomConnector field value if set, zero value otherwise.
+func (o *App) GetCustomConnector() CustomConnectorAppConfig {
+	if o == nil || IsNil(o.CustomConnector) {
+		var ret CustomConnectorAppConfig
+		return ret
+	}
+	return *o.CustomConnector
+}
+
+// GetCustomConnectorOk returns a tuple with the CustomConnector field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *App) GetCustomConnectorOk() (*CustomConnectorAppConfig, bool) {
+	if o == nil || IsNil(o.CustomConnector) {
+		return nil, false
+	}
+	return o.CustomConnector, true
+}
+
+// HasCustomConnector returns a boolean if a field has been set.
+func (o *App) HasCustomConnector() bool {
+	if o != nil && !IsNil(o.CustomConnector) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomConnector gets a reference to the given CustomConnectorAppConfig and assigns it to the CustomConnector field.
+func (o *App) SetCustomConnector(v CustomConnectorAppConfig) {
+	o.CustomConnector = &v
+}
+
 func (o App) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -226,8 +360,20 @@ func (o App) ToMap() (map[string]interface{}, error) {
 	toSerialize["description"] = o.Description
 	toSerialize["admin_owner_id"] = o.AdminOwnerId
 	toSerialize["app_type"] = o.AppType
+	if !IsNil(o.Visibility) {
+		toSerialize["visibility"] = o.Visibility
+	}
+	if !IsNil(o.VisibilityGroupIds) {
+		toSerialize["visibility_group_ids"] = o.VisibilityGroupIds
+	}
+	if !IsNil(o.ImportVisibility) {
+		toSerialize["import_visibility"] = o.ImportVisibility
+	}
 	if !IsNil(o.Validations) {
 		toSerialize["validations"] = o.Validations
+	}
+	if !IsNil(o.CustomConnector) {
+		toSerialize["custom_connector"] = o.CustomConnector
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -281,7 +427,11 @@ func (o *App) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "admin_owner_id")
 		delete(additionalProperties, "app_type")
+		delete(additionalProperties, "visibility")
+		delete(additionalProperties, "visibility_group_ids")
+		delete(additionalProperties, "import_visibility")
 		delete(additionalProperties, "validations")
+		delete(additionalProperties, "custom_connector")
 		o.AdditionalProperties = additionalProperties
 	}
 
