@@ -43,10 +43,12 @@ func (r ApiCreateUarRequest) Execute() (*UAR, *http.Response, error) {
 /*
 CreateUar Method for CreateUar
 
-Starts a User Access Review.
+Starts a User Access Review. Deprecated in favor of `POST /campaigns`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateUarRequest
+
+Deprecated
 */
 func (a *UarsAPIService) CreateUar(ctx context.Context) ApiCreateUarRequest {
 	return ApiCreateUarRequest{
@@ -57,6 +59,7 @@ func (a *UarsAPIService) CreateUar(ctx context.Context) ApiCreateUarRequest {
 
 // Execute executes the request
 //  @return UAR
+// Deprecated
 func (a *UarsAPIService) CreateUarExecute(r ApiCreateUarRequest) (*UAR, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -161,10 +164,12 @@ func (r ApiGetUARsRequest) Execute() (*PaginatedUARsList, *http.Response, error)
 /*
 GetUARs Method for GetUARs
 
-Returns a list of `UAR` objects.
+Returns a list of `UAR` objects. Deprecated in favor of `GET /campaigns`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetUARsRequest
+
+Deprecated
 */
 func (a *UarsAPIService) GetUARs(ctx context.Context) ApiGetUARsRequest {
 	return ApiGetUARsRequest{
@@ -175,6 +180,7 @@ func (a *UarsAPIService) GetUARs(ctx context.Context) ApiGetUARsRequest {
 
 // Execute executes the request
 //  @return PaginatedUARsList
+// Deprecated
 func (a *UarsAPIService) GetUARsExecute(r ApiGetUARsRequest) (*PaginatedUARsList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -267,11 +273,13 @@ func (r ApiGetUarRequest) Execute() (*UAR, *http.Response, error) {
 /*
 GetUar Method for GetUar
 
-Retrieves a specific UAR.
+Retrieves a specific UAR. Deprecated in favor of `GET /campaigns/{campaign_id}`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param uarId The ID of the UAR.
  @return ApiGetUarRequest
+
+Deprecated
 */
 func (a *UarsAPIService) GetUar(ctx context.Context, uarId string) ApiGetUarRequest {
 	return ApiGetUarRequest{
@@ -283,6 +291,7 @@ func (a *UarsAPIService) GetUar(ctx context.Context, uarId string) ApiGetUarRequ
 
 // Execute executes the request
 //  @return UAR
+// Deprecated
 func (a *UarsAPIService) GetUarExecute(r ApiGetUarRequest) (*UAR, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet

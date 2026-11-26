@@ -226,6 +226,205 @@ func (a *ConfigurationTemplatesAPIService) DeleteConfigurationTemplateExecute(r 
 	return localVarHTTPResponse, nil
 }
 
+type ApiDeleteConfigurationTemplateCustomAttributeByKeyRequest struct {
+	ctx context.Context
+	ApiService *ConfigurationTemplatesAPIService
+	configurationTemplateId string
+	attributeKey string
+}
+
+func (r ApiDeleteConfigurationTemplateCustomAttributeByKeyRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteConfigurationTemplateCustomAttributeByKeyExecute(r)
+}
+
+/*
+DeleteConfigurationTemplateCustomAttributeByKey Method for DeleteConfigurationTemplateCustomAttributeByKey
+
+Removes a single custom attribute key from a configuration template.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param configurationTemplateId The ID of the configuration template.
+ @param attributeKey The custom attribute key to remove.
+ @return ApiDeleteConfigurationTemplateCustomAttributeByKeyRequest
+*/
+func (a *ConfigurationTemplatesAPIService) DeleteConfigurationTemplateCustomAttributeByKey(ctx context.Context, configurationTemplateId string, attributeKey string) ApiDeleteConfigurationTemplateCustomAttributeByKeyRequest {
+	return ApiDeleteConfigurationTemplateCustomAttributeByKeyRequest{
+		ApiService: a,
+		ctx: ctx,
+		configurationTemplateId: configurationTemplateId,
+		attributeKey: attributeKey,
+	}
+}
+
+// Execute executes the request
+func (a *ConfigurationTemplatesAPIService) DeleteConfigurationTemplateCustomAttributeByKeyExecute(r ApiDeleteConfigurationTemplateCustomAttributeByKeyRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigurationTemplatesAPIService.DeleteConfigurationTemplateCustomAttributeByKey")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/configuration-templates/{configuration_template_id}/custom-attributes/{attribute_key}"
+	localVarPath = strings.Replace(localVarPath, "{"+"configuration_template_id"+"}", url.PathEscape(parameterValueToString(r.configurationTemplateId, "configurationTemplateId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"attribute_key"+"}", url.PathEscape(parameterValueToString(r.attributeKey, "attributeKey")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiGetConfigurationTemplateCustomAttributesRequest struct {
+	ctx context.Context
+	ApiService *ConfigurationTemplatesAPIService
+	configurationTemplateId string
+}
+
+func (r ApiGetConfigurationTemplateCustomAttributesRequest) Execute() (*CustomAttributesList, *http.Response, error) {
+	return r.ApiService.GetConfigurationTemplateCustomAttributesExecute(r)
+}
+
+/*
+GetConfigurationTemplateCustomAttributes Method for GetConfigurationTemplateCustomAttributes
+
+Returns all custom attributes set on the configuration template.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param configurationTemplateId The ID of the configuration template whose custom attributes to return.
+ @return ApiGetConfigurationTemplateCustomAttributesRequest
+*/
+func (a *ConfigurationTemplatesAPIService) GetConfigurationTemplateCustomAttributes(ctx context.Context, configurationTemplateId string) ApiGetConfigurationTemplateCustomAttributesRequest {
+	return ApiGetConfigurationTemplateCustomAttributesRequest{
+		ApiService: a,
+		ctx: ctx,
+		configurationTemplateId: configurationTemplateId,
+	}
+}
+
+// Execute executes the request
+//  @return CustomAttributesList
+func (a *ConfigurationTemplatesAPIService) GetConfigurationTemplateCustomAttributesExecute(r ApiGetConfigurationTemplateCustomAttributesRequest) (*CustomAttributesList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CustomAttributesList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigurationTemplatesAPIService.GetConfigurationTemplateCustomAttributes")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/configuration-templates/{configuration_template_id}/custom-attributes"
+	localVarPath = strings.Replace(localVarPath, "{"+"configuration_template_id"+"}", url.PathEscape(parameterValueToString(r.configurationTemplateId, "configurationTemplateId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetConfigurationTemplatesRequest struct {
 	ctx context.Context
 	ApiService *ConfigurationTemplatesAPIService
@@ -288,6 +487,234 @@ func (a *ConfigurationTemplatesAPIService) GetConfigurationTemplatesExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPatchConfigurationTemplateCustomAttributesRequest struct {
+	ctx context.Context
+	ApiService *ConfigurationTemplatesAPIService
+	configurationTemplateId string
+	customAttributesList *CustomAttributesList
+}
+
+func (r ApiPatchConfigurationTemplateCustomAttributesRequest) CustomAttributesList(customAttributesList CustomAttributesList) ApiPatchConfigurationTemplateCustomAttributesRequest {
+	r.customAttributesList = &customAttributesList
+	return r
+}
+
+func (r ApiPatchConfigurationTemplateCustomAttributesRequest) Execute() (*CustomAttributesList, *http.Response, error) {
+	return r.ApiService.PatchConfigurationTemplateCustomAttributesExecute(r)
+}
+
+/*
+PatchConfigurationTemplateCustomAttributes Method for PatchConfigurationTemplateCustomAttributes
+
+Upserts specific custom attributes on a configuration template, leaving all other existing attributes untouched. For each key in the request body, the existing value (if any) is replaced. Keys not present in the request body are not modified.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param configurationTemplateId The ID of the configuration template whose custom attributes to upsert.
+ @return ApiPatchConfigurationTemplateCustomAttributesRequest
+*/
+func (a *ConfigurationTemplatesAPIService) PatchConfigurationTemplateCustomAttributes(ctx context.Context, configurationTemplateId string) ApiPatchConfigurationTemplateCustomAttributesRequest {
+	return ApiPatchConfigurationTemplateCustomAttributesRequest{
+		ApiService: a,
+		ctx: ctx,
+		configurationTemplateId: configurationTemplateId,
+	}
+}
+
+// Execute executes the request
+//  @return CustomAttributesList
+func (a *ConfigurationTemplatesAPIService) PatchConfigurationTemplateCustomAttributesExecute(r ApiPatchConfigurationTemplateCustomAttributesRequest) (*CustomAttributesList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CustomAttributesList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigurationTemplatesAPIService.PatchConfigurationTemplateCustomAttributes")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/configuration-templates/{configuration_template_id}/custom-attributes"
+	localVarPath = strings.Replace(localVarPath, "{"+"configuration_template_id"+"}", url.PathEscape(parameterValueToString(r.configurationTemplateId, "configurationTemplateId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.customAttributesList == nil {
+		return localVarReturnValue, nil, reportError("customAttributesList is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.customAttributesList
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiSetConfigurationTemplateCustomAttributesRequest struct {
+	ctx context.Context
+	ApiService *ConfigurationTemplatesAPIService
+	configurationTemplateId string
+	customAttributesList *CustomAttributesList
+}
+
+func (r ApiSetConfigurationTemplateCustomAttributesRequest) CustomAttributesList(customAttributesList CustomAttributesList) ApiSetConfigurationTemplateCustomAttributesRequest {
+	r.customAttributesList = &customAttributesList
+	return r
+}
+
+func (r ApiSetConfigurationTemplateCustomAttributesRequest) Execute() (*CustomAttributesList, *http.Response, error) {
+	return r.ApiService.SetConfigurationTemplateCustomAttributesExecute(r)
+}
+
+/*
+SetConfigurationTemplateCustomAttributes Method for SetConfigurationTemplateCustomAttributes
+
+Sets the custom attributes on a configuration template, replacing all existing attributes. Pass an empty `custom_attributes` array to clear all attributes.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param configurationTemplateId The ID of the configuration template whose custom attributes to set.
+ @return ApiSetConfigurationTemplateCustomAttributesRequest
+*/
+func (a *ConfigurationTemplatesAPIService) SetConfigurationTemplateCustomAttributes(ctx context.Context, configurationTemplateId string) ApiSetConfigurationTemplateCustomAttributesRequest {
+	return ApiSetConfigurationTemplateCustomAttributesRequest{
+		ApiService: a,
+		ctx: ctx,
+		configurationTemplateId: configurationTemplateId,
+	}
+}
+
+// Execute executes the request
+//  @return CustomAttributesList
+func (a *ConfigurationTemplatesAPIService) SetConfigurationTemplateCustomAttributesExecute(r ApiSetConfigurationTemplateCustomAttributesRequest) (*CustomAttributesList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CustomAttributesList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigurationTemplatesAPIService.SetConfigurationTemplateCustomAttributes")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/configuration-templates/{configuration_template_id}/custom-attributes"
+	localVarPath = strings.Replace(localVarPath, "{"+"configuration_template_id"+"}", url.PathEscape(parameterValueToString(r.configurationTemplateId, "configurationTemplateId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.customAttributesList == nil {
+		return localVarReturnValue, nil, reportError("customAttributesList is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.customAttributesList
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

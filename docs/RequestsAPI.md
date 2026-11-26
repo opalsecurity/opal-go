@@ -5,13 +5,17 @@ All URIs are relative to *https://api.opal.dev/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ApproveRequest**](RequestsAPI.md#ApproveRequest) | **Post** /requests/{id}/approve | 
+[**CancelRequest**](RequestsAPI.md#CancelRequest) | **Post** /requests/{id}/cancel | Cancel request
 [**CreateRequest**](RequestsAPI.md#CreateRequest) | **Post** /requests | 
 [**CreateRequestComment**](RequestsAPI.md#CreateRequestComment) | **Post** /requests/{id}/comments | 
 [**DenyRequest**](RequestsAPI.md#DenyRequest) | **Post** /requests/{id}/deny | 
+[**EscalateRequest**](RequestsAPI.md#EscalateRequest) | **Post** /requests/{id}/escalate | Escalate request to skip-manager
 [**GetRequest**](RequestsAPI.md#GetRequest) | **Get** /requests/{id} | Get request by ID
 [**GetRequestComments**](RequestsAPI.md#GetRequestComments) | **Get** /requests/{id}/comments | 
 [**GetRequests**](RequestsAPI.md#GetRequests) | **Get** /requests | Get requests
 [**GetRequestsRelay**](RequestsAPI.md#GetRequestsRelay) | **Get** /requests/relay | Get requests via Relay
+[**RemindRequest**](RequestsAPI.md#RemindRequest) | **Post** /requests/{id}/remind | Send request reminder
+[**RemindRequestReviewer**](RequestsAPI.md#RemindRequestReviewer) | **Post** /requests/{id}/reviewers/{reviewer_id}/remind | Send reminder to a reviewer
 
 
 
@@ -72,6 +76,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ApproveRequest200Response**](ApproveRequest200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CancelRequest
+
+> Request CancelRequest(ctx, id).CancelRequestRequest(cancelRequestRequest).Execute()
+
+Cancel request
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The ID of the request to cancel.
+	cancelRequestRequest := *openapiclient.NewCancelRequestRequest() // CancelRequestRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RequestsAPI.CancelRequest(context.Background(), id).CancelRequestRequest(cancelRequestRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RequestsAPI.CancelRequest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CancelRequest`: Request
+	fmt.Fprintf(os.Stdout, "Response from `RequestsAPI.CancelRequest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | The ID of the request to cancel. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCancelRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **cancelRequestRequest** | [**CancelRequestRequest**](CancelRequestRequest.md) |  | 
+
+### Return type
+
+[**Request**](Request.md)
 
 ### Authorization
 
@@ -297,6 +373,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## EscalateRequest
+
+> EscalateRequest200Response EscalateRequest(ctx, id).Execute()
+
+Escalate request to skip-manager
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The ID of the request to escalate.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RequestsAPI.EscalateRequest(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RequestsAPI.EscalateRequest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `EscalateRequest`: EscalateRequest200Response
+	fmt.Fprintf(os.Stdout, "Response from `RequestsAPI.EscalateRequest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | The ID of the request to escalate. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEscalateRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**EscalateRequest200Response**](EscalateRequest200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetRequest
 
 > Request GetRequest(ctx, id).Execute()
@@ -439,7 +585,7 @@ Name | Type | Description  | Notes
 
 ## GetRequests
 
-> RequestList GetRequests(ctx).StartDateFilter(startDateFilter).EndDateFilter(endDateFilter).RequesterId(requesterId).TargetUserId(targetUserId).ResourceId(resourceId).GroupId(groupId).Cursor(cursor).PageSize(pageSize).ShowPendingOnly(showPendingOnly).Execute()
+> RequestList GetRequests(ctx).StartDateFilter(startDateFilter).EndDateFilter(endDateFilter).RequesterId(requesterId).TargetUserId(targetUserId).ResourceId(resourceId).GroupId(groupId).AppId(appId).Cursor(cursor).PageSize(pageSize).ShowPendingOnly(showPendingOnly).Execute()
 
 Get requests
 
@@ -464,13 +610,14 @@ func main() {
 	targetUserId := "37cb7e41-12ba-46da-92ff-030abe0450b1" // string | Filter requests by their target user ID. (optional)
 	resourceId := "37cb7e41-12ba-46da-92ff-030abe0450b1" // string | Filter requests by the resource ID that was requested. (optional)
 	groupId := "37cb7e41-12ba-46da-92ff-030abe0450b1" // string | Filter requests by the group ID that was requested. (optional)
+	appId := "37cb7e41-12ba-46da-92ff-030abe0450b1" // string | Filter requests by the ID of the app that a requested resource or group belongs to. Returns an empty page if the app does not exist or has no requests visible to the caller. (optional)
 	cursor := "cD0yMDIxLTAxLTA2KzAzJTNBMjQlM0E1My40MzQzMjYlMkIwMCUzQTAw" // string | The pagination cursor value. (optional)
 	pageSize := int32(200) // int32 | Number of results to return per page. Default is 200. (optional)
 	showPendingOnly := true // bool | Boolean toggle for if it should only show pending requests. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RequestsAPI.GetRequests(context.Background()).StartDateFilter(startDateFilter).EndDateFilter(endDateFilter).RequesterId(requesterId).TargetUserId(targetUserId).ResourceId(resourceId).GroupId(groupId).Cursor(cursor).PageSize(pageSize).ShowPendingOnly(showPendingOnly).Execute()
+	resp, r, err := apiClient.RequestsAPI.GetRequests(context.Background()).StartDateFilter(startDateFilter).EndDateFilter(endDateFilter).RequesterId(requesterId).TargetUserId(targetUserId).ResourceId(resourceId).GroupId(groupId).AppId(appId).Cursor(cursor).PageSize(pageSize).ShowPendingOnly(showPendingOnly).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RequestsAPI.GetRequests``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -497,6 +644,7 @@ Name | Type | Description  | Notes
  **targetUserId** | **string** | Filter requests by their target user ID. | 
  **resourceId** | **string** | Filter requests by the resource ID that was requested. | 
  **groupId** | **string** | Filter requests by the group ID that was requested. | 
+ **appId** | **string** | Filter requests by the ID of the app that a requested resource or group belongs to. Returns an empty page if the app does not exist or has no requests visible to the caller. | 
  **cursor** | **string** | The pagination cursor value. | 
  **pageSize** | **int32** | Number of results to return per page. Default is 200. | 
  **showPendingOnly** | **bool** | Boolean toggle for if it should only show pending requests. | 
@@ -582,6 +730,149 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RequestConnection**](RequestConnection.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RemindRequest
+
+> EscalateRequest200Response RemindRequest(ctx, id).Execute()
+
+Send request reminder
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The ID of the request whose reviewers should be reminded.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RequestsAPI.RemindRequest(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RequestsAPI.RemindRequest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RemindRequest`: EscalateRequest200Response
+	fmt.Fprintf(os.Stdout, "Response from `RequestsAPI.RemindRequest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | The ID of the request whose reviewers should be reminded. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRemindRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**EscalateRequest200Response**](EscalateRequest200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RemindRequestReviewer
+
+> EscalateRequest200Response RemindRequestReviewer(ctx, id, reviewerId).Execute()
+
+Send reminder to a reviewer
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/opalsecurity/opal-go"
+)
+
+func main() {
+	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The ID of the request whose reviewer should be reminded.
+	reviewerId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The ID of the pending reviewer to remind.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RequestsAPI.RemindRequestReviewer(context.Background(), id, reviewerId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RequestsAPI.RemindRequestReviewer``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RemindRequestReviewer`: EscalateRequest200Response
+	fmt.Fprintf(os.Stdout, "Response from `RequestsAPI.RemindRequestReviewer`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | The ID of the request whose reviewer should be reminded. | 
+**reviewerId** | **string** | The ID of the pending reviewer to remind. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRemindRequestReviewerRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**EscalateRequest200Response**](EscalateRequest200Response.md)
 
 ### Authorization
 

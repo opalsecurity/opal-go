@@ -277,6 +277,122 @@ func (a *ResourcesAPIService) AddResourceUserExecute(r ApiAddResourceUserRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCheckResourcesRequestableRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	batchRequestabilityCheckRequest *BatchRequestabilityCheckRequest
+}
+
+func (r ApiCheckResourcesRequestableRequest) BatchRequestabilityCheckRequest(batchRequestabilityCheckRequest BatchRequestabilityCheckRequest) ApiCheckResourcesRequestableRequest {
+	r.batchRequestabilityCheckRequest = &batchRequestabilityCheckRequest
+	return r
+}
+
+func (r ApiCheckResourcesRequestableRequest) Execute() (*BatchRequestabilityCheckResponse, *http.Response, error) {
+	return r.ApiService.CheckResourcesRequestableExecute(r)
+}
+
+/*
+CheckResourcesRequestable Check requestability of many resources
+
+Checks whether a user can request each of up to 100 resources, with the same evaluation and
+permission rule as `GET /resources/{resource_id}/requestable/users/{user_id}`. Duplicate IDs
+are dropped and results keep the order of first appearance. A resource that does not exist
+in your organization (or, on a self-check without CHECK_REQUESTABILITY, that you cannot
+read) is returned with `requestable: false` and reason `NOT_FOUND`. This is a read-only
+evaluation: read-only API tokens may call it even though the method is POST.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCheckResourcesRequestableRequest
+*/
+func (a *ResourcesAPIService) CheckResourcesRequestable(ctx context.Context) ApiCheckResourcesRequestableRequest {
+	return ApiCheckResourcesRequestableRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return BatchRequestabilityCheckResponse
+func (a *ResourcesAPIService) CheckResourcesRequestableExecute(r ApiCheckResourcesRequestableRequest) (*BatchRequestabilityCheckResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BatchRequestabilityCheckResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.CheckResourcesRequestable")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/requestable/check"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.batchRequestabilityCheckRequest == nil {
+		return localVarReturnValue, nil, reportError("batchRequestabilityCheckRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.batchRequestabilityCheckRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCreateResourceRequest struct {
 	ctx context.Context
 	ApiService *ResourcesAPIService
@@ -387,6 +503,120 @@ func (a *ResourcesAPIService) CreateResourceExecute(r ApiCreateResourceRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCreateResourceCustomAccessLevelRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	resourceId string
+	createResourceCustomAccessLevelInfo *CreateResourceCustomAccessLevelInfo
+}
+
+func (r ApiCreateResourceCustomAccessLevelRequest) CreateResourceCustomAccessLevelInfo(createResourceCustomAccessLevelInfo CreateResourceCustomAccessLevelInfo) ApiCreateResourceCustomAccessLevelRequest {
+	r.createResourceCustomAccessLevelInfo = &createResourceCustomAccessLevelInfo
+	return r
+}
+
+func (r ApiCreateResourceCustomAccessLevelRequest) Execute() (*ResourceCustomAccessLevelResponse, *http.Response, error) {
+	return r.ApiService.CreateResourceCustomAccessLevelExecute(r)
+}
+
+/*
+CreateResourceCustomAccessLevel Method for CreateResourceCustomAccessLevel
+
+Creates a custom access level on a resource. If the resource is a parent type, the role is created on all child resources.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param resourceId The ID of the resource.
+ @return ApiCreateResourceCustomAccessLevelRequest
+*/
+func (a *ResourcesAPIService) CreateResourceCustomAccessLevel(ctx context.Context, resourceId string) ApiCreateResourceCustomAccessLevelRequest {
+	return ApiCreateResourceCustomAccessLevelRequest{
+		ApiService: a,
+		ctx: ctx,
+		resourceId: resourceId,
+	}
+}
+
+// Execute executes the request
+//  @return ResourceCustomAccessLevelResponse
+func (a *ResourcesAPIService) CreateResourceCustomAccessLevelExecute(r ApiCreateResourceCustomAccessLevelRequest) (*ResourceCustomAccessLevelResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResourceCustomAccessLevelResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.CreateResourceCustomAccessLevel")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/{resource_id}/custom-access-levels"
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.createResourceCustomAccessLevelInfo == nil {
+		return localVarReturnValue, nil, reportError("createResourceCustomAccessLevelInfo is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createResourceCustomAccessLevelInfo
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiDeleteResourceRequest struct {
 	ctx context.Context
 	ApiService *ResourcesAPIService
@@ -429,6 +659,198 @@ func (a *ResourcesAPIService) DeleteResourceExecute(r ApiDeleteResourceRequest) 
 
 	localVarPath := localBasePath + "/resources/{resource_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiDeleteResourceCustomAccessLevelRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	resourceId string
+	accessLevelRemoteId string
+}
+
+func (r ApiDeleteResourceCustomAccessLevelRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteResourceCustomAccessLevelExecute(r)
+}
+
+/*
+DeleteResourceCustomAccessLevel Method for DeleteResourceCustomAccessLevel
+
+Deletes a custom access level identified by its remote ID. If the resource is a parent type, the deletion fans out to all child resources.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param resourceId The ID of the resource.
+ @param accessLevelRemoteId The remote ID of the access level.
+ @return ApiDeleteResourceCustomAccessLevelRequest
+*/
+func (a *ResourcesAPIService) DeleteResourceCustomAccessLevel(ctx context.Context, resourceId string, accessLevelRemoteId string) ApiDeleteResourceCustomAccessLevelRequest {
+	return ApiDeleteResourceCustomAccessLevelRequest{
+		ApiService: a,
+		ctx: ctx,
+		resourceId: resourceId,
+		accessLevelRemoteId: accessLevelRemoteId,
+	}
+}
+
+// Execute executes the request
+func (a *ResourcesAPIService) DeleteResourceCustomAccessLevelExecute(r ApiDeleteResourceCustomAccessLevelRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.DeleteResourceCustomAccessLevel")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/{resource_id}/custom-access-levels/{access_level_remote_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"access_level_remote_id"+"}", url.PathEscape(parameterValueToString(r.accessLevelRemoteId, "accessLevelRemoteId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiDeleteResourceCustomAttributeByKeyRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	resourceId string
+	attributeKey string
+}
+
+func (r ApiDeleteResourceCustomAttributeByKeyRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteResourceCustomAttributeByKeyExecute(r)
+}
+
+/*
+DeleteResourceCustomAttributeByKey Method for DeleteResourceCustomAttributeByKey
+
+Removes a single custom attribute key from a resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param resourceId The ID of the resource.
+ @param attributeKey The custom attribute key to remove.
+ @return ApiDeleteResourceCustomAttributeByKeyRequest
+*/
+func (a *ResourcesAPIService) DeleteResourceCustomAttributeByKey(ctx context.Context, resourceId string, attributeKey string) ApiDeleteResourceCustomAttributeByKeyRequest {
+	return ApiDeleteResourceCustomAttributeByKeyRequest{
+		ApiService: a,
+		ctx: ctx,
+		resourceId: resourceId,
+		attributeKey: attributeKey,
+	}
+}
+
+// Execute executes the request
+func (a *ResourcesAPIService) DeleteResourceCustomAttributeByKeyExecute(r ApiDeleteResourceCustomAttributeByKeyRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.DeleteResourceCustomAttributeByKey")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/{resource_id}/custom-attributes/{attribute_key}"
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"attribute_key"+"}", url.PathEscape(parameterValueToString(r.attributeKey, "attributeKey")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -591,11 +1013,17 @@ type ApiDeleteResourceUserRequest struct {
 	resourceId string
 	userId string
 	accessLevelRemoteId *string
+	deleteResourceUserRequest *DeleteResourceUserRequest
 }
 
 // The remote ID of the access level for which this user has direct access. If omitted, the default access level remote ID value (empty string) is assumed.
 func (r ApiDeleteResourceUserRequest) AccessLevelRemoteId(accessLevelRemoteId string) ApiDeleteResourceUserRequest {
 	r.accessLevelRemoteId = &accessLevelRemoteId
+	return r
+}
+
+func (r ApiDeleteResourceUserRequest) DeleteResourceUserRequest(deleteResourceUserRequest DeleteResourceUserRequest) ApiDeleteResourceUserRequest {
+	r.deleteResourceUserRequest = &deleteResourceUserRequest
 	return r
 }
 
@@ -647,7 +1075,7 @@ func (a *ResourcesAPIService) DeleteResourceUserExecute(r ApiDeleteResourceUserR
 		parameterAddToHeaderOrQuery(localVarQueryParams, "access_level_remote_id", r.accessLevelRemoteId, "form", "")
 	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -663,6 +1091,8 @@ func (a *ResourcesAPIService) DeleteResourceUserExecute(r ApiDeleteResourceUserR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.deleteResourceUserRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -734,6 +1164,431 @@ func (a *ResourcesAPIService) GetResourceExecute(r ApiGetResourceRequest) (*Reso
 	}
 
 	localVarPath := localBasePath + "/resources/{resource_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetResourceAccessLevelsRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	resourceId string
+}
+
+func (r ApiGetResourceAccessLevelsRequest) Execute() (*ResourceAccessLevelList, *http.Response, error) {
+	return r.ApiService.GetResourceAccessLevelsExecute(r)
+}
+
+/*
+GetResourceAccessLevels Get resource access levels
+
+Returns the list of access levels defined for the resource. Resources that only offer default (unnamed) access return an empty list.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param resourceId The ID of the resource whose access levels to return.
+ @return ApiGetResourceAccessLevelsRequest
+*/
+func (a *ResourcesAPIService) GetResourceAccessLevels(ctx context.Context, resourceId string) ApiGetResourceAccessLevelsRequest {
+	return ApiGetResourceAccessLevelsRequest{
+		ApiService: a,
+		ctx: ctx,
+		resourceId: resourceId,
+	}
+}
+
+// Execute executes the request
+//  @return ResourceAccessLevelList
+func (a *ResourcesAPIService) GetResourceAccessLevelsExecute(r ApiGetResourceAccessLevelsRequest) (*ResourceAccessLevelList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResourceAccessLevelList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.GetResourceAccessLevels")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/{resource_id}/access_levels"
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetResourceConfigurationTemplateRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	resourceId string
+}
+
+func (r ApiGetResourceConfigurationTemplateRequest) Execute() (*ResourceConfigurationTemplate, *http.Response, error) {
+	return r.ApiService.GetResourceConfigurationTemplateExecute(r)
+}
+
+/*
+GetResourceConfigurationTemplate Get the ID of the configuration template linked to a resource
+
+Returns the ID of the configuration template that the resource is
+currently linked to. The response body is
+`{"configuration_template_id": "<uuid>" | null}`:
+
+  * `<uuid>` is the ID of the configuration template the resource is linked to.
+  * `null` means the resource is not linked to any configuration template
+    and uses its own private configuration.
+
+This endpoint only exposes the link between a resource and a
+configuration template — it does not return the template's own fields
+(name, description, request configurations, visibility, etc.). To read
+those, call `GET /configuration-templates/{configuration_template_id}`
+with the ID returned here.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param resourceId The ID of the resource whose configuration template link is being read.
+ @return ApiGetResourceConfigurationTemplateRequest
+*/
+func (a *ResourcesAPIService) GetResourceConfigurationTemplate(ctx context.Context, resourceId string) ApiGetResourceConfigurationTemplateRequest {
+	return ApiGetResourceConfigurationTemplateRequest{
+		ApiService: a,
+		ctx: ctx,
+		resourceId: resourceId,
+	}
+}
+
+// Execute executes the request
+//  @return ResourceConfigurationTemplate
+func (a *ResourcesAPIService) GetResourceConfigurationTemplateExecute(r ApiGetResourceConfigurationTemplateRequest) (*ResourceConfigurationTemplate, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResourceConfigurationTemplate
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.GetResourceConfigurationTemplate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/{resource_id}/configuration-template"
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetResourceCustomAccessLevelsRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	resourceId string
+}
+
+func (r ApiGetResourceCustomAccessLevelsRequest) Execute() (*ResourceCustomAccessLevelList, *http.Response, error) {
+	return r.ApiService.GetResourceCustomAccessLevelsExecute(r)
+}
+
+/*
+GetResourceCustomAccessLevels Method for GetResourceCustomAccessLevels
+
+Returns all custom access levels for a resource. If the resource is a parent type (e.g. GitHubOrg), returns aggregated roles across child resources.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param resourceId The ID of the resource.
+ @return ApiGetResourceCustomAccessLevelsRequest
+*/
+func (a *ResourcesAPIService) GetResourceCustomAccessLevels(ctx context.Context, resourceId string) ApiGetResourceCustomAccessLevelsRequest {
+	return ApiGetResourceCustomAccessLevelsRequest{
+		ApiService: a,
+		ctx: ctx,
+		resourceId: resourceId,
+	}
+}
+
+// Execute executes the request
+//  @return ResourceCustomAccessLevelList
+func (a *ResourcesAPIService) GetResourceCustomAccessLevelsExecute(r ApiGetResourceCustomAccessLevelsRequest) (*ResourceCustomAccessLevelList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResourceCustomAccessLevelList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.GetResourceCustomAccessLevels")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/{resource_id}/custom-access-levels"
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetResourceCustomAttributesRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	resourceId string
+}
+
+func (r ApiGetResourceCustomAttributesRequest) Execute() (*CustomAttributesList, *http.Response, error) {
+	return r.ApiService.GetResourceCustomAttributesExecute(r)
+}
+
+/*
+GetResourceCustomAttributes Method for GetResourceCustomAttributes
+
+Returns all custom attributes set on the resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param resourceId The ID of the resource whose custom attributes to return.
+ @return ApiGetResourceCustomAttributesRequest
+*/
+func (a *ResourcesAPIService) GetResourceCustomAttributes(ctx context.Context, resourceId string) ApiGetResourceCustomAttributesRequest {
+	return ApiGetResourceCustomAttributesRequest{
+		ApiService: a,
+		ctx: ctx,
+		resourceId: resourceId,
+	}
+}
+
+// Execute executes the request
+//  @return CustomAttributesList
+func (a *ResourcesAPIService) GetResourceCustomAttributesExecute(r ApiGetResourceCustomAttributesRequest) (*CustomAttributesList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CustomAttributesList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.GetResourceCustomAttributes")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/{resource_id}/custom-attributes"
 	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1058,6 +1913,139 @@ func (a *ResourcesAPIService) GetResourceNhisExecute(r ApiGetResourceNhisRequest
 
 	if r.limit != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetResourceRequestableToUserRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	resourceId string
+	userId string
+	accessLevelRemoteId *string
+	requesterId *string
+}
+
+// Optional access level remote ID to check a single level. Must be an access level of the resource. Omit for resources without access levels. 
+func (r ApiGetResourceRequestableToUserRequest) AccessLevelRemoteId(accessLevelRemoteId string) ApiGetResourceRequestableToUserRequest {
+	r.accessLevelRemoteId = &accessLevelRemoteId
+	return r
+}
+
+// Optional ID of the person filling in the form when different from user_id. Adds the on-behalf check evaluated as that requester, following EnforceRequestOnBehalfOfUser. 
+func (r ApiGetResourceRequestableToUserRequest) RequesterId(requesterId string) ApiGetResourceRequestableToUserRequest {
+	r.requesterId = &requesterId
+	return r
+}
+
+func (r ApiGetResourceRequestableToUserRequest) Execute() (*UserRequestabilityCheck, *http.Response, error) {
+	return r.ApiService.GetResourceRequestableToUserExecute(r)
+}
+
+/*
+GetResourceRequestableToUser Method for GetResourceRequestableToUser
+
+Checks whether a user can request this resource, and at which access levels, using the same
+request-configuration selection as Opal's Access Request page and `POST /requests`. Checking
+another user (or a requester other than the caller) requires an Opal admin or a custom role
+with the CHECK_REQUESTABILITY permission; a caller can always check their own requestability,
+in which case a resource they cannot read is reported as not found. Requestability does not
+factor visibility.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param resourceId The ID of the resource.
+ @param userId The ID of the user the access would be for.
+ @return ApiGetResourceRequestableToUserRequest
+*/
+func (a *ResourcesAPIService) GetResourceRequestableToUser(ctx context.Context, resourceId string, userId string) ApiGetResourceRequestableToUserRequest {
+	return ApiGetResourceRequestableToUserRequest{
+		ApiService: a,
+		ctx: ctx,
+		resourceId: resourceId,
+		userId: userId,
+	}
+}
+
+// Execute executes the request
+//  @return UserRequestabilityCheck
+func (a *ResourcesAPIService) GetResourceRequestableToUserExecute(r ApiGetResourceRequestableToUserRequest) (*UserRequestabilityCheck, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UserRequestabilityCheck
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.GetResourceRequestableToUser")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/{resource_id}/requestable/users/{user_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"user_id"+"}", url.PathEscape(parameterValueToString(r.userId, "userId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.accessLevelRemoteId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "access_level_remote_id", r.accessLevelRemoteId, "form", "")
+	}
+	if r.requesterId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "requester_id", r.requesterId, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1858,6 +2846,113 @@ func (a *ResourcesAPIService) GetResourceVisibilityExecute(r ApiGetResourceVisib
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetResourceVisibleToUserRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	resourceId string
+	userId string
+}
+
+func (r ApiGetResourceVisibleToUserRequest) Execute() (*UserVisibilityCheck, *http.Response, error) {
+	return r.ApiService.GetResourceVisibleToUserExecute(r)
+}
+
+/*
+GetResourceVisibleToUser Method for GetResourceVisibleToUser
+
+Checks whether a user can see this resource, as shown in the Opal UI for that user. Checking another user requires an Opal admin or a custom role with the CHECK_VISIBILITY permission; a caller can always check their own visibility, in which case an entity they cannot see is reported as not found.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param resourceId The ID of the resource.
+ @param userId The ID of the user whose visibility is being checked.
+ @return ApiGetResourceVisibleToUserRequest
+*/
+func (a *ResourcesAPIService) GetResourceVisibleToUser(ctx context.Context, resourceId string, userId string) ApiGetResourceVisibleToUserRequest {
+	return ApiGetResourceVisibleToUserRequest{
+		ApiService: a,
+		ctx: ctx,
+		resourceId: resourceId,
+		userId: userId,
+	}
+}
+
+// Execute executes the request
+//  @return UserVisibilityCheck
+func (a *ResourcesAPIService) GetResourceVisibleToUserExecute(r ApiGetResourceVisibleToUserRequest) (*UserVisibilityCheck, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UserVisibilityCheck
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.GetResourceVisibleToUser")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/{resource_id}/visible/users/{user_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"user_id"+"}", url.PathEscape(parameterValueToString(r.userId, "userId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetResourcesRequest struct {
 	ctx context.Context
 	ApiService *ResourcesAPIService
@@ -1866,10 +2961,13 @@ type ApiGetResourcesRequest struct {
 	resourceTypeFilter *ResourceTypeEnum
 	resourceIds *[]string
 	resourceName *string
+	resourceNameMatch *NameMatchType
 	parentResourceId *string
 	ancestorResourceId *string
 	remoteId *string
 	tagIds *[]string
+	appId *string
+	requestableByUserId *string
 }
 
 // The pagination cursor value.
@@ -1896,9 +2994,15 @@ func (r ApiGetResourcesRequest) ResourceIds(resourceIds []string) ApiGetResource
 	return r
 }
 
-// Resource name.
+// Filter resources by name. Matches against &#x60;name&#x60;, &#x60;remote_name&#x60;, parent-name combinations, and &#x60;remote_id&#x60;. Matching is case-insensitive. Use &#x60;resource_name_match&#x60; to choose the match type; when omitted, CONTAINS (substring) is used.
 func (r ApiGetResourcesRequest) ResourceName(resourceName string) ApiGetResourcesRequest {
 	r.resourceName = &resourceName
+	return r
+}
+
+// How to apply &#x60;resource_name&#x60;. Requires &#x60;resource_name&#x60; to be set. Defaults to CONTAINS when &#x60;resource_name&#x60; is provided without this parameter. EQUALS, STARTS_WITH, and ENDS_WITH match only the resource&#39;s own &#x60;name&#x60; and &#x60;remote_name&#x60;, not parent-name combinations or &#x60;remote_id&#x60;.
+func (r ApiGetResourcesRequest) ResourceNameMatch(resourceNameMatch NameMatchType) ApiGetResourcesRequest {
+	r.resourceNameMatch = &resourceNameMatch
 	return r
 }
 
@@ -1923,6 +3027,18 @@ func (r ApiGetResourcesRequest) RemoteId(remoteId string) ApiGetResourcesRequest
 // The IDs of the tags to filter by. Returns only resources that have any of these tags applied.
 func (r ApiGetResourcesRequest) TagIds(tagIds []string) ApiGetResourcesRequest {
 	r.tagIds = &tagIds
+	return r
+}
+
+// Only return resources that belong to this app.
+func (r ApiGetResourcesRequest) AppId(appId string) ApiGetResourcesRequest {
+	r.appId = &appId
+	return r
+}
+
+// Only return resources this user can request at one or more access levels, using the same evaluation as &#x60;GET /resources/{resource_id}/requestable/users/{user_id}&#x60;. Filtering for another user requires an Opal admin or a custom role with the CHECK_REQUESTABILITY permission. The response is always filtered by the caller&#39;s own READ visibility, so a non-admin CHECK_REQUESTABILITY holder sees the intersection of items they can read and items the target user can request. Filtering for yourself needs no permission. 
+func (r ApiGetResourcesRequest) RequestableByUserId(requestableByUserId string) ApiGetResourcesRequest {
+	r.requestableByUserId = &requestableByUserId
 	return r
 }
 
@@ -1981,6 +3097,9 @@ func (a *ResourcesAPIService) GetResourcesExecute(r ApiGetResourcesRequest) (*Pa
 	if r.resourceName != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "resource_name", r.resourceName, "form", "")
 	}
+	if r.resourceNameMatch != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "resource_name_match", r.resourceNameMatch, "form", "")
+	}
 	if r.parentResourceId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "parent_resource_id", r.parentResourceId, "form", "")
 	}
@@ -2000,6 +3119,12 @@ func (a *ResourcesAPIService) GetResourcesExecute(r ApiGetResourcesRequest) (*Pa
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "tag_ids", t, "form", "multi")
 		}
+	}
+	if r.appId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "app_id", r.appId, "form", "")
+	}
+	if r.requestableByUserId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "requestable_by_user_id", r.requestableByUserId, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2188,6 +3313,120 @@ func (a *ResourcesAPIService) GetUserResourcesExecute(r ApiGetUserResourcesReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiPatchResourceCustomAttributesRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	resourceId string
+	customAttributesList *CustomAttributesList
+}
+
+func (r ApiPatchResourceCustomAttributesRequest) CustomAttributesList(customAttributesList CustomAttributesList) ApiPatchResourceCustomAttributesRequest {
+	r.customAttributesList = &customAttributesList
+	return r
+}
+
+func (r ApiPatchResourceCustomAttributesRequest) Execute() (*CustomAttributesList, *http.Response, error) {
+	return r.ApiService.PatchResourceCustomAttributesExecute(r)
+}
+
+/*
+PatchResourceCustomAttributes Method for PatchResourceCustomAttributes
+
+Upserts specific custom attributes on a resource, leaving all other existing attributes untouched. For each key in the request body, the existing value (if any) is replaced. Keys not present in the request body are not modified.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param resourceId The ID of the resource whose custom attributes to upsert.
+ @return ApiPatchResourceCustomAttributesRequest
+*/
+func (a *ResourcesAPIService) PatchResourceCustomAttributes(ctx context.Context, resourceId string) ApiPatchResourceCustomAttributesRequest {
+	return ApiPatchResourceCustomAttributesRequest{
+		ApiService: a,
+		ctx: ctx,
+		resourceId: resourceId,
+	}
+}
+
+// Execute executes the request
+//  @return CustomAttributesList
+func (a *ResourcesAPIService) PatchResourceCustomAttributesExecute(r ApiPatchResourceCustomAttributesRequest) (*CustomAttributesList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CustomAttributesList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.PatchResourceCustomAttributes")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/{resource_id}/custom-attributes"
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.customAttributesList == nil {
+		return localVarReturnValue, nil, reportError("customAttributesList is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.customAttributesList
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiResourceUserAccessStatusRetrieveRequest struct {
 	ctx context.Context
 	ApiService *ResourcesAPIService
@@ -2291,6 +3530,120 @@ func (a *ResourcesAPIService) ResourceUserAccessStatusRetrieveExecute(r ApiResou
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiSetResourceCustomAttributesRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	resourceId string
+	customAttributesList *CustomAttributesList
+}
+
+func (r ApiSetResourceCustomAttributesRequest) CustomAttributesList(customAttributesList CustomAttributesList) ApiSetResourceCustomAttributesRequest {
+	r.customAttributesList = &customAttributesList
+	return r
+}
+
+func (r ApiSetResourceCustomAttributesRequest) Execute() (*CustomAttributesList, *http.Response, error) {
+	return r.ApiService.SetResourceCustomAttributesExecute(r)
+}
+
+/*
+SetResourceCustomAttributes Method for SetResourceCustomAttributes
+
+Sets the custom attributes on a resource, replacing all existing attributes. Pass an empty `custom_attributes` array to clear all attributes.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param resourceId The ID of the resource whose custom attributes to set.
+ @return ApiSetResourceCustomAttributesRequest
+*/
+func (a *ResourcesAPIService) SetResourceCustomAttributes(ctx context.Context, resourceId string) ApiSetResourceCustomAttributesRequest {
+	return ApiSetResourceCustomAttributesRequest{
+		ApiService: a,
+		ctx: ctx,
+		resourceId: resourceId,
+	}
+}
+
+// Execute executes the request
+//  @return CustomAttributesList
+func (a *ResourcesAPIService) SetResourceCustomAttributesExecute(r ApiSetResourceCustomAttributesRequest) (*CustomAttributesList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CustomAttributesList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.SetResourceCustomAttributes")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/{resource_id}/custom-attributes"
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.customAttributesList == nil {
+		return localVarReturnValue, nil, reportError("customAttributesList is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.customAttributesList
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -2861,6 +4214,265 @@ func (a *ResourcesAPIService) SetResourceVisibilityExecute(r ApiSetResourceVisib
 	}
 	// body params
 	localVarPostBody = r.visibilityInfo
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateResourceConfigurationTemplateRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	resourceId string
+	resourceConfigurationTemplate *ResourceConfigurationTemplate
+}
+
+func (r ApiUpdateResourceConfigurationTemplateRequest) ResourceConfigurationTemplate(resourceConfigurationTemplate ResourceConfigurationTemplate) ApiUpdateResourceConfigurationTemplateRequest {
+	r.resourceConfigurationTemplate = &resourceConfigurationTemplate
+	return r
+}
+
+func (r ApiUpdateResourceConfigurationTemplateRequest) Execute() (*ResourceConfigurationTemplate, *http.Response, error) {
+	return r.ApiService.UpdateResourceConfigurationTemplateExecute(r)
+}
+
+/*
+UpdateResourceConfigurationTemplate Set the ID of the configuration template linked to a resource
+
+Attaches, repoints, or detaches the configuration template linked to a
+resource. This endpoint only manages the link (by ID) between a
+resource and an existing configuration template — it does not create,
+modify, or delete the template itself. To manage a template's own
+fields (name, description, request configurations, visibility, etc.),
+use the `/configuration-templates` endpoints.
+
+The request body is `{"configuration_template_id": "<uuid>" | null}`:
+
+  * A `<uuid>` value links the resource to the configuration template
+    with that ID. If the resource was previously linked to a different
+    template, the resource is repointed in place.
+  * `null` detaches the resource from its current configuration
+    template. The template is deep-copied into a new private
+    configuration with the same settings so the resource's current
+    behaviour is preserved, and the resource is repointed at the fork.
+
+The `configuration_template_id` field is required. Sending `{}` or any
+body in which the field is omitted is rejected with `400`.
+
+The call is idempotent: if the request body matches the resource's
+current link, no changes are made and no audit events are emitted.
+
+This endpoint is the preferred, Terraform-friendly surface for linking
+and unlinking configuration templates on resources. The equivalent
+`configuration_template_id` field on `PUT /resources` remains available
+but is deprecated for this purpose.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param resourceId The ID of the resource whose configuration template link is being set.
+ @return ApiUpdateResourceConfigurationTemplateRequest
+*/
+func (a *ResourcesAPIService) UpdateResourceConfigurationTemplate(ctx context.Context, resourceId string) ApiUpdateResourceConfigurationTemplateRequest {
+	return ApiUpdateResourceConfigurationTemplateRequest{
+		ApiService: a,
+		ctx: ctx,
+		resourceId: resourceId,
+	}
+}
+
+// Execute executes the request
+//  @return ResourceConfigurationTemplate
+func (a *ResourcesAPIService) UpdateResourceConfigurationTemplateExecute(r ApiUpdateResourceConfigurationTemplateRequest) (*ResourceConfigurationTemplate, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResourceConfigurationTemplate
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.UpdateResourceConfigurationTemplate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/{resource_id}/configuration-template"
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.resourceConfigurationTemplate == nil {
+		return localVarReturnValue, nil, reportError("resourceConfigurationTemplate is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.resourceConfigurationTemplate
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateResourceCustomAccessLevelRequest struct {
+	ctx context.Context
+	ApiService *ResourcesAPIService
+	resourceId string
+	accessLevelRemoteId string
+	updateResourceCustomAccessLevelInfo *UpdateResourceCustomAccessLevelInfo
+}
+
+func (r ApiUpdateResourceCustomAccessLevelRequest) UpdateResourceCustomAccessLevelInfo(updateResourceCustomAccessLevelInfo UpdateResourceCustomAccessLevelInfo) ApiUpdateResourceCustomAccessLevelRequest {
+	r.updateResourceCustomAccessLevelInfo = &updateResourceCustomAccessLevelInfo
+	return r
+}
+
+func (r ApiUpdateResourceCustomAccessLevelRequest) Execute() (*ResourceCustomAccessLevelResponse, *http.Response, error) {
+	return r.ApiService.UpdateResourceCustomAccessLevelExecute(r)
+}
+
+/*
+UpdateResourceCustomAccessLevel Method for UpdateResourceCustomAccessLevel
+
+Updates a custom access level identified by its remote ID. If the resource is a parent type, the update fans out to all child resources.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param resourceId The ID of the resource.
+ @param accessLevelRemoteId The remote ID of the access level.
+ @return ApiUpdateResourceCustomAccessLevelRequest
+*/
+func (a *ResourcesAPIService) UpdateResourceCustomAccessLevel(ctx context.Context, resourceId string, accessLevelRemoteId string) ApiUpdateResourceCustomAccessLevelRequest {
+	return ApiUpdateResourceCustomAccessLevelRequest{
+		ApiService: a,
+		ctx: ctx,
+		resourceId: resourceId,
+		accessLevelRemoteId: accessLevelRemoteId,
+	}
+}
+
+// Execute executes the request
+//  @return ResourceCustomAccessLevelResponse
+func (a *ResourcesAPIService) UpdateResourceCustomAccessLevelExecute(r ApiUpdateResourceCustomAccessLevelRequest) (*ResourceCustomAccessLevelResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResourceCustomAccessLevelResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.UpdateResourceCustomAccessLevel")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/resources/{resource_id}/custom-access-levels/{access_level_remote_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"resource_id"+"}", url.PathEscape(parameterValueToString(r.resourceId, "resourceId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"access_level_remote_id"+"}", url.PathEscape(parameterValueToString(r.accessLevelRemoteId, "accessLevelRemoteId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.updateResourceCustomAccessLevelInfo == nil {
+		return localVarReturnValue, nil, reportError("updateResourceCustomAccessLevelInfo is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.updateResourceCustomAccessLevelInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

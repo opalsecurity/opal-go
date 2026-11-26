@@ -8,13 +8,14 @@ Name | Type | Description | Notes
 **Description** | **string** | A description of the group. | 
 **AdminOwnerId** | **string** | The ID of the owner of the group. | 
 **Status** | **string** | The status of the access rule. | 
-**RuleClauses** | [**RuleClauses**](RuleClauses.md) |  | 
+**RuleClauses** | Pointer to [**RuleClauses**](RuleClauses.md) | Tag-based CNF conditions. May be sent with &#x60;query&#x60; (AND). On PUT, omitting this field while sending &#x60;query&#x60; clears tags.  | [optional] 
+**Query** | Pointer to [**OpalNodeQueryBody**](OpalNodeQueryBody.md) | Opal Query defining the user set (same NODE filter body as &#x60;POST /queries/run&#x60;). May be sent with &#x60;ruleClauses&#x60; (AND). On PUT, omitting this field while sending &#x60;ruleClauses&#x60; clears the query. Nested AND/OR, job title / team / manager, and has-access filters are supported.  | [optional] 
 
 ## Methods
 
 ### NewUpdateAccessRuleInfo
 
-`func NewUpdateAccessRuleInfo(name string, description string, adminOwnerId string, status string, ruleClauses RuleClauses, ) *UpdateAccessRuleInfo`
+`func NewUpdateAccessRuleInfo(name string, description string, adminOwnerId string, status string, ) *UpdateAccessRuleInfo`
 
 NewUpdateAccessRuleInfo instantiates a new UpdateAccessRuleInfo object
 This constructor will assign default values to properties that have it defined,
@@ -128,6 +129,36 @@ and a boolean to check if the value has been set.
 
 SetRuleClauses sets RuleClauses field to given value.
 
+### HasRuleClauses
+
+`func (o *UpdateAccessRuleInfo) HasRuleClauses() bool`
+
+HasRuleClauses returns a boolean if a field has been set.
+
+### GetQuery
+
+`func (o *UpdateAccessRuleInfo) GetQuery() OpalNodeQueryBody`
+
+GetQuery returns the Query field if non-nil, zero value otherwise.
+
+### GetQueryOk
+
+`func (o *UpdateAccessRuleInfo) GetQueryOk() (*OpalNodeQueryBody, bool)`
+
+GetQueryOk returns a tuple with the Query field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQuery
+
+`func (o *UpdateAccessRuleInfo) SetQuery(v OpalNodeQueryBody)`
+
+SetQuery sets Query field to given value.
+
+### HasQuery
+
+`func (o *UpdateAccessRuleInfo) HasQuery() bool`
+
+HasQuery returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
