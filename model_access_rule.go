@@ -31,7 +31,12 @@ type AccessRule struct {
 	AdminOwnerId string `json:"admin_owner_id"`
 	// The status of the access rule.
 	Status string `json:"status"`
+	// Tag-based CNF conditions. Present for tag-only rules, tags-as-query rules, and hybrids (tags AND an Opal Query). Empty `when.clauses` for pure Opal Query rules. 
 	RuleClauses RuleClauses `json:"ruleClauses"`
+	// Opal Query defining the user set when this rule uses one. For hybrids, both `ruleClauses` and `query` are set (AND). Omitted for tag-only rules and when the REST dialect cannot express the stored filter. Same NODE filter body as `POST /queries/run`. 
+	Query *OpalNodeQueryBody `json:"query,omitempty"`
+	// True when the access rule stores an Opal Query (including hybrids). `query` is set when the REST dialect can express that filter; it is omitted for filters the API cannot express (e.g. risk, identity detection, agent fields). Rely on this flag, not only on whether `query` is present. 
+	UsesOpalQuery *bool `json:"uses_opal_query,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -204,6 +209,70 @@ func (o *AccessRule) SetRuleClauses(v RuleClauses) {
 	o.RuleClauses = v
 }
 
+// GetQuery returns the Query field value if set, zero value otherwise.
+func (o *AccessRule) GetQuery() OpalNodeQueryBody {
+	if o == nil || IsNil(o.Query) {
+		var ret OpalNodeQueryBody
+		return ret
+	}
+	return *o.Query
+}
+
+// GetQueryOk returns a tuple with the Query field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccessRule) GetQueryOk() (*OpalNodeQueryBody, bool) {
+	if o == nil || IsNil(o.Query) {
+		return nil, false
+	}
+	return o.Query, true
+}
+
+// HasQuery returns a boolean if a field has been set.
+func (o *AccessRule) HasQuery() bool {
+	if o != nil && !IsNil(o.Query) {
+		return true
+	}
+
+	return false
+}
+
+// SetQuery gets a reference to the given OpalNodeQueryBody and assigns it to the Query field.
+func (o *AccessRule) SetQuery(v OpalNodeQueryBody) {
+	o.Query = &v
+}
+
+// GetUsesOpalQuery returns the UsesOpalQuery field value if set, zero value otherwise.
+func (o *AccessRule) GetUsesOpalQuery() bool {
+	if o == nil || IsNil(o.UsesOpalQuery) {
+		var ret bool
+		return ret
+	}
+	return *o.UsesOpalQuery
+}
+
+// GetUsesOpalQueryOk returns a tuple with the UsesOpalQuery field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccessRule) GetUsesOpalQueryOk() (*bool, bool) {
+	if o == nil || IsNil(o.UsesOpalQuery) {
+		return nil, false
+	}
+	return o.UsesOpalQuery, true
+}
+
+// HasUsesOpalQuery returns a boolean if a field has been set.
+func (o *AccessRule) HasUsesOpalQuery() bool {
+	if o != nil && !IsNil(o.UsesOpalQuery) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsesOpalQuery gets a reference to the given bool and assigns it to the UsesOpalQuery field.
+func (o *AccessRule) SetUsesOpalQuery(v bool) {
+	o.UsesOpalQuery = &v
+}
+
 func (o AccessRule) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -220,6 +289,12 @@ func (o AccessRule) ToMap() (map[string]interface{}, error) {
 	toSerialize["admin_owner_id"] = o.AdminOwnerId
 	toSerialize["status"] = o.Status
 	toSerialize["ruleClauses"] = o.RuleClauses
+	if !IsNil(o.Query) {
+		toSerialize["query"] = o.Query
+	}
+	if !IsNil(o.UsesOpalQuery) {
+		toSerialize["uses_opal_query"] = o.UsesOpalQuery
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -274,6 +349,8 @@ func (o *AccessRule) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "admin_owner_id")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "ruleClauses")
+		delete(additionalProperties, "query")
+		delete(additionalProperties, "uses_opal_query")
 		o.AdditionalProperties = additionalProperties
 	}
 

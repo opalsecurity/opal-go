@@ -32,7 +32,7 @@ import (
 )
 
 func main() {
-	updateAccessRuleInfo := *openapiclient.NewUpdateAccessRuleInfo("Platform Engineering", "This access rule represents all platform engineers in the company.", "7c86c85d-0651-43e2-a748-d69d658418e8", "ACTIVE", *openapiclient.NewRuleClauses(*openapiclient.NewRuleConjunction([]openapiclient.RuleDisjunction{*openapiclient.NewRuleDisjunction([]openapiclient.TagSelector{*openapiclient.NewTagSelector("Key_example", "Value_example", "ConnectionId_example")})}))) // UpdateAccessRuleInfo | 
+	updateAccessRuleInfo := *openapiclient.NewUpdateAccessRuleInfo("Platform Engineering", "This access rule represents all platform engineers in the company.", "7c86c85d-0651-43e2-a748-d69d658418e8", "ACTIVE") // UpdateAccessRuleInfo | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -237,7 +237,7 @@ import (
 
 func main() {
 	accessRuleId := "1b978423-db0a-4037-a4cf-f79c60cb67b3" // string | The access rule ID (group ID) of the access rule.
-	updateAccessRuleInfo := *openapiclient.NewUpdateAccessRuleInfo("Platform Engineering", "This access rule represents all platform engineers in the company.", "7c86c85d-0651-43e2-a748-d69d658418e8", "ACTIVE", *openapiclient.NewRuleClauses(*openapiclient.NewRuleConjunction([]openapiclient.RuleDisjunction{*openapiclient.NewRuleDisjunction([]openapiclient.TagSelector{*openapiclient.NewTagSelector("Key_example", "Value_example", "ConnectionId_example")})}))) // UpdateAccessRuleInfo | 
+	updateAccessRuleInfo := *openapiclient.NewUpdateAccessRuleInfo("Platform Engineering", "This access rule represents all platform engineers in the company.", "7c86c85d-0651-43e2-a748-d69d658418e8", "ACTIVE") // UpdateAccessRuleInfo | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
