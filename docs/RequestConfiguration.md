@@ -8,10 +8,13 @@ Name | Type | Description | Notes
 **AllowRequests** | **bool** | A bool representing whether or not to allow requests for this resource. | 
 **AutoApproval** | **bool** | A bool representing whether or not to automatically approve requests for this resource. | 
 **RequireMfaToRequest** | **bool** | A bool representing whether or not to require MFA for requesting access to this resource. | 
-**MaxDurationMinutes** | Pointer to **int32** | The maximum duration for which the resource can be requested (in minutes). | [optional] 
+**MaxDurationMinutes** | Pointer to **int32** | The maximum duration for which the resource can be requested (in minutes). Capped at 1 year (525600) unless a longer maximum has been enabled for your organization. Use -1 for an indefinite duration. | [optional] 
 **RecommendedDurationMinutes** | Pointer to **int32** | The recommended duration for which the resource should be requested (in minutes). -1 represents an indefinite duration. | [optional] 
 **RequireSupportTicket** | **bool** | A bool representing whether or not access requests to the resource require an access ticket. | 
+**ReasonOptional** | Pointer to **bool** | A bool representing whether the reason field is optional for requests. | [optional] 
 **ExtensionsDurationInMinutes** | Pointer to **int32** | The duration for which access can be extended (in minutes). Set to 0 to disable extensions. When &gt; 0, extensions are enabled for the specified duration. | [optional] 
+**DisableSkipLevelEscalation** | Pointer to **bool** | When true, requesters cannot escalate requests to their skip-level manager. When any item in a request has this set to true, the escalation button is disabled and the action is blocked. Defaults to false. | [optional] 
+**DisableScheduledGrants** | Pointer to **bool** | When true, requesters cannot choose a future start time for access. When any item in a request has this set to true, a request with a future start time is rejected. Defaults to false. | [optional] 
 **RequestTemplateId** | Pointer to **string** | The ID of the associated request template. | [optional] 
 **ReviewerStages** | Pointer to [**[]ReviewerStage**](ReviewerStage.md) | The list of reviewer stages for the request configuration. | [optional] 
 **Priority** | **int32** | The priority of the request configuration. | 
@@ -190,6 +193,31 @@ and a boolean to check if the value has been set.
 SetRequireSupportTicket sets RequireSupportTicket field to given value.
 
 
+### GetReasonOptional
+
+`func (o *RequestConfiguration) GetReasonOptional() bool`
+
+GetReasonOptional returns the ReasonOptional field if non-nil, zero value otherwise.
+
+### GetReasonOptionalOk
+
+`func (o *RequestConfiguration) GetReasonOptionalOk() (*bool, bool)`
+
+GetReasonOptionalOk returns a tuple with the ReasonOptional field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReasonOptional
+
+`func (o *RequestConfiguration) SetReasonOptional(v bool)`
+
+SetReasonOptional sets ReasonOptional field to given value.
+
+### HasReasonOptional
+
+`func (o *RequestConfiguration) HasReasonOptional() bool`
+
+HasReasonOptional returns a boolean if a field has been set.
+
 ### GetExtensionsDurationInMinutes
 
 `func (o *RequestConfiguration) GetExtensionsDurationInMinutes() int32`
@@ -214,6 +242,56 @@ SetExtensionsDurationInMinutes sets ExtensionsDurationInMinutes field to given v
 `func (o *RequestConfiguration) HasExtensionsDurationInMinutes() bool`
 
 HasExtensionsDurationInMinutes returns a boolean if a field has been set.
+
+### GetDisableSkipLevelEscalation
+
+`func (o *RequestConfiguration) GetDisableSkipLevelEscalation() bool`
+
+GetDisableSkipLevelEscalation returns the DisableSkipLevelEscalation field if non-nil, zero value otherwise.
+
+### GetDisableSkipLevelEscalationOk
+
+`func (o *RequestConfiguration) GetDisableSkipLevelEscalationOk() (*bool, bool)`
+
+GetDisableSkipLevelEscalationOk returns a tuple with the DisableSkipLevelEscalation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisableSkipLevelEscalation
+
+`func (o *RequestConfiguration) SetDisableSkipLevelEscalation(v bool)`
+
+SetDisableSkipLevelEscalation sets DisableSkipLevelEscalation field to given value.
+
+### HasDisableSkipLevelEscalation
+
+`func (o *RequestConfiguration) HasDisableSkipLevelEscalation() bool`
+
+HasDisableSkipLevelEscalation returns a boolean if a field has been set.
+
+### GetDisableScheduledGrants
+
+`func (o *RequestConfiguration) GetDisableScheduledGrants() bool`
+
+GetDisableScheduledGrants returns the DisableScheduledGrants field if non-nil, zero value otherwise.
+
+### GetDisableScheduledGrantsOk
+
+`func (o *RequestConfiguration) GetDisableScheduledGrantsOk() (*bool, bool)`
+
+GetDisableScheduledGrantsOk returns a tuple with the DisableScheduledGrants field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisableScheduledGrants
+
+`func (o *RequestConfiguration) SetDisableScheduledGrants(v bool)`
+
+SetDisableScheduledGrants sets DisableScheduledGrants field to given value.
+
+### HasDisableScheduledGrants
+
+`func (o *RequestConfiguration) HasDisableScheduledGrants() bool`
+
+HasDisableScheduledGrants returns a boolean if a field has been set.
 
 ### GetRequestTemplateId
 

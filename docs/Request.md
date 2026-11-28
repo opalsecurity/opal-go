@@ -8,12 +8,15 @@ Name | Type | Description | Notes
 **CreatedAt** | **time.Time** | The date and time the request was created. | 
 **UpdatedAt** | **time.Time** | The date and time the request was last updated. | 
 **RequesterId** | **string** | The unique identifier of the user who created the request. | 
+**InitiatedByUserId** | Pointer to **string** | The unique identifier of the user the caller asserted asked for this access. Unverified - Opal records the claim as given. Absent unless the caller supplied it. | [optional] 
 **TargetUserId** | Pointer to **string** | The unique identifier of the user who is the target of the request. | [optional] 
 **TargetGroupId** | Pointer to **string** | The unique identifier of the group who is the target of the request. | [optional] 
 **Status** | [**RequestStatusEnum**](RequestStatusEnum.md) | The status of the request. | 
+**Source** | Pointer to **string** | The channel that created the request. Omitted when the source was not recorded. MCP counts only OAuth sessions. An agent using an API token or a person&#39;s credentials is counted as API, CLI, or WEB. | [optional] 
 **Reason** | **string** | The reason for the request. | 
 **DurationMinutes** | Pointer to **int32** | The duration of the request in minutes. | [optional] 
-**RequestedItemsList** | Pointer to [**[]RequestedItem**](RequestedItem.md) | The list of targets for the request. | [optional] 
+**ScheduledAccessStartAt** | Pointer to **time.Time** | When access is scheduled to begin. Null if access begins as soon as the request is approved. | [optional] 
+**RequestedItemsList** | Pointer to [**[]RequestedItem**](RequestedItem.md) | The list of targets for the request. Items a reviewer denied individually are omitted. | [optional] 
 **CustomFieldsResponses** | Pointer to [**[]RequestCustomFieldResponse**](RequestCustomFieldResponse.md) | The responses given to the custom fields associated to the request | [optional] 
 **Stages** | Pointer to [**RequestItemStages**](RequestItemStages.md) | The stages configuration for this request | [optional] 
 **ReviewerStages** | Pointer to [**RequestReviewerStages**](RequestReviewerStages.md) |  | [optional] 
@@ -117,6 +120,31 @@ and a boolean to check if the value has been set.
 SetRequesterId sets RequesterId field to given value.
 
 
+### GetInitiatedByUserId
+
+`func (o *Request) GetInitiatedByUserId() string`
+
+GetInitiatedByUserId returns the InitiatedByUserId field if non-nil, zero value otherwise.
+
+### GetInitiatedByUserIdOk
+
+`func (o *Request) GetInitiatedByUserIdOk() (*string, bool)`
+
+GetInitiatedByUserIdOk returns a tuple with the InitiatedByUserId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInitiatedByUserId
+
+`func (o *Request) SetInitiatedByUserId(v string)`
+
+SetInitiatedByUserId sets InitiatedByUserId field to given value.
+
+### HasInitiatedByUserId
+
+`func (o *Request) HasInitiatedByUserId() bool`
+
+HasInitiatedByUserId returns a boolean if a field has been set.
+
 ### GetTargetUserId
 
 `func (o *Request) GetTargetUserId() string`
@@ -187,6 +215,31 @@ and a boolean to check if the value has been set.
 SetStatus sets Status field to given value.
 
 
+### GetSource
+
+`func (o *Request) GetSource() string`
+
+GetSource returns the Source field if non-nil, zero value otherwise.
+
+### GetSourceOk
+
+`func (o *Request) GetSourceOk() (*string, bool)`
+
+GetSourceOk returns a tuple with the Source field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSource
+
+`func (o *Request) SetSource(v string)`
+
+SetSource sets Source field to given value.
+
+### HasSource
+
+`func (o *Request) HasSource() bool`
+
+HasSource returns a boolean if a field has been set.
+
 ### GetReason
 
 `func (o *Request) GetReason() string`
@@ -231,6 +284,31 @@ SetDurationMinutes sets DurationMinutes field to given value.
 `func (o *Request) HasDurationMinutes() bool`
 
 HasDurationMinutes returns a boolean if a field has been set.
+
+### GetScheduledAccessStartAt
+
+`func (o *Request) GetScheduledAccessStartAt() time.Time`
+
+GetScheduledAccessStartAt returns the ScheduledAccessStartAt field if non-nil, zero value otherwise.
+
+### GetScheduledAccessStartAtOk
+
+`func (o *Request) GetScheduledAccessStartAtOk() (*time.Time, bool)`
+
+GetScheduledAccessStartAtOk returns a tuple with the ScheduledAccessStartAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheduledAccessStartAt
+
+`func (o *Request) SetScheduledAccessStartAt(v time.Time)`
+
+SetScheduledAccessStartAt sets ScheduledAccessStartAt field to given value.
+
+### HasScheduledAccessStartAt
+
+`func (o *Request) HasScheduledAccessStartAt() bool`
+
+HasScheduledAccessStartAt returns a boolean if a field has been set.
 
 ### GetRequestedItemsList
 

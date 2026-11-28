@@ -19,7 +19,7 @@ import (
 // checks if the UpdateAccessRuleInfo type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateAccessRuleInfo{}
 
-// UpdateAccessRuleInfo # UpdateAccessRuleInfo Object ### Description The `UpdateAccessRuleInfo` object is used as an input to the UpdateAccessRule and CreateAccessRule API.
+// UpdateAccessRuleInfo # UpdateAccessRuleInfo Object ### Description The `UpdateAccessRuleInfo` object is used as an input to the UpdateAccessRule and CreateAccessRule API.  Provide at least one of `ruleClauses` (tag CNF) or `query` (Opal Query). Sending both stores them as AND. PUT replaces the whole condition from the body: omit a side to clear it. Empty `ruleClauses` next to `query` (as GET returns for query-only rules) is treated as absent.
 type UpdateAccessRuleInfo struct {
 	// The name of the access rule.
 	Name string `json:"name"`
@@ -29,7 +29,10 @@ type UpdateAccessRuleInfo struct {
 	AdminOwnerId string `json:"admin_owner_id"`
 	// The status of the access rule.
 	Status string `json:"status"`
-	RuleClauses RuleClauses `json:"ruleClauses"`
+	// Tag-based CNF conditions. May be sent with `query` (AND). On PUT, omitting this field while sending `query` clears tags. 
+	RuleClauses *RuleClauses `json:"ruleClauses,omitempty"`
+	// Opal Query defining the user set (same NODE filter body as `POST /queries/run`). May be sent with `ruleClauses` (AND). On PUT, omitting this field while sending `ruleClauses` clears the query. Nested AND/OR, job title / team / manager, and has-access filters are supported. 
+	Query *OpalNodeQueryBody `json:"query,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -39,13 +42,12 @@ type _UpdateAccessRuleInfo UpdateAccessRuleInfo
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateAccessRuleInfo(name string, description string, adminOwnerId string, status string, ruleClauses RuleClauses) *UpdateAccessRuleInfo {
+func NewUpdateAccessRuleInfo(name string, description string, adminOwnerId string, status string) *UpdateAccessRuleInfo {
 	this := UpdateAccessRuleInfo{}
 	this.Name = name
 	this.Description = description
 	this.AdminOwnerId = adminOwnerId
 	this.Status = status
-	this.RuleClauses = ruleClauses
 	return &this
 }
 
@@ -153,28 +155,68 @@ func (o *UpdateAccessRuleInfo) SetStatus(v string) {
 	o.Status = v
 }
 
-// GetRuleClauses returns the RuleClauses field value
+// GetRuleClauses returns the RuleClauses field value if set, zero value otherwise.
 func (o *UpdateAccessRuleInfo) GetRuleClauses() RuleClauses {
-	if o == nil {
+	if o == nil || IsNil(o.RuleClauses) {
 		var ret RuleClauses
 		return ret
 	}
-
-	return o.RuleClauses
+	return *o.RuleClauses
 }
 
-// GetRuleClausesOk returns a tuple with the RuleClauses field value
+// GetRuleClausesOk returns a tuple with the RuleClauses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateAccessRuleInfo) GetRuleClausesOk() (*RuleClauses, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.RuleClauses) {
 		return nil, false
 	}
-	return &o.RuleClauses, true
+	return o.RuleClauses, true
 }
 
-// SetRuleClauses sets field value
+// HasRuleClauses returns a boolean if a field has been set.
+func (o *UpdateAccessRuleInfo) HasRuleClauses() bool {
+	if o != nil && !IsNil(o.RuleClauses) {
+		return true
+	}
+
+	return false
+}
+
+// SetRuleClauses gets a reference to the given RuleClauses and assigns it to the RuleClauses field.
 func (o *UpdateAccessRuleInfo) SetRuleClauses(v RuleClauses) {
-	o.RuleClauses = v
+	o.RuleClauses = &v
+}
+
+// GetQuery returns the Query field value if set, zero value otherwise.
+func (o *UpdateAccessRuleInfo) GetQuery() OpalNodeQueryBody {
+	if o == nil || IsNil(o.Query) {
+		var ret OpalNodeQueryBody
+		return ret
+	}
+	return *o.Query
+}
+
+// GetQueryOk returns a tuple with the Query field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateAccessRuleInfo) GetQueryOk() (*OpalNodeQueryBody, bool) {
+	if o == nil || IsNil(o.Query) {
+		return nil, false
+	}
+	return o.Query, true
+}
+
+// HasQuery returns a boolean if a field has been set.
+func (o *UpdateAccessRuleInfo) HasQuery() bool {
+	if o != nil && !IsNil(o.Query) {
+		return true
+	}
+
+	return false
+}
+
+// SetQuery gets a reference to the given OpalNodeQueryBody and assigns it to the Query field.
+func (o *UpdateAccessRuleInfo) SetQuery(v OpalNodeQueryBody) {
+	o.Query = &v
 }
 
 func (o UpdateAccessRuleInfo) MarshalJSON() ([]byte, error) {
@@ -191,7 +233,12 @@ func (o UpdateAccessRuleInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize["description"] = o.Description
 	toSerialize["admin_owner_id"] = o.AdminOwnerId
 	toSerialize["status"] = o.Status
-	toSerialize["ruleClauses"] = o.RuleClauses
+	if !IsNil(o.RuleClauses) {
+		toSerialize["ruleClauses"] = o.RuleClauses
+	}
+	if !IsNil(o.Query) {
+		toSerialize["query"] = o.Query
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -209,7 +256,6 @@ func (o *UpdateAccessRuleInfo) UnmarshalJSON(data []byte) (err error) {
 		"description",
 		"admin_owner_id",
 		"status",
-		"ruleClauses",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -244,6 +290,7 @@ func (o *UpdateAccessRuleInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "admin_owner_id")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "ruleClauses")
+		delete(additionalProperties, "query")
 		o.AdditionalProperties = additionalProperties
 	}
 

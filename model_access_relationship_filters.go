@@ -18,12 +18,20 @@ import (
 // checks if the AccessRelationshipFilters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AccessRelationshipFilters{}
 
-// AccessRelationshipFilters Filters the returned nodes by the access edges connected to them. When `isAccessibleBy` and `hasAccessTo` are provided, the returned nodes must satisfy both edge constraints simultaneously. 
+// AccessRelationshipFilters Filters the returned nodes by the access edges connected to them. When `isAccessibleBy` and `hasAccessTo` are provided, the returned nodes must satisfy both edge constraints simultaneously. Supports nested composition via `allOf` / `anyOf` / `not`, and `directOnly` to restrict matching to direct grants. 
 type AccessRelationshipFilters struct {
 	// Inbound-edge filter. The returned node must be accessible by at least one entity matching this filter.
 	IsAccessibleBy *AccessEntityFilters `json:"isAccessibleBy,omitempty"`
 	// Outbound-edge filter. The returned node must have access to at least one entity matching this filter.
 	HasAccessTo *AccessEntityFilters `json:"hasAccessTo,omitempty"`
+	// When true, `hasAccessTo` / `isAccessibleBy` match only direct role assignments (no nested group membership expansion). 
+	DirectOnly *bool `json:"directOnly,omitempty"`
+	// Nested access filters that must all match (logical AND). 
+	AllOf []AccessRelationshipFilters `json:"allOf,omitempty"`
+	// Nested access filters where at least one must match (logical OR). 
+	AnyOf []AccessRelationshipFilters `json:"anyOf,omitempty"`
+	// Excludes nodes matching the embedded access filter (logical NOT). 
+	Not map[string]interface{} `json:"not,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -110,6 +118,134 @@ func (o *AccessRelationshipFilters) SetHasAccessTo(v AccessEntityFilters) {
 	o.HasAccessTo = &v
 }
 
+// GetDirectOnly returns the DirectOnly field value if set, zero value otherwise.
+func (o *AccessRelationshipFilters) GetDirectOnly() bool {
+	if o == nil || IsNil(o.DirectOnly) {
+		var ret bool
+		return ret
+	}
+	return *o.DirectOnly
+}
+
+// GetDirectOnlyOk returns a tuple with the DirectOnly field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccessRelationshipFilters) GetDirectOnlyOk() (*bool, bool) {
+	if o == nil || IsNil(o.DirectOnly) {
+		return nil, false
+	}
+	return o.DirectOnly, true
+}
+
+// HasDirectOnly returns a boolean if a field has been set.
+func (o *AccessRelationshipFilters) HasDirectOnly() bool {
+	if o != nil && !IsNil(o.DirectOnly) {
+		return true
+	}
+
+	return false
+}
+
+// SetDirectOnly gets a reference to the given bool and assigns it to the DirectOnly field.
+func (o *AccessRelationshipFilters) SetDirectOnly(v bool) {
+	o.DirectOnly = &v
+}
+
+// GetAllOf returns the AllOf field value if set, zero value otherwise.
+func (o *AccessRelationshipFilters) GetAllOf() []AccessRelationshipFilters {
+	if o == nil || IsNil(o.AllOf) {
+		var ret []AccessRelationshipFilters
+		return ret
+	}
+	return o.AllOf
+}
+
+// GetAllOfOk returns a tuple with the AllOf field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccessRelationshipFilters) GetAllOfOk() ([]AccessRelationshipFilters, bool) {
+	if o == nil || IsNil(o.AllOf) {
+		return nil, false
+	}
+	return o.AllOf, true
+}
+
+// HasAllOf returns a boolean if a field has been set.
+func (o *AccessRelationshipFilters) HasAllOf() bool {
+	if o != nil && !IsNil(o.AllOf) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllOf gets a reference to the given []AccessRelationshipFilters and assigns it to the AllOf field.
+func (o *AccessRelationshipFilters) SetAllOf(v []AccessRelationshipFilters) {
+	o.AllOf = v
+}
+
+// GetAnyOf returns the AnyOf field value if set, zero value otherwise.
+func (o *AccessRelationshipFilters) GetAnyOf() []AccessRelationshipFilters {
+	if o == nil || IsNil(o.AnyOf) {
+		var ret []AccessRelationshipFilters
+		return ret
+	}
+	return o.AnyOf
+}
+
+// GetAnyOfOk returns a tuple with the AnyOf field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccessRelationshipFilters) GetAnyOfOk() ([]AccessRelationshipFilters, bool) {
+	if o == nil || IsNil(o.AnyOf) {
+		return nil, false
+	}
+	return o.AnyOf, true
+}
+
+// HasAnyOf returns a boolean if a field has been set.
+func (o *AccessRelationshipFilters) HasAnyOf() bool {
+	if o != nil && !IsNil(o.AnyOf) {
+		return true
+	}
+
+	return false
+}
+
+// SetAnyOf gets a reference to the given []AccessRelationshipFilters and assigns it to the AnyOf field.
+func (o *AccessRelationshipFilters) SetAnyOf(v []AccessRelationshipFilters) {
+	o.AnyOf = v
+}
+
+// GetNot returns the Not field value if set, zero value otherwise.
+func (o *AccessRelationshipFilters) GetNot() map[string]interface{} {
+	if o == nil || IsNil(o.Not) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Not
+}
+
+// GetNotOk returns a tuple with the Not field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccessRelationshipFilters) GetNotOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Not) {
+		return map[string]interface{}{}, false
+	}
+	return o.Not, true
+}
+
+// HasNot returns a boolean if a field has been set.
+func (o *AccessRelationshipFilters) HasNot() bool {
+	if o != nil && !IsNil(o.Not) {
+		return true
+	}
+
+	return false
+}
+
+// SetNot gets a reference to the given map[string]interface{} and assigns it to the Not field.
+func (o *AccessRelationshipFilters) SetNot(v map[string]interface{}) {
+	o.Not = v
+}
+
 func (o AccessRelationshipFilters) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -125,6 +261,18 @@ func (o AccessRelationshipFilters) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.HasAccessTo) {
 		toSerialize["hasAccessTo"] = o.HasAccessTo
+	}
+	if !IsNil(o.DirectOnly) {
+		toSerialize["directOnly"] = o.DirectOnly
+	}
+	if !IsNil(o.AllOf) {
+		toSerialize["allOf"] = o.AllOf
+	}
+	if !IsNil(o.AnyOf) {
+		toSerialize["anyOf"] = o.AnyOf
+	}
+	if !IsNil(o.Not) {
+		toSerialize["not"] = o.Not
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -150,6 +298,10 @@ func (o *AccessRelationshipFilters) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "isAccessibleBy")
 		delete(additionalProperties, "hasAccessTo")
+		delete(additionalProperties, "directOnly")
+		delete(additionalProperties, "allOf")
+		delete(additionalProperties, "anyOf")
+		delete(additionalProperties, "not")
 		o.AdditionalProperties = additionalProperties
 	}
 

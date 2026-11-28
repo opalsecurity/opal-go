@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Clauses** | [**[]RuleDisjunction**](RuleDisjunction.md) |  | 
+**Clauses** | [**[]RuleDisjunction**](RuleDisjunction.md) | Empty only when the access rule has &#x60;uses_opal_query&#x60; set. | 
 
 ## Methods
 

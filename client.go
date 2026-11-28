@@ -52,9 +52,13 @@ type APIClient struct {
 
 	AccessRulesAPI *AccessRulesAPIService
 
+	AgentActivityAPI *AgentActivityAPIService
+
 	AppsAPI *AppsAPIService
 
 	BundlesAPI *BundlesAPIService
+
+	CampaignsAPI *CampaignsAPIService
 
 	ConfigurationTemplatesAPI *ConfigurationTemplatesAPIService
 
@@ -70,6 +74,10 @@ type APIClient struct {
 
 	IdpGroupMappingsAPI *IdpGroupMappingsAPIService
 
+	IdpUserAttributeMappingsAPI *IdpUserAttributeMappingsAPIService
+
+	IpAclAPI *IpAclAPIService
+
 	MessageChannelsAPI *MessageChannelsAPIService
 
 	NonHumanIdentitiesAPI *NonHumanIdentitiesAPIService
@@ -78,11 +86,21 @@ type APIClient struct {
 
 	OpalQueriesAPI *OpalQueriesAPIService
 
+	OpalScriptsAPI *OpalScriptsAPIService
+
 	OwnersAPI *OwnersAPIService
+
+	PaladinAPI *PaladinAPIService
+
+	RequestTemplatesAPI *RequestTemplatesAPIService
 
 	RequestsAPI *RequestsAPIService
 
 	ResourcesAPI *ResourcesAPIService
+
+	RoleAssignmentsAPI *RoleAssignmentsAPIService
+
+	ServiceUsersAPI *ServiceUsersAPIService
 
 	SessionsAPI *SessionsAPIService
 
@@ -112,8 +130,10 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.AccessRulesAPI = (*AccessRulesAPIService)(&c.common)
+	c.AgentActivityAPI = (*AgentActivityAPIService)(&c.common)
 	c.AppsAPI = (*AppsAPIService)(&c.common)
 	c.BundlesAPI = (*BundlesAPIService)(&c.common)
+	c.CampaignsAPI = (*CampaignsAPIService)(&c.common)
 	c.ConfigurationTemplatesAPI = (*ConfigurationTemplatesAPIService)(&c.common)
 	c.DelegationsAPI = (*DelegationsAPIService)(&c.common)
 	c.EventStreamsAPI = (*EventStreamsAPIService)(&c.common)
@@ -121,13 +141,20 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.GroupBindingsAPI = (*GroupBindingsAPIService)(&c.common)
 	c.GroupsAPI = (*GroupsAPIService)(&c.common)
 	c.IdpGroupMappingsAPI = (*IdpGroupMappingsAPIService)(&c.common)
+	c.IdpUserAttributeMappingsAPI = (*IdpUserAttributeMappingsAPIService)(&c.common)
+	c.IpAclAPI = (*IpAclAPIService)(&c.common)
 	c.MessageChannelsAPI = (*MessageChannelsAPIService)(&c.common)
 	c.NonHumanIdentitiesAPI = (*NonHumanIdentitiesAPIService)(&c.common)
 	c.OnCallSchedulesAPI = (*OnCallSchedulesAPIService)(&c.common)
 	c.OpalQueriesAPI = (*OpalQueriesAPIService)(&c.common)
+	c.OpalScriptsAPI = (*OpalScriptsAPIService)(&c.common)
 	c.OwnersAPI = (*OwnersAPIService)(&c.common)
+	c.PaladinAPI = (*PaladinAPIService)(&c.common)
+	c.RequestTemplatesAPI = (*RequestTemplatesAPIService)(&c.common)
 	c.RequestsAPI = (*RequestsAPIService)(&c.common)
 	c.ResourcesAPI = (*ResourcesAPIService)(&c.common)
+	c.RoleAssignmentsAPI = (*RoleAssignmentsAPIService)(&c.common)
+	c.ServiceUsersAPI = (*ServiceUsersAPIService)(&c.common)
 	c.SessionsAPI = (*SessionsAPIService)(&c.common)
 	c.TagsAPI = (*TagsAPIService)(&c.common)
 	c.TokensAPI = (*TokensAPIService)(&c.common)
@@ -556,7 +583,10 @@ func addFile(w *multipart.Writer, fieldName, path string) error {
 	if err != nil {
 		return err
 	}
-	defer file.Close()
+	err = file.Close()
+	if err != nil {
+		return err
+	}
 
 	part, err := w.CreateFormFile(fieldName, filepath.Base(path))
 	if err != nil {

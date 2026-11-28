@@ -7,7 +7,14 @@ Name | Type | Description | Notes
 **EntityTypes** | Pointer to **[]string** | Filter by entity type. Only RESOURCE, GROUP, and USER are queryable via OpalQuery. | [optional] 
 **EntityItemTypes** | Pointer to [**[]EntityItemTypeEnum**](EntityItemTypeEnum.md) | Filter by entity item types. | [optional] 
 **EntityName** | Pointer to [**EntityNameFilter**](EntityNameFilter.md) |  | [optional] 
+**EntityDescription** | Pointer to [**EntityDescriptionFilter**](EntityDescriptionFilter.md) |  | [optional] 
 **EntityTag** | Pointer to [**EntityTagFilter**](EntityTagFilter.md) |  | [optional] 
+**EntityTagKey** | Pointer to [**EntityTagKeyFilter**](EntityTagKeyFilter.md) |  | [optional] 
+**HrIdpStatus** | Pointer to [**IdpStatusFilter**](IdpStatusFilter.md) |  | [optional] 
+**EntityAdminOwner** | Pointer to [**EntityAdminFilter**](EntityAdminFilter.md) |  | [optional] 
+**UserTitle** | Pointer to [**UserTitleFilter**](UserTitleFilter.md) |  | [optional] 
+**UserTeam** | Pointer to [**UserTeamFilter**](UserTeamFilter.md) |  | [optional] 
+**UserManager** | Pointer to [**UserManagerFilter**](UserManagerFilter.md) |  | [optional] 
 **EntityIDs** | Pointer to **[]string** | Filter by specific entity UUIDs. | [optional] 
 **ImportedFromApp** | Pointer to **[]string** | Filter by app IDs from which returned nodes will be imported from. | [optional] 
 **RoleRemoteIds** | Pointer to **[]string** | Filter by role remote IDs. Can only be applied within a hasAccessTo clause. | [optional] 
@@ -110,6 +117,31 @@ SetEntityName sets EntityName field to given value.
 
 HasEntityName returns a boolean if a field has been set.
 
+### GetEntityDescription
+
+`func (o *AccessEntityFilters) GetEntityDescription() EntityDescriptionFilter`
+
+GetEntityDescription returns the EntityDescription field if non-nil, zero value otherwise.
+
+### GetEntityDescriptionOk
+
+`func (o *AccessEntityFilters) GetEntityDescriptionOk() (*EntityDescriptionFilter, bool)`
+
+GetEntityDescriptionOk returns a tuple with the EntityDescription field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEntityDescription
+
+`func (o *AccessEntityFilters) SetEntityDescription(v EntityDescriptionFilter)`
+
+SetEntityDescription sets EntityDescription field to given value.
+
+### HasEntityDescription
+
+`func (o *AccessEntityFilters) HasEntityDescription() bool`
+
+HasEntityDescription returns a boolean if a field has been set.
+
 ### GetEntityTag
 
 `func (o *AccessEntityFilters) GetEntityTag() EntityTagFilter`
@@ -134,6 +166,156 @@ SetEntityTag sets EntityTag field to given value.
 `func (o *AccessEntityFilters) HasEntityTag() bool`
 
 HasEntityTag returns a boolean if a field has been set.
+
+### GetEntityTagKey
+
+`func (o *AccessEntityFilters) GetEntityTagKey() EntityTagKeyFilter`
+
+GetEntityTagKey returns the EntityTagKey field if non-nil, zero value otherwise.
+
+### GetEntityTagKeyOk
+
+`func (o *AccessEntityFilters) GetEntityTagKeyOk() (*EntityTagKeyFilter, bool)`
+
+GetEntityTagKeyOk returns a tuple with the EntityTagKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEntityTagKey
+
+`func (o *AccessEntityFilters) SetEntityTagKey(v EntityTagKeyFilter)`
+
+SetEntityTagKey sets EntityTagKey field to given value.
+
+### HasEntityTagKey
+
+`func (o *AccessEntityFilters) HasEntityTagKey() bool`
+
+HasEntityTagKey returns a boolean if a field has been set.
+
+### GetHrIdpStatus
+
+`func (o *AccessEntityFilters) GetHrIdpStatus() IdpStatusFilter`
+
+GetHrIdpStatus returns the HrIdpStatus field if non-nil, zero value otherwise.
+
+### GetHrIdpStatusOk
+
+`func (o *AccessEntityFilters) GetHrIdpStatusOk() (*IdpStatusFilter, bool)`
+
+GetHrIdpStatusOk returns a tuple with the HrIdpStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHrIdpStatus
+
+`func (o *AccessEntityFilters) SetHrIdpStatus(v IdpStatusFilter)`
+
+SetHrIdpStatus sets HrIdpStatus field to given value.
+
+### HasHrIdpStatus
+
+`func (o *AccessEntityFilters) HasHrIdpStatus() bool`
+
+HasHrIdpStatus returns a boolean if a field has been set.
+
+### GetEntityAdminOwner
+
+`func (o *AccessEntityFilters) GetEntityAdminOwner() EntityAdminFilter`
+
+GetEntityAdminOwner returns the EntityAdminOwner field if non-nil, zero value otherwise.
+
+### GetEntityAdminOwnerOk
+
+`func (o *AccessEntityFilters) GetEntityAdminOwnerOk() (*EntityAdminFilter, bool)`
+
+GetEntityAdminOwnerOk returns a tuple with the EntityAdminOwner field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEntityAdminOwner
+
+`func (o *AccessEntityFilters) SetEntityAdminOwner(v EntityAdminFilter)`
+
+SetEntityAdminOwner sets EntityAdminOwner field to given value.
+
+### HasEntityAdminOwner
+
+`func (o *AccessEntityFilters) HasEntityAdminOwner() bool`
+
+HasEntityAdminOwner returns a boolean if a field has been set.
+
+### GetUserTitle
+
+`func (o *AccessEntityFilters) GetUserTitle() UserTitleFilter`
+
+GetUserTitle returns the UserTitle field if non-nil, zero value otherwise.
+
+### GetUserTitleOk
+
+`func (o *AccessEntityFilters) GetUserTitleOk() (*UserTitleFilter, bool)`
+
+GetUserTitleOk returns a tuple with the UserTitle field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserTitle
+
+`func (o *AccessEntityFilters) SetUserTitle(v UserTitleFilter)`
+
+SetUserTitle sets UserTitle field to given value.
+
+### HasUserTitle
+
+`func (o *AccessEntityFilters) HasUserTitle() bool`
+
+HasUserTitle returns a boolean if a field has been set.
+
+### GetUserTeam
+
+`func (o *AccessEntityFilters) GetUserTeam() UserTeamFilter`
+
+GetUserTeam returns the UserTeam field if non-nil, zero value otherwise.
+
+### GetUserTeamOk
+
+`func (o *AccessEntityFilters) GetUserTeamOk() (*UserTeamFilter, bool)`
+
+GetUserTeamOk returns a tuple with the UserTeam field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserTeam
+
+`func (o *AccessEntityFilters) SetUserTeam(v UserTeamFilter)`
+
+SetUserTeam sets UserTeam field to given value.
+
+### HasUserTeam
+
+`func (o *AccessEntityFilters) HasUserTeam() bool`
+
+HasUserTeam returns a boolean if a field has been set.
+
+### GetUserManager
+
+`func (o *AccessEntityFilters) GetUserManager() UserManagerFilter`
+
+GetUserManager returns the UserManager field if non-nil, zero value otherwise.
+
+### GetUserManagerOk
+
+`func (o *AccessEntityFilters) GetUserManagerOk() (*UserManagerFilter, bool)`
+
+GetUserManagerOk returns a tuple with the UserManager field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserManager
+
+`func (o *AccessEntityFilters) SetUserManager(v UserManagerFilter)`
+
+SetUserManager sets UserManager field to given value.
+
+### HasUserManager
+
+`func (o *AccessEntityFilters) HasUserManager() bool`
+
+HasUserManager returns a boolean if a field has been set.
 
 ### GetEntityIDs
 

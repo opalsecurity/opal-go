@@ -13,6 +13,7 @@ package opal
 
 import (
 	"encoding/json"
+	"time"
 	"fmt"
 )
 
@@ -27,10 +28,14 @@ type CreateRequestInfo struct {
 	TargetUserId *string `json:"target_user_id,omitempty"`
 	// The ID of the group the request is for.  Should not be specified if target_user_id is specified.
 	TargetGroupId *string `json:"target_group_id,omitempty"`
+	// The ID of the user who asked for this access, for callers filing a request on someone else's behalf. Opal records this claim as given and does not verify it, so it never affects authorization, reviewer routing, or who may cancel the request; the authenticated caller remains the requester. Must be a user of your organization. Only accepted from a service user for which an Opal admin has enabled \"Let this service user record who asked for access\" under Settings on the service user's page; any other caller receives a 403 when this field is set.
+	InitiatedByUserId *string `json:"initiated_by_user_id,omitempty"`
 	Reason string `json:"reason"`
 	SupportTicket *CreateRequestInfoSupportTicket `json:"support_ticket,omitempty"`
 	// The duration of the request in minutes. -1 represents an indefinite duration
 	DurationMinutes int32 `json:"duration_minutes"`
+	// When access should begin, as an RFC 3339 timestamp. Omit to grant access as soon as the request is approved. When set, access lasts duration_minutes from this time. Only accepted when scheduled access requests are enabled for your organization.
+	ScheduledAccessStartAt *time.Time `json:"scheduled_access_start_at,omitempty"`
 	CustomMetadata []CreateRequestInfoCustomMetadataInner `json:"custom_metadata,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -170,6 +175,38 @@ func (o *CreateRequestInfo) SetTargetGroupId(v string) {
 	o.TargetGroupId = &v
 }
 
+// GetInitiatedByUserId returns the InitiatedByUserId field value if set, zero value otherwise.
+func (o *CreateRequestInfo) GetInitiatedByUserId() string {
+	if o == nil || IsNil(o.InitiatedByUserId) {
+		var ret string
+		return ret
+	}
+	return *o.InitiatedByUserId
+}
+
+// GetInitiatedByUserIdOk returns a tuple with the InitiatedByUserId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateRequestInfo) GetInitiatedByUserIdOk() (*string, bool) {
+	if o == nil || IsNil(o.InitiatedByUserId) {
+		return nil, false
+	}
+	return o.InitiatedByUserId, true
+}
+
+// HasInitiatedByUserId returns a boolean if a field has been set.
+func (o *CreateRequestInfo) HasInitiatedByUserId() bool {
+	if o != nil && !IsNil(o.InitiatedByUserId) {
+		return true
+	}
+
+	return false
+}
+
+// SetInitiatedByUserId gets a reference to the given string and assigns it to the InitiatedByUserId field.
+func (o *CreateRequestInfo) SetInitiatedByUserId(v string) {
+	o.InitiatedByUserId = &v
+}
+
 // GetReason returns the Reason field value
 func (o *CreateRequestInfo) GetReason() string {
 	if o == nil {
@@ -250,6 +287,38 @@ func (o *CreateRequestInfo) SetDurationMinutes(v int32) {
 	o.DurationMinutes = v
 }
 
+// GetScheduledAccessStartAt returns the ScheduledAccessStartAt field value if set, zero value otherwise.
+func (o *CreateRequestInfo) GetScheduledAccessStartAt() time.Time {
+	if o == nil || IsNil(o.ScheduledAccessStartAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.ScheduledAccessStartAt
+}
+
+// GetScheduledAccessStartAtOk returns a tuple with the ScheduledAccessStartAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateRequestInfo) GetScheduledAccessStartAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.ScheduledAccessStartAt) {
+		return nil, false
+	}
+	return o.ScheduledAccessStartAt, true
+}
+
+// HasScheduledAccessStartAt returns a boolean if a field has been set.
+func (o *CreateRequestInfo) HasScheduledAccessStartAt() bool {
+	if o != nil && !IsNil(o.ScheduledAccessStartAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetScheduledAccessStartAt gets a reference to the given time.Time and assigns it to the ScheduledAccessStartAt field.
+func (o *CreateRequestInfo) SetScheduledAccessStartAt(v time.Time) {
+	o.ScheduledAccessStartAt = &v
+}
+
 // GetCustomMetadata returns the CustomMetadata field value if set, zero value otherwise.
 func (o *CreateRequestInfo) GetCustomMetadata() []CreateRequestInfoCustomMetadataInner {
 	if o == nil || IsNil(o.CustomMetadata) {
@@ -300,11 +369,17 @@ func (o CreateRequestInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TargetGroupId) {
 		toSerialize["target_group_id"] = o.TargetGroupId
 	}
+	if !IsNil(o.InitiatedByUserId) {
+		toSerialize["initiated_by_user_id"] = o.InitiatedByUserId
+	}
 	toSerialize["reason"] = o.Reason
 	if !IsNil(o.SupportTicket) {
 		toSerialize["support_ticket"] = o.SupportTicket
 	}
 	toSerialize["duration_minutes"] = o.DurationMinutes
+	if !IsNil(o.ScheduledAccessStartAt) {
+		toSerialize["scheduled_access_start_at"] = o.ScheduledAccessStartAt
+	}
 	if !IsNil(o.CustomMetadata) {
 		toSerialize["custom_metadata"] = o.CustomMetadata
 	}
@@ -358,9 +433,11 @@ func (o *CreateRequestInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "groups")
 		delete(additionalProperties, "target_user_id")
 		delete(additionalProperties, "target_group_id")
+		delete(additionalProperties, "initiated_by_user_id")
 		delete(additionalProperties, "reason")
 		delete(additionalProperties, "support_ticket")
 		delete(additionalProperties, "duration_minutes")
+		delete(additionalProperties, "scheduled_access_start_at")
 		delete(additionalProperties, "custom_metadata")
 		o.AdditionalProperties = additionalProperties
 	}
